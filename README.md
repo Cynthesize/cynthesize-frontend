@@ -1,6 +1,6 @@
 # WAREHAUS
 
-##**Make sure to create pull request for each and every change.**
+## **Make sure to create pull request for each and every change.**
 _
 *Basic structure of the project will be followed as per the doc in the Wiki.*
 
