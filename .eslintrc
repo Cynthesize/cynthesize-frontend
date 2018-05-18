@@ -68,15 +68,6 @@
             }
           ],
           "no-compare-neg": "off",
-          "no-console": [
-            "error",
-            {
-              "allow": [
-                "error",
-                "warn"
-              ]
-            }
-          ],
           "no-constant-condition": [
             "off"
           ],

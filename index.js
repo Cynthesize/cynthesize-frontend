@@ -1,10 +1,11 @@
-var express = require('express')
-var app = express()
+var express = require('express');
+
+var app = express();
 
 app.get('/', function (req, res) {
-  res.send('Hello World!')
-})
+  res.send('Hello World!');
+});
 
 app.listen(8000, function () {
-  console.log('app listening on port 8000!')
-})
+  console.log('App listening on port 8000!');
+});
