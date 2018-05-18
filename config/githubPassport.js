@@ -30,10 +30,6 @@ module.exports = function(passport) {
     // code for signup (use('local-signup', new LocalStategy))
     // code for facebook (use('facebook', new FacebookStrategy))
     // code for twitter (use('twitter', new TwitterStrategy))
-
-    // =========================================================================
-    // GOOGLE ==================================================================
-    // =========================================================================
     passport.use(new GithubStrategy({
 
         clientID        : configAuth.githubAuth.clientID,
@@ -62,9 +58,9 @@ module.exports = function(passport) {
 
                     // set all of the relevant information
                     newUser.github.id    = profile.id;
-                    newUser.github.id = token;
-                    newUser.github.id  = profile.displayName;
-                    newUser.github.id = profile.email; // pull the first email
+                    newUser.github.token = token;
+                    newUser.github.name  = profile.displayName;
+                    newUser.github.email = profile.emails[0].value; // pull the first email
 
                     // save the user
                     newUser.save(function(err) {

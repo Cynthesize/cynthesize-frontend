@@ -14,9 +14,11 @@ var session      = require('express-session');
 
 var configDB = require('./config/database.js');
 
-// configuration ===============================================================
-mongoose.connect(configDB.url); // connect to our database
 
+// configuration ===============================================================
+mongoose.connect(configDB.url, () => {
+    console.log("DB is connected")
+})
 // require('./config/passport')(passport); // pass passport for configuration
 
 // set up our express application
