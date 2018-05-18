@@ -1,5 +1,6 @@
 module.exports = {
   googleAuth : {
+  // eslint-disable-next-line
     clientID: '723843521187-s83osdadeo5s80qhu5prqkkajcrmcho0.apps.googleusercontent.com',
     clientSecret: 'JdElF8O1b0TuWvLpwcHuP_TJ',
     callbackURL: 'http://localhost:8080/auth/google/callback'
