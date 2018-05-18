@@ -4,6 +4,7 @@ var port     = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 var passport = require('passport');
 require('./config/passport.js')(passport);
+require('./config/githubPassport.js')(passport);
 var flash    = require('connect-flash');
 
 var morgan       = require('morgan');

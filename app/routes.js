@@ -17,6 +17,12 @@ module.exports = function(app, passport) {
         });
     });
 
+    app.get('/githubprofile', isLoggedIn, function(req, res) {
+        res.render('githubprofile.ejs', {
+            user : req.user // get the user out of session and pass to template
+        });
+    });
+
     // route for logging out
     app.get('/logout', function(req, res) {
         req.logout();
@@ -38,6 +44,15 @@ module.exports = function(app, passport) {
     app.get('/auth/google/callback',
             passport.authenticate('google', {
                     successRedirect : '/profile',
+                    failureRedirect : '/'
+            }));
+
+    app.get('/auth/github', passport.authenticate('github', { scope : ['profile', 'email'] }));
+
+    // the callback after github has authenticated the user
+    app.get('/auth/github/callback',
+            passport.authenticate('github', {
+                    successRedirect : '/githubprofile',
                     failureRedirect : '/'
             }));
 
