@@ -35,11 +35,11 @@ module.exports = function(passport) {
         } else {
           var newUser = new User();
 
-          newUser.github.id = profile.id;
-          newUser.github.token = token;
-          newUser.github.name = profile.displayName;
-          newUser.github.email = profile.emails[0].value;
-          newUser.github.profilePic = profile.photos[0].value;
+          newUser.id = profile.id;
+          newUser.token = token;
+          newUser.name = profile.displayName;
+          newUser.email = profile.emails[0].value;
+          newUser.profilePic = profile.photos[0].value;
 
           newUser.save(function(err) {
             if (err) {

@@ -3,20 +3,11 @@ var bcrypt = require('bcrypt-nodejs');
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
-  google: {
-    id: String,
-    token: String,
-    email: String,
-    name: String,
-    profilePic: String
-  },
-  github: {
-    id: String,
-    token: String,
-    email: String,
-    name: String,
-    profilePic: String
-  }
+  id: String,
+  token: String,
+  email: String,
+  name: String,
+  profilePic: String
 });
 
 userSchema.methods.generateHash = function(password) {
