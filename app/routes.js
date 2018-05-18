@@ -50,7 +50,7 @@ module.exports = function(app, passport) {
 };
 
 // route middleware to make sure a user is logged in
-var isLoggedI = function (req, res, next) {
+var isLoggedIn = function (req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
