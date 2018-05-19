@@ -22,7 +22,7 @@ do
   "$ESLINT" "$FILE"
 
   if [[ "$?" == 0 ]]; then
-    printf "\t\033[32mESLint Passed: $FILE\033[0m"
+    printf "\t\033[32mESLint Passed: $FILE\033[0m\n"
   else
     printf "\t\033[41mESLint Failed: $FILE\033[0m"
     PASS=false
@@ -62,7 +62,7 @@ do
   "$ESLINT" "$FILE"
 
   if [[ "$?" == 0 ]]; then
-    printf "\t\033[32mESLint Passed: $FILE\033[0m"
+    printf "\t\033[32mESLint Passed: $FILE\033[0m\n"
   else
     printf "\t\033[41mESLint Failed: $FILE\033[0m"
     PASS=false

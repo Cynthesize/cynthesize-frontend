@@ -16,7 +16,7 @@ module.exports = function(app, passport) {
   });
 
   app.get('/githubprofile', isLoggedIn, function(req, res) {
-    res.render('githubprofile.ejs', {
+    res.render('profile.ejs', {
       user : req.user // get the user out of session and pass to template
     });
   });
@@ -44,7 +44,7 @@ module.exports = function(app, passport) {
   // the callback after github has authenticated the user
   app.get('/auth/github/callback',
     passport.authenticate('github', {
-      successRedirect : '/githubprofile',
+      successRedirect : '/profile',
       failureRedirect : '/'
     }));
 };

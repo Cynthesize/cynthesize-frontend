@@ -3,6 +3,15 @@
         "browser": true
     },
     "extends": "eslint:recommended",
+    "overrides": [
+      {
+        "files": [ "views/*.ejs" ],
+        "excludedFiles": "views/*.ejs",
+        "rules": {
+          "quotes": [ 2, "single" ]
+        }
+      }
+    ],
     "rules": {
         "brace-style":[
             "error",

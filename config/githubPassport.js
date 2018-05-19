@@ -35,11 +35,11 @@ module.exports = function(passport) {
         } else {
           var newUser = new User();
 
-          newUser.id = profile.id;
+          newUser.profile_id = profile.id;
           newUser.token = token;
           newUser.name = profile.displayName;
           newUser.email = profile.emails[0].value;
-          newUser.profilePic = profile.photos[0].value;
+          newUser.profile_pic = profile.photos[0].value;
 
           newUser.save(function(err) {
             if (err) {
