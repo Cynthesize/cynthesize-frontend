@@ -30,11 +30,11 @@
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
     "passport-google-oauth": "^1.0.0",
-    "connect-flash" : "~0.1.1",     
-    "bcrypt-nodejs" : "latest",
+    "connect-flash": "~0.1.1",
+    "bcrypt-nodejs": "latest",
     "morgan": "~1.7.0",
     "method-override": "~2.3.6",
-    "ejs" : "~2.5.2"
+    "ejs": "~2.5.2"
   },
   "devDependencies": {
     "eslint-config-airbnb-base": "^12.1.0",
