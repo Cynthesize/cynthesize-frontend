@@ -7,4 +7,4 @@ git config core.hookspath = .githooks
 echo "Path Changed"
 echo ""
 echo "Starting server:"
-npm start
+node-dev server.js
