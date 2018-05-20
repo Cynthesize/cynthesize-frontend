@@ -1,0 +1,45 @@
+<!-- views/add-project.ejs -->
+
+<!doctype html>
+<html>
+<head>
+    <title>Warehaus | Add project</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->   
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <style>
+        body        { padding-top:80px; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="jumbotron text-center">
+        <h1><span class="fa fa-lock"></span> Warehaus </h1>
+        <form method="POST" action="/add-project">
+            <div class="form-group">
+              <label for="project_name">Project Name:</label>
+              <input type="name" class="form-control" id="project_name">
+            </div>
+            <div class="form-group">
+              <label for="images">Upload Images</label>
+              <input type="file" class="form-control" id="images">
+            </div>
+            <div class="form-group">
+              <label for="videos">Upload Videos</label>
+              <input type="file" class="form-control" id="videos">
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input type="text" class="form-control" id="description">
+            </div>
+            <div class="form-group">
+              <label for="tags">Tags</label>
+              <input type="text" class="form-control" id="tags">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form> 
+    </div>
+
+</div>
+</body>
+</html>   
