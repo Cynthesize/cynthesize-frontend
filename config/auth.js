@@ -3,11 +3,11 @@ module.exports = {
   // eslint-disable-next-line
     clientID: '723843521187-s83osdadeo5s80qhu5prqkkajcrmcho0.apps.googleusercontent.com',
     clientSecret: 'JdElF8O1b0TuWvLpwcHuP_TJ',
-    callbackURL: 'http://localhost:8080/auth/google/callback'
+    callbackURL: 'http://localhost:5000/auth/google/callback'
   },
   githubAuth : {
-    clientID      : 'ebf9889e5bc7e3e99ee2', // your App ID
-    clientSecret  : 'c2d7ff619584497a3ca12c132813946fb2c72048',
-    callbackURL   : 'http://localhost:8080/auth/github/callback'
+    clientID      : '37bf2df49739699866f0', // your App ID
+    clientSecret  : '5d88b9d9a696f24ecc9d6889cda65cb86381c02c',
+    callbackURL   : 'http://localhost:5000/auth/github/callback'
   }
 };

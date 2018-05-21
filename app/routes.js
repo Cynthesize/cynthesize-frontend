@@ -1,4 +1,9 @@
 module.exports = function(app, passport) {
+  var bodyParser = require('body-parser');
+  var project = require('./models/project');
+
+  var urlencodedParser = bodyParser.urlencoded({extended:false});
+
   app.get('/', function(req, res) {
     res.render('index.ejs');
   });
@@ -38,8 +43,16 @@ module.exports = function(app, passport) {
     res.render('add-project.ejs');
   });
 
-  app.post('/add-project', isLoggedIn, function (req, res) {
-    console.log(req.body);
+  app.post('/add-project', isLoggedIn, urlencodedParser, function (req, res) {
+    var projectDetails = {
+      project_owner: req.user._id,
+      description: req.body.form_data.description,
+      pictures: req.body.form_data.pictures,
+      videos: req.body.form_data.videos,
+      tags: req.body.form_data.tags,
+      comments: {}
+    };
+    console.log(projectDetails);
   });
 };
 

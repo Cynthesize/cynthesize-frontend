@@ -9,6 +9,28 @@
     <style>
         body        { padding-top:80px; }
     </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+    $(document).ready(function () {
+      $('form').on('submit', function(){
+        var form_data = {
+          project_name: $('#project_name').val(),
+          description: $('#description').val(),
+          tags: $('#tags').val()
+        };
+
+        $.ajax({
+          type: 'POST',
+          url: '/add-project',
+          data: {form_data},
+          success: function(data) {
+            location.reload();
+          }
+        });
+        return false;
+      });
+    });
+    </script>
 </head>
 <body>
 <div class="container">
