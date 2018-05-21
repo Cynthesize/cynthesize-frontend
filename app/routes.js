@@ -1,6 +1,8 @@
 module.exports = function(app, passport) {
   var bodyParser = require('body-parser');
   var project = require('./models/project');
+  var mongoClient = require('mongodb').MongoClient;
+  var url = require('../config/database').url;
 
   var urlencodedParser = bodyParser.urlencoded({extended:false});
 
@@ -52,6 +54,18 @@ module.exports = function(app, passport) {
       tags: req.body.form_data.tags,
       comments: {}
     };
+    mongoClient.connect(url, function(err, database) {
+      if (err) {
+        console.log('Couldn\'t connect to database');
+      }
+      console.log('Connection to database established');
+      database.collection('projects').insertOne(projectDetails, function(err){
+        if (err) {
+          console.log('There was error in inserting project.');
+        }
+        console.log('Successfully entered');
+      });
+    });
     console.log(projectDetails);
   });
 };

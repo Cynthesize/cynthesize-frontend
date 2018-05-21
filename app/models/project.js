@@ -5,17 +5,17 @@ var bcrypt = require('bcrypt-nodejs');
 var projectsSchema = mongoose.Schema({
   project_owner: String,
   description: String,
-  pictures: File,
-  videos: File,
+  pictures: { data: Buffer, contentType: String },
+  videos: { data: Buffer, contentType: String },
   tags: String,
   comments: Object
 });
 
-userSchema.methods.generateHash = function(password) {
+projectsSchema.methods.generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
-userSchema.methods.validPassword = function(password) {
+projectsSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.local.password);
 };
 
