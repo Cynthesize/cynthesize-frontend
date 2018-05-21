@@ -46,13 +46,17 @@ module.exports = function(app, passport) {
   });
 
   app.post('/add-project', isLoggedIn, urlencodedParser, function (req, res) {
+    var responseMessage = [];
     var projectDetails = {
+      project_title: req.body.form_data.project_title,
       project_owner: req.user._id,
       description: req.body.form_data.description,
       pictures: req.body.form_data.pictures,
       videos: req.body.form_data.videos,
       tags: req.body.form_data.tags,
-      comments: {}
+      comments: {},
+      upvotes: 0,
+      downvotes: 0
     };
     mongoClient.connect(url, function(err, database) {
       if (err) {
@@ -64,9 +68,10 @@ module.exports = function(app, passport) {
           console.log('There was error in inserting project.');
         }
         console.log('Successfully entered');
+        responseMessage = 'Congratulations! Project submitted.';
       });
     });
-    console.log(projectDetails);
+    res.json(responseMessage);
   });
 };
 
