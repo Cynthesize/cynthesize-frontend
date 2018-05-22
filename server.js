@@ -14,7 +14,7 @@ var session = require('express-session');
 var configDB = require('./config/database.js');
 
 var app = express();
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 5000;
 
 mongoose.connect(configDB.url, function() {
   console.log('DB is connected');
