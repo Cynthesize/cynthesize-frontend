@@ -17,11 +17,15 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login/gmail', (req,res) => {
-res.render('google_login');
+  res.render('google_login');
 });
 
 app.get('/login/github', (req,res) => {
-res.render('github_login');
+  res.render('github_login');
+});
+
+app.get('/loggedin', (req, res) => {
+  res.send('You are logged in!');
 });
 
 var routes = require('./routes/routes');
