@@ -1,0 +1,55 @@
+[debug] [2018-05-23T03:34:08.568Z] ----------------------------------------------------------------------
+[debug] [2018-05-23T03:34:08.570Z] Command:       /home/wickedbrat/.nvm/versions/node/v8.11.2/bin/node /home/wickedbrat/.nvm/versions/node/v8.11.2/bin/firebase serve
+[debug] [2018-05-23T03:34:08.570Z] CLI Version:   3.18.5
+[debug] [2018-05-23T03:34:08.570Z] Platform:      linux
+[debug] [2018-05-23T03:34:08.570Z] Node Version:  v8.11.2
+[debug] [2018-05-23T03:34:08.570Z] Time:          Wed May 23 2018 09:04:08 GMT+0530 (IST)
+[debug] [2018-05-23T03:34:08.570Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-05-23T03:34:08.578Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-05-23T03:34:08.578Z] > authorizing via signed-in user
+[debug] [2018-05-23T03:34:08.580Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/fir-demo-project  
+  
+ Wed May 23 2018 09:04:08 GMT+0530 (IST)
+[debug] [2018-05-23T03:34:11.302Z] <<< HTTP RESPONSE 200
+[debug] [2018-05-23T03:34:11.302Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/fir-demo-project/tokens  
+  
+ Wed May 23 2018 09:04:11 GMT+0530 (IST)
+[debug] [2018-05-23T03:34:12.697Z] <<< HTTP RESPONSE 200
+[debug] [2018-05-23T03:34:12.698Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/fir-demo-project  
+  
+ Wed May 23 2018 09:04:12 GMT+0530 (IST)
+[debug] [2018-05-23T03:34:15.764Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/wickedbrat/Projects/web-projects/Warehaus/firebase'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-05-23T03:34:16.466Z] Fetching environment
+[debug] [2018-05-23T03:34:16.468Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/300830567303:getServerAppConfig  
+  
+ Wed May 23 2018 09:04:16 GMT+0530 (IST)
+[debug] [2018-05-23T03:34:16.468Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/300830567303/clients/_:getWebAppConfig  
+  
+ Wed May 23 2018 09:04:16 GMT+0530 (IST)
+[debug] [2018-05-23T03:34:17.723Z] <<< HTTP RESPONSE 200
+[debug] [2018-05-23T03:34:17.724Z] Starting @google-cloud/functions-emulator
+[debug] [2018-05-23T03:34:17.781Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: functions
+[info] ✔  hosting: Local server: http://localhost:5000
+
+[debug] [2018-05-23T03:34:19.382Z] Parsing function triggers
+[info] ✔  functions: app: http://localhost:5001/fir-demo-project/us-central1/app
+[info] [hosting] Rewriting /login/gmail to local function app
+[info] [hosting] Rewriting / to local function app
+[info] [hosting] Rewriting /login/github to local function app
+[info] [hosting] Rewriting /auth/github/callback?error=redirect_uri_mismatch&error_description=The+redirect_uri+MUST+match+the+registered+callback+URL+for+this+application.&error_uri=https%3A%2F%2Fdeveloper.github.com%2Fapps%2Fmanaging-oauth-apps%2Ftroubleshooting-authorization-request-errors%2F%23redirect-uri-mismatch&state=ABxvPbnNvsJcfz2hxciQP26gmQwGBVXSMSOgg_DLKlNUgnnNRA8qzMb0tz4VbWQDM8k4Y4J56-9_Ff2-LsOYnkrV22dDtZnCZ0AhFkJk5mE1JfJqlJL40i3MC4fsxIjQ7j4W9s7Z6IO9KEUJhTlKpc26sBEftpgNeGR7BcW_IU45sPcLqmG2OPoTPPlBrQInWTcCwq705jJ7whCCu-hR37cvfM_RxSN2uTZavH6uZy3lw4pIRKV4ggIyZnuYOfoYyYlo7HbPiEdgsITI070rx9JzsjXfFRwUxrLJYteQq5I5GkqOAnb8s5vjNkB8a9ZCT8AmioexU4_roggIQPmYCtYI43qLGnplhdXY10Eq0nU to local function app
+[info] [hosting] Rewriting /login/github to local function app
+[info] [hosting] Rewriting /auth/github/callback?error=redirect_uri_mismatch&error_description=The+redirect_uri+MUST+match+the+registered+callback+URL+for+this+application.&error_uri=https%3A%2F%2Fdeveloper.github.com%2Fapps%2Fmanaging-oauth-apps%2Ftroubleshooting-authorization-request-errors%2F%23redirect-uri-mismatch&state=ABxvPbmQyN8YYrD8vjirZiV8VEIHyeYee9PWcThzXerQApMGzxkDEL3KkxEE74NNybE_4MmiH3IC9rSYu5dWJlBeQV4x-9At2orsIXAOVEDrmb0K7xAfbmz2tBcm89j17qv4MhyPfKA_sbxv2vsaHbcuy-UTb-QLSicbTMmDUbA5XIvSxM2ZnKyjDtR-5srJ4hF-muOYmRGy9Z2k3aFAVbsd1vyVAIsQpWJa67ap6RdC95phkOY1hgujKZbWirUtKoCDMy7ehcFK5foM_nTdeAaQ97CkWiNfcTX6ek1ymS4gg1EfG4U0GmHR9G9W6WCcI8vphNy4q52i72IwpR2bejzSSKYPSqC7kemdOlzUEwM to local function app
+[info] [hosting] Rewriting /login/github to local function app
+[info] [hosting] Rewriting /auth/github/callback?error=redirect_uri_mismatch&error_description=The+redirect_uri+MUST+match+the+registered+callback+URL+for+this+application.&error_uri=https%3A%2F%2Fdeveloper.github.com%2Fapps%2Fmanaging-oauth-apps%2Ftroubleshooting-authorization-request-errors%2F%23redirect-uri-mismatch&state=ABxvPblNxXSL631FOJR3hfxbSEe8Zxn4jK8550KUoYJAx0uqJQAXVpSjJZudwO-SVEYb3plTay6f_AEZ9rMjFzjx0SyuJJ9ZUR7NLYfdljNNGRDuqJtaKfT2kzVpSQztVWcBuD3AqDMA1nVpveNWEgKJl0APm4H5n4eeJcU8Efv32lX40Teg_Xt1xVsiCpUPIAMUOfR7AcG3_SOu7_jKED5-72nEn0tV8k8o-igpADtwxu0_OCpbYqXMh3SXqtEpM_vBInQ0EMWT30o0Sbox9GszH6ZPvEKvx8U821NAKXYlolN9_c3oxVaUxJYcsa4FPTpkfS4vngJalqDUJEe6oIETV-flegzZVE_21KirXus to local function app
+[info] [hosting] Rewriting /login/github to local function app
+[info] [hosting] Rewriting /auth/github/callback?error=redirect_uri_mismatch&error_description=The+redirect_uri+MUST+match+the+registered+callback+URL+for+this+application.&error_uri=https%3A%2F%2Fdeveloper.github.com%2Fapps%2Fmanaging-oauth-apps%2Ftroubleshooting-authorization-request-errors%2F%23redirect-uri-mismatch&state=ABxvPbldDsfwgkYZlnq6vCajtFPwcw0zXtxq37AC919dzDwgg2V0RRwtSUoNnfygbxQxDxQQ-pP-d10NFcXK0Z9R855xmUogAThb-AvlAfC-j_s81Ew3LHfvMESJaGI9JwxQy8mktcL13hg38vI4xNmwRV3S6PIvxmjL8msm7OaHuV2FgpkqxRjEaZ8i-t5UUzw81tKvSSofxYDQyPCsl4ZNVgtFj-Qe8r81ylZJeCBDtKvOMMC6ZECS-u0itYp4cQhieDgriOsgko6rIGiKlufO3UQqClTSttqVi2kipvyEdcanlzL2NGxVhfrSpcRVo64b6ugQyTebCHR8YstLnl54upY6LddgM2x8p6caWYg to local function app
+[info] [hosting] Rewriting /login/github to local function app
+[info] [hosting] Rewriting /auth/github/callback?error=redirect_uri_mismatch&error_description=The+redirect_uri+MUST+match+the+registered+callback+URL+for+this+application.&error_uri=https%3A%2F%2Fdeveloper.github.com%2Fapps%2Fmanaging-oauth-apps%2Ftroubleshooting-authorization-request-errors%2F%23redirect-uri-mismatch&state=ABxvPbnwnMcnxesAe-4yauUWGiPHBogTXuJ2bOCtg8MFTPlzy30wB1f8dA3dnP0hv2XcYlCL8mNG7Vt7t9BBY9sVSGXh-5-XnNQS_KZF-uLKuPPzGGMR9-cMzB44RtkacaPqd1aBfLZ3UXw8lcYO11Mbock9KerQ6zfKx_QZtJw3PV0vs_TMJDBsZPhPHKit7Rp7iBT9xaaLtDhlKvWZ08qRyWB7CrFDi3CEtNJfjeMG4rpic4c6B1Cm4pI5dPLeRTHdrJBnQD6On8GA6QnRserM-TJNjy6PeAq0AaGSuXhbP1oALR3jiLoCwkNQo66zzvosocb7V_JXYW47nlpNbxNpv2cxCIpjoqDJjeaPs68 to local function app
+[info] [hosting] Rewriting /login/github to local function app
+[info] Shutting down...

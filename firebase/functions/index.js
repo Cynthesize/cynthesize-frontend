@@ -13,11 +13,17 @@ app.set('views', './views');
 app.set('view engine', 'hbs');
 
 app.get('/', (req, res) => {
-    res.send("Hello from Firebase!"); 
+  res.send("Hello from Firebase!"); 
 });
 
 app.get('/login/gmail', (req,res) => {
-  res.render('googleLogin');
+res.render('google_login');
 });
+
+app.get('/login/github', (req,res) => {
+res.render('github_login');
+});
+
+var routes = require('./routes/routes');
 
 exports.app = functions.https.onRequest(app);
