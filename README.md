@@ -13,9 +13,7 @@ This project uses
 
  Use ```git clone https://github.com/WickedBrat/Warehaus``` to clone the project.
  
- Type ```npm install``` to install required dependencies.
- 
- Type ```npm run start``` to start the node app.
+ Type ```bash scripts/start.sh``` to install start the server and install requored dependencies.
 
 ------
 
