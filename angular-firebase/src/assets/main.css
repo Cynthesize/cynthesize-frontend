@@ -1,0 +1,27 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+.main__body {
+    background-color: #fafafa;
+    padding-top: 20px;
+    font-family: 'Lato', sans-serif;
+
+}
+
+.login__page {
+    margin-top: 15px;
+    padding-bottom: 25px;
+    vertical-align: middle;
+}
+
+
+.login__card {
+    padding: 20px;
+    /*margin: 20px 0;*/
+}

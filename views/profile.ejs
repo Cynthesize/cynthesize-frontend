@@ -25,15 +25,36 @@
                 <h3 class="text-danger"><span class="fa fa-profile"></span> Details</h3>
 
                     <p>
-                        <strong>id</strong>: <%= user.profile_id %><br>
-                        <strong>token</strong>: <%= user.token %><br>
-                        <strong>email</strong>: <%= user.email %><br>
                         <strong>name</strong>: <%= user.name %>
+                        <br>
+                        <strong>email</strong>: <%= user.email %><br>
+                        <strong>Location</strong>: <%= user.location %><br>
+                        <strong>Orgaization</strong>: <%= user.organization %><br>
+                        <div class="thumbnail">
+                            <img src='<%= user.profile_pic %>'>
+                        </div>
                     </p>
 
             </div>
         </div>
-
+        
+        
+        <div class="col-sm-6">
+            <div class="jumbotron text-center">
+            <h1><span class="fa fa-lock"></span> Edit Profile </h1>
+            <form method="POST" action="/profile">
+                <div class="form-group">
+                  <label for="location">Location:</label>
+                  <input type="text" class="form-control" id="location" name="location" style="width:100%;">
+                </div>
+                <div class="form-group">
+                  <label for="organization">Current Organization</label>
+                  <input type="text" class="form-control" id="organization" name="organization" style="width:100%;">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form> 
+            </div>
+        </div>
     </div>
 
 </div>

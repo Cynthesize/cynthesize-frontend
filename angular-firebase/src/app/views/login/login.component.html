@@ -1,0 +1,34 @@
+<div class="main__body">
+  <div class="container">
+
+    <div class="login__page">
+      <div class="row">
+          <div class="card col-md-4 col-md-offset-4">
+            <div class="login__card">
+              <div class="card-block">
+
+                  <form name="userform" method="post" #f="ngForm">
+                    <h3 align="center">Login</h3>
+
+                    <div class="form-group">
+                        <button type="button" class="btn btn-block" (click)="signInWithGithub()">
+                          <i class="fa fa-github" aria-hidden="true"></i>
+                          Login with Github
+                        </button>
+
+                        <button type="button" class="btn btn-block" (click)="signInWithGoogle()">
+                          <i class="fa fa-google" aria-hidden="true"></i>
+                          Login with Google
+                        </button>
+                    </div>                  
+                  </form>
+                  
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div> <!-- end card -->
+
+  </div>  <!-- end container -->
+</div> 

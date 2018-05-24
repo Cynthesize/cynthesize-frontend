@@ -3,17 +3,11 @@ module.exports = function(app, passport) {
   var project = require('./models/project');
   var mongoClient = require('mongodb').MongoClient;
   var url = require('../config/database').url;
-
-  var urlencodedParser = bodyParser.urlencoded({extended:false});
+  var ObjectId = require('mongodb').ObjectID;
+  var urlencodedParser = bodyParser.urlencoded({extended: true});
 
   app.get('/', function(req, res) {
     res.render('index.ejs');
-  });
-
-  app.get('/profile', isLoggedIn, function(req, res) {
-    res.render('profile.ejs', {
-      user : req.user // get the user out of session and pass to template
-    });
   });
 
   app.get('/logout', function(req, res) {
@@ -40,6 +34,52 @@ module.exports = function(app, passport) {
       successRedirect : '/profile',
       failureRedirect : '/'
     }));
+
+  app.get('/profile', isLoggedIn, function(req, res) {
+    res.render('profile.ejs', {
+      user : req.user, // get the user out of session and pass to template
+      location : function() {
+        if (req.user.location)
+          return req.user.location;
+        else
+          return "-";
+      }
+      organization : function() {
+        if (req.user.organization)
+          return req.user.organization;
+        else
+          return "-";
+      }
+    });
+  });
+
+  app.post('/profile', isLoggedIn, urlencodedParser, function (req, res) {
+    var responseMessage = [];
+    console.log(req.user._id);
+    console.log('Connection to database established');
+    mongoClient.connect(url, function(err, database) {
+      if (err) {
+        console.log('Couldn\'t connect to database');
+      }
+      
+      database.collection('users').updateOne({_id:req.user._id}, {$set: {location:req.body.location,organization:req.body.organization}});
+    });
+    res.render('profile.ejs', {
+      user : req.user, // get the user out of session and pass to template
+      location : function() {
+        if (req.user.location)
+          return req.user.location;
+        else
+          return "-";
+      }
+      organization : function() {
+        if (req.user.organization)
+          return req.user.organization;
+        else
+          return "-";
+      }
+    });
+  });
 
   app.get('/add-project', isLoggedIn, function (req, res) {
     res.render('add-project.ejs');
