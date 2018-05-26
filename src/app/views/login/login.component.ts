@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../core/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,16 +17,16 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {
   }
 
-    signInWithGoogle() {
-      this.authService.signInWithGoogle()
+    googleLogin() {
+      this.authService.googleLogin()
       .then((res) => {
           this.router.navigate(['dashboard'])
         })
       .catch((err) => console.log(err));
     }
 
-    signInWithGithub() {
-      this.authService.signInWithGithub()
+    githubLogin() {
+      this.authService.githubLogin()
       .then((res) => {
           this.router.navigate(['dashboard'])
         })

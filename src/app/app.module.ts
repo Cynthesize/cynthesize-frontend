@@ -1,38 +1,49 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutes } from './app.routes';
-
-import { FormsModule } from '@angular/forms';
-
 import { AppComponent } from './app.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
+import { CoreModule } from './core/core.module';
+import { UserComponent } from './user/user.component';
+import { RouterModule } from '@angular/router';
+import { Routes, CanActivate } from "@angular/router";
+import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './views/login/login.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
-
-import { environment } from '../environments/environment';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
-
-import { AuthService } from './services/auth.service';
-import { AuthGuard } from 'app/services/auth-guard.service';
+import { AuthGuard } from './core/auth.guard';
+import { LocalStorageModule } from 'angular-2-local-storage';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    DashboardComponent
-  ],
   imports: [
     BrowserModule,
-    AppRoutes,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    CoreModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule
+    LocalStorageModule.withConfig({
+      prefix: 'local-store',
+      storageType: 'localStorage'
+    }),
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: UserComponent
+      },
+      
+      {
+        path: 'dashboard',
+        canActivate: [AuthGuard],
+        component: DashboardComponent
+      }
+    ])
   ],
-  providers: [AuthService, AuthGuard],
-  bootstrap: [AppComponent]
+  declarations: [ AppComponent, UserComponent, LoginComponent,DashboardComponent],
+  bootstrap: [ AppComponent ],
+  providers : [AuthGuard]
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,30 +1,20 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-
 import { AuthService} from './auth.service'
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/take';
+import { Injectable } from '@angular/core';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private auth: AuthService, private router: Router) {}
+constructor(private authService: AuthService,
+private Router: Router,
+private LocalStorageService:LocalStorageService) { }
 
-
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | boolean {
-
-      return this.auth.user
-           .take(1)
-           .map(user => !!user)
-           .do(loggedIn => {
-             if (!loggedIn) {
-               console.log('access denied')
-               this.router.navigate(['/login']);
-             }
-         })
-
+  canActivate(route: ActivatedRouteSnapshot, snap: RouterStateSnapshot) {
+  let isLoggedIn:Boolean=this.LocalStorageService.get("isLoggedIn") as Boolean;
+  if (!isLoggedIn) {
+  this.Router.navigate(["/"]);
+  return false;
+  }
+  return true;
   }
 }
