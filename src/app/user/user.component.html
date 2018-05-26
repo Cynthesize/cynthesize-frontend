@@ -1,31 +1,37 @@
 
-<div *ngIf="auth.user | async; then authenticated else guest">
+<div *ngIf="auth.user | async; then newsfeed else guest">
   <!-- template will replace this div -->
 </div>
 
 
 <!-- User NOT logged in -->
 <ng-template #guest>
-<h3>Howdy, GUEST</h3>
-<p>Login to get started...</p>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<h3>Howdy, GUEST</h3>
+			<p>Login to get started...</p>
 
-<button (click)="auth.googleLogin()">
-  <i class="fa fa-google"></i> Connect Google
-</button>
-<button (click)="auth.githubLogin()">
-  <i class="fa fa-google"></i> Connect Github
-</button>
-
+			<button (click)="auth.googleLogin()">
+			  <i class="fa fa-google"></i> Connect Google
+			</button>
+			<button (click)="auth.githubLogin()">
+			  <i class="fa fa-google"></i> Connect Github
+			</button>
+		</div>
+	</div>
 </ng-template>
 
 
 <!-- User logged in -->
-<ng-template #authenticated>
-<div *ngIf="auth.user | async as user">
-  <h3>Howdy, {{ user.displayName }}</h3>
-  <img  [src]="user.photoURL">
-  <p>UID: {{ user.uid }}</p>
-  <p>Favorite Color: {{ user.favoriteColor }} </p>
-  <button (click)="auth.signOut()">Logout</button>
-</div>
+<ng-template #newsfeed>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<u><h1>Newsfeed</h1></u>
+			<div class="jumbotron">
+			
+			</div>  
+		</div>
+	</div>
 </ng-template>

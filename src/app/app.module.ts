@@ -15,6 +15,8 @@ import { LoginComponent } from './views/login/login.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { AuthGuard } from './core/auth.guard';
 import { LocalStorageModule } from 'angular-2-local-storage';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 
 @NgModule({
   imports: [
@@ -39,10 +41,15 @@ import { LocalStorageModule } from 'angular-2-local-storage';
         path: 'dashboard',
         canActivate: [AuthGuard],
         component: DashboardComponent
+      },
+      {
+        path: 'profile',
+        canActivate: [AuthGuard],
+        component: UserProfileComponent
       }
     ])
   ],
-  declarations: [ AppComponent, UserComponent, LoginComponent,DashboardComponent],
+  declarations: [ AppComponent, UserComponent, LoginComponent,DashboardComponent, UserProfileComponent, NewsfeedComponent],
   bootstrap: [ AppComponent ],
   providers : [AuthGuard]
 })

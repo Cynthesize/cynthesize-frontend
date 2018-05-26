@@ -14,10 +14,10 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a>Home</a></li>
+          <li class="active"><a href="">Home</a></li>
           <li><a>About</a></li>
           <li><a>Contact</a></li>
-          <li><a>Profile</a></li>
+          <li><a href="profile">Profile</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
@@ -31,7 +31,7 @@
   <!-- Main component for a primary marketing message or call to action -->
   <div class="jumbotron">
     <h1>Welcome to Dashboard</h1>
-    <p>This is warehaus.</p>
+    <p>This is warehaus. </p>
     <p *ngIf="!(authService.user | async)">
       <a class="btn btn-lg btn-primary" href="" role="button" (click)="authService.signOut()">Login</a>
     </p>
