@@ -1,22 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Routes, CanActivate } from "@angular/router";
+
+
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { LocalStorageModule } from 'angular-2-local-storage';
+
+import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
-import { CoreModule } from './core/core.module';
-import { UserComponent } from './user/user.component';
-import { RouterModule } from '@angular/router';
-import { Routes, CanActivate } from "@angular/router";
-import { FormsModule } from '@angular/forms';
+import { UserComponent } from './views/user/user.component';
 import { LoginComponent } from './views/login/login.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { UserProfileComponent } from './views/user/user-profile/user-profile.component';
+import { NewsfeedComponent } from './views/newsfeed/newsfeed.component';
+
 import { AuthGuard } from './core/auth.guard';
-import { LocalStorageModule } from 'angular-2-local-storage';
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { NewsfeedComponent } from './newsfeed/newsfeed.component';
+
 
 @NgModule({
   imports: [
@@ -31,23 +36,6 @@ import { NewsfeedComponent } from './newsfeed/newsfeed.component';
       prefix: 'local-store',
       storageType: 'localStorage'
     }),
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: UserComponent
-      },
-      
-      {
-        path: 'dashboard',
-        canActivate: [AuthGuard],
-        component: DashboardComponent
-      },
-      {
-        path: 'profile',
-        canActivate: [AuthGuard],
-        component: UserProfileComponent
-      }
-    ])
   ],
   declarations: [ AppComponent, UserComponent, LoginComponent,DashboardComponent, UserProfileComponent, NewsfeedComponent],
   bootstrap: [ AppComponent ],
