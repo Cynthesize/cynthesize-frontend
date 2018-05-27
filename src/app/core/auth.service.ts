@@ -13,8 +13,13 @@ import { LocalStorageService } from 'angular-2-local-storage';
 interface User {
   uid: string;
   email: string;
-  photoURL: string;
-  displayName: string;
+  photo_url: string;
+  display_name: string;
+  subscription: Boolean;
+  projects_owned: Array<any>;
+  projects_upvoted: Array<any>;
+  projects_downvoted: Array<any>;
+  projects_in_review: Array<any>;
 }
 
 
@@ -32,6 +37,7 @@ export class AuthService {
         .switchMap(user => {
           if (user) {
             this.localstorge.set("isLoggedIn", true);
+            this.localstorge.set("userUid", user.uid);
             return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
           } else {
             this.localstorge.set("isLoggedIn", false);
@@ -66,25 +72,34 @@ export class AuthService {
       })
   }
 
-
   private updateUserData(user) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const data: User = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL
+      display_name: user.displayName,
+      photo_url: user.photoURL,
+      subscription: true,
+      projects_downvoted: [],
+      projects_in_review: [],
+      projects_upvoted: [],
+      projects_owned: []
     }
     return userRef.set(data, { merge: true })
   }
 
-  updateUserDataProfile(user,location1,organization1) {
+  updateUserDataProfile(user, location1, organization1) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const data: User = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL
+      display_name: user.displayName,
+      photo_url: user.photoURL,
+      subscription: true,
+      projects_downvoted: [],
+      projects_in_review: [],
+      projects_upvoted: [],
+      projects_owned: []
     }
     return userRef.set(data, { merge: true })
   }

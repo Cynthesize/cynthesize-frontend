@@ -21,6 +21,9 @@ import { UserProfileComponent } from './views/user/user-profile/user-profile.com
 import { NewsfeedComponent } from './views/newsfeed/newsfeed.component';
 
 import { AuthGuard } from './core/auth.guard';
+import { TextualDetailsService } from './services/add-project/textual-details.service';
+import { AddProjectComponent } from './views/user/add-project/add-project.component';
+import { AppRoutes } from './app.routes';
 
 
 @NgModule({
@@ -31,14 +34,23 @@ import { AuthGuard } from './core/auth.guard';
     AngularFireAuthModule,
     AngularFireStorageModule,
     CoreModule,
+    AppRoutes,
     FormsModule,
     LocalStorageModule.withConfig({
       prefix: 'local-store',
       storageType: 'localStorage'
     }),
   ],
-  declarations: [ AppComponent, UserComponent, LoginComponent,DashboardComponent, UserProfileComponent, NewsfeedComponent],
+  declarations: [
+    AppComponent,
+    UserComponent,
+    LoginComponent,
+    DashboardComponent,
+    UserProfileComponent,
+    NewsfeedComponent,
+    AddProjectComponent
+  ],
   bootstrap: [ AppComponent ],
-  providers : [AuthGuard]
+  providers : [AuthGuard, TextualDetailsService]
 })
 export class AppModule {}

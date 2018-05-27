@@ -1,3 +1,6 @@
-<p>
-  add-project works!
-</p>
+<form (submit)="addProjectToDatabase($event)">
+  <input type="text" name="project_name" id="project_name">
+  <input type="text" name="one_line_description" id="one_line_description">
+  <input type="text" name="project_summary" id="project_summary">
+  <input type="submit" value="submit">
+</form>

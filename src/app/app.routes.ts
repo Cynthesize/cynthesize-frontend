@@ -4,6 +4,7 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { UserComponent } from './views/user/user.component';
 import { AuthGuard } from "./core/auth.guard";
 import { UserProfileComponent } from './views/user/user-profile/user-profile.component';
+import { AddProjectComponent } from './views/user/add-project/add-project.component';
 
 const appRoutes: Routes = [
     {
@@ -19,6 +20,10 @@ const appRoutes: Routes = [
       path: 'profile',
       canActivate: [AuthGuard],
       component: UserProfileComponent
+    },
+    {
+      path: 'add-project',
+      component: AddProjectComponent
     }
 ];
 
