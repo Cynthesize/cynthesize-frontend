@@ -1,3 +1,25 @@
-<p>
-  newsfeed works!
-</p>
+<h1>NewsFeed</h1>
+
+<div *ngFor="let project of projects | async">
+
+    <h2>{{ project?.owner }}</h2>
+    <p>{{ project?.project_name }}</p>
+
+</div>
+
+<div
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="1000"
+  (scrolled)="onScroll()">
+
+</div>
+
+<div *ngIf="!finished">
+ Loading more projects...
+</div>
+
+
+<div *ngIf="finished">
+  End of database... That's all folks!
+</div>

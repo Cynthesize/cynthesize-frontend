@@ -10,6 +10,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { LocalStorageModule } from 'angular-2-local-storage';
 
 import { AppComponent } from './app.component';
@@ -24,7 +25,8 @@ import { AuthGuard } from './core/auth.guard';
 import { TextualDetailsService } from './services/add-project/textual-details.service';
 import { AddProjectComponent } from './views/user/add-project/add-project.component';
 import { AppRoutes } from './app.routes';
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NewsfeedService } from './services/newsfeed.service';
 
 @NgModule({
   imports: [
@@ -33,9 +35,11 @@ import { AppRoutes } from './app.routes';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
+    AngularFireDatabaseModule,
     CoreModule,
     AppRoutes,
     FormsModule,
+    InfiniteScrollModule,
     LocalStorageModule.withConfig({
       prefix: 'local-store',
       storageType: 'localStorage'
@@ -48,9 +52,9 @@ import { AppRoutes } from './app.routes';
     DashboardComponent,
     UserProfileComponent,
     NewsfeedComponent,
-    AddProjectComponent
+    AddProjectComponent,
   ],
   bootstrap: [ AppComponent ],
-  providers : [AuthGuard, TextualDetailsService]
+  providers : [AuthGuard, TextualDetailsService,NewsfeedService]
 })
 export class AppModule {}

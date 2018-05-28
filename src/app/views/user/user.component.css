@@ -1,3 +1,6 @@
 body {
 	text-align: center;
 }
+.container {
+  overflow-y: scroll;
+}
