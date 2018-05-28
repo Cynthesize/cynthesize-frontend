@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { NewsfeedService } from '../../services/newsfeed.service'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
-import * as _ from 'lodash'
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/take';
+import * as _ from 'lodash'
 
 @Component({
   selector: 'app-newsfeed',
@@ -36,19 +36,24 @@ export class NewsfeedComponent implements OnInit {
         .do(projects => {
 
           /// set the lastKey in preparation for next query
-          this.lastKey = _.last(projects)['$key']
+          ///this.lastKey = _.last(projects)['$key']
+          this.lastKey = _.slice(projects, this.batch-1, this.batch)['$key']
           const newProjects = _.slice(projects, 0, this.batch)
-
           /// Get current movies in BehaviorSubject
           const currentProjects = this.projects.getValue()
 
           /// If data is identical, stop making queries
-          if (this.lastKey == _.last(newProjects)['$key']) {
+          ///if (this.lastKey == _.last(newProjects)['$key']) {
+          ///  this.finished = true
+          ///}
+          if (this.lastKey == _.slice(newProjects, this.batch-1, this.batch)['$key']) {
             this.finished = true
           }
 
+          console.log(_.slice(newProjects, this.batch-1, this.batch))
           /// Concatenate new movies to current projects
           this.projects.next( _.concat(currentProjects, newProjects) )
+          console.log(this.projects.getValue())
         })
         .take(1)
         .subscribe()
