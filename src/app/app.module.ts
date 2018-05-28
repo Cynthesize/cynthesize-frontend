@@ -24,7 +24,8 @@ import { AuthGuard } from './core/auth.guard';
 import { TextualDetailsService } from './services/add-project/textual-details.service';
 import { AddProjectComponent } from './views/user/add-project/add-project.component';
 import { AppRoutes } from './app.routes';
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NewsfeedService } from './services/newsfeed.service';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { AppRoutes } from './app.routes';
     CoreModule,
     AppRoutes,
     FormsModule,
+    InfiniteScrollModule,
     LocalStorageModule.withConfig({
       prefix: 'local-store',
       storageType: 'localStorage'
@@ -48,9 +50,9 @@ import { AppRoutes } from './app.routes';
     DashboardComponent,
     UserProfileComponent,
     NewsfeedComponent,
-    AddProjectComponent
+    AddProjectComponent,
   ],
   bootstrap: [ AppComponent ],
-  providers : [AuthGuard, TextualDetailsService]
+  providers : [AuthGuard, TextualDetailsService,NewsfeedService]
 })
 export class AppModule {}
