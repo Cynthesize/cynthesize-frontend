@@ -1,25 +1,15 @@
-<h1>NewsFeed</h1>
 
-<div *ngFor="let project of projects | async">
+<div class="content" scrollable (scrollPosition)="scrollHandler($event)">
 
-    <h2>{{ project?.owner }}</h2>
-    <p>{{ project?.project_name }}</p>
+  <p class="tag is-warning" *ngIf="page.done | async">I ran out of boats!</p>
+  <div  *ngIf="page.loading | async"></div>
+
+<div *ngFor="let boat of page.data | async">
+  <h1>Built in {{ boat.project_name }}</h1>
+</div>
 
 </div>
 
-<div
-  infiniteScroll
-  [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="1000"
-  (scrolled)="onScroll()">
-
-</div>
-
-<div *ngIf="!finished">
- Loading more projects...
-</div>
 
 
-<div *ngIf="finished">
-  End of database... That's all folks!
-</div>
+<router-outlet></router-outlet>

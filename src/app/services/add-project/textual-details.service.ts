@@ -19,6 +19,9 @@ interface Project {
   one_line_description: string;
   project_summary: string;
   tags: Array<any>;
+  comments: Object;
+  upvotes: Number;
+  downvotes: Number;
 }
 
 @Injectable()
@@ -42,7 +45,10 @@ export class TextualDetailsService {
       project_name: projectDetails.project_name,
       one_line_description: projectDetails.one_line_description,
       project_summary: projectDetails.project_summary,
-      tags: []
+      tags: [],
+      comments: {},
+      upvotes: 0,
+      downvotes: 0
     };
     console.log(data, projectDetails);
     return projectRef.set(data, { merge: true });
