@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { TextualDetailsService } from "../../../services/add-project/textual-details.service";
 import { ProjectDetailService } from '../../../services/project/project-detail.service';
 
+var generatedDocumentId = () => {
+  return 'project' + Date.now();
+}
+
 @Component({
   selector: 'app-add-project',
   templateUrl: './add-project.component.html',
@@ -19,14 +23,23 @@ export class AddProjectComponent implements OnInit {
     const projectName = e.target.querySelector('#project_name').value;
     const oneLineDescription = e.target.querySelector('#one_line_description').value;
     const projectSummary = e.target.querySelector('#project_summary').value;
+    var isPublic = e.target.querySelector('input[name=is_public]:checked').value;
+    
+    if (isPublic === 'on') {
+      isPublic = true;
+    } else {
+      isPublic = false;
+    }
     
     var ProjectDetails = {
       project_name: projectName,
       one_line_description: oneLineDescription,
-      project_summary: projectSummary
+      project_summary: projectSummary,
+      is_public: isPublic
     };
+    var projectId = generatedDocumentId();
 
-    this.projectDetailUploader.uploadTextualData(ProjectDetails);
+    this.projectDetailUploader.uploadTextualData(ProjectDetails, projectId);
     
   }
 }

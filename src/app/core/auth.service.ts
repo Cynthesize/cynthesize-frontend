@@ -16,7 +16,8 @@ interface User {
   photo_url: string;
   display_name: string;
   subscription: Boolean;
-  projects_owned: Array<any>;
+  private_projects_owned: Object;
+  public_projects_owned: Object;
   projects_upvoted: Array<any>;
   projects_downvoted: Array<any>;
   projects_in_review: Array<any>;

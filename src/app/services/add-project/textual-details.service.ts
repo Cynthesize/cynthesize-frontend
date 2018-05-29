@@ -24,26 +24,18 @@ interface Project {
   downvotes: Number;
 }
 
-var generatedDocumentId = () => {
-  return 'project' + Date.now();
-}
-
 @Injectable()
 export class TextualDetailsService {
-
   profile: Observable<Project>;
 
   constructor(private afs: AngularFirestore,
               private router: Router,
               private localstorge: LocalStorageService,
-              private Auth: AuthService
-            ) {
-  }
+              private Auth: AuthService) {}
 
-  uploadTextualData(projectDetails) {
+  uploadTextualData(projectDetails, projectId) {
     projectDetails.owner_id = this.localstorge.get('userUid');
-
-    const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${generatedDocumentId()}`);
+    const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/`+ projectId);
     const data: Project = {
       owner: projectDetails.owner_id,
       project_name: projectDetails.project_name,
@@ -54,7 +46,16 @@ export class TextualDetailsService {
       upvotes: 0,
       downvotes: 0
     };
-    console.log(data, projectDetails);
+    // const userRef = this.afs.collection('projects').doc(projectDetails.owner_id);
+    // var usersUpdate = {};
+    // if (projectDetails.isPublic) {
+    //   usersUpdate[`public_projects_owned.` + projectId] = projectDetails.isPublic;      
+    // } else {
+    //   usersUpdate[`private_projects_owned.` + projectId] = projectDetails.isPublic;      
+    // }
+
+    // userRef.update(usersUpdate);
+
     return projectRef.set(data, { merge: true });
   }
 }
