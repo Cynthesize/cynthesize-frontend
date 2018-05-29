@@ -39,7 +39,7 @@ export class NewsfeedService {
     this.query = { 
       path,
       field,
-      limit: 6,
+      limit: 3,
       reverse: false,
       prepend: false,
       ...opts
@@ -119,8 +119,6 @@ export class NewsfeedService {
 
   }
 
-
-  // Reset the page
   reset() {
     this._data.next([])
     this._done.next(false)

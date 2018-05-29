@@ -4,10 +4,15 @@
   <p class="tag is-warning" *ngIf="page.done | async">I ran out of boats!</p>
   <div  *ngIf="page.loading | async"></div>
 
-<div *ngFor="let boat of page.data | async">
+<div style="padding: 200px 0 200px 0" *ngFor="let boat of page.data | async">
   <h1>Built in {{ boat.project_name }}</h1>
 </div>
-
+<div class="search-results"
+            infiniteScroll
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            (scrolled)="onScroll()">
+        </div>
 </div>
 
 
