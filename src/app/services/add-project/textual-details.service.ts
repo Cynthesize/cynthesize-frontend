@@ -46,15 +46,15 @@ export class TextualDetailsService {
       upvotes: 0,
       downvotes: 0
     };
-    // const userRef = this.afs.collection('projects').doc(projectDetails.owner_id);
-    // var usersUpdate = {};
-    // if (projectDetails.isPublic) {
-    //   usersUpdate[`public_projects_owned.` + projectId] = projectDetails.isPublic;      
-    // } else {
-    //   usersUpdate[`private_projects_owned.` + projectId] = projectDetails.isPublic;      
-    // }
+     const userRef = this.afs.collection('users').doc(projectDetails.owner_id);
+     var usersUpdate = {};
+     if (projectDetails.is_public) {
+       usersUpdate[`public_projects_owned.` + projectId] = projectDetails.is_public;      
+     } else {
+       usersUpdate[`private_projects_owned.` + projectId] = projectDetails.is_public;      
+     }
 
-    // userRef.update(usersUpdate);
+     userRef.update(usersUpdate);
 
     return projectRef.set(data, { merge: true });
   }
