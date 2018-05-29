@@ -24,6 +24,10 @@ interface Project {
   downvotes: Number;
 }
 
+var generatedDocumentId = () => {
+  return 'project' + Date.now();
+}
+
 @Injectable()
 export class TextualDetailsService {
 
@@ -39,7 +43,7 @@ export class TextualDetailsService {
   uploadTextualData(projectDetails) {
     projectDetails.owner_id = this.localstorge.get('userUid');
 
-    const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${projectDetails.owner_id}`);
+    const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/${generatedDocumentId()}`);
     const data: Project = {
       owner: projectDetails.owner_id,
       project_name: projectDetails.project_name,

@@ -59,16 +59,26 @@ export class AuthService {
   private GoogleoAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
-        this.updateUserData(credential.user)
-        this.router.navigate(['dashboard'])
+        const userRef = this.afs.doc(`users/${credential.user.uid}`).ref.get()
+        .then(doc => {
+          if (!doc.exists) {
+            this.updateUserData(credential.user);
+          }
+        });
+        this.router.navigate(['dashboard']);
       })
   }
 
   private GithuboAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
-        this.updateUserData(credential.user)
-        this.router.navigate(['dashboard'])
+        const userRef = this.afs.doc(`users/${credential.user.uid}`).ref.get()
+        .then(doc => {
+          if (!doc.exists) {
+            this.updateUserData(credential.user);
+          }
+        });
+        this.router.navigate(['dashboard']);
       })
   }
 
