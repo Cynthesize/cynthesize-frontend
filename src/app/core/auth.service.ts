@@ -16,8 +16,7 @@ interface User {
   photo_url: string;
   display_name: string;
   subscription: Boolean;
-  private_projects_owned: Object;
-  public_projects_owned: Object;
+  projects_owned: Object;
   projects_upvoted: Array<any>;
   projects_downvoted: Array<any>;
   projects_in_review: Array<any>;
@@ -91,8 +90,7 @@ export class AuthService {
       display_name: user.displayName,
       photo_url: user.photoURL,
       subscription: true,
-      private_projects_owned: {},
-      public_projects_owned: {},
+      projects_owned: {},
       projects_downvoted: [],
       projects_in_review: [],
       projects_upvoted: [],
@@ -108,8 +106,7 @@ export class AuthService {
       display_name: user.displayName,
       photo_url: user.photoURL,
       subscription: true,
-      private_projects_owned: {},
-      public_projects_owned: {},
+      projects_owned: {},
       projects_downvoted: [],
       projects_in_review: [],
       projects_upvoted: [],

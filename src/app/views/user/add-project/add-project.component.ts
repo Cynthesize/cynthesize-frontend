@@ -23,9 +23,9 @@ export class AddProjectComponent implements OnInit {
     const projectName = e.target.querySelector('#project_name').value;
     const oneLineDescription = e.target.querySelector('#one_line_description').value;
     const projectSummary = e.target.querySelector('#project_summary').value;
-    var isPublic = e.target.querySelector('input[name=is_public]:checked').value;
+    var isPublic;
     
-    if (isPublic === 'on') {
+    if (e.target.querySelector('input[name=is_public]:checked')) {
       isPublic = true;
     } else {
       isPublic = false;
