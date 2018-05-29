@@ -91,10 +91,11 @@ export class AuthService {
       display_name: user.displayName,
       photo_url: user.photoURL,
       subscription: true,
+      private_projects_owned: {},
+      public_projects_owned: {},
       projects_downvoted: [],
       projects_in_review: [],
       projects_upvoted: [],
-      projects_owned: []
     }
     return userRef.set(data, { merge: true })
   }
@@ -107,10 +108,11 @@ export class AuthService {
       display_name: user.displayName,
       photo_url: user.photoURL,
       subscription: true,
+      private_projects_owned: {},
+      public_projects_owned: {},
       projects_downvoted: [],
       projects_in_review: [],
       projects_upvoted: [],
-      projects_owned: []
     }
     return userRef.set(data, { merge: true })
   }
