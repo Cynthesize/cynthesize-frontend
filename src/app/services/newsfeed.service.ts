@@ -30,7 +30,6 @@ export class NewsfeedService {
   done: Observable<boolean> = this._done.asObservable();
   loading: Observable<boolean> = this._loading.asObservable();
 
-
   constructor(private afs: AngularFirestore) { }
 
   // Initial query sets options and defines the Observable
@@ -59,7 +58,6 @@ export class NewsfeedService {
       })
   }
 
-
   // Retrieves additional data from firestore
   more() {
     const cursor = this.getCursor()
@@ -73,7 +71,6 @@ export class NewsfeedService {
     this.mapAndUpdate(more)
   }
 
-
   // Determines the doc snapshot to paginate query 
   private getCursor() {
     const current = this._data.value
@@ -83,10 +80,8 @@ export class NewsfeedService {
     return null
   }
 
-
   // Maps the snapshot to usable format the updates source
   private mapAndUpdate(col: AngularFirestoreCollection<any>) {
-
     if (this._done.value || this._loading.value) { return };
 
     // loading
@@ -115,14 +110,10 @@ export class NewsfeedService {
       })
       .take(1)
       .subscribe()
-
   }
-
   reset() {
     this._data.next([])
     this._done.next(false)
   }
-
-
 }
 

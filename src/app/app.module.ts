@@ -27,6 +27,8 @@ import { AddProjectComponent } from './views/user/add-project/add-project.compon
 import { AppRoutes } from './app.routes';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NewsfeedService } from './services/newsfeed.service';
+import { ProjectSummaryComponent } from './views/project/project-summary/project-summary.component';
+import { ProjectDetailService } from './services/project/project-detail.service';
 
 @NgModule({
   imports: [
@@ -53,8 +55,9 @@ import { NewsfeedService } from './services/newsfeed.service';
     UserProfileComponent,
     NewsfeedComponent,
     AddProjectComponent,
+    ProjectSummaryComponent
   ],
   bootstrap: [AppComponent],
-  providers: [AuthGuard, TextualDetailsService, NewsfeedService]
+  providers: [AuthGuard, TextualDetailsService, NewsfeedService, ProjectDetailService]
 })
 export class AppModule { }
