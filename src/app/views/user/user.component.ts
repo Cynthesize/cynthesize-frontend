@@ -14,7 +14,6 @@ export class UserComponent implements OnInit {
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
-	
-  }
 
+  }
 }

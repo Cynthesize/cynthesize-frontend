@@ -30,13 +30,13 @@ export class TextualDetailsService {
   profile: Observable<Project>;
 
   constructor(private afs: AngularFirestore,
-              private router: Router,
-              private localstorge: LocalStorageService,
-              private Auth: AuthService) {}
+    private router: Router,
+    private localstorge: LocalStorageService,
+    private Auth: AuthService) { }
 
   uploadTextualData(projectDetails, projectId) {
     projectDetails.owner_id = this.localstorge.get('userUid');
-    const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/`+ projectId);
+    const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/` + projectId);
     const data: Project = {
       owner: projectDetails.owner_id,
       project_name: projectDetails.project_name,
@@ -48,15 +48,11 @@ export class TextualDetailsService {
       upvotes: 0,
       downvotes: 0
     };
-     const userRef = this.afs.collection('users').doc(projectDetails.owner_id);
-     var usersUpdate = {};
-     if (projectDetails.is_public) {
-       usersUpdate[`public_projects_owned.` + projectId] = projectDetails.is_public;      
-     } else {
-       usersUpdate[`private_projects_owned.` + projectId] = projectDetails.is_public;      
-     }
+    const userRef = this.afs.collection('users').doc(projectDetails.owner_id);
+    var usersUpdate = {};
+    usersUpdate[`projects_owned.` + projectId] = projectDetails.is_public;
 
-     userRef.update(usersUpdate);
+    userRef.update(usersUpdate);
 
     return projectRef.set(data, { merge: true });
   }

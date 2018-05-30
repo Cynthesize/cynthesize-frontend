@@ -29,21 +29,21 @@ export class AuthService {
   user: Observable<User>;
 
   constructor(private afAuth: AngularFireAuth,
-              private afs: AngularFirestore,
-              private router: Router,private localstorge: LocalStorageService) {
+    private afs: AngularFirestore,
+    private router: Router, private localstorge: LocalStorageService) {
 
-      //// Get auth data, then get firestore user document || null
-      this.user = this.afAuth.authState
-        .switchMap(user => {
-          if (user) {
-            this.localstorge.set("isLoggedIn", true);
-            this.localstorge.set("userUid", user.uid);
-            return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
-          } else {
-            this.localstorge.set("isLoggedIn", false);
-            return Observable.of(null)
-          }
-        })
+    //// Get auth data, then get firestore user document || null
+    this.user = this.afAuth.authState
+      .switchMap(user => {
+        if (user) {
+          this.localstorge.set("isLoggedIn", true);
+          this.localstorge.set("userUid", user.uid);
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+        } else {
+          this.localstorge.set("isLoggedIn", false);
+          return Observable.of(null)
+        }
+      })
   }
 
   googleLogin() {
@@ -60,11 +60,11 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
         const userRef = this.afs.doc(`users/${credential.user.uid}`).ref.get()
-        .then(doc => {
-          if (!doc.exists) {
-            this.updateUserData(credential.user);
-          }
-        });
+          .then(doc => {
+            if (!doc.exists) {
+              this.updateUserData(credential.user);
+            }
+          });
         this.router.navigate(['dashboard']);
       })
   }
@@ -73,11 +73,11 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
         const userRef = this.afs.doc(`users/${credential.user.uid}`).ref.get()
-        .then(doc => {
-          if (!doc.exists) {
-            this.updateUserData(credential.user);
-          }
-        });
+          .then(doc => {
+            if (!doc.exists) {
+              this.updateUserData(credential.user);
+            }
+          });
         this.router.navigate(['dashboard']);
       })
   }
@@ -116,8 +116,8 @@ export class AuthService {
 
   signOut() {
     this.afAuth.auth.signOut().then(() => {
-        this.localstorge.set("isLoggedIn", false);
-        this.router.navigate(['/']);
+      this.localstorge.set("isLoggedIn", false);
+      this.router.navigate(['/']);
     });
   }
 }

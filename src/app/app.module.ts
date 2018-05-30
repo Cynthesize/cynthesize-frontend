@@ -54,7 +54,7 @@ import { NewsfeedService } from './services/newsfeed.service';
     NewsfeedComponent,
     AddProjectComponent,
   ],
-  bootstrap: [ AppComponent ],
-  providers : [AuthGuard, TextualDetailsService,NewsfeedService]
+  bootstrap: [AppComponent],
+  providers: [AuthGuard, TextualDetailsService, NewsfeedService]
 })
-export class AppModule {}
+export class AppModule { }

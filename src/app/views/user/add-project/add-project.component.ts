@@ -24,13 +24,13 @@ export class AddProjectComponent implements OnInit {
     const oneLineDescription = e.target.querySelector('#one_line_description').value;
     const projectSummary = e.target.querySelector('#project_summary').value;
     var isPublic;
-    
+
     if (e.target.querySelector('input[name=is_public]:checked')) {
       isPublic = true;
     } else {
       isPublic = false;
     }
-    
+
     var ProjectDetails = {
       project_name: projectName,
       one_line_description: oneLineDescription,
@@ -40,6 +40,6 @@ export class AddProjectComponent implements OnInit {
     var projectId = generatedDocumentId();
 
     this.projectDetailUploader.uploadTextualData(ProjectDetails, projectId);
-    
+
   }
 }

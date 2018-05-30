@@ -17,21 +17,21 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {
   }
 
-    googleLogin() {
-      this.authService.googleLogin()
+  googleLogin() {
+    this.authService.googleLogin()
       .then((res) => {
-          this.router.navigate(['dashboard'])
-        })
+        this.router.navigate(['dashboard'])
+      })
       .catch((err) => console.log(err));
-    }
+  }
 
-    githubLogin() {
-      this.authService.githubLogin()
+  githubLogin() {
+    this.authService.githubLogin()
       .then((res) => {
-          this.router.navigate(['dashboard'])
-        })
+        this.router.navigate(['dashboard'])
+      })
       .catch((err) => console.log(err));
-    }
+  }
 
 
 

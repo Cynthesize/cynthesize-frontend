@@ -7,24 +7,24 @@ import { UserProfileComponent } from './views/user/user-profile/user-profile.com
 import { AddProjectComponent } from './views/user/add-project/add-project.component';
 
 const appRoutes: Routes = [
-    {
-        path: '',
-        component: UserComponent
-    },  
-    {
-      path: 'dashboard',
-      canActivate: [AuthGuard],
-      component: DashboardComponent
-    },
-    {
-      path: 'profile',
-      canActivate: [AuthGuard],
-      component: UserProfileComponent
-    },
-    {
-      path: 'add-project',
-      component: AddProjectComponent
-    }
+  {
+    path: '',
+    component: UserComponent
+  },
+  {
+    path: 'dashboard',
+    canActivate: [AuthGuard],
+    component: DashboardComponent
+  },
+  {
+    path: 'profile',
+    canActivate: [AuthGuard],
+    component: UserProfileComponent
+  },
+  {
+    path: 'add-project',
+    component: AddProjectComponent
+  }
 ];
 
 export const AppRoutes = RouterModule.forRoot(appRoutes);

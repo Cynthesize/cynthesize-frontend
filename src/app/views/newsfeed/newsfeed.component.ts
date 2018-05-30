@@ -9,7 +9,7 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
   styleUrls: ['./newsfeed.component.css']
 })
 export class NewsfeedComponent implements OnInit {
-  constructor(public page: NewsfeedService) {}
+  constructor(public page: NewsfeedService) { }
 
   ngOnInit() {
     this.page.init('projects', 'project_name', { reverse: false, prepend: false })

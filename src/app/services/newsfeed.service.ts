@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/scan';
 import 'rxjs/add/operator/take';
- 
+
 // Options to reproduce firestore queries consistently
 interface QueryConfig {
   path: string, // path to collection
@@ -15,10 +15,9 @@ interface QueryConfig {
   prepend?: boolean // prepend to source?
 }
 
- 
 @Injectable()
 export class NewsfeedService {
- 
+
   // Source data
   private _done = new BehaviorSubject(false);
   private _loading = new BehaviorSubject(false);
@@ -36,7 +35,7 @@ export class NewsfeedService {
 
   // Initial query sets options and defines the Observable
   init(path, field, opts?) {
-    this.query = { 
+    this.query = {
       path,
       field,
       limit: 3,
@@ -47,29 +46,29 @@ export class NewsfeedService {
 
     const first = this.afs.collection(this.query.path, ref => {
       return ref
-              .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
-              .limit(this.query.limit)
+        .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+        .limit(this.query.limit)
     })
 
     this.mapAndUpdate(first)
 
     // Create the observable array for consumption in components
     this.data = this._data.asObservable()
-        .scan( (acc, val) => { 
-          return this.query.prepend ? val.concat(acc) : acc.concat(val)
-        })
+      .scan((acc, val) => {
+        return this.query.prepend ? val.concat(acc) : acc.concat(val)
+      })
   }
 
- 
+
   // Retrieves additional data from firestore
   more() {
     const cursor = this.getCursor()
 
     const more = this.afs.collection(this.query.path, ref => {
       return ref
-              .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
-              .limit(this.query.limit)
-              .startAfter(cursor)
+        .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+        .limit(this.query.limit)
+        .startAfter(cursor)
     })
     this.mapAndUpdate(more)
   }
@@ -79,7 +78,7 @@ export class NewsfeedService {
   private getCursor() {
     const current = this._data.value
     if (current.length) {
-      return this.query.prepend ? current[0].doc : current[current.length - 1].doc 
+      return this.query.prepend ? current[0].doc : current[current.length - 1].doc
     }
     return null
   }
@@ -101,7 +100,7 @@ export class NewsfeedService {
           const doc = snap.payload.doc
           return { ...data, doc }
         })
-  
+
         // If prepending, reverse array
         values = this.query.prepend ? values.reverse() : values
 
@@ -113,9 +112,9 @@ export class NewsfeedService {
         if (!values.length) {
           this._done.next(true)
         }
-    })
-    .take(1)
-    .subscribe()
+      })
+      .take(1)
+      .subscribe()
 
   }
 
@@ -123,7 +122,7 @@ export class NewsfeedService {
     this._data.next([])
     this._done.next(false)
   }
-  
+
 
 }
 
