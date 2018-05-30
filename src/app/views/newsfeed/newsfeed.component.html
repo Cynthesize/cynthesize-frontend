@@ -1,12 +1,20 @@
 <div class="content" scrollable (scrollPosition)="scrollHandler($event)">
-
-  <p class="tag is-warning" *ngIf="page.done | async">I ran out of boats!</p>
-  <div *ngIf="page.loading | async"></div>
-
-  <div style="padding: 200px 0 200px 0" *ngFor="let boat of page.data | async">
-    <h1>Built in {{ boat.project_name }}</h1>
+  <div *ngFor="let project of page.data | async">
+    <div class="card" style="width:400px; padding-top: 50px;">
+      <img class="card-img-right" src="img_avatar1.png" alt="Card image" style="width:100%">
+      <div class="card-body">
+        <h4 class="card-title">{{ project.project_name }}</h4>
+        <h5 class="card-title">{{ project.one_line_description }}</h5>
+        <p class="card-text">{{ project.project_summary }}</p>
+        <a href="#" class="btn btn-primary">See Profile</a>
+      </div>
+    </div>
   </div>
   <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
   </div>
 </div>
+
+<p class="tag is-warning" *ngIf="page.done | async">End of projects!</p>
+<div *ngIf="page.loading | async"></div>
+
 <router-outlet></router-outlet>
