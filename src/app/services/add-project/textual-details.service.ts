@@ -6,12 +6,12 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/switchMap'
-import 'rxjs/add/observable/of'
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/of';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 
-import { AuthService } from "../../core/auth.service";
+import { AuthService } from '../../core/auth.service';
 
 interface Project {
   owner: string;
@@ -51,7 +51,7 @@ export class TextualDetailsService {
       downvotes: 0
     };
     const userRef = this.afs.collection('users').doc(projectDetails.owner_id);
-    var usersUpdate = {};
+    const usersUpdate = {};
     usersUpdate[`projects_owned.` + projectId] = projectDetails.is_public;
 
     userRef.update(usersUpdate);

@@ -6,8 +6,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/switchMap'
-import 'rxjs/add/observable/of'
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/of';
 import { LocalStorageService } from 'angular-2-local-storage';
 
 interface User {
@@ -36,23 +36,23 @@ export class AuthService {
     this.user = this.afAuth.authState
       .switchMap(user => {
         if (user) {
-          this.localstorge.set("isLoggedIn", true);
-          this.localstorge.set("userUid", user.uid);
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+          this.localstorge.set('isLoggedIn', true);
+          this.localstorge.set('userUid', user.uid);
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
-          this.localstorge.set("isLoggedIn", false);
-          return Observable.of(null)
+          this.localstorge.set('isLoggedIn', false);
+          return Observable.of(null);
         }
-      })
+      });
   }
 
   googleLogin() {
-    const provider = new firebase.auth.GoogleAuthProvider()
+    const provider = new firebase.auth.GoogleAuthProvider();
     return this.GoogleoAuthLogin(provider);
   }
 
   githubLogin() {
-    const provider = new firebase.auth.GithubAuthProvider()
+    const provider = new firebase.auth.GithubAuthProvider();
     return this.GithuboAuthLogin(provider);
   }
 
@@ -66,7 +66,7 @@ export class AuthService {
             }
           });
         this.router.navigate(['dashboard']);
-      })
+      });
   }
 
   private GithuboAuthLogin(provider) {
@@ -79,7 +79,7 @@ export class AuthService {
             }
           });
         this.router.navigate(['dashboard']);
-      })
+      });
   }
 
   private updateUserData(user) {
@@ -94,8 +94,8 @@ export class AuthService {
       projects_downvoted: [],
       projects_in_review: [],
       projects_upvoted: [],
-    }
-    return userRef.set(data, { merge: true })
+    };
+    return userRef.set(data, { merge: true });
   }
 
   updateUserDataProfile(user, location1, organization1) {
@@ -110,13 +110,13 @@ export class AuthService {
       projects_downvoted: [],
       projects_in_review: [],
       projects_upvoted: [],
-    }
-    return userRef.set(data, { merge: true })
+    };
+    return userRef.set(data, { merge: true });
   }
 
   signOut() {
     this.afAuth.auth.signOut().then(() => {
-      this.localstorge.set("isLoggedIn", false);
+      this.localstorge.set('isLoggedIn', false);
       this.router.navigate(['/']);
     });
   }

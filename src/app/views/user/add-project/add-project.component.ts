@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TextualDetailsService } from "../../../services/add-project/textual-details.service";
+import { TextualDetailsService } from '../../../services/add-project/textual-details.service';
 import { ProjectDetailService } from '../../../services/project/project-detail.service';
 import { ImageUploadService } from '../../../services/add-project/image-upload.service';
 import { Upload } from '../../../services/add-project/Upload';
@@ -7,9 +7,9 @@ import * as firebase from 'firebase/app';
 import { snapshotChanges } from 'angularfire2/database';
 
 
-var generatedDocumentId = () => {
+const generatedDocumentId = () => {
   return 'project' + Date.now();
-}
+};
 
 @Component({
   selector: 'app-add-project',
@@ -32,15 +32,15 @@ export class AddProjectComponent implements OnInit {
     const oneLineDescription = e.target.querySelector('#one_line_description').value;
     const projectSummary = e.target.querySelector('#project_summary').value;
     const files_to_upload = e.target.querySelector('#file_input').files;
-    var isPublic;
-    
+    let isPublic;
+
     if (e.target.querySelector('input[name=is_public]:checked')) {
       isPublic = true;
     } else {
       isPublic = false;
     }
-    
-    var ProjectDetails = {
+
+    const ProjectDetails = {
       project_name: projectName,
       one_line_description: oneLineDescription,
       project_summary: projectSummary,
@@ -48,7 +48,7 @@ export class AddProjectComponent implements OnInit {
       uploaded_files: files_to_upload.length || 0
     };
 
-    var projectId = generatedDocumentId();
+    const projectId = generatedDocumentId();
 
     this.upload_files(files_to_upload, projectId);
 

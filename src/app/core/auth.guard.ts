@@ -10,9 +10,9 @@ export class AuthGuard implements CanActivate {
     private LocalStorageService: LocalStorageService) { }
 
   canActivate(route: ActivatedRouteSnapshot, snap: RouterStateSnapshot) {
-    let isLoggedIn: Boolean = this.LocalStorageService.get("isLoggedIn") as Boolean;
+    const isLoggedIn: Boolean = this.LocalStorageService.get('isLoggedIn') as Boolean;
     if (!isLoggedIn) {
-      this.Router.navigate(["/"]);
+      this.Router.navigate(['/']);
       return false;
     }
     return true;
