@@ -21,7 +21,7 @@
       <label class="control-label col-sm-2">Upload Images: </label>
       <!--<app-image-upload></app-image-upload>-->
       <div class="col-sm-10">
-        <input class="form-control" type="file" id="file_input" accept=".jpg" multiple>
+        <input class="form-control" type="file" id="file_input" accept=".jpg,.jpeg" multiple>
       </div>
     </div>
     <div class="form-group">
@@ -40,7 +40,12 @@
     </div>
     <div class="form-group  col-sm-offset-2 col-sm-10">
       <div class="alert alert-success" *ngIf="upload_progress*.99 + text_uploaded == 100">
-          <strong>Success!</strong>
+          <strong>Success</strong>
+      </div>
+    </div>
+    <div class="form-group  col-sm-offset-2 col-sm-10">
+      <div class="alert alert-danger" *ngIf="upload_error">
+          <strong>Error uploading files</strong>
       </div>
     </div>
     <div class="form-group">

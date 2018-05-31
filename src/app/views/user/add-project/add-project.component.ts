@@ -20,6 +20,7 @@ export class AddProjectComponent implements OnInit {
 
   upload_progress: number;
   text_uploaded = 0;
+  upload_error = false;
 
   constructor(private projectDetailUploader: TextualDetailsService, private imageUploader: ImageUploadService) { }
 
@@ -65,25 +66,30 @@ export class AddProjectComponent implements OnInit {
     for (let i = 0; i < files.length; i++) {
       total_bytes += files[i].size;
       const current_upload = new Upload(files[i], project_id);
-      const uploader = this.imageUploader.upload(current_upload);
 
-      uploader.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        (snapshot) =>  {
-          // upload in progress
-          uploaded_bytes -= current_upload.progress;
-          current_upload.progress = snapshot['bytesTransferred'];
-          uploaded_bytes += current_upload.progress;
-          this.upload_progress = uploaded_bytes / total_bytes * 100;
-        },
-        (error) => {
-          // upload failed
-          console.log(error);
-        },
-        () => {
-          // upload success
-          current_upload.name = current_upload.file.name;
-        }
-      );
+      try {
+        const uploader = this.imageUploader.upload(current_upload);
+        uploader.on(firebase.storage.TaskEvent.STATE_CHANGED,
+          (snapshot) =>  {
+            // upload in progress
+            uploaded_bytes -= current_upload.progress;
+            current_upload.progress = snapshot['bytesTransferred'];
+            uploaded_bytes += current_upload.progress;
+            this.upload_progress = uploaded_bytes / total_bytes * 100;
+          },
+          (error) => {
+            // upload failed
+            console.log(error);
+            this.upload_error = true;
+          },
+          () => {
+            // upload success
+            current_upload.name = current_upload.file.name;
+          }
+        );
+      } catch (error) {
+        this.upload_error = true;
+      }
     }
   }
 
