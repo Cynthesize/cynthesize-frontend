@@ -17,22 +17,8 @@ export class ImageUploadService {
     const owner_id = this.localstorge.get('userUid');
     upload.owner_id = owner_id.toString();
     const storageRef = firebase.storage().ref();
-    const uploadTask = storageRef.child(`${this.basePath}/${upload.owner_id}/${upload.project_id}/${upload.file.name}`).put(upload.file);
-
-    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-      (snapshot) =>  {
-        // upload in progress
-        upload.progress = (snapshot['bytesTransferred'] / snapshot['totalBytes']) * 100;
-        console.log(upload.progress);
-      },
-      (error) => {
-        // upload failed
-        console.log(error);
-      },
-      () => {
-        // upload success
-        upload.name = upload.file.name;
-      }
-    );
+    const path = `${this.basePath}/${upload.owner_id}/${upload.project_id}/${upload.file.name}`;
+    const uploadTask = storageRef.child(path).put(upload.file);
+    return uploadTask;
   }
 }
