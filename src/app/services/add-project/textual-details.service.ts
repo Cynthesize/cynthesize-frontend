@@ -19,6 +19,7 @@ interface Project {
   one_line_description: string;
   project_summary: string;
   is_public: Boolean;
+  uploaded_files: number;
   tags: Array<any>;
   comments: Object;
   upvotes: Number;
@@ -43,6 +44,7 @@ export class TextualDetailsService {
       one_line_description: projectDetails.one_line_description,
       project_summary: projectDetails.project_summary,
       is_public: projectDetails.is_public,
+      uploaded_files: projectDetails.uploaded_files,
       tags: [],
       comments: {},
       upvotes: 0,
