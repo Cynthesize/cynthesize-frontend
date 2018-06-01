@@ -51,24 +51,37 @@ export class AddProjectComponent implements OnInit {
 
     const projectId = generatedDocumentId();
 
-    this.upload_files(files_to_upload, projectId);
-
-    this.projectDetailUploader.uploadTextualData(ProjectDetails, projectId)
-      .then(() => {
-        this.text_uploaded = 1;
-    });
+    this.upload_files(files_to_upload, projectId, ProjectDetails);
   }
 
-  upload_files(files, project_id) {
+  upload_files(files, project_id, ProjectDetails) {
     this.upload_progress = (files.length === 0) ? 100 : 0;
     let uploaded_bytes = 0;
     let total_bytes = 0;
-    for (let i = 0; i < files.length; i++) {
-      total_bytes += files[i].size;
-      const current_upload = new Upload(files[i], project_id);
+    let counter = files.length;
+    this.text_uploaded = 0;
 
-      try {
+    if (files.length === 0) {
+      ProjectDetails['uploads_size'] = total_bytes;
+      this.projectDetailUploader.uploadTextualData(ProjectDetails, project_id)
+        .then(() => {
+          this.text_uploaded = 1;
+      });
+    }
+
+    try {
+
+      for (let i = 0; i < files.length; i++) {
+        total_bytes += files[i].size;
+        const current_upload = new Upload(files[i], project_id);
+        current_upload.owner_id = this.imageUploader.get_owner_id();
+        this.imageUploader.verify_upload(current_upload);
+      }
+
+      for (let i = 0; i < files.length; i++) {
+        const current_upload = new Upload(files[i], project_id);
         const uploader = this.imageUploader.upload(current_upload);
+
         uploader.on(firebase.storage.TaskEvent.STATE_CHANGED,
           (snapshot) =>  {
             // upload in progress
@@ -85,12 +98,21 @@ export class AddProjectComponent implements OnInit {
           () => {
             // upload success
             current_upload.name = current_upload.file.name;
+            counter -= 1;
+
+            if (counter === 0) {
+              ProjectDetails['uploads_size'] = total_bytes;
+              this.projectDetailUploader.uploadTextualData(ProjectDetails, project_id)
+                .then(() => {
+                  this.text_uploaded = 1;
+              });
+            }
           }
         );
-      } catch (error) {
-        this.upload_error = true;
       }
+    } catch (error) {
+      console.log(error);
+      this.upload_error = true;
     }
   }
-
 }
