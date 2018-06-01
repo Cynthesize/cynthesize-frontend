@@ -111,7 +111,6 @@ export class NewsfeedService {
       })
       .take(1)
       .subscribe();
-
   }
   reset() {
     this._data.next([]);
