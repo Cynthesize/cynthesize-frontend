@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   googleLogin() {
     this.authService.googleLogin()
       .then((res) => {
-        this.router.navigate(['dashboard'])
+        this.router.navigate(['dashboard']);
       })
       .catch((err) => console.log(err));
   }
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   githubLogin() {
     this.authService.githubLogin()
       .then((res) => {
-        this.router.navigate(['dashboard'])
+        this.router.navigate(['dashboard']);
       })
       .catch((err) => console.log(err));
   }
