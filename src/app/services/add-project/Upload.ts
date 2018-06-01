@@ -1,9 +1,11 @@
 export class Upload {
+    $key: string;
     owner_id: String;
     project_id: String;
     file: File;
     name: string;
     url: string;
+    path: string;
     progress: number;
     createdAt: Date = new Date();
 
