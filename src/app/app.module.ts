@@ -23,6 +23,7 @@ import { NewsfeedComponent } from './views/newsfeed/newsfeed.component';
 
 import { AuthGuard } from './core/auth.guard';
 import { TextualDetailsService } from './services/add-project/textual-details.service';
+import { ProfileUpdateService } from './services/profile/profile-update.service';
 import { AddProjectComponent } from './views/user/add-project/add-project.component';
 import { AppRoutes } from './app.routes';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -58,6 +59,6 @@ import { ProjectDetailService } from './services/project/project-detail.service'
     ProjectSummaryComponent
   ],
   bootstrap: [AppComponent],
-  providers: [AuthGuard, TextualDetailsService, NewsfeedService, ProjectDetailService]
+  providers: [AuthGuard, TextualDetailsService, NewsfeedService, ProjectDetailService, ProfileUpdateService]
 })
 export class AppModule { }
