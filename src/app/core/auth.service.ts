@@ -112,6 +112,7 @@ export class AuthService {
   signOut() {
     this.afAuth.auth.signOut().then(() => {
       this.localstorge.set('isLoggedIn', false);
+      this.localstorge.remove('userUid');
       this.router.navigate(['/']);
     });
   }

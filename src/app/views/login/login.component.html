@@ -7,21 +7,28 @@
           <div class="login__card">
             <div class="card-block">
 
-              <form name="userform" method="post" #f="ngForm">
-                <h3 align="center">Login</h3>
+              <div *ngIf="authService.user | async as user; else showLogin">
+                <h2>Hey {{ user.display_name }}!</h2>
+                <button type="button" class="btn" (click)="authService.signOut()">Logout</button>
+              </div>
 
-                <div class="form-group">
-                  <button type="button" class="btn btn-block" (click)="githubLogin()">
-                    <i class="fa fa-github" aria-hidden="true"></i>
-                    Login with Github
-                  </button>
+              <ng-template #showLogin>
+                <form name="userform" method="post" #f="ngForm">
+                  <h3 align="center">Login</h3>
 
-                  <button type="button" class="btn btn-block" (click)="googleLogin()">
-                    <i class="fa fa-google" aria-hidden="true"></i>
-                    Login with Google
-                  </button>
-                </div>
-              </form>
+                  <div class="form-group">
+                    <button type="button" class="btn btn-block" (click)="githubLogin()">
+                      <i class="fa fa-github" aria-hidden="true"></i>
+                      Login with Github
+                    </button>
+
+                    <button type="button" class="btn btn-block" (click)="googleLogin()">
+                      <i class="fa fa-google" aria-hidden="true"></i>
+                      Login with Google
+                    </button>
+                  </div>
+                </form>
+              </ng-template>
 
             </div>
           </div>
