@@ -25,6 +25,7 @@ interface Project {
   comments: Object;
   upvotes: Number;
   downvotes: Number;
+  date_created: string;
 }
 
 @Injectable()
@@ -50,7 +51,8 @@ export class TextualDetailsService {
       tags: [],
       comments: {},
       upvotes: 0,
-      downvotes: 0
+      downvotes: 0,
+      date_created: Date()
     };
     const userRef = this.afs.collection('users').doc(projectDetails.owner_id);
     const usersUpdate = {};

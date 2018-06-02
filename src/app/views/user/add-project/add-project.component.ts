@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TextualDetailsService } from '../../../services/add-project/textual-details.service';
 import { ProjectDetailService } from '../../../services/project/project-detail.service';
-import { ImageUploadService } from '../../../services/add-project/image-upload.service';
+import { FileUploadService } from '../../../services/add-project/file-upload.service';
 import { Upload } from '../../../services/add-project/Upload';
 import * as firebase from 'firebase/app';
-import { snapshotChanges } from 'angularfire2/database';
 
 
 const generatedDocumentId = () => {
@@ -22,7 +21,7 @@ export class AddProjectComponent implements OnInit {
   text_uploaded = 0;
   upload_error = false;
 
-  constructor(private projectDetailUploader: TextualDetailsService, private imageUploader: ImageUploadService) { }
+  constructor(private projectDetailUploader: TextualDetailsService, private fileUploader: FileUploadService) { }
 
   ngOnInit() {
   }
@@ -32,7 +31,8 @@ export class AddProjectComponent implements OnInit {
     const projectName = e.target.querySelector('#project_name').value;
     const oneLineDescription = e.target.querySelector('#one_line_description').value;
     const projectSummary = e.target.querySelector('#project_summary').value;
-    const files_to_upload = e.target.querySelector('#file_input').files;
+    const images_to_upload = e.target.querySelector('#image_input').files;
+    const videos_to_upload = e.target.querySelector('#video_input').files;
     let isPublic;
 
     if (e.target.querySelector('input[name=is_public]:checked')) {
@@ -46,22 +46,24 @@ export class AddProjectComponent implements OnInit {
       one_line_description: oneLineDescription,
       project_summary: projectSummary,
       is_public: isPublic,
-      uploaded_files: files_to_upload.length || 0
+      uploaded_files: images_to_upload.length + videos_to_upload.length
     };
 
     const projectId = generatedDocumentId();
 
-    this.upload_files(files_to_upload, projectId, ProjectDetails);
+    this.upload_files(images_to_upload, videos_to_upload, projectId, ProjectDetails);
   }
 
-  upload_files(files, project_id, ProjectDetails) {
-    this.upload_progress = (files.length === 0) ? 100 : 0;
+  upload_files(image_files, video_files, project_id, ProjectDetails) {
+    const total_files = image_files.length + video_files.length;
+    this.upload_progress = (total_files === 0) ? 100 : 0;
     let uploaded_bytes = 0;
     let total_bytes = 0;
-    let counter = files.length;
+    let counter = total_files;
     this.text_uploaded = 0;
+    this.upload_error = false;
 
-    if (files.length === 0) {
+    if (total_files === 0) {
       ProjectDetails['uploads_size'] = total_bytes;
       this.projectDetailUploader.uploadTextualData(ProjectDetails, project_id)
         .then(() => {
@@ -71,16 +73,36 @@ export class AddProjectComponent implements OnInit {
 
     try {
 
-      for (let i = 0; i < files.length; i++) {
-        total_bytes += files[i].size;
-        const current_upload = new Upload(files[i], project_id);
-        current_upload.owner_id = this.imageUploader.get_owner_id();
-        this.imageUploader.verify_upload(current_upload);
+      if (video_files.length > 1) {
+        throw new Error('You can only upload 1 video');
       }
 
-      for (let i = 0; i < files.length; i++) {
-        const current_upload = new Upload(files[i], project_id);
-        const uploader = this.imageUploader.upload(current_upload);
+      for (let i = 0; i < image_files.length; i++) {
+        total_bytes += image_files[i].size;
+        const current_upload = new Upload(image_files[i], project_id);
+        current_upload.owner_id = this.fileUploader.get_owner_id();
+        this.fileUploader.verify_upload(current_upload, 'image');
+      }
+
+      for (let i = 0; i < video_files.length; i++) {
+        total_bytes += video_files[i].size;
+        const current_upload = new Upload(video_files[i], project_id);
+        current_upload.owner_id = this.fileUploader.get_owner_id();
+        this.fileUploader.verify_upload(current_upload, 'video');
+      }
+
+      for (let i = 0; i < total_files; i++) {
+
+        let current_upload: Upload;
+        let uploader;
+
+        if (i < image_files.length) {
+          current_upload = new Upload(image_files[i], project_id);
+          uploader = this.fileUploader.upload(current_upload, 'image');
+        } else {
+          current_upload = new Upload(video_files[i - image_files.length], project_id);
+          uploader = this.fileUploader.upload(current_upload, 'video');
+        }
 
         uploader.on(firebase.storage.TaskEvent.STATE_CHANGED,
           (snapshot) =>  {

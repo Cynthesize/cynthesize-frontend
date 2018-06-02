@@ -22,17 +22,12 @@ interface User {
   projects_in_review: Array<any>;
 }
 
-
 @Injectable()
 export class AuthService {
-
   user: Observable<User>;
-
   constructor(private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router, private localstorge: LocalStorageService) {
-
-    //// Get auth data, then get firestore user document || null
     this.user = this.afAuth.authState
       .switchMap(user => {
         if (user) {
@@ -117,6 +112,7 @@ export class AuthService {
   signOut() {
     this.afAuth.auth.signOut().then(() => {
       this.localstorge.set('isLoggedIn', false);
+      this.localstorge.remove('userUid');
       this.router.navigate(['/']);
     });
   }

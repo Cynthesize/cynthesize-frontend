@@ -1,12 +1,13 @@
 <div class="content" scrollable (scrollPosition)="scrollHandler($event)">
   <div *ngFor="let project of page.data | async">
-    <div class="card" style="width:400px; padding-top: 50px;">
+    <div class="card" style="width:400px; padding: 50px 0 50px 100px;">
       <img class="card-img-right" src="img_avatar1.png" alt="Card image" style="width:100%">
       <div class="card-body">
         <h4 class="card-title">{{ project.project_name }}</h4>
         <h5 class="card-title">{{ project.one_line_description }}</h5>
         <p class="card-text">{{ project.project_summary }}</p>
-        <a href="#" class="btn btn-primary">See Profile</a>
+        <a href="#" class="btn btn-primary">{{ project.upvotes }} Upvote</a>
+        <a href="#" class="btn btn-primary">{{ project.downvotes }} Downvotes</a>
       </div>
     </div>
   </div>

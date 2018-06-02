@@ -5,6 +5,7 @@ import { UserComponent } from './views/user/user.component';
 import { AuthGuard } from './core/auth.guard';
 import { UserProfileComponent } from './views/user/user-profile/user-profile.component';
 import { AddProjectComponent } from './views/user/add-project/add-project.component';
+import { ProjectSummaryComponent } from './views/project/project-summary/project-summary.component';
 
 const appRoutes: Routes = [
   {
@@ -24,6 +25,10 @@ const appRoutes: Routes = [
   {
     path: 'add-project',
     component: AddProjectComponent
+  },
+  {
+    path: 'project/:id',
+    component: ProjectSummaryComponent
   }
 ];
 
