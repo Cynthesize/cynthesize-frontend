@@ -7,18 +7,18 @@ import * as firebase from 'firebase/app';
 @Injectable({
   providedIn: 'root'
 })
-export class ImageUploadService {
+export class FileUploadService {
 
   constructor(private localstorge: LocalStorageService, private db: AngularFireDatabase) { }
 
   private basePath = '/uploads';
   uploads: any;
 
-  upload(upload: Upload) {
+  upload(upload: Upload, type: string) {
     upload.owner_id = this.get_owner_id();
-    this.verify_upload(upload);
+    this.verify_upload(upload, type);
     const storageRef = firebase.storage().ref();
-    const path = `${this.basePath}/${upload.owner_id}/${upload.project_id}`;
+    const path = `${this.basePath}/${upload.owner_id}/${upload.project_id}/${type}s`;
     upload.path = path;
     const uploadTask = storageRef.child(`${path}/${upload.file.name}`).put(upload.file);
 
@@ -34,9 +34,28 @@ export class ImageUploadService {
     this.db.list(`${upload.path}/`).push(upload);
   }
 
-  verify_upload(upload: Upload) {
-    if (upload.file.type !== 'image/jpeg' || upload.file.size > 2048576) {
-      throw new Error('File not an image or too big');
+  verify_upload(upload: Upload, type: string) {
+
+    const MAX_IMAGE_SIZE = 2000000;  // 2 MB
+    const MAX_VIDEO_SIZE = 20000000; // 20 MB
+    const image = 'image/jpeg';
+    const video = 'video/mp4';
+    const file = upload.file;
+
+    if (type === 'image') {
+      if (file.type !== image) {
+        throw new Error('File not a valid jpg');
+      }
+      if (file.size > MAX_IMAGE_SIZE) {
+        throw new Error('File exceeds maximum size');
+      }
+    } else if (type === 'video') {
+      if (file.type !== video) {
+        throw new Error('File not a valid mp4');
+      }
+      if (file.size > MAX_VIDEO_SIZE) {
+        throw new Error('File exceeds maximum size');
+      }
     }
 
     if (!upload.owner_id) {

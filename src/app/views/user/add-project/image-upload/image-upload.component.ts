@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ImageUploadService } from '../../../../services/add-project/image-upload.service';
+import { FileUploadService } from '../../../../services/add-project/file-upload.service';
 import { Upload } from '../../../../services/add-project/Upload';
 
 @Component({
@@ -9,12 +9,12 @@ import { Upload } from '../../../../services/add-project/Upload';
 })
 export class ImageUploadComponent implements OnInit {
 
-  constructor(private imageUploader: ImageUploadService) { }
+  constructor(private fileUploader: FileUploadService) { }
 
   upload_files(files) {
     for (let i = 0; i < files.length; i++) {
       const current_upload = new Upload(files[i], 'project_id');
-      this.imageUploader.upload(current_upload);
+      this.fileUploader.upload(current_upload, 'image');
     }
   }
 
