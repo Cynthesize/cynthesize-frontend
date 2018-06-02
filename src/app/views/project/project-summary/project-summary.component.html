@@ -5,6 +5,15 @@
         <h1>Name: {{ projectDetail.project_name }}</h1>
         <p>{{ projectDetail.one_line_description }}</p>
         <hr>
+        <ul>
+            <li *ngFor="let video of videosArray">
+                <video width="320" height="240" controls>
+                  <source [src]="video.url" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+            </li>
+         </ul>
+        <hr>
         <p>Project Summary: <br>{{ projectDetail.project_summary }}</p>
         <p>Upvotes: {{ projectDetail.upvotes }}</p>
         <p>Downvotes: {{ projectDetail.downvotes }}</p>

@@ -5,7 +5,7 @@ import { ProjectDetailService } from '../../../services/project/project-detail.s
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFirestore } from 'angularfire2/firestore';
 
-export interface project {
+export interface Project {
   owner: string;
   project_name: string;
   one_line_description: string;
@@ -27,19 +27,32 @@ export interface project {
   encapsulation: ViewEncapsulation.None
 })
 export class ProjectSummaryComponent implements OnInit {
-  projectDetail: project;
-  editState: boolean = false;
-  taskToEdit: project;
+  projectDetail: Project;
+  editState = false;
+  taskToEdit: Project;
+  videosArray: any[];
 
   constructor(public taskService: ProjectDetailService,
     private route: ActivatedRoute,
-    private db: AngularFirestore) { }
+    private db: AngularFireDatabase) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.taskService.getTasks(params['id']).subscribe(tasks => {
+      const project_id = params['id'];
+      this.taskService.getTasks(project_id).subscribe(tasks => {
         this.projectDetail = tasks;
       });
+
+      this.taskService.get_videos(project_id)
+      .subscribe(videos => {
+        this.videosArray = [];
+        videos.forEach(video => {
+          const x = video.payload.toJSON();
+          x['$key'] = video.key;
+          this.videosArray.push(x);
+        });
+      });
+
     });
   }
 }

@@ -24,14 +24,19 @@ export class FileUploadService {
 
     uploadTask.then(() => {
       upload.name = upload.file.name;
-      this.saveFileData(upload);
+      firebase.storage().ref(`${path}/${upload.file.name}`).getDownloadURL().then(url => {
+        upload.url = url;
+        upload.name = upload.file.name;
+        this.saveFileData(upload);
+      });
     });
 
     return uploadTask;
   }
 
   private saveFileData(upload: Upload) {
-    this.db.list(`${upload.path}/`).push(upload);
+    const type = upload.path.split('/')[4];
+    this.db.list(`${this.basePath}/${upload.project_id}/${type}`).push(upload);
   }
 
   verify_upload(upload: Upload, type: string) {

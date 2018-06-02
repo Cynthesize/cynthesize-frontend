@@ -1,15 +1,14 @@
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
-import { 
+import {
   AngularFirestore,
   AngularFirestoreCollection,
-  AngularFirestoreDocument 
+  AngularFirestoreDocument
 } from 'angularfire2/firestore';
-
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
-export interface project {
+export interface Project {
   owner: string;
   project_name: string;
   one_line_description: string;
@@ -26,26 +25,29 @@ export interface project {
 
 @Injectable()
 export class ProjectDetailService {
-  tasksCollection: AngularFirestoreDocument<project>;
-  tasks: Observable<project>;
-  taskDoc: AngularFirestoreDocument<project>;
-  id: string;
+  tasksCollection: AngularFirestoreDocument<Project>;
+  tasks: Observable<Project>;
+  taskDoc: AngularFirestoreDocument<Project>;
 
-  constructor(public afs:AngularFirestore) {
+  constructor(public afs: AngularFirestore, private db: AngularFireDatabase) {
     // this.tasksCollection = this.afs.collection('projects').doc(this.id);
     // // this.tasks = this.afs.collection('tasks').valueChanges();
     // this.tasks = this.tasksCollection.snapshotChanges().map(changes => {
     //   return changes.payload.data() as project;
-    
     //   });
-    };
+    }
+
     getTasks(id) {
       this.tasksCollection = this.afs.collection('projects').doc(id);
       // this.tasks = this.afs.collection('tasks').valueChanges();
       this.tasks = this.tasksCollection.snapshotChanges().map(changes => {
-        return changes.payload.data() as project;
-      
+        return changes.payload.data() as Project;
         });
-    return this.tasks; 
+    return this.tasks;
   }
+
+  get_videos(project_id) {
+    return this.db.list(`/uploads/${project_id}/videos`).snapshotChanges();
+  }
+
 }
