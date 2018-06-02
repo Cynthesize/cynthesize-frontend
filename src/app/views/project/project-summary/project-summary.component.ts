@@ -1,29 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { ProjectDetailService } from '../../../services/project/project-detail.service';
-import { Observable } from '@firebase/util';
 
+import { ProjectDetailService } from '../../../services/project/project-detail.service';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
+
+export interface project {
+  owner: string;
+  project_name: string;
+  one_line_description: string;
+  project_summary: string;
+  is_public: Boolean;
+  uploaded_files: number;
+  uploads_size: number;
+  tags: Array<any>;
+  comments: Object;
+  upvotes: Number;
+  downvotes: Number;
+  date_created: string;
+}
 
 @Component({
   selector: 'app-project-summary',
   templateUrl: './project-summary.component.html',
-  styleUrls: ['./project-summary.component.css']
+  styleUrls: ['./project-summary.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ProjectSummaryComponent implements OnInit {
-  public id;
-  public projectDetails;
-  constructor(private route: ActivatedRoute,
-    private db:AngularFirestore,
-    public projectDetail: ProjectDetailService) { }
+  projectDetail: project;
+  editState: boolean = false;
+  taskToEdit: project;
+
+  constructor(public taskService: ProjectDetailService,
+    private route: ActivatedRoute,
+    private db: AngularFirestore) { }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
-    this.db.collection("projects").doc( "project1527582960119").ref
-    .onSnapshot(function(doc) {
-      this.projectDetails = doc.data();
-      console.log(this.projectDetails);
+    this.route.params.subscribe(params => {
+      this.taskService.getTasks(params['id']).subscribe(tasks => {
+        this.projectDetail = tasks;
+      });
     });
   }
-
 }

@@ -35,7 +35,7 @@ export class ImageUploadService {
   }
 
   verify_upload(upload: Upload) {
-    if (upload.file.type !== 'image/jpeg' || upload.file.size > 1048576) {
+    if (upload.file.type !== 'image/jpeg' || upload.file.size > 2048576) {
       throw new Error('File not an image or too big');
     }
 
