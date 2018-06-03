@@ -6,6 +6,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFirestore } from 'angularfire2/firestore';
 
 export interface Project {
+  project_id: string;
   owner: string;
   project_name: string;
   one_line_description: string;

@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../../core/auth.service';
 
 interface Project {
+  project_id: string;
   owner: string;
   project_name: string;
   one_line_description: string;
@@ -41,6 +42,7 @@ export class TextualDetailsService {
     projectDetails.owner_id = this.localstorge.get('userUid');
     const projectRef: AngularFirestoreDocument<any> = this.afs.doc(`projects/` + projectId);
     const data: Project = {
+      project_id: projectId,
       owner: projectDetails.owner_id,
       project_name: projectDetails.project_name,
       one_line_description: projectDetails.one_line_description,
