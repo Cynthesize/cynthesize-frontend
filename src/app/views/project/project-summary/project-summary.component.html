@@ -13,12 +13,14 @@
                 </video>
             </li>
          </ul>
-        <hr>
+         <hr>
         <p>Project Summary: <br>{{ projectDetail.project_summary }}</p>
         <p>Upvotes: {{ projectDetail.upvotes }}</p>
         <p>Downvotes: {{ projectDetail.downvotes }}</p>
         <p>Comments: {{ projectDetail.comments }}</p>
       </div>
-    </div>
+      <div class="col-sm-8 text-left" *ngIf="currentUser.uid === projectDetail.owner"> 
+        <h1>Review Section</h1>
+        <app-review [project_id]="project_id"></app-review>
+      </div>
   </div>
-  

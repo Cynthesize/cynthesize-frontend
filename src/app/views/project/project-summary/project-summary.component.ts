@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectDetailService } from '../../../services/project/project-detail.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFirestore } from 'angularfire2/firestore';
+import * as firebase from 'firebase/app';
 
 export interface Project {
   owner: string;
@@ -28,8 +29,10 @@ export interface Project {
 })
 export class ProjectSummaryComponent implements OnInit {
   projectDetail: Project;
+  project_id: string;
   editState = false;
   taskToEdit: Project;
+  currentUser: any;
   videosArray: any[];
 
   constructor(public taskService: ProjectDetailService,
@@ -38,12 +41,12 @@ export class ProjectSummaryComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const project_id = params['id'];
-      this.taskService.getTasks(project_id).subscribe(tasks => {
+      this.project_id = params['id'];
+      this.taskService.getTasks(this.project_id).subscribe(tasks => {
         this.projectDetail = tasks;
       });
 
-      this.taskService.get_videos(project_id)
+      this.taskService.get_videos(this.project_id)
       .subscribe(videos => {
         this.videosArray = [];
         videos.forEach(video => {
@@ -54,5 +57,12 @@ export class ProjectSummaryComponent implements OnInit {
       });
 
     });
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.currentUser = user;
+      }
+    });
+
   }
 }

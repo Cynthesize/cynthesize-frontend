@@ -1,0 +1,8 @@
+<div>
+  <div *ngIf="!review_status; else under_review">
+    <button type="button" class="btn btn-primary" (click)="send_for_review()">Send for Review</button>
+  </div>
+  <ng-template #under_review>
+    Review Status: {{ review_status }}
+  </ng-template>
+</div>

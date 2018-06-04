@@ -35,6 +35,7 @@ import { ProjectSummaryComponent } from './views/project/project-summary/project
 import { ProjectDetailService } from './services/project/project-detail.service';
 import { BoardLoginComponent } from './views/board/board-login/board-login.component';
 import { BoardDashboardComponent } from './views/board/board-dashboard/board-dashboard.component';
+import { ReviewComponent } from './views/project/project-summary/review/review.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { BoardDashboardComponent } from './views/board/board-dashboard/board-das
     AddProjectComponent,
     ProjectSummaryComponent,
     BoardLoginComponent,
-    BoardDashboardComponent
+    BoardDashboardComponent,
+    ReviewComponent
   ],
   bootstrap: [AppComponent],
   providers: [AuthGuard, TextualDetailsService, NewsfeedService, ProjectDetailService, ProfileUpdateService, AuthService,BoardAuthService, BoardAuthGuard]
