@@ -7,10 +7,19 @@
           <div class="login__card">
             <div class="card-block">
 
-              <div *ngIf="authService.user | async as user; else showLogin">
+              <div *ngIf="authService.user | async as user; else isboard">
+                <u><h1>User</h1></u><br>
                 <h2>Hey {{ user.display_name }}!</h2>
                 <button type="button" class="btn" (click)="authService.signOut()">Logout</button>
               </div>
+
+              <ng-template #isboard>
+                <div *ngIf="boardauthService.boardmember | async as user; else showLogin">
+                  <u><h1>Board Member</h1></u><br>
+                  <h2>Hey {{ user.email }}!</h2>
+                  <button type="button" class="btn" (click)="boardauthService.signOut()">Logout</button>
+                </div>
+              </ng-template>
 
               <ng-template #showLogin>
                 <form name="userform" method="post" #f="ngForm">
@@ -29,7 +38,6 @@
                   </div>
                 </form>
               </ng-template>
-
             </div>
           </div>
         </div>

@@ -21,7 +21,10 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { UserProfileComponent } from './views/user/user-profile/user-profile.component';
 import { NewsfeedComponent } from './views/newsfeed/newsfeed.component';
 
+import { BoardAuthGuard } from './core/board-auth.guard';
 import { AuthGuard } from './core/auth.guard';
+import { AuthService } from './core/auth.service';
+import { BoardAuthService } from './core/board-auth.service';
 import { TextualDetailsService } from './services/add-project/textual-details.service';
 import { ProfileUpdateService } from './services/profile/profile-update.service';
 import { AddProjectComponent } from './views/user/add-project/add-project.component';
@@ -30,6 +33,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NewsfeedService } from './services/newsfeed.service';
 import { ProjectSummaryComponent } from './views/project/project-summary/project-summary.component';
 import { ProjectDetailService } from './services/project/project-detail.service';
+import { BoardLoginComponent } from './views/board/board-login/board-login.component';
+import { BoardDashboardComponent } from './views/board/board-dashboard/board-dashboard.component';
+
 
 @NgModule({
   imports: [
@@ -56,9 +62,11 @@ import { ProjectDetailService } from './services/project/project-detail.service'
     UserProfileComponent,
     NewsfeedComponent,
     AddProjectComponent,
-    ProjectSummaryComponent
+    ProjectSummaryComponent,
+    BoardLoginComponent,
+    BoardDashboardComponent
   ],
   bootstrap: [AppComponent],
-  providers: [AuthGuard, TextualDetailsService, NewsfeedService, ProjectDetailService, ProfileUpdateService]
+  providers: [AuthGuard, TextualDetailsService, NewsfeedService, ProjectDetailService, ProfileUpdateService, AuthService,BoardAuthService, BoardAuthGuard]
 })
 export class AppModule { }
