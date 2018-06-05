@@ -13,8 +13,8 @@ import { LocalStorageService } from 'angular-2-local-storage';
   styleUrls: ['./newsfeed.component.css']
 })
 export class NewsfeedComponent implements OnInit {
-  public userUpvoteData;
-  public userDownvoteData;
+  public userUpvoteData = {};
+  public userDownvoteData =  {};
 
   constructor(public page: NewsfeedService,
     public votingService: VotingService,

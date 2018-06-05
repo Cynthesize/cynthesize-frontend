@@ -7,7 +7,7 @@
         <h5 class="card-title">{{ project.one_line_description }}</h5>
         <p class="card-text">{{ project.project_summary }}</p>
         <input class="btn btn-success"
-               *ngIf="userUpvoteData[project.project_id] | async as userUpvoteData; else notUpvoted"
+               *ngIf="userUpvoteData[project.project_id]; else notUpvoted"
                (click)="neutralizeUpvote($event)"
                name="{{ project.project_id }}"
                value="{{ project.upvotes }} Upvotes">
