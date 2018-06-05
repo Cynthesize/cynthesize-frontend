@@ -6,8 +6,29 @@
         <h4 class="card-title">{{ project.project_name }}</h4>
         <h5 class="card-title">{{ project.one_line_description }}</h5>
         <p class="card-text">{{ project.project_summary }}</p>
-        <input href="#" class="btn btn-primary" *ngIf="hasVoted(project.project_id)" (click)="upvote($event)" name="{{ project.project_id }}" value="{{ project.upvotes }}">
-        <input href="#" class="btn btn-primary" (click)="downvote($event)" name="{{ project.project_id }}" value="{{ project.downvotes }} Downvotes">
+        <input class="btn btn-success"
+               *ngIf="userUpvoteData[project.project_id] | async as userUpvoteData; else notUpvoted"
+               (click)="neutralizeUpvote($event)"
+               name="{{ project.project_id }}"
+               value="{{ project.upvotes }} Upvotes">
+        <ng-template #notUpvoted>
+          <input class="btn btn-primary"
+                 (click)="upvote($event)"
+                 name="{{ project.project_id }}"
+                 value="{{ project.upvotes }} Upvotes">
+        </ng-template>
+
+        <input class="btn btn-danger"
+               *ngIf="userDownvoteData[project.project_id]; else notDownvoted"
+               (click)="neutralizeDownvote($event)"
+               name="{{ project.project_id }}"
+               value="{{ project.downvotes }} Downvotes">
+        <ng-template #notDownvoted>
+          <input class="btn btn-primary"
+                 (click)="downvote($event)"
+                 name="{{ project.project_id }}"
+                 value="{{ project.downvotes }} Downvotes">
+        </ng-template>
       </div>
     </div>
   </div>

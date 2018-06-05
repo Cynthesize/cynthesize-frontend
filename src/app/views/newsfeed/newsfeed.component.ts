@@ -13,6 +13,9 @@ import { LocalStorageService } from 'angular-2-local-storage';
   styleUrls: ['./newsfeed.component.css']
 })
 export class NewsfeedComponent implements OnInit {
+  public userUpvoteData;
+  public userDownvoteData;
+
   constructor(public page: NewsfeedService,
     public votingService: VotingService,
     public authService: AuthService,
@@ -21,42 +24,56 @@ export class NewsfeedComponent implements OnInit {
   ) { }
 
   user_uid = this.localService.get('userUid');
+
   ngOnInit() {
     this.page.init('projects', 'project_name', { reverse: false, prepend: false });
+    if(this.localService.get('isLoggedIn')) {
+      this.votingService.getUserUpvotedProjectList(this.localService.get('userUid')).subscribe(userData => {
+        if (userData) {
+          this.userUpvoteData = userData;          
+        } else {
+          this.userUpvoteData = {};
+        }
+      }); 
+      this.votingService.getUserDownvotedProjectList(this.localService.get('userUid')).subscribe(userData => {
+        if (userData) {
+          this.userDownvoteData = userData;          
+        } else {
+          this.userDownvoteData = {};
+        }
+      }); 
+    }   
   }
 
   onScroll() {
     this.page.more();
   }
 
-  public hasVoted(project_id) {
-    console.log(project_id);
-    
-    // this.votingService.getUserVotedProjectList(this.user_uid).forEach(project => {
-    //   if (project_id === project) {
-    //     return 0;
-    //   }
-    // });
-    // return 1;
-  }
-
   upvote(e) {
-    e.target.disable = true;
     if(!this.localService.get('isLoggedIn')) {
       this.router.navigate(['login']);
     } else {     
       var project_id = e.target.name;
-      console.log(this.user_uid);
-      
       this.votingService.upvoteProject(project_id, this.user_uid);
     }
   }
+
   downvote(e) {
-    var project_id = e.target.name;    
-    if(this.votingService.downvoteProject(project_id)){
-      e.target.value++;
-    } else {
-      e.target.value = "Failed";
+    if(!this.localService.get('isLoggedIn')) {
+      this.router.navigate(['login']);
+    } else {     
+      var project_id = e.target.name;
+      this.votingService.upvoteProject(project_id, this.user_uid);
     }
+  }
+
+  neutralizeUpvote(e) {
+    var project_id = e.target.name;
+    this.votingService.neutralizeUpvote(project_id, this.localService.get('userUid'))
+  }
+
+  neutralizeDownvote(e) {
+    var project_id = e.target.name;
+    this.votingService.neutralizeDownvote(project_id, this.localService.get('userUid'))
   }
 }

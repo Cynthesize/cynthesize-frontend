@@ -7,53 +7,97 @@ import {
 } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { firestore } from 'firebase';
 
 @Injectable()
 export class VotingService {
 
+  userDataDocument: AngularFirestoreDocument<any>
+  userVotesData: Observable<any>
+
   constructor(public afs: AngularFirestore, private db: AngularFireDatabase) {
-    }
-  
-  getUserVotedProjectList(user_id) {
-    var userList = []
-    this.afs.firestore.collection('user').doc(user_id).onSnapshot(data => {
-      userList = data.data().projects_upvoted;
-    });
-    return userList;
   }
 
-  upvoteProject(project_id, user_id) : any {
+  getUserUpvotedProjectList(user_id) {
+    this.userDataDocument = this.afs.collection('user_upvotes').doc(user_id);
+    this.userVotesData = this.userDataDocument.snapshotChanges().map(data => {
+      return data.payload.data();
+    });
+    return this.userVotesData;
+  }
+
+  getUserDownvotedProjectList(user_id) {
+    this.userDataDocument = this.afs.collection('user_downvotes').doc(user_id);
+    this.userVotesData = this.userDataDocument.snapshotChanges().map(data => {
+      return data.payload.data();
+    });
+    return this.userVotesData;
+  }
+
+  upvoteProject(project_id, user_id): any {
     var docRef = this.afs.firestore.collection('projects').doc(project_id);
-    var userRef = this.afs.firestore.collection('users').doc(user_id);
+    var userRef = this.afs.collection('user_upvotes').doc(user_id);
 
-    this.afs.firestore.runTransaction(transaction => 
-      transaction.get(userRef).then(doc => {
-        var projectsUpvoted = doc.data().projects_upvoted.concat(project_id);
-        console.log(projectsUpvoted);
-        
-        transaction.update(userRef, {projects_upvoted: projectsUpvoted})
-      })).then(() => {console.log('user array entered');return 1;})
-      .catch(() => {console.log('user array not entered');return 0;})
+    userRef.set({ [project_id]: true }, { merge: true })
 
-    this.afs.firestore.runTransaction(transaction => 
+    this.afs.firestore.runTransaction(transaction =>
       transaction.get(docRef).then(doc => {
         var currentUpvote = doc.data().upvotes;
-        transaction.update(docRef, {upvotes: currentUpvote + 1});
-      })).then(() => {return 1;})
-      .catch(() => {return 0;});
-  }
-  
-  downvoteProject(project_id) {
-    var docRef = this.afs.firestore.collection('projects').doc(project_id);
-    this.afs.firestore.runTransaction(transaction => 
-      transaction.get(docRef).then(doc => {
-        var currentUpvote = doc.data().downvotes + 1;
-        transaction.update(docRef, {downvotes: currentUpvote});
+        transaction.update(docRef, { upvotes: currentUpvote + 1 });
       })).then(() => {
-        console.log('Upvoted!');
         return 1;
       }).catch(() => {
-        console.log('Upvoted!');
+        return 0;
+      });
+  }
+
+  downvoteProject(project_id, user_id) {
+    var docRef = this.afs.firestore.collection('projects').doc(project_id);
+    var userRef = this.afs.collection('user_downvotes').doc(user_id);
+
+    userRef.set({ [project_id]: true }, { merge: true })
+
+    this.afs.firestore.runTransaction(transaction =>
+      transaction.get(docRef).then(doc => {
+        var currentDownvote = doc.data().downvotes;
+        transaction.update(docRef, { upvotes: currentDownvote + 1 });
+      })).then(() => {
+        return 1;
+      }).catch(() => {
+        return 0;
+      });
+  }
+
+  neutralizeUpvote(project_id, user_id) {
+    var docRef = this.afs.firestore.collection('projects').doc(project_id);
+    var userRef = this.afs.collection('user_upvotes').doc(user_id);
+
+    userRef.update({[project_id] : false});
+
+    this.afs.firestore.runTransaction(transaction =>
+      transaction.get(docRef).then(doc => {
+        var currentUpvote = doc.data().upvotes;
+        transaction.update(docRef, { upvotes: currentUpvote - 1 });
+      })).then(() => {
+        return 1;
+      }).catch(() => {
+        return 0;
+      });
+  }
+
+  neutralizeDownvote(project_id, user_id) {
+    var docRef = this.afs.firestore.collection('projects').doc(project_id);
+    var userRef = this.afs.collection('user_downvotes').doc(user_id);
+
+    userRef.update({[project_id] : false});
+
+    this.afs.firestore.runTransaction(transaction =>
+      transaction.get(docRef).then(doc => {
+        var currentDownvote = doc.data().downvotes;
+        transaction.update(docRef, { downvotes: currentDownvote - 1 });
+      })).then(() => {
+        return 1;
+      }).catch(() => {
         return 0;
       });
   }
