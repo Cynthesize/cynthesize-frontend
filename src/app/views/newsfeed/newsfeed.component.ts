@@ -63,7 +63,7 @@ export class NewsfeedComponent implements OnInit {
       this.router.navigate(['login']);
     } else {     
       var project_id = e.target.name;
-      this.votingService.upvoteProject(project_id, this.user_uid);
+      this.votingService.downvoteProject(project_id, this.user_uid);
     }
   }
 

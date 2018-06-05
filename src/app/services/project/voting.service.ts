@@ -63,7 +63,9 @@ export class VotingService {
         transaction.update(docRef, { upvotes: currentDownvote + 1 });
       })).then(() => {
         return 1;
-      }).catch(() => {
+      }).catch((err) => {
+        console.log(err);
+        
         return 0;
       });
   }
