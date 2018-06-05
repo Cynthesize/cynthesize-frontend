@@ -21,7 +21,10 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { UserProfileComponent } from './views/user/user-profile/user-profile.component';
 import { NewsfeedComponent } from './views/newsfeed/newsfeed.component';
 
+import { BoardAuthGuard } from './core/board-auth.guard';
 import { AuthGuard } from './core/auth.guard';
+import { AuthService } from './core/auth.service';
+import { BoardAuthService } from './core/board-auth.service';
 import { TextualDetailsService } from './services/add-project/textual-details.service';
 import { ProfileUpdateService } from './services/profile/profile-update.service';
 import { AddProjectComponent } from './views/user/add-project/add-project.component';
@@ -33,6 +36,9 @@ import { ProjectDetailService } from './services/project/project-detail.service'
 import { UpvoteComponent } from './views/project/project-summary/upvote/upvote.component';
 import { DownvoteComponent } from './views/project/project-summary/downvote/downvote.component';
 import { VotingService } from './services/project/voting.service';
+import { BoardLoginComponent } from './views/board/board-login/board-login.component';
+import { BoardDashboardComponent } from './views/board/board-dashboard/board-dashboard.component';
+import { ReviewComponent } from './views/project/project-summary/review/review.component';
 
 @NgModule({
   imports: [
@@ -62,7 +68,10 @@ import { VotingService } from './services/project/voting.service';
     ProjectSummaryComponent,
     UpvoteComponent,
     DownvoteComponent,
-    UpvoteComponent
+    UpvoteComponent,
+    BoardLoginComponent,
+    BoardDashboardComponent,
+    ReviewComponent
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -71,7 +80,10 @@ import { VotingService } from './services/project/voting.service';
     NewsfeedService,
     ProjectDetailService,
     ProfileUpdateService,
-    VotingService
+    VotingService,
+    AuthService,
+    BoardAuthService,
+    BoardAuthGuard
   ]
 })
 export class AppModule { }

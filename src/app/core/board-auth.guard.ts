@@ -4,7 +4,7 @@ import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { LocalStorageService } from 'angular-2-local-storage';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class BoardAuthGuard implements CanActivate {
   constructor(private authService: AuthService,
     private Router: Router,
     private LocalStorageService: LocalStorageService) { }
@@ -15,11 +15,7 @@ export class AuthGuard implements CanActivate {
     console.log(isLoggedIn);
     console.log(isBoardLoggedIn);
 
-    if (isBoardLoggedIn) {
-      this.Router.navigate(['/']);
-      return false;
-    }
-    if (!isLoggedIn) {
+    if (!isBoardLoggedIn) {
       this.Router.navigate(['/']);
       return false;
     }

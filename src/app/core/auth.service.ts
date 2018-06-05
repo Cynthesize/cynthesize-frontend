@@ -8,6 +8,7 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/fromPromise';
 import { LocalStorageService } from 'angular-2-local-storage';
 
 interface User {
@@ -27,18 +28,27 @@ export class AuthService {
   user: Observable<User>;
   constructor(private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private router: Router, private localstorge: LocalStorageService) {
-    this.user = this.afAuth.authState
-      .switchMap(user => {
-        if (user) {
-          this.localstorge.set('isLoggedIn', true);
-          this.localstorge.set('userUid', user.uid);
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-        } else {
-          this.localstorge.set('isLoggedIn', false);
-          return Observable.of(null);
-        }
-      });
+    private router: Router, private localstorage: LocalStorageService) {
+    const isLoggedIn: Boolean = this.localstorage.get('isLoggedIn') as Boolean;
+    const isBoardLoggedIn: Boolean = this.localstorage.get('isBoardLoggedIn') as Boolean;
+    
+      this.user = this.afAuth.authState
+        .switchMap(user => {
+          if (user) {
+            if(isBoardLoggedIn){
+              this.localstorage.set('isLoggedIn', false);
+              return Observable.of(null);
+            }
+            else {
+              this.localstorage.set('isLoggedIn', true);
+              this.localstorage.set('userUid', user.uid);
+              return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+            }
+          } else {
+            this.localstorage.set('isLoggedIn', false);
+            return Observable.of(null);
+          }
+        });
   }
 
   googleLogin() {
@@ -60,6 +70,8 @@ export class AuthService {
               this.updateUserData(credential.user);
             }
           });
+        this.localstorage.set('isBoardLoggedIn', false);
+        this.localstorage.set('isLoggedIn', true);
         this.router.navigate(['dashboard']);
       });
   }
@@ -73,6 +85,8 @@ export class AuthService {
               this.updateUserData(credential.user);
             }
           });
+        this.localstorage.set('isBoardLoggedIn', false);
+        this.localstorage.set('isLoggedIn', true);
         this.router.navigate(['dashboard']);
       });
   }
@@ -111,8 +125,10 @@ export class AuthService {
 
   signOut() {
     this.afAuth.auth.signOut().then(() => {
-      this.localstorge.set('isLoggedIn', false);
-      this.localstorge.remove('userUid');
+      this.localstorage.set('isBoardLoggedIn', false);
+      this.localstorage.remove('boardmemberUid');
+      this.localstorage.set('isLoggedIn', false);
+      this.localstorage.remove('userUid');
       this.router.navigate(['/']);
     });
   }

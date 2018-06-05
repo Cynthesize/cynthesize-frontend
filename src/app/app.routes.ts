@@ -5,7 +5,10 @@ import { UserComponent } from './views/user/user.component';
 import { AuthGuard } from './core/auth.guard';
 import { UserProfileComponent } from './views/user/user-profile/user-profile.component';
 import { AddProjectComponent } from './views/user/add-project/add-project.component';
+import { BoardLoginComponent } from './views/board/board-login/board-login.component';
 import { ProjectSummaryComponent } from './views/project/project-summary/project-summary.component';
+import { BoardDashboardComponent } from './views/board/board-dashboard/board-dashboard.component';
+import { BoardAuthGuard } from './core/board-auth.guard';
 
 const appRoutes: Routes = [
   {
@@ -24,6 +27,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'add-project',
+    canActivate: [AuthGuard],
     component: AddProjectComponent
   },
   {
@@ -33,6 +37,15 @@ const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'board/login',
+    component: BoardLoginComponent
+  },
+  {
+    path: 'board/dashboard',
+    canActivate: [BoardAuthGuard],
+    component: BoardDashboardComponent
   }
 ];
 
