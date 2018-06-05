@@ -37,7 +37,7 @@ export class NewsfeedService {
     this.query = {
       path,
       field,
-      limit: 3,
+      limit: 4,
       reverse: false,
       prepend: false,
       ...opts
@@ -45,6 +45,7 @@ export class NewsfeedService {
 
     const first = this.afs.collection(this.query.path, ref => {
       return ref
+        .where('is_public', '==', true)
         .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
         .limit(this.query.limit);
     });
@@ -64,6 +65,7 @@ export class NewsfeedService {
 
     const more = this.afs.collection(this.query.path, ref => {
       return ref
+        .where('is_public', '==', true)
         .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
         .limit(this.query.limit)
         .startAfter(cursor);

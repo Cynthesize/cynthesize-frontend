@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 export interface Project {
+  project_id: string;
   owner: string;
   project_name: string;
   one_line_description: string;

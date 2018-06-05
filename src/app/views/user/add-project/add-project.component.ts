@@ -27,7 +27,6 @@ export class AddProjectComponent implements OnInit {
   }
 
   addProjectToDatabase(e) {
-    e.preventDefault();
     const projectName = e.target.querySelector('#project_name').value;
     const oneLineDescription = e.target.querySelector('#one_line_description').value;
     const projectSummary = e.target.querySelector('#project_summary').value;

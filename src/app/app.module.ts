@@ -30,6 +30,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NewsfeedService } from './services/newsfeed.service';
 import { ProjectSummaryComponent } from './views/project/project-summary/project-summary.component';
 import { ProjectDetailService } from './services/project/project-detail.service';
+import { UpvoteComponent } from './views/project/project-summary/upvote/upvote.component';
+import { DownvoteComponent } from './views/project/project-summary/downvote/downvote.component';
+import { VotingService } from './services/project/voting.service';
 
 @NgModule({
   imports: [
@@ -56,9 +59,19 @@ import { ProjectDetailService } from './services/project/project-detail.service'
     UserProfileComponent,
     NewsfeedComponent,
     AddProjectComponent,
-    ProjectSummaryComponent
+    ProjectSummaryComponent,
+    UpvoteComponent,
+    DownvoteComponent,
+    UpvoteComponent
   ],
   bootstrap: [AppComponent],
-  providers: [AuthGuard, TextualDetailsService, NewsfeedService, ProjectDetailService, ProfileUpdateService]
+  providers: [
+    AuthGuard,
+    TextualDetailsService,
+    NewsfeedService,
+    ProjectDetailService,
+    ProfileUpdateService,
+    VotingService
+  ]
 })
 export class AppModule { }

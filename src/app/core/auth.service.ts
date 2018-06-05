@@ -17,9 +17,9 @@ interface User {
   display_name: string;
   subscription: Boolean;
   projects_owned: Object;
-  projects_upvoted: Array<any>;
-  projects_downvoted: Array<any>;
-  projects_in_review: Array<any>;
+  projects_upvoted: Array<string>;
+  projects_downvoted: Array<string>;
+  projects_in_review: Array<string>;
 }
 
 @Injectable()
