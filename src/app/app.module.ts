@@ -4,7 +4,7 @@ import { CoreModule } from './core/core.module';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Routes, CanActivate } from '@angular/router';
-
+import { NglModule } from 'ng-lightning/ng-lightning';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -23,11 +23,13 @@ import { NewsfeedComponent } from './views/newsfeed/newsfeed.component';
 
 import { BoardAuthGuard } from './core/board-auth.guard';
 import { AuthGuard } from './core/auth.guard';
+import { AlertService } from './core/alert.service';
 import { AuthService } from './core/auth.service';
 import { BoardAuthService } from './core/board-auth.service';
 import { TextualDetailsService } from './services/add-project/textual-details.service';
 import { ProfileUpdateService } from './services/profile/profile-update.service';
 import { AddProjectComponent } from './views/user/add-project/add-project.component';
+import { BoardNotificationService } from './services/board-notification/board-notification.service';
 import { AppRoutes } from './app.routes';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NewsfeedService } from './services/newsfeed.service';
@@ -38,6 +40,7 @@ import { DownvoteComponent } from './views/project/project-summary/downvote/down
 import { VotingService } from './services/project/voting.service';
 import { BoardLoginComponent } from './views/board/board-login/board-login.component';
 import { BoardDashboardComponent } from './views/board/board-dashboard/board-dashboard.component';
+import { BoardReviewNotificationComponent } from './views/board/board-review-notification/board-review-notification.component';
 import { ReviewComponent } from './views/project/project-summary/review/review.component';
 
 @NgModule({
@@ -51,6 +54,7 @@ import { ReviewComponent } from './views/project/project-summary/review/review.c
     CoreModule,
     AppRoutes,
     FormsModule,
+    NglModule,
     InfiniteScrollModule,
     LocalStorageModule.withConfig({
       prefix: 'local-store',
@@ -71,7 +75,8 @@ import { ReviewComponent } from './views/project/project-summary/review/review.c
     UpvoteComponent,
     BoardLoginComponent,
     BoardDashboardComponent,
-    ReviewComponent
+    ReviewComponent,
+    BoardReviewNotificationComponent
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -83,7 +88,9 @@ import { ReviewComponent } from './views/project/project-summary/review/review.c
     VotingService,
     AuthService,
     BoardAuthService,
-    BoardAuthGuard
+    BoardAuthGuard,
+    AlertService,
+    BoardNotificationService
   ]
 })
 export class AppModule { }

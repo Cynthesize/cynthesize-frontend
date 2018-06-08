@@ -1,0 +1,15 @@
+<div class="thumbnail">
+	<div *ngFor="let proj of noti.projects | async">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-2">
+				{{ proj.project_name }}
+			</div>
+			<div class="col-md-2" *ngIf="buser.boardmember | async as user">
+				<input class="btn btn-success"
+	               (click)="acceptReview($event,user.email,user.uid)"
+	               name="{{ proj.project_id }}">
+			</div>
+		</div>
+	</div>
+</div>

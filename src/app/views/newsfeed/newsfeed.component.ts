@@ -27,6 +27,7 @@ export class NewsfeedComponent implements OnInit {
 
   ngOnInit() {
     this.page.init('projects', 'project_name', { reverse: false, prepend: false });
+    console.log(this.page.moreheha);
     if(this.localService.get('isLoggedIn')) {
       this.votingService.getUserUpvotedProjectList(this.localService.get('userUid')).subscribe(userData => {
         if (userData) {

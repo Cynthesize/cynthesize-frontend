@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/auth.service';
+import { AlertService } from '../../core/alert.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,9 +9,10 @@ import { AuthService } from '../../core/auth.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService,private alertService: AlertService) { }
 
   ngOnInit() {
+        this.alertService.showAlert(true, "Dashboard has been laoded.");
   }
 
 }

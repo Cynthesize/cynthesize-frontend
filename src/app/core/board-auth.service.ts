@@ -18,7 +18,7 @@ export class BoardAuthService {
   constructor(private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router, private localstorage: LocalStorageService) {
-    this.boardmember = this.afAuth.authState;  
+    this.boardmember = this.afAuth.authState; 
   }
 
   boardLogin(email,password) {

@@ -27,6 +27,7 @@
     "core-js": "^2.5.4",
     "eslint": "^4.19.1",
     "firebase": "^5.0.3",
+    "ng-lightning": "^2.0.1",
     "ngx-infinite-scroll": "^6.0.0",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.2.0",

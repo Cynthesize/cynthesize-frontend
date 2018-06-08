@@ -22,7 +22,7 @@ export class NewsfeedService {
   private _done = new BehaviorSubject(false);
   private _loading = new BehaviorSubject(false);
   private _data = new BehaviorSubject([]);
-
+  public moreheha;
   private query: QueryConfig;
 
   // Observable data
@@ -42,6 +42,14 @@ export class NewsfeedService {
       prepend: false,
       ...opts
     };
+
+
+    const hehaha = this.afs.collection('projects', ref => {
+      return ref.where('review_status', '==', 'to_be_reviewed')
+    });
+
+    this.moreheha = hehaha.valueChanges();
+
 
     const first = this.afs.collection(this.query.path, ref => {
       return ref
