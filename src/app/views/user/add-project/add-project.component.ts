@@ -20,8 +20,9 @@ export class AddProjectComponent implements OnInit {
   upload_progress: number;
   text_uploaded = 0;
   upload_error = false;
+  items = [];
 
-  constructor(private projectDetailUploader: TextualDetailsService, private fileUploader: FileUploadService) { }
+constructor(private projectDetailUploader: TextualDetailsService, private fileUploader: FileUploadService) { }
 
   ngOnInit() {
   }
@@ -34,6 +35,11 @@ export class AddProjectComponent implements OnInit {
     const videos_to_upload = e.target.querySelector('#video_input').files;
     let isPublic;
 
+    const tags = [];
+    this.items.forEach(element => {
+      tags.push(element['value']);
+    });
+
     if (e.target.querySelector('input[name=is_public]:checked')) {
       isPublic = true;
     } else {
@@ -45,7 +51,8 @@ export class AddProjectComponent implements OnInit {
       one_line_description: oneLineDescription,
       project_summary: projectSummary,
       is_public: isPublic,
-      uploaded_files: images_to_upload.length + videos_to_upload.length
+      uploaded_files: images_to_upload.length + videos_to_upload.length,
+      tags: tags
     };
 
     const projectId = generatedDocumentId();

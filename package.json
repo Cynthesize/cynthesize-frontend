@@ -28,6 +28,7 @@
     "eslint": "^4.19.1",
     "firebase": "^5.0.3",
     "ng-lightning": "^2.0.1",
+    "ngx-chips": "^1.9.2",
     "ngx-infinite-scroll": "^6.0.0",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.2.0",

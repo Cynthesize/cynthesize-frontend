@@ -50,7 +50,7 @@ export class TextualDetailsService {
       is_public: projectDetails.is_public,
       uploaded_files: projectDetails.uploaded_files,
       uploads_size: projectDetails.uploads_size,
-      tags: [],
+      tags: projectDetails.tags,
       comments: {},
       upvotes: 0,
       downvotes: 0,

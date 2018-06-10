@@ -43,6 +43,10 @@ import { BoardDashboardComponent } from './views/board/board-dashboard/board-das
 import { BoardReviewNotificationComponent } from './views/board/board-review-notification/board-review-notification.component';
 import { ReviewComponent } from './views/project/project-summary/review/review.component';
 
+import { TagInputModule } from 'ngx-chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -60,6 +64,10 @@ import { ReviewComponent } from './views/project/project-summary/review/review.c
       prefix: 'local-store',
       storageType: 'localStorage'
     }),
+    TagInputModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
   declarations: [
     AppComponent,
