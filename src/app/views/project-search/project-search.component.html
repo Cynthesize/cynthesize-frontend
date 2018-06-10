@@ -1,0 +1,10 @@
+<div class="row"><div class="col-md-3"></div>
+<div class="col-md-3">
+Search: <input type="text" [(ngModel)]="searchterm" (keyup)="search($event)">
+<ul *ngFor="let proj of projects">
+	<li>{{proj.project_name}}</li>
+</ul>
+<div *ngIf="projects?.length < 1">
+	<p>Sorry, no projects found</p>
+</div>
+</div>

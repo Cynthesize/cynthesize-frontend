@@ -20,6 +20,7 @@ import { LoginComponent } from './views/login/login.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { UserProfileComponent } from './views/user/user-profile/user-profile.component';
 import { NewsfeedComponent } from './views/newsfeed/newsfeed.component';
+import { ProjectSearchComponent } from './views/project-search/project-search.component';
 
 import { BoardAuthGuard } from './core/board-auth.guard';
 import { AuthGuard } from './core/auth.guard';
@@ -84,7 +85,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BoardLoginComponent,
     BoardDashboardComponent,
     ReviewComponent,
-    BoardReviewNotificationComponent
+    BoardReviewNotificationComponent,
+    ProjectSearchComponent
   ],
   bootstrap: [AppComponent],
   providers: [
