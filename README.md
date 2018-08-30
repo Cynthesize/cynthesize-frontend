@@ -8,7 +8,7 @@ To get started, run ```npm install``` in terminal to download required dependenc
 
 Use ```ng serve``` to start server at ```http://localhost:4200```
 
-## NOTE: All the API calls should be made to '/api/<xyz>'. The calls will be forwarded to ```http://localhost:5000```
+> NOTE: All the API calls should be made to '/api/<xyz>'. The calls will be forwarded to ```http://localhost:5000```
 
 ### Getting familiar with Angular
 
