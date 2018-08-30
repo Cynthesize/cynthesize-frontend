@@ -6,7 +6,7 @@ This project is created in Angular 6.0.
 
 To get started, run ```npm install``` in terminal to download required dependencies.
 
-Use ```ng serve``` to start server at ```http://localhost:4200```
+Use ```npm start``` or ```ng serve --proxy-config proxyconfig.json``` to start server at ```http://localhost:4200```
 
 > NOTE: All the API calls should be made to '/api/<xyz>'. The calls will be forwarded to ```http://localhost:5000```
 
