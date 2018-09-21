@@ -11,6 +11,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { StatusComponent } from './components/status/status.component';
 
+import { MyMaterialModule } from './material';
+
 
 const appRoutes: Routes = [
   {
@@ -38,7 +40,8 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     HttpModule,
-    FormsModule
+    FormsModule,
+    MyMaterialModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
