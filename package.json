@@ -27,6 +27,7 @@
     "bootstrap": "^4.1.1",
     "core-js": "^2.5.4",
     "eslint": "^4.19.1",
+    "hammerjs": "^2.0.8",
     "jquery": "^1.9.1",
     "ng-lightning": "^2.0.1",
     "ngx-chips": "^1.9.2",
