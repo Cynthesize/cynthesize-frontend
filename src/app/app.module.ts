@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AuthService } from './services/auth.service';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -44,7 +44,11 @@ const appRoutes: Routes = [
     HttpModule,
     FormsModule,
     MyMaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule
+  ],
+  exports: [
+    FormsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

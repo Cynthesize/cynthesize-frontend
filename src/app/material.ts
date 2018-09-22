@@ -78,8 +78,8 @@ import {
 ];
 
 @NgModule({
-    imports: matModules,
-    exports: matModules
+    imports: [...matModules],
+    exports: [...matModules]
 })
 
 export class MyMaterialModule { }

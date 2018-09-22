@@ -1,30 +1,23 @@
-<div id="background">
-    <div id="top">
-
-    </div>
+<div class="background">
+	<div class="top">
+	</div>
 </div>
-
-<div id="card">
-    <h2 class="company-title">
-        STARTUP<strong>X</strong>
-    </h2>
-    <h4 class="welcome">We're glad to see you again!</h4>
-    
-    <form (ngSubmit)="onLogin()" novalidate>
-            
-            <mat-form-field>
-                          
-                    <input matInput placeholder="Email" [(ngModel)]="user.email" name="email" required>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-                    <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password" name="password" required>
-                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            </mat-form-field>
-            <br>
-            <button type="submit" mat-raised-button color="primary">Login</button>
-            
-    
-    </form>
-
+<div class="container">
+	<div class="startup-auth-card">
+		<h2 class="startup-title">Startup<strong>X</strong></h2>
+		<br>
+		<h4 class="welcome">Glad to see ya' again!</h4>
+		<div class="startup-form-container">
+			<form [formGroup]="formGroup">
+				<mat-form-field class="startup-auth-input-field">
+					<input matInput placeholder="Enter e-mail address" formControlName="email" autocomplete="true">
+				</mat-form-field>
+				<mat-form-field class="startup-auth-input-field">
+					<input matInput placeholder="Enter password" [type]="hide ? 'password' : 'text'" formControlName="password">
+					<mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+				</mat-form-field>
+				<button mat-raised-button class="auth-submit" color="primary">Login</button>
+			</form>
+		</div>
+	</div>
 </div>

@@ -1,0 +1,23 @@
+.background{
+    height:100vh;
+    width:100%;
+    top: 0;
+    z-index: -1;
+    position: fixed;
+    background-color:#111;
+}
+
+.top{
+    height: 50%;
+    background-image: url(../../../assets/img/back.png);
+    background-size:cover;
+    background-position:center;
+}
+
+h2, h4 {
+    text-align: center;
+}
+.auth-submit {
+    position: relative;
+    left: 38%;
+}
