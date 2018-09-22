@@ -46,6 +46,7 @@ input.example-right-align {
 .welcome{
     font-family: 'Open Sans';
     font-weight:100;
+    margin-bottom:30px;
     text-align: center;
 }
 
@@ -56,4 +57,17 @@ input.example-right-align {
   
 .form-field > * {
     width: 100%;
+}
+
+mat-form-field{
+    position: relative;
+    width:50%;
+    margin-left:25%;
+
+}
+
+button{
+    left:50%;
+    transform: translateX(-50%);
+    margin-top:15px;
 }

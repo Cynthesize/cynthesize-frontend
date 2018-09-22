@@ -5,8 +5,8 @@ import { AppComponent } from './app.component';
 import { AuthService } from './services/auth.service';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Routes, RouterModule } from '@angular/router'
+
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { StatusComponent } from './components/status/status.component';
@@ -41,8 +41,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpModule,
     FormsModule,
-    MyMaterialModule,
-    BrowserAnimationsModule
+    MyMaterialModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
