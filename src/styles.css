@@ -1,3 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import url( 'https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons');
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Open Sans';
+}

@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 import {
     MatAutocompleteModule,
     MatBadgeModule,
@@ -37,7 +39,7 @@ import {
     MatTreeModule
 } from '@angular/material';
 
-const matModules = [
+ const matModules = [
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -76,8 +78,8 @@ const matModules = [
 ];
 
 @NgModule({
-    imports: [...matModules],
-    exports: [...matModules]
+    imports: matModules,
+    exports: matModules
 })
 
 export class MyMaterialModule { }
