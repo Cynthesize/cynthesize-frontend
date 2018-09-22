@@ -14,6 +14,7 @@ import { StatusComponent } from './components/status/status.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MyMaterialModule } from './material';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 const appRoutes: Routes = [
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    StatusComponent
+    StatusComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

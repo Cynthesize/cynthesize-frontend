@@ -1,0 +1,20 @@
+.codebuddy-spacer {
+    flex: 1 1 auto;
+}
+
+.codebuddy-navbar-icon {
+    padding: 0 14px;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    margin: 0 10px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.navbar-buttons {
+    float: right;
+}

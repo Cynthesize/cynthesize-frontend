@@ -6,14 +6,12 @@
     position: fixed;
     background-color:#111;
 }
-
 .top{
     height: 50%;
     background-image: url(../../../assets/img/back.png);
     background-size:cover;
     background-position:center;
 }
-
 h2, h4 {
     text-align: center;
 }
