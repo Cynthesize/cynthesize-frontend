@@ -11,6 +11,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { StatusComponent } from './components/status/status.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MyMaterialModule } from './material';
 
 
@@ -41,7 +43,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpModule,
     FormsModule,
-    MyMaterialModule
+    MyMaterialModule,
+    BrowserAnimationsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 import { User } from '../../models/user'
