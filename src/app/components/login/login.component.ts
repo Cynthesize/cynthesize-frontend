@@ -9,8 +9,13 @@ import { User } from '../../models/user'
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
+
 export class LoginComponent implements OnInit {
+  hide=true;
   user: User = new User();
+
+
   constructor(private auth: AuthService) { }
   onLogin(): void {
     this.auth.login(this.user)
