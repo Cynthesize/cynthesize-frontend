@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
+import { EncryptionService } from 'angular-encryption-service';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -13,15 +14,29 @@ import { User } from '../../models/user';
 
 export class LoginComponent implements OnInit {
   hide = false;
-  user: User = new User();
+  user: any = new User();
+  userFormGroup: FormGroup;
+
   constructor(
     private auth: AuthService,
     private fb: FormBuilder,
+    private encryptionService: EncryptionService,
+
     ) { }
 
-  formGroup: FormGroup;
+
+  encrypt(password): Promise<string> {
+    return this.encryptionService.generateKey(password).then(key => {
+      return this.encryptionService.encrypt('plain text', key);
+    });
+  }
+
 
   onLogin(): void {
+    console.log('youoouo');
+    this.encrypt(this.user.password).then((hashedPassword) => {
+      this.user.password = hashedPassword;
+    });
     this.auth.login(this.user)
       .then((user) => {
         console.log(user.json());
@@ -32,7 +47,7 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit() {
 
-    this.formGroup = this.fb.group({
+    this.userFormGroup = this.fb.group({
       email: ['', [
         Validators.required,
       ]],
@@ -45,10 +60,10 @@ export class LoginComponent implements OnInit {
   }
 
   get username() {
-    return this.formGroup.get('email');
+    return this.userFormGroup.get('email');
   }
 
   get password() {
-    return this.formGroup.get('password');
+    return this.userFormGroup.get('password');
   }
 }

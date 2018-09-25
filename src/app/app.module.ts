@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AuthService } from './services/auth.service';
@@ -15,7 +15,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MyMaterialModule } from './material';
 import { NavbarComponent } from './components/navbar/navbar.component';
-
+import { AddIdeaComponent } from './components/idea/add-idea/add-idea.component';
+import { IdeaService } from './services/idea.service';
+import { CRYPT_CONFIG_PROVIDER, CryptConfigProvider, EncryptionServiceModule } from 'angular-encryption-service';
 
 const appRoutes: Routes = [
   {
@@ -32,13 +34,22 @@ const appRoutes: Routes = [
   }
 ];
 
+const AppCryptConfigProvider: CryptConfigProvider = {
+  getSalt(): Promise<string> {
+    // TODO: implement providing a salt, which should be unique per user and
+    // base64-encoded.
+    return Promise.resolve('saltsalt');
+  }
+};
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
     StatusComponent,
-    NavbarComponent
+    NavbarComponent,
+    AddIdeaComponent
   ],
   imports: [
     BrowserModule,
@@ -47,12 +58,11 @@ const appRoutes: Routes = [
     FormsModule,
     MyMaterialModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EncryptionServiceModule.forRoot(),
   ],
-  exports: [
-    FormsModule
-  ],
-  providers: [AuthService],
-  bootstrap: [AppComponent]
+  providers: [AuthService, IdeaService, {provide: CRYPT_CONFIG_PROVIDER, useValue: AppCryptConfigProvider}],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
