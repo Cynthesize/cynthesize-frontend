@@ -51,7 +51,6 @@ export class RegisterComponent implements OnInit {
 
   onRegister(): void {
     console.log('Function called;');
-    
     this.encrypt(this.user.password).then((hashedPassword) => {
       this.user.password = hashedPassword;
     });
