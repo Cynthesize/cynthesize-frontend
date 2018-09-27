@@ -1,3 +1,29 @@
-<p>
-  add-idea works!
-</p>
+<app-navbar></app-navbar>
+
+<div id="background">
+
+    <div class="card">
+
+        <h2 class="heading">Add Idea</h2>
+        <hr>
+        <form [formGroup]="ideaFormGroup">
+
+            <div class="container">
+                <mat-form-field>
+                    <input matInput maxlength="100" placeholder="Your Idea (max 100 characters)">
+                </mat-form-field>
+                <mat-form-field>
+                    <textarea matInput name="description" maxlength="500" rows="1" placeholder="Idea's description (max 500 characters)"></textarea>
+                </mat-form-field>
+                <button mat-raised-button type="submit" color="primary">Submit</button>
+            </div>
+
+
+        </form>
+
+      </div>
+
+
+</div>
+
+
