@@ -7,7 +7,7 @@
 		<h2 class="startup-title">Startup<strong>X</strong></h2>
 		<h4 class="welcome">Glad to see ya' again!</h4>
 		<div class="startup-form-container">
-			<form (ngSubmit)="onRegister()" [formGroup]="regFormGroup">
+			<form (submit)="onRegister()" [formGroup]="regFormGroup">
 				<mat-form-field class="startup-auth-input-field">
 					<input matInput placeholder="Enter full name" name="full_name" formControlName="full_name" autocomplete="true">
 				</mat-form-field>
@@ -27,7 +27,7 @@
 					<mat-option [value]="prefer_not_to_say">Prefer not to say</mat-option>
 				</mat-select>
 				<mat-card-action>
-					<button type="button" mat-raised-button class="auth-submit" color="primary">Login</button>
+					<button type="submit" mat-raised-button class="auth-submit" color="primary">Login</button>
 				</mat-card-action>
 			</form>
 			<a routerLink="/login">Already a user?</a>

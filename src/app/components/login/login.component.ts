@@ -13,6 +13,7 @@ import { User } from '../../models/user';
 })
 
 export class LoginComponent implements OnInit {
+
   hide = false;
   user: any = new User();
   userFormGroup: FormGroup;

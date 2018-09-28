@@ -9,6 +9,7 @@ import { IdeaService } from '../../../services/idea.service';
   styleUrls: ['./add-idea.component.css']
 })
 export class AddIdeaComponent implements OnInit {
+
   ideaInstance: Idea = new Idea;
   ideaFormGroup: FormGroup;
   constructor(
