@@ -13,7 +13,6 @@ export class RegisterComponent implements OnInit {
   user: any = new User();
   regFormGroup: FormGroup;
   hide = true;
-  selectedGender = 'prefer_not_to_say';
 
   constructor(
     private auth: AuthService,
@@ -35,7 +34,7 @@ export class RegisterComponent implements OnInit {
       ]],
       password: ['', [
         Validators.required,
-        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
+        // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
       ]],
       email: ['', [
         Validators.required,
@@ -43,17 +42,19 @@ export class RegisterComponent implements OnInit {
       ]],
       full_name: ['', [
         Validators.required,
-      ]],
-      gender: ['']
+      ]]
     });
 
   }
 
   onRegister(): void {
-    console.log('Function called;');
     this.encrypt(this.user.password).then((hashedPassword) => {
       this.user.password = hashedPassword;
     });
+    this.user.username = this.regFormGroup.get('username').value;
+    this.user.full_name = this.regFormGroup.get('full_name').value;
+    this.user.email = this.regFormGroup.get('email').value;
+
     this.auth.register(this.user)
     .then((user) => {
       localStorage.setItem('token', user.json().auth_token);
@@ -69,10 +70,6 @@ export class RegisterComponent implements OnInit {
 
   get firstName() {
     return this.regFormGroup.get('full_name');
-  }
-
-  get gender() {
-    return this.regFormGroup.get('gender');
   }
 
   get email() {

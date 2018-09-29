@@ -9,11 +9,12 @@ export class AuthService {
   private headers: Headers = new Headers({'Content-Type': 'application/json'});
   constructor(private http: Http) { }
   login(user: User): Promise<any> {
-    const url = '/api/auth/login';
+    const url = '/api/login/';
     return this.http.post(url, user, {headers: this.headers}).toPromise();
   }
   register(user: User): Promise<any> {
-    const url = '/api/auth/register';
+    const url = '/api/register/';
+    console.log(user);
     return this.http.post(url, user, {headers: this.headers}).toPromise();
   }
   ensureAuthenticated(token): Promise<any> {
