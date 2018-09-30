@@ -25,6 +25,7 @@
     "@reactivex/rxjs": "^6.2.0",
     "angular-2-local-storage": "^2.0.0",
     "angular-encryption-service": "^0.1.0",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^4.1.1",
     "core-js": "^2.5.4",
     "eslint": "^4.19.1",

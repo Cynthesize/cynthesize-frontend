@@ -1,6 +1,7 @@
 export class Idea {
-    constructor(
-      ideaName?: string,
-      owner?: string,
-      description?: string) {}
+  idea_name: string;
+  ownerToken: string;
+  owner: string;
+  description: string;
+    constructor() {}
 }

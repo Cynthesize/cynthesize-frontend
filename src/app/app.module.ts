@@ -9,7 +9,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { StatusComponent } from './components/status/status.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -29,8 +28,8 @@ const appRoutes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'status',
-    component: StatusComponent
+    path: 'idea/add-idea',
+    component: AddIdeaComponent
   }
 ];
 
@@ -47,7 +46,6 @@ const AppCryptConfigProvider: CryptConfigProvider = {
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    StatusComponent,
     NavbarComponent,
     AddIdeaComponent
   ],

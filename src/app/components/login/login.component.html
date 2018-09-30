@@ -6,16 +6,19 @@
 	<div class="startup-auth-card">
 		<h2 class="startup-title">Startup<strong>X</strong></h2>
 		<h4 class="welcome">Glad to see ya' again!</h4>
+		<div *ngIf="error">
+			error
+		</div>
 		<div class="startup-form-container">
-			<form [formGroup]="userFormGroup">
+			<form (submit)="onLogin()" [formGroup]="userFormGroup">
 				<mat-form-field class="startup-auth-input-field">
-					<input matInput placeholder="Enter e-mail address" formControlName="email" autocomplete="true">
+					<input matInput placeholder="Enter username" formControlName="username" autocomplete="true">
 				</mat-form-field>
 				<mat-form-field class="startup-auth-input-field">
 					<input matInput placeholder="Enter password" [type]="hide ? 'password' : 'text'" formControlName="password">
 					<mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
 				</mat-form-field>
-				<button mat-raised-button class="auth-submit" color="primary">Login</button>
+				<button mat-raised-button type="submit" class="auth-submit" color="primary">Login</button>
 			</form>
 			<a routerLink="/register">Not registered yet?</a>
 		</div>

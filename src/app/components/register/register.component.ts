@@ -3,6 +3,7 @@ import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { EncryptionService } from 'angular-encryption-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { async } from 'rxjs/internal/scheduler/async';
 
 @Component({
   selector: 'app-register',
@@ -18,11 +19,11 @@ export class RegisterComponent implements OnInit {
     private auth: AuthService,
     private encryptionService: EncryptionService,
     private fb: FormBuilder
-    ) {}
+  ) { }
 
-  encrypt(password): Promise<string> {
+  encrypt(password, string): Promise<string> {
     return this.encryptionService.generateKey(password).then(key => {
-      return this.encryptionService.encrypt('plain text', key);
+      return this.encryptionService.encrypt(string, key);
     });
   }
 
@@ -31,10 +32,11 @@ export class RegisterComponent implements OnInit {
     this.regFormGroup = this.fb.group({
       username: ['', [
         Validators.required,
+        Validators.minLength(4)
       ]],
       password: ['', [
         Validators.required,
-        // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
+        Validators.minLength(6)
       ]],
       email: ['', [
         Validators.required,
@@ -48,20 +50,18 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister(): void {
-    this.encrypt(this.user.password).then((hashedPassword) => {
-      this.user.password = hashedPassword;
-    });
     this.user.username = this.regFormGroup.get('username').value;
     this.user.full_name = this.regFormGroup.get('full_name').value;
     this.user.email = this.regFormGroup.get('email').value;
-
+    this.user.password =  this.regFormGroup.get('password').value;
     this.auth.register(this.user)
-    .then((user) => {
-      localStorage.setItem('token', user.json().auth_token);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then((respose) => {
+        if (respose.status === 201) {
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   get username() {

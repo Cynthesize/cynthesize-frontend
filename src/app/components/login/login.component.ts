@@ -13,7 +13,6 @@ import { User } from '../../models/user';
 })
 
 export class LoginComponent implements OnInit {
-
   hide = false;
   user: any = new User();
   userFormGroup: FormGroup;
@@ -22,25 +21,22 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private fb: FormBuilder,
     private encryptionService: EncryptionService,
+  ) { }
 
-    ) { }
-
-
-  encrypt(password): Promise<string> {
+  encrypt(password, string): Promise<string> {
     return this.encryptionService.generateKey(password).then(key => {
-      return this.encryptionService.encrypt('plain text', key);
+      return this.encryptionService.encrypt(string, key);
     });
   }
 
-
   onLogin(): void {
-    console.log('youoouo');
-    this.encrypt(this.user.password).then((hashedPassword) => {
-      this.user.password = hashedPassword;
-    });
+    this.user.username = this.userFormGroup.get('username').value;
+    this.user.password = this.userFormGroup.get('password').value;
+    console.log(this.user);
     this.auth.login(this.user)
       .then((user) => {
         console.log(user.json());
+        localStorage.setItem('token', user.json().token);
       })
       .catch((err) => {
         console.log(err);
@@ -49,19 +45,18 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
     this.userFormGroup = this.fb.group({
-      email: ['', [
+      username: ['', [
         Validators.required,
       ]],
       password: ['', [
         Validators.required,
-        // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
       ]]
     });
 
   }
 
   get username() {
-    return this.userFormGroup.get('email');
+    return this.userFormGroup.get('username');
   }
 
   get password() {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Idea } from '../../../models/idea';
 import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
 import { IdeaService } from '../../../services/idea.service';
+import { LocalStorageModule } from 'angular-2-local-storage';
 
 @Component({
   selector: 'app-add-idea',
@@ -16,19 +17,37 @@ export class AddIdeaComponent implements OnInit {
     private fb: FormBuilder,
     private ideaService: IdeaService) { }
 
-  // onIdeaSubmit(): void {
-  //   this.ideaService.addIdea(this.ideaInstance);
-  // }
+  onIdeaSubmit(): void {
+    this.ideaInstance.idea_name = this.ideaFormGroup.get('idea_name').value;
+    this.ideaInstance.description = this.ideaFormGroup.get('description').value;
+    this.ideaInstance.ownerToken = localStorage.getItem('token');
+    this.ideaService.addIdea(this.ideaInstance)
+      .then((Response) => {
+        console.log(Response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   ngOnInit() {
+    this.ideaFormGroup = this.fb.group({
+      idea_name: ['', [
+        Validators.required,
+      ]],
+      description: ['', [
+        Validators.required,
+      ]]
+    });
   }
 
-  getIdeaName() {
-    return this.ideaFormGroup.get('ideaName');
+
+  get ideaName() {
+    return this.ideaFormGroup.get('idea_name');
   }
 
-  getIdeaDescription() {
-    return this.ideaFormGroup.get('ideaDescription');
+  get ideaDescription() {
+    return this.ideaFormGroup.get('description');
   }
 
 }
