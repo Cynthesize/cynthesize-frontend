@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
-import { EncryptionService } from 'angular-encryption-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { async } from 'rxjs/internal/scheduler/async';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,18 +13,14 @@ export class RegisterComponent implements OnInit {
   user: any = new User();
   regFormGroup: FormGroup;
   hide = true;
+  errorEncountered = false;
+  errorString: string;
 
   constructor(
     private auth: AuthService,
-    private encryptionService: EncryptionService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) { }
-
-  encrypt(password, string): Promise<string> {
-    return this.encryptionService.generateKey(password).then(key => {
-      return this.encryptionService.encrypt(string, key);
-    });
-  }
 
   ngOnInit() {
 
@@ -50,17 +45,20 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister(): void {
+    this.errorEncountered = false;
     this.user.username = this.regFormGroup.get('username').value;
     this.user.full_name = this.regFormGroup.get('full_name').value;
     this.user.email = this.regFormGroup.get('email').value;
     this.user.password =  this.regFormGroup.get('password').value;
     this.auth.register(this.user)
-      .then((respose) => {
-        if (respose.status === 201) {
+      .then((response) => {
+        if (response.status === 201) {
+          this.router.navigate(['/login']);
         }
       })
       .catch((err) => {
-        console.log(err);
+        this.errorEncountered = true;
+        this.errorString = err._body;
       });
   }
 
@@ -78,5 +76,8 @@ export class RegisterComponent implements OnInit {
 
   get password() {
     return this.regFormGroup.get('password');
+  }
+
+  emitMessage() {
   }
 }

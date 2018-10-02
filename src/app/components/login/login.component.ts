@@ -5,6 +5,7 @@ import { EncryptionService } from 'angular-encryption-service';
 import { AuthService } from '../../services/auth.service';
 
 import { User } from '../../models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,30 +17,28 @@ export class LoginComponent implements OnInit {
   hide = false;
   user: any = new User();
   userFormGroup: FormGroup;
+  errorEncountered = false;
+  errorString: string;
 
   constructor(
     private auth: AuthService,
     private fb: FormBuilder,
-    private encryptionService: EncryptionService,
+    private router: Router
   ) { }
 
-  encrypt(password, string): Promise<string> {
-    return this.encryptionService.generateKey(password).then(key => {
-      return this.encryptionService.encrypt(string, key);
-    });
-  }
-
   onLogin(): void {
+    this.errorEncountered = false;
     this.user.username = this.userFormGroup.get('username').value;
     this.user.password = this.userFormGroup.get('password').value;
     console.log(this.user);
     this.auth.login(this.user)
       .then((user) => {
-        console.log(user.json());
         localStorage.setItem('token', user.json().token);
+        this.router.navigate(['/idea/add-idea']);
       })
       .catch((err) => {
-        console.log(err);
+        this.errorEncountered = true;
+        this.errorString = err._body;
       });
   }
   ngOnInit() {

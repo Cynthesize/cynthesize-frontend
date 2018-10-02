@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AuthService } from './services/auth.service';
@@ -21,6 +21,7 @@ import { IdeaPageComponent } from './components/idea/idea-page/idea-page.compone
 import { IdeaCardComponent } from './components/idea/idea-card/idea-card.component';
 import { IdeaModalComponent } from './components/idea/idea-modal/idea-modal.component';
 
+import { ErrorHandlerComponent } from './components/error-handler/error-handler.component';
 
 const appRoutes: Routes = [
   {
@@ -58,7 +59,8 @@ const AppCryptConfigProvider: CryptConfigProvider = {
     AddIdeaComponent,
     IdeaPageComponent,
     IdeaCardComponent,
-    IdeaModalComponent
+    IdeaModalComponent,
+    ErrorHandlerComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,11 @@ const AppCryptConfigProvider: CryptConfigProvider = {
     ReactiveFormsModule,
     EncryptionServiceModule.forRoot(),
   ],
-  providers: [AuthService, IdeaService, {provide: CRYPT_CONFIG_PROVIDER, useValue: AppCryptConfigProvider}],
+  providers: [
+    AuthService,
+    IdeaService,
+    {provide: CRYPT_CONFIG_PROVIDER, useValue: AppCryptConfigProvider},
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
