@@ -3,5 +3,6 @@ export class Idea {
   ownerToken: string;
   owner: string;
   description: string;
+  require_assistance: string;
     constructor() {}
 }

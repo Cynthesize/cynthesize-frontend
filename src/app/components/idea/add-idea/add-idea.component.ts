@@ -20,6 +20,7 @@ export class AddIdeaComponent implements OnInit {
   onIdeaSubmit(): void {
     this.ideaInstance.idea_name = this.ideaFormGroup.get('idea_name').value;
     this.ideaInstance.description = this.ideaFormGroup.get('description').value;
+    this.ideaInstance.require_assistance = this.ideaFormGroup.get('require_assistance').value;
     this.ideaInstance.ownerToken = localStorage.getItem('token');
     this.ideaService.addIdea(this.ideaInstance)
       .then((Response) => {
@@ -37,7 +38,8 @@ export class AddIdeaComponent implements OnInit {
       ]],
       description: ['', [
         Validators.required,
-      ]]
+      ]],
+      require_assistance: ['']
     });
   }
 
@@ -48,6 +50,10 @@ export class AddIdeaComponent implements OnInit {
 
   get ideaDescription() {
     return this.ideaFormGroup.get('description');
+  }
+
+  get require_assistance() {
+    return this.ideaFormGroup.get('require_assistance');
   }
 
 }
