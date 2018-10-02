@@ -17,6 +17,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddIdeaComponent } from './components/idea/add-idea/add-idea.component';
 import { IdeaService } from './services/idea.service';
 import { CRYPT_CONFIG_PROVIDER, CryptConfigProvider, EncryptionServiceModule } from 'angular-encryption-service';
+import { IdeaPageComponent } from './components/idea/idea-page/idea-page.component';
 
 const appRoutes: Routes = [
   {
@@ -30,6 +31,10 @@ const appRoutes: Routes = [
   {
     path: 'idea/add-idea',
     component: AddIdeaComponent
+  },
+  {
+    path: 'idea/ideas',
+    component: IdeaPageComponent
   }
 ];
 
@@ -47,7 +52,8 @@ const AppCryptConfigProvider: CryptConfigProvider = {
     LoginComponent,
     RegisterComponent,
     NavbarComponent,
-    AddIdeaComponent
+    AddIdeaComponent,
+    IdeaPageComponent
   ],
   imports: [
     BrowserModule,
