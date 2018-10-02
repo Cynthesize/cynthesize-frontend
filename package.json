@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxyconfig.json",
+    "start": "ng serve -o --proxy-config proxyconfig.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -33,7 +33,7 @@
     "jquery": "^1.9.1",
     "ng-lightning": "^2.0.1",
     "ngx-chips": "^1.9.8",
-    "ngx-infinite-scroll": "^6.0.0",
+    "ngx-infinite-scroll": "^6.0.1",
     "popper.js": "^1.14.3",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.2.0",
