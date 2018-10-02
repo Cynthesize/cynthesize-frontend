@@ -29,3 +29,12 @@
 .startup-form-container {
     padding: 10px 0 10px 0;
 }
+
+h2::after{
+  display: block;
+  height:2px;
+  width:20%;
+  margin-left: 50%;
+  background-color:#222;
+  transform: translateX(-50%);
+}

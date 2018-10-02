@@ -1,0 +1,12 @@
+.container{
+  background-color: #CCC;
+}
+
+h2::after{
+  display: block;
+  height:2px;
+  width:20%;
+  margin-left: 50%;
+  background-color:#222;
+  transform: translateX(-50%);
+}
