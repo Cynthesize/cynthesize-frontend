@@ -6,8 +6,8 @@
 	<div class="startup-auth-card">
 		<h2 class="startup-title">Startup<strong>X</strong></h2>
 		<h4 class="welcome">Glad to see ya' again!</h4>
-		<div *ngIf="error">
-			error
+		<div *ngIf="errorEncountered">
+			<app-error-handler [errorMessage]="errorString"></app-error-handler>
 		</div>
 		<div class="startup-form-container">
 			<form (submit)="onLogin()" [formGroup]="userFormGroup">
