@@ -1,5 +1,5 @@
 .container{
-  background-color: #CCC;
+
 }
 
 h2::after{
@@ -9,4 +9,10 @@ h2::after{
   margin-left: 50%;
   background-color:#222;
   transform: translateX(-50%);
+}
+
+
+.idea-container{
+  width:60%;
+
 }

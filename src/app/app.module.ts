@@ -19,6 +19,7 @@ import { IdeaService } from './services/idea.service';
 import { CRYPT_CONFIG_PROVIDER, CryptConfigProvider, EncryptionServiceModule } from 'angular-encryption-service';
 import { IdeaPageComponent } from './components/idea/idea-page/idea-page.component';
 import { IdeaCardComponent } from './components/idea/idea-card/idea-card.component';
+import { IdeaModalComponent } from './components/idea/idea-modal/idea-modal.component';
 
 
 const appRoutes: Routes = [
@@ -56,7 +57,8 @@ const AppCryptConfigProvider: CryptConfigProvider = {
     NavbarComponent,
     AddIdeaComponent,
     IdeaPageComponent,
-    IdeaCardComponent
+    IdeaCardComponent,
+    IdeaModalComponent
   ],
   imports: [
     BrowserModule,
