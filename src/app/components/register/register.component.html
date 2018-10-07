@@ -3,24 +3,24 @@
 	</div>
 </div>
 <div class="container">
-	<div class="startup-auth-card">
-		<h2 class="startup-title">Startup<strong>X</strong></h2>
+	<div class="cynthesize-auth-card">
+		<h2 class="cynthesize-title">Cynthesize</h2>
 		<h4 class="welcome">Glad to see ya' again!</h4>
-		<div class="startup-form-container">
+		<div class="cynthesize-form-container">
 			<div *ngIf="errorEncountered">
 				<app-error-handler [errorMessage]="errorString"></app-error-handler>
 			</div>
 			<form (submit)="onRegister()" [formGroup]="regFormGroup">
-				<mat-form-field class="startup-auth-input-field">
+				<mat-form-field class="cynthesize-auth-input-field">
 					<input matInput placeholder="Enter full name" type="text" me="full_name" formControlName="full_name" autocomplete="true">
 				</mat-form-field>
-				<mat-form-field class="startup-auth-input-field">
+				<mat-form-field class="cynthesize-auth-input-field">
 					<input matInput placeholder="Enter username" type="text" name="username" formControlName="username" autocomplete="true">
 				</mat-form-field>
-				<mat-form-field class="startup-auth-input-field">
+				<mat-form-field class="cynthesize-auth-input-field">
 					<input matInput placeholder="Enter e-mail address" type="text" name="email" formControlName="email" autocomplete="true">
 				</mat-form-field>
-				<mat-form-field class="startup-auth-input-field">
+				<mat-form-field class="cynthesize-auth-input-field">
 					<input matInput placeholder="Enter password" name="password" [type]="hide ? 'password' : 'text'" formControlName="password">
 					<mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
 				</mat-form-field>

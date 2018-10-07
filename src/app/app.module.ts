@@ -1,27 +1,27 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
-
-import { AppComponent } from './app.component';
-import { AuthService } from './services/auth.service';
+/* Modules */
 import { HttpModule } from '@angular/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MyMaterialModule } from './material';
 import { Routes, RouterModule } from '@angular/router';
-
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MyMaterialModule } from './material';
+/* Components */
+import { AppComponent } from './app.component';
+import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { RegisterComponent } from './components/register/register.component';
 import { AddIdeaComponent } from './components/idea/add-idea/add-idea.component';
-import { IdeaService } from './services/idea.service';
-import { CRYPT_CONFIG_PROVIDER, CryptConfigProvider, EncryptionServiceModule } from 'angular-encryption-service';
 import { IdeaPageComponent } from './components/idea/idea-page/idea-page.component';
 import { IdeaCardComponent } from './components/idea/idea-card/idea-card.component';
 import { IdeaModalComponent } from './components/idea/idea-modal/idea-modal.component';
-
 import { ErrorHandlerComponent } from './components/error-handler/error-handler.component';
+
+/* Services */
+import { IdeaService } from './services/idea.service';
+import { AuthService } from './services/auth.service';
 
 const appRoutes: Routes = [
   {
@@ -41,14 +41,6 @@ const appRoutes: Routes = [
     component: IdeaPageComponent
   }
 ];
-
-const AppCryptConfigProvider: CryptConfigProvider = {
-  getSalt(): Promise<string> {
-    // TODO: implement providing a salt, which should be unique per user and
-    // base64-encoded.
-    return Promise.resolve('saltsalt');
-  }
-};
 
 @NgModule({
   declarations: [
@@ -70,12 +62,11 @@ const AppCryptConfigProvider: CryptConfigProvider = {
     MyMaterialModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    EncryptionServiceModule.forRoot(),
+    InfiniteScrollModule,
   ],
   providers: [
     AuthService,
     IdeaService,
-    {provide: CRYPT_CONFIG_PROVIDER, useValue: AppCryptConfigProvider},
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

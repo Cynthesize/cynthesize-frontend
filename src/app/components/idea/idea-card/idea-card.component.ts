@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-idea-card',
@@ -6,6 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./idea-card.component.css']
 })
 export class IdeaCardComponent implements OnInit {
+  @Input() ideaName: string;
+  @Input() description: string;
+  @Input() likes: string;
+  @Input() owner: string;
+  @Input() timestamp: string;
 
   constructor() { }
 

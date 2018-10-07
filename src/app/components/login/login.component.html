@@ -3,18 +3,18 @@
 	</div>
 </div>
 <div class="container">
-	<div class="startup-auth-card">
-		<h2 class="startup-title">Startup<strong>X</strong></h2>
+	<div class="cynthesize-auth-card">
+		<h2 class="cynthesize-title">Cynthesize</h2>
 		<h4 class="welcome">Glad to see ya' again!</h4>
 		<div *ngIf="errorEncountered">
 			<app-error-handler [errorMessage]="errorString"></app-error-handler>
 		</div>
-		<div class="startup-form-container">
+		<div class="cynthesize-form-container">
 			<form (submit)="onLogin()" [formGroup]="userFormGroup">
-				<mat-form-field class="startup-auth-input-field">
+				<mat-form-field class="cynthesize-auth-input-field">
 					<input matInput placeholder="Enter username" formControlName="username" autocomplete="true">
 				</mat-form-field>
-				<mat-form-field class="startup-auth-input-field">
+				<mat-form-field class="cynthesize-auth-input-field">
 					<input matInput placeholder="Enter password" [type]="hide ? 'password' : 'text'" formControlName="password">
 					<mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
 				</mat-form-field>
