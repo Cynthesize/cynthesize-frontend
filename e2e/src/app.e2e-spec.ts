@@ -1,14 +1,21 @@
+import { browser } from 'protractor';
 import { AppPage } from './app.po';
 
-describe('workspace-project App', () => {
+describe('app', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display login page and login into app', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    expect(browser.getCurrentUrl()).toContain('/login');
+    page.login();
+  });
+
+  it('should display hello message', () => {
+    page.navigateTo();
+    expect(page.getParagraphText()).toEqual('Hello world !');
   });
 });

@@ -1,0 +1,46 @@
+@import "src/theme/theme-variables";
+
+:host {
+  display: flex;
+  flex: 1;
+  background-color: #222222;
+}
+
+.inline-loader {
+  display: inline-block;
+}
+
+.version {
+  margin: 0;
+}
+
+.login-container,
+.mat-form-field {
+  width: 100%;
+}
+
+.login-error {
+  color: mat-color($app-warn);
+}
+
+.login-box {
+  min-width: 450px;
+}
+
+.background{
+  height:100vh;
+  width:100%;
+  top: 0;
+  position: fixed;
+}
+
+.top{
+  height: 50%;
+  background: url(../../../assets/back.png);
+  background-size:cover;
+  background-position:center;
+}
+
+.input {
+  margin: 7px 0;
+}

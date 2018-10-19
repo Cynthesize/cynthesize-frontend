@@ -1,4 +1,7 @@
 {
+  "extends": [
+    "tslint-config-prettier"
+  ],
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
@@ -26,20 +29,30 @@
       "spaces"
     ],
     "interface-over-type-literal": true,
+    "jsdoc-format": true,
     "label-position": true,
     "max-line-length": [
       true,
-      140
+      120
     ],
     "member-access": false,
     "member-ordering": [
       true,
       {
         "order": [
-          "static-field",
-          "instance-field",
-          "static-method",
-          "instance-method"
+          "public-static-field",
+          "protected-static-field",
+          "private-static-field",
+          "public-instance-field",
+          "protected-instance-field",
+          "private-instance-field",
+          "public-static-method",
+          "protected-static-method",
+          "private-static-method",
+          "constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
         ]
       }
     ],
@@ -48,13 +61,16 @@
     "no-console": [
       true,
       "debug",
-      "info",
       "time",
       "timeEnd",
       "trace"
     ],
     "no-construct": true,
     "no-debugger": true,
+    "no-duplicate-variable": [
+      true,
+      "check-parameters"
+    ],
     "no-duplicate-super": true,
     "no-empty": false,
     "no-empty-interface": true,
@@ -96,6 +112,11 @@
       true,
       "allow-null-check"
     ],
+    "typedef": [
+      true,
+      "parameter",
+      "property-declaration"
+    ],
     "typedef-whitespace": [
       true,
       {
@@ -115,6 +136,18 @@
       "check-operator",
       "check-separator",
       "check-type"
+    ],
+    "directive-selector": [
+      true,
+      "attribute",
+      "app",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "app",
+      "kebab-case"
     ],
     "no-output-on-prefix": true,
     "use-input-property-decorator": true,

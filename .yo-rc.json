@@ -1,0 +1,24 @@
+{
+  "generator-ngx-rocket": {
+    "version": "5.2.0",
+    "props": {
+      "location": "path",
+      "appName": "cynthesize",
+      "target": [
+        "web"
+      ],
+      "pwa": true,
+      "ui": "material",
+      "layout": "simple",
+      "auth": true,
+      "lazy": true,
+      "angulartics": true,
+      "analyticsProvider": "ga",
+      "googleAnalyticsAccount": "UA-117554037-1",
+      "prettier": true,
+      "projectName": "cynthesize",
+      "packageManager": "npm",
+      "mobile": []
+    }
+  }
+}
