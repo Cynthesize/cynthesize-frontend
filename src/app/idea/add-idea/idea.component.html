@@ -1,0 +1,45 @@
+<div class="container">
+  <mat-card>
+    <h1>
+      <mat-card-title translate>Add Idea</mat-card-title>
+    </h1>
+    <mat-card-content>
+      <form (ngSubmit)="addIdea()" [formGroup]="addIdeaForm" novalidate>
+        <div class="add-error" [hidden]="!error || isLoading" *ngFor="let errorMessage of error" translate>
+          {{ errorMessage }}
+        </div>
+        <br />
+        <div fxLayout="column">
+          <mat-form-field class="input">
+            <input type="text" matInput formControlName="ideaname" autocomplete="ideaname" [placeholder]="'Ideaname' | translate" />
+            <mat-error *ngIf="addIdeaForm.controls.ideaname.valid || addIdeaForm.controls.ideaname.untouched">
+              <span translate>Ideaname is required</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="input">
+            <input type="text" matInput formControlName="description" autocomplete="description" [placeholder]="'Add Description' | translate" />
+            <mat-error *ngIf="addIdeaForm.controls.description.valid || addIdeaForm.controls.description.untouched">
+              <span translate>Description is required</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="input">
+            <mat-chip-list #tagList>
+              <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
+                {{tag.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Add tag" [matChipInputFor]="tagList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+          </mat-form-field>
+          <mat-slide-toggle class="input" color="primary" formControlName="needAssistance" translate>Need Assistance?</mat-slide-toggle>
+          <br />
+          <button mat-raised-button color="primary" class="input" type="submit" [disabled]="addIdeaForm.invalid || isLoading">
+            <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
+            <span translate>Add Idea</span>
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

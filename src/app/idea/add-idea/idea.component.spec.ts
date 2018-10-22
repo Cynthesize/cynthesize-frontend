@@ -3,21 +3,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialModule } from '@app/material.module';
-import { AboutComponent } from './about.component';
+import { IdeaComponent } from './idea.component';
 
-describe('AboutComponent', () => {
-  let component: AboutComponent;
-  let fixture: ComponentFixture<AboutComponent>;
+describe('IdeaComponent', () => {
+  let component: IdeaComponent;
+  let fixture: ComponentFixture<IdeaComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [BrowserAnimationsModule, FlexLayoutModule, MaterialModule],
-      declarations: [AboutComponent]
+      declarations: [IdeaComponent]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AboutComponent);
+    fixture = TestBed.createComponent(IdeaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

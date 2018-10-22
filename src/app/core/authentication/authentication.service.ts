@@ -3,9 +3,8 @@ import { Observable, of } from 'rxjs';
 import BACKEND_URLS from '../../shared/backend-urls';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Headers } from '@angular/http';
 import { Logger } from '../logger.service';
-import { finalize, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 const log = new Logger('HttpCacheService');
 
@@ -58,9 +57,7 @@ export class AuthenticationService {
       email: context.email,
       password: context.password
     };
-    console.log('lulz here');
-    
-    return this.http.post<any>(BACKEND_URLS.USER_AUTH_REGISTER, user, {headers: this.headers})
+    return this.http.post<any>(BACKEND_URLS.USER_AUTH_REGISTER, user, { headers: this.headers })
       .pipe(map((res: any) => {
         console.log(res);
         if (res.username === context.username) {
