@@ -3,7 +3,7 @@ import { Idea } from '@app/shared/idea';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import BACKEND_URLS from '@app/shared/backend-urls';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { flatMap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,16 +23,29 @@ export class IdeaService {
    */
   public addIdea(context: Idea) {
     const idea = {
-      ideaname: context.ideaname,
+      ideaname: context.idea_name,
       description: context.description,
-      require_assistance: context.needAssistance,
+      require_assistance: context.require_assistance,
       owner: JSON.parse(localStorage.getItem('credentials'))['username']
     };
     console.log(JSON.parse(localStorage.getItem('credentials'))['token'], idea, context);
-    return this.http.post<any>(BACKEND_URLS.ADD_IDEA, idea, { headers: this.headers })
+    return this.http.post<any>(BACKEND_URLS.IDEA, idea, { headers: this.headers })
       .pipe(map((res: any) => {
         console.log(res);
-        this.router.navigate(['/']);
         return res;
-      }));  }
+      }));
+  }
+  /**
+   * getIdea
+   */
+  public getIdea(id: string) {
+    return this.http.get(BACKEND_URLS.IDEA, {
+      params: {
+        id: id
+      }
+    }).pipe(map((res: any) => {
+        console.log(res);
+        return res;
+      }));
+  }
 }

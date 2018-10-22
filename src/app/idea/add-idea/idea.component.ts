@@ -6,6 +6,7 @@ import { MatChipInputEvent } from '@angular/material';
 import { IdeaService } from '@app/core/idea/idea.service';
 import { Logger } from '@app/core';
 import { finalize } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 export interface Tags {
   name: string;
@@ -41,7 +42,8 @@ export class IdeaComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private ideaService: IdeaService
+    private ideaService: IdeaService,
+    private router: ActivatedRoute
   ) {
     this.createForm();
   }
@@ -96,10 +98,14 @@ export class IdeaComponent implements OnInit {
   ngOnInit() {}
   private createForm() {
     this.addIdeaForm = this.formBuilder.group({
-      ideaname: ['', Validators.required],
+      idea_name: ['', Validators.required],
       description: ['', Validators.required],
       tags: [''],
-      needAssistance: true
+      require_assistance: true
+    });
+
+    this.router.snapshot.queryParams.subscribe((query: any) => {
+      console.log(query.id);
     });
   }
 }

@@ -1,6 +1,6 @@
 export interface Idea {
-    ideaname: string;
+    idea_name: string;
     description: string;
     tags: Array<string>;
-    needAssistance: Boolean;
+    require_assistance: Boolean;
 }
