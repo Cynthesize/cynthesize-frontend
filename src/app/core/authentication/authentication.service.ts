@@ -36,8 +36,7 @@ const credentialsKey = 'credentials';
 export class AuthenticationService {
   private _credentials: Credentials | null;
 
-  private headers: HttpHeaders = new HttpHeaders(
-    { 'Content-Type': 'application/json' });
+  private headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient, private router: Router) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
@@ -57,14 +56,15 @@ export class AuthenticationService {
       email: context.email,
       password: context.password
     };
-    return this.http.post<any>(BACKEND_URLS.USER_AUTH_REGISTER, user, { headers: this.headers })
-      .pipe(map((res: any) => {
+    return this.http.post<any>(BACKEND_URLS.USER_AUTH_REGISTER, user, { headers: this.headers }).pipe(
+      map((res: any) => {
         console.log(res);
         if (res.username === context.username) {
           this.router.navigate(['/login']);
         }
         return res;
-      }));
+      })
+    );
   }
   /**
    * Authenticates the user.
@@ -77,14 +77,15 @@ export class AuthenticationService {
       username: context.username,
       password: context.password
     };
-    return this.http.post<any>(BACKEND_URLS.USER_AUTH_LOGIN, user)
-      .pipe(map((res: any) => {
+    return this.http.post<any>(BACKEND_URLS.USER_AUTH_LOGIN, user).pipe(
+      map((res: any) => {
         if (res && res.token) {
           res.username = context.username;
           this.setCredentials(res, context.remember);
         }
         return res;
-      }));
+      })
+    );
   }
 
   /**

@@ -11,15 +11,16 @@ const routes: Routes = [
     path: 'add',
     component: IdeaComponent,
     data: { title: extract('Cynthesize | Add Idea') }
-  }, {
+  },
+  {
     path: 'view/:id',
     component: ViewIdeaComponent,
     data: { title: extract('Idea Details') }
-  }, {
+  },
+  {
     path: '**',
     redirectTo: 'add'
   }
-
 ];
 
 @NgModule({
@@ -27,4 +28,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: []
 })
-export class IdeaRoutingModule { }
+export class IdeaRoutingModule {}

@@ -22,4 +22,4 @@ import { ViewIdeaComponent } from './view-idea/view-idea.component';
   ],
   declarations: [IdeaComponent, ViewIdeaComponent]
 })
-export class IdeaModule { }
+export class IdeaModule {}

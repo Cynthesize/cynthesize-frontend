@@ -14,13 +14,11 @@ export interface Tags {
 
 const log = new Logger('Idea');
 
-
 @Component({
   selector: 'app-idea',
   templateUrl: './idea.component.html',
   styleUrls: ['./idea.component.scss']
 })
-
 export class IdeaComponent implements OnInit {
   version: string = environment.version;
   error: string;
@@ -34,17 +32,9 @@ export class IdeaComponent implements OnInit {
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  tags: Tags[] = [
-    { name: 'Artificial Intelligence' },
-    { name: 'Robotics' },
-    { name: 'Web Application' }
-  ];
+  tags: Tags[] = [{ name: 'Artificial Intelligence' }, { name: 'Robotics' }, { name: 'Web Application' }];
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private ideaService: IdeaService,
-    private router: ActivatedRoute
-  ) {
+  constructor(private formBuilder: FormBuilder, private ideaService: IdeaService, private router: ActivatedRoute) {
     this.createForm();
   }
 
@@ -78,7 +68,7 @@ export class IdeaComponent implements OnInit {
 
     // Add our fruit
     if ((value || '').trim()) {
-      this.tags.push({name: value.trim()});
+      this.tags.push({ name: value.trim() });
     }
 
     // Reset the input value
@@ -102,10 +92,6 @@ export class IdeaComponent implements OnInit {
       description: ['', Validators.required],
       tags: [''],
       require_assistance: true
-    });
-
-    this.router.snapshot.queryParams.subscribe((query: any) => {
-      console.log(query.id);
     });
   }
 }

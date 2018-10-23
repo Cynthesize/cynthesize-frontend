@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Idea } from '@app/shared/idea';
 import { IdeaService } from '@app/core/idea/idea.service';
 import { finalize, switchMap } from 'rxjs/operators';
@@ -18,9 +18,10 @@ export class ViewIdeaComponent implements OnInit {
 
   constructor(
     private title: Title,
-    private route: ActivatedRoute,
-    private ideaService: IdeaService
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private ideaService: IdeaService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.getIdea();
@@ -28,27 +29,30 @@ export class ViewIdeaComponent implements OnInit {
   }
 
   getIdea() {
-    this.id = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => {
-        console.log(params.get('id'));
-        return(params.get('id'));
-      }
-    ));
-    console.log(this.id);
-    
-    this.ideaService.getIdea('1')
+    const routeParam = this.activatedRoute.params.pipe(
+      switchMap(params => {
+        return params.get();
+      })
+    );
+    this.ideaService
+      .getIdea(routeParam.source['_value'].id)
       .pipe(
         finalize(() => {
           console.log('loaded');
         })
       )
-      .subscribe((data: any) => {
-        this.idea = data[0];
-        this.isLoading = true;
-        console.log(this.idea);
-      }, (error: any) => {
-        console.log(error);
-      });
+      .subscribe(
+        (data: any) => {
+          if (data.length === 0) {
+            this.router.navigate(['404']);
+          }
+          this.idea = data[0];
+          this.isLoading = true;
+          console.log(this.idea);
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
   }
-
 }
