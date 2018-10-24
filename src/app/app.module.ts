@@ -32,7 +32,7 @@ import { AppRoutingModule } from './app-routing.module';
     ShellModule,
     HomeModule,
     AuthModule,
-    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
+    Angulartics2Module.forRoot(),
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
   declarations: [AppComponent],

@@ -9,17 +9,20 @@ import { IdeaComponent } from './add-idea/idea.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared';
 import { ViewIdeaComponent } from './view-idea/view-idea.component';
+import { IdeaFeedComponent } from './idea-feed/idea-feed.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   imports: [
     CommonModule,
     TranslateModule,
     FlexLayoutModule,
+    ScrollingModule,
     MaterialModule,
     IdeaRoutingModule,
     ReactiveFormsModule,
     SharedModule
   ],
-  declarations: [IdeaComponent, ViewIdeaComponent]
+  declarations: [IdeaComponent, ViewIdeaComponent, IdeaFeedComponent]
 })
 export class IdeaModule {}

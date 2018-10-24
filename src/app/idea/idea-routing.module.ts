@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { extract } from '@app/core';
 import { IdeaComponent } from './add-idea/idea.component';
 import { ViewIdeaComponent } from './view-idea/view-idea.component';
+import { IdeaFeedComponent } from './idea-feed/idea-feed.component';
 
 const routes: Routes = [
   // Module is lazy loaded, see app-routing.module.ts
@@ -18,8 +19,13 @@ const routes: Routes = [
     data: { title: extract('Idea Details') }
   },
   {
+    path: 'feed',
+    component: IdeaFeedComponent,
+    data: { title: extract('Cynthesize | Ideas') }
+  },
+  {
     path: '**',
-    redirectTo: 'add'
+    redirectTo: ''
   }
 ];
 

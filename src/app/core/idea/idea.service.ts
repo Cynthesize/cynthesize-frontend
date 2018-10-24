@@ -51,4 +51,21 @@ export class IdeaService {
         })
       );
   }
+  /**
+   * getNIdeas
+   */
+  public getNIdeas(cursor: string) {
+    return this.http
+      .get(BACKEND_URLS.IDEA, {
+        params: {
+          idea_cursor: cursor
+        }
+      })
+      .pipe(
+        map((res: any) => {
+          console.log(res);
+          return res;
+        })
+      );
+  }
 }

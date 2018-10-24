@@ -25,6 +25,9 @@ export class LoginComponent implements OnInit {
     private i18nService: I18nService,
     private authenticationService: AuthenticationService
   ) {
+    if (authenticationService.isAuthenticated()) {
+      router.navigate(['idea']);
+    }
     this.createForm();
   }
 
