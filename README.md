@@ -18,6 +18,8 @@ Cynthesize is a platform where users can post their project ideas and details to
     ```
 3. Frontend server is up and running on your local machine. Edit in your favourite code editor and see the changes instantly.
 
+
+
 #### [Click here](https://github.com/Cynthesize/backend) to go to the backend repository.
 
-
+### Star this repository before contributing to this project.
