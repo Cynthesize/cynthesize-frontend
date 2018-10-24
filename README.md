@@ -2,7 +2,7 @@
 
 ### Introduction
 
-Cynthsize is a platform where people can post their project ideas and people can vote/comment on them. Our vision is to create a marketplace where people can connect with suitable developers and get started with their project.
+Cynthesize is a platform where users can post their project ideas and details to get feedback from the community upon things that matter, like the idea itself, the tech stack, the development plan, the approach on the problem. Our vision is to create a platform that unifies the product development process.
 
 ### Installation Instructions (Frontend)
 
