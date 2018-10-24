@@ -23,3 +23,7 @@ Cynthesize is a platform where users can post their project ideas and details to
 #### [Click here](https://github.com/Cynthesize/backend) to go to the backend repository.
 
 ### Star this repository before contributing to this project.
+
+### Contribution Guidelines
+
+Following [these](CONTRIBUTE.md) guidelines helps to communicate that you respect the time of the developers managing and developing this open source project. In return, they should reciprocate that respect in addressing your issue, assessing changes, and helping you finalize your pull requests.
