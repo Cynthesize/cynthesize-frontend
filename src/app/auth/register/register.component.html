@@ -37,13 +37,14 @@
               <span translate>Password is required</span>
             </mat-error>
           </mat-form-field>
-          <button mat-raised-button color="primary" class="input" type="submit" [disabled]="registerForm.invalid || isLoading">
+          <button mat-raised-button class="button-lg" color="primary" type="submit" [disabled]="registerForm.invalid || isLoading">
             <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
             <span translate>Register</span>
           </button>
         </div>
       </form>
-      <a routerLink="/login">Already a user?</a>
+      <hr class="short-seperator">
+      <a routerLink="/login" class="nofocuslink"><button mat-stroked-button color="accent" class="button-sm">Login</button></a>
     </mat-card>
   </div>
 </div>
