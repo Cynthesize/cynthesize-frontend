@@ -1,6 +1,6 @@
 <div fxFill *ngIf="isLoading" fxLayout="column" fxFlex="80" fxLayoutAlign="center" fxLayoutGap="1.5rem" class="idea-block mat-typography">
   <div fxLayout="row">
-    <h1>{{idea.id}}</h1>
+    <h1>{{idea.id}}</h1> <app-liking [likes]="idea.upvotes" [ideaId]="idea.id"></app-liking>
   </div>
   <div fxLayout="row">
     <h2>

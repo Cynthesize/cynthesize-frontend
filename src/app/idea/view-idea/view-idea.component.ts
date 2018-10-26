@@ -37,9 +37,7 @@ export class ViewIdeaComponent implements OnInit {
     this.ideaService
       .getIdea(routeParam.source['_value'].id)
       .pipe(
-        finalize(() => {
-          console.log('loaded');
-        })
+        finalize(() => {})
       )
       .subscribe(
         (data: any) => {
@@ -48,7 +46,6 @@ export class ViewIdeaComponent implements OnInit {
           }
           this.idea = data[0];
           this.isLoading = true;
-          console.log(this.idea);
         },
         (error: any) => {
           console.log(error);

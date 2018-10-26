@@ -68,4 +68,20 @@ export class IdeaService {
         })
       );
   }
+  /**
+   * LikeIdea
+   */
+  public likeIdea(ideaId: string) {
+    const url = BACKEND_URLS.UPDATE_UPVOTES + ideaId;
+    return this.http
+    .put(url, {
+      headers: this.headers
+    })
+    .pipe(
+      map((res: any) => {
+        console.log(res);
+        return res;
+      })
+    );
+  }
 }

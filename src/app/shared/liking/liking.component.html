@@ -1,0 +1,3 @@
+<div [hidden]="!authenticationService.isAuthenticated()">
+  <button mat-raised-button color="{{ isLiked() }}" (click)="like()"><mat-icon>thumb_up</mat-icon>{{ likes }}</button>
+</div>
