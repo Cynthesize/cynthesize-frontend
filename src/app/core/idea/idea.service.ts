@@ -11,7 +11,7 @@ import { flatMap, map } from 'rxjs/operators';
 export class IdeaService {
   private headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${JSON.parse(localStorage.getItem('credentials'))['token']}`
+    Authorization: `JWT ${JSON.parse(localStorage.getItem('credentials'))['token']}`
   });
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -21,12 +21,12 @@ export class IdeaService {
    */
   public addIdea(context: Idea) {
     const idea = {
-      ideaname: context.idea_name,
+      idea_name: context.idea_name,
       description: context.description,
       require_assistance: context.require_assistance,
-      owner: JSON.parse(localStorage.getItem('credentials'))['username']
+      owner: JSON.parse(localStorage.getItem('credentials'))['user_id']
     };
-    console.log(JSON.parse(localStorage.getItem('credentials'))['token'], idea, context);
+    console.log(localStorage.getItem('credentials'));
     return this.http.post<any>(BACKEND_URLS.IDEA, idea, { headers: this.headers }).pipe(
       map((res: any) => {
         console.log(res);
@@ -73,6 +73,7 @@ export class IdeaService {
    */
   public likeIdea(ideaId: string) {
     const url = BACKEND_URLS.UPDATE_UPVOTES + ideaId;
+    console.log(this.headers);
     return this.http
     .put(url, {
       headers: this.headers

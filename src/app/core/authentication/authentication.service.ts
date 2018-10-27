@@ -125,6 +125,7 @@ export class AuthenticationService {
     this._credentials = credentials || null;
 
     if (credentials) {
+      credentials['user_id'] = JSON.parse(window.atob(credentials.token.split('.')[1])).user_id;
       const storage = remember ? localStorage : sessionStorage;
       storage.setItem(credentialsKey, JSON.stringify(credentials));
     } else {
