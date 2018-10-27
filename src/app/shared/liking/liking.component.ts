@@ -31,12 +31,14 @@ export class LikingComponent implements OnInit {
   like(ideaId: string) {
     this.liked = true;
     this.ideaService
-      .likeIdea('1')
+      .likeIdea(ideaId)
       .pipe(
         finalize(() => {})
       )
       .subscribe(
-        (data: any) => {},
+        (data: any) => {
+          this.likes = data.upvotes;
+        },
         (error: any) => {
           this.liked = false;
           console.log(error);

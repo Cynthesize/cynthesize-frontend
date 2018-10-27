@@ -9,12 +9,14 @@ import { flatMap, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class IdeaService {
-  private headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json',
-    Authorization: `JWT ${JSON.parse(localStorage.getItem('credentials'))['token']}`
-  });
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `JWT ${JSON.parse(localStorage.getItem('credentials'))['token']}`
+    })
+  };
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   /**
    * addIdea
@@ -26,8 +28,7 @@ export class IdeaService {
       require_assistance: context.require_assistance,
       owner: JSON.parse(localStorage.getItem('credentials'))['user_id']
     };
-    console.log(localStorage.getItem('credentials'));
-    return this.http.post<any>(BACKEND_URLS.IDEA, idea, { headers: this.headers }).pipe(
+    return this.http.post<any>(BACKEND_URLS.IDEA, idea, this.httpOptions).pipe(
       map((res: any) => {
         console.log(res);
         return res;
@@ -73,16 +74,12 @@ export class IdeaService {
    */
   public likeIdea(ideaId: string) {
     const url = BACKEND_URLS.UPDATE_UPVOTES + ideaId;
-    console.log(this.headers);
     return this.http
-    .put(url, {
-      headers: this.headers
-    })
-    .pipe(
-      map((res: any) => {
-        console.log(res);
-        return res;
-      })
-    );
+      .put(url, {}, this.httpOptions)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 }
