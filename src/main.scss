@@ -72,3 +72,11 @@ mat-card.register-box {
   margin-top: 15px;
   margin-bottom: 10px;
 }
+.center-aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.aligner-item {
+  min-width: 50%;
+}
