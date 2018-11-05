@@ -47,7 +47,6 @@ export class IdeaService {
       })
       .pipe(
         map((res: any) => {
-          console.log(res);
           return res;
         })
       );
