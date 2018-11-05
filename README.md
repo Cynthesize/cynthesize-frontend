@@ -1,6 +1,6 @@
 # Cynthesize
 
-[![Join the chat at https://gitter.im/oppia/oppia-chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Cynthesize/Lobby)
+[![Join the chat at https://gitter.im/oppia/oppia-chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Cynthesize-gitter/Lobby)
 
 ### Introduction
 
