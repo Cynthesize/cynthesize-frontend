@@ -7,7 +7,7 @@
   "start_url": "/",
   "display": "standalone",
   "icons": [{
-    "src": "assets/ngx-rocket-logo.png",
+    "src": "assets/cynthesize-logo.png",
     "sizes": "512x512",
     "type": "image/png"
   }]
