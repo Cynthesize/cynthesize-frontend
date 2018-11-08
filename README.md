@@ -1,5 +1,7 @@
 # Cynthesize
 
+[![Join the chat at https://gitter.im/oppia/oppia-chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Cynthesize-gitter/Lobby)
+
 ### Introduction
 
 Cynthesize is a platform where users can post their project ideas and details to get feedback from the community upon things that matter, like the idea itself, the tech stack, the development plan, the approach on the problem. Our vision is to create a platform that unifies the product development process.
