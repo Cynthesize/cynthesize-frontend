@@ -81,4 +81,18 @@ export class IdeaService {
         })
       );
   }
+
+  /**
+   * FetchComments
+   */
+  public FetchComments(ideaId: string) {
+    const url = BACKEND_URLS.FETCH_COMMENTS + ideaId;
+    return this.http.get(url)
+      .pipe(
+        map((res: any) => {
+          console.log(res);
+          return res;
+        })
+      );
+  }
 }

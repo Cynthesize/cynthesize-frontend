@@ -1,0 +1,7 @@
+<div *ngFor="let comment of commentsArray">
+  {{ comment.text }} by {{ comment.user }} at {{ comment.commented_at | date }}
+  <div *ngFor="let reply of comment.replies">
+    {{reply.text}} by {{ reply.user }}  at {{ reply.replied_at | date }}
+  </div>
+  <br>
+</div>
