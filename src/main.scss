@@ -80,3 +80,34 @@ mat-card.register-box {
 .aligner-item {
   min-width: 500px;
 }
+
+.content-main-header {
+  margin-bottom: 5px;
+  font-size: 2rem;
+  display: inline-block;
+}
+
+.content-header {
+  font-size: 1.1rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-bottom: 5px !important;
+  margin-top: 5px;
+}
+
+.content-header::after {
+  display: block;
+  content: "";
+  height: 3px;
+  width: 5%;
+  background-color: #3498db;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.coming-soon-content {
+  content: "";
+  color: #aaa;
+  font-size: 1rem;
+  font-style: italic;
+}

@@ -5,10 +5,7 @@ import { SettingRoutingModule } from './setting-routing.module';
 import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SettingRoutingModule
-  ],
+  imports: [CommonModule, SettingRoutingModule],
   declarations: [SettingsComponent]
 })
-export class SettingModule { }
+export class SettingModule {}

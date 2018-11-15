@@ -36,15 +36,14 @@ export class ViewIdeaComponent implements OnInit {
     );
     this.ideaService
       .getIdea(routeParam.source['_value'].id)
-      .pipe(
-        finalize(() => {})
-      )
+      .pipe(finalize(() => {}))
       .subscribe(
         (data: any) => {
           if (data.length === 0) {
             this.router.navigate(['404']);
           }
           this.idea = data[0];
+          console.log(this.idea);
           this.isLoading = true;
         },
         (error: any) => {
