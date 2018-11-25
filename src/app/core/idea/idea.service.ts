@@ -12,11 +12,11 @@ export class IdeaService {
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `JWT ${JSON.parse(localStorage.getItem('credentials'))['token']}`
+      Authorization: `JWT ${JSON.parse(localStorage.getItem('credentials'))['token']}`
     })
   };
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
 
   /**
    * addIdea
@@ -73,13 +73,11 @@ export class IdeaService {
    */
   public likeIdea(ideaId: string) {
     const url = BACKEND_URLS.UPDATE_UPVOTES + ideaId;
-    return this.http
-      .put(url, {}, this.httpOptions)
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this.http.put(url, {}, this.httpOptions).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   /**
@@ -87,12 +85,11 @@ export class IdeaService {
    */
   public FetchComments(ideaId: string) {
     const url = BACKEND_URLS.FETCH_COMMENTS + ideaId;
-    return this.http.get(url)
-      .pipe(
-        map((res: any) => {
-          console.log(res);
-          return res;
-        })
-      );
+    return this.http.get(url).pipe(
+      map((res: any) => {
+        console.log(res);
+        return res;
+      })
+    );
   }
 }

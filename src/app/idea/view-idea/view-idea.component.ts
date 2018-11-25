@@ -36,9 +36,7 @@ export class ViewIdeaComponent implements OnInit {
     );
     this.ideaService
       .getIdea(routeParam.source['_value'].id)
-      .pipe(
-        finalize(() => {})
-      )
+      .pipe(finalize(() => {}))
       .subscribe(
         (data: any) => {
           if (data.length === 0) {

@@ -14,7 +14,7 @@ export class CommentsComponent implements OnInit {
 
   commentsArray = [Object];
 
-  constructor(private ideaService: IdeaService) { }
+  constructor(private ideaService: IdeaService) {}
 
   ngOnInit() {
     this.fetchIdeaComments();
@@ -23,9 +23,7 @@ export class CommentsComponent implements OnInit {
   fetchIdeaComments() {
     this.ideaService
       .FetchComments(this.ideaId)
-      .pipe(
-        finalize(() => {})
-      )
+      .pipe(finalize(() => {}))
       .subscribe(
         (data: any) => {
           this.commentsArray = data;

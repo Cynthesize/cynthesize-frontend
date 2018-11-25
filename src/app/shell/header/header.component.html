@@ -1,12 +1,10 @@
 <mat-toolbar class="mat-elevation-z6 navbar" color="primary">
   <div fxHide.gt-sm fxLayoutAlign="start center">
-    <button class="menu-button" mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span class="title">{{title}}</span>
+    <button class="menu-button" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+    <span class="title">{{ title }}</span>
   </div>
   <div fxHide.lt-md>
-    <a class="brand" href="https://github.com/ngx-rocket" translate>APP_NAME</a>
+    <a class="brand" routerLink="/"><img src="assets/cynthesize-banner-logo.png" alt="Cynthesize" width="150px"/></a>
     <button mat-button routerLink="/home" routerLinkActive="active">
       <mat-icon>home</mat-icon>
       <span translate>Home</span>
@@ -16,22 +14,15 @@
       <span translate>Add Idea</span>
     </button>
   </div>
-  <span fxFlex></span>
-  <button mat-icon-button [matMenuTriggerFor]="languageMenu">
-    <mat-icon>language</mat-icon>
-  </button>
+  <span fxFlex></span> <button mat-icon-button [matMenuTriggerFor]="languageMenu"><mat-icon>language</mat-icon></button>
   <mat-menu #languageMenu="matMenu">
-    <button mat-menu-item *ngFor="let language of languages" (click)="setLanguage(language)">
-        {{language}}
-      </button>
+    <button mat-menu-item *ngFor="let language of languages" (click)="setLanguage(language)">{{ language }}</button>
   </mat-menu>
-  <button mat-icon-button [matMenuTriggerFor]="userMenu">
-    <mat-icon>person</mat-icon>
-  </button>
+  <button mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>person</mat-icon></button>
   <mat-menu #userMenu="matMenu">
     <mat-list>
       <mat-list-item routerLink="/user">
-        <span translate>Logged in as</span>&nbsp;<b>{{username}}</b>
+        <span translate>Logged in as</span>&nbsp;<b>{{ username }}</b>
       </mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>

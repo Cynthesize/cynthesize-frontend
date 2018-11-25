@@ -5,10 +5,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { DetailsComponent } from './details/details.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    UserRoutingModule
-  ],
+  imports: [CommonModule, UserRoutingModule],
   declarations: [DetailsComponent]
 })
-export class UserModule { }
+export class UserModule {}

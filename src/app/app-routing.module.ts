@@ -7,7 +7,7 @@ import { extract } from './core';
 const routes: Routes = [
   Shell.childRoutes([
     { path: 'idea', loadChildren: 'app/idea/idea.module#IdeaModule' },
-    { path: 'user', loadChildren: 'app/profile/profile.module#ProfileModule' },
+    { path: 'user', loadChildren: 'app/profile/profile.module#ProfileModule' }
   ]),
   // Fallback when no prior route is matched
   { path: '404', component: NotFoundComponent, data: { title: extract('Page not found! :(') } },

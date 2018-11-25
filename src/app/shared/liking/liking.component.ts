@@ -16,10 +16,7 @@ export class LikingComponent implements OnInit {
 
   liked = false;
 
-  constructor(
-    private ideaService: IdeaService,
-    public authenticationService: AuthenticationService
-  ) { }
+  constructor(private ideaService: IdeaService, public authenticationService: AuthenticationService) {}
 
   isLiked() {
     if (this.liked === true) {
@@ -32,9 +29,7 @@ export class LikingComponent implements OnInit {
     this.liked = true;
     this.ideaService
       .likeIdea(ideaId)
-      .pipe(
-        finalize(() => {})
-      )
+      .pipe(finalize(() => {}))
       .subscribe(
         (data: any) => {
           this.likes = data.upvotes;
@@ -45,8 +40,5 @@ export class LikingComponent implements OnInit {
         }
       );
   }
-  ngOnInit() {
-  }
-
-
+  ngOnInit() {}
 }
