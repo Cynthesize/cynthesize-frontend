@@ -1,43 +1,104 @@
 <div class="background">
-  <div class="top">
-  </div>
-</div>
-<div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1.5rem" class="mat-typography">
-
-  <div class="login-container" fxLayout="row" fxLayoutAlign="center">
-    <mat-card class="login-box">
-      <mat-card-title fxLayoutAlign="center" translate>Welcome to Cynthesize!</mat-card-title>
-      <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
-        <div class="login-error" [hidden]="!error || isLoading" *ngFor="let errorMessage of error" translate>
-          {{ errorMessage }}
-        </div>
-        <br />
-        <div fxLayout="column">
-          <mat-form-field class="input">
-            <input type="text" matInput formControlName="username" autocomplete="username" [placeholder]="'Username' | translate" />
+  <div class="container container--login">
+    <div class="form-box">
+      <div class="form-box__heading">
+        <img src="../../../assets/logos/Asset 2MY.png" alt="Cynthesize Logo" class="form-box__heading__logo" />
+        <!--
+          <h2 class="heading--secondary">
+            Login
+          </h2>
+        -->
+      </div>
+      <div class="form-box__form-login">
+        <form (ngSubmit)="login()" class="form-box__form" [formGroup]="loginForm" novalidate>
+          <mat-form-field class="form-box__input-field">
+            <input
+              type="text"
+              class="form-box__input"
+              matInput
+              formControlName="username"
+              autocomplete="username"
+              [placeholder]="'Username' | translate"
+            />
             <mat-error *ngIf="loginForm.controls.username.valid || loginForm.controls.username.untouched">
               <span translate>Username is required</span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="input">
-            <input type="password" matInput formControlName="password" autocomplete="current-password" [placeholder]="'Password' | translate"
-              required />
+          <mat-form-field class="form-box__input-field">
+            <input
+              type="password"
+              class="form-box__input"
+              matInput
+              formControlName="password"
+              autocomplete="current-password"
+              [placeholder]="'Password' | translate"
+              required
+            />
             <mat-error *ngIf="loginForm.controls.password.valid || loginForm.controls.password.untouched">
               <span translate>Password is required</span>
             </mat-error>
           </mat-form-field>
-          <mat-checkbox class="input" color="primary" formControlName="remember" translate>Stay logged in</mat-checkbox>
-          
-          <br>
-
-          <button mat-raised-button class="button-lg" color="primary" type="submit" [disabled]="loginForm.invalid || isLoading">
-            <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
+          <mat-checkbox class="input" color="primary" formControlName="remember" class="form-box__remember" translate
+            >Stay logged in</mat-checkbox
+          >
+          <button
+            mat-raised-button
+            class="button-primary form-box__btn-login"
+            color="primary"
+            type="submit"
+            [disabled]="loginForm.invalid || isLoading"
+          >
             <span translate>Login</span>
           </button>
-        </div>
-      </form>
-      <hr class="short-seperator">
-      <a routerLink="/register" class="nofocuslink"><button mat-raised-button color="accent" class="button-sm">Not registered yet?</button></a>
-    </mat-card>
+        </form>
+        <a routerLink="/register" class="button-text nofocuslink">Not registered yet?</a>
+      </div>
+    </div>
   </div>
 </div>
+
+<!--
+  <div class="background">
+    <div class="top">
+    </div>
+  </div>
+  <div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1.5rem" class="mat-typography">
+
+    <div class="login-container" fxLayout="row" fxLayoutAlign="center">
+      <mat-card class="login-box">
+        <mat-card-title fxLayoutAlign="center" translate>Welcome to Cynthesize!</mat-card-title>
+        <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
+          <div class="login-error" [hidden]="!error || isLoading" *ngFor="let errorMessage of error" translate>
+            {{ errorMessage }}
+          </div>
+          <br />
+          <div fxLayout="column">
+            <mat-form-field class="input">
+              <input type="text" matInput formControlName="username" autocomplete="username" [placeholder]="'Username' | translate" />
+              <mat-error *ngIf="loginForm.controls.username.valid || loginForm.controls.username.untouched">
+                <span translate>Username is required</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="input">
+              <input type="password" matInput formControlName="password" autocomplete="current-password" [placeholder]="'Password' | translate"
+                required />
+              <mat-error *ngIf="loginForm.controls.password.valid || loginForm.controls.password.untouched">
+                <span translate>Password is required</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-checkbox class="input" color="primary" formControlName="remember" translate>Stay logged in</mat-checkbox>
+
+            <br>
+
+            <button mat-raised-button class="button-lg" color="primary" type="submit" [disabled]="loginForm.invalid || isLoading">
+              <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
+              <span translate>Login</span>
+            </button>
+          </div>
+        </form>
+        <hr class="short-seperator">
+        <a routerLink="/register" class="nofocuslink"><button mat-raised-button color="accent" class="button-sm">Not registered yet?</button></a>
+      </mat-card>
+    </div>
+  </div>
+-->

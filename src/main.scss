@@ -26,10 +26,34 @@
 }
 
 * {
-  font-family: "gothamlight";
-  font-weight: 600;
+  margin: 0;
+  padding: 0;
 }
 
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; //10px //will be used for rems
+}
+
+body {
+  box-sizing: border-box;
+
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+
+  background: linear-gradient(white);
+
+  color: white;
+}
+
+/* 
 mat-card.login-box,
 mat-card.register-box {
   padding: 50px;
@@ -77,4 +101,35 @@ mat-card.register-box {
 }
 .aligner-item {
   min-width: 500px;
+}
+ */
+.content-main-header {
+  margin-bottom: 5px;
+  font-size: 2rem;
+  display: inline-block;
+}
+
+.content-header {
+  font-size: 1.1rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-bottom: 5px !important;
+  margin-top: 5px;
+}
+
+.content-header::after {
+  display: block;
+  content: "";
+  height: 3px;
+  width: 5%;
+  background-color: #3498db;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.coming-soon-content {
+  content: "";
+  color: #aaa;
+  font-size: 1rem;
+  font-style: italic;
 }

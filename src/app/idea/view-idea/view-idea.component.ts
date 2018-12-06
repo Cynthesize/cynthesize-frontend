@@ -43,6 +43,7 @@ export class ViewIdeaComponent implements OnInit {
             this.router.navigate(['404']);
           }
           this.idea = data[0];
+          console.log(this.idea);
           this.isLoading = true;
         },
         (error: any) => {

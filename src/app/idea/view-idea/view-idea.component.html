@@ -1,23 +1,29 @@
-<div fxFill *ngIf="isLoading" fxLayout="column" fxFlex="80" fxLayoutAlign="center" fxLayoutGap="1.5rem" class="idea-block mat-typography">
-  <div fxLayout="row">
-    <h1>{{idea.id}}</h1> <app-liking [likes]="idea.upvotes" [ideaId]="idea.id"></app-liking>
+<div
+  fxFill
+  *ngIf="isLoading"
+  fxLayout="column"
+  fxFlex="70"
+  fxLayoutAlign="center"
+  fxLayoutGap="1.5rem"
+  class="idea-block mat-typography"
+>
+  <div class="idea-title">
+    <div class="idea-name">
+      <h1 class="content-main-header">{{ idea.idea_name }}</h1>
+    </div>
+
+    <div class="idea-owner">
+      <h3>by {{ idea.owner }}</h3>
+    </div>
   </div>
-  <div fxLayout="row">
-    <h2>
-      by {{idea.owner}}
-    </h2>
-  </div>
-  <div fxLayout="row">
-      <div fxLayout="column" fxFill fxFlex="50">
-  <h2>Description</h2>
-  {{ idea.description }}
-      </div>
-      <div fxLayout="column" fxFill fxFlex="50">
-  <h2>Comments</h2>
+
+  <h2 class="content-header">Description</h2>
+  <p class="p-content">{{ idea.description }}</p>
+
+  <app-liking [likes]="idea.upvotes" [ideaId]="idea.id"></app-liking>
+
+  <h2 class="content-header">Comments</h2>
+
+  <div class="coming-soon-content">Feature coming soon.</div>
   <app-comments [ideaId]="idea.id"></app-comments>
-      </div>
-  </div>
-  <div fxlayout="row">
-Tags: 
-  </div>
 </div>
