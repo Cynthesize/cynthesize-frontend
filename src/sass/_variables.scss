@@ -1,0 +1,33 @@
+//Colors
+
+$color-white: #ffffff;
+$color-black: #000000;
+
+$color-primary: #00bcd4;
+$color-primary-light: #b2ebf2;
+$color-primary-dark: #0080ff;
+
+$color-accent: #00bcd4;
+
+$color-primary-text: #212121;
+$color-secondary-text: #757575;
+$color-divider: #bdbdbd;
+
+//Shadow Values
+
+$shadow-light: 0rem 1rem 4rem rgba(0, 0, 0, 0.1);
+
+//Border Radius Values
+
+$radius-small: 3px;
+$radius-medium: 0.5rem;
+$radius-large: 1rem;
+
+//Breakpoints
+
+$bp-12: 75em; //1200px 1em = 16px always for breakpoints
+$bp-11: 68.75em; //1100px
+$bp-9: 56.25em; //900px
+$bp-8: 50em; //900px
+$bp-6: 37.5em; //600px
+$bp-5: 31.25em; //500px

@@ -1,0 +1,22 @@
+.heading--secondary {
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: $color-primary-dark;
+  margin: 0.5rem 0;
+}
+
+.button-text:link,
+.button-text:visited {
+  font-family: inherit;
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: $color-accent;
+  margin: 1rem 0;
+  text-align: center;
+  justify-self: flex-end;
+
+  @media (max-width: $bp-6) {
+    font-size: 1.6rem;
+  }
+}

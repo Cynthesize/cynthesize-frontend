@@ -1,50 +1,139 @@
 <div class="background">
-  <div class="top">
-  </div>
-</div>
-<div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1.5rem" class="mat-typography">
-  <div class="register-container" fxLayout="row" fxLayoutAlign="center">
-    <mat-card class="register-box">
-      <mat-card-title fxLayoutAlign="center" translate>Cynthesize</mat-card-title>
-      <form (ngSubmit)="register()" [formGroup]="registerForm" novalidate>
-        <div class="register-error" [hidden]="!error || isLoading" *ngFor="let errorMessage of error" translate>
-          {{ errorMessage }}
-        </div>
-        <br />
-        <div fxLayout="column">
-          <mat-form-field class="input">
-            <input type="text" matInput formControlName="username" autocomplete="username" [placeholder]="'Username' | translate" />
-            <mat-error *ngIf="registerForm.controls.username.valid || registerForm.controls.username.untouched">
-              <span translate>Username is required</span>
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field class="input">
-            <input type="text" matInput formControlName="fullname" autocomplete="fullname" [placeholder]="'Fullname' | translate" />
+  <div class="container container--register">
+    <div class="form-box">
+      <div class="form-box__heading">
+        <img src="../../../assets/logos/Asset 2MY.png" alt="Cynthesize Logo" class="form-box__heading__logo" />
+      </div>
+
+      <form (ngSubmit)="register()" class="form-box__form" [formGroup]="registerForm" novalidate>
+        <div class="form-box__form-login">
+          <div
+            class="register-error form-box__register-error"
+            [hidden]="!error || isLoading"
+            *ngFor="let errorMessage of error"
+            translate
+          >
+            {{ errorMessage }}
+          </div>
+
+          <mat-form-field class="form-box__input-field">
+            <input
+              type="text"
+              class="form-box__input"
+              matInput
+              formControlName="fullname"
+              autocomplete="fullname"
+              [placeholder]="'Fullname' | translate"
+            />
             <mat-error *ngIf="registerForm.controls.fullname.valid || registerForm.controls.fullname.untouched">
               <span translate>Fullname is required</span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="input">
-            <input type="text" matInput formControlName="email" autocomplete="email" [placeholder]="'Email' | translate" />
+          <mat-form-field class="form-box__input-field">
+            <input
+              type="text"
+              class="form-box__input"
+              matInput
+              formControlName="username"
+              autocomplete="username"
+              [placeholder]="'Username' | translate"
+            />
+            <mat-error *ngIf="registerForm.controls.username.valid || registerForm.controls.username.untouched">
+              <span translate>Username is required</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="form-box__input-field">
+            <input
+              type="text"
+              class="form-box__input"
+              matInput
+              formControlName="email"
+              autocomplete="email"
+              [placeholder]="'Email' | translate"
+            />
             <mat-error *ngIf="registerForm.controls.email.valid || registerForm.controls.email.untouched">
               <span translate>Email is required</span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="input">
-            <input type="password" matInput formControlName="password" autocomplete="current-password" [placeholder]="'Password' | translate"
-              required />
+          <mat-form-field class="form-box__input-field">
+            <input
+              type="password"
+              class="form-box__input"
+              matInput
+              formControlName="password"
+              autocomplete="current-password"
+              [placeholder]="'Password' | translate"
+              required
+            />
             <mat-error *ngIf="registerForm.controls.password.valid || registerForm.controls.password.untouched">
               <span translate>Password is required</span>
             </mat-error>
           </mat-form-field>
-          <button mat-raised-button class="button-lg" color="primary" type="submit" [disabled]="registerForm.invalid || isLoading">
-            <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
+
+          <button
+            mat-raised-button
+            class="button-primary form-box__btn-register"
+            type="submit"
+            [disabled]="registerForm.invalid || isLoading"
+          >
             <span translate>Register</span>
           </button>
         </div>
       </form>
-      <hr class="short-seperator">
-      <a routerLink="/login" class="nofocuslink"><button mat-stroked-button color="accent" class="button-sm">Login</button></a>
-    </mat-card>
+      <a routerLink="/login" class="button-text nofocuslink">Already Registered?<br />Login Here.</a>
+    </div>
   </div>
 </div>
+
+<!--
+  <div class="background">
+    <div class="top">
+    </div>
+  </div>
+  <div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1.5rem" class="mat-typography">
+    <div class="register-container" fxLayout="row" fxLayoutAlign="center">
+      <mat-card class="register-box">
+        <mat-card-title fxLayoutAlign="center" translate>Cynthesize</mat-card-title>
+        <form (ngSubmit)="register()" [formGroup]="registerForm" novalidate>
+          <div class="register-error" [hidden]="!error || isLoading" *ngFor="let errorMessage of error" translate>
+            {{ errorMessage }}
+          </div>
+          <br />
+          <div fxLayout="column">
+            <mat-form-field class="input">
+              <input type="text" matInput formControlName="username" autocomplete="username" [placeholder]="'Username' | translate" />
+              <mat-error *ngIf="registerForm.controls.username.valid || registerForm.controls.username.untouched">
+                <span translate>Username is required</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="input">
+              <input type="text" matInput formControlName="fullname" autocomplete="fullname" [placeholder]="'Fullname' | translate" />
+              <mat-error *ngIf="registerForm.controls.fullname.valid || registerForm.controls.fullname.untouched">
+                <span translate>Fullname is required</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="input">
+              <input type="text" matInput formControlName="email" autocomplete="email" [placeholder]="'Email' | translate" />
+              <mat-error *ngIf="registerForm.controls.email.valid || registerForm.controls.email.untouched">
+                <span translate>Email is required</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="input">
+              <input type="password" matInput formControlName="password" autocomplete="current-password" [placeholder]="'Password' | translate"
+                required />
+              <mat-error *ngIf="registerForm.controls.password.valid || registerForm.controls.password.untouched">
+                <span translate>Password is required</span>
+              </mat-error>
+            </mat-form-field>
+            <button mat-raised-button class="button-lg" color="primary" type="submit" [disabled]="registerForm.invalid || isLoading">
+              <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
+              <span translate>Register</span>
+            </button>
+          </div>
+        </form>
+        <hr class="short-seperator">
+        <a routerLink="/login" class="nofocuslink"><button mat-stroked-button color="accent" class="button-sm">Login</button></a>
+      </mat-card>
+    </div>
+  </div>
+-->
