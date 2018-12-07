@@ -7,15 +7,6 @@
 
       <form (ngSubmit)="register()" class="form-box__form" [formGroup]="registerForm" novalidate>
         <div class="form-box__form-login">
-          <div
-            class="register-error form-box__register-error"
-            [hidden]="!error || isLoading"
-            *ngFor="let errorMessage of error"
-            translate
-          >
-            {{ errorMessage }}
-          </div>
-
           <mat-form-field class="form-box__input-field">
             <input
               type="text"

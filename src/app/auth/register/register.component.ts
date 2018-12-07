@@ -5,6 +5,7 @@ import { finalize } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
 import { Logger, I18nService, AuthenticationService } from '@app/core';
+import { MatSnackBar } from '@angular/material';
 
 const log = new Logger('Register');
 
@@ -15,7 +16,7 @@ const log = new Logger('Register');
 })
 export class RegisterComponent implements OnInit {
   version: string = environment.version;
-  error: Array<string> = [];
+  errorString: string;
   registerForm: FormGroup;
   isLoading = false;
 
@@ -23,7 +24,8 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private i18nService: I18nService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    public snackBar: MatSnackBar
   ) {
     this.createForm();
   }
@@ -46,9 +48,27 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/login'], { replaceUrl: true });
         },
         error => {
+          this.errorString = '';
           for (let i = 0; i < Object.keys(error.error).length; i++) {
-            this.error = error.error[Object.keys(error.error)[i]];
+            this.errorString +=
+              Object.keys(error.error)
+                [i].toString()
+                .charAt(0)
+                .toUpperCase() +
+              Object.keys(error.error)
+                [i].toString()
+                .slice(1) +
+              ': ' +
+              error.error[Object.keys(error.error)[i]]
+                .toString()
+                .charAt(0)
+                .toUpperCase() +
+              error.error[Object.keys(error.error)[i]].toString().slice(1) +
+              '\n';
           }
+          this.snackBar.open(this.errorString, 'Ok', {
+            duration: 10000
+          });
         }
       );
   }
