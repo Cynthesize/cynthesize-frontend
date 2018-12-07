@@ -1,0 +1,27 @@
+<mat-vertical-stepper [linear]="true" #stepper>
+  <mat-step [stepControl]="projectName">
+    <form [formGroup]="project">
+      <ng-template matStepLabel>Enter a project name</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Eg: My Project" formControlName="projectName" required />
+      </mat-form-field>
+      <div><button mat-button matStepperNext>Next</button></div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="projectId">
+    <form [formGroup]="project">
+      <ng-template matStepLabel>Enter your Project ID</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Eg: {{ generateProjectId() }}" formControlName="projectId" required />
+      </mat-form-field>
+      <div><button mat-button matStepperPrevious>Back</button> <button mat-button matStepperNext>Next</button></div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button> <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>

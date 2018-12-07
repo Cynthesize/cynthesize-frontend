@@ -14,11 +14,7 @@
       <span translate>Add Idea</span>
     </button>
   </div>
-  <span fxFlex></span> <button mat-icon-button [matMenuTriggerFor]="languageMenu"><mat-icon>language</mat-icon></button>
-  <mat-menu #languageMenu="matMenu">
-    <button mat-menu-item *ngFor="let language of languages" (click)="setLanguage(language)">{{ language }}</button>
-  </mat-menu>
-  <button mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>person</mat-icon></button>
+  <span fxFlex></span> <button mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>person</mat-icon></button>
   <mat-menu #userMenu="matMenu">
     <mat-list>
       <mat-list-item routerLink="/user">
