@@ -1,5 +1,5 @@
 <mat-vertical-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="projectName">
+  <mat-step [stepControl]="project">
     <form [formGroup]="project">
       <ng-template matStepLabel>Enter a project name</ng-template>
       <mat-form-field>
@@ -8,7 +8,7 @@
       <div><button mat-button matStepperNext>Next</button></div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="projectId">
+  <mat-step [stepControl]="project">
     <form [formGroup]="project">
       <ng-template matStepLabel>Enter your Project ID</ng-template>
       <mat-form-field>
