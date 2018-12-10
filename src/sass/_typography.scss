@@ -6,6 +6,71 @@
   margin: 0.5rem 0;
 }
 
+.heading--title {
+  font-size: 2rem;
+  line-height: 120%;
+  margin: 1rem 0 1rem 0;
+
+  @media (max-width: $bp-6) {
+    text-align: center;
+  }
+
+  &__special {
+    text-transform: uppercase;
+    text-align: center;
+    margin: 1rem 0 1rem 0;
+    color: $color-primary-dark;
+  }
+}
+
+hr.seperator {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.heading--subtitle {
+  font-weight: 300;
+  font-size: 1.3rem;
+  color: $color-secondary-text;
+  margin-bottom: 2rem;
+
+  @media (max-width: $bp-6) {
+    text-align: center;
+  }
+}
+
+.paragraph {
+  font-size: 1.3rem;
+
+  &--medium {
+    color: $color-primary-text;
+    margin: 1rem auto;
+  }
+}
+
+.btn {
+  &--icon {
+    font-size: 1.9rem;
+    margin-right: 0.5rem;
+  }
+
+  &--like {
+    margin-bottom: 2rem;
+  }
+}
+
+.link--inline:visited,
+.link--inline:link {
+  text-decoration: none;
+  color: $color-primary;
+}
+
+.link--inline:hover {
+  color: $color-primary-dark;
+}
+
 .button-text:link,
 .button-text:visited {
   font-family: inherit;
