@@ -1,8 +1,105 @@
-.container {
-  text-align: center;
-  padding: 1rem;
+@import "../../../sass/declarations";
+
+:host {
+  width: 100%;
 }
 
-.mat-icon {
-  vertical-align: middle;
+.background {
+  min-height: 90vh;
+  //background-color: darken($color-white, 10%);
+  background-color: white;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  //box-shadow: $shadow-light;
+
+  overflow: hidden;
+
+  &--add-idea {
+    width: 100rem;
+    //background-color: red;
+    background-color: white;
+    min-height: 50rem;
+    padding: 3rem;
+    font-size: 1.6rem;
+
+    border-radius: $radius-small;
+    display: flex;
+    align-items: stretch;
+
+    @media (max-width: $bp-6) {
+      flex-direction: column;
+      padding: 1rem;
+    }
+  }
+}
+
+.form {
+  background-color: white;
+  margin-right: 3rem;
+  flex: 0 0 60%;
+
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: $bp-6) {
+    flex: 0 0 90%;
+    margin-right: 0;
+  }
+
+  &__container {
+    display: block;
+    //background-color: pink;
+    width: 80%;
+
+    @media (max-width: $bp-6) {
+      width: 100%;
+    }
+  }
+}
+
+.illustration {
+  flex-grow: 1;
+
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary, 0.8),
+      rgba(white, 0.3),
+      rgba($color-primary, 0.8)
+    ),
+    url("../../../assets/images/add-idea.jpg");
+  background-blend-mode: soft-light;
+  background-size: cover;
+  background-position: center;
+
+  @media (max-width: $bp-6) {
+    display: none;
+  }
+}
+
+.input {
+  font-weight: 300;
+
+  &__text {
+    font-weight: 300;
+    font-family: inherit;
+  }
+}
+
+.mat-chip.mat-standard-chip {
+  background-color: $color-primary;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.button--submit--lg {
+  display: block;
+  width: 30%;
 }
