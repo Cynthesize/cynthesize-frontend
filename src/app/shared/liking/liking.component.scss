@@ -1,0 +1,10 @@
+@import "../../../sass/declarations";
+
+:host {
+  display: flex;
+  justify-content: flex-start;
+
+  @media (max-width: $bp-6) {
+    justify-content: center;
+  }
+}

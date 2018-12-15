@@ -12,7 +12,7 @@
     <form [formGroup]="project">
       <ng-template matStepLabel>Enter your Project ID</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Eg: {{ generateProjectId() }}" formControlName="projectId" required />
+        <input matInput placeholder="Eg: {{ generateProjectId() }}" formControlName="project" required />
       </mat-form-field>
       <div><button mat-button matStepperPrevious>Back</button> <button mat-button matStepperNext>Next</button></div>
     </form>
