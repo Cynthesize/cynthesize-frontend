@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./view-idea.component.scss']
 })
 export class ViewIdeaComponent implements OnInit {
-  idea: Observable<Idea>;
+  idea: Observable<any>;
   id: Observable<string>;
   isLoading = false;
 

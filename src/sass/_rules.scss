@@ -1,0 +1,15 @@
+.v-desktop {
+  display: block;
+
+  @media (max-width: 37.5em) {
+    display: none;
+  }
+}
+
+.v-mobile {
+  display: none;
+
+  @media (max-width: 37.5em) {
+    display: block;
+  }
+}
