@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { ProfileRoutingModule } from './profile-routing.module';
 
 @NgModule({
   imports: [CommonModule, ProfileRoutingModule],
-  declarations: []
+  declarations: [],
+  providers: []
 })
 export class ProfileModule {}

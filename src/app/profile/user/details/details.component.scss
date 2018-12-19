@@ -1,0 +1,253 @@
+@import "../../../../sass/declarations";
+
+:host {
+  width: 100%;
+}
+
+.background {
+  min-height: 90vh;
+  background-color: #efefef;
+  position: relative;
+
+  padding: 8rem 0;
+
+  @media (max-width: 37.5em) {
+    padding: 0 0;
+  }
+}
+
+.container {
+  overflow: hidden;
+
+  &--user-profile {
+    width: 80%;
+    background-color: white;
+    font-size: 1.6rem;
+    height: auto;
+    border-radius: $radius-small;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+
+    @media (max-width: 37.5em) {
+      width: 100%;
+      flex-direction: column;
+    }
+  }
+}
+
+.user-header {
+  display: block;
+  padding: 3rem;
+  background-color: $color-primary-dark;
+  color: $color-white;
+
+  flex: 0 0 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 37.5em) {
+    height: auto;
+    padding: 3rem 0;
+  }
+
+  &__container {
+    height: auto;
+
+    display: flex;
+
+    @media (max-width: 37.5em) {
+      flex-direction: column;
+      align-items: center;
+      height: auto;
+    }
+
+    &__name {
+      padding: 0 2rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+
+      @media (max-width: 37.5em) {
+        padding: 1rem 0 0 0;
+        align-items: center;
+      }
+    }
+  }
+}
+
+.dp-l-container {
+  height: 11rem;
+  width: 11rem;
+  overflow: hidden;
+
+  border-radius: 50%;
+  border: 2px solid white;
+
+  @media (max-width: 37.5em) {
+    height: 10rem;
+    width: 10rem;
+  }
+}
+
+.dp-l-image {
+  height: 100%;
+  width: 100%;
+}
+
+.user-container {
+  background-color: white;
+  flex: 0 0 100%;
+  min-height: 50rem;
+
+  padding: $gw-m;
+  display: flex;
+
+  @media (max-width: 37.5em) {
+    flex-direction: column;
+    padding: 0;
+    align-items: stretch;
+  }
+}
+
+.multi-tab-details {
+  margin-right: $gw-m;
+
+  flex: 0 0 70%;
+  background-color: white;
+
+  @media (max-width: 37.5em) {
+    margin-right: 0;
+  }
+}
+
+.profile-details {
+  flex-grow: 1;
+}
+
+.detail-block {
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+
+  &:not(:last-of-type) {
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid lighten($color: $color-divider, $amount: 22%);
+  }
+
+  &__icon {
+    color: $color-primary-dark;
+    font-size: 2rem;
+    margin-right: 0.5rem;
+  }
+}
+
+.tab-content {
+  margin: 2rem;
+  min-height: 30rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #666666;
+}
+
+.tab-contact {
+  padding: 2rem;
+}
+
+.coming-soon {
+  height: auto;
+  width: 100%;
+}
+
+.tab-text {
+  padding: 3rem;
+  font-weight: bolder;
+
+  @media (max-width: 37.5em) {
+    padding: 1.5rem;
+  }
+}
+
+.title {
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+  color: $color-primary-dark;
+  font-weight: bold;
+}
+
+.block {
+  padding: 2rem 0;
+  font-family: "gothamlight";
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid lighten($color: $color-divider, $amount: 15%);
+  }
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__item {
+    background-color: #f1c40f;
+    padding: 0.5rem 2rem;
+    border-radius: 300px;
+    color: white;
+    margin-bottom: 1rem;
+
+    &:not(:last-of-type) {
+      margin-right: 1rem;
+    }
+
+    @media (max-width: 37.5em) {
+      padding: 0.5rem 1rem;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+
+      &:not(:last-of-type) {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+.icon-list-block {
+  display: flex;
+  flex-direction: row;
+  padding: 0.5rem 0;
+  text-align: left;
+  flex-grow: 1;
+  font-size: 1.2rem;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+
+  @media (max-width: 37.5em) {
+    margin-top: 1rem;
+    justify-content: center;
+  }
+}
+
+.social-icon {
+  height: 2.5rem;
+  width: auto;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  color: $color-primary-dark;
+}
+
+.mat-tooltip {
+  background: #212121;
+  font-size: 1.2rem;
+}
