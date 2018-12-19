@@ -12,6 +12,8 @@ import { ViewIdeaComponent } from './view-idea/view-idea.component';
 import { IdeaFeedComponent } from './idea-feed/idea-feed.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
+
 @NgModule({
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MaterialModule,
     IdeaRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    NgxPaginationModule
   ],
   declarations: [IdeaComponent, ViewIdeaComponent, IdeaFeedComponent]
 })
