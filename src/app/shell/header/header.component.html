@@ -17,7 +17,7 @@
   <span fxFlex></span> <button mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>person</mat-icon></button>
   <mat-menu #userMenu="matMenu">
     <mat-list>
-      <mat-list-item routerLink="/user">
+      <mat-list-item routerLink="/user/{{ username }}">
         <span translate>Logged in as</span>&nbsp;<b>{{ username }}</b>
       </mat-list-item>
       <mat-divider></mat-divider>
