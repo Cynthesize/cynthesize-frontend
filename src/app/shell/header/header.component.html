@@ -9,12 +9,15 @@
     /></a>
   </div>
   <span fxFlex></span>
-  <button class="header__link" mat-button routerLink="/idea/feed" routerLinkActive="active">
-    <span translate>Ideas</span>
-  </button>
-  <button class="header__link" mat-button routerLink="/project/add" routerLinkActive="active">
-    <span translate>Projects</span></button
-  ><button mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>person</mat-icon></button>
+  <div class="v-desktop">
+    <button class="header__link" mat-button routerLink="/idea/feed" routerLinkActive="active">
+      <span translate>Ideas</span>
+    </button>
+    <button class="header__link" mat-button routerLink="/project/add" routerLinkActive="active">
+      <span translate>Projects</span>
+    </button>
+  </div>
+  <button mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>person</mat-icon></button>
   <mat-menu #userMenu="matMenu" class="profile-menu">
     <div class="user-info">
       <p class="helper-text" translate>Logged in as</p>
