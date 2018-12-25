@@ -1,4 +1,5 @@
 @import "src/theme/theme-variables";
+@import "../../../sass/declarations";
 
 .navbar {
   position: fixed;
@@ -16,4 +17,85 @@
 
 .menu-button {
   margin-right: 1rem;
+}
+
+.header {
+  color: white;
+  background-color: #202020;
+
+  &__content {
+    display: flex;
+    align-items: center;
+  }
+
+  &__full-logo {
+    padding-top: 1rem;
+    margin-right: 2rem;
+  }
+
+  &__link {
+    font-size: 1.7rem;
+    font-family: "gothamlight";
+    font-weight: bold;
+    border-radius: 0;
+    padding: 0;
+    margin-right: 1rem;
+    //border-bottom: 2px solid transparent;
+    transition: all 0.1s ease-in;
+
+    &:hover {
+      border-bottom: 2px solid white;
+    }
+  }
+}
+
+.ng-trigger-transformMenu {
+  background-color: white;
+  box-shadow: 0 0 2px #555555;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 25rem;
+  color: black;
+}
+
+.helper-text {
+  display: block;
+  font-size: 1.3rem;
+  color: #444;
+  font-family: "gothamlight", sans-serif;
+}
+
+.username {
+  font-size: 2rem;
+}
+
+.user-info {
+  padding: 2rem;
+}
+
+.user-link {
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+  font-family: "gothamlight", sans-serif;
+  color: $color-primary-dark;
+  cursor: pointer;
+
+  &:nth-child(odd) {
+    background-color: darken($color: #ffffff, $amount: 3%);
+  }
+}
+
+.user-logout {
+  padding: 1rem 2rem 0 2rem;
+}
+
+.logout {
+  border: none;
+  background-color: white;
+  color: $color-primary-dark;
+  font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
 }
