@@ -1,27 +1,33 @@
-<mat-toolbar class="mat-elevation-z6 navbar" color="primary">
+<mat-toolbar class="mat-elevation-z1 navbar header">
   <div fxHide.gt-sm fxLayoutAlign="start center">
     <button class="menu-button" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
     <span class="title">{{ title }}</span>
   </div>
-  <div fxHide.lt-md>
-    <a class="brand" routerLink="/"><img src="assets/cynthesize-banner-logo.png" alt="Cynthesize" width="150px"/></a>
-    <button mat-button routerLink="/home" routerLinkActive="active">
-      <mat-icon>home</mat-icon>
-      <span translate>Home</span>
+  <div class="header__content" fxHide.lt-md>
+    <a class="brand header__full-logo" routerLink="/"
+      ><img src="../../../assets/logos/Asset 2MY.png" alt="Cynthesize" width="150px"
+    /></a>
+
+    <button class="header__link" mat-button routerLink="/idea/feed" routerLinkActive="active">
+      <span translate>Ideas</span>
     </button>
-    <button mat-button routerLink="/idea/add" routerLinkActive="active">
-      <mat-icon>info</mat-icon>
-      <span translate>Add Idea</span>
+    <button class="header__link" mat-button routerLink="/project/add" routerLinkActive="active">
+      <span translate>Projects</span>
     </button>
   </div>
   <span fxFlex></span> <button mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>person</mat-icon></button>
-  <mat-menu #userMenu="matMenu">
-    <mat-list>
-      <mat-list-item routerLink="/user/{{ username }}">
-        <span translate>Logged in as</span>&nbsp;<b>{{ username }}</b>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-    </mat-list>
-    <button mat-menu-item (click)="logout()" translate>Logout</button>
+  <mat-menu #userMenu="matMenu" class="profile-menu">
+    <div class="user-info">
+      <p class="helper-text" translate>Logged in as</p>
+      <h4 class="username">{{ username }}</h4>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="user-links">
+      <div class="user-link" routerLink="/user">Profile</div>
+      <div class="user-link" routerLink="/project/add">My Projects</div>
+      <div class="user-link" routerLink="/home">About</div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="user-logout"><button class="logout" (click)="logout()" translate>Logout</button></div>
   </mat-menu>
 </mat-toolbar>
