@@ -7,15 +7,14 @@
     <a class="brand header__full-logo" routerLink="/"
       ><img src="../../../assets/logos/Asset 2MY.png" alt="Cynthesize" width="150px"
     /></a>
-
-    <button class="header__link" mat-button routerLink="/idea/feed" routerLinkActive="active">
-      <span translate>Ideas</span>
-    </button>
-    <button class="header__link" mat-button routerLink="/project/add" routerLinkActive="active">
-      <span translate>Projects</span>
-    </button>
   </div>
-  <span fxFlex></span> <button mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>person</mat-icon></button>
+  <span fxFlex></span>
+  <button class="header__link" mat-button routerLink="/idea/feed" routerLinkActive="active">
+    <span translate>Ideas</span>
+  </button>
+  <button class="header__link" mat-button routerLink="/project/add" routerLinkActive="active">
+    <span translate>Projects</span></button
+  ><button mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>person</mat-icon></button>
   <mat-menu #userMenu="matMenu" class="profile-menu">
     <div class="user-info">
       <p class="helper-text" translate>Logged in as</p>
