@@ -1,0 +1,57 @@
+.comment {
+  background-color: #ffffff;
+  border-radius: 2px;
+  padding: 2rem;
+  font-size: 1.3rem;
+
+  &__info {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 1rem;
+
+    font-size: 1.5rem;
+
+    &--user {
+      margin-right: 1rem;
+    }
+
+    &--time {
+      color: #aaaaaa;
+    }
+  }
+
+  &__text {
+    margin-bottom: 1rem;
+  }
+
+  &__replies {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5rem;
+  }
+}
+
+.reply {
+  width: 80%;
+  padding: 2rem 0;
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid rgb(221, 221, 221);
+  }
+
+  &__info {
+    display: flex;
+    margin-bottom: 1rem;
+
+    font-size: 1.4rem;
+
+    &--user {
+      margin-right: 1rem;
+    }
+
+    &--time {
+      color: #aaaaaa;
+    }
+  }
+}
