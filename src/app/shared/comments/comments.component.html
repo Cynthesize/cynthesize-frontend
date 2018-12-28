@@ -1,7 +1,33 @@
-<div *ngFor="let comment of commentsArray">
+<!-- <div *ngFor="let comment of commentsArray">
   {{ comment.text }} by {{ comment.user }} at {{ comment.commented_at | date }}
   <div *ngFor="let reply of comment.replies">
     {{reply.text}} by {{ reply.user }}  at {{ reply.replied_at | date }}
   </div>
   <br>
+</div> -->
+
+<div class="comment">
+  <div class="comment__info">
+    <div class="comment__info--user">@zerefwayne</div>
+    <div class="comment__info--time">12:45PM</div>
+  </div>
+
+  <div class="comment__text">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus consectetur quas quisquam, excepturi voluptatibus
+    eaque recusandae blanditiis qui reprehenderit dolorum eveniet et, quos odio quasi consequuntur possimus, at voluptas
+    omnis.
+  </div>
+  <div class="comment__replies">
+    <div class="reply">
+      <div class="reply__info">
+        <div class="reply__info--user">@aayushjoglekar</div>
+        <div class="reply__info--time">1:30PM</div>
+      </div>
+
+      <div class="reply__text">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi, quia dolorum voluptatem sint, corporis porro
+        consectetur nostrum nobis, eius totam harum ut. Suscipit, dignissimos pariatur possimus provident esse non eum.
+      </div>
+    </div>
+  </div>
 </div>
