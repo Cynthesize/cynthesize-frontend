@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Idea } from '@app/shared/idea';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import BACKEND_URLS from '@app/shared/backend-urls';
-import { Router } from '@angular/router';
-import { flatMap, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +15,7 @@ export class IdeaService {
     })
   };
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   /**
    * addIdea
