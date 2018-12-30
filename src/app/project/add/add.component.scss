@@ -1,0 +1,81 @@
+@import "../../../sass/declarations";
+
+:host {
+  width: 100%;
+}
+
+.background {
+  min-height: 90vh;
+  //background-color: darken($color-white, 10%);
+  background-color: whitesmoke;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: $bp-6) {
+    background-color: white;
+  }
+}
+
+.container {
+  //box-shadow: $shadow-light;
+
+  overflow: hidden;
+
+  &--add-project {
+    width: 100rem;
+    background-color: white;
+    min-height: 50rem;
+    padding: 3rem 4rem;
+    font-size: 1.6rem;
+
+    border-radius: $radius-small;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    h1 {
+      margin-bottom: 2rem;
+
+      @media (max-width: $bp-6) {
+        margin-bottom: 4rem;
+      }
+    }
+
+    @media (max-width: $bp-6) {
+      flex-direction: column;
+      padding: 1rem;
+    }
+  }
+}
+
+.form {
+  width: 100%;
+  font-size: 1.3rem;
+
+  ::ng-deep .mat-step-label {
+    font-size: 2rem;
+  }
+
+  ::ng-deep input.mat-input-element {
+    font-size: 1.6rem;
+  }
+}
+
+.description {
+  width: 60%;
+
+  @media (max-width: $bp-6) {
+    width: 90%;
+  }
+}
+
+.text {
+  width: 40%;
+
+  @media (max-width: $bp-6) {
+    width: 90%;
+  }
+}
