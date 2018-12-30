@@ -8,7 +8,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddComponent implements OnInit {
   project: FormGroup;
-
+  foods: any[] = [
+    { value: 'steak-0', viewValue: 'Steak' },
+    { value: 'pizza-1', viewValue: 'Pizza' },
+    { value: 'tacos-2', viewValue: 'Tacos' }
+  ];
   constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
