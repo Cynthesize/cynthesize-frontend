@@ -25,11 +25,10 @@
     </div>
     <mat-divider></mat-divider>
     <div class="user-links">
-      <div class="user-link" routerLink="/user">Profile</div>
+      <div class="user-link" routerLink="/user/{{ username }}">Profile</div>
       <div class="user-link" routerLink="/project/add">My Projects</div>
       <div class="user-link" routerLink="/home">About</div>
+      <div class="user-link" (click)="logout()">Logout</div>
     </div>
-    <mat-divider></mat-divider>
-    <div class="user-logout"><button class="logout" (click)="logout()" translate>Logout</button></div>
   </mat-menu>
 </mat-toolbar>
