@@ -1,0 +1,32 @@
+<div class="panel-main__heading">
+  <div class="panel-main__topic">{{ getPageName() }}</div>
+
+  <button mat-raised-button (click)="initAddIssueDialogue()" style="border-radius: 30px;">
+    <mat-icon>library_add</mat-icon> Add Issue
+  </button>
+</div>
+<div class="panel-main__issues" *ngFor="let issue of issues">
+  <div class="container">
+    <div class="issue-info">
+      <div class="issue-info__link">
+        <a>{{ issue.id }}</a>
+      </div>
+      <div class="issue-info__time">{{ issue.created_on | date }}</div>
+    </div>
+
+    <div class="issue-text">{{ issue.description }}</div>
+
+    <div class="issue-comments">
+      <h4 class="issue-comments__heading">DISCUSSION</h4>
+
+      <div class="issue-comments__list">
+        <!-- <app-comments></app-comments> -->
+        <app-comments
+          [activityType]="'issue'"
+          [activityId]="issue.id"
+          [issueCommentObject]="issue.comments"
+        ></app-comments>
+      </div>
+    </div>
+  </div>
+</div>

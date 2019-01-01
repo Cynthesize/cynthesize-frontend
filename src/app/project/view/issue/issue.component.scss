@@ -1,0 +1,88 @@
+@import "../../../../sass/declarations";
+
+:host {
+  width: 90%;
+}
+
+.container {
+  background-color: white;
+  padding: 3rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 5px #cccccc;
+}
+
+.issue-text {
+  font-size: 1.6rem;
+  margin: 2rem 0;
+}
+
+.issue-info {
+  color: $color-primary-dark;
+  font-size: 1.5rem;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.issue-comments {
+  &__heading {
+    color: $color-primary-dark;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  &__list {
+  }
+}
+
+.panel-main {
+  background-color: whitesmoke;
+
+  height: 100%;
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  flex: 0 0 63%;
+
+  padding: 5rem;
+
+  &__heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 4rem;
+  }
+
+  &__topic {
+    font-size: 3rem;
+  }
+
+  &__add {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    font-size: 1.3rem;
+
+    background-color: white;
+    border-radius: 400px;
+    border: 2px solid $color-primary;
+    cursor: pointer;
+
+    mat-icon {
+      margin-top: -0.5rem;
+    }
+  }
+
+  &__issues {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    app-issue {
+      margin-bottom: 3rem;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<!-- <simplemde [(ngModel)]="content" [options]="{ toolbar: ['bold', 'italic', 'heading', '|', 'quote'] }"></simplemde> -->
+
+<div class="comment">
+  <div class="comment__info" *ngIf="type === 'comment'">
+    <div class="comment__info--user">{{ user }}</div>
+    <div class="comment__info--time">{{ time | timeDiff }}</div>
+  </div>
+  <div class="comment__text" *ngIf="type === 'comment'">
+    <td-markdown> {{ content }} </td-markdown>
+  </div>
+  <div class="comment__replies" *ngIf="type === 'reply'">
+    <div class="reply">
+      <div class="reply__info">
+        <div class="reply__info--user">{{ user }}</div>
+        <div class="reply__info--time">{{ time | timeDiff }}</div>
+      </div>
+      <div class="reply__text">
+        <td-markdown> {{ content }} </td-markdown>
+      </div>
+    </div>
+  </div>
+</div>
