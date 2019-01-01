@@ -7,7 +7,7 @@
 .background {
   min-height: 90vh;
   //background-color: darken($color-white, 10%);
-  background-color: whitesmoke;
+  background-color: white;
   position: relative;
 
   display: flex;
@@ -25,16 +25,17 @@
   overflow: hidden;
 
   &--add-project {
-    width: 100rem;
-    background-color: white;
-    min-height: 50rem;
+    width: 75%;
+    height: 60rem;
     padding: 3rem 4rem;
     font-size: 1.6rem;
 
-    border-radius: $radius-small;
+    border-radius: $radius-large;
     display: flex;
     justify-content: center;
-    flex-direction: column;
+    align-items: stretch;
+
+    box-shadow: 0 0 2rem #ededed;
 
     h1 {
       margin-bottom: 2rem;
@@ -46,7 +47,10 @@
 
     @media (max-width: $bp-6) {
       flex-direction: column;
-      padding: 1rem;
+      width: 100%;
+      padding: 1rem 1rem;
+      height: auto;
+      box-shadow: none;
     }
   }
 }
@@ -78,4 +82,44 @@
   @media (max-width: $bp-6) {
     width: 90%;
   }
+}
+
+.content {
+  flex: 0 0 60%;
+  margin-right: 5rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  @media (max-width: $bp-6) {
+    flex: 0 0 100%;
+    margin-right: 0;
+  }
+}
+
+.picture {
+  flex-grow: 1;
+
+  background-image: url(../../../assets/images/add-project.jpg);
+  background-size: cover;
+  background-position: center;
+
+  border-radius: 1rem;
+
+  @media (max-width: $bp-6) {
+    display: none;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0px; /* remove scrollbar space */
+  background: transparent; /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #ff0000;
 }
