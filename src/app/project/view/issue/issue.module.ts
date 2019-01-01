@@ -6,6 +6,7 @@ import { IssueComponent } from './issue.component';
 import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 @NgModule({
   declarations: [IssueComponent],

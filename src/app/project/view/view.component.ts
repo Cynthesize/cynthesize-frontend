@@ -3,6 +3,7 @@ import { ProjectService } from '@app/core/project/project.service';
 import { finalize, switchMap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Project } from '@app/shared/objects';
 
 @Component({
   selector: 'app-view',
@@ -10,7 +11,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./view.component.scss']
 })
 export class ViewComponent implements OnInit {
-  project: Observable<any>;
+  project: Observable<Project>;
   checkpointList = {};
   currentActiveBar = 'Home';
 
