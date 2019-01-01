@@ -5,9 +5,19 @@
 
 @import "theme/theme-variables";
 @import "../node_modules/material-design-icons-iconfont/dist/material-design-icons.css";
-
 @import "~@angular/material/theming";
+@import "~@covalent/markdown/markdown-theme";
+
 @include mat-core();
+
+$primary: mat-palette($mat-orange, 800);
+$accent: mat-palette($mat-light-blue, 600, A100, A400);
+$warn: mat-palette($mat-red, 600);
+
+$theme: mat-light-theme($primary, $accent, $warn);
+
+@include covalent-markdown-theme($theme);
+
 @include angular-material-theme($app-theme);
 
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");

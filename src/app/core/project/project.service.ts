@@ -26,7 +26,6 @@ export class ProjectService {
       })
       .pipe(
         map((res: any) => {
-          console.log(res);
           return res;
         })
       );
@@ -44,7 +43,6 @@ export class ProjectService {
       })
       .pipe(
         map((res: any) => {
-          console.log(res);
           return res;
         })
       );

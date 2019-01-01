@@ -6,28 +6,32 @@
   <br>
 </div> -->
 
-<div class="comment">
-  <div class="comment__info">
-    <div class="comment__info--user">@zerefwayne</div>
-    <div class="comment__info--time">12:45PM</div>
-  </div>
-
-  <div class="comment__text">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus consectetur quas quisquam, excepturi voluptatibus
-    eaque recusandae blanditiis qui reprehenderit dolorum eveniet et, quos odio quasi consequuntur possimus, at voluptas
-    omnis.
-  </div>
-  <div class="comment__replies">
-    <div class="reply">
-      <div class="reply__info">
-        <div class="reply__info--user">@aayushjoglekar</div>
-        <div class="reply__info--time">1:30PM</div>
-      </div>
-
-      <div class="reply__text">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi, quia dolorum voluptatem sint, corporis porro
-        consectetur nostrum nobis, eius totam harum ut. Suscipit, dignissimos pariatur possimus provident esse non eum.
-      </div>
+<div *ngIf="issueCommentObject">
+  <div *ngFor="let comment of issueCommentObject">
+    <app-editable-comment
+      [content]="comment.comment_text"
+      [type]="'comment'"
+      [time]="comment.timestamp"
+      [user]="comment.commenter"
+      (commentEdited)="onCommentEdited(comment, $event)"
+    >
+    </app-editable-comment>
+    <div *ngFor="let reply of comment.comment_replies">
+      <app-editable-comment
+        [content]="reply.reply_text"
+        [type]="'reply'"
+        [time]="reply.timestamp"
+        [user]="reply.respondent"
+        (commentEdited)="onCommentEdited(reply, $event)"
+      >
+      </app-editable-comment>
     </div>
   </div>
+</div>
+
+<div class="comments__add-comment-section">
+  <div class="comments__add-comment-box">
+    <td-text-editor [value]="'**Siddhant**'" [options]="options" [(ngModel)]="comment"></td-text-editor>
+  </div>
+  <button (click)="addNewComment()" class="button">Add comment</button>
 </div>

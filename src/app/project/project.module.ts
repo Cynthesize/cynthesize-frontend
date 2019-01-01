@@ -7,20 +7,10 @@ import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ViewComponent } from './view/view.component';
-import { IssueComponent } from './issue/issue.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 @NgModule({
-  declarations: [AddComponent, ViewComponent, IssueComponent],
-  imports: [
-    CommonModule,
-    ProjectRoutingModule,
-    SharedModule,
-    FormsModule,
-    MaterialModule,
-    ReactiveFormsModule,
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot()
-  ]
+  declarations: [AddComponent],
+  imports: [CommonModule, ProjectRoutingModule, SharedModule, FormsModule, MaterialModule, ReactiveFormsModule]
 })
 export class ProjectModule {}
