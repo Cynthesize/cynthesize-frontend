@@ -17,6 +17,8 @@ import { ProjectService } from '@app/core/project/project.service';
 import { EditableDirective } from '../editable.directive';
 import { IssueComments } from '../objects';
 import { TdTextEditorComponent } from '@covalent/text-editor';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comments',
@@ -24,31 +26,33 @@ import { TdTextEditorComponent } from '@covalent/text-editor';
   styleUrls: ['./comments.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class CommentsComponent implements OnInit {
-  @Input()
-  activityId: string;
-  @Input()
-  activityType: string;
-  @Input()
-  issueCommentObject: [IssueComments];
-  options: any = {
-    lineWrapping: true,
-    toolbar: true
-  };
-  comment: '';
-
+export class CommentsComponent implements OnInit, OnChanges {
+  @Input() activityId: string;
+  @Input() activityType: string;
+  @Input() issueCommentObject: [IssueComments];
   @Input() comments: any;
   @Output() commentsUpdated = new EventEmitter();
   @ViewChild(EditableDirective) newCommentEditor: any;
 
+  options: any = {
+    lineWrapping: true
+  };
+  comment = '';
   commentsArray = [Object];
+  commentingOnIssue = false;
+  projectId: string;
 
-  constructor(private ideaService: IdeaService, private projectService: ProjectService) {}
+  constructor(
+    private ideaService: IdeaService,
+    private projectService: ProjectService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    console.log(this.activityType);
+    console.log(this.issueCommentObject);
     if (this.activityType === 'issue') {
-      console.log(this.issueCommentObject);
+      this.projectId = this.router.url.split('/')[2];
     } else {
       console.log('Not issue');
     }
@@ -75,15 +79,25 @@ export class CommentsComponent implements OnInit {
       );
   }
 
-  addNewComment() {
-    const comments = this.comments.slice();
-    comments.splice(0, 0, {
-      user: localStorage.getItem(''),
-      time: +new Date(),
-      content: this.newCommentEditor.getEditableContent()
-    });
-    this.commentsUpdated.next(comments);
-    this.newCommentEditor.setEditableContent('');
+  addNewComment(projectId: string, issueId: string) {
+    console.log(this.comment, projectId, issueId);
+    this.projectService
+      .addComment(this.comment, projectId, issueId)
+      .pipe(
+        finalize(() => {
+          this.commentingOnIssue = false;
+        })
+      )
+      .subscribe(
+        comment => {
+          comment.commenter = JSON.parse(localStorage.getItem('credentials'))['username'];
+          this.issueCommentObject.push(comment);
+          console.log(`Comment Added`);
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   onCommentEdited(comment: any, content: any) {
@@ -103,5 +117,13 @@ export class CommentsComponent implements OnInit {
     // Emit event so the updated comment list can be persisted
     // outside the component
     this.commentsUpdated.next(comments);
+  }
+
+  addCommentBox(): void {
+    this.commentingOnIssue = true;
+  }
+
+  cancel(): void {
+    this.commentingOnIssue = false;
   }
 }
