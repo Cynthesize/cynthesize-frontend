@@ -29,8 +29,16 @@
               "src/manifest.json",
               "src/assets"
             ],
-            "styles": ["src/main.scss", "node_modules/ngx-simplemde/src/index.css"],
-            "scripts": ["node_modules/simplemde-antd/dist/simplemde.min.js"]
+            "styles": [
+              "src/main.scss",
+              "./node_modules/froala-editor/css/froala_editor.pkgd.min.css",
+              "./node_modules/froala-editor/css/froala_style.min.css",
+              "./node_modules/font-awesome/css/font-awesome.css"
+            ],
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/froala-editor/js/froala_editor.pkgd.min.js"
+            ]
           },
           "configurations": {
             "production": {

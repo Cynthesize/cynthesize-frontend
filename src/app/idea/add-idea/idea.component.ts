@@ -40,6 +40,7 @@ export class IdeaComponent implements OnInit {
 
   addIdea() {
     this.isLoading = true;
+    console.log(this.addIdeaForm.value);
     this.ideaService
       .addIdea(this.addIdeaForm.value)
       .pipe(

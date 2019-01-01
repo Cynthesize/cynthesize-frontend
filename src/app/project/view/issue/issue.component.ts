@@ -16,11 +16,6 @@ export class IssueComponent implements OnInit {
   issues: Observable<any>;
   checkpointList = {};
   sub: any;
-  public editorContent = `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore facilis similique
-  odit aliquid eligendi laboriosam repudiandae quam veritatis, harum officia, ratione neque quas natus quibusdam alias
-  hic, id libero doloribus! Lorem
-  ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ipsa nostrum odio est ea, nulla pariatur. Laudantium
-  totam eius repudiandae iste, saepe illum commodi quidem suscipit architecto aspernatur, quibusdam labore.`;
 
   constructor(private projectService: ProjectService, private route: ActivatedRoute, private router: Router) {}
 
@@ -44,12 +39,15 @@ export class IssueComponent implements OnInit {
           }
           this.project = data;
           this.checkpointList = this._getCheckpointData(data['area_of_issues_open'][0]);
+          console.log(this.checkpointList);
           Object.keys(this.checkpointList).forEach(checkpoint => {
+            console.log(this.checkpointList[checkpoint], checkpointName);
             if (checkpoint === checkpointName) {
               let idList = '';
               data['area_of_issues_open'][0][checkpointName].forEach((id: any) => {
                 idList += id;
               });
+              console.log(idList);
               this.projectService
                 .fetchIdea(idList)
                 .pipe(finalize(() => {}))

@@ -1,6 +1,7 @@
 .comment {
   background-color: #ffffff;
   border-radius: 2px;
+  padding: 2rem;
   font-size: 1.3rem;
 
   &__info {
@@ -53,13 +54,4 @@
       color: #aaaaaa;
     }
   }
-}
-
-.editor-statusbar {
-  display: none;
-}
-
-.CodeMirror {
-  padding: 0;
-  max-height: 30px;
 }

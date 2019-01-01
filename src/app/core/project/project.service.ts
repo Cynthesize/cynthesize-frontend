@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import BACKEND_URLS from '@app/shared/backend-urls';
 import { map } from 'rxjs/operators';
-import { IssueComments } from '@app/shared/objects';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +26,7 @@ export class ProjectService {
       })
       .pipe(
         map((res: any) => {
+          console.log(res);
           return res;
         })
       );
@@ -44,26 +44,9 @@ export class ProjectService {
       })
       .pipe(
         map((res: any) => {
+          console.log(res);
           return res;
         })
       );
-  }
-
-  /**
-   * Add Comments for an issue in the project.
-   */
-  public addComment(commentText: string, projectId: string, issueId: string) {
-    const IssueComment = {
-      comment_text: commentText,
-      project_id: projectId,
-      issue_id: issueId,
-      commenter: JSON.parse(localStorage.getItem('credentials'))['user_id']
-    };
-    return this.http.post<any>(BACKEND_URLS.ADD_ISSUE_COMMENT, IssueComment, this.httpOptions).pipe(
-      map((res: any) => {
-        console.log(res);
-        return res;
-      })
-    );
   }
 }
