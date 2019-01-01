@@ -5,19 +5,15 @@ import {
   EventEmitter,
   Output,
   ViewChild,
-  Inject,
   ViewEncapsulation,
   SimpleChanges,
   OnChanges
 } from '@angular/core';
 import { IdeaService } from '@app/core/idea/idea.service';
 import { finalize } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { ProjectService } from '@app/core/project/project.service';
 import { EditableDirective } from '../editable.directive';
 import { IssueComments } from '../objects';
-import { TdTextEditorComponent } from '@covalent/text-editor';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -42,15 +38,9 @@ export class CommentsComponent implements OnInit, OnChanges {
   commentingOnIssue = false;
   projectId: string;
 
-  constructor(
-    private ideaService: IdeaService,
-    private projectService: ProjectService,
-    private formBuilder: FormBuilder,
-    private router: Router
-  ) {}
+  constructor(private ideaService: IdeaService, private projectService: ProjectService, private router: Router) {}
 
   ngOnInit(): void {
-    console.log(this.issueCommentObject);
     if (this.activityType === 'issue') {
       this.projectId = this.router.url.split('/')[2];
     } else {
@@ -71,7 +61,6 @@ export class CommentsComponent implements OnInit, OnChanges {
       .subscribe(
         (data: any) => {
           this.commentsArray = data;
-          console.log(data);
         },
         (error: any) => {
           console.log(error);
@@ -80,7 +69,6 @@ export class CommentsComponent implements OnInit, OnChanges {
   }
 
   addNewComment(projectId: string, issueId: string) {
-    console.log(this.comment, projectId, issueId);
     this.projectService
       .addComment(this.comment, projectId, issueId)
       .pipe(
