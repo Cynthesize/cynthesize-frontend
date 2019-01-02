@@ -8,7 +8,8 @@ const BACKEND_URLS = {
   REPLIES: '/comment/reply',
   UPDATE_UPVOTES: '/idea/vote/',
   USER_AUTH_LOGIN: '/user/login/',
-  USER_AUTH_REGISTER: '/user/register/'
+  USER_AUTH_REGISTER: '/user/register/',
+  USER_DETAILS: '/user/view'
 };
 
 export default BACKEND_URLS;
