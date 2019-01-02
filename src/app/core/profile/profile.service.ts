@@ -48,6 +48,7 @@ export class ProfileService {
       bio: updateObject['bio'],
       birth_date: updateObject['birth_date'],
       technologies: techString,
+      website: updateObject['website'],
       location: updateObject['location'],
       username: JSON.parse(localStorage.getItem('credentials'))['username']
     };

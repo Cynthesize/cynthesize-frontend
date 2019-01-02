@@ -49,7 +49,8 @@ export class DetailsComponent implements OnInit {
       bio: new FormControl(''),
       dob: new FormControl(''),
       listOfTech: new FormControl([]),
-      location: new FormControl('')
+      location: new FormControl(''),
+      website: new FormControl('')
     });
     this.profileService
       .getUserDetails(this.username)
@@ -64,6 +65,8 @@ export class DetailsComponent implements OnInit {
           this.editForm.get('bio').setValue(data[0].bio);
           this.editForm.get('dob').setValue(data[0].birth_date);
           this.editForm.get('listOfTech').setValue(data[0].technologies);
+          this.editForm.get('location').setValue(data[0].location);
+          this.editForm.get('website').setValue(data[0].website);
           this.user.social_links.forEach(sociallink => {
             const username = sociallink.substr(sociallink.lastIndexOf('/') + 1, sociallink.length);
             if (sociallink.includes('facebook') || sociallink.includes('github') || sociallink.includes('twitter')) {
@@ -120,7 +123,8 @@ export class DetailsComponent implements OnInit {
       bio: this.editForm.get('bio').value,
       location: this.editForm.get('location').value,
       technologies: this.listOfTech,
-      birth_date: this.editForm.get('dob').value
+      birth_date: this.editForm.get('dob').value,
+      website: this.editForm.get('website').value
     };
     console.log(userUpdateObject);
     this.profileService

@@ -161,7 +161,17 @@
               <mat-icon class="detail-block__icon">mail_outline</mat-icon> {{ user.email }}
             </div>
             <div class="detail-block" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
-              <mat-icon class="detail-block__icon">location_on</mat-icon> Lucknow, India
+              <mat-icon class="detail-block__icon">domain</mat-icon> {{ user.website }}
+            </div>
+            <div class="detail-block" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+              <mat-icon class="detail-block__icon">domain</mat-icon>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Location</mat-label>
+                <input matInput formControlName="website" placeholder="Add website" value="{{ user.website }}" />
+              </mat-form-field>
+            </div>
+            <div class="detail-block" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
+              <mat-icon class="detail-block__icon">location_on</mat-icon> {{ user.location }}
             </div>
             <div class="detail-block" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
               <mat-icon class="detail-block__icon">location_on</mat-icon>
