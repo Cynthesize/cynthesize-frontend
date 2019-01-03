@@ -5,7 +5,7 @@
 }
 
 .background {
-  min-height: 90vh;
+  height: 100%;
   //background-color: darken($color-white, 10%);
   background-color: white;
   position: relative;
@@ -25,8 +25,8 @@
   overflow: hidden;
 
   &--add-project {
-    width: 75%;
-    height: 60rem;
+    width: 90%;
+    height: 70rem;
     padding: 3rem 4rem;
     font-size: 1.6rem;
 
@@ -34,8 +34,6 @@
     display: flex;
     justify-content: center;
     align-items: stretch;
-
-    box-shadow: 0 0 2rem #ededed;
 
     h1 {
       margin-bottom: 2rem;
