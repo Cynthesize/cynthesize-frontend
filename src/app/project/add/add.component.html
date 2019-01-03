@@ -1,44 +1,53 @@
-<mat-vertical-stepper [linear]="false" #stepper>
-  <mat-step [stepControl]="project">
-    <form [formGroup]="project">
-      <ng-template matStepLabel>Project name</ng-template>
-      <mat-form-field hintLabel="Enter a project name.">
-        <input matInput placeholder="Eg: My Project" formControlName="projectName" required />
-      </mat-form-field>
-      <div><button mat-button matStepperNext>Next</button></div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="project" [optional]="true">
-    <form [formGroup]="project">
-      <ng-template matStepLabel>Project ID</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Eg: {{ generateProjectId() }}" formControlName="projectId" required />
-      </mat-form-field>
-      <div><button mat-button matStepperPrevious>Back</button> <button mat-button matStepperNext>Next</button></div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="project">
-    <form [formGroup]="project">
-      <ng-template matStepLabel>Brief description of the project.</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Add a brief description of the project." formControlName="description" required />
-      </mat-form-field>
-      <div><button mat-button matStepperPrevious>Back</button> <button mat-button matStepperNext>Next</button></div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="project">
-    <form [formGroup]="project">
-      <ng-template matStepLabel>Where are you?</ng-template>
-      <mat-form-field>
-        <mat-select placeholder="What best describes your project stage? (Select one)">
-          <mat-option *ngFor="let food of foods" [value]="food.value"> {{ food.viewValue }} </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div><button mat-button matStepperPrevious>Back</button> <button mat-button matStepperNext>Next</button></div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-  </mat-step>
-</mat-vertical-stepper>
+<div class="background">
+  <div class="container--add-project">
+    <div class="content">
+      <h1 class="heading--xl">Add Project</h1>
+      <div class="form">
+        <mat-vertical-stepper [linear]="true" #stepper>
+          <mat-step [stepControl]="project">
+            <form [formGroup]="project">
+              <ng-template matStepLabel>Project Name</ng-template>
+              <mat-form-field class="text">
+                <input matInput placeholder="Eg: My Project" formControlName="projectName" required />
+              </mat-form-field>
+              <div><button mat-raised-button color="primary" matStepperNext>Next</button></div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="project">
+            <form [formGroup]="project">
+              <ng-template matStepLabel>Project Description</ng-template>
+              <mat-form-field class="description">
+                <textarea matInput formControlName="projectId" required></textarea>
+              </mat-form-field>
+              <div>
+                <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+                <button mat-raised-button color="primary" mat-raised-button color="primary" matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="project">
+            <form [formGroup]="project">
+              <ng-template matStepLabel>Project Status</ng-template>
+              <mat-form-field class="text">
+                <input matInput placeholder="Eg: Ideation" formControlName="currentStage" required />
+              </mat-form-field>
+              <div>
+                <button mat-raised-button color="primary" matStepperPrevious>Back</button
+                ><button mat-raised-button color="primary" matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Submit</ng-template>
+            Save
+            <div>
+              <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+              <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
+            </div>
+          </mat-step>
+        </mat-vertical-stepper>
+      </div>
+    </div>
+    <div class="picture"></div>
+  </div>
+</div>
