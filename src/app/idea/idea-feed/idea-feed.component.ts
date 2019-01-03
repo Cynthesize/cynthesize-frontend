@@ -31,7 +31,7 @@ export class IdeaFeedComponent implements OnInit {
       .subscribe(
         (data: any) => {
           if (data.length === 0) {
-            this.router.navigate(['404']);
+            this.router.navigate(['not-found']);
           }
           console.log(data);
           this.collection = data;

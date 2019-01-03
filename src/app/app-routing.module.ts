@@ -11,7 +11,7 @@ const routes: Routes = [
     { path: 'project', loadChildren: 'app/project/project.module#ProjectModule' }
   ]),
   // Fallback when no prior route is matched
-  { path: '404', component: NotFoundComponent, data: { title: extract('Page not found! :(') } },
+  { path: 'not-found', component: NotFoundComponent, data: { title: extract('Page not found! :(') } },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
