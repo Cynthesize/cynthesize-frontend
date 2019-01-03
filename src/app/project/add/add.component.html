@@ -3,46 +3,61 @@
     <div class="content">
       <h1 class="heading--xl">Add Project</h1>
       <div class="form">
-        <mat-vertical-stepper [linear]="true" #stepper>
+        <mat-vertical-stepper [linear]="isLinear" #stepper>
           <mat-step [stepControl]="project">
             <form [formGroup]="project">
-              <ng-template matStepLabel>Project Name</ng-template>
+              <ng-template matStepLabel>Enter your project name</ng-template>
               <mat-form-field class="text">
-                <input matInput placeholder="Eg: My Project" formControlName="projectName" required />
+                <input matInput placeholder="Eg: Cynthesize" formControlName="projectName" required />
               </mat-form-field>
-              <div><button mat-raised-button color="primary" matStepperNext>Next</button></div>
+              <div><button mat-button matStepperNext>Next</button></div>
             </form>
           </mat-step>
           <mat-step [stepControl]="project">
             <form [formGroup]="project">
-              <ng-template matStepLabel>Project Description</ng-template>
-              <mat-form-field class="description">
-                <textarea matInput formControlName="projectId" required></textarea>
+              <ng-template matStepLabel>Enter your project ID</ng-template>
+              <mat-form-field class="text">
+                <input
+                  matInput
+                  placeholder="Eg: Cynthesize-tech"
+                  formControlName="projectId"
+                  value="{{ generateProjectId() }}"
+                  required
+                />
               </mat-form-field>
               <div>
-                <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-                <button mat-raised-button color="primary" mat-raised-button color="primary" matStepperNext>Next</button>
+                <button mat-button matStepperPrevious>Back</button> <button mat-button matStepperNext>Next</button>
               </div>
             </form>
           </mat-step>
           <mat-step [stepControl]="project">
             <form [formGroup]="project">
-              <ng-template matStepLabel>Project Status</ng-template>
+              <ng-template matStepLabel>Enter a brief description of your project</ng-template>
+              <mat-form-field class="text">
+                <input matInput placeholder="Description" formControlName="description" required />
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperPrevious>Back</button> <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="project">
+            <form [formGroup]="project">
+              <ng-template matStepLabel>What's your status</ng-template>
               <mat-form-field class="text">
                 <input matInput placeholder="Eg: Ideation" formControlName="currentStage" required />
               </mat-form-field>
               <div>
-                <button mat-raised-button color="primary" matStepperPrevious>Back</button
-                ><button mat-raised-button color="primary" matStepperNext>Next</button>
+                <button mat-button matStepperPrevious>Back</button> <button mat-button matStepperNext>Next</button>
               </div>
             </form>
           </mat-step>
           <mat-step>
-            <ng-template matStepLabel>Submit</ng-template>
-            Save
+            <ng-template matStepLabel>Done</ng-template>
+            Click Submit button to add the project.
             <div>
-              <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-              <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
+              <button mat-button (click)="stepper.reset()">Reset</button>
+              <button mat-button (click)="addProject()">Submit</button>
             </div>
           </mat-step>
         </mat-vertical-stepper>

@@ -35,12 +35,12 @@ export class IssueComponent implements OnInit {
   getProject(routeParam: string) {
     const checkpointName = routeParam;
     this.projectService
-      .getProject('1')
+      .getProject(this.router.url.split('/')[2])
       .pipe(finalize(() => {}))
       .subscribe(
         (data: any) => {
           if (data === {}) {
-            // this.router.navigate(['404']);
+            // this.router.navigate(['not-found']);
           }
           this.project = data;
           this.checkpointList = this._getCheckpointData(data['area_of_issues_open'][0]);

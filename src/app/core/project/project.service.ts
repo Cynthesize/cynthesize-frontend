@@ -15,14 +15,34 @@ export class ProjectService {
     })
   };
   constructor(private http: HttpClient) {}
+
   /**
-   * getProject
+   * ADD A PROJECT
+   */
+  public addProject(projectDetails: Object) {
+    const projectDetailsObject = {
+      project_name: projectDetails['projectName'],
+      project_id: projectDetails['projectId'],
+      description: projectDetails['description'],
+      current_stage: projectDetails['currentStage'],
+      owner: JSON.parse(localStorage.getItem('credentials'))['user_id']
+    };
+    return this.http.post<any>(BACKEND_URLS.PROJECT, projectDetailsObject, this.httpOptions).pipe(
+      map((res: any) => {
+        console.log(res);
+        return res;
+      })
+    );
+  }
+
+  /**
+   * GET PROJECT DETAILS
    */
   public getProject(id: string) {
     return this.http
-      .get(BACKEND_URLS.FETCH_PROJECT_DETAILS, {
+      .get(BACKEND_URLS.PROJECT, {
         params: {
-          id: '2'
+          id: id
         }
       })
       .pipe(
@@ -33,7 +53,7 @@ export class ProjectService {
   }
 
   /**
-   * getProject
+   * FETCH IDEA
    */
   public fetchIdea(idList: string) {
     return this.http

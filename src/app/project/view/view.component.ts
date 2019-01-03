@@ -15,11 +15,11 @@ export class ViewComponent implements OnInit {
   checkpointList = {};
   currentActiveBar = 'Home';
 
-  constructor(private projectService: ProjectService, private router: Router) {}
-
-  ngOnInit() {
+  constructor(private projectService: ProjectService, private router: Router) {
     this.getProject();
   }
+
+  ngOnInit() {}
 
   getProject() {
     this.projectService
@@ -27,11 +27,12 @@ export class ViewComponent implements OnInit {
       .pipe(finalize(() => {}))
       .subscribe(
         (data: any) => {
-          if (data === {}) {
-            this.router.navigate(['404']);
+          if (data.length === 0) {
+            this.router.navigate(['not-found']);
+          } else {
+            this.project = data;
+            this.checkpointList = this._getCheckpointData(data['area_of_issues_open'][0]);
           }
-          this.project = data;
-          this.checkpointList = this._getCheckpointData(data['area_of_issues_open'][0]);
         },
         (error: any) => {
           console.log(error);
