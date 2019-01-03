@@ -40,7 +40,7 @@ export class ViewIdeaComponent implements OnInit {
       .subscribe(
         (data: any) => {
           if (data.length === 0) {
-            this.router.navigate(['404']);
+            this.router.navigate(['not-found']);
           }
           this.idea = data[0];
           console.log(this.idea);

@@ -58,7 +58,7 @@ export class DetailsComponent implements OnInit {
       .subscribe(
         (data: any) => {
           if (data.length === 0) {
-            this.router.navigate(['404']);
+            this.router.navigate(['not-found']);
           }
           this.user = data[0];
           this.listOfTech = data[0].technologies;
