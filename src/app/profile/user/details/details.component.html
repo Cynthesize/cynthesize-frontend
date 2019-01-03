@@ -1,176 +1,211 @@
-<div class="background">
-  <div class="container container--user-profile">
-    <div class="user-header">
-      <div class="user-header__container">
-        <div class="dp-l-container">
-          <img class="dp-l-image" src="../../../../assets/images/background-login-register.png" />
-        </div>
-        <div class="user-header__container__name">
-          <h2>Aayush Joglekar</h2>
-          <h4>@aayushjoglekar</h4>
+<div class="background" *ngIf="user">
+  <form [formGroup]="editForm">
+    <button mat-button (click)="toggleFormFields(true)" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
+      Edit
+    </button>
+    <button mat-button (click)="toggleFormFields(false)" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+      Cancel
+    </button>
+    <button mat-button (click)="onSubmit()" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">Submit</button>
+    <div class="container container--user-profile">
+      <div class="user-header">
+        <div class="user-header__container">
+          <div class="dp-l-container">
+            <img class="dp-l-image" src="../../../../assets/images/background-login-register.png" />
+          </div>
+          <div class="user-header__container__name">
+            <h2>{{ user.full_name }}</h2>
+            <h4>@{{ user.username }}</h4>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="user-container">
+        <div class="multi-tab-details">
+          <div class="v-desktop">
+            <mat-tab-group mat-align-tabs="center">
+              <mat-tab label="Details">
+                <ng-template matTabContent>
+                  <div class="tab-text">
+                    <div
+                      class="block"
+                      *ngIf="username == loggedInUsername || (username != loggedInUsername && user?.bio !== null)"
+                    >
+                      <h4 class="title">About Me</h4>
+                      <p
+                        *ngIf="user?.bio !== null"
+                        [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }"
+                        class="paragraph"
+                      >
+                        {{ user.bio }}
+                      </p>
+                      <div
+                        *ngIf="username == loggedInUsername"
+                        [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }"
+                      >
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Edit Bio</mat-label>
+                          <input matInput formControlName="bio" placeholder="Edit Bio" value="{{ user.bio }}" />
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="block" *ngIf="user?.technologies !== null || user?.technologies?.length !== 0">
+                      <h4 class="title">I am pretty good at</h4>
+                      <div class="tech-stack">
+                        <div [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
+                          <div class="tech-stack__item" *ngFor="let tech of user.technologies">{{ tech }}</div>
+                        </div>
+                        <div [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+                          <mat-form-field class="full-width">
+                            <mat-chip-list #chipList>
+                              <mat-chip
+                                *ngFor="let tech of listOfTech"
+                                [selectable]="selectable"
+                                [removable]="removable"
+                                (removed)="remove(tech)"
+                              >
+                                {{ tech }}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                              </mat-chip>
+                              <input
+                                placeholder="New tech..."
+                                [matChipInputFor]="chipList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                [matChipInputAddOnBlur]="addOnBlur"
+                                (matChipInputTokenEnd)="add($event)"
+                                formControlName="listOfTech"
+                              />
+                            </mat-chip-list>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
 
-    <div class="user-container">
-      <div class="multi-tab-details">
+                    <div class="block"><h4 class="title">Contributions</h4></div>
+                  </div>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Ideas">
+                <ng-template matTabContent> <div class="tab-content">Coming Soon</div> </ng-template>
+              </mat-tab>
+              <mat-tab label="Projects">
+                <ng-template matTabContent> <div class="tab-content">Coming Soon</div> </ng-template>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+
+          <div class="v-mobile">
+            <mat-tab-group mat-align-tabs="center">
+              <mat-tab label="Details">
+                <ng-template matTabContent>
+                  <div class="tab-text">
+                    <div class="block" *ngIf="user?.bio !== null">
+                      <h4 class="title">About Me</h4>
+                      <p class="paragraph">{{ user.bio }}</p>
+                    </div>
+
+                    <div class="block" *ngIf="user?.technologies !== null || user?.technologies?.length !== 0">
+                      <h4 class="title">I am pretty good at</h4>
+                      <div class="tech-stack">
+                        <div class="tech-stack__item" *ngFor="let tech of user.technologies">{{ tech }}</div>
+                      </div>
+                    </div>
+
+                    <div class="block"><h4 class="title">Contributions</h4></div>
+                  </div>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Ideas">
+                <ng-template matTabContent> <div class="tab-content">Coming Soon</div> </ng-template>
+              </mat-tab>
+              <mat-tab label="Projects">
+                <ng-template matTabContent> <div class="tab-content">Coming Soon</div> </ng-template>
+              </mat-tab>
+              <mat-tab label="Contact">
+                <ng-template matTabContent>
+                  <div class="tab-contact">
+                    <div class="profile-details">
+                      <div class="detail-block">
+                        <mat-icon class="detail-block__icon">mail_outline</mat-icon> {{ user.email }}
+                      </div>
+                      <div class="detail-block">
+                        <mat-icon class="detail-block__icon">location_on</mat-icon> Lucknow, India
+                      </div>
+
+                      <div class="detail-block">
+                        <mat-icon class="detail-block__icon">cake</mat-icon> {{ user.birth_date | date: 'longDate' }}
+                      </div>
+
+                      <div
+                        class="detail-block social-links"
+                        *ngIf="user?.social_links !== null || user?.social_links?.length !== 0"
+                      >
+                        <a *ngFor="let sociallink of sociallinks" [href]="sociallink.socialLink" target="_blank">
+                          <img
+                            matTooltip="@{{ sociallink.username }}"
+                            class="social-icon"
+                            src="{{ sociallink.logoUrl }}"
+                          />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+
         <div class="v-desktop">
-          <mat-tab-group mat-align-tabs="center">
-            <mat-tab label="Details">
-              <ng-template matTabContent>
-                <div class="tab-text">
-                  <div class="block">
-                    <h4 class="title">About Me</h4>
-                    <p class="paragraph">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, aperiam nam. Corrupti incidunt
-                      atque ullam, distinctio suscipit perspiciatis sit cupiditate, sequi voluptatum, iste beatae
-                      consectetur quos autem. Voluptas, consequatur sed.
-                    </p>
-                  </div>
+          <div class="profile-details">
+            <div class="detail-block">
+              <mat-icon class="detail-block__icon">mail_outline</mat-icon> {{ user.email }}
+            </div>
+            <div class="detail-block" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
+              <mat-icon class="detail-block__icon">domain</mat-icon> {{ user.website }}
+            </div>
+            <div class="detail-block" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+              <mat-icon class="detail-block__icon">domain</mat-icon>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Location</mat-label>
+                <input matInput formControlName="website" placeholder="Add website" value="{{ user.website }}" />
+              </mat-form-field>
+            </div>
+            <div class="detail-block" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
+              <mat-icon class="detail-block__icon">location_on</mat-icon> {{ user.location }}
+            </div>
+            <div class="detail-block" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+              <mat-icon class="detail-block__icon">location_on</mat-icon>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Location</mat-label>
+                <input matInput formControlName="location" placeholder="Add location" value="{{ user.location }}" />
+              </mat-form-field>
+            </div>
+            <div class="detail-block" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
+              <mat-icon class="detail-block__icon">cake</mat-icon> {{ user.birth_date | date: 'longDate' }}
+            </div>
+            <div class="detail-block" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+              <mat-icon class="detail-block__icon">cake</mat-icon>
+              <mat-form-field>
+                <input
+                  matInput
+                  formControlName="dob"
+                  [matDatepicker]="dp3"
+                  placeholder="Enter date of birth."
+                  value="{{ user.birth_date }}"
+                />
+                <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+              </mat-form-field>
+            </div>
 
-                  <div class="block">
-                    <h4 class="title">I am pretty good at</h4>
-                    <div class="tech-stack">
-                      <div class="tech-stack__item">ReactJS</div>
-                      <div class="tech-stack__item">SASS</div>
-                      <div class="tech-stack__item">NodeJS</div>
-                      <div class="tech-stack__item">Firebase</div>
-                      <div class="tech-stack__item">ReactJS</div>
-                      <div class="tech-stack__item">SASS</div>
-                      <div class="tech-stack__item">NodeJS</div>
-                      <div class="tech-stack__item">Firebase</div>
-                    </div>
-                  </div>
-
-                  <div class="block"><h4 class="title">Contributions</h4></div>
-                </div>
-              </ng-template>
-            </mat-tab>
-            <mat-tab label="Ideas">
-              <ng-template matTabContent> <div class="tab-content">Coming Soon</div> </ng-template>
-            </mat-tab>
-            <mat-tab label="Projects">
-              <ng-template matTabContent> <div class="tab-content">Coming Soon</div> </ng-template>
-            </mat-tab>
-          </mat-tab-group>
-        </div>
-
-        <div class="v-mobile">
-          <mat-tab-group mat-align-tabs="center">
-            <mat-tab label="Details">
-              <ng-template matTabContent>
-                <div class="tab-text">
-                  <div class="block">
-                    <h4 class="title">About Me</h4>
-                    <p class="paragraph">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, aperiam nam. Corrupti incidunt
-                      atque ullam, distinctio suscipit perspiciatis sit cupiditate, sequi voluptatum, iste beatae
-                      consectetur quos autem. Voluptas, consequatur sed.
-                    </p>
-                  </div>
-
-                  <div class="block">
-                    <h4 class="title">I am pretty good at</h4>
-                    <div class="tech-stack">
-                      <div class="tech-stack__item">ReactJS</div>
-                      <div class="tech-stack__item">SASS</div>
-                      <div class="tech-stack__item">NodeJS</div>
-                      <div class="tech-stack__item">Firebase</div>
-                      <div class="tech-stack__item">ReactJS</div>
-                      <div class="tech-stack__item">SASS</div>
-                      <div class="tech-stack__item">NodeJS</div>
-                      <div class="tech-stack__item">Firebase</div>
-                    </div>
-                  </div>
-
-                  <div class="block"><h4 class="title">Contributions</h4></div>
-                </div>
-              </ng-template>
-            </mat-tab>
-            <mat-tab label="Ideas">
-              <ng-template matTabContent> <div class="tab-content">Coming Soon</div> </ng-template>
-            </mat-tab>
-            <mat-tab label="Projects">
-              <ng-template matTabContent> <div class="tab-content">Coming Soon</div> </ng-template>
-            </mat-tab>
-            <mat-tab label="Contact">
-              <ng-template matTabContent>
-                <div class="tab-contact">
-                  <div class="profile-details">
-                    <div class="detail-block">
-                      <mat-icon class="detail-block__icon">mail_outline</mat-icon> iit2017017@iiita.ac.in
-                    </div>
-                    <div class="detail-block">
-                      <mat-icon class="detail-block__icon">location_on</mat-icon> Lucknow, India
-                    </div>
-
-                    <div class="detail-block"><mat-icon class="detail-block__icon">cake</mat-icon> 3rd March, 1999</div>
-
-                    <div class="detail-block social-links">
-                      <a href="#">
-                        <img
-                          matTooltip="@joglekaraayush"
-                          class="social-icon"
-                          src="../../../../assets/logos/social/facebook-logo.svg"
-                        />
-                      </a>
-
-                      <a href="#">
-                        <img
-                          matTooltip="@zerefwayne"
-                          class="social-icon"
-                          src="../../../../assets/logos/social/twitter-logo.svg"
-                        />
-                      </a>
-
-                      <a href="#">
-                        <img
-                          matTooltip="@zerefwayne"
-                          class="social-icon"
-                          src="../../../../assets/logos/social/github-logo.svg"
-                        />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </ng-template>
-            </mat-tab>
-          </mat-tab-group>
-        </div>
-      </div>
-
-      <div class="v-desktop">
-        <div class="profile-details">
-          <div class="detail-block">
-            <mat-icon class="detail-block__icon">mail_outline</mat-icon> iit2017017@iiita.ac.in
-          </div>
-          <div class="detail-block"><mat-icon class="detail-block__icon">location_on</mat-icon> Lucknow, India</div>
-
-          <div class="detail-block"><mat-icon class="detail-block__icon">cake</mat-icon> 3rd March, 1999</div>
-
-          <div class="detail-block social-links">
-            <a href="#">
-              <img
-                matTooltip="@joglekaraayush"
-                class="social-icon"
-                src="../../../../assets/logos/social/facebook-logo.svg"
-              />
-            </a>
-
-            <a href="#">
-              <img
-                matTooltip="@zerefwayne"
-                class="social-icon"
-                src="../../../../assets/logos/social/twitter-logo.svg"
-              />
-            </a>
-
-            <a href="#">
-              <img matTooltip="@zerefwayne" class="social-icon" src="../../../../assets/logos/social/github-logo.svg" />
-            </a>
+            <div class="detail-block social-links" *ngIf="user?.social_links">
+              <a *ngFor="let sociallink of sociallinks" [href]="sociallink.socialLink" target="_blank">
+                <img matTooltip="@{{ sociallink.username }}" class="social-icon" src="{{ sociallink.logoUrl }}" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>

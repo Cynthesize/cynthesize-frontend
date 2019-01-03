@@ -1,10 +1,16 @@
-<!-- <div *ngFor="let comment of commentsArray">
-  {{ comment.text }} by {{ comment.user }} at {{ comment.commented_at | date }}
-  <div *ngFor="let reply of comment.replies">
-    {{reply.text}} by {{ reply.user }}  at {{ reply.replied_at | date }}
+<!-- Idea Comment Section -->
+
+<div *ngIf="activityType === 'idea'">
+  <div *ngFor="let comment of commentsArray">
+    {{ comment.text }} by {{ comment.user }} at {{ comment.commented_at | date }}
+    <div *ngFor="let reply of comment.replies">
+      {{ reply.text }} by {{ reply.user }} at {{ reply.replied_at | date }}
+    </div>
+    <br />
   </div>
-  <br>
-</div> -->
+</div>
+
+<!-- Issue Comment Section  -->
 
 <div *ngIf="issueCommentObject">
   <div *ngFor="let comment of issueCommentObject">
