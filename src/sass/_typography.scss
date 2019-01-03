@@ -14,6 +14,15 @@
   }
 }
 
+.heading--xl {
+  font-size: 4.5rem;
+
+  @media (max-width: $bp-6) {
+    font-size: 4rem;
+    text-align: center;
+  }
+}
+
 .heading--title {
   font-size: 2rem;
   line-height: 120%;
