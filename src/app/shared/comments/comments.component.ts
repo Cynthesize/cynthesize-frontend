@@ -43,8 +43,8 @@ export class CommentsComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     if (this.activityType === 'issue') {
       this.projectId = this.router.url.split('/')[2];
-    } else {
-      console.log('Not issue');
+    } else if (this.activityType === 'idea') {
+      this.fetchIdeaComments();
     }
   }
 
