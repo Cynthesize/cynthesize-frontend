@@ -1,6 +1,10 @@
 <div class="panel-main__heading">
   <div class="panel-main__topic">{{ getPageName() }}</div>
 
+  <div *ngIf="getPageName() === 'Home'">
+    <div *ngFor="let property of (project | keyvalue)">{{ property.key }} : {{ property.value }}</div>
+  </div>
+
   <button mat-raised-button (click)="initAddIssueDialogue()" style="border-radius: 30px;">
     <mat-icon>library_add</mat-icon> Add Issue
   </button>
