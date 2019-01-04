@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, Inject } from '@angular/core';
 import { ProjectService } from '@app/core/project/project.service';
 import { finalize } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-issue',
@@ -22,7 +23,12 @@ export class IssueComponent implements OnInit {
   ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ipsa nostrum odio est ea, nulla pariatur. Laudantium
   totam eius repudiandae iste, saepe illum commodi quidem suscipit architecto aspernatur, quibusdam labore.`;
 
-  constructor(private projectService: ProjectService, private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private projectService: ProjectService,
+    private route: ActivatedRoute,
+    private router: Router,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -85,5 +91,27 @@ export class IssueComponent implements OnInit {
 
   initAddIssueDialogue() {
     console.log('Modal init');
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddIssueComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+}
+
+@Component({
+  selector: 'app-add-issue',
+  templateUrl: 'add-issue.html'
+})
+export class AddIssueComponent {
+  constructor(public dialogRef: MatDialogRef<AddIssueComponent>) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
