@@ -135,8 +135,8 @@ export class AddIssueComponent {
   }
   addIssue() {
     this.projectService.addIssue(this.checkpointName.value, this.issueText.value, project.id).subscribe(data => {
-      console.log(data);
       this.onNoClick();
+      location.reload();
     });
   }
 }
