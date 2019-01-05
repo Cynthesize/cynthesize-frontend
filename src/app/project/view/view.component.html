@@ -14,14 +14,14 @@
       </h2>
       <ul class="checkpoint-list__list">
         <li
-          [routerLink]="['/project/1/view']"
+          [routerLink]="['/project/' + project.project_id + '/view']"
           [ngClass]="{ active: isBarActive() === 'Home' }"
           class="checkpoint-list__item"
         >
           Home
         </li>
         <li
-          [routerLink]="['/project/1/view/', checkpoint.key]"
+          [routerLink]="['/project/' + project.project_id + '/view/', checkpoint.key]"
           routerLinkActive="active"
           class="checkpoint-list__item"
           *ngFor="let checkpoint of (checkpointList | keyvalue)"

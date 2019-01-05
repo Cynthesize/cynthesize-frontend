@@ -4,6 +4,10 @@ import { finalize } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { FormControl, Validators } from '@angular/forms';
+import { Project } from '@app/shared/objects';
+
+let project: any = {};
 
 @Component({
   selector: 'app-issue',
@@ -13,15 +17,10 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 })
 export class IssueComponent implements OnInit {
   activeCheckpoint: string;
-  project: Observable<any>;
+  projectDetails: Observable<Project>;
   issues: Observable<any>;
   checkpointList = {};
   sub: any;
-  public editorContent = `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore facilis similique
-  odit aliquid eligendi laboriosam repudiandae quam veritatis, harum officia, ratione neque quas natus quibusdam alias
-  hic, id libero doloribus! Lorem
-  ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ipsa nostrum odio est ea, nulla pariatur. Laudantium
-  totam eius repudiandae iste, saepe illum commodi quidem suscipit architecto aspernatur, quibusdam labore.`;
 
   constructor(
     private projectService: ProjectService,
@@ -45,10 +44,8 @@ export class IssueComponent implements OnInit {
       .pipe(finalize(() => {}))
       .subscribe(
         (data: any) => {
-          if (data === {}) {
-            // this.router.navigate(['not-found']);
-          }
-          this.project = data;
+          project = data;
+          this.projectDetails = data;
           this.checkpointList = this._getCheckpointData(data['area_of_issues_open'][0]);
           Object.keys(this.checkpointList).forEach(checkpoint => {
             if (checkpoint === checkpointName) {
@@ -86,16 +83,17 @@ export class IssueComponent implements OnInit {
   }
 
   getPageName() {
-    return this.router.url.split('/')[4] || 'Home';
+    return decodeURI(this.router.url.split('/')[4] || 'Home');
   }
 
   initAddIssueDialogue() {
     console.log('Modal init');
+    this.openDialog();
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddIssueComponent, {
-      width: '250px'
+      width: 'auto'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -109,9 +107,36 @@ export class IssueComponent implements OnInit {
   templateUrl: 'add-issue.html'
 })
 export class AddIssueComponent {
-  constructor(public dialogRef: MatDialogRef<AddIssueComponent>) {}
+  checkpointName = new FormControl('', [Validators.required]);
+  issueText = new FormControl('', [Validators.required]);
+  checkpoints = [
+    'Design',
+    'Ideation',
+    'Market',
+    'Tech Stack',
+    'Product Domain',
+    'MVP',
+    'Security',
+    'Funding',
+    'Team',
+    'Miscellaneous'
+  ];
+  options: any = {
+    lineWrapping: true
+  };
+  constructor(
+    public dialogRef: MatDialogRef<AddIssueComponent>,
+    private projectService: ProjectService,
+    private router: Router
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  addIssue() {
+    this.projectService.addIssue(this.checkpointName.value, this.issueText.value, project.id).subscribe(data => {
+      console.log(data);
+      this.onNoClick();
+    });
   }
 }
