@@ -81,7 +81,25 @@ export class ProjectService {
     };
     return this.http.post<any>(BACKEND_URLS.ADD_ISSUE_COMMENT, IssueComment, this.httpOptions).pipe(
       map((res: any) => {
-        console.log(res);
+        return res;
+      })
+    );
+  }
+
+  /**
+   * Add Issue for a checkpoint in the project.
+   */
+  public addIssue(checkpointName: string, issuesDescription: string, projectId: string) {
+    const issue = {
+      checkpoint_name: checkpointName,
+      description: issuesDescription,
+      project_id: projectId,
+      created_by: JSON.parse(localStorage.getItem('credentials'))['user_id']
+    };
+    console.log(issue);
+
+    return this.http.post<any>(BACKEND_URLS.ADD_ISSUE, issue, this.httpOptions).pipe(
+      map((res: any) => {
         return res;
       })
     );

@@ -2,7 +2,7 @@
   <div class="panel-main__topic">{{ getPageName() }}</div>
 
   <div *ngIf="getPageName() === 'Home'">
-    <div *ngFor="let property of (project | keyvalue)">{{ property.key }} : {{ property.value }}</div>
+    <div *ngFor="let property of (projectDetails | keyvalue)">{{ property.key }} : {{ property.value }}</div>
   </div>
 
   <button mat-raised-button (click)="initAddIssueDialogue()" style="border-radius: 30px;">
@@ -18,7 +18,9 @@
       <div class="issue-info__time">{{ issue.created_on | date }}</div>
     </div>
 
-    <div class="issue-text">{{ issue.description }}</div>
+    <div class="issue-text">
+      <td-markdown> {{ issue.description }} </td-markdown>
+    </div>
 
     <div class="issue-comments">
       <h4 class="issue-comments__heading">DISCUSSION</h4>

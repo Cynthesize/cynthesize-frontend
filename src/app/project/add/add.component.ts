@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./add.component.scss']
 })
 export class AddComponent implements OnInit {
+  isLinear = false;
   project: FormGroup;
   foods: any[] = [
     { value: 'steak-0', viewValue: 'Steak' },
