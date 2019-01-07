@@ -2,6 +2,7 @@
 
 <div class="comment">
   <div class="comment__info" *ngIf="type === 'comment'">
+    <div class="comment__info--photo"><img src="../../../../assets/user.png" /></div>
     <div class="comment__info--user">{{ user }}</div>
     <div class="comment__info--time">{{ time | timeDiff }}</div>
   </div>
@@ -11,6 +12,7 @@
   <div class="comment__replies" *ngIf="type === 'reply'">
     <div class="reply">
       <div class="reply__info">
+        <div class="comment__info--photo"><img src="../../../../assets/user.png" /></div>
         <div class="reply__info--user">{{ user }}</div>
         <div class="reply__info--time">{{ time | timeDiff }}</div>
       </div>
