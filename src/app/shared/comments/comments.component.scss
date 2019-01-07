@@ -9,7 +9,24 @@
 
     margin-bottom: 1rem;
 
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+
+    &--photo {
+      height: 3rem;
+      width: 3rem;
+      border-radius: 50%;
+      margin-right: 1rem;
+      overflow: hidden;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        height: 100%;
+        width: auto;
+      }
+    }
 
     &--user {
       margin-right: 1rem;
@@ -21,7 +38,8 @@
   }
 
   &__text {
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    font-size: 1.6rem;
   }
 
   &__replies {
@@ -33,17 +51,39 @@
 
 .reply {
   width: 80%;
-  padding: 2rem 0;
+  padding: 1rem 0 0 0;
 
   &:not(:last-of-type) {
     border-bottom: 1px solid rgb(221, 221, 221);
   }
 
+  &__text {
+    font-size: 1.6rem;
+  }
+
   &__info {
     display: flex;
+    align-items: center;
     margin-bottom: 1rem;
 
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+
+    &--photo {
+      height: 3rem;
+      width: 3rem;
+      border-radius: 50%;
+      margin-right: 1rem;
+      overflow: hidden;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        height: 100%;
+        width: auto;
+      }
+    }
 
     &--user {
       margin-right: 1rem;
@@ -62,4 +102,12 @@
 .CodeMirror {
   padding: 0;
   max-height: 30px;
+}
+
+.comment > * {
+  margin-bottom: 2rem;
+}
+
+.new_comment {
+  font-size: 1.6rem;
 }
