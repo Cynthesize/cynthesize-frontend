@@ -15,6 +15,8 @@ import { FormsModule } from '@angular/forms';
 import { TimeDiffPipe } from './pipes/time-diff.pipe';
 import { CovalentTextEditorModule } from '@covalent/text-editor';
 import { CovalentMarkdownModule } from '@covalent/markdown';
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import * as Cloudinary from 'cloudinary-core';
 
 @NgModule({
   imports: [
@@ -25,7 +27,8 @@ import { CovalentMarkdownModule } from '@covalent/markdown';
     MomentModule,
     FormsModule,
     CovalentTextEditorModule,
-    CovalentMarkdownModule
+    CovalentMarkdownModule,
+    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'cynthesize' })
   ],
   declarations: [
     LoaderComponent,

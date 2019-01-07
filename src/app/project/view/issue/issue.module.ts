@@ -8,9 +8,10 @@ import { MaterialModule } from '@app/material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CovalentMarkdownModule } from '@covalent/markdown';
 import { CovalentTextEditorModule } from '@covalent/text-editor';
+import { DetachedIssueComponent } from './detached-issue/detached-issue.component';
 
 @NgModule({
-  declarations: [IssueComponent, AddIssueComponent],
+  declarations: [IssueComponent, AddIssueComponent, DetachedIssueComponent],
   entryComponents: [AddIssueComponent],
   imports: [
     CommonModule,
