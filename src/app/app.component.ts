@@ -42,7 +42,9 @@ export class AppComponent implements OnInit {
           });
         }
       });
-      this.snackBar.open(errorMessage);
+      this.snackBar.open(errorMessage, 'Okay', {
+        duration: 2000
+      });
     });
   }
 
