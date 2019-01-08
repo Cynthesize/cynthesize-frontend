@@ -8,6 +8,8 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 import { environment } from '@env/environment';
 import { Logger, I18nService } from '@app/core';
+import { ErrorHandlerService } from './core/error-handler.service';
+import { MatSnackBar } from '@angular/material';
 
 const log = new Logger('App');
 
@@ -25,8 +27,24 @@ export class AppComponent implements OnInit {
     // do not remove the analytics injection, even if the call in ngOnInit() is removed
     // this injection initializes page tracking through the router
     private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
-    private i18nService: I18nService
-  ) {}
+    private i18nService: I18nService,
+    private errorHandler: ErrorHandlerService,
+    private snackBar: MatSnackBar
+  ) {
+    this.errorHandler.subj_notification.subscribe(message => {
+      let errorMessage = '';
+      Object.keys(message['error']).forEach(category => {
+        if (typeof (message['error'][category] === 'string')) {
+          errorMessage += message['error'][category] + '\n';
+        } else if (typeof message['error'][category] === 'object') {
+          message['error'][category].forEach((messageString: any) => {
+            errorMessage += messageString + '\n';
+          });
+        }
+      });
+      this.snackBar.open(errorMessage);
+    });
+  }
 
   ngOnInit() {
     // Setup logger

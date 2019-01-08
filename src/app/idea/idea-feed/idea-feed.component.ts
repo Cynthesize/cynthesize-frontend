@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { IdeaService } from '@app/core/idea/idea.service';
 import { finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { ErrorHandlerService } from '@app/core/error-handler.service';
 
 @Component({
   selector: 'app-idea-feed',
@@ -10,10 +11,11 @@ import { Router } from '@angular/router';
 })
 export class IdeaFeedComponent implements OnInit {
   isLoading = false;
-  @Input('data') collection: any = [];
-  totalCount: number = 20;
-  pageIndex: number = 1;
-  constructor(private ideaService: IdeaService, private router: Router) {}
+  @Input('data')
+  collection: any = [];
+  totalCount = 20;
+  pageIndex = 1;
+  constructor(private ideaService: IdeaService, private router: Router, private errorHandler: ErrorHandlerService) {}
 
   ngOnInit() {
     this.getCurrentPagesIdeas(1);
@@ -38,7 +40,7 @@ export class IdeaFeedComponent implements OnInit {
           this.isLoading = true;
         },
         (error: any) => {
-          console.log(error);
+          this.errorHandler.subj_notification.next(error);
         }
       );
   }

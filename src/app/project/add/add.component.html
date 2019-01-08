@@ -2,19 +2,18 @@
   <div class="container--add-project">
     <div class="content">
       <h1 class="heading--xl">Add Project</h1>
-      <div class="form">
-        <mat-vertical-stepper [linear]="isLinear" #stepper>
-          <mat-step [stepControl]="project">
-            <form [formGroup]="project">
+      <form [formGroup]="project" (keydown.enter)="$event.preventDefault()">
+        <div class="form">
+          <div *ngIf="formNotfilled"><i>Please fill all the fields.</i></div>
+          <mat-vertical-stepper [linear]="isLinear" #stepper>
+            <mat-step [stepControl]="project">
               <ng-template matStepLabel>Enter your project name</ng-template>
               <mat-form-field class="text">
                 <input matInput placeholder="Eg: Cynthesize" formControlName="projectName" required />
               </mat-form-field>
               <div><button mat-button matStepperNext>Next</button></div>
-            </form>
-          </mat-step>
-          <mat-step [stepControl]="project">
-            <form [formGroup]="project">
+            </mat-step>
+            <mat-step [stepControl]="project">
               <ng-template matStepLabel>Enter your project ID</ng-template>
               <mat-form-field class="text">
                 <input
@@ -28,10 +27,8 @@
               <div>
                 <button mat-button matStepperPrevious>Back</button> <button mat-button matStepperNext>Next</button>
               </div>
-            </form>
-          </mat-step>
-          <mat-step [stepControl]="project">
-            <form [formGroup]="project">
+            </mat-step>
+            <mat-step [stepControl]="project">
               <ng-template matStepLabel>Enter a brief description of your project</ng-template>
               <mat-form-field class="text">
                 <input matInput placeholder="Description" formControlName="description" required />
@@ -39,10 +36,8 @@
               <div>
                 <button mat-button matStepperPrevious>Back</button> <button mat-button matStepperNext>Next</button>
               </div>
-            </form>
-          </mat-step>
-          <mat-step [stepControl]="project">
-            <form [formGroup]="project">
+            </mat-step>
+            <mat-step [stepControl]="project">
               <ng-template matStepLabel>What's your status</ng-template>
               <mat-form-field class="text">
                 <input matInput placeholder="Eg: Ideation" formControlName="currentStage" required />
@@ -50,18 +45,18 @@
               <div>
                 <button mat-button matStepperPrevious>Back</button> <button mat-button matStepperNext>Next</button>
               </div>
-            </form>
-          </mat-step>
-          <mat-step>
-            <ng-template matStepLabel>Done</ng-template>
-            Click Submit button to add the project.
-            <div>
-              <button mat-button (click)="stepper.reset()">Reset</button>
-              <button mat-button (click)="addProject()">Submit</button>
-            </div>
-          </mat-step>
-        </mat-vertical-stepper>
-      </div>
+            </mat-step>
+            <mat-step>
+              <ng-template matStepLabel>Done</ng-template>
+              Click Submit button to add the project.
+              <div>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+                <button mat-button (click)="addProject()">Submit</button>
+              </div>
+            </mat-step>
+          </mat-vertical-stepper>
+        </div>
+      </form>
     </div>
     <div class="picture"></div>
   </div>

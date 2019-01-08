@@ -1,9 +1,10 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ProjectService } from '@app/core/project/project.service';
-import { finalize, switchMap } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Project } from '@app/shared/objects';
+import { ErrorHandlerService } from '@app/core/error-handler.service';
 
 @Component({
   selector: 'app-view',
@@ -15,7 +16,11 @@ export class ViewComponent implements OnInit {
   checkpointList = {};
   currentActiveBar = 'Home';
 
-  constructor(private projectService: ProjectService, private router: Router) {
+  constructor(
+    private projectService: ProjectService,
+    private router: Router,
+    private errorHandler: ErrorHandlerService
+  ) {
     this.getProject();
   }
 
@@ -35,7 +40,7 @@ export class ViewComponent implements OnInit {
           }
         },
         (error: any) => {
-          console.log(error);
+          this.errorHandler.subj_notification.next(error);
         }
       );
   }
