@@ -7,6 +7,7 @@ import { MatSnackBar, MatChipInputEvent } from '@angular/material';
 import { AuthenticationService } from '@app/core/authentication/authentication.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { ErrorHandlerService } from '@app/core/error-handler.service';
 
 @Component({
   selector: 'app-details',
@@ -36,9 +37,9 @@ export class DetailsComponent implements OnInit {
   constructor(
     private profileService: ProfileService,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private errorHandler: ErrorHandlerService
   ) {
     this.username = this.route.snapshot.params.username;
     this.loggedInUsername = this.authenticationService.credentials.username;
@@ -89,27 +90,7 @@ export class DetailsComponent implements OnInit {
           });
         },
         (error: any) => {
-          this.errorString = '';
-          for (let i = 0; i < Object.keys(error.error).length; i++) {
-            this.errorString +=
-              Object.keys(error.error)
-                [i].toString()
-                .charAt(0)
-                .toUpperCase() +
-              Object.keys(error.error)
-                [i].toString()
-                .slice(1) +
-              ': ' +
-              error.error[Object.keys(error.error)[i]]
-                .toString()
-                .charAt(0)
-                .toUpperCase() +
-              error.error[Object.keys(error.error)[i]].toString().slice(1) +
-              '\n';
-          }
-          this.snackBar.open(this.errorString, 'Ok', {
-            duration: 10000
-          });
+          this.errorHandler.subj_notification.next(error);
         }
       );
   }
@@ -135,7 +116,7 @@ export class DetailsComponent implements OnInit {
           location.reload();
         },
         (error: any) => {
-          console.log(error);
+          this.errorHandler.subj_notification.next(error);
         }
       );
   }

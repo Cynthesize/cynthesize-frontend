@@ -7,6 +7,7 @@ import { IdeaService } from '@app/core/idea/idea.service';
 import { Logger } from '@app/core';
 import { finalize } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { ErrorHandlerService } from '@app/core/error-handler.service';
 
 export interface Tags {
   name: string;
@@ -34,7 +35,11 @@ export class IdeaComponent implements OnInit {
 
   tags: Tags[] = [{ name: 'Artificial Intelligence' }, { name: 'Robotics' }, { name: 'Web Application' }];
 
-  constructor(private formBuilder: FormBuilder, private ideaService: IdeaService, private router: ActivatedRoute) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private ideaService: IdeaService,
+    private errorHandler: ErrorHandlerService
+  ) {
     this.createForm();
   }
 
@@ -53,10 +58,7 @@ export class IdeaComponent implements OnInit {
           log.debug(`Idea Added`);
         },
         error => {
-          console.log(error);
-          for (let i = 0; i < Object.keys(error.error).length; i++) {
-            this.error = error.error[Object.keys(error.error)[i]];
-          }
+          this.errorHandler.subj_notification.next(error);
         }
       );
   }

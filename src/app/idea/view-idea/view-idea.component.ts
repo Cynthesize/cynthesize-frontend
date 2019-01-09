@@ -5,6 +5,7 @@ import { Idea } from '@app/shared/idea';
 import { IdeaService } from '@app/core/idea/idea.service';
 import { finalize, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { ErrorHandlerService } from '@app/core/error-handler.service';
 
 @Component({
   selector: 'app-view-idea',
@@ -20,7 +21,8 @@ export class ViewIdeaComponent implements OnInit {
     private title: Title,
     private activatedRoute: ActivatedRoute,
     private ideaService: IdeaService,
-    private router: Router
+    private router: Router,
+    private errorHandler: ErrorHandlerService
   ) {}
 
   ngOnInit() {
@@ -47,7 +49,7 @@ export class ViewIdeaComponent implements OnInit {
           this.isLoading = true;
         },
         (error: any) => {
-          console.log(error);
+          this.errorHandler.subj_notification.next(error);
         }
       );
   }
