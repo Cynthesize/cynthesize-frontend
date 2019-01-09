@@ -10,8 +10,8 @@
     <div class="checkpoint-list">
       <ul class="checkpoint-list__list">
         <li
-          [routerLink]="['/project/' + project.project_id + '/view']"
-          [ngClass]="{ active: isBarActive() === 'Home' }"
+          (click)="setBarActive('Home')"
+          [ngClass]="{ active: currentActiveBar === 'Home' }"
           class="checkpoint-list__item"
         >
           Home
@@ -20,17 +20,23 @@
       <h2 class="checkpoint-list__heading">Checkpoints</h2>
       <ul>
         <li
-          [routerLink]="['/project/' + project.project_id + '/view/', checkpoint.key]"
-          routerLinkActive="active"
+          (click)="setBarActive(checkpoint.key)"
+          [ngClass]="{ active: currentActiveBar === checkpoint.key }"
           class="checkpoint-list__item"
-          *ngFor="let checkpoint of (checkpointList | keyvalue)"
+          *ngFor="let checkpoint of (_getCheckpointData(project['area_of_issues_open'][0]) | keyvalue)"
         >
           {{ checkpoint.key }}
         </li>
       </ul>
     </div>
   </div>
-  <div class="panel-main"><router-outlet></router-outlet></div>
+  <div class="panel-main">
+    <app-issue
+      [projectId]="project.id"
+      [checkpoints]="project['area_of_issues_open'][0]"
+      [activeCheckpoint]="currentActiveBar"
+    ></app-issue>
+  </div>
   <div class="panel-description">
     <div class="project--description">
       <div class="project--description__heading">Description</div>

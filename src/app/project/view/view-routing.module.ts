@@ -5,17 +5,7 @@ import { ViewComponent } from './view.component';
 const routes: Routes = [
   {
     path: '',
-    component: ViewComponent,
-    children: [
-      {
-        path: ':issueName',
-        loadChildren: './issue/issue.module#IssueModule'
-      },
-      {
-        path: '',
-        loadChildren: './issue/issue.module#IssueModule'
-      }
-    ]
+    component: ViewComponent
   }
 ];
 
