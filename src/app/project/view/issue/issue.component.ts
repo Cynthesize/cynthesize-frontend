@@ -51,7 +51,7 @@ export class IssueComponent implements OnInit {
             if (checkpoint === checkpointName) {
               let idList = '';
               data['area_of_issues_open'][0][checkpointName].forEach((id: any) => {
-                idList += id + ',';
+                idList += id;
               });
               this.projectService
                 .fetchIdea(idList)
