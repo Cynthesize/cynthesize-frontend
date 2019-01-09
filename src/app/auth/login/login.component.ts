@@ -6,6 +6,7 @@ import { finalize } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { Logger, I18nService, AuthenticationService } from '@app/core';
 import { MatSnackBar } from '@angular/material';
+import { ErrorHandlerService } from '@app/core/error-handler.service';
 
 const log = new Logger('Login');
 
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private i18nService: I18nService,
     private authenticationService: AuthenticationService,
-    private snackBar: MatSnackBar
+    private errorHandler: ErrorHandlerService
   ) {
     if (authenticationService.isAuthenticated()) {
       router.navigate(['idea']);
@@ -51,27 +52,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/'], { replaceUrl: true });
         },
         error => {
-          this.errorString = '';
-          for (let i = 0; i < Object.keys(error.error).length; i++) {
-            this.errorString +=
-              Object.keys(error.error)
-                [i].toString()
-                .charAt(0)
-                .toUpperCase() +
-              Object.keys(error.error)
-                [i].toString()
-                .slice(1) +
-              ': ' +
-              error.error[Object.keys(error.error)[i]]
-                .toString()
-                .charAt(0)
-                .toUpperCase() +
-              error.error[Object.keys(error.error)[i]].toString().slice(1) +
-              '\n';
-          }
-          this.snackBar.open(this.errorString, 'Ok', {
-            duration: 10000
-          });
+          this.errorHandler.subj_notification.next(error);
         }
       );
   }

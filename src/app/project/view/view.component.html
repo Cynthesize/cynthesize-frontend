@@ -8,10 +8,6 @@
       <div class="project--status">{{ project.current_stage }}</div>
     </div>
     <div class="checkpoint-list">
-      <h2 class="checkpoint-list__heading">
-        Checkpoints
-        <mat-icon>add_circle</mat-icon>
-      </h2>
       <ul class="checkpoint-list__list">
         <li
           [routerLink]="['/project/' + project.project_id + '/view']"
@@ -20,6 +16,9 @@
         >
           Home
         </li>
+      </ul>
+      <h2 class="checkpoint-list__heading">Checkpoints</h2>
+      <ul>
         <li
           [routerLink]="['/project/' + project.project_id + '/view/', checkpoint.key]"
           routerLinkActive="active"

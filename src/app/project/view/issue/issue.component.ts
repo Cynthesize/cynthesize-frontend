@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { Project } from '@app/shared/objects';
+import { ErrorHandlerService } from '@app/core/error-handler.service';
 
 let project: any = {};
 
@@ -26,7 +27,8 @@ export class IssueComponent implements OnInit {
     private projectService: ProjectService,
     private route: ActivatedRoute,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private errorHandler: ErrorHandlerService
   ) {}
 
   ngOnInit() {
@@ -61,7 +63,7 @@ export class IssueComponent implements OnInit {
                     this.issues = issueObject;
                   },
                   (error: any) => {
-                    console.log(error);
+                    this.errorHandler.subj_notification.next(error);
                   }
                 );
             }
