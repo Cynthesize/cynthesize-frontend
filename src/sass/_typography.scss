@@ -102,3 +102,19 @@ hr.seperator {
     font-size: 1.6rem;
   }
 }
+
+.text {
+  font-family: "Open Sans", serif;
+  font-weight: 400;
+}
+
+.text-button {
+  color: $color-primary;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: 0.2s all ease-in-out;
+
+  &:hover {
+    border-bottom: 1px solid $color-primary;
+  }
+}
