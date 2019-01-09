@@ -35,13 +35,7 @@ export class IssueComponent implements OnInit, OnChanges {
     private errorHandler: ErrorHandlerService
   ) {}
 
-  ngOnInit() {
-    // this.sub = this.activeCheckpoint.subscribe(params => {
-    //   const term = params['issueName'];
-    //   this.getProject(term);
-    //   return term;
-    // });
-  }
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getProject(changes.activeCheckpoint.currentValue);
@@ -54,7 +48,6 @@ export class IssueComponent implements OnInit, OnChanges {
         this.checkpoints[activeCheckpoint].forEach((id: any) => {
           idList += id + ',';
         });
-        console.log(idList);
         this.projectService
           .fetchIdea(idList)
           .pipe(finalize(() => {}))
@@ -70,56 +63,11 @@ export class IssueComponent implements OnInit, OnChanges {
     });
   }
 
-  // const checkpointName = this.activeCheckpoint;
-  // this.projectService
-  //   .getProject(this.router.url.split('/')[2])
-  //   .pipe(finalize(() => { }))
-  //   .subscribe(
-  //     (data: any) => {
-  //       console.log(data);
-  //       project = data;
-  //       this.projectDetails = data;
-  //       this.checkpointList = this._getCheckpointData(data['area_of_issues_open'][0]);
-  //       Object.keys(this.checkpointList).forEach(checkpoint => {
-  //         if (checkpoint === checkpointName) {
-  //           let idList = '';
-  //           data['area_of_issues_open'][0][checkpointName].forEach((id: any) => {
-  //             idList += id + ',';
-  //           });
-  //           this.projectService
-  //             .fetchIdea(idList)
-  //             .pipe(finalize(() => { }))
-  //             .subscribe(
-  //               (issueObject: any) => {
-  //                 this.issues = issueObject;
-  //               },
-  //               (error: any) => {
-  //                 this.errorHandler.subj_notification.next(error);
-  //               }
-  //             );
-  //         }
-  //       });
-  //     },
-  //     (error: any) => {
-  //       console.log(error);
-  //     }
-  //   );
-  _getCheckpointData(recievedObject: Object) {
-    const _tempObject = {};
-    Object.keys(recievedObject).forEach(checkpoint => {
-      if (recievedObject[checkpoint].length > 0) {
-        _tempObject[checkpoint] = recievedObject[checkpoint].length;
-      }
-    });
-    return _tempObject;
-  }
-
   getPageName() {
     return decodeURI(this.router.url.split('/')[4] || 'Home');
   }
 
   initAddIssueDialogue() {
-    console.log('Modal init');
     this.openDialog();
   }
 
@@ -128,9 +76,7 @@ export class IssueComponent implements OnInit, OnChanges {
       width: 'auto'
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    dialogRef.afterClosed().subscribe(result => {});
   }
 }
 

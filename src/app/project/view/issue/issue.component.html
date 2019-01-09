@@ -2,11 +2,11 @@
   <div class="panel-main__topic">{{ activeCheckpoint }}</div>
   <!-- <div *ngIf="getPageName() === 'Home'">
     <div *ngFor="let property of (projectDetails | keyvalue)">{{ property.key }} : {{ property.value }}</div>
-  </div> -->
+  </div>
 
   <button mat-raised-button (click)="initAddIssueDialogue()" style="border-radius: 30px;">
     <mat-icon>library_add</mat-icon> Add Issue
-  </button>
+  </button> -->
 </div>
 <div class="panel-main__issues" *ngFor="let issue of issues">
   <app-detached-issue [issue]="issue"></app-detached-issue>

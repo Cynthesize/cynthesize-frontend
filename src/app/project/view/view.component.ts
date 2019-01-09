@@ -35,7 +35,6 @@ export class ViewComponent implements OnInit {
             this.router.navigate(['not-found']);
           } else {
             this.project = data;
-            console.log(data);
           }
         },
         (error: any) => {
@@ -46,7 +45,6 @@ export class ViewComponent implements OnInit {
 
   _getCheckpointData(recievedObject: Object) {
     const _tempObject = {};
-    console.log(recievedObject);
     Object.keys(recievedObject).forEach(checkpoint => {
       if (recievedObject[checkpoint].length > 0) {
         _tempObject[checkpoint] = recievedObject[checkpoint].length;

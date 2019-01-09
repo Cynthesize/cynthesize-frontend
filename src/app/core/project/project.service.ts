@@ -87,6 +87,22 @@ export class ProjectService {
   }
 
   /**
+   * Add Reply for a comment in the project.
+   */
+  public addReply(commentId: string, replyText: string) {
+    const IssueCommentReply = {
+      comment_id: commentId,
+      reply_text: replyText,
+      respondent: JSON.parse(localStorage.getItem('credentials'))['user_id']
+    };
+    return this.http.post<any>(BACKEND_URLS.ADD_ISSUE_COMMENT_REPLY, IssueCommentReply, this.httpOptions).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
+  /**
    * Add Issue for a checkpoint in the project.
    */
   public addIssue(checkpointName: string, issuesDescription: string, projectId: string) {

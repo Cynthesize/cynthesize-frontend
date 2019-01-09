@@ -1,6 +1,7 @@
 const BACKEND_URLS = {
   ADD_ISSUE: '/project/issue',
   ADD_ISSUE_COMMENT: '/project/issue/comment',
+  ADD_ISSUE_COMMENT_REPLY: '/project/issue/reply',
   COMMENT: '/comment/get',
   FETCH_COMMENTS: '/comment/',
   FETCH_ISSUE_OBJECT: '/project/issue',

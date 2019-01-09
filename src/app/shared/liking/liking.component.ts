@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { IdeaService } from '@app/core/idea/idea.service';
 import { finalize } from 'rxjs/operators';
 import { AuthenticationService } from '@app/core';
+import { ErrorHandlerService } from '@app/core/error-handler.service';
 
 @Component({
   selector: 'app-liking',
@@ -16,7 +17,11 @@ export class LikingComponent implements OnInit {
 
   liked = false;
 
-  constructor(private ideaService: IdeaService, public authenticationService: AuthenticationService) {}
+  constructor(
+    private ideaService: IdeaService,
+    public authenticationService: AuthenticationService,
+    private errorHandler: ErrorHandlerService
+  ) {}
 
   isLiked() {
     if (this.liked === true) {
@@ -36,7 +41,7 @@ export class LikingComponent implements OnInit {
         },
         (error: any) => {
           this.liked = false;
-          console.log(error);
+          this.errorHandler.subj_notification.next(error);
         }
       );
   }
