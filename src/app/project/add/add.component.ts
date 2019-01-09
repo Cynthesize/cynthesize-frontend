@@ -14,11 +14,6 @@ export class AddComponent implements OnInit {
   isLinear = false;
   project: FormGroup;
   formNotfilled = false;
-  foods: any[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' }
-  ];
   constructor(
     private _formBuilder: FormBuilder,
     private projectService: ProjectService,
@@ -36,7 +31,7 @@ export class AddComponent implements OnInit {
   }
 
   generateProjectId() {
-    const id = this.project.get('projectName').value + Math.round(Date.now() / 1000000);
+    const id = this.project.get('projectName').value.replace(/ /g, '-') + Math.round(Date.now() / 1000000);
     this.project.get('projectId').setValue(id);
     return id;
   }
