@@ -1,96 +1,50 @@
 <!-- <simplemde [(ngModel)]="content" [options]="{ toolbar: ['bold', 'italic', 'heading', '|', 'quote'] }"></simplemde> -->
-
-<!-- <div class="comment">
-
-  <div class="comment__left-pane" *ngIf="type === 'comment'">
-    <div class="comment__info--photo"><img src="../../../../assets/user.png" /></div>
-
-  </div>
-  <div class="comment__right-pane">
-      <div class="comment__info" *ngIf="type === 'comment'">
-          <div class="comment__info--user">{{ user }}</div>
-          <div class="comment__info--time">{{ time | timeDiff }}</div>
-        </div>
-        
-        <div class="comment__text" *ngIf="type === 'comment'">
-          <td-markdown> {{ content }} </td-markdown>
-        </div>
-      
-        <div class="comment__replies" *ngIf="type === 'reply'">
-          <div class="reply">
-            <div class="reply__left-pane">
-              <div class="reply__info--photo"><img src="../../../../assets/user.png" /></div>
-            </div>
-            <div class="reply__right-pane">
-                <div class="reply__info">
-                    <div class="reply__info--user">{{ user }}</div>
-                    <div class="reply__info--time">{{ time | timeDiff }}</div>
-                  </div>
-                  <div class="reply__text">
-                    <td-markdown> {{ content }} </td-markdown>
-                  </div>
-            </div>
-          </div>
-        </div>
-
-  </div>
-</div> -->
-
 <div class="comment">
   <div class="comment__left-pane">
     <div class="comment__info--photo"><img src="../../../../assets/user.png" /></div>
   </div>
   <div class="comment__right-pane">
     <div class="comment__info">
-      <div class="comment__info--user">aayushjoglekar</div>
-      <div class="comment__info--time">3 days ago</div>
+      <div
+        class="comment__info--user"
+        [routerLink]="['/user', comment.commenter]"
+        routerLinkActive="router-link-active"
+      >
+        {{ comment.commenter }}
+      </div>
+      <div class="comment__info--time">{{ comment.timestamp | timeDiff }}</div>
       <span class="gap">&bull;</span>
-      <div class="comment__info--upvote text-button">&#x25B2; Upvote (23)</div>
+      <div class="comment__info--upvote text-button">&#x25B2; Upvote ({{ comment.likes }})</div>
       <span class="gap">&bull;</span>
-      <div class="comment__info--reply text-button">Reply</div>
+      <div class="comment__info--reply text-button" (click)="replyToComment()">Reply</div>
     </div>
     <div class="comment__text">
       <p class="text">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis, minus pariatur vitae atque neque ullam
-        porro voluptatum perspiciatis, vel quos consequuntur? Deleniti placeat a repudiandae, quasi similique voluptatem
-        voluptas suscipit! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum necessitatibus, deleniti sed
-        enim officia laboriosam placeat eos. Libero, modi dolor? Consequatur saepe eligendi ab aliquid, commodi animi
-        accusamus quos similique!
+        <td-markdown> {{ comment.comment_text }} </td-markdown>
       </p>
     </div>
 
     <div class="comment__replies">
-      <div class="reply">
+      <div class="reply" *ngFor="let reply of comment.comment_replies">
         <div class="reply__left-pane">
           <div class="reply__info--photo"><img src="../../../../assets/user.png" /></div>
         </div>
         <div class="reply__right-pane">
           <div class="reply__info">
-            <div class="reply__info--user">zerefwayne</div>
-            <div class="reply__info--time">4 hours ago</div>
+            <div class="reply__info--user" [routerLink]="['/user', reply.respondent]">{{ reply.respondent }}</div>
+            <div class="reply__info--time">{{ reply.timestamp | timeDiff }}</div>
           </div>
-          <div class="reply__text text">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat excepturi voluptatum, enim aut perferendis
-            tenetur dolorem id maiores iure modi illum aspernatur, est doloribus cupiditate eveniet neque consectetur
-            quis quam.
+          <div class="reply__text">
+            <p class=" text">
+              <td-markdown> {{ reply.reply_text }} </td-markdown>
+            </p>
           </div>
         </div>
       </div>
-      <div class="reply">
-        <div class="reply__left-pane">
-          <div class="reply__info--photo"><img src="../../../../assets/user.png" /></div>
-        </div>
-        <div class="reply__right-pane">
-          <div class="reply__info">
-            <div class="reply__info--user">zerefwayne</div>
-            <div class="reply__info--time">4 hours ago</div>
-          </div>
-          <div class="reply__text text">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat excepturi voluptatum, enim aut perferendis
-            tenetur dolorem id maiores iure modi illum aspernatur, est doloribus cupiditate eveniet neque consectetur
-            quis quam.
-          </div>
-        </div>
+      <div *ngIf="replying">
+        <td-text-editor [(ngModel)]="reply" [options]="options"></td-text-editor>
+        <button mat-button (click)="cancel()">Cancel</button>
+        <button mat-button (click)="addCommentReply(comment.id)">Post Reply</button>
       </div>
     </div>
   </div>

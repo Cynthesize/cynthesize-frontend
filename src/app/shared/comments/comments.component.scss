@@ -7,7 +7,6 @@
 
   border-radius: 0.5rem;
   padding: 1rem;
-  margin-bottom: 2rem;
   display: flex;
 
   &__left-pane {
@@ -21,8 +20,6 @@
   &__info {
     display: flex;
     align-items: center;
-
-    margin-bottom: 2rem;
 
     font-size: 1.6rem;
 
@@ -45,6 +42,7 @@
 
     &--user {
       margin-right: 1rem;
+      cursor: pointer;
     }
 
     &--time {
@@ -60,12 +58,12 @@
   &__replies {
     display: flex;
     flex-direction: column;
-    margin-left: 5rem;
+    margin-left: -1rem;
   }
 }
 
 .reply {
-  padding: 2rem 0;
+  padding: 1rem 0;
 
   display: flex;
 
@@ -125,6 +123,7 @@
 .CodeMirror {
   padding: 0;
   max-height: 30px;
+  min-height: 200px !important;
 }
 
 .comment > * {

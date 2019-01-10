@@ -17,11 +17,13 @@ import { CovalentTextEditorModule } from '@covalent/text-editor';
 import { CovalentMarkdownModule } from '@covalent/markdown';
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as Cloudinary from 'cloudinary-core';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     FlexLayoutModule,
     MaterialModule,
+    RouterModule,
     CommonModule,
     SimplemdeModule.forRoot(),
     MomentModule,
