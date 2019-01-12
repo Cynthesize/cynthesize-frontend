@@ -8,6 +8,7 @@ import { AuthenticationService } from '@app/core/authentication/authentication.s
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-details',
@@ -53,8 +54,9 @@ export class DetailsComponent implements OnInit {
       location: new FormControl(''),
       website: new FormControl('')
     });
+    this.fetchUserContributions();
     this.profileService
-      .getUserDetails(this.username)
+      .getUserDetails()
       .pipe(finalize(() => {}))
       .subscribe(
         (data: any) => {
@@ -138,5 +140,20 @@ export class DetailsComponent implements OnInit {
     if (index >= 0) {
       this.listOfTech.splice(index, 1);
     }
+  }
+
+  fetchUserContributions() {
+    this.profileService
+      .getUserContributions()
+      .pipe(finalize(() => {}))
+      .subscribe(
+        (data: any) => {
+          this.user.idea_list = data.idea_list;
+          this.user.project_list = data.project_list;
+        },
+        (error: any) => {
+          this.errorHandler.subj_notification.next(error);
+        }
+      );
   }
 }

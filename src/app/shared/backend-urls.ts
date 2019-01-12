@@ -11,6 +11,7 @@ const BACKEND_URLS = {
   UPDATE_UPVOTES: '/idea/vote/',
   USER_AUTH_LOGIN: '/user/login/',
   USER_AUTH_REGISTER: '/user/register/',
+  USER_CONTRIBUTIONS_DETAILS: '/user/contrib',
   USER_DETAILS: '/user/view'
 };
 

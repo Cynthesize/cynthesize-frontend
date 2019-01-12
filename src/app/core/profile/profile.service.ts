@@ -19,9 +19,26 @@ export class ProfileService {
   /**
    * getUserDetails
    */
-  public getUserDetails(username: string) {
+  public getUserDetails() {
     return this.http
       .get(BACKEND_URLS.USER_DETAILS, {
+        params: {
+          username: this.router.url.split('/')[2]
+        }
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * getUserContributions
+   */
+  public getUserContributions() {
+    return this.http
+      .get(BACKEND_URLS.USER_CONTRIBUTIONS_DETAILS, {
         params: {
           username: this.router.url.split('/')[2]
         }
