@@ -15,6 +15,7 @@ import { ProjectService } from '@app/core/project/project.service';
 import { EditableDirective } from '../editable.directive';
 import { IssueComments } from '../objects';
 import { Router } from '@angular/router';
+import { ErrorHandlerService } from '@app/core/error-handler.service';
 
 @Component({
   selector: 'app-comments',
@@ -38,7 +39,12 @@ export class CommentsComponent implements OnInit, OnChanges {
   commentingOnIssue = false;
   projectId: string;
 
-  constructor(private ideaService: IdeaService, private projectService: ProjectService, private router: Router) {}
+  constructor(
+    private ideaService: IdeaService,
+    private projectService: ProjectService,
+    private router: Router,
+    private errorHandler: ErrorHandlerService
+  ) {}
 
   ngOnInit(): void {
     if (this.activityType === 'issue') {
@@ -63,7 +69,7 @@ export class CommentsComponent implements OnInit, OnChanges {
           this.commentsArray = data;
         },
         (error: any) => {
-          console.log(error);
+          this.errorHandler.subj_notification.next(error);
         }
       );
   }
@@ -80,10 +86,9 @@ export class CommentsComponent implements OnInit, OnChanges {
         comment => {
           comment.commenter = JSON.parse(localStorage.getItem('credentials'))['username'];
           this.issueCommentObject.push(comment);
-          console.log(`Comment Added`);
         },
         error => {
-          console.log(error);
+          this.errorHandler.subj_notification.next(error);
         }
       );
   }

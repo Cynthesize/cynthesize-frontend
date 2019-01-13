@@ -14,31 +14,14 @@
 
 <div *ngIf="issueCommentObject">
   <div *ngFor="let comment of issueCommentObject">
-    <app-editable-comment
-      [content]="comment.comment_text"
-      [type]="'comment'"
-      [time]="comment.timestamp"
-      [user]="comment.commenter"
-      (commentEdited)="onCommentEdited(comment, $event)"
-    >
+    <app-editable-comment [comment]="comment" (commentEdited)="onCommentEdited(comment, $event)">
     </app-editable-comment>
-    <div class="comment" *ngFor="let reply of comment.comment_replies">
-      <app-editable-comment
-        [content]="reply.reply_text"
-        [type]="'reply'"
-        [time]="reply.timestamp"
-        [user]="reply.respondent"
-        (commentEdited)="onCommentEdited(reply, $event)"
-      >
-      </app-editable-comment>
-    </div>
   </div>
   <div *ngIf="!commentingOnIssue">
     <button mat-button (click)="addCommentBox()"><mat-icon>comment</mat-icon>&nbsp;COMMENT</button>
   </div>
   <div *ngIf="commentingOnIssue" class="new_comment">
     <td-text-editor [(ngModel)]="comment" [options]="options" *ngIf="commentingOnIssue"></td-text-editor>
-    <br />
     <button mat-button (click)="cancel()">Cancel</button>
     <button mat-button (click)="addNewComment(projectId, activityId)">Post Comment</button>
   </div>

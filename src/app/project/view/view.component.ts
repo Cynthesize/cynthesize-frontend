@@ -13,7 +13,6 @@ import { ErrorHandlerService } from '@app/core/error-handler.service';
 })
 export class ViewComponent implements OnInit {
   project: Observable<Project>;
-  checkpointList = {};
   currentActiveBar = 'Home';
 
   constructor(
@@ -36,7 +35,6 @@ export class ViewComponent implements OnInit {
             this.router.navigate(['not-found']);
           } else {
             this.project = data;
-            this.checkpointList = this._getCheckpointData(data['area_of_issues_open'][0]);
           }
         },
         (error: any) => {
@@ -57,6 +55,10 @@ export class ViewComponent implements OnInit {
 
   isBarActive() {
     return this.router.url.split('/')[4] || 'Home';
+  }
+
+  setBarActive(checkpointName: string) {
+    this.currentActiveBar = checkpointName;
   }
 
   initCheckpoint(el: any) {
