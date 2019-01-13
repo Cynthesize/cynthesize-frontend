@@ -1,14 +1,52 @@
-<div class="panel-main__heading">
-  <div class="panel-main__topic">{{ getPageName() }}</div>
+<div *ngIf="getPageName() === 'Home'">
+  <div class="project-dashboard">
+    <div class="project-dashboard__header">
+      <div class="project-dashboard__info">
+        <h1 class="project-dashboard__name">A Twitter Clone</h1>
+        <h3 class="project-dashboard__origin">
+          Created on <span class="text-bold">3/01/2019</span> by <span class="text-bold">zerefwayne</span>
+        </h3>
+      </div>
+      <button mat-raised-button (click)="initAddIssueDialogue()" style="border-radius: 30px;">
+        <mat-icon>library_add</mat-icon> Add Issue
+      </button>
+    </div>
 
-  <div *ngIf="getPageName() === 'Home'">
-    <div *ngFor="let property of (projectDetails | keyvalue)">{{ property.key }} : {{ property.value }}</div>
+    <div class="project-dashboard__cards">
+      <div class="project-dashboard__card">
+        <div class="project-dashboard__card__title">Description</div>
+        <div class="project-dashboard__card__text">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex temporibus, tempora aliquam fugiat beatae,
+          dignissimos minima perspiciatis enim magni numquam praesentium quisquam perferendis. Corporis, tenetur.
+          Similique aut animi dignissimos aliquid. <br />
+          Amet consectetur adipisicing elit. Quo repudiandae, unde ipsa iusto sunt, ipsam laudantium quos rerum veniam
+          impedit reprehenderit placeat quae consectetur a fugit voluptatem soluta ducimus quia!
+        </div>
+      </div>
+
+      <div class="project-dashboard__card">
+        <div class="project-dashboard__card__title">Contributors</div>
+        <div class="project-dashboard__card__wrap">
+          <div class="collab">
+            <div class="collab__photo"></div>
+            <div class="collab__name">Aayush Joglekar</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 
-  <button mat-raised-button (click)="initAddIssueDialogue()" style="border-radius: 30px;">
-    <mat-icon>library_add</mat-icon> Add Issue
-  </button>
+<div *ngIf="getPageName() !== 'Home'">
+  <div class="panel-main__heading">
+    <div class="panel-main__topic">{{ getPageName() }}</div>
+    <button mat-raised-button (click)="initAddIssueDialogue()" style="border-radius: 30px;">
+      <mat-icon>library_add</mat-icon> Add Issue
+    </button>
+  </div>
+  <div class="panel-main__issues" *ngFor="let issue of issues">
+    <app-detached-issue [issue]="issue"></app-detached-issue>
+  </div>
 </div>
-<div class="panel-main__issues" *ngFor="let issue of issues">
-  <app-detached-issue [issue]="issue"></app-detached-issue>
-</div>
+
+<!--*ngIf="getPageName() === 'Home'-->
