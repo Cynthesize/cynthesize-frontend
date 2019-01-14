@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import BACKEND_URLS from '@app/shared/backend-urls';
 import { map } from 'rxjs/internal/operators/map';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -58,7 +59,7 @@ export class ProfileService {
     updateObject['technologies'].forEach((tech: string) => {
       techString += tech + ',';
     });
-    if (typeof updateObject['birth_date'] === 'object') {
+    if (typeof updateObject['birth_date'] === 'object' && updateObject['birth_date']) {
       updateObject['birth_date'] = updateObject['birth_date'].toISOString().slice(0, 10);
     }
     const request = {
@@ -67,7 +68,8 @@ export class ProfileService {
       technologies: techString,
       website: updateObject['website'],
       location: updateObject['location'],
-      username: JSON.parse(localStorage.getItem('credentials'))['username']
+      username: JSON.parse(localStorage.getItem('credentials'))['username'],
+      profile_pic: updateObject['profile_pic']
     };
     return this.http.put(BACKEND_URLS.USER_DETAILS, request, this.httpOptions).pipe(
       map((res: any) => {
@@ -76,5 +78,17 @@ export class ProfileService {
         return res;
       })
     );
+  }
+
+  /**
+   * uploadImage
+   */
+  public uploadImage(image: File): Observable<Object> {
+    const formData = new FormData();
+    console.log(JSON.parse(localStorage.getItem('credentials'))['username']);
+
+    formData.append('file', image, JSON.parse(localStorage.getItem('credentials'))['username']);
+    formData.append('upload_preset', 'qdninpjl');
+    return this.http.post('https://api.cloudinary.com/v1_1/cynthesize/image/upload/', formData);
   }
 }
