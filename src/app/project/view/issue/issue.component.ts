@@ -8,6 +8,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { Project } from '@app/shared/objects';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 
+const SharedProjectId: string;
+
 @Component({
   selector: 'app-issue',
   templateUrl: './issue.component.html',
@@ -26,6 +28,8 @@ export class IssueComponent implements OnInit, OnChanges {
   issues: Observable<any>;
   checkpointList = {};
   sub: any;
+
+  SharedProjectId = this.projectId;
 
   constructor(
     private projectService: ProjectService,
@@ -112,7 +116,7 @@ export class AddIssueComponent {
     this.dialogRef.close();
   }
   addIssue() {
-    this.projectService.addIssue(this.checkpointName.value, this.issueText.value, '1').subscribe(data => {
+    this.projectService.addIssue(this.checkpointName.value, this.issueText.value, SharedProjectId).subscribe(data => {
       this.onNoClick();
       location.reload();
     });

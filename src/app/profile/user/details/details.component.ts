@@ -8,6 +8,7 @@ import { AuthenticationService } from '@app/core/authentication/authentication.s
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
+import { userInfo } from 'os';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
