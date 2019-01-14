@@ -8,7 +8,6 @@ import { AuthenticationService } from '@app/core/authentication/authentication.s
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
-import { userInfo } from 'os';
 
 @Component({
   selector: 'app-details',
