@@ -46,8 +46,6 @@
     "material-design-icons-iconfont": "^4.0.2",
     "moment": "^2.23.0",
     "ng-inline-edit": "^0.7.0",
-    "ngx-infinite-scroll": "^6.0.1",
-    "ngx-moment": "^3.3.0",
     "ngx-pagination": "^3.2.1",
     "ngx-simplemde": "^1.1.1",
     "rxjs": "^6.3.1",
