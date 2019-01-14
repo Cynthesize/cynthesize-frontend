@@ -1,4 +1,5 @@
-<div class="background" *ngIf="user">
+<div class="loader" *ngIf="!user.bio"><mat-spinner></mat-spinner></div>
+<div class="background" *ngIf="user.bio">
   <form [formGroup]="editForm">
     <button mat-button (click)="toggleFormFields(true)" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
       Edit
@@ -6,12 +7,22 @@
     <button mat-button (click)="toggleFormFields(false)" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
       Cancel
     </button>
-    <button mat-button (click)="onSubmit()" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">Submit</button>
+    <button mat-button (click)="onSubmit()" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+      Save changes
+    </button>
     <div class="container container--user-profile">
       <div class="user-header">
         <div class="user-header__container">
           <div class="dp-l-container">
-            <img class="dp-l-image" src="../../../../assets/images/background-login-register.png" />
+            <input
+              #imageInput
+              class="dp-l-image image-input"
+              type="file"
+              accept="image/*"
+              (change)="processFile(imageInput)"
+              [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }"
+            />
+            <cl-image class="dp-l-image" public-id="{{ user.profile_pic }}" secure="true"></cl-image>
           </div>
           <div class="user-header__container__name">
             <h2>{{ user.full_name }}</h2>

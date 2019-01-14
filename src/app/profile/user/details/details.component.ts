@@ -3,12 +3,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/internal/operators/finalize';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { User } from '@app/core/profile/user';
-import { MatSnackBar, MatChipInputEvent } from '@angular/material';
+import { MatChipInputEvent } from '@angular/material';
 import { AuthenticationService } from '@app/core/authentication/authentication.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
-import { userInfo } from 'os';
+
+class ImageSnippet {
+  constructor(public src: string, public file: File) {}
+}
 
 @Component({
   selector: 'app-details',
@@ -26,14 +29,13 @@ export class DetailsComponent implements OnInit {
 
   editForm: FormGroup;
 
-  /* Chip Variables*/
-
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   listOfTech: any[];
+  selectedFile: ImageSnippet;
 
   constructor(
     private profileService: ProfileService,
@@ -48,11 +50,11 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.editForm = new FormGroup({
-      bio: new FormControl(''),
-      dob: new FormControl(''),
+      bio: new FormControl(),
+      dob: new FormControl(),
       listOfTech: new FormControl([]),
-      location: new FormControl(''),
-      website: new FormControl('')
+      location: new FormControl(),
+      website: new FormControl()
     });
     this.fetchUserContributions();
     this.profileService
@@ -65,11 +67,6 @@ export class DetailsComponent implements OnInit {
           }
           this.user = data[0];
           this.listOfTech = data[0].technologies;
-          this.editForm.get('bio').setValue(data[0].bio);
-          this.editForm.get('dob').setValue(data[0].birth_date);
-          this.editForm.get('listOfTech').setValue(data[0].technologies);
-          this.editForm.get('location').setValue(data[0].location);
-          this.editForm.get('website').setValue(data[0].website);
           this.user.social_links.forEach(sociallink => {
             const username = sociallink.substr(sociallink.lastIndexOf('/') + 1, sociallink.length);
             if (sociallink.includes('facebook') || sociallink.includes('github') || sociallink.includes('twitter')) {
@@ -102,14 +99,30 @@ export class DetailsComponent implements OnInit {
   }
 
   onSubmit() {
+    if (!this.selectedFile) {
+      this.updateUserData(null);
+    } else {
+      this.profileService.uploadImage(this.selectedFile.file).subscribe(
+        (res: any) => {
+          const profileUrl = 'v' + res.version + '/' + res.public_id + '.' + res.format;
+          this.updateUserData(profileUrl);
+        },
+        (err: any) => {
+          this.errorHandler.subj_notification.next(err);
+        }
+      );
+    }
+  }
+
+  updateUserData(profileUrl: string) {
     const userUpdateObject = {
       bio: this.editForm.get('bio').value,
       location: this.editForm.get('location').value,
       technologies: this.listOfTech,
       birth_date: this.editForm.get('dob').value,
-      website: this.editForm.get('website').value
+      website: this.editForm.get('website').value,
+      profile_pic: profileUrl
     };
-    console.log(userUpdateObject);
     this.profileService
       .UpdateUserDetails(userUpdateObject)
       .pipe(finalize(() => {}))
@@ -133,6 +146,15 @@ export class DetailsComponent implements OnInit {
     if (input) {
       input.value = '';
     }
+  }
+
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+    reader.addEventListener('load', (event: any) => {
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+    });
+    reader.readAsDataURL(file);
   }
 
   remove(tech: string): void {

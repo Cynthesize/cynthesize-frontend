@@ -112,7 +112,7 @@ export class AddIssueComponent {
     this.dialogRef.close();
   }
   addIssue() {
-    this.projectService.addIssue(this.checkpointName.value, this.issueText.value, this.projectId).subscribe(data => {
+    this.projectService.addIssue(this.checkpointName.value, this.issueText.value, '1').subscribe(data => {
       this.onNoClick();
       location.reload();
     });

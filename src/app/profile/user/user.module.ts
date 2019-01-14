@@ -5,9 +5,19 @@ import { UserRoutingModule } from './user-routing.module';
 import { DetailsComponent } from './details/details.component';
 import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import * as Cloudinary from 'cloudinary-core';
 
 @NgModule({
-  imports: [CommonModule, SharedModule, FormsModule, MaterialModule, UserRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    FormsModule,
+    MaterialModule,
+    UserRoutingModule,
+    ReactiveFormsModule,
+    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'cynthesize' })
+  ],
   declarations: [DetailsComponent]
 })
 export class UserModule {}
