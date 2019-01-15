@@ -23,8 +23,9 @@ export class IssueComponent implements OnInit, OnChanges {
   projectId: any;
   @Input()
   activeCheckpoint: any;
+  @Input()
+  projectDetails: any;
 
-  projectDetails: Observable<Project>;
   issues: Observable<any>;
   checkpointList = {};
   sub: any;
@@ -64,10 +65,6 @@ export class IssueComponent implements OnInit, OnChanges {
           );
       }
     });
-  }
-
-  getPageName() {
-    return decodeURI(this.router.url.split('/')[4] || 'Home');
   }
 
   initAddIssueDialogue() {

@@ -93,3 +93,137 @@
     }
   }
 }
+
+.project-dashboard {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__name {
+    font-size: 4rem;
+  }
+
+  &__origin {
+    font-size: 1.4rem;
+    color: #444444;
+  }
+
+  &__cards {
+    flex: 0 0 70%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    margin-right: 3rem;
+
+    & > *:not(:last-child) {
+      margin-bottom: 3rem;
+    }
+  }
+
+  &__stats {
+    flex-grow: 1;
+
+    background-color: white;
+    padding: 2rem 3rem;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+    font-family: "Open Sans", sans-serif;
+
+    ul {
+      list-style: none;
+      text-decoration: none;
+    }
+
+    li {
+      font-size: 1.6rem;
+      font-weight: 400;
+      border-radius: 1rem;
+      border: solid 1px #cccccc;
+      width: 100%;
+      margin-bottom: 1rem;
+      overflow: hidden;
+
+      display: flex;
+      justify-content: stretch;
+
+      .key {
+        padding: 0.5rem 2rem;
+        flex: 0 0 80%;
+        background-color: #444444;
+        color: White;
+        font-weight: 600;
+
+        display: flex;
+        align-items: center;
+      }
+
+      .value {
+        padding: 0.5rem 1rem;
+        text-align: center;
+        flex-grow: 1;
+        color: $color-primary;
+        font-weight: 500;
+        font-size: 2rem;
+        display: inline-block;
+        box-shadow: 0 0 1rem #333333;
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+
+    margin-top: 4rem;
+  }
+
+  &__card {
+    background-color: white;
+    padding: 2rem 3rem;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+    font-family: "Open Sans", sans-serif;
+
+    &__title {
+      font-weight: 600;
+      font-size: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    &__text {
+      font-weight: 400;
+    }
+
+    &__wrap {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      & > * {
+        margin: 0.5rem;
+      }
+    }
+  }
+}
+
+.collab {
+  width: fit-content;
+
+  display: inline-block;
+  padding: 0.5rem 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  border-radius: 20rem;
+
+  border: 1px solid #cccccc;
+}
+
+.thumbnail {
+  margin-right: 1rem;
+}

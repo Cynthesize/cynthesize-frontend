@@ -22,6 +22,7 @@ import { CovalentTextEditorModule } from '@covalent/text-editor';
     CovalentMarkdownModule,
     CovalentTextEditorModule,
     FormsModule
-  ]
+  ],
+  entryComponents: [AddIssueComponent]
 })
 export class ViewModule {}
