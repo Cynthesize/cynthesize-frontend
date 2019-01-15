@@ -8,7 +8,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Project } from '@app/shared/objects';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 
-const SharedProjectId: string;
+let SharedProjectId: string;
 
 @Component({
   selector: 'app-issue',

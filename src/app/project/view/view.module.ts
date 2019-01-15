@@ -9,9 +9,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { IssueComponent } from './issue/issue.component';
 import { DetachedIssueComponent } from './issue/detached-issue/detached-issue.component';
 import { CovalentMarkdownModule } from '@covalent/markdown';
+import { AddComponent } from '../add/add.component';
 
 @NgModule({
-  declarations: [ViewComponent, IssueComponent, DetachedIssueComponent],
+  declarations: [ViewComponent, IssueComponent, DetachedIssueComponent, AddComponent],
   imports: [CommonModule, ViewRoutingModule, SharedModule, MaterialModule, ReactiveFormsModule, CovalentMarkdownModule]
 })
 export class ViewModule {}
