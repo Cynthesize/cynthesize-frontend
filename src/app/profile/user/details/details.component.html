@@ -98,14 +98,14 @@
               <mat-tab label="Ideas">
                 <ng-template matTabContent>
                   <div *ngFor="let idea of user.idea_list">
-                    <mat-card>{{ idea.idea_name }}</mat-card>
+                    <a [routerLink]="['/issue/view', idea.id]">{{ idea.idea_name }}</a>
                   </div>
                 </ng-template>
               </mat-tab>
               <mat-tab label="Projects">
                 <ng-template matTabContent>
                   <div *ngFor="let project of user.project_list">
-                    <div [routerLink]="['/project', project.project_id, '/view']">{{ project.project_name }}</div>
+                    <a [routerLink]="['/project', project.project_id, 'view']">{{ project.project_name }}</a>
                   </div>
                 </ng-template>
               </mat-tab>
