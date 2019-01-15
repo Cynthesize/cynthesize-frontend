@@ -66,10 +66,6 @@ export class IssueComponent implements OnInit, OnChanges {
     });
   }
 
-  getPageName() {
-    return decodeURI(this.router.url.split('/')[4] || 'Home');
-  }
-
   initAddIssueDialogue() {
     this.openDialog();
   }

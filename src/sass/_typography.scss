@@ -124,3 +124,19 @@ hr.seperator {
     border-bottom: 1px solid $color-primary;
   }
 }
+
+.thumbnail {
+  height: 3rem;
+  width: 3rem;
+  background-color: white;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > * {
+    height: 100%;
+    width: auto;
+  }
+}
