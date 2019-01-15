@@ -35,7 +35,6 @@ export class ViewComponent implements OnInit {
             this.router.navigate(['not-found']);
           } else {
             this.project = data;
-            console.log(data);
           }
         },
         (error: any) => {

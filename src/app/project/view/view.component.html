@@ -33,6 +33,7 @@
 
   <div class="panel-main">
     <app-issue
+      [projectDetails]="project"
       [projectId]="project.id"
       [checkpoints]="project['area_of_issues_open'][0]"
       [activeCheckpoint]="currentActiveBar"
