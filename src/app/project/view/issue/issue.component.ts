@@ -8,7 +8,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Project } from '@app/shared/objects';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 
-let SharedProjectId: string;
+const SharedProjectId = '';
 
 @Component({
   selector: 'app-issue',
@@ -33,7 +33,6 @@ export class IssueComponent implements OnInit, OnChanges {
 
   constructor(
     private projectService: ProjectService,
-    private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
     private errorHandler: ErrorHandlerService
