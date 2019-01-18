@@ -11,5 +11,11 @@ export const environment = {
   version: env.npm_package_version + '-dev',
   serverUrl: '/api',
   defaultLanguage: 'en-US',
-  supportedLanguages: ['en-US', 'fr-FR']
+  supportedLanguages: ['en-US', 'fr-FR'],
+  GRAPHQL_URL: 'https://cynth-87hdf545mhgfg.herokuapp.com/v1alpha1/graphql',
+  REALTIME_GRAPHQL_URL: 'wss://cynth-87hdf545mhgfg.herokuapp.com/v1alpha1/graphql',
+  hasuraAccessKey: 'top_secret_key',
+  auth0ClientId: 'tEbTH2wRl3dHtWZ0m4nqoWPsN1GIu9dQ',
+  auth0Domain: 'cynthesize.auth0.com',
+  auth0RedirectUri: 'http://localhost:4200/callback'
 };

@@ -8,12 +8,6 @@ import { IssueComments } from '@app/shared/objects';
   providedIn: 'root'
 })
 export class ProjectService {
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `JWT ${JSON.parse(localStorage.getItem('credentials'))['token']}`
-    })
-  };
   constructor(private http: HttpClient) {}
 
   /**
@@ -27,7 +21,7 @@ export class ProjectService {
       current_stage: projectDetails['currentStage'],
       owner: JSON.parse(localStorage.getItem('credentials'))['user_id']
     };
-    return this.http.post<any>(BACKEND_URLS.PROJECT, projectDetailsObject, this.httpOptions).pipe(
+    return this.http.post<any>(BACKEND_URLS.PROJECT, projectDetailsObject).pipe(
       map((res: any) => {
         console.log(res);
         return res;
@@ -79,7 +73,7 @@ export class ProjectService {
       issue_id: issueId,
       commenter: JSON.parse(localStorage.getItem('credentials'))['user_id']
     };
-    return this.http.post<any>(BACKEND_URLS.ADD_ISSUE_COMMENT, IssueComment, this.httpOptions).pipe(
+    return this.http.post<any>(BACKEND_URLS.ADD_ISSUE_COMMENT, IssueComment).pipe(
       map((res: any) => {
         return res;
       })
@@ -95,7 +89,7 @@ export class ProjectService {
       reply_text: replyText,
       respondent: JSON.parse(localStorage.getItem('credentials'))['user_id']
     };
-    return this.http.post<any>(BACKEND_URLS.ADD_ISSUE_COMMENT_REPLY, IssueCommentReply, this.httpOptions).pipe(
+    return this.http.post<any>(BACKEND_URLS.ADD_ISSUE_COMMENT_REPLY, IssueCommentReply).pipe(
       map((res: any) => {
         return res;
       })
@@ -114,7 +108,7 @@ export class ProjectService {
     };
     console.log(issue);
 
-    return this.http.post<any>(BACKEND_URLS.ADD_ISSUE, issue, this.httpOptions).pipe(
+    return this.http.post<any>(BACKEND_URLS.ADD_ISSUE, issue).pipe(
       map((res: any) => {
         return res;
       })
