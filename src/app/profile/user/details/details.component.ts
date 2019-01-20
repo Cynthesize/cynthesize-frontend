@@ -4,11 +4,9 @@ import { finalize } from 'rxjs/internal/operators/finalize';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { User } from '@app/core/profile/user';
 import { MatChipInputEvent } from '@angular/material';
-import { AuthenticationService } from '@app/core/authentication/authentication.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
-import { Apollo } from 'apollo-angular';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -56,7 +54,6 @@ export class DetailsComponent implements OnInit {
 
     this.profileService.getUserDetails(this.username).subscribe(
       (data: any) => {
-        console.log(data);
         if (data.user.length === 0) {
           this.router.navigate(['not-found']);
         }
@@ -136,7 +133,6 @@ export class DetailsComponent implements OnInit {
     const value = event.value;
     if ((value || '').trim()) {
       this.listOfTech.push(value.trim());
-      console.log(this.listOfTech);
     }
     if (input) {
       input.value = '';

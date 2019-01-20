@@ -30,8 +30,10 @@
       </ul>
     </div>
   </div>
+
   <div class="panel-main">
     <app-issue
+      [projectDetails]="project"
       [projectId]="project.id"
       [checkpoints]="project.projectIssuessByprojectId"
       [activeCheckpoint]="currentActiveBar"

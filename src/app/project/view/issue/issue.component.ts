@@ -23,8 +23,9 @@ export class IssueComponent implements OnInit, OnChanges {
   projectId: any;
   @Input()
   activeCheckpoint: any;
+  @Input()
+  projectDetails: any;
 
-  projectDetails: Observable<Project>;
   issues: Observable<any>;
   checkpointList = {};
   sub: any;

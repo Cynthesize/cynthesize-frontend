@@ -15,37 +15,15 @@ export class HeaderComponent implements OnInit {
   @Input()
   sidenav: MatSidenav;
 
-  constructor(
-    private router: Router,
-    private titleService: Title,
-    private authenticationService: AuthenticationService,
-    private i18nService: I18nService
-  ) {}
+  constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit() {}
-
-  setLanguage(language: string) {
-    this.i18nService.language = language;
-  }
 
   logout() {
     this.authenticationService.logout();
   }
 
-  get currentLanguage(): string {
-    return this.i18nService.language;
-  }
-
-  get languages(): string[] {
-    return this.i18nService.supportedLanguages;
-  }
-
   get username(): string {
-    const credentials = this.authenticationService;
-    return null;
-  }
-
-  get title(): string {
-    return this.titleService.getTitle();
+    return localStorage.getItem('username');
   }
 }

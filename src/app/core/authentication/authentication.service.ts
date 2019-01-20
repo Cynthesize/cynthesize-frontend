@@ -50,7 +50,9 @@ export class AuthenticationService {
           }
         })
         .valueChanges.subscribe((res: any) => {
+          console.log(res.data.user[0].username);
           if (res.data.user.length === 0) {
+            console.log(res.data.user[0].username);
             this.apollo
               .mutate<any>({
                 mutation: MUTATION_ADD_USER,
@@ -65,17 +67,15 @@ export class AuthenticationService {
                   ]
                 }
               })
-              .subscribe(data => {
-                console.log(data);
-              });
+              .subscribe(data => {});
           } else {
             localStorage.setItem('user_profile_pic', res.data.user[0].profile_pic);
             localStorage.setItem('username', res.data.user[0].username);
             localStorage.setItem('userId', res.data.user[0].id);
+            console.log(localStorage.getItem('username'), res);
           }
         });
       if (authResult && authResult.accessToken && authResult.idToken) {
-        console.log(authResult);
         window.location.hash = '';
         this.setSession(authResult);
         this.router.navigate(['/home']);

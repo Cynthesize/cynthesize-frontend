@@ -1,12 +1,18 @@
 import gql from 'graphql-tag';
-import { USER_DETAILS_FRAGMENT, PROJECT_DETAILS_FRAGMENT, PROJECT_ISSUE_FRAGMENT } from './fragments';
+import {
+  USER_DETAILS_FRAGMENT,
+  PROJECT_DETAILS_FRAGMENT,
+  PROJECT_ISSUE_FRAGMENT,
+  USER_PROFILE_PIC_FRAGMENT
+} from './fragments';
 
 const QUERY_USER_CHECK = gql`
   query fetch_user($email: String!) {
     user(where: { email: { _eq: $email } }) {
-      id
+      ...UserProfilePicFragment
     }
   }
+  ${USER_PROFILE_PIC_FRAGMENT}
 `;
 
 const QUERY_USER_DETAILS = gql`
