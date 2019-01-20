@@ -20,12 +20,12 @@
       <h2 class="checkpoint-list__heading">Checkpoints</h2>
       <ul>
         <li
-          (click)="setBarActive(checkpoint.key)"
-          [ngClass]="{ active: currentActiveBar === checkpoint.key }"
+          (click)="setBarActive(checkpoint.checkpoint_name)"
+          [ngClass]="{ active: currentActiveBar === checkpoint.checkpoint_name }"
           class="checkpoint-list__item"
-          *ngFor="let checkpoint of (_getCheckpointData(project['area_of_issues_open'][0]) | keyvalue)"
+          *ngFor="let checkpoint of project.projectIssuessByprojectId"
         >
-          {{ checkpoint.key }}
+          {{ checkpoint.checkpoint_name }}
         </li>
       </ul>
     </div>
@@ -33,19 +33,8 @@
   <div class="panel-main">
     <app-issue
       [projectId]="project.id"
-      [checkpoints]="project['area_of_issues_open'][0]"
+      [checkpoints]="project.projectIssuessByprojectId"
       [activeCheckpoint]="currentActiveBar"
     ></app-issue>
   </div>
-  <!-- <div class="panel-description">
-    <div class="project--description">
-      <div class="project--description__heading">Description</div>
-      <div class="project--description__text">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut autem quidem explicabo consequatur, eligendi minus
-        reiciendis placeat expedita inventore officiis, sed illo possimus temporibus id facere ipsum veritatis. Ipsam,
-        itaque! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim, asperiores! Natus numquam aut ducimus
-        dolores! Ullam nam fugit a voluptas, minima pariatur excepturi, soluta nemo quia quaerat sunt delectus magnam.
-      </div>
-    </div>
-  </div> -->
 </div>

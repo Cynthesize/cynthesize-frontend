@@ -41,29 +41,12 @@ export class IssueComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.getProject(changes.activeCheckpoint.currentValue);
-  }
-
-  getProject(activeCheckpoint: string) {
-    Object.keys(this.checkpoints).forEach(checkpoint => {
-      if (checkpoint === activeCheckpoint) {
-        let idList = '';
-        this.checkpoints[activeCheckpoint].forEach((id: any) => {
-          idList += id + ',';
-        });
-        this.projectService
-          .fetchIdea(idList)
-          .pipe(finalize(() => {}))
-          .subscribe(
-            (issueObject: any) => {
-              this.issues = issueObject;
-            },
-            (error: any) => {
-              this.errorHandler.subj_notification.next(error);
-            }
-          );
-      }
-    });
+    this.projectService
+      .fetchIssueInCheckpoint(changes.activeCheckpoint.currentValue, this.projectId)
+      .subscribe((data: any) => {
+        this.issues = data.data.project_issues;
+        console.log(data);
+      });
   }
 
   initAddIssueDialogue() {

@@ -56,7 +56,9 @@ export class AddComponent implements OnInit {
         .pipe(finalize(() => {}))
         .subscribe(
           (data: any) => {
-            this.router.navigate(['/project/' + data.project_id + '/view']);
+            const project_name =
+              data.data.insert_project.returning['0'].id + '-' + data.data.insert_project.returning['0'].project_name;
+            this.router.navigate(['/project/' + project_name + '/view']);
           },
           (error: any) => {
             this.errorHandler.subj_notification.next(error);

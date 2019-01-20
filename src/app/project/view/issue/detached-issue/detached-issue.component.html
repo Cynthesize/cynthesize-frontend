@@ -1,7 +1,7 @@
 <div class="container">
   <div class="issue-info">
     <div class="issue-info__link">
-      <a>{{ issue.id }}</a>
+      <a>{{ issue.id }} by {{ issue.userBycreatedBy.username }}</a>
     </div>
     <div class="issue-info__time">{{ issue.created_on | date }}</div>
   </div>
@@ -14,7 +14,12 @@
     <h4 class="issue-comments__heading">DISCUSSION</h4>
 
     <div class="issue-comments__list">
-      <app-comments [activityType]="'issue'" [activityId]="issue.id" [issueCommentObject]="issue.comments">
+      <app-comments
+        [activityType]="'issue'"
+        [activityId]="issue.id"
+        [projectId]="projectId"
+        [issueCommentObject]="issue.projectIssuesCommentssByissueId"
+      >
       </app-comments>
     </div>
   </div>

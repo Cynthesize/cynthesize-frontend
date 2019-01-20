@@ -4,32 +4,29 @@ import { Router } from '@angular/router';
 import BACKEND_URLS from '@app/shared/backend-urls';
 import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs';
+import { Apollo } from 'apollo-angular';
+import { QUERY_USER_DETAILS } from '@app/shared/queries';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `JWT ${JSON.parse(localStorage.getItem('credentials'))['token']}`
-    })
-  };
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private apollo: Apollo) {}
 
-  /**
+  /*
    * getUserDetails
    */
   public getUserDetails() {
-    return this.http
-      .get(BACKEND_URLS.USER_DETAILS, {
-        params: {
-          username: this.router.url.split('/')[2]
+    return this.apollo
+      .watchQuery<any>({
+        query: QUERY_USER_DETAILS,
+        variables: {
+          username: 'WickedBrat'
         }
       })
-      .pipe(
+      .valueChanges.pipe(
         map((res: any) => {
-          return res;
+          return res.data;
         })
       );
   }
@@ -71,7 +68,7 @@ export class ProfileService {
       username: JSON.parse(localStorage.getItem('credentials'))['username'],
       profile_pic: updateObject['profile_pic']
     };
-    return this.http.put(BACKEND_URLS.USER_DETAILS, request, this.httpOptions).pipe(
+    return this.http.put(BACKEND_URLS.USER_DETAILS, request).pipe(
       map((res: any) => {
         console.log(res);
 

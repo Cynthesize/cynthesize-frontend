@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class DetachedIssueComponent implements OnInit {
   @Input()
   issue: any;
+  @Input()
+  projectId: any;
 
   constructor() {}
 
