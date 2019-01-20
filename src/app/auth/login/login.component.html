@@ -6,48 +6,6 @@
       </div>
       <div class="form-box__form-login">
         <button mat-raised-button color="primary" (click)="authenticationService.login()">Login</button>
-        <!-- <form (ngSubmit)="login()" class="form-box__form" [formGroup]="loginForm" novalidate>
-          <mat-form-field class="form-box__input-field">
-            <input
-              type="text"
-              class="form-box__input"
-              matInput
-              formControlName="username"
-              autocomplete="username"
-              [placeholder]="'Username' | translate"
-            />
-            <mat-error *ngIf="loginForm.controls.username.valid || loginForm.controls.username.untouched">
-              <span translate>Username is required</span>
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field class="form-box__input-field">
-            <input
-              type="password"
-              class="form-box__input"
-              matInput
-              formControlName="password"
-              autocomplete="current-password"
-              [placeholder]="'Password' | translate"
-              required
-            />
-            <mat-error *ngIf="loginForm.controls.password.valid || loginForm.controls.password.untouched">
-              <span translate>Password is required</span>
-            </mat-error>
-          </mat-form-field>
-          <mat-checkbox class="input" color="primary" formControlName="remember" class="form-box__remember" translate
-            >Stay logged in</mat-checkbox
-          >
-          <button
-            mat-raised-button
-            class="button-primary form-box__btn-login"
-            color="primary"
-            type="submit"
-            [disabled]="loginForm.invalid || isLoading"
-          >
-            <span translate>Login</span>
-          </button>
-        </form>
-        <a routerLink="/register" class="button-text nofocuslink">Not registered yet?</a> -->
       </div>
     </div>
   </div>
