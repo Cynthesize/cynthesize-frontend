@@ -2,6 +2,8 @@
 
 [![Join the chat at https://gitter.im/oppia/oppia-chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Cynthesize-gitter/Lobby)
 
+Go ahead! Star this repo! 
+
 ### Introduction
 
 Cynthesize is a platform where users can post their project ideas and details to get feedback from the community upon things that matter, like the idea itself, the tech stack, the development plan, the approach on the problem. Our vision is to create a platform that unifies the product development process.
@@ -10,13 +12,13 @@ Cynthesize is a platform where users can post their project ideas and details to
 
 1. Fork and clone the repository **Cynthesize/frontend** to your local machine.
 2. Go to project folder and install dependencies:
-     ```sh
+    ```sh
     npm install
     ```
 
 2. Launch development server, and open `localhost:4200` in your browser:
     ```sh
-    npn run start
+    npm start
     ```
 3. Frontend server is up and running on your local machine. Edit in your favourite code editor and see the changes instantly.
 
