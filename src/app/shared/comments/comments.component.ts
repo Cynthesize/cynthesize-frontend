@@ -83,7 +83,7 @@ export class CommentsComponent implements OnInit, OnChanges {
       )
       .subscribe(
         comment => {
-          this.issueCommentObject.push(comment);
+          this.issueCommentObject.push(comment.data.insert_project_issues_comments.returning[0]);
         },
         error => {
           this.errorHandler.subj_notification.next(error);

@@ -61,10 +61,23 @@ const MUTATION_ADD_ISSUE_COMMENT_REPLY = gql`
   ${ISSUE_COMMENT_REPLY_FRAGMENT}
 `;
 
+const MUTATION_UPDATE_LIKE_COUNTER = gql`
+  mutation update_likes($likesOffCounter: Int!, $commentId: Int!) {
+    update_project_issues_comments(where: { id: { _eq: $commentId } }, _inc: { likes: $likesOffCounter }) {
+      affected_rows
+      returning {
+        id
+        likes
+      }
+    }
+  }
+`;
+
 export {
   MUTATION_ADD_ISSUE,
   MUTATION_ADD_ISSUE_COMMENT,
   MUTATION_ADD_ISSUE_COMMENT_REPLY,
   MUTATION_ADD_PROJECT,
-  MUTATION_ADD_USER
+  MUTATION_ADD_USER,
+  MUTATION_UPDATE_LIKE_COUNTER
 };

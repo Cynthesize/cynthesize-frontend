@@ -16,12 +16,12 @@ export class ProfileService {
   /*
    * getUserDetails
    */
-  public getUserDetails() {
+  public getUserDetails(username: string) {
     return this.apollo
       .watchQuery<any>({
         query: QUERY_USER_DETAILS,
         variables: {
-          username: 'WickedBrat'
+          username: username
         }
       })
       .valueChanges.pipe(
@@ -82,9 +82,7 @@ export class ProfileService {
    */
   public uploadImage(image: File): Observable<Object> {
     const formData = new FormData();
-    console.log(JSON.parse(localStorage.getItem('credentials'))['username']);
-
-    formData.append('file', image, JSON.parse(localStorage.getItem('credentials'))['username']);
+    formData.append('file', image, localStorage.getItem('username'));
     formData.append('upload_preset', 'qdninpjl');
     return this.http.post('https://api.cloudinary.com/v1_1/cynthesize/image/upload/', formData);
   }

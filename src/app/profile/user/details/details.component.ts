@@ -9,7 +9,6 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { Apollo } from 'apollo-angular';
-import { QUERY_USER_DETAILS } from '@app/shared/queries';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -25,8 +24,6 @@ export class DetailsComponent implements OnInit {
   user: User = new User();
   username: string;
   sociallinks: any = [];
-  errorString: string;
-  loggedInUsername: string;
   isFieldEditable = false;
 
   editForm: FormGroup;
@@ -43,12 +40,9 @@ export class DetailsComponent implements OnInit {
     private profileService: ProfileService,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
-    private errorHandler: ErrorHandlerService,
-    private apollo: Apollo
+    private errorHandler: ErrorHandlerService
   ) {
     this.username = this.route.snapshot.params.username;
-    this.loggedInUsername = 'Wickde';
   }
 
   ngOnInit() {
@@ -60,14 +54,14 @@ export class DetailsComponent implements OnInit {
       website: new FormControl()
     });
 
-    this.profileService.getUserDetails().subscribe(
+    this.profileService.getUserDetails(this.username).subscribe(
       (data: any) => {
         console.log(data);
         if (data.user.length === 0) {
           this.router.navigate(['not-found']);
         }
         this.user = data.user[0];
-        this.listOfTech = data.user[0].technologies;
+        this.listOfTech = data.user[0].technologies || [];
         this.user.social_links.forEach(sociallink => {
           const username = sociallink.substr(sociallink.lastIndexOf('/') + 1, sociallink.length);
           if (sociallink.includes('facebook') || sociallink.includes('github') || sociallink.includes('twitter')) {
