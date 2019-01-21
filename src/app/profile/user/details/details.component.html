@@ -1,5 +1,5 @@
-<div class="loader" *ngIf="!user.bio"><mat-spinner></mat-spinner></div>
-<div class="background" *ngIf="user.bio">
+<div class="loader" *ngIf="!user.email"><mat-spinner></mat-spinner></div>
+<div class="background" *ngIf="user.email">
   <form [formGroup]="editForm">
     <button mat-button (click)="toggleFormFields(true)" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
       Edit
@@ -25,7 +25,7 @@
             <cl-image class="dp-l-image" public-id="{{ user.profile_pic }}" secure="true"></cl-image>
           </div>
           <div class="user-header__container__name">
-            <h2>{{ user.full_name }}</h2>
+            <h2>{{ user.name }}</h2>
             <h4>@{{ user.username }}</h4>
           </div>
         </div>

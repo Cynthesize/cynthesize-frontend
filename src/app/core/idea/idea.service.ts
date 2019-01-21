@@ -8,13 +8,6 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class IdeaService {
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `JWT ${JSON.parse(localStorage.getItem('credentials'))['token']}`
-    })
-  };
-
   constructor(private http: HttpClient) {}
 
   /**
@@ -27,7 +20,7 @@ export class IdeaService {
       require_assistance: context.require_assistance,
       owner: JSON.parse(localStorage.getItem('credentials'))['user_id']
     };
-    return this.http.post<any>(BACKEND_URLS.IDEA, idea, this.httpOptions).pipe(
+    return this.http.post<any>(BACKEND_URLS.IDEA, idea).pipe(
       map((res: any) => {
         console.log(res);
         return res;
@@ -72,7 +65,7 @@ export class IdeaService {
    */
   public likeIdea(ideaId: string) {
     const url = BACKEND_URLS.UPDATE_UPVOTES + ideaId;
-    return this.http.put(url, {}, this.httpOptions).pipe(
+    return this.http.put(url, {}).pipe(
       map((res: any) => {
         return res;
       })

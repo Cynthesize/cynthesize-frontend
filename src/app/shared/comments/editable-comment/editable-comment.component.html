@@ -2,7 +2,7 @@
 <div class="comment">
   <div class="comment__left-pane">
     <div class="comment__info--photo">
-      <cl-image class="dp-l-image" public-id="{{ comment.commenter.profile_pic }}" secure="true">
+      <cl-image class="dp-l-image" public-id="{{ comment.userBycommenter.profile_pic }}" secure="true">
         <cl-transformation height="40" crop="scale"> </cl-transformation>
       </cl-image>
     </div>
@@ -11,14 +11,16 @@
     <div class="comment__info">
       <div
         class="comment__info--user"
-        [routerLink]="['/user', comment.commenter.username]"
+        [routerLink]="['/user', comment.userBycommenter.username]"
         routerLinkActive="router-link-active"
       >
-        {{ comment.commenter.username }}
+        {{ comment.userBycommenter.username }}
       </div>
       <div class="comment__info--time">{{ comment.timestamp | timeDiff }}</div>
       <span class="gap">&bull;</span>
-      <div class="comment__info--upvote text-button">&#x25B2; Upvote ({{ comment.likes }})</div>
+      <div class="comment__info--upvote text-button" (click)="like(comment.id)">
+        &#x25B2; Upvote ({{ comment.likes }})
+      </div>
       <span class="gap">&bull;</span>
       <div class="comment__info--reply text-button" (click)="replyToComment()">Reply</div>
     </div>
@@ -29,18 +31,18 @@
     </div>
 
     <div class="comment__replies">
-      <div class="reply" *ngFor="let reply of comment.comment_replies">
+      <div class="reply" *ngFor="let reply of comment.projectIssuesReplysBycommentId">
         <div class="reply__left-pane">
           <div class="reply__info--photo">
-            <cl-image class="dp-l-image" public-id="{{ reply.respondent.profile_pic }}" secure="true">
+            <cl-image class="dp-l-image" public-id="{{ reply.userByrespondent.profile_pic }}" secure="true">
               <cl-transformation height="40" crop="scale"> </cl-transformation>
             </cl-image>
           </div>
         </div>
         <div class="reply__right-pane">
           <div class="reply__info">
-            <div class="reply__info--user" [routerLink]="['/user', reply.respondent.username]">
-              {{ reply.respondent.username }}
+            <div class="reply__info--user" [routerLink]="['/user', reply.userByrespondent.username]">
+              {{ reply.userByrespondent.username }}
             </div>
             <div class="reply__info--time">{{ reply.timestamp | timeDiff }}</div>
           </div>

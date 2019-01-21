@@ -8,7 +8,6 @@ import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { LoginRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   imports: [
@@ -20,6 +19,6 @@ import { RegisterComponent } from './register/register.component';
     MaterialModule,
     LoginRoutingModule
   ],
-  declarations: [LoginComponent, RegisterComponent]
+  declarations: [LoginComponent]
 })
 export class AuthModule {}

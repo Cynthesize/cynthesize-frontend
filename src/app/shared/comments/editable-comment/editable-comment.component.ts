@@ -20,11 +20,9 @@ export class EditableCommentComponent implements OnInit {
   };
   replying = false;
 
-  constructor(private projectService: ProjectService, private errorHandler: ErrorHandlerService) {}
+  constructor(public projectService: ProjectService, private errorHandler: ErrorHandlerService) {}
 
-  ngOnInit() {
-    console.log(this.comment);
-  }
+  ngOnInit() {}
 
   onContentSaved(content: any) {
     this.commentEdited.next(content);
@@ -44,13 +42,21 @@ export class EditableCommentComponent implements OnInit {
       )
       .subscribe(
         reply => {
-          reply.respondent = JSON.parse(localStorage.getItem('credentials'))['username'];
-          this.comment.comment_replies.push(reply);
+          this.comment.projectIssuesReplysBycommentId.push(reply.data.insert_project_issues_reply.returning[0]);
         },
         error => {
           this.errorHandler.subj_notification.next(error);
         }
       );
+  }
+
+  public like(commentId: number) {
+    this.projectService.incrementOrDecrementLikeCounter(commentId).subscribe(
+      (data: any) => {},
+      (error: any) => {
+        this.errorHandler.subj_notification.next(error);
+      }
+    );
   }
 
   cancel(): void {

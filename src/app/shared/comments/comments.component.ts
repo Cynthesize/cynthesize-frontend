@@ -28,6 +28,7 @@ export class CommentsComponent implements OnInit, OnChanges {
   @Input() activityType: string;
   @Input() issueCommentObject: [IssueComments];
   @Input() comments: any;
+  @Input() projectId: any;
   @Output() commentsUpdated = new EventEmitter();
   @ViewChild(EditableDirective) newCommentEditor: any;
 
@@ -37,7 +38,6 @@ export class CommentsComponent implements OnInit, OnChanges {
   comment = '';
   commentsArray = [Object];
   commentingOnIssue = false;
-  projectId: string;
 
   constructor(
     private ideaService: IdeaService,
@@ -48,9 +48,8 @@ export class CommentsComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     if (this.activityType === 'issue') {
-      this.projectId = this.router.url.split('/')[2];
     } else if (this.activityType === 'idea') {
-      this.fetchIdeaComments();
+      // this.fetchIdeaComments();
     }
   }
 
@@ -84,8 +83,7 @@ export class CommentsComponent implements OnInit, OnChanges {
       )
       .subscribe(
         comment => {
-          comment.commenter = JSON.parse(localStorage.getItem('credentials'))['username'];
-          this.issueCommentObject.push(comment);
+          this.issueCommentObject.push(comment.data.insert_project_issues_comments.returning[0]);
         },
         error => {
           this.errorHandler.subj_notification.next(error);

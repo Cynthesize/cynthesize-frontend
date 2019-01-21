@@ -4,7 +4,6 @@ import { finalize } from 'rxjs/internal/operators/finalize';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { User } from '@app/core/profile/user';
 import { MatChipInputEvent } from '@angular/material';
-import { AuthenticationService } from '@app/core/authentication/authentication.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
@@ -23,8 +22,6 @@ export class DetailsComponent implements OnInit {
   user: User = new User();
   username: string;
   sociallinks: any = [];
-  errorString: string;
-  loggedInUsername: string;
   isFieldEditable = false;
 
   editForm: FormGroup;
@@ -41,11 +38,9 @@ export class DetailsComponent implements OnInit {
     private profileService: ProfileService,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
     private errorHandler: ErrorHandlerService
   ) {
     this.username = this.route.snapshot.params.username;
-    this.loggedInUsername = this.authenticationService.credentials.username;
   }
 
   ngOnInit() {
@@ -56,42 +51,39 @@ export class DetailsComponent implements OnInit {
       location: new FormControl(),
       website: new FormControl()
     });
-    this.fetchUserContributions();
-    this.profileService
-      .getUserDetails()
-      .pipe(finalize(() => {}))
-      .subscribe(
-        (data: any) => {
-          if (data.length === 0) {
-            this.router.navigate(['not-found']);
-          }
-          this.user = data[0];
-          this.listOfTech = data[0].technologies;
-          this.user.social_links.forEach(sociallink => {
-            const username = sociallink.substr(sociallink.lastIndexOf('/') + 1, sociallink.length);
-            if (sociallink.includes('facebook') || sociallink.includes('github') || sociallink.includes('twitter')) {
-              const social =
-                (sociallink.includes('facebook') && 'facebook') ||
-                (sociallink.includes('github') && 'github') ||
-                (sociallink.includes('twitter') && 'twitter');
-              this.sociallinks.push({
-                socialLink: sociallink,
-                username: username,
-                logoUrl: '../../../../assets/logos/social/' + social + '-logo.svg'
-              });
-            } else {
-              this.sociallinks.push({
-                socialLink: sociallink,
-                username: sociallink,
-                logoUrl: '../../../../assets/logos/grid-world.svg'
-              });
-            }
-          });
-        },
-        (error: any) => {
-          this.errorHandler.subj_notification.next(error);
+
+    this.profileService.getUserDetails(this.username).subscribe(
+      (data: any) => {
+        if (data.user.length === 0) {
+          this.router.navigate(['not-found']);
         }
-      );
+        this.user = data.user[0];
+        this.listOfTech = data.user[0].technologies || [];
+        this.user.social_links.forEach(sociallink => {
+          const username = sociallink.substr(sociallink.lastIndexOf('/') + 1, sociallink.length);
+          if (sociallink.includes('facebook') || sociallink.includes('github') || sociallink.includes('twitter')) {
+            const social =
+              (sociallink.includes('facebook') && 'facebook') ||
+              (sociallink.includes('github') && 'github') ||
+              (sociallink.includes('twitter') && 'twitter');
+            this.sociallinks.push({
+              socialLink: sociallink,
+              username: username,
+              logoUrl: '../../../../assets/logos/social/' + social + '-logo.svg'
+            });
+          } else {
+            this.sociallinks.push({
+              socialLink: sociallink,
+              username: sociallink,
+              logoUrl: '../../../../assets/logos/grid-world.svg'
+            });
+          }
+        });
+      },
+      (error: any) => {
+        this.errorHandler.subj_notification.next(error);
+      }
+    );
   }
 
   toggleFormFields(toggle: boolean) {
@@ -141,7 +133,6 @@ export class DetailsComponent implements OnInit {
     const value = event.value;
     if ((value || '').trim()) {
       this.listOfTech.push(value.trim());
-      console.log(this.listOfTech);
     }
     if (input) {
       input.value = '';

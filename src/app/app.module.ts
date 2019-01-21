@@ -17,6 +17,8 @@ import { ShellModule } from './shell/shell.module';
 import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { CallbackComponent } from './callback/callback.component';
+import { GraphqlModule } from './graphql/graphql.module';
 
 @NgModule({
   imports: [
@@ -32,10 +34,11 @@ import { AppRoutingModule } from './app-routing.module';
     ShellModule,
     HomeModule,
     AuthModule,
+    GraphqlModule,
     Angulartics2Module.forRoot(),
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, CallbackComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

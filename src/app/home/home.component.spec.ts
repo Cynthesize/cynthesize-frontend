@@ -22,7 +22,7 @@ describe('HomeComponent', () => {
         FlexLayoutModule,
         MaterialModule,
         RouterTestingModule,
-        Angulartics2Module.forRoot([]),
+        Angulartics2Module.forRoot(),
         CoreModule,
         SharedModule,
         HttpClientTestingModule

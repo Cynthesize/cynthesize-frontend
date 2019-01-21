@@ -20,12 +20,12 @@
       <h2 class="checkpoint-list__heading">Checkpoints</h2>
       <ul>
         <li
-          (click)="setBarActive(checkpoint.key)"
-          [ngClass]="{ active: currentActiveBar === checkpoint.key }"
+          (click)="setBarActive(checkpoint.checkpoint_name)"
+          [ngClass]="{ active: currentActiveBar === checkpoint.checkpoint_name }"
           class="checkpoint-list__item"
-          *ngFor="let checkpoint of (_getCheckpointData(project['area_of_issues_open'][0]) | keyvalue)"
+          *ngFor="let checkpoint of project.projectIssuessByprojectId"
         >
-          {{ checkpoint.key }}
+          {{ checkpoint.checkpoint_name }}
         </li>
       </ul>
     </div>
@@ -35,7 +35,7 @@
     <app-issue
       [projectDetails]="project"
       [projectId]="project.id"
-      [checkpoints]="project['area_of_issues_open'][0]"
+      [checkpoints]="project.projectIssuessByprojectId"
       [activeCheckpoint]="currentActiveBar"
     ></app-issue>
   </div>

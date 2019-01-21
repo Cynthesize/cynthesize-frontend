@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private i18nService: I18nService,
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private errorHandler: ErrorHandlerService
   ) {
     if (authenticationService.isAuthenticated()) {
@@ -36,26 +36,26 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
-  login() {
-    this.isLoading = true;
-    this.authenticationService
-      .login(this.loginForm.value)
-      .pipe(
-        finalize(() => {
-          this.loginForm.markAsPristine();
-          this.isLoading = false;
-        })
-      )
-      .subscribe(
-        credentials => {
-          log.debug(`${credentials.username} successfully logged in`);
-          this.router.navigate(['/'], { replaceUrl: true });
-        },
-        error => {
-          this.errorHandler.subj_notification.next(error);
-        }
-      );
-  }
+  // login() {
+  //   this.isLoading = true;
+  //   this.authenticationService
+  //     .login(this.loginForm.value)
+  //     .pipe(
+  //       finalize(() => {
+  //         this.loginForm.markAsPristine();
+  //         this.isLoading = false;
+  //       })
+  //     )
+  //     .subscribe(
+  //       credentials => {
+  //         log.debug(`${credentials.username} successfully logged in`);
+  //         this.router.navigate(['/'], { replaceUrl: true });
+  //       },
+  //       error => {
+  //         this.errorHandler.subj_notification.next(error);
+  //       }
+  //     );
+  // }
 
   setLanguage(language: string) {
     this.i18nService.language = language;

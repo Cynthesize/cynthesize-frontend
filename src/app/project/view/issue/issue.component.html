@@ -2,7 +2,7 @@
   <div class="project-dashboard">
     <div class="project-dashboard__header">
       <div class="project-dashboard__info">
-        <h1 class="project-dashboard__name">A Twitter Clone</h1>
+        <h1 class="project-dashboard__name">{{ projectDetails.project_name }}</h1>
         <h3 class="project-dashboard__origin">
           Created on <span class="text-bold">{{ projectDetails.created_on | date }}</span> by
           <span class="text-bold">{{ projectDetails.owner }}</span>
@@ -25,7 +25,7 @@
           <div class="project-dashboard__card__wrap">
             <div class="collab">
               <div class="collab__photo"><img src="../../../../assets/user.png" class="thumbnail" /></div>
-              <div class="collab__name">Aayush Joglekar</div>
+              <div class="collab__name">{{ projectDetails.owner }}</div>
             </div>
           </div>
         </div>
@@ -69,6 +69,6 @@
   </div>
 
   <div class="panel-main__issues" *ngFor="let issue of issues">
-    <app-detached-issue [issue]="issue"></app-detached-issue>
+    <app-detached-issue [issue]="issue" [projectId]="projectId"></app-detached-issue>
   </div>
 </div>

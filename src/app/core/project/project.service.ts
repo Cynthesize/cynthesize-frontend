@@ -2,52 +2,80 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import BACKEND_URLS from '@app/shared/backend-urls';
 import { map } from 'rxjs/operators';
-import { IssueComments } from '@app/shared/objects';
+import { Apollo } from 'apollo-angular';
+import {
+  MUTATION_ADD_PROJECT,
+  MUTATION_ADD_ISSUE_COMMENT,
+  MUTATION_ADD_ISSUE_COMMENT_REPLY,
+  MUTATION_ADD_ISSUE,
+  MUTATION_UPDATE_LIKE_COUNTER
+} from '@app/shared/mutations';
+import { QUERY_PROJECT_DETAILS, QUERY_CHECKPOINT_ISSUES } from '@app/shared/queries';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `JWT ${JSON.parse(localStorage.getItem('credentials'))['token']}`
-    })
-  };
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private apollo: Apollo) {}
 
   /**
    * ADD A PROJECT
    */
   public addProject(projectDetails: Object) {
-    const projectDetailsObject = {
-      project_name: projectDetails['projectName'],
-      project_id: projectDetails['projectId'],
-      description: projectDetails['description'],
-      current_stage: projectDetails['currentStage'],
-      owner: JSON.parse(localStorage.getItem('credentials'))['user_id']
-    };
-    return this.http.post<any>(BACKEND_URLS.PROJECT, projectDetailsObject, this.httpOptions).pipe(
-      map((res: any) => {
-        console.log(res);
-        return res;
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_ADD_PROJECT,
+        variables: {
+          objects: [
+            {
+              project_name: projectDetails['projectName'],
+              description: projectDetails['description'],
+              current_stage: projectDetails['currentStage'],
+              owner: localStorage.getItem('userId')
+            }
+          ]
+        }
       })
-    );
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * fetchIssueInCheckpoint
+   */
+  public fetchIssueInCheckpoint(checkpointName: string, projectId: number) {
+    return this.apollo
+      .watchQuery<any>({
+        query: QUERY_CHECKPOINT_ISSUES,
+        variables: {
+          checkpointName: checkpointName,
+          projectId: projectId
+        }
+      })
+      .valueChanges.pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 
   /**
    * GET PROJECT DETAILS
    */
   public getProject(id: string) {
-    return this.http
-      .get(BACKEND_URLS.PROJECT, {
-        params: {
-          id: id
+    return this.apollo
+      .watchQuery<any>({
+        query: QUERY_PROJECT_DETAILS,
+        variables: {
+          id: id.split('-')[0]
         }
       })
-      .pipe(
+      .valueChanges.pipe(
         map((res: any) => {
-          return res;
+          return res.data.project;
         })
       );
   }
@@ -73,51 +101,88 @@ export class ProjectService {
    * Add Comments for an issue in the project.
    */
   public addComment(commentText: string, projectId: string, issueId: string) {
-    const IssueComment = {
-      comment_text: commentText,
-      project_id: projectId,
-      issue_id: issueId,
-      commenter: JSON.parse(localStorage.getItem('credentials'))['user_id']
-    };
-    return this.http.post<any>(BACKEND_URLS.ADD_ISSUE_COMMENT, IssueComment, this.httpOptions).pipe(
-      map((res: any) => {
-        return res;
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_ADD_ISSUE_COMMENT,
+        variables: {
+          objects: {
+            comment_text: commentText,
+            project_id: projectId,
+            issue_id: issueId,
+            commenter: localStorage.getItem('userId')
+          }
+        }
       })
-    );
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 
   /**
    * Add Reply for a comment in the project.
    */
   public addReply(commentId: string, replyText: string) {
-    const IssueCommentReply = {
-      comment_id: commentId,
-      reply_text: replyText,
-      respondent: JSON.parse(localStorage.getItem('credentials'))['user_id']
-    };
-    return this.http.post<any>(BACKEND_URLS.ADD_ISSUE_COMMENT_REPLY, IssueCommentReply, this.httpOptions).pipe(
-      map((res: any) => {
-        return res;
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_ADD_ISSUE_COMMENT_REPLY,
+        variables: {
+          objects: {
+            reply_text: replyText,
+            comment_id: commentId,
+            respondent: localStorage.getItem('userId')
+          }
+        }
       })
-    );
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 
   /**
    * Add Issue for a checkpoint in the project.
    */
   public addIssue(checkpointName: string, issuesDescription: string, projectId: string) {
-    const issue = {
-      checkpoint_name: checkpointName,
-      description: issuesDescription,
-      project_id: projectId,
-      created_by: JSON.parse(localStorage.getItem('credentials'))['user_id']
-    };
-    console.log(issue);
-
-    return this.http.post<any>(BACKEND_URLS.ADD_ISSUE, issue, this.httpOptions).pipe(
-      map((res: any) => {
-        return res;
+    return this.apollo
+      .mutate({
+        mutation: MUTATION_ADD_ISSUE,
+        variables: {
+          objects: {
+            checkpoint_name: checkpointName,
+            description: issuesDescription,
+            project_id: projectId,
+            created_by: localStorage.getItem('userId')
+          }
+        }
       })
-    );
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * incrementOrDecrementLikeCounter
+   */
+  public incrementOrDecrementLikeCounter(commentId: number) {
+    console.log(commentId);
+
+    return this.apollo
+      .mutate({
+        mutation: MUTATION_UPDATE_LIKE_COUNTER,
+        variables: {
+          likesOffCounter: 1,
+          commentId: commentId
+        }
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 }

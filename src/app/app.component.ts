@@ -32,16 +32,17 @@ export class AppComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.errorHandler.subj_notification.subscribe(message => {
-      let errorMessage = '';
-      Object.keys(message['error']).forEach(category => {
-        if (typeof (message['error'][category] === 'string')) {
-          errorMessage += message['error'][category] + '\n';
-        } else if (typeof message['error'][category] === 'object') {
-          message['error'][category].forEach((messageString: any) => {
-            errorMessage += messageString + '\n';
-          });
-        }
-      });
+      const errorMessage = '';
+      console.log(message);
+      // Object.keys(message['error']).forEach(category => {
+      //   if (typeof (message['error'][category] === 'string')) {
+      //     errorMessage += message['error'][category] + '\n';
+      //   } else if (typeof message['error'][category] === 'object') {
+      //     message['error'][category].forEach((messageString: any) => {
+      //       errorMessage += messageString + '\n';
+      //     });
+      //   }
+      // });
       this.snackBar.open(errorMessage, 'Okay', {
         duration: 2000
       });

@@ -3,6 +3,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { Shell } from '@app/shell/shell.service';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { extract } from './core';
+import { CallbackComponent } from './callback/callback.component';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -10,6 +11,7 @@ const routes: Routes = [
     { path: 'user', loadChildren: 'app/profile/profile.module#ProfileModule' },
     { path: 'project', loadChildren: 'app/project/project.module#ProjectModule' }
   ]),
+  { path: 'callback', component: CallbackComponent },
   // Fallback when no prior route is matched
   { path: 'not-found', component: NotFoundComponent, data: { title: extract('Page not found! :(') } },
   { path: '**', redirectTo: '', pathMatch: 'full' }
