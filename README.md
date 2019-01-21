@@ -8,23 +8,26 @@ Go ahead! Star this repo!
 
 Cynthesize is a platform where users can post their project ideas and details to get feedback from the community upon things that matter, like the idea itself, the tech stack, the development plan, the approach on the problem. Our vision is to create a platform that unifies the product development process.
 
-### Installation Instructions (Frontend)
+### Installation Instructions
 
-1. Fork and clone the repository **Cynthesize/frontend** to your local machine.
-2. Go to project folder and install dependencies:
+1. Fork and star this repo.
+2. Once you've forked this repo, clone the repository to your local machine. You may do so by running the following command.
     ```sh
+    git clone https://github.com/<YOUR_USERNAME>/frontend
+    ```
+3. Go to project folder and install dependencies:
+    ```sh
+    cd frontend/
     npm install
     ```
 
-2. Launch development server, and open `localhost:4200` in your browser:
+4. Launch development server, and open `localhost:4200` in your browser:
     ```sh
     npm start
     ```
-3. Frontend server is up and running on your local machine. Edit in your favourite code editor and see the changes instantly.
+5. Frontend server is up and running on your local machine. Edit in your favourite code editor and see the changes instantly.
 
 
-
-#### [Click here](https://github.com/Cynthesize/backend) to go to the backend repository.
 
 ### Star this repository before contributing to this project.
 
