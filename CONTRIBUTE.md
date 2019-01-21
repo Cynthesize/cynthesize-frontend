@@ -2,6 +2,14 @@
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change. Please note we have a code of conduct, please follow it in all your interactions with the project.
 
+## Do's and Don't(s)
+
+- We value and appriciate your efforts and for the same reason we do not want you to do repetitive work. To work on an issue, you'll need to comment on the issue to claim it. Once you're assigned to the issue, you'll have 3 days to open a pull request for the issue. Failing to do so, issue will be available for other developers to work upon.
+- Never hesitate to reach out! We all once started a noob and still have a lot of things to learn and we believe that asking for help whenever needed is the best way to go for it. We can be contacted via:
+    - [Gitter Channel](https://github.com/Cynthesize-gitter/Lobby)
+    - [Cynthesize mailing List](https://groups.google.com/forum/#!forum/cynthesize-dev)
+
+
 ### Pull Request Process
 
 1. Ensure any install or build dependencies are removed before the end of the layer when doing a 
