@@ -44,8 +44,8 @@ export class ViewIdeaComponent implements OnInit {
           if (data.length === 0) {
             this.router.navigate(['not-found']);
           }
-          this.idea = data[0];
-          console.log(this.idea);
+          this.idea = data.data.ideas[0];
+          console.log(data);
           this.isLoading = true;
         },
         (error: any) => {

@@ -8,6 +8,57 @@ const USER_PROFILE_PIC_FRAGMENT = gql`
   }
 `;
 
+const IDEA_REPLY_FRAGMENT = gql`
+  fragment IdeaReplyFragment on ideas_reply {
+    id
+    reply_text
+    userByrespondent {
+      ...UserProfilePicFragment
+    }
+    likes
+    dislikes
+    timestamp
+  }
+  ${USER_PROFILE_PIC_FRAGMENT}
+`;
+
+const IDEA_COMMENTS_FRAGMENT = gql`
+  fragment IdeaCommentFragment on ideas_comments {
+    id
+    comment_text
+    idea_id
+    likes
+    dislikes
+    timestamp
+    userBycommenter {
+      ...UserProfilePicFragment
+    }
+    ideasReplysBycommentId {
+      ...IdeaReplyFragment
+    }
+  }
+  ${USER_PROFILE_PIC_FRAGMENT}
+  ${IDEA_REPLY_FRAGMENT}
+`;
+
+const IDEA_DETAILS_FRAGMENT = gql`
+  fragment IdeaDetailsFragment on ideas {
+    id
+    ideaOwner {
+      ...UserProfilePicFragment
+    }
+    idea_name
+    require_assistance
+    description
+    upvotes
+    ideaCommentsByideaId {
+      ...IdeaCommentFragment
+    }
+  }
+  ${USER_PROFILE_PIC_FRAGMENT}
+  ${IDEA_COMMENTS_FRAGMENT}
+`;
+
 const ISSUE_COMMENT_REPLY_FRAGMENT = gql`
   fragment IssueCommentReplyFragment on project_issues_reply {
     id
@@ -92,6 +143,7 @@ const PROJECT_DETAILS_FRAGMENT = gql`
 `;
 
 export {
+  IDEA_DETAILS_FRAGMENT,
   ISSUE_COMMENT_REPLY_FRAGMENT,
   ISSUE_COMMENT_FRAGMENT,
   PROJECT_DETAILS_FRAGMENT,

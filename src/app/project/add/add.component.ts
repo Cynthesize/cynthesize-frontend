@@ -24,16 +24,9 @@ export class AddComponent implements OnInit {
   ngOnInit() {
     this.project = this._formBuilder.group({
       projectName: ['', Validators.required],
-      projectId: [''],
       description: ['', Validators.required],
       currentStage: ['', Validators.required]
     });
-  }
-
-  generateProjectId() {
-    const id = this.project.get('projectName').value.replace(/ /g, '-') + Math.round(Date.now() / 1000000);
-    this.project.get('projectId').setValue(id);
-    return id;
   }
 
   addProject() {
@@ -46,7 +39,6 @@ export class AddComponent implements OnInit {
     } else {
       const projectDetails = {
         projectName: this.project.get('projectName').value,
-        projectId: this.project.get('projectId').value,
         description: this.project.get('description').value,
         currentStage: this.project.get('currentStage').value
       };

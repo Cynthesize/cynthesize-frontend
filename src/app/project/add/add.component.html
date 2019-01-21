@@ -14,21 +14,6 @@
               <div><button mat-button matStepperNext>Next</button></div>
             </mat-step>
             <mat-step [stepControl]="project">
-              <ng-template matStepLabel>Enter your project ID</ng-template>
-              <mat-form-field class="text">
-                <input
-                  matInput
-                  placeholder="Eg: Cynthesize-tech"
-                  formControlName="projectId"
-                  value="{{ generateProjectId() }}"
-                  required
-                />
-              </mat-form-field>
-              <div>
-                <button mat-button matStepperPrevious>Back</button> <button mat-button matStepperNext>Next</button>
-              </div>
-            </mat-step>
-            <mat-step [stepControl]="project">
               <ng-template matStepLabel>Enter a brief description of your project</ng-template>
               <mat-form-field class="text">
                 <input matInput placeholder="Description" formControlName="description" required />

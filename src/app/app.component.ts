@@ -27,23 +27,11 @@ export class AppComponent implements OnInit {
     // do not remove the analytics injection, even if the call in ngOnInit() is removed
     // this injection initializes page tracking through the router
     private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
-    private i18nService: I18nService,
     private errorHandler: ErrorHandlerService,
     private snackBar: MatSnackBar
   ) {
     this.errorHandler.subj_notification.subscribe(message => {
-      const errorMessage = '';
-      console.log(message);
-      // Object.keys(message['error']).forEach(category => {
-      //   if (typeof (message['error'][category] === 'string')) {
-      //     errorMessage += message['error'][category] + '\n';
-      //   } else if (typeof message['error'][category] === 'object') {
-      //     message['error'][category].forEach((messageString: any) => {
-      //       errorMessage += messageString + '\n';
-      //     });
-      //   }
-      // });
-      this.snackBar.open(errorMessage, 'Okay', {
+      this.snackBar.open(message.errors[0].message, 'Okay', {
         duration: 2000
       });
     });
@@ -60,7 +48,6 @@ export class AppComponent implements OnInit {
     this.angulartics2GoogleAnalytics.eventTrack(environment.version, { category: 'App initialized' });
 
     // Setup translations
-    this.i18nService.init(environment.defaultLanguage, environment.supportedLanguages);
 
     const onNavigationEnd = this.router.events.pipe(filter(event => event instanceof NavigationEnd));
 

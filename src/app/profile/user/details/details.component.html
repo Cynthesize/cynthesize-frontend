@@ -37,17 +37,10 @@
               <mat-tab label="Details">
                 <ng-template matTabContent>
                   <div class="tab-text">
-                    <div
-                      class="block"
-                      *ngIf="username == loggedInUsername || (username != loggedInUsername && user?.bio !== null)"
-                    >
+                    <div class="block">
                       <h4 class="title">About Me</h4>
-                      <p
-                        *ngIf="user?.bio !== null"
-                        [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }"
-                        class="paragraph"
-                      >
-                        {{ user.bio }}
+                      <p [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }" class="paragraph">
+                        {{ user.bio || 'Add bio' }}
                       </p>
                       <div
                         *ngIf="username == loggedInUsername"

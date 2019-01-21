@@ -1,43 +1,52 @@
 import { Injectable } from '@angular/core';
 import { Idea } from '@app/shared/idea';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import BACKEND_URLS from '@app/shared/backend-urls';
 import { map } from 'rxjs/operators';
+import { Apollo } from 'apollo-angular';
+import { MUTATION_ADD_IDEA, MUTATION_LIKE_IDEA } from '@app/shared/mutations';
+import { QUERY_IDEA_DETAILS, QUERY_LIMITED_IDEA_DETAILS } from '@app/shared/queries';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IdeaService {
-  constructor(private http: HttpClient) {}
+  constructor(private apollo: Apollo) {}
 
   /**
    * addIdea
    */
   public addIdea(context: Idea) {
-    const idea = {
-      idea_name: context.idea_name,
-      description: context.description,
-      require_assistance: context.require_assistance,
-      owner: JSON.parse(localStorage.getItem('credentials'))['user_id']
-    };
-    return this.http.post<any>(BACKEND_URLS.IDEA, idea).pipe(
-      map((res: any) => {
-        console.log(res);
-        return res;
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_ADD_IDEA,
+        variables: {
+          objects: {
+            idea_name: context.idea_name,
+            description: context.description,
+            require_assistance: context.require_assistance,
+            owner: localStorage.getItem('userId')
+          }
+        }
       })
-    );
+      .pipe(
+        map((res: any) => {
+          console.log(res);
+          return res;
+        })
+      );
   }
+
   /**
    * getIdea
    */
   public getIdea(id: string) {
-    return this.http
-      .get(BACKEND_URLS.IDEA, {
-        params: {
-          id: id
+    return this.apollo
+      .watchQuery<any>({
+        query: QUERY_IDEA_DETAILS,
+        variables: {
+          ideaId: id
         }
       })
-      .pipe(
+      .valueChanges.pipe(
         map((res: any) => {
           return res;
         })
@@ -46,14 +55,16 @@ export class IdeaService {
   /**
    * getNIdeas
    */
-  public getNIdeas(cursor: string) {
-    return this.http
-      .get(BACKEND_URLS.IDEA, {
-        params: {
-          idea_cursor: cursor
+  public getNIdeas(limit: number, offset: number) {
+    return this.apollo
+      .watchQuery<any>({
+        query: QUERY_LIMITED_IDEA_DETAILS,
+        variables: {
+          limit: limit,
+          offset: offset
         }
       })
-      .pipe(
+      .valueChanges.pipe(
         map((res: any) => {
           console.log(res);
           return res;
@@ -64,24 +75,18 @@ export class IdeaService {
    * LikeIdea
    */
   public likeIdea(ideaId: string) {
-    const url = BACKEND_URLS.UPDATE_UPVOTES + ideaId;
-    return this.http.put(url, {}).pipe(
-      map((res: any) => {
-        return res;
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_LIKE_IDEA,
+        variables: {
+          idea_id: ideaId,
+          user_id: localStorage.getItem('userId')
+        }
       })
-    );
-  }
-
-  /**
-   * FetchComments
-   */
-  public FetchComments(ideaId: string) {
-    const url = BACKEND_URLS.FETCH_COMMENTS + ideaId;
-    return this.http.get(url).pipe(
-      map((res: any) => {
-        console.log(res);
-        return res;
-      })
-    );
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 }
