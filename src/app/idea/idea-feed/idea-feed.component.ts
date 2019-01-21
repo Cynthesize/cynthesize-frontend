@@ -11,8 +11,8 @@ import { ErrorHandlerService } from '@app/core/error-handler.service';
 })
 export class IdeaFeedComponent implements OnInit {
   isLoading = false;
-  @Input('data')
-  collection: any = [];
+  // @Input('data')
+  // collection: any = [];
   totalCount = 20;
   pageIndex = 1;
   constructor(private ideaService: IdeaService, private router: Router, private errorHandler: ErrorHandlerService) {}
@@ -27,21 +27,21 @@ export class IdeaFeedComponent implements OnInit {
     this.pageIndex = pageIndex;
     const ideasPerPage = 5;
     const startIndexOfCurrentPage = (pageIndex - 1) * ideasPerPage + 1;
-    this.ideaService
-      .getNIdeas(startIndexOfCurrentPage.toString())
-      .pipe(finalize(() => {}))
-      .subscribe(
-        (data: any) => {
-          if (data.length === 0) {
-            this.router.navigate(['not-found']);
-          }
-          console.log(data);
-          this.collection = data;
-          this.isLoading = true;
-        },
-        (error: any) => {
-          this.errorHandler.subj_notification.next(error);
-        }
-      );
+    // this.ideaService
+    //   .getNIdeas()
+    //   .pipe(finalize(() => {}))
+    //   .subscribe(
+    //     (data: any) => {
+    //       if (data.length === 0) {
+    //         this.router.navigate(['not-found']);
+    //       }
+    //       console.log(data);
+    //       this.collection = data;
+    //       this.isLoading = true;
+    //     },
+    //     (error: any) => {
+    //       this.errorHandler.subj_notification.next(error);
+    //     }
+    //   );
   }
 }

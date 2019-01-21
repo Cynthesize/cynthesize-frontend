@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ErrorHandlerService {
-  public subj_notification: Subject<string> = new Subject();
+  public subj_notification: Subject<any> = new Subject();
 
   constructor() {}
 }

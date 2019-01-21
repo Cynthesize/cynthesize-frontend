@@ -3,7 +3,8 @@ import {
   USER_DETAILS_FRAGMENT,
   PROJECT_DETAILS_FRAGMENT,
   PROJECT_ISSUE_FRAGMENT,
-  USER_PROFILE_PIC_FRAGMENT
+  USER_PROFILE_PIC_FRAGMENT,
+  IDEA_DETAILS_FRAGMENT
 } from './fragments';
 
 const QUERY_USER_CHECK = gql`
@@ -24,6 +25,24 @@ const QUERY_USER_DETAILS = gql`
   ${USER_DETAILS_FRAGMENT}
 `;
 
+const QUERY_IDEA_DETAILS = gql`
+  query fetch_ideas($ideaId: Int!) {
+    ideas(where: { id: { _eq: $ideaId } }) {
+      ...IdeaDetailsFragment
+    }
+  }
+  ${IDEA_DETAILS_FRAGMENT}
+`;
+
+const QUERY_LIMITED_IDEA_DETAILS = gql`
+  query fetch_ideas($limit: Int!, $offset: Int!) {
+    ideas(limit: $limit, offset: $offset) {
+      ...IdeaDetailsFragment
+    }
+  }
+  ${IDEA_DETAILS_FRAGMENT}
+`;
+
 const QUERY_PROJECT_DETAILS = gql`
   query fetch_project($id: Int!) {
     project(where: { id: { _eq: $id } }) {
@@ -42,4 +61,11 @@ const QUERY_CHECKPOINT_ISSUES = gql`
   ${PROJECT_ISSUE_FRAGMENT}
 `;
 
-export { QUERY_CHECKPOINT_ISSUES, QUERY_PROJECT_DETAILS, QUERY_USER_CHECK, QUERY_USER_DETAILS };
+export {
+  QUERY_CHECKPOINT_ISSUES,
+  QUERY_PROJECT_DETAILS,
+  QUERY_USER_CHECK,
+  QUERY_USER_DETAILS,
+  QUERY_IDEA_DETAILS,
+  QUERY_LIMITED_IDEA_DETAILS
+};

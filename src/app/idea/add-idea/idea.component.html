@@ -6,9 +6,6 @@
       <hr class="seperator" />
       <div class="form__container">
         <form (ngSubmit)="addIdea()" [formGroup]="addIdeaForm" novalidate>
-          <div class="add-error" [hidden]="!error || isLoading" *ngFor="let errorMessage of error" translate>
-            {{ errorMessage }}
-          </div>
           <br />
           <div fxLayout="column">
             <mat-form-field class="input">
@@ -18,7 +15,7 @@
                 matInput
                 formControlName="idea_name"
                 [autocomplete]="false"
-                [placeholder]="'Idea Name' | translate"
+                placeholder="Add an idea name."
                 required
               />
               <mat-error *ngIf="addIdeaForm.controls.idea_name.valid || addIdeaForm.controls.idea_name.untouched">
@@ -31,7 +28,7 @@
                 matInput
                 formControlName="description"
                 autocomplete="description"
-                [placeholder]="'Add Description' | translate"
+                placeholder="Add a brief description about the idea."
                 required
               />
               <mat-error *ngIf="addIdeaForm.controls.description.valid || addIdeaForm.controls.description.untouched">

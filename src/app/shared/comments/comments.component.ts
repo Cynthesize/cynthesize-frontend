@@ -59,20 +59,6 @@ export class CommentsComponent implements OnInit, OnChanges {
     }
   }
 
-  fetchIdeaComments() {
-    this.ideaService
-      .FetchComments(this.activityId)
-      .pipe(finalize(() => {}))
-      .subscribe(
-        (data: any) => {
-          this.commentsArray = data;
-        },
-        (error: any) => {
-          this.errorHandler.subj_notification.next(error);
-        }
-      );
-  }
-
   addNewComment(projectId: string, issueId: string) {
     this.projectService
       .addComment(this.comment, projectId, issueId)
