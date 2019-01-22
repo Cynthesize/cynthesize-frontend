@@ -1,20 +1,21 @@
-<div *ngIf="collection" class="idea-list">
+<div *ngIf="ideaList" class="idea-list">
   <table>
     <tr>
       <th>Idea name</th>
       <th>Description</th>
     </tr>
-    <tr
-      *ngFor="let item of (collection | paginate: { itemsPerPage: 5, currentPage: pageIndex, totalItems: totalCount })"
-    >
+    <tr *ngFor="let item of (ideaList | paginate: { itemsPerPage: 5, currentPage: pageIndex, totalItems: totalCount })">
       <td>{{ item.idea_name }}</td>
       <td>{{ item.description }}</td>
     </tr>
   </table>
-
-  <pagination-controls
-    (pageChange)="getCurrentPagesIdeas($event)"
-    autoHide="true"
-    class="my-pagination"
-  ></pagination-controls>
 </div>
+
+<mat-paginator
+  [length]="length"
+  [pageIndex]="pageIndex"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[5, 10]"
+  (page)="pageEvent = getIdeasFromServer($event)"
+>
+</mat-paginator>

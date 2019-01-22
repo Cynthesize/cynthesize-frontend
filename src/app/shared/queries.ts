@@ -37,7 +37,14 @@ const QUERY_IDEA_DETAILS = gql`
 const QUERY_LIMITED_IDEA_DETAILS = gql`
   query fetch_ideas($limit: Int!, $offset: Int!) {
     ideas(limit: $limit, offset: $offset) {
-      ...IdeaDetailsFragment
+      id
+      idea_name
+      description
+      upvotes
+      ideaOwner {
+        username
+        profile_pic
+      }
     }
   }
   ${IDEA_DETAILS_FRAGMENT}
@@ -61,11 +68,22 @@ const QUERY_CHECKPOINT_ISSUES = gql`
   ${PROJECT_ISSUE_FRAGMENT}
 `;
 
+const QUERY_TOTAL_IDEA_COUNT = gql`
+  query fetch_ideas {
+    ideas_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+
 export {
   QUERY_CHECKPOINT_ISSUES,
   QUERY_PROJECT_DETAILS,
   QUERY_USER_CHECK,
   QUERY_USER_DETAILS,
   QUERY_IDEA_DETAILS,
-  QUERY_LIMITED_IDEA_DETAILS
+  QUERY_LIMITED_IDEA_DETAILS,
+  QUERY_TOTAL_IDEA_COUNT
 };
