@@ -70,7 +70,7 @@ export class ProjectService {
       .watchQuery<any>({
         query: QUERY_PROJECT_DETAILS,
         variables: {
-          id: id.split('-')[0]
+          id: id
         }
       })
       .valueChanges.pipe(

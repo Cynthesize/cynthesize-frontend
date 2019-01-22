@@ -87,6 +87,7 @@ export class AddIssueComponent {
   constructor(
     public dialogRef: MatDialogRef<AddIssueComponent>,
     private projectService: ProjectService,
+    private errorHandler: ErrorHandlerService,
     private router: Router
   ) {}
 
@@ -94,9 +95,16 @@ export class AddIssueComponent {
     this.dialogRef.close();
   }
   addIssue() {
-    this.projectService.addIssue(this.checkpointName.value, this.issueText.value, SharedProjectId).subscribe(data => {
-      this.onNoClick();
-      location.reload();
-    });
+    this.projectService
+      .addIssue(this.checkpointName.value, this.issueText.value, this.router.url.split('/')[2].split('-')[0])
+      .subscribe(
+        data => {
+          this.onNoClick();
+          location.reload();
+        },
+        error => {
+          this.errorHandler.subj_notification.next(error.error.errors[0].message);
+        }
+      );
   }
 }

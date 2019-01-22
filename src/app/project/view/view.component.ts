@@ -27,7 +27,7 @@ export class ViewComponent implements OnInit {
 
   getProject() {
     this.projectService
-      .getProject(this.router.url.split('/')[2])
+      .getProject(this.router.url.split('/')[2].split('-')[0])
       .pipe(finalize(() => {}))
       .subscribe(
         (data: any) => {
