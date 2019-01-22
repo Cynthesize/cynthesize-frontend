@@ -1,5 +1,5 @@
-<div class="loader" *ngIf="!user.email"><mat-spinner></mat-spinner></div>
-<div class="background" *ngIf="user.email">
+<div class="loader" *ngIf="!isPageLoaded"><mat-spinner></mat-spinner></div>
+<div class="background" *ngIf="isPageLoaded">
   <form [formGroup]="editForm">
     <button mat-button (click)="toggleFormFields(true)" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
       Edit
