@@ -227,6 +227,9 @@
 .thumbnail {
   margin-right: 1rem;
 }
-.CodeMirror {
-  max-width: 438px;
+
+@media screen and (min-width: 800px) {
+  .CodeMirror {
+    width: 50vw;
+  }
 }
