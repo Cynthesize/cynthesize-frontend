@@ -3,6 +3,8 @@ import { IdeaService } from '@app/core/idea/idea.service';
 import { finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
+import { Subscription } from 'rxjs';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-idea-feed',
@@ -10,38 +12,20 @@ import { ErrorHandlerService } from '@app/core/error-handler.service';
   styleUrls: ['./idea-feed.component.scss']
 })
 export class IdeaFeedComponent implements OnInit {
-  isLoading = false;
-  // @Input('data')
-  // collection: any = [];
-  totalCount = 20;
-  pageIndex = 1;
-  constructor(private ideaService: IdeaService, private router: Router, private errorHandler: ErrorHandlerService) {}
+  length: number;
+  ideaList: any;
+  constructor(private ideaService: IdeaService) {}
 
   ngOnInit() {
-    this.getCurrentPagesIdeas(1);
+    this.ideaService.getTotalIdeaCount().subscribe(data => {
+      this.length = data.data.ideas_aggregate.aggregate.count;
+    });
+    this.getIdeasFromServer({ pageSize: 5, pageIndex: 0 });
   }
 
-  getIdeaFeed() {}
-
-  getCurrentPagesIdeas(pageIndex: number) {
-    this.pageIndex = pageIndex;
-    const ideasPerPage = 5;
-    const startIndexOfCurrentPage = (pageIndex - 1) * ideasPerPage + 1;
-    // this.ideaService
-    //   .getNIdeas()
-    //   .pipe(finalize(() => {}))
-    //   .subscribe(
-    //     (data: any) => {
-    //       if (data.length === 0) {
-    //         this.router.navigate(['not-found']);
-    //       }
-    //       console.log(data);
-    //       this.collection = data;
-    //       this.isLoading = true;
-    //     },
-    //     (error: any) => {
-    //       this.errorHandler.subj_notification.next(error);
-    //     }
-    //   );
+  getIdeasFromServer(event: any) {
+    this.ideaService.getNIdeas(event.pageSize, event.pageIndex).subscribe(data => {
+      this.ideaList = data.data.ideas;
+    });
   }
 }
