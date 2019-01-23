@@ -42,40 +42,8 @@ export class AuthenticationService {
 
   public handleAuthentication(): void {
     this.auth0.parseHash((err: any, authResult: any) => {
-      this.apollo
-        .watchQuery<any>({
-          query: QUERY_USER_CHECK,
-          variables: {
-            email: authResult.idTokenPayload.email
-          }
-        })
-        .valueChanges.subscribe((res: any) => {
-          console.log(res.data.user[0].username);
-          if (res.data.user.length === 0) {
-            console.log(res.data.user[0].username);
-            this.apollo
-              .mutate<any>({
-                mutation: MUTATION_ADD_USER,
-                variables: {
-                  objects: [
-                    {
-                      email: authResult.idTokenPayload.email,
-                      name: authResult.idTokenPayload.name,
-                      username: authResult.idTokenPayload.nickname,
-                      profile_pic: authResult.idTokenPayload.picture
-                    }
-                  ]
-                }
-              })
-              .subscribe(data => {});
-          } else {
-            localStorage.setItem('user_profile_pic', res.data.user[0].profile_pic);
-            localStorage.setItem('username', res.data.user[0].username);
-            localStorage.setItem('userId', res.data.user[0].id);
-            console.log(localStorage.getItem('username'), res);
-          }
-        });
       if (authResult && authResult.accessToken && authResult.idToken) {
+        this.handleUserDatabaseEntry(authResult);
         window.location.hash = '';
         this.setSession(authResult);
         this.router.navigate(['/home']);
@@ -83,6 +51,45 @@ export class AuthenticationService {
         this.router.navigate(['/']);
       }
     });
+  }
+
+  private handleUserDatabaseEntry(authResult: any) {
+    this.apollo
+      .watchQuery<any>({
+        query: QUERY_USER_CHECK,
+        variables: {
+          email: authResult.idTokenPayload.email
+        }
+      })
+      .valueChanges.subscribe((res: any) => {
+        if (res.data.user.length === 0) {
+          this.apollo
+            .mutate<any>({
+              mutation: MUTATION_ADD_USER,
+              variables: {
+                objects: [
+                  {
+                    email: authResult.idTokenPayload.email,
+                    name: authResult.idTokenPayload.name,
+                    username: authResult.idTokenPayload.nickname,
+                    profile_pic: authResult.idTokenPayload.picture
+                  }
+                ]
+              }
+            })
+            .subscribe(data => {
+              console.log(data);
+
+              localStorage.setItem('user_profile_pic', data.data.insert_user.returning[0].profile_pic);
+              localStorage.setItem('username', data.data.insert_user.returning[0].username);
+              localStorage.setItem('userId', data.data.insert_user.returning[0].id);
+            });
+        } else {
+          localStorage.setItem('user_profile_pic', res.data.user[0].profile_pic);
+          localStorage.setItem('username', res.data.user[0].username);
+          localStorage.setItem('userId', res.data.user[0].id);
+        }
+      });
   }
 
   private setSession(authResult: any): void {

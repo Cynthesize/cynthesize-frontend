@@ -20,6 +20,7 @@ class ImageSnippet {
 })
 export class DetailsComponent implements OnInit {
   user: User = new User();
+  isPageLoaded = false;
   username: string;
   sociallinks: any = [];
   isFieldEditable = false;
@@ -57,6 +58,7 @@ export class DetailsComponent implements OnInit {
         if (data.user.length === 0) {
           this.router.navigate(['not-found']);
         }
+        this.isPageLoaded = true;
         this.user = data.user[0];
         this.listOfTech = data.user[0].technologies || [];
         this.user.social_links.forEach(sociallink => {

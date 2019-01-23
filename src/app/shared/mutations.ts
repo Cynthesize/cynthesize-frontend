@@ -1,16 +1,16 @@
 import gql from 'graphql-tag';
-import { USER_PROFILE_PIC_FRAGMENT, ISSUE_COMMENT_FRAGMENT, ISSUE_COMMENT_REPLY_FRAGMENT } from './fragments';
+import { ISSUE_COMMENT_FRAGMENT, ISSUE_COMMENT_REPLY_FRAGMENT, USER_DETAILS_FRAGMENT } from './fragments';
 
 const MUTATION_ADD_USER = gql`
   mutation insert_user($objects: [user_insert_input!]!) {
     insert_user(objects: $objects) {
       affected_rows
       returning {
-        ...UserProfilePicFragment
+        ...UserDetailsFragment
       }
     }
   }
-  ${USER_PROFILE_PIC_FRAGMENT}
+  ${USER_DETAILS_FRAGMENT}
 `;
 
 const MUTATION_ADD_PROJECT = gql`
