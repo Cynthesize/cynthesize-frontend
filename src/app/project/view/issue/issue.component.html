@@ -3,9 +3,14 @@
     <div class="project-dashboard__header">
       <div class="project-dashboard__info">
         <h1 class="project-dashboard__name">{{ projectDetails.project_name }}</h1>
+
         <h3 class="project-dashboard__origin">
-          Created on <span class="text-bold">{{ projectDetails.created_on | date }}</span> by
-          <span class="text-bold">{{ projectDetails.owner }}</span>
+          <div *ngIf="projectDetails.created_on">
+            Created on <span class="text-bold">{{ projectDetails.created_on | date }}</span>
+          </div>
+          <div *ngIf="projectDetails.owner">
+            by <span class="text-bold" ng-if="projectDetails.owner">{{ projectDetails.owner }}</span>
+          </div>
         </h3>
       </div>
       <button mat-raised-button (click)="initAddIssueDialogue()" style="border-radius: 30px;">
