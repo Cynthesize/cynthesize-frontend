@@ -193,7 +193,7 @@
               </mat-form-field>
             </div>
             <div class="detail-block" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
-              <mat-icon class="detail-block__icon">cake</mat-icon> {{ user.birth_date | date: 'longDate' }}
+              <mat-icon class="detail-block__icon">cake</mat-icon> {{ user.date_of_birth | date: 'longDate' }}
             </div>
             <div class="detail-block" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
               <mat-icon class="detail-block__icon">cake</mat-icon>
@@ -203,7 +203,7 @@
                   formControlName="dob"
                   [matDatepicker]="dp3"
                   placeholder="Enter date of birth."
-                  value="{{ user.birth_date }}"
+                  value="{{ user.date_of_birth }}"
                 />
                 <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
                 <mat-datepicker #dp3 disabled="false"></mat-datepicker>
