@@ -58,29 +58,30 @@ export class DetailsComponent implements OnInit {
         if (data.user.length === 0) {
           this.router.navigate(['not-found']);
         }
+        console.log(data);
         this.isPageLoaded = true;
         this.user = data.user[0];
         this.listOfTech = data.user[0].technologies || [];
-        this.user.social_links.forEach(sociallink => {
-          const username = sociallink.substr(sociallink.lastIndexOf('/') + 1, sociallink.length);
-          if (sociallink.includes('facebook') || sociallink.includes('github') || sociallink.includes('twitter')) {
-            const social =
-              (sociallink.includes('facebook') && 'facebook') ||
-              (sociallink.includes('github') && 'github') ||
-              (sociallink.includes('twitter') && 'twitter');
-            this.sociallinks.push({
-              socialLink: sociallink,
-              username: username,
-              logoUrl: '../../../../assets/logos/social/' + social + '-logo.svg'
-            });
-          } else {
-            this.sociallinks.push({
-              socialLink: sociallink,
-              username: sociallink,
-              logoUrl: '../../../../assets/logos/grid-world.svg'
-            });
-          }
-        });
+        // this.user.social_links.forEach(sociallink => {
+        //   const username = sociallink.substr(sociallink.lastIndexOf('/') + 1, sociallink.length);
+        //   if (sociallink.includes('facebook') || sociallink.includes('github') || sociallink.includes('twitter')) {
+        //     const social =
+        //       (sociallink.includes('facebook') && 'facebook') ||
+        //       (sociallink.includes('github') && 'github') ||
+        //       (sociallink.includes('twitter') && 'twitter');
+        //     this.sociallinks.push({
+        //       socialLink: sociallink,
+        //       username: username,
+        //       logoUrl: '../../../../assets/logos/social/' + social + '-logo.svg'
+        //     });
+        //   } else {
+        //     this.sociallinks.push({
+        //       socialLink: sociallink,
+        //       username: sociallink,
+        //       logoUrl: '../../../../assets/logos/grid-world.svg'
+        //     });
+        //   }
+        // });
       },
       (error: any) => {
         this.errorHandler.subj_notification.next(error);
@@ -94,7 +95,7 @@ export class DetailsComponent implements OnInit {
 
   onSubmit() {
     if (!this.selectedFile) {
-      this.updateUserData(null);
+      this.updateUserData();
     } else {
       this.profileService.uploadImage(this.selectedFile.file).subscribe(
         (res: any) => {
@@ -108,17 +109,23 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  updateUserData(profileUrl: string) {
+  updateUserData(profileUrl?: string) {
     const userUpdateObject = {
       bio: this.editForm.get('bio').value,
       location: this.editForm.get('location').value,
       technologies: this.listOfTech,
-      birth_date: this.editForm.get('dob').value,
+      date_of_birth: this.editForm.get('dob').value,
       website: this.editForm.get('website').value,
       profile_pic: profileUrl
     };
+    const trimmedUserChangeObject = {};
+    Object.keys(userUpdateObject).forEach(key => {
+      if (userUpdateObject[key] || (key === 'technologies' && userUpdateObject[key].length === 0)) {
+        trimmedUserChangeObject[key] = userUpdateObject[key];
+      }
+    });
     this.profileService
-      .UpdateUserDetails(userUpdateObject)
+      .UpdateUserDetails(trimmedUserChangeObject)
       .pipe(finalize(() => {}))
       .subscribe(
         (data: any) => {

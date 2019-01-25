@@ -114,6 +114,7 @@ const USER_DETAILS_FRAGMENT = gql`
     email
     location
     name
+    date_of_birth
     social_links
     technologies
     upvoted_ideas
