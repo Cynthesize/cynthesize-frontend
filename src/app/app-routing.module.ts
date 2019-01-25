@@ -7,6 +7,7 @@ import { CallbackComponent } from './callback/callback.component';
 
 const routes: Routes = [
   Shell.childRoutes([
+    { path: 'home', redirectTo: '/idea/feed', pathMatch: 'full' },
     { path: 'idea', loadChildren: 'app/idea/idea.module#IdeaModule' },
     { path: 'user', loadChildren: 'app/profile/profile.module#ProfileModule' },
     { path: 'project', loadChildren: 'app/project/project.module#ProjectModule' }
