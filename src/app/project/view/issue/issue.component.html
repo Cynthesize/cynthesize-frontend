@@ -28,10 +28,13 @@
         <div class="project-dashboard__card">
           <div class="project-dashboard__card__title">Contributors</div>
           <div class="project-dashboard__card__wrap">
-            <div class="collab">
-              <div class="collab__photo"><img src="../../../../assets/user.png" class="thumbnail" /></div>
-              <div class="collab__name">{{ projectDetails.owner }}</div>
-            </div>
+            <span *ngIf="projectDetails.owner; else elseBlock">
+              <div class="collab">
+                <div class="collab__photo"><img src="../../../../assets/user.png" class="thumbnail" /></div>
+                <div class="collab__name">{{ projectDetails.owner }}</div>
+              </div>
+            </span>
+            <ng-template #elseBlock>Nothing to show</ng-template>
           </div>
         </div>
       </div>
