@@ -1,23 +1,11 @@
 <div class="container">
-  <mat-card>
-    <p>
-      <img class="logo" src="assets/cynthesize-logo.png" alt="angular logo"/>
-    </p>
-    <mat-card-content>
-      <mat-card-title translate>Hello world !</mat-card-title>
-      <mat-card-subtitle>
-        <app-loader [isLoading]="isLoading" size="1.5"></app-loader>
-        <q [hidden]="isLoading">{{quote}}</q>
-      </mat-card-subtitle>
-      <mat-card-actions>
-        <button
-          mat-raised-button
-          angulartics2On="click"
-          angularticsAction="Click button below quote"
-          [angularticsCategory]="quote">
-          Click me to send an Analytics event
-        </button>
-      </mat-card-actions>
-    </mat-card-content>
-  </mat-card>
+  <div id="slider">
+    <figure>
+      <img src="https://www.teamcopenhagen.dk/media/1106/1600x450.png?quality=90&width=1600" alt />
+      <img src="https://www.teamcopenhagen.dk/media/1106/1600x450.png?quality=90&width=1600" alt />
+      <img src="https://www.teamcopenhagen.dk/media/1106/1600x450.png?quality=90&width=1600" alt />
+      <img src="https://www.teamcopenhagen.dk/media/1106/1600x450.png?quality=90&width=1600" alt />
+      <img src="https://www.teamcopenhagen.dk/media/1106/1600x450.png?quality=90&width=1600" alt />
+    </figure>
+  </div>
 </div>
