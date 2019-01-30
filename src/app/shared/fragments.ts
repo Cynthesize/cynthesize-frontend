@@ -8,6 +8,20 @@ const USER_PROFILE_PIC_FRAGMENT = gql`
   }
 `;
 
+const USER_LIKES = gql`
+  fragment UserLikesFragments on user {
+    projectIssuesCommentsLikessByuserId {
+      comment_id
+    }
+    ideaUpvotessByuserId {
+      idea_id
+    }
+    ideasCommentsLikesByuserId {
+      comment_id
+    }
+  }
+`;
+
 const IDEA_REPLY_FRAGMENT = gql`
   fragment IdeaReplyFragment on ideas_reply {
     id
@@ -150,5 +164,6 @@ export {
   PROJECT_DETAILS_FRAGMENT,
   PROJECT_ISSUE_FRAGMENT,
   USER_DETAILS_FRAGMENT,
+  USER_LIKES,
   USER_PROFILE_PIC_FRAGMENT
 };

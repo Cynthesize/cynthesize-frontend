@@ -85,13 +85,37 @@ const MUTATION_ADD_ISSUE_COMMENT_REPLY = gql`
   ${ISSUE_COMMENT_REPLY_FRAGMENT}
 `;
 
-const MUTATION_UPDATE_LIKE_COUNTER = gql`
-  mutation update_likes($likesOffCounter: Int!, $commentId: Int!) {
+const MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT = gql`
+  mutation update_likes($likesOffCounter: Int!, $commentId: Int!, $userId: Int!) {
     update_project_issues_comments(where: { id: { _eq: $commentId } }, _inc: { likes: $likesOffCounter }) {
       affected_rows
       returning {
         id
         likes
+      }
+    }
+    insert_project_issues_comments_likes(objects: { user_id: $userId, comment_id: $commentId }) {
+      affected_rows
+      returning {
+        comment_id
+      }
+    }
+  }
+`;
+
+const MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE = gql`
+  mutation update_likes($likesOffCounter: Int!, $commentId: Int!, $userId: Int!) {
+    update_project_issues_comments(where: { id: { _eq: $commentId } }, _inc: { likes: $likesOffCounter }) {
+      affected_rows
+      returning {
+        id
+        likes
+      }
+    }
+    delete_project_issues_comments_likes(where: { user_id: { _eq: $userId }, comment_id: { _eq: $commentId } }) {
+      affected_rows
+      returning {
+        comment_id
       }
     }
   }
@@ -116,7 +140,8 @@ export {
   MUTATION_ADD_ISSUE_COMMENT_REPLY,
   MUTATION_ADD_PROJECT,
   MUTATION_ADD_USER,
-  MUTATION_UPDATE_LIKE_COUNTER,
+  MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE,
+  MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT,
   MUTATION_LIKE_IDEA,
   MUTATION_UPDATE_USER_DETAILS
 };
