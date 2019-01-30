@@ -4,7 +4,8 @@ import {
   PROJECT_DETAILS_FRAGMENT,
   PROJECT_ISSUE_FRAGMENT,
   USER_PROFILE_PIC_FRAGMENT,
-  IDEA_DETAILS_FRAGMENT
+  IDEA_DETAILS_FRAGMENT,
+  USER_LIKES
 } from './fragments';
 
 const QUERY_USER_CHECK = gql`
@@ -78,6 +79,15 @@ const QUERY_TOTAL_IDEA_COUNT = gql`
   }
 `;
 
+const QUERY_USER_LIKES = gql`
+  query users_likes($userId: Int!) {
+    user(where: { id: { _eq: $userId } }) {
+      ...UserLikesFragments
+    }
+  }
+  ${USER_LIKES}
+`;
+
 export {
   QUERY_CHECKPOINT_ISSUES,
   QUERY_PROJECT_DETAILS,
@@ -85,5 +95,6 @@ export {
   QUERY_USER_DETAILS,
   QUERY_IDEA_DETAILS,
   QUERY_LIMITED_IDEA_DETAILS,
-  QUERY_TOTAL_IDEA_COUNT
+  QUERY_TOTAL_IDEA_COUNT,
+  QUERY_USER_LIKES
 };
