@@ -1,10 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IdeaService } from '@app/core/idea/idea.service';
-import { finalize } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { ErrorHandlerService } from '@app/core/error-handler.service';
-import { Subscription } from 'rxjs';
-import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-idea-feed',

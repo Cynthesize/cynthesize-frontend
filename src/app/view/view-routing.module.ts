@@ -3,13 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: ':id/view',
-    loadChildren: './view/view.module#ViewModule'
+    path: 'project/:id',
+    loadChildren: 'app/view/view-project/view-project.module#ViewProjectModule'
   },
   {
-    path: '**',
-    redirectTo: 'add',
-    pathMatch: 'full'
+    path: 'feed',
+    loadChildren: 'app/view/feed/feed.module#FeedModule'
   }
 ];
 
@@ -17,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProjectRoutingModule {}
+export class ViewRoutingModule {}
