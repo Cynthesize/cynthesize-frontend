@@ -6,15 +6,16 @@
   font-size: 1.3rem;
 
   border-radius: 0.5rem;
-  padding: 1rem;
+  padding: 0rem;
   display: flex;
 
   &__left-pane {
-    padding: 1rem 1rem 1rem 1rem;
+    padding: 0rem 1rem 0rem 1rem;
+    margin: 0rem 0rem 1rem 0rem;
   }
 
   &__right-pane {
-    padding: 1rem 2rem 0 1rem;
+    padding: 0rem 2rem 0rem 1rem;
   }
 
   &__info {
@@ -49,7 +50,7 @@
   }
 
   &__text {
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.8rem;
     font-size: 1.6rem;
   }
 
@@ -74,13 +75,13 @@
   }
 
   &__left-pane {
-    padding: 0 1rem 1rem 1rem;
+    padding: 0 1rem 0rem 1rem;
   }
 
   &__info {
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0rem;
 
     font-size: 1.5rem;
 
