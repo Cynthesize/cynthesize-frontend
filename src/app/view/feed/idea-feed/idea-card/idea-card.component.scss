@@ -1,0 +1,69 @@
+@import "../../../../../sass/declarations";
+
+:host {
+  width: 100%;
+  overflow: hidden;
+}
+
+.background {
+  min-height: 100vh;
+  background-color: darken($color-white, 10%);
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  box-shadow: $shadow-light;
+
+  overflow: hidden;
+
+  &--idea {
+    width: 80rem;
+    background-color: white;
+    min-height: 40rem;
+    padding: 3rem;
+    font-size: 1.6rem;
+    border-radius: $radius-small;
+    display: flex;
+    align-items: stretch;
+
+    @media (max-width: $bp-6) {
+      flex-direction: column;
+    }
+  }
+}
+
+.idea-description {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 50%;
+  margin-right: 3rem;
+}
+
+.idea-discussion {
+  flex-grow: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.comments {
+  flex-grow: 1;
+  background-color: #f0f0f0;
+  border-radius: 0.2rem;
+
+  font-size: 1.4rem;
+  font-style: italic;
+  color: darken($color: #dedede, $amount: 30%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: $bp-6) {
+    padding: 2rem 0;
+  }
+}

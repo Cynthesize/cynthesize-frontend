@@ -1,6 +1,9 @@
 <div *ngIf="ideaList" class="idea-list">
   <div *ngFor="let item of (ideaList | paginate: { itemsPerPage: 5, currentPage: pageIndex, totalItems: totalCount })">
-    <mat-card> {{ item.idea_name }} {{ item.description }} {{ item.upvotes }} </mat-card>
+    <mat-card>
+      <mat-icon (click)="openDialog(item)">open_in_new</mat-icon>
+      {{ item.idea_name }} {{ item.description }} {{ item.upvotes }}
+    </mat-card>
   </div>
 </div>
 
