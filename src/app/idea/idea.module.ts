@@ -5,7 +5,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialModule } from '@app/material.module';
 import { IdeaRoutingModule } from './idea-routing.module';
-import { IdeaComponent } from './add-idea/idea.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared';
 import { ViewIdeaComponent } from './view-idea/view-idea.component';
@@ -26,6 +25,6 @@ import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
     SharedModule,
     NgxPaginationModule
   ],
-  declarations: [IdeaComponent, ViewIdeaComponent, IdeaFeedComponent]
+  declarations: [ViewIdeaComponent, IdeaFeedComponent]
 })
 export class IdeaModule {}
