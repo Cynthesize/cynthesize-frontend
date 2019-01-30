@@ -24,20 +24,13 @@ export class GraphqlModule {
      */
     let authHeader: any;
 
-    if (authenticationService.isAuthenticated()) {
-      authHeader = new HttpHeaders()
-        .set('X-Hasura-Access-Key', HASURA_ACCESS_KEY)
-        .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${localStorage.getItem('access_token')}`)
-        .set('X-Hasura-Role', 'admin')
-        .set('X-Hasura-User-Id', localStorage.getItem('userId'));
-    } else {
-      authHeader = new HttpHeaders()
-        .set('X-Hasura-Access-Key', HASURA_ACCESS_KEY)
-        .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${localStorage.getItem('access_token')}`)
-        .set('X-Hasura-Role', 'guest');
-    }
+    authHeader = new HttpHeaders()
+      .set('X-Hasura-Access-Key', HASURA_ACCESS_KEY)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${localStorage.getItem('access_token')}`)
+      .set('X-Hasura-Role', 'admin')
+      .set('X-Hasura-User-Id', localStorage.getItem('userId'));
+
     // Create a HTTP Link with the URI and the header.
     const http = httpLink.create({ uri, headers: authHeader });
 
