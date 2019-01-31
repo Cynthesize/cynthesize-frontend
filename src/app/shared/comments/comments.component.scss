@@ -6,11 +6,10 @@
   font-size: 1.3rem;
 
   border-radius: 0.5rem;
-  padding: 0rem;
   display: flex;
 
   &__left-pane {
-    padding: 0rem 1rem 0rem 1rem;
+    padding: 0 1rem;
     margin: 0rem 0rem 1rem 0rem;
   }
 
@@ -21,7 +20,6 @@
   &__info {
     display: flex;
     align-items: center;
-
     font-size: 1.6rem;
 
     &--photo {
@@ -63,7 +61,6 @@
 
 .reply {
   padding: 1rem 0;
-
   display: flex;
 
   &:not(:last-of-type) {
@@ -71,18 +68,16 @@
   }
 
   &__text {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 
   &__left-pane {
-    padding: 0 1rem 0rem 1rem;
+    padding: 0 1rem;
   }
 
   &__info {
     display: flex;
     align-items: center;
-    margin-bottom: 0rem;
-
     font-size: 1.5rem;
 
     &--photo {
@@ -117,15 +112,9 @@
 }
 
 .CodeMirror {
-  padding: 0;
   max-height: 30px;
   min-height: 200px !important;
 }
-
-.comment > * {
-  margin-bottom: 2rem;
-}
-
 .new_comment {
   font-size: 1.6rem;
 }
