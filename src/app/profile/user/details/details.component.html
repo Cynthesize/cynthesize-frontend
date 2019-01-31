@@ -5,12 +5,14 @@
     <div class="profile-header-info">
       <div class="container">
         <div class="profile-header-info__user-card">
-          <div class="profile-header-info__photo"><img src="../../../../assets/user.png" /></div>
+          <div class="profile-header-info__photo">
+            <cl-image height="150" crop="scale" public-id="{{ user.profile_pic }}" secure="true"></cl-image>
+          </div>
 
-          <h3 class="profile-header-info__username">@aayushjoglekar</h3>
+          <h3 class="profile-header-info__username">@{{ user.username }}</h3>
         </div>
 
-        <div class="profile-header-info__name">Aayush Joglekar</div>
+        <div class="profile-header-info__name">{{ user.name }}</div>
       </div>
     </div>
   </div>
@@ -20,7 +22,7 @@
       <div class="side-info">
         <div class="info_card">
           <div class="info_card--header">Location</div>
-          <div class="info_card--body">IIIT Allahabad, India</div>
+          <div class="info_card--body">{{ user.location }}</div>
         </div>
         <div class="info_card">
           <div class="info_card--header">Bio</div>
@@ -32,7 +34,9 @@
         </div>
         <div class="info_card">
           <div class="info_card--header">Tech Stack</div>
-          <div class="info_card--body">React, Node, Bootstrap</div>
+          <div class="info_card--body">
+            <span *ngFor="let tech of user.technologies"> {{ tech }} </span>
+          </div>
         </div>
       </div>
 
@@ -48,7 +52,7 @@
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident qui saepe nam, dicta omnis quidem
               velit voluptatem tempore? Repudiandae, id.
             </div>
-            <a class="expand" href="#"><img src="../../../../assets/images/external-link.svg"/></a>
+            <a class="expand" href="#"><mat-icon>open_in_new</mat-icon></a>
           </div>
         </div>
 
@@ -64,7 +68,7 @@
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident qui saepe nam, dicta omnis quidem
               velit voluptatem tempore? Repudiandae, id.
             </div>
-            <a class="expand" href="#"><img src="../../../../assets/images/external-link.svg"/></a>
+            <a class="expand" href="#"><mat-icon>open_in_new</mat-icon></a>
           </div>
           <div class="project_card">
             <div class="project_card--header">Idea Name</div>
@@ -72,7 +76,7 @@
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident qui saepe nam, dicta omnis quidem
               velit voluptatem tempore? Repudiandae, id.
             </div>
-            <a class="expand" href="#"><img src="../../../../assets/images/external-link.svg"/></a>
+            <a class="expand" href="#"><mat-icon>open_in_new</mat-icon></a>
           </div>
           <div class="project_card">
             <div class="project_card--header">Idea Name</div>
@@ -80,7 +84,7 @@
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident qui saepe nam, dicta omnis quidem
               velit voluptatem tempore? Repudiandae, id.
             </div>
-            <a class="expand" href="#"><img src="../../../../assets/images/external-link.svg"/></a>
+            <a class="expand" href="#"><mat-icon>open_in_new</mat-icon></a>
           </div>
         </div>
       </div>
