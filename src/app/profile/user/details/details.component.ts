@@ -24,6 +24,7 @@ export class DetailsComponent implements OnInit {
   username: string;
   sociallinks: any = [];
   isFieldEditable = false;
+  isSameUser = localStorage.getItem('username') === this.router.url.split('/')[2];
 
   editForm: FormGroup;
 
