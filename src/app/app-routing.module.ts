@@ -7,9 +7,9 @@ import { CallbackComponent } from './callback/callback.component';
 
 const routes: Routes = [
   Shell.childRoutes([
-    { path: 'idea', loadChildren: 'app/idea/idea.module#IdeaModule' },
-    { path: 'user', loadChildren: 'app/profile/profile.module#ProfileModule' },
-    { path: 'project', loadChildren: 'app/project/project.module#ProjectModule' }
+    { path: 'add', loadChildren: 'app/add/add.module#AddModule' },
+    { path: 'view', loadChildren: 'app/view/view.module#ViewModule' },
+    { path: 'user', loadChildren: 'app/profile/profile.module#ProfileModule' }
   ]),
   { path: 'callback', component: CallbackComponent },
   // Fallback when no prior route is matched

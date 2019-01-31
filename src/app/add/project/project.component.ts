@@ -6,11 +6,11 @@ import { Router } from '@angular/router';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 
 @Component({
-  selector: 'app-add',
-  templateUrl: './add.component.html',
-  styleUrls: ['./add.component.scss']
+  selector: 'app-project',
+  templateUrl: './project.component.html',
+  styleUrls: ['./project.component.scss']
 })
-export class AddComponent implements OnInit {
+export class AddProjectComponent implements OnInit {
   isLinear = false;
   project: FormGroup;
   formNotfilled = false;

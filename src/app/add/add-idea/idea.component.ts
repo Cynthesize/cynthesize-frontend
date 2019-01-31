@@ -6,7 +6,6 @@ import { MatChipInputEvent } from '@angular/material';
 import { IdeaService } from '@app/core/idea/idea.service';
 import { Logger } from '@app/core';
 import { finalize } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 
 export interface Tags {
@@ -20,7 +19,7 @@ const log = new Logger('Idea');
   templateUrl: './idea.component.html',
   styleUrls: ['./idea.component.scss']
 })
-export class IdeaComponent implements OnInit {
+export class AddIdeaComponent implements OnInit {
   version: string = environment.version;
   error: string;
   addIdeaForm: FormGroup;
@@ -67,12 +66,10 @@ export class IdeaComponent implements OnInit {
     const input = event.input;
     const value = event.value;
 
-    // Add our fruit
     if ((value || '').trim()) {
       this.tags.push({ name: value.trim() });
     }
 
-    // Reset the input value
     if (input) {
       input.value = '';
     }

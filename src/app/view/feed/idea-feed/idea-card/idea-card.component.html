@@ -1,0 +1,19 @@
+<div class="container container--idea">
+  <div class="idea-description">
+    <h2 class="heading--title">{{ data.idea.idea_name }}</h2>
+    <h4 class="heading--subtitle">
+      by <a href="#" class="link--inline">{{ data.idea.owner }}</a>
+    </h4>
+    <app-liking [likes]="data.idea.upvotes" [ideaId]="data.idea.id"></app-liking>
+
+    <hr class="seperator" />
+
+    <div class="description-box">
+      <p class="paragraph paragraph--medium">{{ data.idea.description }}</p>
+    </div>
+  </div>
+  <div class="idea-discussion">
+    <h4 class="heading--title__special">Discussion</h4>
+    <div class="comments">Feature coming soon</div>
+  </div>
+</div>
