@@ -1,13 +1,17 @@
 @import "../../../../sass/declarations";
 
+* {
+  font-family: inherit;
+}
+
 :host {
   width: 100%;
 }
 
 .background {
-  min-height: 90vh;
   background-color: #efefef;
   position: relative;
+  font-family: "Open Sans", sans-serif;
 
   @media (max-width: 37.5em) {
     padding: 0 0;
@@ -19,7 +23,7 @@
 }
 
 .profile-header {
-  height: 38rem;
+  height: 45vh;
   background-image: linear-gradient(135deg, rgb(102, 126, 234) 0%, rgb(118, 75, 162) 100%);
   display: flex;
   flex-direction: column;
@@ -73,13 +77,13 @@
   }
 
   &__username {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 1.6rem;
   }
 
-  &__names {
+  &__name {
     font-size: 3rem;
-    font-weight: bold;
+    font-weight: 700;
   }
 }
 
@@ -90,6 +94,8 @@ body {
 .main-body {
   display: flex;
   justify-content: center;
+  padding-bottom: 3rem;
+  margin-bottom: 5rem;
 
   .container {
     display: flex;
@@ -97,14 +103,102 @@ body {
   }
 
   .side-info {
-    width: 30rem;
-
+    flex: 0 0 30rem;
     margin-right: 5rem;
 
     padding-top: 15rem;
+
+    & > *:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+
+    & > * {
+      display: flex;
+    }
+  }
+
+  .info_card {
+    background-color: white;
+    padding: 2rem;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    font-size: 1.5rem;
+    box-shadow: 0px 0px 0.5rem #aaaaaa;
+    border-radius: 1rem;
+    font-weight: 400;
+
+    &--header {
+      font-weight: 600;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
   }
 
   .main-info {
+    &__section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
     flex-grow: 1;
+    margin-top: 2rem;
+
+    &__projects {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      & > * {
+        flex: 0 0 49%;
+        margin: 1rem 0;
+      }
+    }
+
+    h2 {
+      margin: 2rem 0;
+    }
   }
+
+  .project_card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.5rem #aaaaaa;
+    padding: 2rem;
+
+    font-size: 1.5rem;
+
+    &--header {
+      font-size: 1.7rem;
+      margin-bottom: 1rem;
+    }
+
+    &--body {
+      font-weight: 400;
+    }
+  }
+}
+
+.expand {
+  position: absolute;
+  top: 1.8rem;
+  right: 2.7rem;
+
+  img {
+    height: 1.3rem;
+  }
+}
+
+.see-more {
+  text-decoration: none;
+  color: $color-primary-dark;
+
+  font-size: 1.6rem;
 }
