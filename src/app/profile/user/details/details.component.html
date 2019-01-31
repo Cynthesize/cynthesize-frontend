@@ -1,93 +1,138 @@
-<div class="background">
-  <div class="profile-header">
-    <div class="profile-header-cover"></div>
+<div class="loader" *ngIf="!isPageLoaded"><mat-spinner></mat-spinner></div>
+<div class="background" *ngIf="isPageLoaded">
+  <form [formGroup]="editForm">
+    <div class="profile-header">
+      <div class="profile-header-cover"></div>
+      <div class="profile-header-info">
+        <div class="container">
+          <div class="profile-header-info__user-card">
+            <div class="profile-header-info__photo">
+              <cl-image height="150" crop="scale" public-id="{{ user.profile_pic }}" secure="true"></cl-image>
+            </div>
 
-    <div class="profile-header-info">
+            <h3 class="profile-header-info__username" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
+              @{{ user.username }}
+            </h3>
+            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+              <input
+                matInput
+                class="profile-header-info__username"
+                value="{{ user.username }}"
+                formControlName="bio"
+                placeholder="Enter new username"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="profile-header-info__name">
+            {{ user.name }}
+            <span>
+              <mat-icon
+                (click)="toggleFormFields(true)"
+                [ngStyle]="{ display: !isFieldEditable && isSameUser ? 'contents' : 'none' }"
+              >
+                edit
+              </mat-icon>
+              <mat-icon
+                (click)="toggleFormFields(false)"
+                [ngStyle]="{ display: isFieldEditable ? 'contents' : 'none' }"
+              >
+                cancel
+              </mat-icon>
+              <mat-icon (click)="onSubmit()" [ngStyle]="{ display: isFieldEditable ? 'contents' : 'none' }">
+                save
+              </mat-icon>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-body">
       <div class="container">
-        <div class="profile-header-info__user-card">
-          <div class="profile-header-info__photo">
-            <cl-image height="150" crop="scale" public-id="{{ user.profile_pic }}" secure="true"></cl-image>
+        <div class="side-info">
+          <div class="info_card">
+            <div class="info_card--header">Location</div>
+            <div class="info_card--body" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
+              {{ user.location }}
+            </div>
+            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+              <input matInput value="{{ user.location }}" formControlName="location" placeholder="Enter a location" />
+            </mat-form-field>
+            <div class="info_card--header">Birthday</div>
+            <div class="info_card--body" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
+              {{ user.date_of_birth }}
+            </div>
+            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+              <input matInput value="{{ user.date_of_birth }}" formControlName="dob" placeholder="Select a date" />
+            </mat-form-field>
           </div>
-
-          <h3 class="profile-header-info__username">@{{ user.username }}</h3>
+          <div class="info_card">
+            <div class="info_card--header">About me</div>
+            <div class="info_card--body" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
+              {{ user.bio }}
+            </div>
+            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+              <input matInput value="{{ user.bio }}" formControlName="bio" placeholder="Enter a bio" />
+            </mat-form-field>
+          </div>
+          <div class="info_card">
+            <div class="info_card--header">Things I'm fond of...</div>
+            <div class="info_card--body">
+              <span *ngFor="let tech of user.technologies"> {{ tech }} </span>
+            </div>
+          </div>
         </div>
 
-        <div class="profile-header-info__name">{{ user.name }}</div>
+        <div class="main-info">
+          <div class="main-info__section-header">
+            <h2>PROJECTS</h2>
+            <a href="#" class="see-more">See More</a>
+          </div>
+          <div class="main-info__projects">
+            <div class="project_card">
+              <div class="project_card--header">Project Name | Ideation</div>
+              <div class="project_card--body">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident qui saepe nam, dicta omnis quidem
+                velit voluptatem tempore? Repudiandae, id.
+              </div>
+              <a class="expand" href="#"><mat-icon>open_in_new</mat-icon></a>
+            </div>
+          </div>
+
+          <div class="main-info__section-header">
+            <h2>IDEAS</h2>
+            <a href="#" class="see-more">See More</a>
+            <!--goes to idea/feed with filter of this user's username-->
+          </div>
+          <div class="main-info__projects">
+            <div class="project_card">
+              <div class="project_card--header">Idea Name</div>
+              <div class="project_card--body">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident qui saepe nam, dicta omnis quidem
+                velit voluptatem tempore? Repudiandae, id.
+              </div>
+              <a class="expand" href="#"><mat-icon>open_in_new</mat-icon></a>
+            </div>
+            <div class="project_card">
+              <div class="project_card--header">Idea Name</div>
+              <div class="project_card--body">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident qui saepe nam, dicta omnis quidem
+                velit voluptatem tempore? Repudiandae, id.
+              </div>
+              <a class="expand" href="#"><mat-icon>open_in_new</mat-icon></a>
+            </div>
+            <div class="project_card">
+              <div class="project_card--header">Idea Name</div>
+              <div class="project_card--body">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident qui saepe nam, dicta omnis quidem
+                velit voluptatem tempore? Repudiandae, id.
+              </div>
+              <a class="expand" href="#"><mat-icon>open_in_new</mat-icon></a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="main-body">
-    <div class="container">
-      <div class="side-info">
-        <div class="info_card">
-          <div class="info_card--header">Location</div>
-          <div class="info_card--body">{{ user.location }}</div>
-        </div>
-        <div class="info_card">
-          <div class="info_card--header">{{ user.bio }}</div>
-          <div class="info_card--body">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae esse eos officiis, nesciunt expedita deleniti
-            explicabo quo! Nulla commodi reprehenderit recusandae ex cupiditate id eos porro repellat enim, maxime
-            omnis!
-          </div>
-        </div>
-        <div class="info_card">
-          <div class="info_card--header">Tech Stack</div>
-          <div class="info_card--body">
-            <span *ngFor="let tech of user.technologies"> {{ tech }} </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="main-info">
-        <div class="main-info__section-header">
-          <h2>PROJECTS</h2>
-          <a href="#" class="see-more">See More</a>
-        </div>
-        <div class="main-info__projects">
-          <div class="project_card">
-            <div class="project_card--header">Project Name | Ideation</div>
-            <div class="project_card--body">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident qui saepe nam, dicta omnis quidem
-              velit voluptatem tempore? Repudiandae, id.
-            </div>
-            <a class="expand" href="#"><mat-icon>open_in_new</mat-icon></a>
-          </div>
-        </div>
-
-        <div class="main-info__section-header">
-          <h2>IDEAS</h2>
-          <a href="#" class="see-more">See More</a>
-          <!--goes to idea/feed with filter of this user's username-->
-        </div>
-        <div class="main-info__projects">
-          <div class="project_card">
-            <div class="project_card--header">Idea Name</div>
-            <div class="project_card--body">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident qui saepe nam, dicta omnis quidem
-              velit voluptatem tempore? Repudiandae, id.
-            </div>
-            <a class="expand" href="#"><mat-icon>open_in_new</mat-icon></a>
-          </div>
-          <div class="project_card">
-            <div class="project_card--header">Idea Name</div>
-            <div class="project_card--body">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident qui saepe nam, dicta omnis quidem
-              velit voluptatem tempore? Repudiandae, id.
-            </div>
-            <a class="expand" href="#"><mat-icon>open_in_new</mat-icon></a>
-          </div>
-          <div class="project_card">
-            <div class="project_card--header">Idea Name</div>
-            <div class="project_card--body">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident qui saepe nam, dicta omnis quidem
-              velit voluptatem tempore? Repudiandae, id.
-            </div>
-            <a class="expand" href="#"><mat-icon>open_in_new</mat-icon></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  </form>
 </div>
