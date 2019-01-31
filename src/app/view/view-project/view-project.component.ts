@@ -7,11 +7,11 @@ import { Project } from '@app/shared/objects';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 
 @Component({
-  selector: 'app-view',
-  templateUrl: './view.component.html',
-  styleUrls: ['./view.component.scss']
+  selector: 'app-view-project',
+  templateUrl: './view-project.component.html',
+  styleUrls: ['./view-project.component.scss']
 })
-export class ViewComponent implements OnInit {
+export class ViewProjectComponent implements OnInit {
   project: Observable<Project>;
   currentActiveBar = 'Home';
 
@@ -27,7 +27,7 @@ export class ViewComponent implements OnInit {
 
   getProject() {
     this.projectService
-      .getProject(this.router.url.split('/')[2].split('-')[0])
+      .getProject(this.router.url.split('/')[3].split('-')[0])
       .pipe(finalize(() => {}))
       .subscribe(
         (data: any) => {
@@ -42,11 +42,6 @@ export class ViewComponent implements OnInit {
         }
       );
   }
-
-  isBarActive() {
-    return this.router.url.split('/')[4] || 'Home';
-  }
-
   setBarActive(checkpointName: string) {
     this.currentActiveBar = checkpointName;
   }

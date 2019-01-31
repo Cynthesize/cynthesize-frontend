@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ViewRoutingModule } from './view-routing.module';
-import { ViewComponent } from './view.component';
+import { ViewRoutingModule } from './view-project-routing.module';
+import { ViewProjectComponent } from './view-project.component';
 import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -12,7 +12,7 @@ import { CovalentMarkdownModule } from '@covalent/markdown';
 import { CovalentTextEditorModule } from '@covalent/text-editor';
 
 @NgModule({
-  declarations: [ViewComponent, IssueComponent, DetachedIssueComponent, AddIssueComponent],
+  declarations: [ViewProjectComponent, IssueComponent, DetachedIssueComponent, AddIssueComponent],
   imports: [
     CommonModule,
     ViewRoutingModule,
@@ -25,4 +25,4 @@ import { CovalentTextEditorModule } from '@covalent/text-editor';
   ],
   entryComponents: [AddIssueComponent]
 })
-export class ViewModule {}
+export class ViewProjectModule {}
