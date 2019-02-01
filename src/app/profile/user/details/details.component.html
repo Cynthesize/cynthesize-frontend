@@ -18,7 +18,7 @@
                 matInput
                 class="profile-header-info__username"
                 value="{{ user.username }}"
-                formControlName="bio"
+                formControlName="username"
                 placeholder="Enter new username"
               />
             </mat-form-field>
@@ -26,7 +26,7 @@
 
           <div class="profile-header-info__name">
             {{ user.name }}
-            <span>
+            <span class="see-more">
               <mat-icon
                 (click)="toggleFormFields(true)"
                 [ngStyle]="{ display: !isFieldEditable && isSameUser ? 'contents' : 'none' }"
