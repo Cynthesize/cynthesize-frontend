@@ -17,8 +17,11 @@ $warn: mat-palette($mat-red, 600);
 $theme: mat-light-theme($primary, $accent, $warn);
 
 @include covalent-markdown-theme($theme);
-
 @include angular-material-theme($app-theme);
+$custom-typography: mat-typography-config(
+  $font-family: "Open Sans"
+);
+@include mat-core($custom-typography);
 
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 @import "theme/theme";

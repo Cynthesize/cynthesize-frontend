@@ -8,8 +8,8 @@ const USER_PROFILE_PIC_FRAGMENT = gql`
   }
 `;
 
-const USER_LIKES = gql`
-  fragment UserLikesFragments on user {
+const USER_LIKES_FRAGMENT = gql`
+  fragment UserLikesFragment on user {
     projectIssuesCommentsLikessByuserId {
       comment_id
     }
@@ -18,6 +18,44 @@ const USER_LIKES = gql`
     }
     ideasCommentsLikesByuserId {
       comment_id
+    }
+  }
+`;
+
+const USER_MINIMAL_CONTRIBUTIONS_FRAGMENT = gql`
+  fragment UserMinimalContributionsFragment on user {
+    projectsByowner(limit: 4) {
+      id
+      project_name
+      description
+      current_stage
+      watching
+    }
+    ideasByOwner(limit: 4) {
+      idea_name
+      description
+      upvotes
+    }
+  }
+`;
+const USER_DETAILED_CONTRIBUTIONS_PROJECTS_FRAGMENT = gql`
+  fragment UserDetailedContributionsProjectsFragment on user {
+    projectsByowner {
+      id
+      project_name
+      description
+      current_stage
+      watching
+    }
+  }
+`;
+
+const USER_DETAILED_CONTRIBUTIONS_IDEAS_FRAGMENT = gql`
+  fragment UserDetailedContributionsIdeasFragment on user {
+    ideasByOwner {
+      idea_name
+      description
+      upvotes
     }
   }
 `;
@@ -164,6 +202,9 @@ export {
   PROJECT_DETAILS_FRAGMENT,
   PROJECT_ISSUE_FRAGMENT,
   USER_DETAILS_FRAGMENT,
-  USER_LIKES,
-  USER_PROFILE_PIC_FRAGMENT
+  USER_LIKES_FRAGMENT,
+  USER_PROFILE_PIC_FRAGMENT,
+  USER_MINIMAL_CONTRIBUTIONS_FRAGMENT,
+  USER_DETAILED_CONTRIBUTIONS_PROJECTS_FRAGMENT,
+  USER_DETAILED_CONTRIBUTIONS_IDEAS_FRAGMENT
 };

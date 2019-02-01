@@ -19,6 +19,8 @@ class ImageSnippet {
   encapsulation: ViewEncapsulation.None
 })
 export class DetailsComponent implements OnInit {
+  userProjects: Array<Object>;
+  userIdeas: Array<Object>;
   user: User = new User();
   isPageLoaded = false;
   username: string;
@@ -86,6 +88,33 @@ export class DetailsComponent implements OnInit {
       },
       (error: any) => {
         this.errorHandler.subj_notification.next(error);
+      }
+    );
+
+    this.profileService.getUserMinimalContributions(this.username).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.userIdeas = res.user[0].ideasByOwner;
+        this.userProjects = res.user[0].projectsByowner;
+      },
+      (err: any) => {
+        this.errorHandler.subj_notification.next(err);
+      }
+    );
+  }
+
+  fetchContributions(context: string) {
+    this.username = this.router.url.split('/')[2];
+    this.profileService.getUserDetailedContributions(this.username, context).subscribe(
+      (res: any) => {
+        if (context === 'projects' || context === 'project') {
+          this.userProjects = res.user[0].projectsByowner;
+        } else {
+          this.userIdeas = res.user[0].ideasByOwner;
+        }
+      },
+      (err: any) => {
+        this.errorHandler.subj_notification.next(err);
       }
     );
   }
