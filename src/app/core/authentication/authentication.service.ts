@@ -28,7 +28,6 @@ export class AuthenticationService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('user_id');
     localStorage.removeItem('expires_at');
-    location.reload();
     this.router.navigate(['/login']);
   }
 
@@ -62,6 +61,7 @@ export class AuthenticationService {
         }
       })
       .valueChanges.subscribe((res: any) => {
+        console.log(res);
         if (res.data.user.length === 0) {
           this.apollo
             .mutate<any>({

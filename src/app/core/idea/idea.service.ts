@@ -102,4 +102,22 @@ export class IdeaService {
         })
       );
   }
+
+  /**
+   * getIdeaComments
+   */
+  public getIdeaComments(idea_id: number) {
+    return this.apollo
+      .query({
+        query: QUERY_IDEA_DETAILS,
+        variables: {
+          ideaId: idea_id
+        }
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 }
