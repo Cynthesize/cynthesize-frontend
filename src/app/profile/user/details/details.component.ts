@@ -49,6 +49,7 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.editForm = new FormGroup({
+      username: new FormControl(),
       bio: new FormControl(),
       dob: new FormControl(),
       listOfTech: new FormControl([]),
@@ -141,6 +142,7 @@ export class DetailsComponent implements OnInit {
 
   updateUserData(profileUrl?: string) {
     const userUpdateObject = {
+      username: this.editForm.get('username').value,
       bio: this.editForm.get('bio').value,
       location: this.editForm.get('location').value,
       technologies: this.listOfTech,
@@ -159,6 +161,11 @@ export class DetailsComponent implements OnInit {
       .pipe(finalize(() => {}))
       .subscribe(
         (data: any) => {
+          if (data.data.update_user.returning[0].username !== localStorage.getItem('username')) {
+            localStorage.setItem('username', data.data.update_user.returning[0].username);
+            const newUsername = '/user/' + localStorage.getItem('username');
+            this.router.navigate([newUsername]);
+          }
           location.reload();
         },
         (error: any) => {
