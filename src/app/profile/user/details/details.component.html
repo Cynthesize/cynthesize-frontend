@@ -85,52 +85,36 @@
         </div>
 
         <div class="main-info">
-          <div class="main-info__section-header">
-            <h2>PROJECTS</h2>
-            <a href="#" class="see-more">See More</a>
-          </div>
-          <div class="main-info__projects">
-            <div class="project_card">
-              <div class="project_card--header">Project Name | Ideation</div>
-              <div class="project_card--body">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident qui saepe nam, dicta omnis quidem
-                velit voluptatem tempore? Repudiandae, id.
-              </div>
-              <a class="expand" href="#"><mat-icon>open_in_new</mat-icon></a>
+          <span *ngIf="userProjects">
+            <div class="main-info__section-header">
+              <h2>PROJECTS</h2>
+              <a class="see-more" *ngIf="userProjects.length === 4" (click)="fetchContributions('projects')"
+                >See all projects</a
+              >
             </div>
-          </div>
+            <div class="main-info__projects">
+              <div class="project_card" *ngFor="let project of userProjects">
+                <div class="project_card--header">{{ project.project_name }} | {{ project.current_stage }}</div>
+                <div class="project_card--body">{{ project.description }}</div>
+                <a class="expand" [routerLink]="['/view/project', project.id]"><mat-icon>open_in_new</mat-icon></a>
+              </div>
+            </div>
+          </span>
 
-          <div class="main-info__section-header">
-            <h2>IDEAS</h2>
-            <a href="#" class="see-more">See More</a>
-            <!--goes to idea/feed with filter of this user's username-->
-          </div>
-          <div class="main-info__projects">
-            <div class="project_card">
-              <div class="project_card--header">Idea Name</div>
-              <div class="project_card--body">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident qui saepe nam, dicta omnis quidem
-                velit voluptatem tempore? Repudiandae, id.
-              </div>
-              <a class="expand" href="#"><mat-icon>open_in_new</mat-icon></a>
+          <span *ngIf="userIdeas">
+            <div class="main-info__section-header">
+              <h2>IDEAS</h2>
+              <a class="see-more" *ngIf="userIdeas.length === 4" (click)="fetchContributions('ideas')">See all ideas</a>
+              <!--goes to idea/feed with filter of this user's username-->
             </div>
-            <div class="project_card">
-              <div class="project_card--header">Idea Name</div>
-              <div class="project_card--body">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident qui saepe nam, dicta omnis quidem
-                velit voluptatem tempore? Repudiandae, id.
+            <div class="main-info__projects">
+              <div class="project_card" *ngFor="let idea of userIdeas">
+                <div class="project_card--header">{{ idea.idea_name }}</div>
+                <div class="project_card--body">{{ idea.description }}</div>
+                <a class="expand" href=""><mat-icon>open_in_new</mat-icon></a>
               </div>
-              <a class="expand" href="#"><mat-icon>open_in_new</mat-icon></a>
             </div>
-            <div class="project_card">
-              <div class="project_card--header">Idea Name</div>
-              <div class="project_card--body">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident qui saepe nam, dicta omnis quidem
-                velit voluptatem tempore? Repudiandae, id.
-              </div>
-              <a class="expand" href="#"><mat-icon>open_in_new</mat-icon></a>
-            </div>
-          </div>
+          </span>
         </div>
       </div>
     </div>
