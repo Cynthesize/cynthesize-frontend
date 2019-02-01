@@ -1,4 +1,4 @@
-<div *ngIf="ideaList" class="idea-list">
+<!-- <div *ngIf="ideaList" class="idea-list">
   <div *ngFor="let item of (ideaList | paginate: { itemsPerPage: 5, currentPage: pageIndex, totalItems: totalCount })">
     <mat-card>
       <mat-icon (click)="openDialog(item)">open_in_new</mat-icon>
@@ -14,4 +14,49 @@
   [pageSizeOptions]="[5, 10]"
   (page)="pageEvent = getIdeasFromServer($event)"
 >
-</mat-paginator>
+</mat-paginator> -->
+<div class="background">
+  <section class="section-header">
+    <!-- 
+    <h1 class="section-header__title">
+      
+    </h1> -->
+    <p class="section-header__slogan">Discuss ideas with the community here!</p>
+  </section>
+  <section class="section-search"><div class="search-box">Search | Popular | New</div></section>
+  <section class="section-issues">
+    <div *ngIf="ideaList" class="container">
+      <mat-card
+        class="idea-card"
+        *ngFor="let item of (ideaList | paginate: { itemsPerPage: 5, currentPage: pageIndex, totalItems: totalCount })"
+      >
+        <div class="idea-card__owner">
+          <div class="idea-card__owner__photo"><img src="../../../../assets/user.png" /></div>
+          <div class="idea-card__owner__username">@aayushjoglekar</div>
+        </div>
+        <div class="idea-card__body">
+          <div class="idea-card__header">
+            <div class="idea-card__header__idea-name">{{ item.idea_name }}</div>
+
+            <div class="idea-card__header__icon-list">
+              <mat-icon class="idea-card__icon">arrow_drop_up</mat-icon>
+              <div class="idea-card__stat">(15)</div>
+              <mat-icon class="idea-card__icon" (click)="openDialog(item)">open_in_new</mat-icon>
+            </div>
+          </div>
+
+          <div class="idea-card__description">{{ item.description }}</div>
+        </div>
+      </mat-card>
+    </div>
+
+    <mat-paginator
+      [length]="length"
+      [pageIndex]="pageIndex"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10]"
+      (page)="pageEvent = getIdeasFromServer($event)"
+    >
+    </mat-paginator>
+  </section>
+</div>
