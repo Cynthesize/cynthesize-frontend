@@ -59,7 +59,6 @@
   padding: 2rem 0;
 
   .container {
-    //background-color: yellow;
     padding: 1rem;
   }
 }
@@ -84,19 +83,9 @@
 
     border-right: 1px solid #cdcdcd;
 
-    &__photo {
-      height: 5rem;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      margin-bottom: 1rem;
-
-      img {
-        height: 100%;
-        width: auto;
-      }
+    &__username {
+      color: black;
+      text-decoration: none;
     }
   }
 
