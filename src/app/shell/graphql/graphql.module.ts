@@ -3,7 +3,7 @@ import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { GRAPHQL_URL, HASURA_ACCESS_KEY, REALTIME_GRAPHQL_URL } from '../../environments/environment';
+import { GRAPHQL_URL, HASURA_ACCESS_KEY, REALTIME_GRAPHQL_URL } from '../../../environments/environment';
 import { AuthenticationService } from '@app/core';
 
 @NgModule({
@@ -28,8 +28,7 @@ export class GraphqlModule {
       .set('X-Hasura-Access-Key', HASURA_ACCESS_KEY)
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${localStorage.getItem('access_token')}`)
-      .set('X-Hasura-Role', 'admin')
-      .set('X-Hasura-User-Id', localStorage.getItem('userId'));
+      .set('X-Hasura-Role', 'admin');
 
     // Create a HTTP Link with the URI and the header.
     const http = httpLink.create({ uri, headers: authHeader });

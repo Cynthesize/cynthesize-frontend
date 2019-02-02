@@ -48,7 +48,7 @@
 
     @media (max-width: 37.5em) {
       flex-direction: column;
-      justify-content: center;
+      justify-content: center
     }
   }
 
@@ -70,6 +70,7 @@
     }
 
     margin-right: 5rem;
+    z-index: 1;
   }
 
   &__photo {
