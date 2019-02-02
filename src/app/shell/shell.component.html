@@ -3,15 +3,16 @@
     <mat-sidenav #sidenav mode="over" ngClass.gt-sm="has-border">
       <nav>
         <mat-list>
-          <mat-divider></mat-divider>
           <a mat-list-item routerLink="/idea/feed" routerLinkActive="active" (click)="sidenav.close()">
-            <span translate>Ideas</span>
+            <span translate>Idea Portal</span>
           </a>
           <mat-divider></mat-divider>
-          <a mat-list-item routerLink="/project/add" routerLinkActive="active" (click)="sidenav.close()">
-            <span translate>Projects</span>
+          <a mat-list-item routerLink="/add/idea" routerLinkActive="active" (click)="sidenav.close()">
+            <span translate>Add Idea</span>
           </a>
-          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="/add/project" routerLinkActive="active" (click)="sidenav.close()">
+            <span translate>Add Project</span>
+          </a>
         </mat-list>
       </nav>
     </mat-sidenav>
