@@ -42,6 +42,7 @@ export class AddComponent implements OnInit {
         description: this.project.get('description').value,
         currentStage: this.project.get('currentStage').value
       };
+
       console.log(projectDetails);
       this.projectService
         .addProject(projectDetails)
@@ -50,7 +51,10 @@ export class AddComponent implements OnInit {
           (data: any) => {
             const project_name =
               data.data.insert_project.returning['0'].id + '-' + data.data.insert_project.returning['0'].project_name;
-            this.router.navigate(['/project/' + project_name + '/view']);
+            var str = project_name;
+            str = str.replace(/\s+/g, '-').toLowerCase();
+
+            this.router.navigate(['/project/' + str + '/view']);
           },
           (error: any) => {
             this.errorHandler.subj_notification.next(error);
