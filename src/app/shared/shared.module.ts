@@ -14,10 +14,17 @@ import { FormsModule } from '@angular/forms';
 import { TimeDiffPipe } from './pipes/time-diff.pipe';
 import { CovalentTextEditorModule } from '@covalent/text-editor';
 import { CovalentMarkdownModule } from '@covalent/markdown';
-import { CloudinaryModule } from '@cloudinary/angular-5.x';
-import * as Cloudinary from 'cloudinary-core';
 import { RouterModule } from '@angular/router';
+import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
+import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
 
+export const cloudinary = {
+  Cloudinary: CloudinaryCore
+};
+export const config: CloudinaryConfiguration = {
+  cloud_name: 'cynthesize',
+  upload_preset: 'qdninpjl'
+};
 @NgModule({
   imports: [
     FlexLayoutModule,
@@ -28,7 +35,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     CovalentTextEditorModule,
     CovalentMarkdownModule,
-    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'cynthesize' })
+    CloudinaryModule.forRoot(cloudinary, config)
   ],
   declarations: [
     LoaderComponent,
