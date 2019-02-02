@@ -96,7 +96,7 @@ export class AddIssueComponent {
   }
   addIssue() {
     this.projectService
-      .addIssue(this.checkpointName.value, this.issueText.value, this.router.url.split('/')[2].split('-')[0])
+      .addIssue(this.checkpointName.value, this.issueText.value, this.router.url.split('/')[3].split('-')[0])
       .subscribe(
         data => {
           this.onNoClick();
