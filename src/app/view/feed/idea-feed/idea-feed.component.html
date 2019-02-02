@@ -24,12 +24,15 @@
         <div class="idea-card__body">
           <div class="idea-card__header">
             <div class="idea-card__header__idea-name">{{ item.idea_name }}</div>
-
             <div class="idea-card__header__icon-list">
               <mat-icon class="idea-card__icon">arrow_drop_up</mat-icon>
               <div class="idea-card__stat">({{ item.upvotes }})</div>
               <mat-icon class="idea-card__icon" (click)="openDialog(item)">open_in_new</mat-icon>
             </div>
+          </div>
+
+          <div class="idea-card__header__idea-username">
+            by <span class="text-bold">{{ item.ideaOwner.username }}</span>
           </div>
 
           <div class="idea-card__description">{{ item.description }}</div>

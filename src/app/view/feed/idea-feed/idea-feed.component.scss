@@ -11,10 +11,17 @@
 
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 37.5em) {
+  }
 }
 
 .container {
   width: 50%;
+
+  @media (max-width: 37.5em) {
+    width: 95%;
+  }
 }
 
 .section-header {
@@ -27,11 +34,19 @@
   &__title {
     font-size: 4rem;
     color: #212121;
+
+    @media (max-width: 37.5em) {
+      font-size: 3rem;
+    }
   }
 
   &__slogan {
     font-size: 2rem;
     color: #212121;
+
+    @media (max-width: 37.5em) {
+      font-size: 1.6rem;
+    }
   }
 }
 
@@ -86,6 +101,13 @@
     &__username {
       color: black;
       text-decoration: none;
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 37.5em) {
+      display: none;
+      padding: 0;
+      border: none;
     }
   }
 
@@ -97,6 +119,11 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+
+    @media (max-width: 37.5em) {
+      padding: 0;
+      border: none;
+    }
   }
 
   &__header {
@@ -111,11 +138,34 @@
       font-size: 2rem;
       font-weight: 400;
       flex-grow: 1;
+
+      @media (max-width: 37.5em) {
+        font-size: 1.6rem;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 600;
+      }
+    }
+
+    @media (max-width: 37.5em) {
+      margin-bottom: 0;
     }
 
     &__icon-list {
       display: flex;
       align-items: center;
+    }
+
+    &__idea-username {
+      display: none;
+
+      @media (max-width: 37.5em) {
+        display: block;
+        font-size: 1.2rem;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 400;
+
+        margin-bottom: 1rem;
+      }
     }
   }
 
