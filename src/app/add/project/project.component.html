@@ -7,36 +7,36 @@
           <div *ngIf="formNotfilled"><i>Please fill all the fields.</i></div>
           <mat-vertical-stepper [linear]="isLinear" #stepper>
             <mat-step [stepControl]="project">
-              <ng-template matStepLabel>Enter your project name</ng-template>
+              <ng-template matStepLabel>Think of a cool name for your project. </ng-template>
               <mat-form-field class="text">
                 <input matInput placeholder="Eg: Cynthesize" formControlName="projectName" required />
               </mat-form-field>
-              <div><button mat-button matStepperNext>Next</button></div>
+              <div><button mat-button class="button button--forward" matStepperNext>Next</button></div>
             </mat-step>
             <mat-step [stepControl]="project">
-              <ng-template matStepLabel>Enter a brief description of your project</ng-template>
+              <ng-template matStepLabel>Describe your project - a bit of detail would do!</ng-template>
               <mat-form-field class="text">
                 <input matInput placeholder="Description" formControlName="description" required />
               </mat-form-field>
-              <div>
-                <button mat-button matStepperPrevious>Back</button> <button mat-button matStepperNext>Next</button>
-              </div>
+              <div><button class="button button--forward" mat-button matStepperNext>Next</button></div>
             </mat-step>
             <mat-step [stepControl]="project">
-              <ng-template matStepLabel>What's your status</ng-template>
-              <mat-form-field class="text">
-                <input matInput placeholder="Eg: Ideation" formControlName="currentStage" required />
+              <ng-template matStepLabel
+                >Which of these stages would you say are closest to your project’s completion?</ng-template
+              >
+
+              <mat-form-field>
+                <mat-select placeholder="Select a stage" formControlName="currentStage">
+                  <mat-option *ngFor="let stage of stages" [value]="stage"> {{ stage }} </mat-option>
+                </mat-select>
               </mat-form-field>
-              <div>
-                <button mat-button matStepperPrevious>Back</button> <button mat-button matStepperNext>Next</button>
-              </div>
+              <div><button class="button button--forward" mat-button matStepperNext>Next</button></div>
             </mat-step>
             <mat-step>
-              <ng-template matStepLabel>Done</ng-template>
-              Click Submit button to add the project.
+              <ng-template matStepLabel>Hit Submit!</ng-template>
               <div>
-                <button mat-button (click)="stepper.reset()">Reset</button>
-                <button mat-button (click)="addProject()">Submit</button>
+                <button mat-button class="button button--warning" (click)="stepper.reset()">Reset</button>
+                <button mat-button class="button button--forward" (click)="addProject()">Submit</button>
               </div>
             </mat-step>
           </mat-vertical-stepper>

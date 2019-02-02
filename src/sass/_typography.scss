@@ -106,6 +106,7 @@ hr.seperator {
 .text {
   font-family: "Open Sans", serif;
   font-weight: 400;
+  font-size: 1.6rem;
 }
 
 .text-bold {
@@ -138,5 +139,24 @@ hr.seperator {
   & > * {
     height: 100%;
     width: auto;
+  }
+}
+
+.button {
+  font-size: 1.6rem;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+
+  margin-right: 1rem;
+
+  &--forward {
+    background-color: $color-primary;
+    color: white;
+    border: 1px solid transparent;
+  }
+
+  &--warning {
+    border: 1px solid red;
+    color: red;
   }
 }
