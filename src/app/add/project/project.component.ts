@@ -14,6 +14,17 @@ export class AddProjectComponent implements OnInit {
   isLinear = false;
   project: FormGroup;
   formNotfilled = false;
+
+  stages: String[] = [
+    'Ideation',
+    'Execution Ongoing',
+    'MVP Ready',
+    'Pre-production',
+    'Beta Testing',
+    'Production ready',
+    'In Production'
+  ];
+
   constructor(
     private _formBuilder: FormBuilder,
     private projectService: ProjectService,
