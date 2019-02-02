@@ -10,6 +10,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class IdeaFeedComponent implements OnInit {
   length: number;
   ideaList: any;
+  pageIndex = 0;
+  pageSize = 5;
+  pageEvent: any;
   constructor(private ideaService: IdeaService, public dialog: MatDialog) {}
 
   openDialog(idea: any): void {

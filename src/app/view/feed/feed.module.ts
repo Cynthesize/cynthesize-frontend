@@ -7,8 +7,16 @@ import { IssuesFeedComponent } from './issues-feed/issues-feed.component';
 import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { CloudinaryModule } from '@cloudinary/angular-5.x';
-import * as Cloudinary from 'cloudinary-core';
+import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
+import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
+
+export const cloudinary = {
+  Cloudinary: CloudinaryCore
+};
+export const config: CloudinaryConfiguration = {
+  cloud_name: 'cynthesize',
+  upload_preset: 'qdninpjl'
+};
 
 @NgModule({
   declarations: [IdeaFeedComponent, IssuesFeedComponent, IdeaCardComponent],
@@ -18,7 +26,7 @@ import * as Cloudinary from 'cloudinary-core';
     SharedModule,
     MaterialModule,
     NgxPaginationModule,
-    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'cynthesize' })
+    CloudinaryModule.forRoot(cloudinary, config)
   ],
   entryComponents: [IdeaCardComponent]
 })
