@@ -10,12 +10,19 @@
   </div>
   <span fxFlex></span>
   <div class="v-desktop">
-    <button class="header__link" mat-button routerLink="/add/idea" routerLinkActive="active">
-      <span translate>Ideas</span>
+    <button class="header__link" mat-button routerLink="/view/feed/ideas" routerLinkActive="active">
+      <span translate>Idea Portal</span>
     </button>
-    <button class="header__link" mat-button routerLink="/add/project" routerLinkActive="active">
-      <span translate>Projects</span>
-    </button>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>add_circle</mat-icon></button>
+    <mat-menu #menu="matMenu">
+      <button class="header__link" mat-menu-item routerLink="/add/idea" routerLinkActive="active">
+        <span translate>New Idea</span>
+      </button>
+      <button class="header__link" mat-menu-item routerLink="/add/project" routerLinkActive="active">
+        <span translate>New Project</span>
+      </button>
+    </mat-menu>
   </div>
   <button mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>person</mat-icon></button>
   <mat-menu #userMenu="matMenu" class="profile-menu">
@@ -26,8 +33,6 @@
     <mat-divider></mat-divider>
     <div class="user-links">
       <div class="user-link" routerLink="/user/{{ username }}">Profile</div>
-      <div class="user-link" routerLink="/project/add">My Projects</div>
-      <div class="user-link" routerLink="/home">About</div>
       <div class="user-link" (click)="logout()">Logout</div>
     </div>
   </mat-menu>
