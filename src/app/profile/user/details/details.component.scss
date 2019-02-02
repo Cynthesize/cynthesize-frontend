@@ -20,6 +20,10 @@
 
 .container {
   width: 75%;
+
+  @media (max-width: 37.5em) {
+    width: 90%;
+  }
 }
 
 .profile-header {
@@ -41,6 +45,11 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+
+    @media (max-width: 37.5em) {
+      flex-direction: column;
+      justify-content: center;
+    }
   }
 
   &__user-card {
@@ -55,6 +64,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 37.5em) {
+      display: none;
+    }
 
     margin-right: 5rem;
   }
@@ -93,11 +106,21 @@
   .container {
     display: flex;
     justify-content: center;
+
+    @media (max-width: 37.5em) {
+      flex-direction: column;
+    }
   }
 
   .side-info {
     flex: 0 0 30rem;
     margin-right: 5rem;
+
+    @media (max-width: 37.5em) {
+      margin-right: 0;
+      padding-top: 3rem;
+      order: 2;
+    }
 
     padding-top: 15rem;
 
@@ -138,6 +161,12 @@
       justify-content: space-between;
     }
 
+    @media (max-width: 37.5em) {
+      order: 1;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid #454545;
+    }
+
     flex-grow: 1;
     margin-top: 2rem;
 
@@ -149,6 +178,10 @@
       & > * {
         flex: 0 0 49%;
         margin: 1rem 0;
+
+        @media (max-width: 37.5em) {
+          flex: 0 0 100%;
+        }
       }
     }
 
