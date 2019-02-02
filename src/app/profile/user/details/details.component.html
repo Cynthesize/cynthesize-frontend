@@ -1,221 +1,120 @@
-<div class="loader" *ngIf="!user.email"><mat-spinner></mat-spinner></div>
-<div class="background" *ngIf="user.email">
+<div class="loader" *ngIf="!isPageLoaded"><mat-spinner></mat-spinner></div>
+<div class="background" *ngIf="isPageLoaded">
   <form [formGroup]="editForm">
-    <button mat-button (click)="toggleFormFields(true)" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
-      Edit
-    </button>
-    <button mat-button (click)="toggleFormFields(false)" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
-      Cancel
-    </button>
-    <button mat-button (click)="onSubmit()" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
-      Save changes
-    </button>
-    <div class="container container--user-profile">
-      <div class="user-header">
-        <div class="user-header__container">
-          <div class="dp-l-container">
-            <input
-              #imageInput
-              class="dp-l-image image-input"
-              type="file"
-              accept="image/*"
-              (change)="processFile(imageInput)"
-              [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }"
-            />
-            <cl-image class="dp-l-image" public-id="{{ user.profile_pic }}" secure="true"></cl-image>
+    <div class="profile-header">
+      <div class="profile-header-cover"></div>
+      <div class="profile-header-info">
+        <div class="container">
+          <div class="profile-header-info__user-card">
+            <div class="profile-header-info__photo">
+              <cl-image height="150" crop="scale" public-id="{{ user.profile_pic }}" secure="true"></cl-image>
+            </div>
+
+            <h3 class="profile-header-info__username" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
+              @{{ user.username }}
+            </h3>
+            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+              <input
+                matInput
+                class="profile-header-info__username"
+                value="{{ user.username }}"
+                formControlName="username"
+                placeholder="Enter new username"
+              />
+            </mat-form-field>
           </div>
-          <div class="user-header__container__name">
-            <h2>{{ user.name }}</h2>
-            <h4>@{{ user.username }}</h4>
+
+          <div class="profile-header-info__name">
+            {{ user.name }}
+            <span class="see-more">
+              <mat-icon
+                (click)="toggleFormFields(true)"
+                [ngStyle]="{ display: !isFieldEditable && isSameUser ? 'contents' : 'none' }"
+              >
+                edit
+              </mat-icon>
+              <mat-icon
+                (click)="toggleFormFields(false)"
+                [ngStyle]="{ display: isFieldEditable ? 'contents' : 'none' }"
+              >
+                cancel
+              </mat-icon>
+              <mat-icon (click)="onSubmit()" [ngStyle]="{ display: isFieldEditable ? 'contents' : 'none' }">
+                save
+              </mat-icon>
+            </span>
           </div>
         </div>
       </div>
-      <div class="user-container">
-        <div class="multi-tab-details">
-          <div class="v-desktop">
-            <mat-tab-group mat-align-tabs="center">
-              <mat-tab label="Details">
-                <ng-template matTabContent>
-                  <div class="tab-text">
-                    <div class="block">
-                      <h4 class="title">About Me</h4>
-                      <p [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }" class="paragraph">
-                        {{ user.bio || 'Add bio' }}
-                      </p>
-                      <div
-                        *ngIf="username == loggedInUsername"
-                        [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }"
-                      >
-                        <mat-form-field appearance="outline" class="full-width">
-                          <mat-label>Edit Bio</mat-label>
-                          <input matInput formControlName="bio" placeholder="Edit Bio" value="{{ user.bio }}" />
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="block" *ngIf="user?.technologies !== null || user?.technologies?.length !== 0">
-                      <h4 class="title">I am pretty good at</h4>
-                      <div class="tech-stack">
-                        <div [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
-                          <div class="tech-stack__item" *ngFor="let tech of user.technologies">{{ tech }}</div>
-                        </div>
-                        <div [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
-                          <mat-form-field class="full-width">
-                            <mat-chip-list #chipList>
-                              <mat-chip
-                                *ngFor="let tech of listOfTech"
-                                [selectable]="selectable"
-                                [removable]="removable"
-                                (removed)="remove(tech)"
-                              >
-                                {{ tech }}
-                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                              </mat-chip>
-                              <input
-                                placeholder="New tech..."
-                                [matChipInputFor]="chipList"
-                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                [matChipInputAddOnBlur]="addOnBlur"
-                                (matChipInputTokenEnd)="add($event)"
-                                formControlName="listOfTech"
-                              />
-                            </mat-chip-list>
-                          </mat-form-field>
-                        </div>
-                      </div>
-                    </div>
+    </div>
 
-                    <div class="block"><h4 class="title">Contributions</h4></div>
-                  </div>
-                </ng-template>
-              </mat-tab>
-              <mat-tab label="Ideas">
-                <ng-template matTabContent>
-                  <div *ngFor="let idea of user.idea_list">
-                    <a [routerLink]="['/issue/view', idea.id]">{{ idea.idea_name }}</a>
-                  </div>
-                </ng-template>
-              </mat-tab>
-              <mat-tab label="Projects">
-                <ng-template matTabContent>
-                  <div *ngFor="let project of user.project_list">
-                    <a [routerLink]="['/project', project.project_id, 'view']">{{ project.project_name }}</a>
-                  </div>
-                </ng-template>
-              </mat-tab>
-            </mat-tab-group>
+    <div class="main-body">
+      <div class="container">
+        <div class="side-info">
+          <div class="info_card">
+            <div class="info_card--header">Location</div>
+            <div class="info_card--body" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
+              {{ user.location }}
+            </div>
+            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+              <input matInput value="{{ user.location }}" formControlName="location" placeholder="Enter a location" />
+            </mat-form-field>
+            <div class="info_card--header">Birthday</div>
+            <div class="info_card--body" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
+              {{ user.date_of_birth }}
+            </div>
+            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+              <input matInput value="{{ user.date_of_birth }}" formControlName="dob" placeholder="Select a date" />
+            </mat-form-field>
           </div>
-
-          <div class="v-mobile">
-            <mat-tab-group mat-align-tabs="center">
-              <mat-tab label="Details">
-                <ng-template matTabContent>
-                  <div class="tab-text">
-                    <div class="block" *ngIf="user?.bio !== null">
-                      <h4 class="title">About Me</h4>
-                      <p class="paragraph">{{ user.bio }}</p>
-                    </div>
-
-                    <div class="block" *ngIf="user?.technologies !== null || user?.technologies?.length !== 0">
-                      <h4 class="title">I am pretty good at</h4>
-                      <div class="tech-stack">
-                        <div class="tech-stack__item" *ngFor="let tech of user.technologies">{{ tech }}</div>
-                      </div>
-                    </div>
-
-                    <div class="block"><h4 class="title">Contributions</h4></div>
-                  </div>
-                </ng-template>
-              </mat-tab>
-              <mat-tab label="Ideas">
-                <ng-template matTabContent> <div class="tab-content">Coming Soon</div> </ng-template>
-              </mat-tab>
-              <mat-tab label="Projects">
-                <ng-template matTabContent> <div class="tab-content">Coming Soon</div> </ng-template>
-              </mat-tab>
-              <mat-tab label="Contact">
-                <ng-template matTabContent>
-                  <div class="tab-contact">
-                    <div class="profile-details">
-                      <div class="detail-block">
-                        <mat-icon class="detail-block__icon">mail_outline</mat-icon> {{ user.email }}
-                      </div>
-                      <div class="detail-block">
-                        <mat-icon class="detail-block__icon">location_on</mat-icon> Lucknow, India
-                      </div>
-
-                      <div class="detail-block">
-                        <mat-icon class="detail-block__icon">cake</mat-icon> {{ user.birth_date | date: 'longDate' }}
-                      </div>
-
-                      <div
-                        class="detail-block social-links"
-                        *ngIf="user?.social_links !== null || user?.social_links?.length !== 0"
-                      >
-                        <a *ngFor="let sociallink of sociallinks" [href]="sociallink.socialLink" target="_blank">
-                          <img
-                            matTooltip="@{{ sociallink.username }}"
-                            class="social-icon"
-                            src="{{ sociallink.logoUrl }}"
-                          />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </ng-template>
-              </mat-tab>
-            </mat-tab-group>
+          <div class="info_card">
+            <div class="info_card--header">About me</div>
+            <div class="info_card--body" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
+              {{ user.bio }}
+            </div>
+            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+              <input matInput value="{{ user.bio }}" formControlName="bio" placeholder="Enter a bio" />
+            </mat-form-field>
+          </div>
+          <div class="info_card">
+            <div class="info_card--header">Things I'm fond of...</div>
+            <div class="info_card--body">
+              <span *ngFor="let tech of user.technologies"> {{ tech }} </span>
+            </div>
           </div>
         </div>
 
-        <div class="v-desktop">
-          <div class="profile-details">
-            <div class="detail-block">
-              <mat-icon class="detail-block__icon">mail_outline</mat-icon> {{ user.email }}
+        <div class="main-info">
+          <span *ngIf="userProjects">
+            <div class="main-info__section-header">
+              <h2>PROJECTS</h2>
+              <a class="see-more" *ngIf="userProjects.length === 4" (click)="fetchContributions('projects')"
+                >See all projects</a
+              >
             </div>
-            <div class="detail-block" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
-              <mat-icon class="detail-block__icon">domain</mat-icon> {{ user.website }}
+            <div class="main-info__projects">
+              <div class="project_card" *ngFor="let project of userProjects">
+                <div class="project_card--header">{{ project.project_name }} | {{ project.current_stage }}</div>
+                <div class="project_card--body">{{ project.description }}</div>
+                <a class="expand" [routerLink]="['/view/project', project.id]"><mat-icon>open_in_new</mat-icon></a>
+              </div>
             </div>
-            <div class="detail-block" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
-              <mat-icon class="detail-block__icon">domain</mat-icon>
-              <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Location</mat-label>
-                <input matInput formControlName="website" placeholder="Add website" value="{{ user.website }}" />
-              </mat-form-field>
-            </div>
-            <div class="detail-block" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
-              <mat-icon class="detail-block__icon">location_on</mat-icon> {{ user.location }}
-            </div>
-            <div class="detail-block" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
-              <mat-icon class="detail-block__icon">location_on</mat-icon>
-              <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Location</mat-label>
-                <input matInput formControlName="location" placeholder="Add location" value="{{ user.location }}" />
-              </mat-form-field>
-            </div>
-            <div class="detail-block" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
-              <mat-icon class="detail-block__icon">cake</mat-icon> {{ user.birth_date | date: 'longDate' }}
-            </div>
-            <div class="detail-block" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
-              <mat-icon class="detail-block__icon">cake</mat-icon>
-              <mat-form-field>
-                <input
-                  matInput
-                  formControlName="dob"
-                  [matDatepicker]="dp3"
-                  placeholder="Enter date of birth."
-                  value="{{ user.birth_date }}"
-                />
-                <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-                <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-              </mat-form-field>
-            </div>
+          </span>
 
-            <div class="detail-block social-links" *ngIf="user?.social_links">
-              <a *ngFor="let sociallink of sociallinks" [href]="sociallink.socialLink" target="_blank">
-                <img matTooltip="@{{ sociallink.username }}" class="social-icon" src="{{ sociallink.logoUrl }}" />
-              </a>
+          <span *ngIf="userIdeas">
+            <div class="main-info__section-header">
+              <h2>IDEAS</h2>
+              <a class="see-more" *ngIf="userIdeas.length === 4" (click)="fetchContributions('ideas')">See all ideas</a>
+              <!--goes to idea/feed with filter of this user's username-->
             </div>
-          </div>
+            <div class="main-info__projects">
+              <div class="project_card" *ngFor="let idea of userIdeas">
+                <div class="project_card--header">{{ idea.idea_name }}</div>
+                <div class="project_card--body">{{ idea.description }}</div>
+                <a class="expand" href=""><mat-icon>open_in_new</mat-icon></a>
+              </div>
+            </div>
+          </span>
         </div>
       </div>
     </div>

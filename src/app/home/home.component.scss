@@ -1,14 +1,57 @@
-.container {
-  text-align: center;
-  padding: 1em;
+@import "../../sass/declarations";
+
+.first {
+  height: 90vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+
+  padding: 5rem;
+
+  .content {
+    flex: 0 0 40%;
+    height: 70%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 2rem 0 2rem 2rem;
+    justify-content: space-between;
+  }
 }
 
-.logo {
-  width: 150px;
-  margin: 0 auto;
+.cynthesize-full-logo {
+  height: 6rem;
+  width: auto;
 }
 
-q {
-  font-style: italic;
-  quotes: "« " " »";
+.section-background {
+  height: 100%;
+
+  position: absolute;
+  right: -2rem;
+  top: 0;
+
+  z-index: -1;
+}
+
+.home-xl-heading {
+  font-size: 4.5rem;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  color: $color-primary-dark;
+}
+
+.home-m-paragraph {
+  color: $color-primary;
+  font-size: 1.8rem;
+
+  margin-right: 10rem;
+}
+
+.cynthesize-who-we-are {
+  justify-self: center;
 }

@@ -19,10 +19,14 @@ class ImageSnippet {
   encapsulation: ViewEncapsulation.None
 })
 export class DetailsComponent implements OnInit {
+  userProjects: Array<Object>;
+  userIdeas: Array<Object>;
   user: User = new User();
+  isPageLoaded = false;
   username: string;
   sociallinks: any = [];
   isFieldEditable = false;
+  isSameUser = localStorage.getItem('username') === this.router.url.split('/')[2];
 
   editForm: FormGroup;
 
@@ -45,6 +49,7 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.editForm = new FormGroup({
+      username: new FormControl(),
       bio: new FormControl(),
       dob: new FormControl(),
       listOfTech: new FormControl([]),
@@ -57,31 +62,60 @@ export class DetailsComponent implements OnInit {
         if (data.user.length === 0) {
           this.router.navigate(['not-found']);
         }
+        console.log(data);
+        this.isPageLoaded = true;
         this.user = data.user[0];
         this.listOfTech = data.user[0].technologies || [];
-        this.user.social_links.forEach(sociallink => {
-          const username = sociallink.substr(sociallink.lastIndexOf('/') + 1, sociallink.length);
-          if (sociallink.includes('facebook') || sociallink.includes('github') || sociallink.includes('twitter')) {
-            const social =
-              (sociallink.includes('facebook') && 'facebook') ||
-              (sociallink.includes('github') && 'github') ||
-              (sociallink.includes('twitter') && 'twitter');
-            this.sociallinks.push({
-              socialLink: sociallink,
-              username: username,
-              logoUrl: '../../../../assets/logos/social/' + social + '-logo.svg'
-            });
-          } else {
-            this.sociallinks.push({
-              socialLink: sociallink,
-              username: sociallink,
-              logoUrl: '../../../../assets/logos/grid-world.svg'
-            });
-          }
-        });
+        // this.user.social_links.forEach(sociallink => {
+        //   const username = sociallink.substr(sociallink.lastIndexOf('/') + 1, sociallink.length);
+        //   if (sociallink.includes('facebook') || sociallink.includes('github') || sociallink.includes('twitter')) {
+        //     const social =
+        //       (sociallink.includes('facebook') && 'facebook') ||
+        //       (sociallink.includes('github') && 'github') ||
+        //       (sociallink.includes('twitter') && 'twitter');
+        //     this.sociallinks.push({
+        //       socialLink: sociallink,
+        //       username: username,
+        //       logoUrl: '../../../../assets/logos/social/' + social + '-logo.svg'
+        //     });
+        //   } else {
+        //     this.sociallinks.push({
+        //       socialLink: sociallink,
+        //       username: sociallink,
+        //       logoUrl: '../../../../assets/logos/grid-world.svg'
+        //     });
+        //   }
+        // });
       },
       (error: any) => {
         this.errorHandler.subj_notification.next(error);
+      }
+    );
+
+    this.profileService.getUserMinimalContributions(this.username).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.userIdeas = res.user[0].ideasByOwner;
+        this.userProjects = res.user[0].projectsByowner;
+      },
+      (err: any) => {
+        this.errorHandler.subj_notification.next(err);
+      }
+    );
+  }
+
+  fetchContributions(context: string) {
+    this.username = this.router.url.split('/')[2];
+    this.profileService.getUserDetailedContributions(this.username, context).subscribe(
+      (res: any) => {
+        if (context === 'projects' || context === 'project') {
+          this.userProjects = res.user[0].projectsByowner;
+        } else {
+          this.userIdeas = res.user[0].ideasByOwner;
+        }
+      },
+      (err: any) => {
+        this.errorHandler.subj_notification.next(err);
       }
     );
   }
@@ -92,7 +126,7 @@ export class DetailsComponent implements OnInit {
 
   onSubmit() {
     if (!this.selectedFile) {
-      this.updateUserData(null);
+      this.updateUserData();
     } else {
       this.profileService.uploadImage(this.selectedFile.file).subscribe(
         (res: any) => {
@@ -106,20 +140,32 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  updateUserData(profileUrl: string) {
+  updateUserData(profileUrl?: string) {
     const userUpdateObject = {
+      username: this.editForm.get('username').value,
       bio: this.editForm.get('bio').value,
       location: this.editForm.get('location').value,
       technologies: this.listOfTech,
-      birth_date: this.editForm.get('dob').value,
+      date_of_birth: this.editForm.get('dob').value,
       website: this.editForm.get('website').value,
       profile_pic: profileUrl
     };
+    const trimmedUserChangeObject = {};
+    Object.keys(userUpdateObject).forEach(key => {
+      if (userUpdateObject[key] || (key === 'technologies' && userUpdateObject[key].length === 0)) {
+        trimmedUserChangeObject[key] = userUpdateObject[key];
+      }
+    });
     this.profileService
-      .UpdateUserDetails(userUpdateObject)
+      .UpdateUserDetails(trimmedUserChangeObject)
       .pipe(finalize(() => {}))
       .subscribe(
         (data: any) => {
+          if (data.data.update_user.returning[0].username !== localStorage.getItem('username')) {
+            localStorage.setItem('username', data.data.update_user.returning[0].username);
+            const newUsername = '/user/' + localStorage.getItem('username');
+            this.router.navigate([newUsername]);
+          }
           location.reload();
         },
         (error: any) => {

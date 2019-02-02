@@ -24,7 +24,7 @@ import { ErrorHandlerService } from '@app/core/error-handler.service';
   encapsulation: ViewEncapsulation.None
 })
 export class CommentsComponent implements OnInit, OnChanges {
-  @Input() activityId: string;
+  @Input() activityId: number;
   @Input() activityType: string;
   @Input() issueCommentObject: [IssueComments];
   @Input() comments: any;
@@ -49,7 +49,7 @@ export class CommentsComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     if (this.activityType === 'issue') {
     } else if (this.activityType === 'idea') {
-      // this.fetchIdeaComments();
+      this.fetchIdeaComments();
     }
   }
 
@@ -72,7 +72,7 @@ export class CommentsComponent implements OnInit, OnChanges {
           this.issueCommentObject.push(comment.data.insert_project_issues_comments.returning[0]);
         },
         error => {
-          this.errorHandler.subj_notification.next(error);
+          this.errorHandler.subj_notification.next(error.error.message);
         }
       );
   }
@@ -102,5 +102,17 @@ export class CommentsComponent implements OnInit, OnChanges {
 
   cancel(): void {
     this.commentingOnIssue = false;
+  }
+
+  fetchIdeaComments() {
+    this.ideaService.getIdeaComments(this.activityId).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.commentsArray = data.data.ideas[0].ideaCommentsByideaId;
+      },
+      (error: any) => {
+        this.errorHandler.subj_notification.next(error.error.message);
+      }
+    );
   }
 }

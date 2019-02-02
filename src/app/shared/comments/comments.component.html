@@ -2,9 +2,9 @@
 
 <div *ngIf="activityType === 'idea'">
   <div *ngFor="let comment of commentsArray">
-    {{ comment.text }} by {{ comment.user }} at {{ comment.commented_at | date }}
-    <div *ngFor="let reply of comment.replies">
-      {{ reply.text }} by {{ reply.user }} at {{ reply.replied_at | date }}
+    {{ comment.comment_text }} by {{ comment.commenter }} at {{ comment.timestamp | date }}
+    <div *ngFor="let reply of comment.ideasReplysBycommentId">
+      {{ reply.reply_text }} by {{ reply.respondent }} at {{ reply.time | date }}
     </div>
     <br />
   </div>

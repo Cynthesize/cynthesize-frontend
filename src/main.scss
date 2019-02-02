@@ -17,10 +17,13 @@ $warn: mat-palette($mat-red, 600);
 $theme: mat-light-theme($primary, $accent, $warn);
 
 @include covalent-markdown-theme($theme);
-
 @include angular-material-theme($app-theme);
+$custom-typography: mat-typography-config(
+  $font-family: "Open Sans"
+);
+@include mat-core($custom-typography);
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800");
 @import "theme/theme";
 
 @font-face {
@@ -63,56 +66,10 @@ body {
   color: white;
 }
 
-/* 
-mat-card.login-box,
-mat-card.register-box {
-  padding: 50px;
-  border-radius: 8px;
+.pointer {
+  cursor: pointer;
 }
 
-.login-box mat-card-title,
-.register-box mat-card-title {
-  font-size: 25px;
-}
-
-.login-box .button-lg,
-.register-box .button-lg {
-  width: 80%;
-  padding: 5px 30px;
-  margin: auto;
-}
-
-.login-box .button-sm,
-.register-box .button-sm {
-  width: 50%;
-  padding: 2px 15px;
-  margin-left: 25%;
-}
-
-.nofocuslink {
-  text-decoration: none;
-  color: #888;
-  font-style: italic;
-}
-
-.short-seperator {
-  width: 30%;
-  border: none;
-  display: block;
-  height: 1px;
-  background-color: #2196f3;
-  margin-top: 15px;
-  margin-bottom: 10px;
-}
-.center-aligner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.aligner-item {
-  min-width: 500px;
-}
- */
 .content-main-header {
   margin-bottom: 5px;
   font-size: 2rem;

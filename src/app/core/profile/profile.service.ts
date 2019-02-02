@@ -5,7 +5,13 @@ import BACKEND_URLS from '@app/shared/backend-urls';
 import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs';
 import { Apollo } from 'apollo-angular';
-import { QUERY_USER_DETAILS } from '@app/shared/queries';
+import {
+  QUERY_USER_DETAILS,
+  QUERY_USER_MINIMAL_CONTRIBUTIONS,
+  QUERY_USER_DETAILED_CONTRIBUTIONS_PROJECTS,
+  QUERY_USER_DETAILED_CONTRIBUTIONS_IDEAS
+} from '@app/shared/queries';
+import { MUTATION_UPDATE_USER_DETAILS } from '@app/shared/mutations';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +26,47 @@ export class ProfileService {
     return this.apollo
       .watchQuery<any>({
         query: QUERY_USER_DETAILS,
+        variables: {
+          username: username
+        }
+      })
+      .valueChanges.pipe(
+        map((res: any) => {
+          return res.data;
+        })
+      );
+  }
+
+  /*
+   * getUserMinimalContributions
+   */
+  public getUserMinimalContributions(username: string) {
+    return this.apollo
+      .watchQuery<any>({
+        query: QUERY_USER_MINIMAL_CONTRIBUTIONS,
+        variables: {
+          username: username
+        }
+      })
+      .valueChanges.pipe(
+        map((res: any) => {
+          return res.data;
+        })
+      );
+  }
+
+  /*
+   * getUserDetailedContributions
+   */
+  public getUserDetailedContributions(username: string, context: string) {
+    console.log(context);
+    let query = QUERY_USER_DETAILED_CONTRIBUTIONS_IDEAS;
+    if (context === 'projects' || context === 'project') {
+      query = QUERY_USER_DETAILED_CONTRIBUTIONS_PROJECTS;
+    }
+    return this.apollo
+      .watchQuery<any>({
+        query: query,
         variables: {
           username: username
         }
@@ -52,29 +99,19 @@ export class ProfileService {
    * UpdateUserDetails
    */
   public UpdateUserDetails(updateObject: Object) {
-    let techString = '';
-    updateObject['technologies'].forEach((tech: string) => {
-      techString += tech + ',';
-    });
-    if (typeof updateObject['birth_date'] === 'object' && updateObject['birth_date']) {
-      updateObject['birth_date'] = updateObject['birth_date'].toISOString().slice(0, 10);
-    }
-    const request = {
-      bio: updateObject['bio'],
-      birth_date: updateObject['birth_date'],
-      technologies: techString,
-      website: updateObject['website'],
-      location: updateObject['location'],
-      username: JSON.parse(localStorage.getItem('credentials'))['username'],
-      profile_pic: updateObject['profile_pic']
-    };
-    return this.http.put(BACKEND_URLS.USER_DETAILS, request).pipe(
-      map((res: any) => {
-        console.log(res);
-
-        return res;
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_UPDATE_USER_DETAILS,
+        variables: {
+          userId: localStorage.getItem('userId'),
+          updateObject: updateObject
+        }
       })
-    );
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 
   /**

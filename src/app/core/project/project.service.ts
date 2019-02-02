@@ -8,7 +8,8 @@ import {
   MUTATION_ADD_ISSUE_COMMENT,
   MUTATION_ADD_ISSUE_COMMENT_REPLY,
   MUTATION_ADD_ISSUE,
-  MUTATION_UPDATE_LIKE_COUNTER
+  MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT,
+  MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE
 } from '@app/shared/mutations';
 import { QUERY_PROJECT_DETAILS, QUERY_CHECKPOINT_ISSUES } from '@app/shared/queries';
 
@@ -70,7 +71,7 @@ export class ProjectService {
       .watchQuery<any>({
         query: QUERY_PROJECT_DETAILS,
         variables: {
-          id: id.split('-')[0]
+          id: id
         }
       })
       .valueChanges.pipe(
@@ -169,14 +170,22 @@ export class ProjectService {
    * incrementOrDecrementLikeCounter
    */
   public incrementOrDecrementLikeCounter(commentId: number) {
-    console.log(commentId);
-
+    let mutationTBU = MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT;
+    let likeOffset = 1;
+    if (this._checkCommentStatus(commentId)) {
+      mutationTBU = MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE;
+      likeOffset = -1;
+      this._updateLocalStorage(false, commentId);
+    } else {
+      this._updateLocalStorage(true, commentId);
+    }
     return this.apollo
       .mutate({
-        mutation: MUTATION_UPDATE_LIKE_COUNTER,
+        mutation: mutationTBU,
         variables: {
-          likesOffCounter: 1,
-          commentId: commentId
+          likesOffCounter: likeOffset,
+          commentId: commentId,
+          userId: localStorage.getItem('userId')
         }
       })
       .pipe(
@@ -184,5 +193,32 @@ export class ProjectService {
           return res;
         })
       );
+  }
+
+  private _checkCommentStatus(commentId: number) {
+    const userCommentArray = JSON.parse(localStorage.getItem('projectIssuesCommentsLikessByuserId'));
+    let flag = false;
+    userCommentArray.forEach((comment_id: any) => {
+      if (comment_id === commentId) {
+        flag = true;
+      }
+    });
+    return flag;
+  }
+
+  private _updateLocalStorage(insert: boolean, commentId?: number) {
+    const userCommentArray = JSON.parse(localStorage.getItem('projectIssuesCommentsLikessByuserId'));
+
+    if (insert) {
+      userCommentArray.push(commentId);
+      localStorage.setItem('projectIssuesCommentsLikessByuserId', JSON.stringify(userCommentArray));
+      return;
+    }
+    for (let i = 0; i < userCommentArray.length; i++) {
+      if (userCommentArray[i] === commentId) {
+        userCommentArray.splice(i, 1);
+      }
+    }
+    localStorage.setItem('projectIssuesCommentsLikessByuserId', JSON.stringify(userCommentArray));
   }
 }

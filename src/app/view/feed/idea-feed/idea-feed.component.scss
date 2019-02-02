@@ -1,0 +1,135 @@
+@import "../../../../sass/declarations";
+
+:host {
+  width: 100%;
+}
+
+.background {
+  min-height: 90vh;
+  background-color: white;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 50%;
+}
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 0 1rem 0;
+
+  &__title {
+    font-size: 4rem;
+    color: #212121;
+  }
+
+  &__slogan {
+    font-size: 2rem;
+    color: #212121;
+  }
+}
+
+.section-search {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.search-box {
+  font-size: 1.6rem;
+
+  background-color: white;
+  box-shadow: 0 0 1rem #cdcdcd;
+
+  padding: 1.5rem 4rem;
+  border-radius: 500rem;
+}
+
+.section-issues {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 2rem 0;
+
+  .container {
+    padding: 1rem;
+  }
+}
+
+.idea-card {
+  font-family: "Open Sans", sans-serif;
+
+  display: flex;
+
+  &:not(:last-of-type) {
+    margin-bottom: 1rem;
+  }
+
+  &__owner {
+    flex: 0 0 10%;
+    padding: 0 2rem;
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-right: 1px solid #cdcdcd;
+
+    &__username {
+      color: black;
+      text-decoration: none;
+    }
+  }
+
+  &__body {
+    font-size: 1.6rem;
+    font-weight: 400;
+    padding: 0 0 1rem 3rem;
+
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  &__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 1rem;
+
+    &__idea-name {
+      font-size: 2rem;
+      font-weight: 400;
+      flex-grow: 1;
+    }
+
+    &__icon-list {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__icon {
+    top: 1rem;
+    right: 1rem;
+
+    font-size: 2rem;
+
+    cursor: pointer;
+  }
+
+  &__stat {
+    margin-top: -0.5rem;
+    margin-right: 1rem;
+  }
+}

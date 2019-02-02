@@ -3,7 +3,7 @@ import { Idea } from '@app/shared/idea';
 import { map } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { MUTATION_ADD_IDEA, MUTATION_LIKE_IDEA } from '@app/shared/mutations';
-import { QUERY_IDEA_DETAILS, QUERY_LIMITED_IDEA_DETAILS } from '@app/shared/queries';
+import { QUERY_IDEA_DETAILS, QUERY_LIMITED_IDEA_DETAILS, QUERY_TOTAL_IDEA_COUNT } from '@app/shared/queries';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,6 @@ export class IdeaService {
       })
       .pipe(
         map((res: any) => {
-          console.log(res);
           return res;
         })
       );
@@ -66,7 +65,6 @@ export class IdeaService {
       })
       .valueChanges.pipe(
         map((res: any) => {
-          console.log(res);
           return res;
         })
       );
@@ -81,6 +79,39 @@ export class IdeaService {
         variables: {
           idea_id: ideaId,
           user_id: localStorage.getItem('userId')
+        }
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * getTotalIdeaCount
+   */
+  public getTotalIdeaCount() {
+    return this.apollo
+      .query({
+        query: QUERY_TOTAL_IDEA_COUNT
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * getIdeaComments
+   */
+  public getIdeaComments(idea_id: number) {
+    return this.apollo
+      .query({
+        query: QUERY_IDEA_DETAILS,
+        variables: {
+          ideaId: idea_id
         }
       })
       .pipe(

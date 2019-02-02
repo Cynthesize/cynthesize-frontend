@@ -7,9 +7,10 @@ import { MaterialModule } from '@app/material.module';
 
 import { ShellComponent } from './shell.component';
 import { HeaderComponent } from './header/header.component';
+import { GraphqlModule } from './graphql/graphql.module';
 
 @NgModule({
-  imports: [CommonModule, TranslateModule, FlexLayoutModule, MaterialModule, RouterModule],
+  imports: [CommonModule, TranslateModule, FlexLayoutModule, MaterialModule, RouterModule, GraphqlModule],
   declarations: [HeaderComponent, ShellComponent]
 })
 export class ShellModule {}

@@ -1,16 +1,16 @@
 import gql from 'graphql-tag';
-import { USER_PROFILE_PIC_FRAGMENT, ISSUE_COMMENT_FRAGMENT, ISSUE_COMMENT_REPLY_FRAGMENT } from './fragments';
+import { ISSUE_COMMENT_FRAGMENT, ISSUE_COMMENT_REPLY_FRAGMENT, USER_DETAILS_FRAGMENT } from './fragments';
 
 const MUTATION_ADD_USER = gql`
   mutation insert_user($objects: [user_insert_input!]!) {
     insert_user(objects: $objects) {
       affected_rows
       returning {
-        ...UserProfilePicFragment
+        ...UserDetailsFragment
       }
     }
   }
-  ${USER_PROFILE_PIC_FRAGMENT}
+  ${USER_DETAILS_FRAGMENT}
 `;
 
 const MUTATION_ADD_PROJECT = gql`
@@ -85,8 +85,8 @@ const MUTATION_ADD_ISSUE_COMMENT_REPLY = gql`
   ${ISSUE_COMMENT_REPLY_FRAGMENT}
 `;
 
-const MUTATION_UPDATE_LIKE_COUNTER = gql`
-  mutation update_likes($likesOffCounter: Int!, $commentId: Int!) {
+const MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT = gql`
+  mutation update_likes($likesOffCounter: Int!, $commentId: Int!, $userId: Int!) {
     update_project_issues_comments(where: { id: { _eq: $commentId } }, _inc: { likes: $likesOffCounter }) {
       affected_rows
       returning {
@@ -94,7 +94,43 @@ const MUTATION_UPDATE_LIKE_COUNTER = gql`
         likes
       }
     }
+    insert_project_issues_comments_likes(objects: { user_id: $userId, comment_id: $commentId }) {
+      affected_rows
+      returning {
+        comment_id
+      }
+    }
   }
+`;
+
+const MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE = gql`
+  mutation update_likes($likesOffCounter: Int!, $commentId: Int!, $userId: Int!) {
+    update_project_issues_comments(where: { id: { _eq: $commentId } }, _inc: { likes: $likesOffCounter }) {
+      affected_rows
+      returning {
+        id
+        likes
+      }
+    }
+    delete_project_issues_comments_likes(where: { user_id: { _eq: $userId }, comment_id: { _eq: $commentId } }) {
+      affected_rows
+      returning {
+        comment_id
+      }
+    }
+  }
+`;
+
+const MUTATION_UPDATE_USER_DETAILS = gql`
+  mutation update_user_details($updateObject: user_set_input!, $userId: Int!) {
+    update_user(where: { id: { _eq: $userId } }, _set: $updateObject) {
+      affected_rows
+      returning {
+        ...UserDetailsFragment
+      }
+    }
+  }
+  ${USER_DETAILS_FRAGMENT}
 `;
 
 export {
@@ -104,6 +140,8 @@ export {
   MUTATION_ADD_ISSUE_COMMENT_REPLY,
   MUTATION_ADD_PROJECT,
   MUTATION_ADD_USER,
-  MUTATION_UPDATE_LIKE_COUNTER,
-  MUTATION_LIKE_IDEA
+  MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE,
+  MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT,
+  MUTATION_LIKE_IDEA,
+  MUTATION_UPDATE_USER_DETAILS
 };

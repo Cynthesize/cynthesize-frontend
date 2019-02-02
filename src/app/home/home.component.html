@@ -1,23 +1,16 @@
 <div class="container">
-  <mat-card>
-    <p>
-      <img class="logo" src="assets/cynthesize-logo.png" alt="angular logo"/>
-    </p>
-    <mat-card-content>
-      <mat-card-title translate>Hello world !</mat-card-title>
-      <mat-card-subtitle>
-        <app-loader [isLoading]="isLoading" size="1.5"></app-loader>
-        <q [hidden]="isLoading">{{quote}}</q>
-      </mat-card-subtitle>
-      <mat-card-actions>
-        <button
-          mat-raised-button
-          angulartics2On="click"
-          angularticsAction="Click button below quote"
-          [angularticsCategory]="quote">
-          Click me to send an Analytics event
-        </button>
-      </mat-card-actions>
-    </mat-card-content>
-  </mat-card>
+  <section class="first">
+    <img class="section-background" src="../../assets/home.svg" />
+
+    <div class="content">
+      <img class="cynthesize-full-logo" src="../../assets/cynthesize-banner-logo.png" />
+      <div class="cynthesize-who-we-are">
+        <h2 class="home-xl-heading">Who are we?</h2>
+        <p class="home-m-paragraph">
+          We turn your projects to products by helping you find a team, help you through design, development phases and
+          finally host your project.
+        </p>
+      </div>
+    </div>
+  </section>
 </div>
