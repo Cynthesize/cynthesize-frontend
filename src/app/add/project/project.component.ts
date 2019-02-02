@@ -53,8 +53,7 @@ export class AddProjectComponent implements OnInit {
               data.data.insert_project.returning['0'].id + '-' + data.data.insert_project.returning['0'].project_name;
             var str = project_name;
             str = str.replace(/\s+/g, '-').toLowerCase();
-
-            this.router.navigate(['/project/' + str + '/view']);
+            this.router.navigate(['/view/project/' + str]);
           },
           (error: any) => {
             this.errorHandler.subj_notification.next(error);
