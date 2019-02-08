@@ -7,6 +7,8 @@ import { MatChipInputEvent } from '@angular/material';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
+import { MatDialog } from '@angular/material';
+import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -42,7 +44,8 @@ export class DetailsComponent implements OnInit {
     private profileService: ProfileService,
     private route: ActivatedRoute,
     private router: Router,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private dialog: MatDialog
   ) {
     this.username = this.route.snapshot.params.username;
   }
@@ -102,6 +105,15 @@ export class DetailsComponent implements OnInit {
         this.errorHandler.subj_notification.next(err);
       }
     );
+  }
+
+  openDialog(idea: any): void {
+    const dialogRef = this.dialog.open(IdeaCardComponent, {
+      width: 'auto',
+      data: { idea }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {});
   }
 
   fetchContributions(context: string) {
