@@ -44,7 +44,7 @@
     transition: all 0.1s ease-in;
 
     &:hover {
-      border-bottom: 2px solid white;
+      //border-bottom: 2px solid white; causes blinking of border
     }
   }
 }
