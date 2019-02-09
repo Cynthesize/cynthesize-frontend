@@ -54,6 +54,8 @@ export class AddProjectComponent implements OnInit {
         currentStage: this.project.get('currentStage').value
       };
 
+      projectDetails.projectName = projectDetails.projectName.replace(/\s+/g, ' ').trim();
+
       console.log(projectDetails);
       this.projectService
         .addProject(projectDetails)
