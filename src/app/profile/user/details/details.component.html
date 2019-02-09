@@ -111,7 +111,7 @@
               <div class="project_card" *ngFor="let idea of userIdeas">
                 <div class="project_card--header">{{ idea.idea_name }}</div>
                 <div class="project_card--body">{{ idea.description }}</div>
-                <a class="expand" href=""><mat-icon>open_in_new</mat-icon></a>
+                <a><mat-icon class="expand" (click)="openDialog(idea)">open_in_new</mat-icon></a>
               </div>
             </div>
           </span>
