@@ -59,7 +59,6 @@ export class ProfileService {
    * getUserDetailedContributions
    */
   public getUserDetailedContributions(username: string, context: string) {
-    console.log(context);
     let query = QUERY_USER_DETAILED_CONTRIBUTIONS_IDEAS;
     if (context === 'projects' || context === 'project') {
       query = QUERY_USER_DETAILED_CONTRIBUTIONS_PROJECTS;

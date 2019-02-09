@@ -107,7 +107,6 @@ export class CommentsComponent implements OnInit, OnChanges {
   fetchIdeaComments() {
     this.ideaService.getIdeaComments(this.activityId).subscribe(
       (data: any) => {
-        console.log(data);
         this.commentsArray = data.data.ideas[0].ideaCommentsByideaId;
       },
       (error: any) => {
