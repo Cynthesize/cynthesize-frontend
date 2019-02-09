@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material';
 import { IdeaService } from '@app/core/idea/idea.service';
 import { Logger } from '@app/core';
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 
@@ -37,7 +38,8 @@ export class AddIdeaComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private ideaService: IdeaService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private router: Router
   ) {
     this.createForm();
   }
@@ -55,6 +57,7 @@ export class AddIdeaComponent implements OnInit {
       .subscribe(
         credentials => {
           log.debug(`Idea Added`);
+          this.router.navigate(['/view/feed/ideas']);
         },
         error => {
           this.errorHandler.subj_notification.next(error);
