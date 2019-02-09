@@ -17,6 +17,7 @@ import { CovalentMarkdownModule } from '@covalent/markdown';
 import { RouterModule } from '@angular/router';
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
 import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
+import { IdeaCardComponent } from './idea-card/idea-card.component';
 
 export const cloudinary = {
   Cloudinary: CloudinaryCore
@@ -44,7 +45,8 @@ export const config: CloudinaryConfiguration = {
     CommentsComponent,
     EditableDirective,
     EditableCommentComponent,
-    TimeDiffPipe
+    TimeDiffPipe,
+    IdeaCardComponent
   ],
   exports: [LoaderComponent, LikingComponent, CommentsComponent]
 })

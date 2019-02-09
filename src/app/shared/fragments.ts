@@ -32,6 +32,7 @@ const USER_MINIMAL_CONTRIBUTIONS_FRAGMENT = gql`
       watching
     }
     ideasByOwner(limit: 4) {
+      id
       idea_name
       description
       upvotes
@@ -53,6 +54,7 @@ const USER_DETAILED_CONTRIBUTIONS_PROJECTS_FRAGMENT = gql`
 const USER_DETAILED_CONTRIBUTIONS_IDEAS_FRAGMENT = gql`
   fragment UserDetailedContributionsIdeasFragment on user {
     ideasByOwner {
+      id
       idea_name
       description
       upvotes

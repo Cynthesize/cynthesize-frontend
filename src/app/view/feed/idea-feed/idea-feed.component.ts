@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IdeaService } from '@app/core/idea/idea.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
+import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
 
 @Component({
   selector: 'app-idea-feed',
@@ -35,17 +36,5 @@ export class IdeaFeedComponent implements OnInit {
     this.ideaService.getNIdeas(event.pageSize, event.pageIndex).subscribe(data => {
       this.ideaList = data.data.ideas;
     });
-  }
-}
-@Component({
-  selector: 'app-idea-card',
-  templateUrl: './idea-card/idea-card.component.html',
-  styleUrls: ['./idea-card/idea-card.component.scss']
-})
-export class IdeaCardComponent {
-  constructor(public dialogRef: MatDialogRef<IdeaCardComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 }
