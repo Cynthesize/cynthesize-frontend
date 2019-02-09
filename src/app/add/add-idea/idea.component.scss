@@ -5,101 +5,98 @@
 }
 
 .background {
-  min-height: 90vh;
-  //background-color: darken($color-white, 10%);
-  background-color: white;
+  height: 100%;
+  background-color: red;
   position: relative;
 
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-.container {
-  //box-shadow: $shadow-light;
-
-  overflow: hidden;
-
-  &--add-idea {
-    width: 100rem;
-    //background-color: red;
-    background-color: white;
-    min-height: 50rem;
-    padding: 3rem;
-    font-size: 1.6rem;
-
-    border-radius: $radius-small;
-    display: flex;
-    align-items: stretch;
-
-    @media (max-width: $bp-6) {
-      flex-direction: column;
-      padding: 1rem;
-    }
+  @media (max-width: $bp-6) {
   }
 }
 
-.form {
+.add-idea-container {
+  padding: 5rem;
   background-color: white;
-  margin-right: 3rem;
-  flex: 0 0 60%;
 
-  padding: 2rem;
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
+
+  display: flex;
+
+  @media (max-width: $bp-6) {
+    width: 95%;
+    padding: 2rem;
+  }
+}
+
+.form-container {
+  padding: 3rem;
+  background-color: white;
+
+  width: 40rem;
+
+  overflow-y: scroll;
 
   display: flex;
   flex-direction: column;
+  justify-content: center;
+
+  margin-right: 5rem;
 
   @media (max-width: $bp-6) {
-    flex: 0 0 90%;
+    width: 100%;
     margin-right: 0;
-  }
-
-  &__container {
-    display: block;
-    //background-color: pink;
-    width: 80%;
-
-    @media (max-width: $bp-6) {
-      width: 100%;
-    }
+    padding: 2rem;
   }
 }
 
-.illustration {
-  flex-grow: 1;
+::-webkit-scrollbar {
+  width: 0px;
+  /* remove scrollbar space */
+  background: transparent;
+  /* optional: just make scrollbar invisible */
+}
 
-  background-image: linear-gradient(
-      to right bottom,
-      rgba($color-primary, 0.8),
-      rgba(white, 0.3),
-      rgba($color-primary, 0.8)
-    ),
-    url("../../../assets/images/add-idea.jpg");
-  background-blend-mode: soft-light;
-  background-size: cover;
-  background-position: center;
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.artwork-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0 2rem;
+
+  img {
+    height: 25rem;
+  }
 
   @media (max-width: $bp-6) {
     display: none;
   }
 }
 
-.input {
-  font-weight: 300;
+.add-idea-form {
+  display: flex;
+  flex-direction: column;
+}
 
-  &__text {
-    font-weight: 300;
-    font-family: inherit;
+.submit-button {
+  width: fit-content;
+  font-size: 1.6rem;
+
+  margin-top: 2rem;
+}
+
+.mb-l {
+  margin-bottom: 5rem;
+
+  @media (max-width: $bp-6) {
+    margin-bottom: 3rem;
   }
-}
-
-.mat-chip.mat-standard-chip {
-  background-color: $color-primary;
-  color: white;
-  font-size: 1.2rem;
-}
-
-.button--submit--lg {
-  display: block;
-  width: 30%;
 }
