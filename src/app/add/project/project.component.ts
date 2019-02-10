@@ -14,6 +14,10 @@ export class AddProjectComponent implements OnInit {
   isLinear = false;
   project: FormGroup;
   formNotfilled = false;
+  projectDescription = '';
+  options: any = {
+    lineWrapping: true
+  };
 
   stages: String[] = [
     'Ideation',
@@ -43,8 +47,8 @@ export class AddProjectComponent implements OnInit {
   addProject() {
     if (
       this.project.get('projectName').value === '' ||
-      this.project.get('projectName').value === '' ||
-      this.project.get('projectName').value === ''
+      this.project.get('description').value === '' ||
+      this.project.get('currentStage').value === ''
     ) {
       this.formNotfilled = true;
     } else {
@@ -55,8 +59,6 @@ export class AddProjectComponent implements OnInit {
       };
 
       projectDetails.projectName = projectDetails.projectName.replace(/\s+/g, ' ').trim();
-
-      console.log(projectDetails);
       this.projectService
         .addProject(projectDetails)
         .pipe(finalize(() => {}))
@@ -64,7 +66,7 @@ export class AddProjectComponent implements OnInit {
           (data: any) => {
             const project_name =
               data.data.insert_project.returning['0'].id + '-' + data.data.insert_project.returning['0'].project_name;
-            var str = project_name;
+            let str = project_name;
             str = str.replace(/\s+/g, '-').toLowerCase();
             this.router.navigate(['/view/project/' + str]);
           },

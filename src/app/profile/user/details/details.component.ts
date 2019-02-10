@@ -65,7 +65,6 @@ export class DetailsComponent implements OnInit {
         if (data.user.length === 0) {
           this.router.navigate(['not-found']);
         }
-        console.log(data);
         this.isPageLoaded = true;
         this.user = data.user[0];
         this.listOfTech = data.user[0].technologies || [];
@@ -97,7 +96,6 @@ export class DetailsComponent implements OnInit {
 
     this.profileService.getUserMinimalContributions(this.username).subscribe(
       (res: any) => {
-        console.log(res);
         this.userIdeas = res.user[0].ideasByOwner;
         this.userProjects = res.user[0].projectsByowner;
       },
