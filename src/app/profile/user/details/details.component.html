@@ -87,7 +87,26 @@
           <div class="info_card">
             <div class="info_card--header">Things I'm fond of...</div>
             <div class="info_card--body">
-              <span *ngFor="let tech of user.technologies"> {{ tech }} </span>
+              <mat-chip-list
+                *ngFor="let tech of user.technologies"
+                [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }"
+              >
+                <mat-chip>{{ tech }}</mat-chip>
+              </mat-chip-list>
+              <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+                <mat-chip-list #chipList>
+                  <mat-chip *ngFor="let tech of user.technologies" [removable]="removable" (removed)="remove(tech)">
+                    {{ tech }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)"
+                  />
+                </mat-chip-list>
+              </mat-form-field>
             </div>
           </div>
         </div>

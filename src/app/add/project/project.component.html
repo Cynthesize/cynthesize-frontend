@@ -15,9 +15,7 @@
             </mat-step>
             <mat-step [stepControl]="project">
               <ng-template matStepLabel>Describe your project - a bit of detail would do!</ng-template>
-              <mat-form-field class="addproject-text">
-                <input matInput placeholder="Description" formControlName="description" required />
-              </mat-form-field>
+              <td-text-editor formControlName="description" [options]="options"></td-text-editor>
               <div><button class="button button--forward" mat-button matStepperNext>Next</button></div>
             </mat-step>
             <mat-step [stepControl]="project">
