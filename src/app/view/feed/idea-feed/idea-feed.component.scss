@@ -4,7 +4,7 @@
   width: 100%;
 }
 
-.background {
+.ideafeed-background {
   min-height: 90vh;
   background-color: white;
   position: relative;
@@ -16,7 +16,7 @@
   }
 }
 
-.container {
+.ideafeed-container {
   width: 50%;
 
   @media (max-width: 37.5em) {

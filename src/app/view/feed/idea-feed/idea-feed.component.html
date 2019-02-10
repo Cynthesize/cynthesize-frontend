@@ -1,8 +1,8 @@
-<div class="background">
+<div class="ideafeed-background">
   <section class="section-header"><p class="section-header__slogan">Discuss ideas with the community here!</p></section>
   <section class="section-search"><div class="search-box">Search | Popular | New</div></section>
   <section class="section-issues">
-    <div *ngIf="ideaList" class="container">
+    <div *ngIf="ideaList" class="ideafeed-container">
       <mat-card
         class="idea-card"
         *ngFor="let item of (ideaList | paginate: { itemsPerPage: 5, currentPage: pageIndex, totalItems: totalCount })"
