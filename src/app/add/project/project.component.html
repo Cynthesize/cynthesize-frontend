@@ -1,14 +1,14 @@
-<div class="background">
-  <div class="container--add-project">
-    <div class="content">
-      <h1 class="heading--xl">Add Project</h1>
+<div class="addproject-background">
+  <div class="addproject-container--add-project">
+    <div class="addproject-content">
+      <h1 class="addproject-heading--xl">Add Project</h1>
       <form [formGroup]="project" (keydown.enter)="$event.preventDefault()">
-        <div class="form">
+        <div class="addproject-form">
           <div *ngIf="formNotfilled"><i>Please fill all the fields.</i></div>
           <mat-vertical-stepper [linear]="isLinear" #stepper>
             <mat-step [stepControl]="project">
               <ng-template matStepLabel>Think of a cool name for your project. </ng-template>
-              <mat-form-field class="text">
+              <mat-form-field class="addproject-text">
                 <input matInput placeholder="Eg: Cynthesize" formControlName="projectName" required />
               </mat-form-field>
               <div><button mat-button class="button button--forward" matStepperNext>Next</button></div>
@@ -41,6 +41,6 @@
         </div>
       </form>
     </div>
-    <div class="picture"></div>
+    <div class="addproject-picture"></div>
   </div>
 </div>

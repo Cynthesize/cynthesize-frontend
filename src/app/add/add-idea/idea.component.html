@@ -1,93 +1,13 @@
-<!-- <div class="background">
-  <div class="container container--add-idea add-idea">
-    <div class="form">
-      <h1 class="heading--huge">Add Idea</h1>
-      <h2 class="heading--subtitle">Show off your amazing idea and discuss with the community!</h2>
-      <hr class="seperator" />
-      <div class="form__container">
-        <form (ngSubmit)="addIdea()" [formGroup]="addIdeaForm" novalidate>
-          <br />
-          <div fxLayout="column">
-            <mat-form-field class="input">
-              <input
-                type="text"
-                class="input__text"
-                matInput
-                formControlName="idea_name"
-                [autocomplete]="false"
-                placeholder="Add an idea name."
-                required
-              />
-              <mat-error *ngIf="addIdeaForm.controls.idea_name.valid || addIdeaForm.controls.idea_name.untouched">
-                <span translate>Idea Name is required!</span>
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field class="input">
-              <input
-                type="text"
-                matInput
-                formControlName="description"
-                autocomplete="description"
-                placeholder="Add a brief description about the idea."
-                required
-              />
-              <mat-error *ngIf="addIdeaForm.controls.description.valid || addIdeaForm.controls.description.untouched">
-                <span translate>Description is required!</span>
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field class="input">
-              <mat-chip-list #tagList>
-                <mat-chip
-                  *ngFor="let tag of tags"
-                  [selectable]="selectable"
-                  [removable]="removable"
-                  (removed)="remove(tag)"
-                >
-                  {{ tag.name }}
-                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                </mat-chip>
-                <input
-                  placeholder="Add tags to your idea (max 5)"
-                  [matChipInputFor]="tagList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  [matChipInputAddOnBlur]="addOnBlur"
-                  (matChipInputTokenEnd)="add($event)"
-                />
-              </mat-chip-list>
-            </mat-form-field>
-            <mat-slide-toggle class="input" color="primary" formControlName="require_assistance" translate
-              >Need Assistance?</mat-slide-toggle
-            >
-            <br />
-            <button
-              mat-raised-button
-              color="primary"
-              class="button--submit--lg"
-              type="submit"
-              [disabled]="addIdeaForm.invalid || isLoading"
-            >
-              <span translate>Add Idea</span>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+<div class="addidea-background">
+  <div class="addidea-add-idea-container">
+    <div class="addidea-form-container">
+      <h1 class="addidea-mb-l">Add Idea</h1>
 
-    <div class="illustration"></div>
-  </div>
-</div>
- -->
-
-<div class="background">
-  <div class="add-idea-container">
-    <div class="form-container">
-      <h1 class="mb-l">Add Idea</h1>
-
-      <form class="add-idea-form" (ngSubmit)="addIdea()" [formGroup]="addIdeaForm" novalidate>
-        <mat-form-field class="input">
+      <form class="addidea-add-idea-form" (ngSubmit)="addIdea()" [formGroup]="addIdeaForm" novalidate>
+        <mat-form-field class="addidea-input">
           <input
             type="text"
-            class="input__text"
+            class="addidea-input__text"
             matInput
             formControlName="idea_name"
             [autocomplete]="false"
@@ -99,7 +19,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="input">
+        <mat-form-field class="addidea-input">
           <input
             type="text"
             matInput
@@ -116,7 +36,7 @@
         <button
           mat-raised-button
           color="primary"
-          class="submit-button"
+          class="addidea-submit-button"
           type="submit"
           [disabled]="addIdeaForm.invalid || isLoading"
         >
@@ -124,6 +44,6 @@
         </button>
       </form>
     </div>
-    <div class="artwork-container"><img src="../../../assets/images/add-issue.svg" /></div>
+    <div class="addidea-artwork-container"><img src="../../../assets/images/add-issue.svg" /></div>
   </div>
 </div>

@@ -4,13 +4,6 @@
   width: 90%;
 }
 
-.container {
-  background-color: white;
-  padding: 3rem;
-  border-radius: 0.5rem;
-  box-shadow: 0px 0px 5px #cccccc;
-}
-
 .issue-text {
   font-size: 1.8rem;
   margin: 2rem 0;
@@ -32,9 +25,6 @@
     color: $color-primary-dark;
     font-size: 1.5rem;
     margin-bottom: 2rem;
-  }
-
-  &__list {
   }
 }
 

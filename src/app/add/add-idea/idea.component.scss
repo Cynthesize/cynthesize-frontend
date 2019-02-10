@@ -4,52 +4,90 @@
   width: 100%;
 }
 
-.background {
-  height: 100%;
-  background-color: red;
-  position: relative;
+.addidea- {
+  &background {
+    height: 100%;
+    background-color: red;
+    position: relative;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  @media (max-width: $bp-6) {
+    @media (max-width: $bp-6) {
+    }
   }
-}
 
-.add-idea-container {
-  padding: 5rem;
-  background-color: white;
+  &add-idea-container {
+    padding: 5rem;
+    background-color: white;
 
-  font-size: 1.6rem;
-  border-radius: 0.5rem;
+    font-size: 1.6rem;
+    border-radius: 0.5rem;
 
-  display: flex;
+    display: flex;
 
-  @media (max-width: $bp-6) {
-    width: 95%;
-    padding: 2rem;
+    @media (max-width: $bp-6) {
+      width: 95%;
+      padding: 2rem;
+    }
   }
-}
 
-.form-container {
-  padding: 3rem;
-  background-color: white;
+  &form-container {
+    padding: 3rem;
+    background-color: white;
 
-  width: 40rem;
+    width: 40rem;
 
-  overflow-y: scroll;
+    overflow-y: scroll;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-  margin-right: 5rem;
+    margin-right: 5rem;
 
-  @media (max-width: $bp-6) {
-    width: 100%;
-    margin-right: 0;
-    padding: 2rem;
+    @media (max-width: $bp-6) {
+      width: 100%;
+      margin-right: 0;
+      padding: 2rem;
+    }
+  }
+
+  &artwork-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 2rem;
+
+    img {
+      height: 25rem;
+    }
+
+    @media (max-width: $bp-6) {
+      display: none;
+    }
+  }
+
+  &add-idea-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &submit-button {
+    width: fit-content;
+    font-size: 1.6rem;
+
+    margin-top: 2rem;
+  }
+
+  &mb-l {
+    margin-bottom: 5rem;
+
+    @media (max-width: $bp-6) {
+      margin-bottom: 3rem;
+    }
   }
 }
 
@@ -63,40 +101,4 @@
 /* optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
   background: transparent;
-}
-
-.artwork-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 0 2rem;
-
-  img {
-    height: 25rem;
-  }
-
-  @media (max-width: $bp-6) {
-    display: none;
-  }
-}
-
-.add-idea-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.submit-button {
-  width: fit-content;
-  font-size: 1.6rem;
-
-  margin-top: 2rem;
-}
-
-.mb-l {
-  margin-bottom: 5rem;
-
-  @media (max-width: $bp-6) {
-    margin-bottom: 3rem;
-  }
 }
