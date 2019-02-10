@@ -64,7 +64,15 @@
               {{ user.date_of_birth }}
             </div>
             <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
-              <input matInput value="{{ user.date_of_birth }}" formControlName="dob" placeholder="Select a date" />
+              <input
+                matInput
+                [matDatepicker]="myDatepicker"
+                value="{{ user.date_of_birth }}"
+                formControlName="dob"
+                placeholder="Select a date"
+              />
+              <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+              <mat-datepicker #myDatepicker></mat-datepicker>
             </mat-form-field>
           </div>
           <div class="info_card">
