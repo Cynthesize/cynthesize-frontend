@@ -120,11 +120,21 @@
               >
             </div>
             <div class="main-info__projects">
-              <div class="project_card" *ngFor="let project of userProjects">
-                <div class="project_card--header">{{ project.project_name }} | {{ project.current_stage }}</div>
-                <div class="project_card--body">{{ project.description }}</div>
-                <a class="expand" [routerLink]="['/view/project', project.id]"><mat-icon>open_in_new</mat-icon></a>
+              <div *ngIf="!userProjects?.length > 0; else elseBlock">
+                <div *ngIf="isSameUser; else notsameuser">
+                  <p>Nothing to show</p>
+                  <br /><button routerLink="/add/project" mat-raised-button>Add projects</button>
+                </div>
+                <ng-template #notsameuser> No projects to show </ng-template>
               </div>
+
+              <ng-template #elseBlock>
+                <div class="project_card" *ngFor="let project of userProjects">
+                  <div class="project_card--header">{{ project.project_name }} | {{ project.current_stage }}</div>
+                  <div class="project_card--body">{{ project.description }}</div>
+                  <a class="expand" [routerLink]="['/view/project', project.id]"><mat-icon>open_in_new</mat-icon></a>
+                </div>
+              </ng-template>
             </div>
           </span>
 
