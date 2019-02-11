@@ -145,11 +145,21 @@
               <!--goes to idea/feed with filter of this user's username-->
             </div>
             <div class="main-info__projects">
-              <div class="project_card" *ngFor="let idea of userIdeas">
-                <div class="project_card--header">{{ idea.idea_name }}</div>
-                <div class="project_card--body">{{ idea.description }}</div>
-                <a><mat-icon class="expand" (click)="openDialog(idea)">open_in_new</mat-icon></a>
+              <div *ngIf="!userIdeas?.length > 0; else elseBlock">
+                <div *ngIf="isSameUser; else notsameuser">
+                  <p>Nothing to show</p>
+                  <br /><button routerLink="/add/idea" mat-raised-button>Add Ideas</button>
+                </div>
+                <ng-template #notsameuser> No Ideas to show </ng-template>
               </div>
+
+              <ng-template #elseBlock>
+                <div class="project_card" *ngFor="let idea of userIdeas">
+                  <div class="project_card--header">{{ idea.idea_name }}</div>
+                  <div class="project_card--body">{{ idea.description }}</div>
+                  <a><mat-icon class="expand" (click)="openDialog(idea)">open_in_new</mat-icon></a>
+                </div>
+              </ng-template>
             </div>
           </span>
         </div>
