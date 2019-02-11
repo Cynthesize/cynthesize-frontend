@@ -68,6 +68,7 @@ export class DetailsComponent implements OnInit {
         this.isPageLoaded = true;
         this.user = data.user[0];
         this.listOfTech = data.user[0].technologies || [];
+        console.log(data.user);
         // this.user.social_links.forEach(sociallink => {
         //   const username = sociallink.substr(sociallink.lastIndexOf('/') + 1, sociallink.length);
         //   if (sociallink.includes('facebook') || sociallink.includes('github') || sociallink.includes('twitter')) {
@@ -110,7 +111,7 @@ export class DetailsComponent implements OnInit {
       width: 'auto',
       data: { idea }
     });
-
+    console.log(idea);
     dialogRef.afterClosed().subscribe(result => {});
   }
 
