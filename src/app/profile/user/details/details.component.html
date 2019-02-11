@@ -132,15 +132,15 @@
               >
             </div>
             <div class="main-info__projects">
-              <div *ngIf="!userProjects?.length > 0; else elseBlock">
-                <div *ngIf="isSameUser; else notsameuser">
+              <div *ngIf="!userProjects?.length > 0; else ProjectCreated">
+                <div *ngIf="isSameUser; else isDifferentUser">
                   <p>Nothing to show</p>
                   <br /><button routerLink="/add/project" mat-raised-button>Add projects</button>
                 </div>
-                <ng-template #notsameuser> No projects to show </ng-template>
+                <ng-template #isDifferentUser> No projects to show </ng-template>
               </div>
 
-              <ng-template #elseBlock>
+              <ng-template #ProjectCreated>
                 <div class="project_card" *ngFor="let project of userProjects">
                   <div class="project_card--header">{{ project.project_name }} | {{ project.current_stage }}</div>
                   <div class="project_card--body">{{ project.description }}</div>
@@ -157,15 +157,15 @@
               <!--goes to idea/feed with filter of this user's username-->
             </div>
             <div class="main-info__projects">
-              <div *ngIf="!userIdeas?.length > 0; else elseBlock">
-                <div *ngIf="isSameUser; else notsameuser">
+              <div *ngIf="!userIdeas?.length > 0; else IdeasCreated">
+                <div *ngIf="isSameUser; else isDifferentUser">
                   <p>Nothing to show</p>
                   <br /><button routerLink="/add/idea" mat-raised-button>Add Ideas</button>
                 </div>
-                <ng-template #notsameuser> No Ideas to show </ng-template>
+                <ng-template #isDifferentUser> No Ideas to show </ng-template>
               </div>
 
-              <ng-template #elseBlock>
+              <ng-template #IdeasCreated>
                 <div class="project_card" *ngFor="let idea of userIdeas">
                   <div class="project_card--header">{{ idea.idea_name }}</div>
                   <div class="project_card--body">{{ idea.description }}</div>
