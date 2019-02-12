@@ -22,6 +22,18 @@
                 placeholder="Enter new username"
               />
             </mat-form-field>
+            <div class="social-links">
+              <a href="{{ social.value }}" *ngFor="let social of (user.social_links | keyvalue)" target="_blank">
+                <img
+                  matTooltip="{{ social.value }}"
+                  class="social-icon"
+                  src="../../../../assets/logos/social/{{ social.key }}-logo.svg"
+                />
+              </a>
+              <mat-icon (click)="openSocialDialog()" [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }"
+                >add_circle</mat-icon
+              >
+            </div>
           </div>
 
           <div class="profile-header-info__name">

@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>Please enter full URL to the links</h2>
+<mat-dialog-content class="mat-typography">
+  <div>
+    <mat-form-field
+      ><input matInput [(ngModel)]="data.github" placeholder="Enter full Github url..." value="{{ data.github }}" />
+    </mat-form-field>
+    <br />
+    <mat-form-field
+      ><input
+        matInput
+        [(ngModel)]="data.facebook"
+        placeholder="Enter full Facebook url..."
+        value="{{ data.facebook }}"
+      />
+    </mat-form-field>
+    <br />
+    <mat-form-field
+      ><input
+        matInput
+        [(ngModel)]="data.linkedin"
+        placeholder="Enter full LinkedIn url..."
+        value="{{ data.linkedin }}"
+      />
+    </mat-form-field>
+    <br />
+    <mat-form-field
+      ><input matInput [(ngModel)]="data.website" placeholder="Enter website url..." value="{{ data.website }}" />
+    </mat-form-field>
+    <br />
+    <mat-form-field
+      ><input matInput [(ngModel)]="data.twitter" placeholder="Enter full Twitter url..." value="{{ data.twitter }}" />
+    </mat-form-field>
+    <br />
+    <mat-form-field
+      ><input matInput [(ngModel)]="data.dribble" placeholder="Enter full Dribble url..." value="{{ data.dribble }}" />
+    </mat-form-field>
+    <br />
+    <mat-form-field
+      ><input matInput [(ngModel)]="data.other" placeholder="Enter full url..." value="{{ data.other }}" />
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="data" cdkFocusInitial>Submit</button>
+</mat-dialog-actions>

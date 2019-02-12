@@ -1,9 +1,9 @@
 import { ProfileService } from '@app/core/profile/profile.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/internal/operators/finalize';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
 import { User } from '@app/core/profile/user';
-import { MatChipInputEvent } from '@angular/material';
+import { MatChipInputEvent, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
@@ -12,6 +12,10 @@ import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
+}
+
+export interface SocialLinks {
+  website: string;
 }
 
 @Component({
@@ -28,6 +32,7 @@ export class DetailsComponent implements OnInit {
   username: string;
   sociallinks: any = [];
   isFieldEditable = false;
+  socialLinks: any;
   isSameUser = localStorage.getItem('username') === this.router.url.split('/')[2];
 
   editForm: FormGroup;
@@ -68,26 +73,6 @@ export class DetailsComponent implements OnInit {
         this.isPageLoaded = true;
         this.user = data.user[0];
         this.listOfTech = data.user[0].technologies || [];
-        // this.user.social_links.forEach(sociallink => {
-        //   const username = sociallink.substr(sociallink.lastIndexOf('/') + 1, sociallink.length);
-        //   if (sociallink.includes('facebook') || sociallink.includes('github') || sociallink.includes('twitter')) {
-        //     const social =
-        //       (sociallink.includes('facebook') && 'facebook') ||
-        //       (sociallink.includes('github') && 'github') ||
-        //       (sociallink.includes('twitter') && 'twitter');
-        //     this.sociallinks.push({
-        //       socialLink: sociallink,
-        //       username: username,
-        //       logoUrl: '../../../../assets/logos/social/' + social + '-logo.svg'
-        //     });
-        //   } else {
-        //     this.sociallinks.push({
-        //       socialLink: sociallink,
-        //       username: sociallink,
-        //       logoUrl: '../../../../assets/logos/grid-world.svg'
-        //     });
-        //   }
-        // });
       },
       (error: any) => {
         this.errorHandler.subj_notification.next(error);
@@ -112,6 +97,16 @@ export class DetailsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {});
+  }
+
+  openSocialDialog(): void {
+    const dialogRef = this.dialog.open(SocialDialogComponent, {
+      width: 'auto',
+      data: this.user.social_links
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.socialLinks = result;
+    });
   }
 
   fetchContributions(context: string) {
@@ -158,8 +153,10 @@ export class DetailsComponent implements OnInit {
       technologies: this.listOfTech,
       date_of_birth: this.editForm.get('dob').value,
       website: this.editForm.get('website').value,
-      profile_pic: profileUrl
+      profile_pic: profileUrl,
+      social_links: this.socialLinks
     };
+    console.log(userUpdateObject);
     const trimmedUserChangeObject = {};
     Object.keys(userUpdateObject).forEach(key => {
       if (userUpdateObject[key] || (key === 'technologies' && userUpdateObject[key].length === 0)) {
@@ -224,5 +221,20 @@ export class DetailsComponent implements OnInit {
           this.errorHandler.subj_notification.next(error);
         }
       );
+  }
+}
+
+@Component({
+  selector: 'app-social-dialog',
+  templateUrl: './social-dialog.component.html',
+  styleUrls: ['./social-dialog.component.scss']
+})
+export class SocialDialogComponent {
+  socialLinks: FormGroup;
+
+  constructor(public dialogRef: MatDialogRef<SocialDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
