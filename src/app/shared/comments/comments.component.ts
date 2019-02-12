@@ -38,6 +38,7 @@ export class CommentsComponent implements OnInit, OnChanges {
   comment = '';
   commentsArray = [Object];
   commentingOnIssue = false;
+  isLoading = false;
 
   constructor(
     private ideaService: IdeaService,
@@ -65,6 +66,7 @@ export class CommentsComponent implements OnInit, OnChanges {
       .pipe(
         finalize(() => {
           this.commentingOnIssue = false;
+          this.isLoading = false;
         })
       )
       .subscribe(
@@ -98,10 +100,12 @@ export class CommentsComponent implements OnInit, OnChanges {
 
   addCommentBox(): void {
     this.commentingOnIssue = true;
+    this.isLoading = false;
   }
 
   cancel(): void {
     this.commentingOnIssue = false;
+    this.isLoading = false;
   }
 
   fetchIdeaComments() {

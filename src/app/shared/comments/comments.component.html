@@ -1,6 +1,6 @@
 <!-- Idea Comment Section -->
-
-<div *ngIf="activityType === 'idea'">
+<div class="loader" *ngIf="isLoading"><mat-spinner></mat-spinner></div>
+<div *ngIf="activityType === 'idea' && !isLoading">
   <div *ngFor="let comment of commentsArray">
     {{ comment.comment_text }} by {{ comment.commenter }} at {{ comment.timestamp | date }}
     <div *ngFor="let reply of comment.ideasReplysBycommentId">
@@ -11,8 +11,8 @@
 </div>
 
 <!-- Issue Comment Section  -->
-
-<div *ngIf="issueCommentObject">
+<div class="loader" *ngIf="isLoading"><mat-spinner></mat-spinner></div>
+<div *ngIf="issueCommentObject && !isLoading">
   <div *ngFor="let comment of issueCommentObject">
     <app-editable-comment [comment]="comment" (commentEdited)="onCommentEdited(comment, $event)">
     </app-editable-comment>
@@ -20,6 +20,7 @@
   <div *ngIf="!commentingOnIssue">
     <button mat-button (click)="addCommentBox()"><mat-icon>comment</mat-icon>&nbsp;COMMENT</button>
   </div>
+
   <div *ngIf="commentingOnIssue" class="new_comment">
     <td-text-editor [(ngModel)]="comment" [options]="options" *ngIf="commentingOnIssue"></td-text-editor>
     <button mat-button (click)="cancel()">Cancel</button>

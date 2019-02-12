@@ -23,7 +23,6 @@ export class AddIdeaComponent implements OnInit {
   version: string = environment.version;
   error: string;
   addIdeaForm: FormGroup;
-
   isLoading = false;
   visible = true;
   selectable = true;
@@ -43,7 +42,7 @@ export class AddIdeaComponent implements OnInit {
   }
 
   addIdea() {
-    this.isLoading = true;
+    this.isLoading = false;
     this.ideaService
       .addIdea(this.addIdeaForm.value)
       .pipe(
@@ -85,6 +84,7 @@ export class AddIdeaComponent implements OnInit {
 
   ngOnInit() {}
   private createForm() {
+    this.isLoading = false;
     this.addIdeaForm = this.formBuilder.group({
       idea_name: ['', Validators.required],
       description: ['', Validators.required],
