@@ -21,6 +21,8 @@
 
         <mat-form-field class="addidea-input" hintLabel="Enter atleast 50 characters">
           <input
+            #input
+            minlength="50"
             type="text"
             matInput
             formControlName="description"
