@@ -19,7 +19,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="addidea-input">
+        <mat-form-field class="addidea-input" hintLabel="Enter atleast 50 characters">
           <input
             type="text"
             matInput
@@ -27,8 +27,8 @@
             autocomplete="description"
             placeholder="Add a brief description about the idea."
             required
-            minlength="50"
           />
+
           <mat-error *ngIf="addIdeaForm.controls.description.valid || addIdeaForm.controls.description.untouched">
             <span translate>Description is required!</span>
           </mat-error>
