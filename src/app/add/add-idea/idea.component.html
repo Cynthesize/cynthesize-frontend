@@ -27,6 +27,7 @@
             autocomplete="description"
             placeholder="Add a brief description about the idea."
             required
+            minlength="50"
           />
           <mat-error *ngIf="addIdeaForm.controls.description.valid || addIdeaForm.controls.description.untouched">
             <span translate>Description is required!</span>
