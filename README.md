@@ -16,11 +16,11 @@ Cynthesize is a platform where users can post their project ideas and details to
 1. Fork and star this repo.
 2. Once you've forked this repo, clone the repository to your local machine. You may do so by running the following command.
     ```sh
-    git clone https://github.com/<YOUR_USERNAME>/frontend
+    git clone https://github.com/<YOUR_USERNAME>/cynthesize-frontend
     ```
 3. Go to project folder and install dependencies:
     ```sh
-    cd frontend/
+    cd cynthesize-frontend/
     npm install
     ```
 
