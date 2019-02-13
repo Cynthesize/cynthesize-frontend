@@ -110,7 +110,6 @@ export class DetailsComponent implements OnInit {
       width: 'auto',
       data: { idea }
     });
-
     dialogRef.afterClosed().subscribe(result => {});
   }
 

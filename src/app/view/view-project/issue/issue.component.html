@@ -44,15 +44,12 @@
         <ul>
           <li>
             <div class="key">Watching:</div>
-            <div class="value">5</div>
+            <div class="value">{{ projectDetails.watching || 0 }}</div>
           </li>
-          <li>
-            <div class="key">Mentors:</div>
-            <div class="value">3</div>
-          </li>
+
           <li>
             <div class="key">Checkpoints:</div>
-            <div class="value">2</div>
+            <div class="value">{{ checkpoints.length }}</div>
           </li>
           <li>
             <div class="key">Issues Open:</div>

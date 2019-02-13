@@ -11,6 +11,10 @@ Go ahead! Star this repo!
 
 Cynthesize is a platform where users can post their project ideas and details to get feedback from the community upon things that matter, like the idea itself, the tech stack, the development plan, the approach on the problem. Our vision is to create a platform that unifies the product development process.
 
+Tell us about yourself at our [Gitter Channel](https://gitter.im/Cynthesize-gitter/Lobby). 
+
+We recommend you going through the [wiki page](https://github.com/Cynthesize/cynthesize-frontend/wiki)
+
 ### Installation Instructions
 
 1. Fork and star this repo.
