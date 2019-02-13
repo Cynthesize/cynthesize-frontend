@@ -39,7 +39,7 @@ export class AddProjectComponent implements OnInit {
   ngOnInit() {
     this.project = this._formBuilder.group({
       projectName: ['', Validators.required],
-      description: ['', Validators.required],
+      description: ['', [Validators.required, Validators.minLength(150)]],
       currentStage: ['', Validators.required]
     });
   }
