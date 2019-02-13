@@ -34,7 +34,6 @@
               <ng-template matStepLabel
                 >Which of these stages would you say are closest to your project’s completion?</ng-template
               >
-
               <mat-form-field>
                 <mat-select placeholder="Select a stage" formControlName="currentStage">
                   <mat-option *ngFor="let stage of stages" [value]="stage"> {{ stage }} </mat-option>
