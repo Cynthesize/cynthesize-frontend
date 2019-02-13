@@ -16,13 +16,24 @@
             <mat-step [stepControl]="project">
               <ng-template matStepLabel>Describe your project - a bit of detail would do!</ng-template>
               <td-text-editor formControlName="description" [options]="options"></td-text-editor>
-              <div><button class="button button--forward" mat-button matStepperNext>Next</button></div>
+              <div *ngIf="project.controls['description'].hasError('minlength')">
+                <i>Please enter atleast 150 characters</i>
+              </div>
+              <div>
+                <button
+                  [disabled]="project.controls['description'].hasError('minlength')"
+                  class="button button--forward"
+                  mat-button
+                  matStepperNext
+                >
+                  Next
+                </button>
+              </div>
             </mat-step>
             <mat-step [stepControl]="project">
               <ng-template matStepLabel
                 >Which of these stages would you say are closest to your project’s completion?</ng-template
               >
-
               <mat-form-field>
                 <mat-select placeholder="Select a stage" formControlName="currentStage">
                   <mat-option *ngFor="let stage of stages" [value]="stage"> {{ stage }} </mat-option>
