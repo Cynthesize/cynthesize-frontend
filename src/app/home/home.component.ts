@@ -11,6 +11,7 @@ import { QuoteService } from './quote.service';
 export class HomeComponent implements OnInit {
   quote: string;
   isLoading: boolean;
+  username: string = localStorage.getItem('username');
 
   constructor(private quoteService: QuoteService) {}
 
