@@ -205,6 +205,7 @@
     &--header {
       font-size: 1.7rem;
       margin-bottom: 1rem;
+      cursor: pointer;
     }
 
     &--body {
@@ -228,6 +229,25 @@
   color: $color-primary-dark;
   cursor: pointer;
   font-size: 1.6rem;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 14px;
+
+  @media (max-width: 37.5em) {
+    margin-top: 1rem;
+    justify-content: center;
+  }
+}
+
+.social-icon {
+  height: 2.5rem;
+  width: auto;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  color: $color-primary-dark;
 }
 
 .input {
