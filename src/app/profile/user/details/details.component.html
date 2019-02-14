@@ -13,7 +13,7 @@
             <h3 class="profile-header-info__username" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
               @{{ user.username }}
             </h3>
-            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }" class="input">
               <input
                 matInput
                 class="profile-header-info__username"
@@ -56,14 +56,14 @@
             <div class="info_card--body" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
               {{ user.location }}
             </div>
-            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }" class="input ">
               <input matInput value="{{ user.location }}" formControlName="location" placeholder="Enter a location" />
             </mat-form-field>
             <div class="info_card--header">Birthday</div>
             <div class="info_card--body" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
               {{ user.date_of_birth }}
             </div>
-            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }" class="input">
               <input
                 matInput
                 [matDatepicker]="myDatepicker"
@@ -80,7 +80,7 @@
             <div class="info_card--body" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
               {{ user.bio }}
             </div>
-            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }" class="input">
               <input matInput value="{{ user.bio }}" formControlName="bio" placeholder="Enter a bio" />
             </mat-form-field>
           </div>
@@ -93,7 +93,7 @@
               >
                 <mat-chip>{{ tech }}</mat-chip>
               </mat-chip-list>
-              <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+              <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }" class="input">
                 <mat-chip-list #chipList>
                   <mat-chip *ngFor="let tech of user.technologies" [removable]="removable" (removed)="remove(tech)">
                     {{ tech }}
