@@ -42,7 +42,7 @@ export class AddIdeaComponent implements OnInit {
   }
 
   addIdea() {
-    this.isLoading = false;
+    this.isLoading = true;
     this.ideaService
       .addIdea(this.addIdeaForm.value)
       .pipe(
@@ -54,8 +54,10 @@ export class AddIdeaComponent implements OnInit {
       .subscribe(
         credentials => {
           log.debug(`Idea Added`);
+          this.isLoading = false;
         },
         error => {
+          this.isLoading = false;
           this.errorHandler.subj_notification.next(error);
         }
       );

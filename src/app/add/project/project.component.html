@@ -1,5 +1,5 @@
-<div class="loader" *ngIf="formNotfilled"><mat-spinner></mat-spinner></div>
-<div class="background" *ngIf="!formNotfilled">
+<div class="loader" *ngIf="isPageLoading"><mat-spinner></mat-spinner></div>
+<div class="background" *ngIf="!isPageLoading">
   <div class="container--add-project">
     <div class="content">
       <h1 class="heading--xl">Add Project</h1>

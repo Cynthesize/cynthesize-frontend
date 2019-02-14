@@ -14,6 +14,7 @@ export class AddProjectComponent implements OnInit {
   isLinear = false;
   project: FormGroup;
   formNotfilled = false;
+  isPageLoading = false;
 
   stages: String[] = [
     'Ideation',
@@ -41,10 +42,11 @@ export class AddProjectComponent implements OnInit {
   }
 
   addProject() {
+    this.isPageLoading = true;
     if (
       this.project.get('projectName').value === '' ||
-      this.project.get('projectName').value === '' ||
-      this.project.get('projectName').value === ''
+      this.project.get('description').value === '' ||
+      this.project.get('currentStage').value === ''
     ) {
       this.formNotfilled = true;
     } else {
@@ -57,9 +59,14 @@ export class AddProjectComponent implements OnInit {
       console.log(projectDetails);
       this.projectService
         .addProject(projectDetails)
-        .pipe(finalize(() => {}))
+        .pipe(
+          finalize(() => {
+            this.isPageLoading = false;
+          })
+        )
         .subscribe(
           (data: any) => {
+            this.isPageLoading = false;
             const project_name =
               data.data.insert_project.returning['0'].id + '-' + data.data.insert_project.returning['0'].project_name;
             var str = project_name;
@@ -67,6 +74,7 @@ export class AddProjectComponent implements OnInit {
             this.router.navigate(['/view/project/' + str]);
           },
           (error: any) => {
+            this.isPageLoading = false;
             this.errorHandler.subj_notification.next(error);
           }
         );

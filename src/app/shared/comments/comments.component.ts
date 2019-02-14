@@ -61,6 +61,7 @@ export class CommentsComponent implements OnInit, OnChanges {
   }
 
   addNewComment(projectId: string, issueId: string) {
+    this.isLoading = true;
     this.projectService
       .addComment(this.comment, projectId, issueId)
       .pipe(
@@ -71,9 +72,11 @@ export class CommentsComponent implements OnInit, OnChanges {
       )
       .subscribe(
         comment => {
+          this.isLoading = false;
           this.issueCommentObject.push(comment.data.insert_project_issues_comments.returning[0]);
         },
         error => {
+          this.isLoading = false;
           this.errorHandler.subj_notification.next(error.error.message);
         }
       );
@@ -109,12 +112,15 @@ export class CommentsComponent implements OnInit, OnChanges {
   }
 
   fetchIdeaComments() {
+    this.isLoading = true;
     this.ideaService.getIdeaComments(this.activityId).subscribe(
       (data: any) => {
         console.log(data);
+        this.isLoading = false;
         this.commentsArray = data.data.ideas[0].ideaCommentsByideaId;
       },
       (error: any) => {
+        this.isLoading = false;
         this.errorHandler.subj_notification.next(error.error.message);
       }
     );

@@ -16,6 +16,7 @@ export class LikingComponent implements OnInit {
   likes: number;
 
   liked = false;
+  isPageLoading = false;
 
   constructor(
     private ideaService: IdeaService,
@@ -32,15 +33,22 @@ export class LikingComponent implements OnInit {
 
   like(ideaId: string) {
     this.liked = true;
+    this.isPageLoading = true;
     this.ideaService
       .likeIdea(ideaId)
-      .pipe(finalize(() => {}))
+      .pipe(
+        finalize(() => {
+          this.isPageLoading = false;
+        })
+      )
       .subscribe(
         (data: any) => {
           this.likes = data.upvotes;
+          this.isPageLoading = false;
         },
         (error: any) => {
           this.liked = false;
+          this.isPageLoading = false;
           this.errorHandler.subj_notification.next(error);
         }
       );
