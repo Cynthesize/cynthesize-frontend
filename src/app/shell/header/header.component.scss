@@ -48,14 +48,13 @@
   }
 }
 
-.profile-header-info {
+.profile-header-info-nav {
   &__photo {
     height: 5rem;
     width: 5rem;
     border-radius: 50%;
     float: right;
     justify-content: center;
-    margin-bottom: 1rem;
     overflow: hidden;
   }
 }
