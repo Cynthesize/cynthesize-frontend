@@ -4,118 +4,123 @@
   width: 100%;
 }
 
-.background {
-  height: 100%;
-  background-color: white;
-  position: relative;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @media (max-width: $bp-6) {
+.addproject- {
+  &background {
+    height: 100%;
     background-color: white;
-  }
-}
+    position: relative;
 
-.container {
-  //box-shadow: $shadow-light;
-
-  overflow: hidden;
-
-  &--add-project {
-    width: 90%;
-    height: 70rem;
-    padding: 3rem 4rem;
-    font-size: 1.6rem;
-
-    border-radius: $radius-large;
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: stretch;
-
-    h1 {
-      margin-bottom: 2rem;
-
-      @media (max-width: $bp-6) {
-        margin-bottom: 4rem;
-      }
-    }
 
     @media (max-width: $bp-6) {
-      flex-direction: column;
-      width: 100%;
-      padding: 1rem 1rem;
-      height: auto;
-      box-shadow: none;
+      background-color: white;
     }
   }
-}
 
-.form {
-  width: 100%;
-  font-size: 1.3rem;
+  &container {
+    //box-shadow: $shadow-light;
 
-  ::ng-deep .mat-step-label {
-    font-size: 2rem;
+    overflow: hidden;
+
+    &--add-project {
+      width: 90%;
+      height: 70rem;
+      padding: 3rem 4rem;
+      font-size: 1.6rem;
+
+      border-radius: $radius-large;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+
+      h1 {
+        margin-bottom: 2rem;
+
+        @media (max-width: $bp-6) {
+          margin-bottom: 4rem;
+        }
+      }
+
+      @media (max-width: $bp-6) {
+        flex-direction: column;
+        width: 100%;
+        padding: 1rem 1rem;
+        height: auto;
+        box-shadow: none;
+      }
+    }
   }
 
-  ::ng-deep input.mat-input-element {
-    font-size: 1.6rem;
+  &form {
+    width: 100%;
+    font-size: 1.3rem;
+
+    ::ng-deep .mat-step-label {
+      font-size: 2rem;
+    }
+
+    ::ng-deep input.mat-input-element {
+      font-size: 1.6rem;
+    }
   }
-}
 
-.description {
-  width: 60%;
+  &description {
+    width: 60%;
 
-  @media (max-width: $bp-6) {
-    width: 90%;
+    @media (max-width: $bp-6) {
+      width: 90%;
+    }
   }
-}
 
-.text {
-  width: 40%;
+  &text {
+    width: 40%;
 
-  @media (max-width: $bp-6) {
-    width: 90%;
+    @media (max-width: $bp-6) {
+      width: 90%;
+    }
   }
-}
 
-.content {
-  flex: 0 0 60%;
-  margin-right: 5rem;
+  &content {
+    flex: 0 0 60%;
+    margin-right: 5rem;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-  overflow-x: hidden;
-  overflow-y: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
 
-  @media (max-width: $bp-6) {
-    flex: 0 0 100%;
-    margin-right: 0;
+    @media (max-width: $bp-6) {
+      flex: 0 0 100%;
+      margin-right: 0;
+    }
   }
-}
 
-.picture {
-  flex-grow: 1;
+  &picture {
+    flex-grow: 1;
 
-  background-image: url(../../../assets/images/add-project.jpg);
-  background-size: cover;
-  background-position: center;
+    background-image: url(../../../assets/images/add-project.jpg);
+    background-size: cover;
+    background-position: center;
 
-  border-radius: 1rem;
+    border-radius: 1rem;
 
-  @media (max-width: $bp-6) {
-    display: none;
+    @media (max-width: $bp-6) {
+      display: none;
+    }
   }
 }
 
 ::-webkit-scrollbar {
-  width: 0px; /* remove scrollbar space */
-  background: transparent; /* optional: just make scrollbar invisible */
+  width: 0px;
+  /* remove scrollbar space */
+  background: transparent;
+  /* optional: just make scrollbar invisible */
 }
+
 /* optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
   background: #ff0000;

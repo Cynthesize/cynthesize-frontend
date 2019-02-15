@@ -1,17 +1,49 @@
 @import "../../sass/declarations";
 
+.home- {
+  &section {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+
+    padding: 5rem;
+
+    .content {
+      flex: 0 0 40%;
+    }
+  }
+
+  &cynthesize-full-logo {
+    height: 6rem;
+    width: auto;
+
+    @media (max-width: 37.5em) {
+      height: 4rem;
+      margin-bottom: 4rem;
+    }
+  }
+
+  &home-xl-heading {
+    font-size: 4.5rem;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 700;
+    color: $color-primary-dark;
+  }
+
+  &cynthesize-who-we-are {
+    justify-self: center;
+  }
+}
+
 .first {
-  height: 90vh;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
+  &--section {
+    justify-content: flex-start;
+  }
 
-  display: flex;
-
-  padding: 5rem;
-
-  .content {
-    flex: 0 0 40%;
+  &--content {
     height: 70%;
 
     display: flex;
@@ -21,37 +53,107 @@
     padding: 2rem 0 2rem 2rem;
     justify-content: space-between;
   }
+
+  &--background {
+    height: 100%;
+
+    position: absolute;
+    right: -2rem;
+    top: 0;
+
+    z-index: -1;
+
+    @media (max-width: 37.5em) {
+      display: none;
+    }
+  }
+
+  &--paragraph {
+    color: $color-primary;
+    font-size: 1.8rem;
+
+    margin-right: 10rem;
+    margin-top: 2rem;
+  }
 }
 
-.cynthesize-full-logo {
-  height: 6rem;
-  width: auto;
+.second {
+  transform: rotateY(180deg);
+
+  &--section {
+    justify-content: flex-end;
+    height: 100vh;
+  }
+
+  &--background {
+    height: 80%;
+
+    position: absolute;
+
+    z-index: -1;
+    left: -2rem;
+    top: 10%;
+
+    @media (max-width: 37.5em) {
+      display: none;
+    }
+  }
+
+  &--content {
+    height: 100%;
+    align-self: flex-end;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 2rem 0 2rem 2rem;
+    justify-content: center;
+
+    text-align: right;
+  }
+
+  &--paragraph {
+    color: $color-primary;
+    font-size: 1.8rem;
+    margin-top: 2rem;
+  }
 }
 
-.section-background {
-  height: 100%;
+.third {
+  &--section {
+    justify-content: flex-start;
+  }
 
-  position: absolute;
-  right: -2rem;
-  top: 0;
+  &--content {
+    height: 100%;
 
-  z-index: -1;
-}
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 
-.home-xl-heading {
-  font-size: 4.5rem;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 700;
-  color: $color-primary-dark;
-}
+    padding: 2rem 0 2rem 2rem;
+    justify-content: center;
+  }
 
-.home-m-paragraph {
-  color: $color-primary;
-  font-size: 1.8rem;
+  &--background {
+    height: 80%;
 
-  margin-right: 10rem;
-}
+    position: absolute;
 
-.cynthesize-who-we-are {
-  justify-self: center;
+    z-index: -1;
+    right: -2rem;
+    top: 10%;
+
+    @media (max-width: 37.5em) {
+      display: none;
+    }
+  }
+
+  &--paragraph {
+    color: $color-primary;
+    font-size: 1.8rem;
+
+    margin-right: 10rem;
+    margin-top: 2rem;
+  }
 }

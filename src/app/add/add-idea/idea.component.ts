@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material';
 import { IdeaService } from '@app/core/idea/idea.service';
 import { Logger } from '@app/core';
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 
@@ -36,13 +37,18 @@ export class AddIdeaComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private ideaService: IdeaService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private router: Router
   ) {
     this.createForm();
   }
 
   addIdea() {
     this.isLoading = true;
+    //console.log(this.addIdeaForm.value);
+    this.addIdeaForm.value.idea_name = this.addIdeaForm.value.idea_name.replace(/\s+/g, ' ').trim();
+    this.addIdeaForm.value.description = this.addIdeaForm.value.description.replace(/\s+/g, ' ').trim();
+    //console.log(this.addIdeaForm.value);
     this.ideaService
       .addIdea(this.addIdeaForm.value)
       .pipe(
@@ -55,6 +61,7 @@ export class AddIdeaComponent implements OnInit {
         credentials => {
           log.debug(`Idea Added`);
           this.isLoading = false;
+          this.router.navigate(['/view/feed/ideas']);
         },
         error => {
           this.isLoading = false;

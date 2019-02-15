@@ -61,7 +61,6 @@ export class AuthenticationService {
         }
       })
       .valueChanges.subscribe((res: any) => {
-        console.log(res);
         if (res.data.user.length === 0) {
           this.apollo
             .mutate<any>({

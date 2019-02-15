@@ -1,31 +1,41 @@
+
 <div class="loader" *ngIf="isPageLoading"><mat-spinner></mat-spinner></div>
-<div class="background" *ngIf="!isPageLoading">
-  <div class="container--add-project">
-    <div class="content">
-      <h1 class="heading--xl">Add Project</h1>
+<div class="addproject-background" *ngIf="!isPageLoading">
+  <div class="addproject-container--add-project">
+    <div class="addproject-content">
+      <h1 class="addproject-heading--xl">Add Project</h1>
       <form [formGroup]="project" (keydown.enter)="$event.preventDefault()">
-        <div class="form">
+        <div class="addproject-form">
           <div *ngIf="formNotfilled"><i>Please fill all the fields.</i></div>
           <mat-vertical-stepper [linear]="isLinear" #stepper>
             <mat-step [stepControl]="project">
               <ng-template matStepLabel>Think of a cool name for your project. </ng-template>
-              <mat-form-field class="text">
+              <mat-form-field class="addproject-text">
                 <input matInput placeholder="Eg: Cynthesize" formControlName="projectName" required />
               </mat-form-field>
               <div><button mat-button class="button button--forward" matStepperNext>Next</button></div>
             </mat-step>
             <mat-step [stepControl]="project">
               <ng-template matStepLabel>Describe your project - a bit of detail would do!</ng-template>
-              <mat-form-field class="text">
-                <input matInput placeholder="Description" formControlName="description" required />
-              </mat-form-field>
-              <div><button class="button button--forward" mat-button matStepperNext>Next</button></div>
+              <td-text-editor formControlName="description" [options]="options"></td-text-editor>
+              <div *ngIf="project.controls['description'].hasError('minlength')">
+                <i>Please enter atleast 150 characters</i>
+              </div>
+              <div>
+                <button
+                  [disabled]="project.controls['description'].hasError('minlength')"
+                  class="button button--forward"
+                  mat-button
+                  matStepperNext
+                >
+                  Next
+                </button>
+              </div>
             </mat-step>
             <mat-step [stepControl]="project">
               <ng-template matStepLabel
                 >Which of these stages would you say are closest to your project’s completion?</ng-template
               >
-
               <mat-form-field>
                 <mat-select placeholder="Select a stage" formControlName="currentStage">
                   <mat-option *ngFor="let stage of stages" [value]="stage"> {{ stage }} </mat-option>
@@ -44,6 +54,6 @@
         </div>
       </form>
     </div>
-    <div class="picture"></div>
+    <div class="addproject-picture"></div>
   </div>
 </div>

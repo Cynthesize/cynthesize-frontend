@@ -15,6 +15,11 @@ export class AddProjectComponent implements OnInit {
   project: FormGroup;
   formNotfilled = false;
   isPageLoading = false;
+  projectDescription = '';
+  options: any = {
+    lineWrapping: true
+  };
+
 
   stages: String[] = [
     'Ideation',
@@ -36,7 +41,7 @@ export class AddProjectComponent implements OnInit {
   ngOnInit() {
     this.project = this._formBuilder.group({
       projectName: ['', Validators.required],
-      description: ['', Validators.required],
+      description: ['', [Validators.required, Validators.minLength(150)]],
       currentStage: ['', Validators.required]
     });
   }
@@ -56,7 +61,7 @@ export class AddProjectComponent implements OnInit {
         currentStage: this.project.get('currentStage').value
       };
 
-      console.log(projectDetails);
+      projectDetails.projectName = projectDetails.projectName.replace(/\s+/g, ' ').trim();
       this.projectService
         .addProject(projectDetails)
         .pipe(
@@ -69,7 +74,7 @@ export class AddProjectComponent implements OnInit {
             this.isPageLoading = false;
             const project_name =
               data.data.insert_project.returning['0'].id + '-' + data.data.insert_project.returning['0'].project_name;
-            var str = project_name;
+            let str = project_name;
             str = str.replace(/\s+/g, '-').toLowerCase();
             this.router.navigate(['/view/project/' + str]);
           },

@@ -13,7 +13,7 @@
             <h3 class="profile-header-info__username" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
               @{{ user.username }}
             </h3>
-            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }" class="input">
               <input
                 matInput
                 class="profile-header-info__username"
@@ -56,15 +56,23 @@
             <div class="info_card--body" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
               {{ user.location }}
             </div>
-            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }" class="input ">
               <input matInput value="{{ user.location }}" formControlName="location" placeholder="Enter a location" />
             </mat-form-field>
             <div class="info_card--header">Birthday</div>
             <div class="info_card--body" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
               {{ user.date_of_birth }}
             </div>
-            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
-              <input matInput value="{{ user.date_of_birth }}" formControlName="dob" placeholder="Select a date" />
+            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }" class="input">
+              <input
+                matInput
+                [matDatepicker]="myDatepicker"
+                value="{{ user.date_of_birth }}"
+                formControlName="dob"
+                placeholder="Select a date"
+              />
+              <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+              <mat-datepicker #myDatepicker></mat-datepicker>
             </mat-form-field>
           </div>
           <div class="info_card">
@@ -72,14 +80,33 @@
             <div class="info_card--body" [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }">
               {{ user.bio }}
             </div>
-            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }">
+            <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }" class="input">
               <input matInput value="{{ user.bio }}" formControlName="bio" placeholder="Enter a bio" />
             </mat-form-field>
           </div>
           <div class="info_card">
             <div class="info_card--header">Things I'm fond of...</div>
             <div class="info_card--body">
-              <span *ngFor="let tech of user.technologies"> {{ tech }} </span>
+              <mat-chip-list
+                *ngFor="let tech of user.technologies"
+                [ngStyle]="{ display: !isFieldEditable ? 'block' : 'none' }"
+              >
+                <mat-chip>{{ tech }}</mat-chip>
+              </mat-chip-list>
+              <mat-form-field [ngStyle]="{ display: isFieldEditable ? 'block' : 'none' }" class="input">
+                <mat-chip-list #chipList>
+                  <mat-chip *ngFor="let tech of user.technologies" [removable]="removable" (removed)="remove(tech)">
+                    {{ tech }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)"
+                  />
+                </mat-chip-list>
+              </mat-form-field>
             </div>
           </div>
         </div>
@@ -93,11 +120,23 @@
               >
             </div>
             <div class="main-info__projects">
-              <div class="project_card" *ngFor="let project of userProjects">
-                <div class="project_card--header">{{ project.project_name }} | {{ project.current_stage }}</div>
-                <div class="project_card--body">{{ project.description }}</div>
-                <a class="expand" [routerLink]="['/view/project', project.id]"><mat-icon>open_in_new</mat-icon></a>
+              <div *ngIf="!userProjects?.length > 0; else ProjectCreated">
+                <div *ngIf="isSameUser; else isDifferentUser">
+                  <p>Nothing to show</p>
+                  <br /><button routerLink="/add/project" mat-raised-button>Add projects</button>
+                </div>
+                <ng-template #isDifferentUser> No projects to show </ng-template>
               </div>
+
+              <ng-template #ProjectCreated>
+                <div class="project_card" *ngFor="let project of userProjects">
+                  <div class="project_card--header" [routerLink]="['/view/project', project.id]">
+                    {{ project.project_name }} | {{ project.current_stage }}
+                  </div>
+                  <div class="project_card--body">{{ project.description }}</div>
+                  <a class="expand" [routerLink]="['/view/project', project.id]"><mat-icon>open_in_new</mat-icon></a>
+                </div>
+              </ng-template>
             </div>
           </span>
 
@@ -108,11 +147,21 @@
               <!--goes to idea/feed with filter of this user's username-->
             </div>
             <div class="main-info__projects">
-              <div class="project_card" *ngFor="let idea of userIdeas">
-                <div class="project_card--header">{{ idea.idea_name }}</div>
-                <div class="project_card--body">{{ idea.description }}</div>
-                <a class="expand" href=""><mat-icon>open_in_new</mat-icon></a>
+              <div *ngIf="!userIdeas?.length > 0; else IdeasCreated">
+                <div *ngIf="isSameUser; else isDifferentUser">
+                  <p>Nothing to show</p>
+                  <br /><button routerLink="/add/idea" mat-raised-button>Add Ideas</button>
+                </div>
+                <ng-template #isDifferentUser> No Ideas to show </ng-template>
               </div>
+
+              <ng-template #IdeasCreated>
+                <div class="project_card" *ngFor="let idea of userIdeas">
+                  <div class="project_card--header" (click)="openDialog(idea)">{{ idea.idea_name }}</div>
+                  <div class="project_card--body">{{ idea.description }}</div>
+                  <a><mat-icon class="expand" (click)="openDialog(idea)">open_in_new</mat-icon></a>
+                </div>
+              </ng-template>
             </div>
           </span>
         </div>
