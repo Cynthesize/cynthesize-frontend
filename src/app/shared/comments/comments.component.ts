@@ -115,7 +115,6 @@ export class CommentsComponent implements OnInit, OnChanges {
     this.isLoading = true;
     this.ideaService.getIdeaComments(this.activityId).subscribe(
       (data: any) => {
-        console.log(data);
         this.isLoading = false;
         this.commentsArray = data.data.ideas[0].ideaCommentsByideaId;
       },
