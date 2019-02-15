@@ -91,7 +91,7 @@
     "karma-jasmine": "^2.0.1",
     "karma-junit-reporter": "^1.2.0",
     "prettier": "^1.16.4",
-    "pretty-quick": "^1.6.0",
+    "pretty-quick": "^1.10.0",
     "protractor": "^5.4.2",
     "puppeteer": "^1.12.2",
     "stylelint": "~9.8.0",
