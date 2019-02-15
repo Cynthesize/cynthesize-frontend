@@ -44,6 +44,8 @@ export class ViewProjectComponent implements OnInit {
   }
   setBarActive(checkpointName: string) {
     this.currentActiveBar = checkpointName;
+
+    // this.location.replaceState("/view/project/"+checkpointName);
   }
 
   initCheckpoint(el: any) {
