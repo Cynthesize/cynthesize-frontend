@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserRoutingModule } from './user-routing.module';
-import { DetailsComponent } from './details/details.component';
+import { DetailsComponent, SocialDialogComponent } from './details/details.component';
 import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
@@ -26,7 +26,7 @@ export const config: CloudinaryConfiguration = {
     ReactiveFormsModule,
     CloudinaryModule.forRoot(cloudinary, config)
   ],
-  declarations: [DetailsComponent],
-  entryComponents: [IdeaCardComponent]
+  declarations: [DetailsComponent, SocialDialogComponent],
+  entryComponents: [IdeaCardComponent, SocialDialogComponent]
 })
 export class UserModule {}
