@@ -97,6 +97,9 @@
     align-items: center;
 
     border-right: 1px solid #cdcdcd;
+    
+    min-width: 13em;
+    word-break: break-all;
 
     &__username {
       color: black;
