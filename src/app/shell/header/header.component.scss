@@ -48,6 +48,16 @@
   }
 }
 
+.profile-header-info-nav {
+  &__photo {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    float: right;
+    justify-content: center;
+    overflow: hidden;
+  }
+}
 .ng-trigger-transformMenu {
   background-color: white;
   box-shadow: 0 0 2px #555555;

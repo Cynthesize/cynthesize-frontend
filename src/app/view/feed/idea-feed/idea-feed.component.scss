@@ -89,7 +89,7 @@
 
   &__owner {
     flex: 0 0 10%;
-    padding: 0 2rem;
+    padding: 0 1rem;
     display: flex;
 
     flex-direction: column;
@@ -97,6 +97,9 @@
     align-items: center;
 
     border-right: 1px solid #cdcdcd;
+    
+    min-width: 13em;
+    word-break: break-all;
 
     &__username {
       color: black;

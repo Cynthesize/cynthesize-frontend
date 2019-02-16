@@ -2,7 +2,6 @@ import { Title } from '@angular/platform-browser';
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material';
-
 import { AuthenticationService, I18nService } from '@app/core';
 
 @Component({
@@ -25,5 +24,8 @@ export class HeaderComponent implements OnInit {
 
   get username(): string {
     return localStorage.getItem('username');
+  }
+  get profilepPic(): string {
+    return localStorage.getItem('user_profile_pic');
   }
 }
