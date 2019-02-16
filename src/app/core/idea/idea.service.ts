@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Idea } from '@app/shared/idea';
 import { map } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
-import { MUTATION_ADD_IDEA, MUTATION_LIKE_IDEA } from '@app/shared/mutations';
+import { MUTATION_ADD_IDEA, MUTATION_LIKE_IDEA, MUTATION_DELETE_IDEA } from '@app/shared/mutations';
 import { QUERY_IDEA_DETAILS, QUERY_LIMITED_IDEA_DETAILS, QUERY_TOTAL_IDEA_COUNT } from '@app/shared/queries';
 
 @Injectable({
@@ -25,6 +25,25 @@ export class IdeaService {
             require_assistance: context.require_assistance,
             owner: localStorage.getItem('userId')
           }
+        }
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   *
+   * delete idea
+   */
+  public deleteIdea(id: String) {
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_DELETE_IDEA,
+        variables: {
+          ideaId: id
         }
       })
       .pipe(
