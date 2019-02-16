@@ -40,6 +40,8 @@ xcuserdata/
 # Misc
 /.sass-cache
 /connect.lock
+/package-lock.json
+/package.json
 /coverage
 /libpeerconnection.log
 npm-debug.log

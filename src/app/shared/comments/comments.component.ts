@@ -38,6 +38,7 @@ export class CommentsComponent implements OnInit, OnChanges {
   comment = '';
   commentsArray = [Object];
   commentingOnIssue = false;
+  isLoading = false;
 
   constructor(
     private ideaService: IdeaService,
@@ -60,18 +61,22 @@ export class CommentsComponent implements OnInit, OnChanges {
   }
 
   addNewComment(projectId: string, issueId: string) {
+    this.isLoading = true;
     this.projectService
       .addComment(this.comment, projectId, issueId)
       .pipe(
         finalize(() => {
+          this.isLoading = false;
           this.commentingOnIssue = false;
         })
       )
       .subscribe(
         comment => {
+          this.isLoading = false;
           this.issueCommentObject.push(comment.data.insert_project_issues_comments.returning[0]);
         },
         error => {
+          this.isLoading = false;
           this.errorHandler.subj_notification.next(error.error.message);
         }
       );
@@ -98,18 +103,23 @@ export class CommentsComponent implements OnInit, OnChanges {
 
   addCommentBox(): void {
     this.commentingOnIssue = true;
+    this.isLoading = false;
   }
 
   cancel(): void {
     this.commentingOnIssue = false;
+    this.isLoading = false;
   }
 
   fetchIdeaComments() {
+    this.isLoading = true;
     this.ideaService.getIdeaComments(this.activityId).subscribe(
       (data: any) => {
+        this.isLoading = false;
         this.commentsArray = data.data.ideas[0].ideaCommentsByideaId;
       },
       (error: any) => {
+        this.isLoading = false;
         this.errorHandler.subj_notification.next(error.error.message);
       }
     );
