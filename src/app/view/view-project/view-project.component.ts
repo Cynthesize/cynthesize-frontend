@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Project } from '@app/shared/objects';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-view-project',
@@ -19,11 +18,9 @@ export class ViewProjectComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private router: Router,
-    private errorHandler: ErrorHandlerService,
-    private route: ActivatedRoute
+    private errorHandler: ErrorHandlerService
   ) {
     this.getProject();
-    this.route.params.subscribe(params => console.log(params));
   }
 
   ngOnInit() {}
@@ -47,7 +44,7 @@ export class ViewProjectComponent implements OnInit {
   }
   setBarActive(checkpointName: string) {
     this.currentActiveBar = checkpointName;
-    this.router.navigate(['project/:id/:name', checkpointName]);
+    this.router.navigate(['project/:id/:name', 'checkpointName']);
   }
 
   initCheckpoint(el: any) {

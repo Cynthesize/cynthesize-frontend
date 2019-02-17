@@ -7,11 +7,6 @@ const routes: Routes = [
     path: '',
     component: ViewProjectComponent
   }
-
-  // {
-  //   path: '/:name',
-  //   component: ViewProjectComponent
-  //   }
 ];
 
 @NgModule({

@@ -81,16 +81,6 @@ export class AddIssueComponent {
     { name: 'Funding' },
     { name: 'Team' },
     { name: 'Miscellaneous' }
-    // 'Design',
-    // 'Ideation',
-    // 'Market',
-    // 'Tech Stack',
-    // 'Product Domain',
-    // 'MVP',
-    // 'Security',
-    // 'Funding',
-    // 'Team',
-    // 'Miscellaneous'
   ];
   options: any = {
     lineWrapping: true

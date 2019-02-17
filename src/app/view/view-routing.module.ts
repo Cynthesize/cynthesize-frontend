@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'project/:id/:name',
-    component: ViewProjectModule
+    loadChildren: 'app/view/view-project/view-project.module#ViewProjectModule'
   },
   {
     path: 'feed',
