@@ -46,6 +46,7 @@ export class IssueComponent implements OnInit, OnChanges {
       .fetchIssueInCheckpoint(changes.activeCheckpoint.currentValue, this.projectId)
       .subscribe((data: any) => {
         this.issues = data.data.project_issues;
+        console.log(this.activeCheckpoint);
       });
   }
 
@@ -80,6 +81,16 @@ export class AddIssueComponent {
     { name: 'Funding' },
     { name: 'Team' },
     { name: 'Miscellaneous' }
+    // 'Design',
+    // 'Ideation',
+    // 'Market',
+    // 'Tech Stack',
+    // 'Product Domain',
+    // 'MVP',
+    // 'Security',
+    // 'Funding',
+    // 'Team',
+    // 'Miscellaneous'
   ];
   options: any = {
     lineWrapping: true

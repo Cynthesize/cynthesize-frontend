@@ -4,7 +4,7 @@
     <mat-form-field>
       <mat-select [formControl]="checkpointName" placeholder="Select checkpoint" required>
         <mat-option>--</mat-option>
-        <mat-option *ngFor="let checkpoint of checkpoints" [value]="checkpoint"> {{checkpoint}} </mat-option>
+        <mat-option *ngFor="let checkpoint of checkpoints" [value]="checkpoint"> {{checkpoint.name}} </mat-option>
       </mat-select>
       <mat-error *ngIf="checkpointName.hasError('required')">Please choose a checkpoint.</mat-error>
       <mat-hint></mat-hint>
