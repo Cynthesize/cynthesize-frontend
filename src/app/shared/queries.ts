@@ -55,8 +55,8 @@ const QUERY_LIMITED_IDEA_DETAILS = gql`
 `;
 
 const QUERY_PROJECT_DETAILS = gql`
-  query fetch_project($id: Int!) {
-    project(where: { id: { _eq: $id } }) {
+  query fetch_project($id: Int!, $name: String!) {
+    project(where: { id: { _eq: $id }, project_name: { _eq: $name } }) {
       ...ProjectDetailsFragment
     }
   }
