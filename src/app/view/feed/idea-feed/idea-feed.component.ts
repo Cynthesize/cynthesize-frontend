@@ -38,9 +38,11 @@ export class IdeaFeedComponent implements OnInit {
     });
   }
 
-  deleteidea(idea: any) {
-    this.ideaService.deleteIdea(idea.id).subscribe(data => {
-      window.location.reload();
+  deleteidea(id: any) {
+    this.ideaService.deleteIdea(id).subscribe(data => {
+      this.ideaList = this.ideaList.filter((obj: any) => {
+        return obj.id != data.data.delete_ideas.returning[0].id;
+      });
     });
   }
 }
