@@ -55,7 +55,7 @@ export class AddProjectComponent implements OnInit {
       this.formNotfilled = true;
     } else {
       const projectDetails = {
-        projectName: this.project.get('projectName').value,
+        projectName: this.project.get('projectName').value.toLowerCase(),
         description: this.project.get('description').value,
         currentStage: this.project.get('currentStage').value
       };

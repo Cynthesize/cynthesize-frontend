@@ -66,12 +66,13 @@ export class ProjectService {
   /**
    * GET PROJECT DETAILS
    */
-  public getProject(id: string) {
+  public getProject(id: string, name: string) {
     return this.apollo
       .watchQuery<any>({
         query: QUERY_PROJECT_DETAILS,
         variables: {
-          id: id
+          id: id,
+          name: name
         }
       })
       .valueChanges.pipe(
