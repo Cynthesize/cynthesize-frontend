@@ -41,7 +41,6 @@
     "@types/auth0-js": "^8.11.11",
     "@types/graphql": "^14.0.6",
     "@types/ws": "^6.0.1",
-    "angular": "^1.7.7",
     "angulartics2": "^7.4.1",
     "apollo-angular": "^1.5.0",
     "apollo-angular-link-http": "^1.5.0",
