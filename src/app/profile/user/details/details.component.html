@@ -142,11 +142,16 @@
 
               <ng-template #ProjectCreated>
                 <div class="project_card" *ngFor="let project of userProjects">
-                  <div class="project_card--header" [routerLink]="['/view/project', project.id]">
+                  <div
+                    class="project_card--header"
+                    [routerLink]="['/view/project', project.id + '-' + project.project_name]"
+                  >
                     {{ project.project_name }} | {{ project.current_stage }}
                   </div>
                   <div class="project_card--body">{{ project.description }}</div>
-                  <a class="expand" [routerLink]="['/view/project', project.id]"><mat-icon>open_in_new</mat-icon></a>
+                  <a class="expand" [routerLink]="['/view/project', project.id + '-' + project.project_name]"
+                    ><mat-icon>open_in_new</mat-icon></a
+                  >
                 </div>
               </ng-template>
             </div>

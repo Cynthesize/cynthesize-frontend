@@ -46,10 +46,11 @@ export class AddIdeaComponent implements OnInit {
 
   addIdea() {
     this.isLoading = true;
-    //console.log(this.addIdeaForm.value);
-    this.addIdeaForm.value.idea_name = this.addIdeaForm.value.idea_name.replace(/\s+/g, ' ').trim();
+    this.addIdeaForm.value.idea_name = this.addIdeaForm.value.idea_name
+      .replace(/\s+/g, ' ')
+      .trim()
+      .toLowerCase();
     this.addIdeaForm.value.description = this.addIdeaForm.value.description.replace(/\s+/g, ' ').trim();
-    //console.log(this.addIdeaForm.value);
     this.ideaService
       .addIdea(this.addIdeaForm.value)
       .pipe(
