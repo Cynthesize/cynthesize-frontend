@@ -1,4 +1,5 @@
-<div class="addidea-background">
+<div class="loader" *ngIf="isLoading"><mat-spinner></mat-spinner></div>
+<div class="addidea-background" *ngIf="!isLoading">
   <div class="addidea-add-idea-container">
     <div class="addidea-form-container">
       <h1 class="addidea-mb-l">Add Idea</h1>

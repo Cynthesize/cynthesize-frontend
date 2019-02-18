@@ -24,7 +24,6 @@ export class AddIdeaComponent implements OnInit {
   version: string = environment.version;
   error: string;
   addIdeaForm: FormGroup;
-
   isLoading = false;
   visible = true;
   selectable = true;
@@ -61,9 +60,11 @@ export class AddIdeaComponent implements OnInit {
       .subscribe(
         credentials => {
           log.debug(`Idea Added`);
+          this.isLoading = false;
           this.router.navigate(['/view/feed/ideas']);
         },
         error => {
+          this.isLoading = false;
           this.errorHandler.subj_notification.next(error);
         }
       );
@@ -92,6 +93,7 @@ export class AddIdeaComponent implements OnInit {
 
   ngOnInit() {}
   private createForm() {
+    this.isLoading = false;
     this.addIdeaForm = this.formBuilder.group({
       idea_name: ['', Validators.required],
       description: ['', Validators.required],
