@@ -100,3 +100,8 @@ body {
   font-size: 1rem;
   font-style: italic;
 }
+
+// overriding  mat-dialog-container
+.custom-dialog-container .mat-dialog-container {
+  padding: 0;
+}
