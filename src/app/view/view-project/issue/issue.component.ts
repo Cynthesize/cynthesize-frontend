@@ -64,10 +64,7 @@ export class IssueComponent implements OnInit, OnChanges {
 
 @Component({
   selector: 'app-add-issue',
-  templateUrl: 'add-issue.html',
-  styles: [
-    '#mat-dialog-0 > app-add-issue > div:nth-child(2) > form > td-text-editor > div > div.CodeMirror.cm-s-paper.CodeMirror-wrap > div.CodeMirror-scroll { height: 300px;}'
-  ]
+  templateUrl: 'add-issue.html'
 })
 export class AddIssueComponent {
   checkpointName = new FormControl('', [Validators.required]);
