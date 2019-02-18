@@ -223,3 +223,41 @@
     width: 50vw;
   }
 }
+
+#mat-dialog-0 {
+  > app-add-issue {
+    > div {
+      &:nth-child(2) {
+        > form {
+          > td-text-editor {
+            > div {
+              > div.CodeMirror.cm-s-paper.CodeMirror-wrap {
+                height: 300px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#mat-dialog-0 {
+  > app-add-issue {
+    > div {
+      &:nth-child(2) {
+        > form {
+          > td-text-editor {
+            > div {
+              > div.CodeMirror.cm-s-paper.CodeMirror-wrap {
+                > div.CodeMirror-scroll {
+                  padding: 5px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
