@@ -40,4 +40,12 @@ export class IdeaFeedComponent implements OnInit {
         this.ideaList = data.data.ideas;
       });
   }
+
+  deleteidea(id: any) {
+    this.ideaService.deleteIdea(id).subscribe(data => {
+      this.ideaList = this.ideaList.filter((obj: any) => {
+        return obj.id != data.data.delete_ideas.returning[0].id;
+      });
+    });
+  }
 }
