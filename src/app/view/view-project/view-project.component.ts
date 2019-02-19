@@ -53,7 +53,6 @@ export class ViewProjectComponent implements OnInit {
   }
   setBarActive(checkpointName: string) {
     this.currentActiveBar = checkpointName;
-    this.router.navigate(['/view/project', this.router.url.split('/')[3].split('-')[0], this.currentActiveBar]);
   }
 
   initCheckpoint(el: any) {

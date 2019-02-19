@@ -25,7 +25,11 @@
           class="checkpoint-list__item"
           *ngFor="let checkpoint of project.projectIssuessByprojectId"
         >
-          {{ checkpoint.checkpoint_name }}
+          <a
+            class="checkpoint-list__item"
+            [routerLink]="['/view/project/', project.id + '-' + project.project_name, checkpoint.checkpoint_name]"
+            ><div>{{ checkpoint.checkpoint_name }}</div></a
+          >
         </li>
       </ul>
     </div>
