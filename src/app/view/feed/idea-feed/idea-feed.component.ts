@@ -18,6 +18,7 @@ export class IdeaFeedComponent implements OnInit {
 
   openDialog(idea: any): void {
     const dialogRef = this.dialog.open(IdeaCardComponent, {
+      panelClass: 'custom-dialog-container',
       width: 'auto',
       data: { idea }
     });
@@ -33,8 +34,18 @@ export class IdeaFeedComponent implements OnInit {
   }
 
   getIdeasFromServer(event: any) {
-    this.ideaService.getNIdeas(event.pageSize, event.pageIndex).subscribe(data => {
-      this.ideaList = data.data.ideas;
+    this.ideaService
+      .getNIdeas(event.pageSize, event.pageIndex)
+      .subscribe(data => {
+        this.ideaList = data.data.ideas;
+      });
+  }
+
+  deleteidea(id: any) {
+    this.ideaService.deleteIdea(id).subscribe(data => {
+      this.ideaList = this.ideaList.filter((obj: any) => {
+        return obj.id != data.data.delete_ideas.returning[0].id;
+      });
     });
   }
 }
