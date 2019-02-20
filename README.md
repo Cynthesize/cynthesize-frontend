@@ -34,9 +34,6 @@ We recommend you going through the [wiki page](https://github.com/Cynthesize/cyn
     ```
 5. Frontend server is up and running on your local machine. Edit in your favourite code editor and see the changes instantly.
 
-The Hasura GraphQL Engine is an extremely lightweight, high-performance product that gives you instant realtime GraphQL APIs on a Postgres database. This can be used to quickly build new applications on Postgres or fast-track the move to GraphQL for existing applications on Postgres.
-
-It comes with a UI that lets you create and view tables on your database and make GraphQL queries using the embedded GraphiQL interface.
 
 # Hasura's GraphQL Engine
 
