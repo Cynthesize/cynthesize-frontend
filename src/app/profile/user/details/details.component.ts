@@ -1,4 +1,5 @@
 import { ProfileService } from '@app/core/profile/profile.service';
+import { IdeaService } from '@app/core/idea/idea.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/internal/operators/finalize';
 import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
@@ -47,6 +48,7 @@ export class DetailsComponent implements OnInit {
 
   constructor(
     private profileService: ProfileService,
+    private ideaService: IdeaService,
     private route: ActivatedRoute,
     private router: Router,
     private errorHandler: ErrorHandlerService,
@@ -189,6 +191,14 @@ export class DetailsComponent implements OnInit {
     if (input) {
       input.value = '';
     }
+  }
+
+  deleteIdea(id: any) {
+    this.ideaService.deleteIdea(id).subscribe(data => {
+      this.userIdeas = this.userIdeas.filter((obj: any) => {
+        return obj.id != data.data.delete_ideas.returning[0].id;
+      });
+    });
   }
 
   processFile(imageInput: any) {
