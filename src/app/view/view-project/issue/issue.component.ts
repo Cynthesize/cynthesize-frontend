@@ -46,7 +46,6 @@ export class IssueComponent implements OnInit, OnChanges {
       .fetchIssueInCheckpoint(changes.activeCheckpoint.currentValue, this.projectId)
       .subscribe((data: any) => {
         this.issues = data.data.project_issues;
-        console.log(this.activeCheckpoint);
       });
   }
 
