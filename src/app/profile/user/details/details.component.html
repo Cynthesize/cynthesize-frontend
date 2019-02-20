@@ -41,17 +41,17 @@
             <span class="see-more">
               <mat-icon
                 (click)="toggleFormFields(true)"
-                [ngStyle]="{ display: !isFieldEditable && isSameUser ? 'contents' : 'none' }"
+                [ngStyle]="{ display: !isFieldEditable && isSameUser ? 'inline' : 'none' }"
               >
                 edit
               </mat-icon>
               <mat-icon
                 (click)="toggleFormFields(false)"
-                [ngStyle]="{ display: isFieldEditable ? 'contents' : 'none' }"
+                [ngStyle]="{ display: isFieldEditable ? 'inline' : 'none' }"
               >
                 cancel
               </mat-icon>
-              <mat-icon (click)="onSubmit()" [ngStyle]="{ display: isFieldEditable ? 'contents' : 'none' }">
+              <mat-icon (click)="onSubmit()" [ngStyle]="{ display: isFieldEditable ? 'inline' : 'none' }">
                 save
               </mat-icon>
             </span>
