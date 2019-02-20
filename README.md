@@ -41,9 +41,6 @@ The Hasura GraphQL Engine is an extremely lightweight, high-performance product 
 
 It comes with a UI that lets you create and view tables on your database and make GraphQL queries using the embedded GraphiQL interface.
 
-## How we used it?
-
-
 
 ## Writing API endpoints with Hasura and GraphQL
 
