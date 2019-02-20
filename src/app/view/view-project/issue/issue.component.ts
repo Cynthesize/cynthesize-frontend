@@ -71,16 +71,16 @@ export class AddIssueComponent {
   checkpointName = new FormControl('', [Validators.required]);
   issueText = new FormControl('', [Validators.required]);
   checkpoints = [
-    { name: 'Design' },
-    { name: 'Ideation' },
-    { name: 'Market' },
-    { name: 'Tech-Stack' },
-    { name: 'Product-Domain' },
-    { name: 'MVP' },
-    { name: 'Security' },
-    { name: 'Funding' },
-    { name: 'Team' },
-    { name: 'Miscellaneous' }
+    'Design',
+    'Ideation',
+    'Market',
+    'Tech Stack',
+    'Product Domain',
+    'MVP',
+    'Security',
+    'Funding',
+    'Team',
+    'Miscellaneous'
   ];
   options: any = {
     lineWrapping: true
