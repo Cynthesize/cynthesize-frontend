@@ -135,7 +135,7 @@
               <div *ngIf="!userProjects?.length > 0; else ProjectCreated">
                 <div *ngIf="isSameUser; else isDifferentUser">
                   <p>Nothing to show</p>
-                  <br /><button routerLink="/add/project" mat-raised-button>Add projects</button>
+                  <br /><button type="button" routerLink="/add/project" mat-raised-button>Add projects</button>
                 </div>
                 <ng-template #isDifferentUser> No projects to show </ng-template>
               </div>
@@ -167,7 +167,7 @@
               <div *ngIf="!userIdeas?.length > 0; else IdeasCreated">
                 <div *ngIf="isSameUser; else isDifferentUser">
                   <p>Nothing to show</p>
-                  <br /><button routerLink="/add/idea" mat-raised-button>Add Ideas</button>
+                  <br /><button type="button" routerLink="/add/idea" mat-raised-button>Add Ideas</button>
                 </div>
                 <ng-template #isDifferentUser> No Ideas to show </ng-template>
               </div>
