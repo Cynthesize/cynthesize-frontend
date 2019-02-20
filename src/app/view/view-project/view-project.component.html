@@ -9,23 +9,28 @@
     </div>
     <div class="checkpoint-list">
       <ul class="checkpoint-list__list">
-        <li
-          (click)="setBarActive('Home')"
-          [ngClass]="{ active: currentActiveBar === 'Home' }"
-          class="checkpoint-list__item"
-        >
-          Home
+        <li [ngClass]="{ active: currentActiveBar === 'Home' }" class="checkpoint-list__item">
+          <a
+            (click)="setBarActive('Home')"
+            class="checkpoint-list__item"
+            [routerLink]="['/view/project/', project.id + '-' + project.project_name, 'Home']"
+            ><div>Home</div></a
+          >
         </li>
       </ul>
       <h2 class="checkpoint-list__heading">Checkpoints</h2>
       <ul>
         <li
-          (click)="setBarActive(checkpoint.checkpoint_name)"
           [ngClass]="{ active: currentActiveBar === checkpoint.checkpoint_name }"
           class="checkpoint-list__item"
           *ngFor="let checkpoint of project.projectIssuessByprojectId"
         >
-          {{ checkpoint.checkpoint_name }}
+          <a
+            (click)="setBarActive(checkpoint.checkpoint_name)"
+            class="checkpoint-list__item"
+            [routerLink]="['/view/project/', project.id + '-' + project.project_name, checkpoint.checkpoint_name]"
+            ><div>{{ checkpoint.checkpoint_name }}</div></a
+          >
         </li>
       </ul>
     </div>
