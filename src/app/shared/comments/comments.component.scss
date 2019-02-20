@@ -123,3 +123,55 @@
   margin: 0 1rem;
   color: #aaaaaa;
 }
+
+body {
+  > app-root {
+    > app-shell {
+      > div {
+        > mat-sidenav-container {
+          > mat-sidenav-content {
+            > app-view-project {
+              > div {
+                > div.panel-main {
+                  > app-issue {
+                    > div {
+                      > div.panel-main__issues.ng-star-inserted {
+                        > app-detached-issue {
+                          > div {
+                            > div.issue-comments {
+                              > div {
+                                > app-comments {
+                                  > div {
+                                    > div.new_comment.ng-star-inserted {
+                                      > td-text-editor {
+                                        > div {
+                                          > div.CodeMirror.cm-s-paper.CodeMirror-wrap {
+                                            max-height: none;
+                                          }
+                                          > div.CodeMirror.cm-s-paper.CodeMirror-wrap {
+                                            > div.CodeMirror-scroll {
+                                              height: 300px;
+                                              max-height: none;
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
