@@ -45,10 +45,7 @@
               >
                 edit
               </mat-icon>
-              <mat-icon
-                (click)="toggleFormFields(false)"
-                [ngStyle]="{ display: isFieldEditable ? 'inline' : 'none' }"
-              >
+              <mat-icon (click)="toggleFormFields(false)" [ngStyle]="{ display: isFieldEditable ? 'inline' : 'none' }">
                 cancel
               </mat-icon>
               <mat-icon (click)="onSubmit()" [ngStyle]="{ display: isFieldEditable ? 'inline' : 'none' }">
@@ -174,9 +171,14 @@
 
               <ng-template #IdeasCreated>
                 <div class="project_card" *ngFor="let idea of userIdeas">
-                  <div class="project_card--header" (click)="openDialog(idea)">{{ idea.idea_name }}</div>
-                  <div class="project_card--body">{{ idea.description }}</div>
-                  <a><mat-icon class="expand" (click)="openDialog(idea)">open_in_new</mat-icon></a>
+                  <div class="project_card--header">
+                    <span (click)="openDialog(item)"> {{ idea.idea_name }}</span>
+                    <div class="idea-card__header__icon-list">
+                      <a><mat-icon class="expand" (click)="openDialog(idea)">open_in_new</mat-icon></a>
+                      <a><mat-icon class="delete" (click)="deleteIdea(idea.id)">delete</mat-icon></a>
+                    </div>
+                  </div>
+                  <div class="idea-card__description">{{ idea.description }}</div>
                 </div>
               </ng-template>
             </div>
