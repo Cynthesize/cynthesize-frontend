@@ -52,7 +52,28 @@ reject comments, commits, code, wiki edits, issues, and other contributions
 that are not aligned to this Code of Conduct, or to ban temporarily or
 permanently any contributor for other behaviors that they deem inappropriate,
 threatening, offensive, or harmful.
-   
+
+## Guides for opening issues
+
+### Subject of the issue
+Describe your issue here.
+
+### Your environment
+* Operating system
+* which browser and its version
+
+### Steps to reproduce
+Tell us how to reproduce this issue.
+
+### Expected behaviour
+Tell us what should happen
+
+### Actual behaviour
+Tell us what happens instead
+
+### Screenshots(if any)
+* Gif, png, jpeg etc
+
 ## Developer's Certificate of Origin 1.1
 
 By making a contribution to this project, I certify that:
