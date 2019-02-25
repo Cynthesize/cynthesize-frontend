@@ -16,8 +16,16 @@ import { CovalentTextEditorModule } from '@covalent/text-editor';
 import { CovalentMarkdownModule } from '@covalent/markdown';
 import { RouterModule } from '@angular/router';
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
-import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
+import {
+  CloudinaryConfiguration,
+  CloudinaryModule
+} from '@cloudinary/angular-5.x';
 import { IdeaCardComponent } from './idea-card/idea-card.component';
+import { ConfirmComponent } from './confirm/confirm.component';
+import { ProfileRoutingModule } from '@app/profile/profile-routing.module';
+import { ProfileService } from '@app/core/profile/profile.service';
+import { UserRoutingModule } from '@app/profile/user/user-routing.module';
+import { CoreModule } from '@app/core';
 
 export const cloudinary = {
   Cloudinary: CloudinaryCore
@@ -46,8 +54,14 @@ export const config: CloudinaryConfiguration = {
     EditableDirective,
     EditableCommentComponent,
     TimeDiffPipe,
-    IdeaCardComponent
+    IdeaCardComponent,
+    ConfirmComponent
   ],
-  exports: [LoaderComponent, LikingComponent, CommentsComponent]
+  exports: [
+    LoaderComponent,
+    LikingComponent,
+    CommentsComponent,
+    ConfirmComponent
+  ]
 })
 export class SharedModule {}
