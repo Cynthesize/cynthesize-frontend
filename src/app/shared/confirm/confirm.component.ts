@@ -15,7 +15,4 @@ export class ConfirmComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  sendConfirmation(ans: any): void {
-    this.dialogRef.close(ans);
-  }
 }
