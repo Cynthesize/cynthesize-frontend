@@ -146,6 +146,11 @@
                     {{ project.project_name }} | {{ project.current_stage }}
                   </div>
                   <div class="project_card--body">{{ project.description }}</div>
+                  <div>
+                    <a class="see-here" [routerLink]="['/view/project', project.id + '-' + project.project_name]"
+                      >See More ....</a
+                    >
+                  </div>
                   <a class="expand" [routerLink]="['/view/project', project.id + '-' + project.project_name]"
                     ><mat-icon>open_in_new</mat-icon></a
                   >
