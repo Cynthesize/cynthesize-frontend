@@ -9,43 +9,31 @@
   z-index: 1;
 }
 
-.brand {
-  color: mat-color($app-primary, "default-contrast");
-  text-decoration: none;
-  padding-right: 1rem;
+.mat-button {
+  font-size: 16px;
 }
-
-.menu-button {
-  margin-right: 1rem;
+.mat-elevation-z1 {
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
 }
-
 .header {
-  color: white;
-  background-color: #202020;
+  font-size: 16px;
+  color: #0264fb;
 
-  &__content {
-    display: flex;
-    align-items: center;
-  }
+  background-color: rgb(255, 255, 255);
 
   &__full-logo {
     padding-top: 1rem;
     margin-right: 2rem;
   }
+}
 
-  &__link {
-    font-size: 1.7rem;
-    font-family: "gothamlight";
-    font-weight: bold;
-    border-radius: 0;
-    padding: 0;
-    margin-right: 1rem;
-    transition: all 0.1s ease-in;
+.container {
+  width: 75%;
+  margin: 0 auto;
+}
 
-    &:hover {
-      //border-bottom: 2px solid white; causes blinking of border
-    }
-  }
+.mat-toolbar-single-row {
+  height: 90px !important;
 }
 
 .profile-header-info-nav {
@@ -87,7 +75,6 @@
 .user-link {
   padding: 1rem 2rem;
   font-size: 1.4rem;
-  font-family: "gothamlight", sans-serif;
   color: $color-primary-dark;
   cursor: pointer;
 
@@ -96,15 +83,7 @@
   }
 }
 
-.user-logout {
-  padding: 1rem 2rem 0 2rem;
-}
-
-.logout {
-  border: none;
-  background-color: white;
-  color: $color-primary-dark;
-  font-weight: bold;
-  font-family: inherit;
-  cursor: pointer;
+.mat-raised-button {
+  width: 150px;
+  background-color: #ffb03a;
 }

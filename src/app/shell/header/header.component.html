@@ -1,43 +1,53 @@
 <mat-toolbar class="mat-elevation-z1 navbar header">
-  <div fxHide.gt-sm fxLayoutAlign="start center">
-    <button class="menu-button" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
-  </div>
-  <div class="header__content" fxHide.lt-md>
-    <a class="brand header__full-logo" routerLink="/"
-      ><img src="../../../assets/logos/Asset 2MY.png" alt="Cynthesize" width="150px"
-    /></a>
-  </div>
-  <span fxFlex></span>
-  <div class="v-desktop">
-    <button class="header__link" mat-button routerLink="/view/feed/ideas" routerLinkActive="active">
-      <span translate>Idea Feed</span>
-    </button>
-    <button class="header__link" mat-button [matMenuTriggerFor]="menu" routerLinkActive="active">
-      <span translate>Add </span>
-      <mat-icon>add_circle</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button class="header__link" mat-menu-item routerLink="/add/idea" routerLinkActive="active">
-        <span translate>New Idea</span>
+  <div class="container">
+    <div fxHide.gt-sm fxLayoutAlign="start center">
+      <button class="menu-button" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+    </div>
+    <div class="header__content" fxHide.lt-md>
+      <a class="brand header__full-logo" routerLink="/"
+        ><img src="../../../assets/logos/Asset 2MY.png" alt="Cynthesize" width="150px"
+      /></a>
+    </div>
+    <span fxFlex></span>
+    <div class="v-desktop">
+      <button class="header__link" mat-button routerLink="/view/feed/ideas" routerLinkActive="active">
+        <span translate>Ideas</span>
       </button>
-      <button class="header__link" mat-menu-item routerLink="/add/project" routerLinkActive="active">
-        <span translate>New Project</span>
+      <button class="header__link" mat-button [matMenuTriggerFor]="menu" routerLinkActive="active">
+        <span translate>Collaborate </span>
+        <!-- <mat-icon>add_circle</mat-icon> -->
       </button>
+      <mat-menu #menu="matMenu">
+        <button class="header__link" mat-menu-item routerLink="/add/idea" routerLinkActive="active">
+          <span translate>New Idea</span>
+        </button>
+        <button class="header__link" mat-menu-item routerLink="/add/project" routerLinkActive="active">
+          <span translate>New Project</span>
+        </button>
+      </mat-menu>
+      <button class="header__link" mat-button routerLink="/" routerLinkActive="active">
+        <span translate>Become a mentor</span>
+      </button>
+    </div>
+    <button mat-icon-button [matMenuTriggerFor]="userMenu" *ngIf="authenticationService.isAuthenticated()">
+      <mat-icon> person </mat-icon>
+    </button>
+    <button mat-raised-button *ngIf="!authenticationService.isAuthenticated()" (click)="authenticationService.login()">
+      Login
+    </button>
+    <mat-menu #userMenu="matMenu" class="profile-menu">
+      <div class="user-info ">
+        <div class="profile-header-info-nav__photo">
+          <cl-image height="50" crop="scale" public-id="{{ profilepPic }}" secure="true"></cl-image>
+        </div>
+        <p class="helper-text" translate>Logged in as</p>
+        <h4 class="username">{{ username }}</h4>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="user-links">
+        <div class="user-link" routerLink="/user/{{ username }}">Profile</div>
+        <div class="user-link" (click)="logout()">Logout</div>
+      </div>
     </mat-menu>
   </div>
-  <button mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon> person </mat-icon></button>
-  <mat-menu #userMenu="matMenu" class="profile-menu">
-    <div class="user-info ">
-      <div class="profile-header-info-nav__photo">
-        <cl-image height="50" crop="scale" public-id="{{ profilepPic }}" secure="true"></cl-image>
-      </div>
-      <p class="helper-text" translate>Logged in as</p>
-      <h4 class="username">{{ username }}</h4>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="user-links">
-      <div class="user-link" routerLink="/user/{{ username }}">Profile</div>
-      <div class="user-link" (click)="logout()">Logout</div>
-    </div>
-  </mat-menu>
 </mat-toolbar>

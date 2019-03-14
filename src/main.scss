@@ -19,11 +19,10 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include covalent-markdown-theme($theme);
 @include angular-material-theme($app-theme);
 $custom-typography: mat-typography-config(
-  $font-family: "Open Sans"
+  $font-family: "Montserrat"
 );
 @include mat-core($custom-typography);
-
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800");
 @import "theme/theme";
 
 @font-face {
@@ -57,13 +56,23 @@ html {
 body {
   box-sizing: border-box;
 
-  font-family: "gothamlight";
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   line-height: 1.6;
 
   background: linear-gradient(white);
 
   color: white;
+}
+
+.center-divs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-margin-120 {
+  margin: 120px 0;
 }
 
 .pointer {

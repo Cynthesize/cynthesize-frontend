@@ -1,159 +1,115 @@
 @import "../../sass/declarations";
 
-.home- {
-  &section {
-    height: 100vh;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
+.home-content {
+  width: 425px;
+  margin: 0 auto;
+  padding: 80px 0;
+  text-align: center;
+}
 
-    display: flex;
+.home-description {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
 
-    padding: 5rem;
+.home-heading {
+  font-size: 4.5rem;
+  color: #0264fb;
+}
 
-    .content {
-      flex: 0 0 40%;
-    }
-  }
+.home-card {
+  display: inline-block;
+  flex-basis: 17%;
+  text-align: center;
+}
 
-  &cynthesize-full-logo {
-    height: 6rem;
-    width: auto;
-
-    @media (max-width: 37.5em) {
-      height: 4rem;
-      margin-bottom: 4rem;
-    }
-  }
-
-  &home-xl-heading {
-    font-size: 4.5rem;
-    font-family: "Open Sans", sans-serif;
-    font-weight: 700;
-    color: $color-primary-dark;
-  }
-
-  &cynthesize-who-we-are {
-    justify-self: center;
+@media screen and (max-width: 1134px) {
+  .home-info-cards {
+    flex-direction: column;
   }
 }
 
-.first {
-  &--section {
-    justify-content: flex-start;
-  }
-
-  &--content {
-    height: 70%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    padding: 2rem 0 2rem 2rem;
-    justify-content: space-between;
-  }
-
-  &--background {
-    height: 100%;
-
-    position: absolute;
-    right: -2rem;
-    top: 0;
-
-    z-index: -1;
-
-    @media (max-width: 37.5em) {
-      display: none;
-    }
-  }
-
-  &--paragraph {
-    color: $color-primary;
-    font-size: 1.8rem;
-
-    margin-right: 10rem;
-    margin-top: 2rem;
-  }
+.home-contact-heading {
+  font-size: 4.4rem;
+  color: #0264fb;
 }
 
-.second {
-  transform: rotateY(180deg);
-
-  &--section {
-    justify-content: flex-end;
-    height: 100vh;
-  }
-
-  &--background {
-    height: 80%;
-
-    position: absolute;
-
-    z-index: -1;
-    left: -2rem;
-    top: 10%;
-
-    @media (max-width: 37.5em) {
-      display: none;
-    }
-  }
-
-  &--content {
-    height: 100%;
-    align-self: flex-end;
-
-    display: flex;
-    flex-direction: column;
-
-    padding: 2rem 0 2rem 2rem;
-    justify-content: center;
-
-    text-align: right;
-  }
-
-  &--paragraph {
-    color: $color-primary;
-    font-size: 1.8rem;
-    margin-top: 2rem;
-  }
+.home-contact-description {
+  font-size: 1.5rem;
 }
 
-.third {
-  &--section {
-    justify-content: flex-start;
-  }
+.home-content-contact {
+  display: inline-block;
+  width: 50%;
+}
 
-  &--content {
-    height: 100%;
+.home-section {
+  height: 300px;
+  background-color: white;
+}
 
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.home-contact-icons {
+  width: 50%;
+}
 
-    padding: 2rem 0 2rem 2rem;
-    justify-content: center;
-  }
+.icons {
+  display: inline-block;
+  margin: 0 15px;
+  text-align: center;
+}
 
-  &--background {
-    height: 80%;
+.social-icon {
+  width: 40px;
+  margin: 15px;
+  border-radius: 50%;
+  font-size: 4rem;
+}
 
-    position: absolute;
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
 
-    z-index: -1;
-    right: -2rem;
-    top: 10%;
+.icon-details {
+  font-size: 1.2rem;
+  color: #0264fb;
+}
 
-    @media (max-width: 37.5em) {
-      display: none;
-    }
-  }
+.icon-name {
+  font-size: 1rem;
+  color: grey;
+}
 
-  &--paragraph {
-    color: $color-primary;
-    font-size: 1.8rem;
+.card-heading {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
 
-    margin-right: 10rem;
-    margin-top: 2rem;
-  }
+.home-info-cards {
+  display: flex;
+  justify-content: space-around;
+}
+
+.section1 {
+  display: flex;
+}
+
+.home-banner {
+  display: flex;
+  flex-direction: column;
+}
+.home-section1 {
+  background-color: white;
+  padding: 125px 0;
+}
+.home-community {
+  text-align: center;
+  width: 400px;
+  margin: 40px auto 0 auto;
+}
+.community-button {
+  width: 100%;
+  margin-top: 20px;
 }

@@ -14,12 +14,15 @@ export class HeaderComponent implements OnInit {
   @Input()
   sidenav: MatSidenav;
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(public authenticationService: AuthenticationService) {}
 
   ngOnInit() {}
 
   logout() {
     this.authenticationService.logout();
+  }
+  isAuthenticated() {
+    this.authenticationService.isAuthenticated();
   }
 
   get username(): string {
