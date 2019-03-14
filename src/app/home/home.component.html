@@ -1,53 +1,123 @@
-<div class="home-container">
-  <section class="home-section first--section">
-    <img class="first--background" src="../../assets/home.svg" />
-
-    <div class="content first--content">
-      <img class="home-cynthesize-full-logo" src="../../assets/cynthesize-banner-logo.png" />
-      <div class="home-cynthesize-who-we-are">
-        <h2 class="home-home-xl-heading">Who are we?</h2>
-        <p class="first--paragraph">
-          We turn your projects to products by helping you find a team, help you through design, development phases and
-          finally host your project.
-        </p>
-      </div>
+<div class="home-section1">
+  <section class="section1 container">
+    <div class="home-banner">
+      <h1 class="home-heading">Cynthesize is a place to turn your ideas into projects.</h1>
+      <p class="home-description">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum, dolor sit amet.
+      </p>
+      <mat-card class="home-community">
+        <h2 class="home-description">Wanna join the community?</h2>
+        <button mat-raised-button color="primary" class="community-button">See active projects</button>
+        <button mat-raised-button color="primary" class="community-button">Ideate with the community</button>
+      </mat-card>
     </div>
-  </section>
-  <section class="home-section second--section">
-    <img class="second--background" src="../../assets/images/project.png" />
-
-    <div class="content second--content">
-      <div class="home-cynthesize-who-we-are">
-        <h2 class="home-home-xl-heading">Want to launch your project?</h2>
-        <p class="second--paragraph">
-          Add your project to our portal and get connected to mentors who will help your side-gig to become a product.
-        </p>
-        <br />
-        <br />
-        <button style="margin-right: 1rem;" routerLink="/add/project" mat-raised-button color="primary">
-          Add Your Project
-        </button>
-        <button routerLink="/user/{{ username }}" mat-stroked-button color="primary">Visit Your Project</button>
-      </div>
-    </div>
-  </section>
-  <section class="home-section third--section">
-    <img class="third--background" src="../../assets/images/ideas.png" />
-
-    <div class="content third--content">
-      <div class="home-cynthesize-who-we-are">
-        <h2 class="home-home-xl-heading">Have a great idea?</h2>
-        <p class="third--paragraph">
-          Add an idea to our discussion feed and get reviews by people worldwide. Visit our Idea Feed to see other great
-          ideas.
-          <br />
-          <br />
-          <button style="margin-right: 1rem;" routerLink="/add/idea" mat-raised-button color="primary">
-            Add New idea
-          </button>
-          <button routerLink="/view/feed/ideas" mat-stroked-button color="primary">Visit Idea Feed</button>
-        </p>
-      </div>
+    <div class="home-banner-image">
+      <img src="../../assets/images/building.svg" />
     </div>
   </section>
 </div>
+<div class="container">
+  <section class="top-margin-120">
+    <div class="home-content">
+      <h1 class="home-heading">What do we do?</h1>
+      <p class="home-description">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum, dolor sit amet.
+      </p>
+    </div>
+    <div class="home-info-cards">
+      <mat-card class="home-card">
+        <mat-card-content>
+          <p class="card-heading">START PROJECTS</p>
+          <p class="home-description">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero eligendi fuga debitis accusamus inventore
+            voluptates quae voluptatibus nostrum. Vel, repellendus repellat. Enim provident nulla aspernatur excepturi
+            eligendi temporibus eum nesciunt.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button style="width:100%;">Create a project</button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card class="home-card">
+        <mat-card-content>
+          <p class="card-heading">IDEATE WITH OTHERS</p>
+          <p class="home-description">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero eligendi fuga debitis accusamus inventore
+            voluptates quae voluptatibus nostrum. Vel, repellendus repellat. Enim provident nulla aspernatur excepturi
+            eligendi temporibus eum nesciunt.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button style="width:100%;">Submit your idea</button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card class="home-card">
+        <mat-card-content>
+          <p class="card-heading">COLLABORATE</p>
+          <p class="home-description">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero eligendi fuga debitis accusamus inventore
+            voluptates quae voluptatibus nostrum. Vel, repellendus repellat. Enim provident nulla aspernatur excepturi
+            eligendi temporibus eum nesciunt.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button style="width:100%;">Find projects</button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card class="home-card">
+        <mat-card-content>
+          <p class="card-heading">BECOME A MENTOR</p>
+          <p class="home-description">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero eligendi fuga debitis accusamus inventore
+            voluptates quae voluptatibus nostrum. Vel, repellendus repellat. Enim provident nulla aspernatur excepturi
+            eligendi temporibus eum nesciunt.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button style="width:100%;">Apply</button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card class="home-card">
+        <mat-card-content>
+          <p class="card-heading">SEE PROJECTS</p>
+          <p class="home-description">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero eligendi fuga debitis accusamus inventore
+            voluptates quae voluptatibus nostrum. Vel, repellendus repellat. Enim provident nulla aspernatur excepturi
+            eligendi temporibus eum nesciunt.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button style="width:100%;">Published projects</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </section>
+</div>
+<section class="home-section center-divs">
+  <div class="container contact">
+    <div class="home-content-contact">
+      <h1 class="home-contact-heading">Get in Touch</h1>
+      <p class="home-contact-description">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium eius voluptatibus, exercitationem cum
+        veritatis
+      </p>
+    </div>
+    <div class="home-contact-icons center-divs">
+      <div class="icons">
+        <mat-icon class="social-icon">email</mat-icon>
+        <div class="icon-details">cynthesize.tech@gmail.com</div>
+        <div class="icon-name">Email</div>
+      </div>
+      <div class="icons">
+        <img class="social-icon" src="../../assets/logos/social/twitter-logo.svg" />
+        <div class="icon-details">@CynthesizeTech</div>
+        <div class="icon-name">Twitter</div>
+      </div>
+      <div class="icons">
+        <img class="social-icon" src="../../assets/logos/social/facebook-logo.svg" />
+        <div class="icon-details">cynthesizetech</div>
+        <div class="icon-name">Facebook</div>
+      </div>
+    </div>
+  </div>
+</section>

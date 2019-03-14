@@ -42,6 +42,7 @@ export class AuthenticationService {
   public handleAuthentication(): void {
     this.auth0.parseHash((err: any, authResult: any) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
+        console.log(authResult);
         this.handleUserDatabaseEntry(authResult);
         window.location.hash = '';
         this.setSession(authResult);
