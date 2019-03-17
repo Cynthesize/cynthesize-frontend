@@ -1,0 +1,44 @@
+@import "../../../sass/declarations";
+
+:host {
+  width: 100%;
+  overflow: hidden;
+}
+
+.background {
+  min-height: 30vh;
+  background-color: darken($color-white, 10%);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn {
+  width: fit-content;
+  font-size: 1.6rem;
+  margin-top: 2rem;
+  margin-right: 2rem;
+  padding-left: 1rem;
+  padding-right: 1 rem;
+}
+
+.container {
+  box-shadow: $shadow-light;
+
+  overflow: hidden;
+
+  &--confirm {
+    width: 40rem;
+    background-color: white;
+    min-height: 10rem;
+    padding: 3rem;
+    font-size: 1.6rem;
+    border-radius: $radius-small;
+    display: flex;
+    align-items: stretch;
+
+    @media (max-width: $bp-6) {
+      flex-direction: column;
+    }
+  }
+}

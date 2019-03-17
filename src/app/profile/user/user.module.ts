@@ -2,12 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserRoutingModule } from './user-routing.module';
-import { DetailsComponent, SocialDialogComponent } from './details/details.component';
+import {
+  DetailsComponent,
+  SocialDialogComponent
+} from './details/details.component';
 import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
-import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
+import {
+  CloudinaryConfiguration,
+  CloudinaryModule
+} from '@cloudinary/angular-5.x';
 import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
+import { ConfirmComponent } from '@app/shared/confirm/confirm.component';
 
 export const cloudinary = {
   Cloudinary: CloudinaryCore
@@ -27,6 +34,6 @@ export const config: CloudinaryConfiguration = {
     CloudinaryModule.forRoot(cloudinary, config)
   ],
   declarations: [DetailsComponent, SocialDialogComponent],
-  entryComponents: [IdeaCardComponent, SocialDialogComponent]
+  entryComponents: [IdeaCardComponent, SocialDialogComponent, ConfirmComponent]
 })
 export class UserModule {}

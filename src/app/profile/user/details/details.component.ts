@@ -4,12 +4,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/internal/operators/finalize';
 import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
 import { User } from '@app/core/profile/user';
-import { MatChipInputEvent, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {
+  MatChipInputEvent,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from '@angular/material';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { MatDialog } from '@angular/material';
 import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
+import { ConfirmComponent } from '@app/shared/confirm/confirm.component';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -29,15 +34,15 @@ export class DetailsComponent implements OnInit {
   userProjects: Array<Object>;
   userIdeas: Array<Object>;
   user: User = new User();
-  isPageLoaded = false;
   username: string;
   sociallinks: any = [];
   isFieldEditable = false;
   socialLinks: any;
-  isSameUser = localStorage.getItem('username') === this.router.url.split('/')[2];
+  isSameUser =
+    localStorage.getItem('username') === this.router.url.split('/')[2];
 
+  isPageLoaded = false;
   editForm: FormGroup;
-
   visible = true;
   selectable = true;
   removable = true;
@@ -100,6 +105,17 @@ export class DetailsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {});
   }
 
+  openConfirmDialog(idea: any): void {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      width: 'auto',
+      data: { idea }
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      if (data == true) this.deleteIdea(idea.id);
+    });
+  }
+
   openSocialDialog(): void {
     const dialogRef = this.dialog.open(SocialDialogComponent, {
       width: 'auto',
@@ -112,18 +128,20 @@ export class DetailsComponent implements OnInit {
 
   fetchContributions(context: string) {
     this.username = this.router.url.split('/')[2];
-    this.profileService.getUserDetailedContributions(this.username, context).subscribe(
-      (res: any) => {
-        if (context === 'projects' || context === 'project') {
-          this.userProjects = res.user[0].projectsByowner;
-        } else {
-          this.userIdeas = res.user[0].ideasByOwner;
+    this.profileService
+      .getUserDetailedContributions(this.username, context)
+      .subscribe(
+        (res: any) => {
+          if (context === 'projects' || context === 'project') {
+            this.userProjects = res.user[0].projectsByowner;
+          } else {
+            this.userIdeas = res.user[0].ideasByOwner;
+          }
+        },
+        (err: any) => {
+          this.errorHandler.subj_notification.next(err);
         }
-      },
-      (err: any) => {
-        this.errorHandler.subj_notification.next(err);
-      }
-    );
+      );
   }
 
   toggleFormFields(toggle: boolean) {
@@ -136,7 +154,8 @@ export class DetailsComponent implements OnInit {
     } else {
       this.profileService.uploadImage(this.selectedFile.file).subscribe(
         (res: any) => {
-          const profileUrl = 'v' + res.version + '/' + res.public_id + '.' + res.format;
+          const profileUrl =
+            'v' + res.version + '/' + res.public_id + '.' + res.format;
           this.updateUserData(profileUrl);
         },
         (err: any) => {
@@ -160,7 +179,10 @@ export class DetailsComponent implements OnInit {
     console.log(userUpdateObject);
     const trimmedUserChangeObject = {};
     Object.keys(userUpdateObject).forEach(key => {
-      if (userUpdateObject[key] || (key === 'technologies' && userUpdateObject[key].length === 0)) {
+      if (
+        userUpdateObject[key] ||
+        (key === 'technologies' && userUpdateObject[key].length === 0)
+      ) {
         trimmedUserChangeObject[key] = userUpdateObject[key];
       }
     });
@@ -169,8 +191,14 @@ export class DetailsComponent implements OnInit {
       .pipe(finalize(() => {}))
       .subscribe(
         (data: any) => {
-          if (data.data.update_user.returning[0].username !== localStorage.getItem('username')) {
-            localStorage.setItem('username', data.data.update_user.returning[0].username);
+          if (
+            data.data.update_user.returning[0].username !==
+            localStorage.getItem('username')
+          ) {
+            localStorage.setItem(
+              'username',
+              data.data.update_user.returning[0].username
+            );
             const newUsername = '/user/' + localStorage.getItem('username');
             this.router.navigate([newUsername]);
           }
@@ -241,7 +269,10 @@ export class DetailsComponent implements OnInit {
 export class SocialDialogComponent {
   socialLinks: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<SocialDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(
+    public dialogRef: MatDialogRef<SocialDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close();

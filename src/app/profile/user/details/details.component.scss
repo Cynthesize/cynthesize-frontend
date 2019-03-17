@@ -28,7 +28,11 @@
 
 .profile-header {
   height: 35vh;
-  background-image: linear-gradient(135deg, rgb(102, 126, 234) 0%, rgb(118, 75, 162) 100%);
+  background-image: linear-gradient(
+    135deg,
+    rgb(102, 126, 234) 0%,
+    rgb(118, 75, 162) 100%
+  );
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -42,10 +46,14 @@
   justify-content: center;
 
   @media (max-width: 37.5em) {
-    height:35vh;
-    background-image: linear-gradient(135deg, rgb(102, 126, 234) 0%, rgb(118, 75, 162) 100%);
+    height: 35vh;
+    background-image: linear-gradient(
+      135deg,
+      rgb(102, 126, 234) 0%,
+      rgb(118, 75, 162) 100%
+    );
     background-repeat: no-repeat;
-    background-size: 100% 65%; 
+    background-size: 100% 65%;
   }
 
   .container {
@@ -99,7 +107,6 @@
     @media (max-width: 37.5em) {
       margin-bottom: 0;
     }
-
   }
 
   &__username {
@@ -109,18 +116,16 @@
     @media (max-width: 37.5em) {
       padding-top: 2rem;
     }
-
   }
 
   &__name {
     font-size: 3rem;
     font-weight: 700;
-    padding-top: .5rem;
+    padding-top: 0.5rem;
 
     @media (max-width: 37.5em) {
       padding-top: 1rem;
     }
-
   }
 }
 

@@ -2,13 +2,13 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'app-idea-card',
-  templateUrl: './idea-card.component.html',
-  styleUrls: ['./idea-card.component.scss']
+  selector: 'app-confirm',
+  templateUrl: './confirm.component.html',
+  styleUrls: ['./confirm.component.scss']
 })
-export class IdeaCardComponent {
+export class ConfirmComponent {
   constructor(
-    public dialogRef: MatDialogRef<IdeaCardComponent>,
+    public dialogRef: MatDialogRef<ConfirmComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
