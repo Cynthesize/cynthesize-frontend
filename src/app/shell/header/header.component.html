@@ -5,8 +5,13 @@
     </div>
     <div class="header__content" fxHide.lt-md>
       <a class="brand header__full-logo" routerLink="/"
-        ><img src="../../../assets/logos/Asset 2MY.png" alt="Cynthesize" width="150px"
-      /></a>
+        ><img src="../../../assets/cynthesize-logo.png" alt="Cynthesize" width="30px" /><b
+          style="vertical-align: text-bottom;
+                  color: blue;
+                  margin: 7px;"
+          >Cynthesize
+        </b></a
+      >
     </div>
     <span fxFlex></span>
     <div class="v-desktop">
@@ -27,6 +32,9 @@
       </mat-menu>
       <button class="header__link" mat-button routerLink="/" routerLinkActive="active">
         <span translate>Become a mentor</span>
+      </button>
+      <button class="header__link" mat-button routerLink="/view/launched" routerLinkActive="active">
+        <span translate>Launched Projects</span>
       </button>
     </div>
     <button mat-icon-button [matMenuTriggerFor]="userMenu" *ngIf="authenticationService.isAuthenticated()">
