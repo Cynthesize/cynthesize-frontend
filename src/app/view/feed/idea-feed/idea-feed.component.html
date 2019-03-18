@@ -1,52 +1,35 @@
-<div class="ideafeed-background">
-  <section class="section-header"><p class="section-header__slogan">Discuss ideas with the community here!</p></section>
-  <section class="section-search"><div class="search-box">Search | Popular | New</div></section>
-  <section class="section-issues">
-    <div *ngIf="ideaList" class="ideafeed-container">
-      <mat-card
-        class="idea-card"
-        *ngFor="let item of (ideaList | paginate: { itemsPerPage: 5, currentPage: pageIndex, totalItems: totalCount })"
-      >
-        <div class="idea-card__owner">
-          <div class="idea-card__owner__photo">
-            <cl-image
-              class="dp-l-image"
-              public-id="{{ item.ideaOwner.profile_pic }}"
-              secure="true"
-              style="height: 5rem; border-radius: 50%;"
-            >
-            </cl-image>
-          </div>
-          <a class="idea-card__owner__username pointer" [routerLink]="['/user', item.ideaOwner.username]"
-            >@{{ item.ideaOwner.username }}</a
-          >
-        </div>
-        <div class="idea-card__body">
-          <div class="idea-card__header">
-            <div class="idea-card__header__idea-name" (click)="openDialog(item)">{{ item.idea_name }}</div>
-            <div class="idea-card__header__icon-list">
-              <mat-icon class="idea-card__icon">arrow_drop_up</mat-icon>
-              <div class="idea-card__stat">({{ item.upvotes }})</div>
-              <mat-icon class="idea-card__icon" (click)="openDialog(item)">open_in_new</mat-icon>
+<div class="container">
+  <div class="page">
+    <div class="page-header">
+      <div class="page-heading">IDEAS</div>
+    </div>
+    <div class="page-search">
+      <div class="page-search-box">
+        <mat-form-field appearance="fill">
+          <mat-label>Search Ideas</mat-label>
+          <input matInput />
+          <mat-icon matPrefix>search</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="page-sort"><span>POPULAR</span>&nbsp;|&nbsp;<span>NEWEST</span></div>
+    </div>
+    <div class="page-data">
+      <div class="idea-feed-data" *ngFor="let ideaList of ideasList">
+        <mat-card class="idea-card" *ngFor="let idea of ideaList">
+          <div class="idea-card-details">
+            <div class="idea-card-project-name">{{ idea.idea_name }}</div>
+            <div class="idea-card-project-description">
+              {{ idea.description }}
             </div>
           </div>
-
-          <div class="idea-card__header__idea-username">
-            by <span class="text-bold">{{ item.ideaOwner.username }}</span>
+          <div class="idea-card-links">
+            <div class="idea-card-icons">
+              <mat-icon>whatshot</mat-icon> {{ idea.upvotes }} <mat-icon>comment</mat-icon> 98
+              <mat-icon>share</mat-icon>
+            </div>
           </div>
-
-          <div class="idea-card__description">{{ item.description }}</div>
-        </div>
-      </mat-card>
+        </mat-card>
+      </div>
     </div>
-
-    <mat-paginator
-      [length]="length"
-      [pageIndex]="pageIndex"
-      [pageSize]="pageSize"
-      [pageSizeOptions]="[5, 10]"
-      (page)="pageEvent = getIdeasFromServer($event)"
-    >
-    </mat-paginator>
-  </section>
+  </div>
 </div>

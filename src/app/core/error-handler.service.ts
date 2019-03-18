@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 })
 export class ErrorHandlerService {
   public subj_notification: Subject<any> = new Subject();
+  public ideaWindowScrolled: Subject<any> = new Subject();
 
   constructor() {}
 }

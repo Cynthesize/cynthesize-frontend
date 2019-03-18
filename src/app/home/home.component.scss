@@ -8,12 +8,12 @@
 }
 
 .home-description {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 500;
 }
 
 .home-heading {
-  font-size: 4.5rem;
+  font-size: 3rem;
   color: #0264fb;
 }
 
@@ -32,10 +32,11 @@
 .home-contact-heading {
   font-size: 4.4rem;
   color: #0264fb;
+  line-height: 6rem;
 }
 
 .home-contact-description {
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .home-content-contact {
@@ -60,9 +61,9 @@
 
 .social-icon {
   width: 40px;
-  margin: 15px;
+  margin: 10px;
   border-radius: 50%;
-  font-size: 4rem;
+  font-size: 3rem;
 }
 
 .contact {
@@ -72,7 +73,7 @@
 }
 
 .icon-details {
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   color: #0264fb;
 }
 
@@ -82,7 +83,7 @@
 }
 
 .card-heading {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 20px;
 }
@@ -111,5 +112,5 @@
 }
 .community-button {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 10px;
 }

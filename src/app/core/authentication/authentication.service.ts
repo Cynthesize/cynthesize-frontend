@@ -3,8 +3,8 @@ import * as auth0 from 'auth0-js';
 import { Router } from '@angular/router';
 import { authClientId, authDomain, callbackUrl, auth0Audience } from '../../../environments/environment';
 import { Apollo } from 'apollo-angular';
-import { QUERY_USER_CHECK, QUERY_USER_LIKES } from '@app/shared/queries';
-import { MUTATION_ADD_USER } from '@app/shared/mutations';
+import { QUERY_USER_CHECK, QUERY_USER_LIKES } from '@app/shared/queries/user-queries';
+import { MUTATION_ADD_USER } from '@app/shared/mutations/user-mutations';
 
 /**
  * Provides a base for authentication workflow.

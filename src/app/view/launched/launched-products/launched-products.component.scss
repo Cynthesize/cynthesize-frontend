@@ -1,0 +1,45 @@
+@import "../../../../sass/declarations";
+
+.card {
+  width: 100%;
+  margin: 10px 0 0 0;
+  display: flex;
+}
+
+.card-image {
+  width: 144px;
+  height: 144px;
+  padding: 10px;
+  background-color: black;
+}
+
+.card-details {
+  flex: 3;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.card-project-name {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.card-project-description {
+  color: #8e8e8e;
+  padding: 5px 0 0 0;
+}
+
+.card-links {
+  flex-direction: column;
+  flex: 0.35;
+}
+
+.card-icons {
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+.card-icons > mat-icon {
+  margin: 5px;
+}

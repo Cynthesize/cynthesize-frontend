@@ -16,7 +16,7 @@
         </mat-list>
       </nav>
     </mat-sidenav>
-    <mat-sidenav-content>
+    <mat-sidenav-content (scroll)="onWindowScroll($event)">
       <app-header [sidenav]="sidenav"></app-header>
       <router-outlet></router-outlet>
     </mat-sidenav-content>

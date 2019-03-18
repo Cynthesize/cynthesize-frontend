@@ -72,7 +72,7 @@ export class AddProjectComponent implements OnInit {
           (data: any) => {
             this.isPageLoading = false;
             const project_name =
-              data.data.insert_project.returning['0'].id + '-' + data.data.insert_project.returning['0'].project_name;
+              data.data.insert_projects.returning['0'].id + '-' + data.data.insert_projects.returning['0'].project_name;
             let str = project_name;
             str = str.replace(/\s+/g, '-').toLowerCase();
             this.router.navigate(['/view/project/' + str]);

@@ -50,19 +50,15 @@ $custom-typography: mat-typography-config(
 
 html {
   box-sizing: border-box;
-  font-size: 62.5%; //10px //will be used for rems
 }
 
 body {
   box-sizing: border-box;
-
   font-family: "Montserrat", sans-serif;
-  font-weight: 600;
-  line-height: 1.6;
-
-  background: linear-gradient(white);
-
+  font-weight: 400;
+  background: #f7f8fb;
   color: white;
+  font-size: 0.8rem;
 }
 
 .center-divs {
@@ -77,6 +73,43 @@ body {
 
 .pointer {
   cursor: pointer;
+}
+
+.page {
+  margin: 60px 0 0 0;
+}
+
+.page-heading {
+  color: orange;
+  font-size: 2.5rem;
+  font-weight: 900;
+}
+
+.page-search {
+  display: flex;
+  margin: 20px 0 0 0;
+}
+
+.page-sort {
+  align-self: center;
+}
+
+.page-search-box {
+  width: -webkit-fill-available;
+}
+
+.mat-form-field {
+  width: 500px;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  border-radius: 40px !important;
+  background-color: white;
+  border: #8e8e8e solid;
+}
+
+.mat-form-field-underline {
+  display: none;
 }
 
 .content-main-header {
