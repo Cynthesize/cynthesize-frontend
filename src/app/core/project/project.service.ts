@@ -10,8 +10,8 @@ import {
   MUTATION_ADD_ISSUE,
   MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT,
   MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE
-} from '@app/shared/mutations';
-import { QUERY_PROJECT_DETAILS, QUERY_CHECKPOINT_ISSUES } from '@app/shared/queries';
+} from '@app/shared/mutations/project-mutations';
+import { QUERY_CHECKPOINT_ISSUES, QUERY_PROJECT_DETAILS } from '@app/shared/queries/project-queries';
 
 @Injectable({
   providedIn: 'root'
@@ -77,7 +77,7 @@ export class ProjectService {
       })
       .valueChanges.pipe(
         map((res: any) => {
-          return res.data.project;
+          return res.data.projects;
         })
       );
   }

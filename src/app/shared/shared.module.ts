@@ -18,6 +18,7 @@ import { RouterModule } from '@angular/router';
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
 import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
 import { IdeaCardComponent } from './idea-card/idea-card.component';
+import { ScrollingDirective } from './scrolling.directive';
 
 export const cloudinary = {
   Cloudinary: CloudinaryCore
@@ -46,7 +47,8 @@ export const config: CloudinaryConfiguration = {
     EditableDirective,
     EditableCommentComponent,
     TimeDiffPipe,
-    IdeaCardComponent
+    IdeaCardComponent,
+    ScrollingDirective
   ],
   exports: [LoaderComponent, LikingComponent, CommentsComponent]
 })

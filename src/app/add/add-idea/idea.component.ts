@@ -98,8 +98,7 @@ export class AddIdeaComponent implements OnInit {
     this.addIdeaForm = this.formBuilder.group({
       idea_name: ['', Validators.required],
       description: ['', Validators.required],
-      tags: [''],
-      require_assistance: true
+      tags: ['']
     });
   }
 }

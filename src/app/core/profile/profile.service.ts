@@ -8,10 +8,10 @@ import { Apollo } from 'apollo-angular';
 import {
   QUERY_USER_DETAILS,
   QUERY_USER_MINIMAL_CONTRIBUTIONS,
-  QUERY_USER_DETAILED_CONTRIBUTIONS_PROJECTS,
-  QUERY_USER_DETAILED_CONTRIBUTIONS_IDEAS
-} from '@app/shared/queries';
-import { MUTATION_UPDATE_USER_DETAILS } from '@app/shared/mutations';
+  QUERY_USER_DETAILED_CONTRIBUTIONS_IDEAS,
+  QUERY_USER_DETAILED_CONTRIBUTIONS_PROJECTS
+} from '@app/shared/queries/user-queries';
+import { MUTATION_UPDATE_USER_DETAILS } from '@app/shared/mutations/user-mutations';
 
 @Injectable({
   providedIn: 'root'

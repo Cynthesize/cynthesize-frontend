@@ -1,15 +1,12 @@
 import gql from 'graphql-tag';
 import {
-  USER_DETAILS_FRAGMENT,
-  PROJECT_DETAILS_FRAGMENT,
-  PROJECT_ISSUE_FRAGMENT,
   USER_PROFILE_PIC_FRAGMENT,
-  IDEA_DETAILS_FRAGMENT,
+  USER_DETAILS_FRAGMENT,
   USER_LIKES_FRAGMENT,
   USER_MINIMAL_CONTRIBUTIONS_FRAGMENT,
   USER_DETAILED_CONTRIBUTIONS_PROJECTS_FRAGMENT,
   USER_DETAILED_CONTRIBUTIONS_IDEAS_FRAGMENT
-} from './fragments';
+} from '../fragments/user-fragments';
 
 const QUERY_USER_CHECK = gql`
   query fetch_user($email: String!) {
@@ -27,59 +24,6 @@ const QUERY_USER_DETAILS = gql`
     }
   }
   ${USER_DETAILS_FRAGMENT}
-`;
-
-const QUERY_IDEA_DETAILS = gql`
-  query fetch_ideas($ideaId: Int!) {
-    ideas(where: { id: { _eq: $ideaId } }) {
-      ...IdeaDetailsFragment
-    }
-  }
-  ${IDEA_DETAILS_FRAGMENT}
-`;
-
-const QUERY_LIMITED_IDEA_DETAILS = gql`
-  query fetch_ideas($limit: Int!, $offset: Int!) {
-    ideas(limit: $limit, offset: $offset) {
-      id
-      idea_name
-      description
-      upvotes
-      ideaOwner {
-        username
-        profile_pic
-      }
-    }
-  }
-  ${IDEA_DETAILS_FRAGMENT}
-`;
-
-const QUERY_PROJECT_DETAILS = gql`
-  query fetch_project($id: Int!, $name: String!) {
-    project(where: { id: { _eq: $id }, project_name: { _eq: $name } }) {
-      ...ProjectDetailsFragment
-    }
-  }
-  ${PROJECT_DETAILS_FRAGMENT}
-`;
-
-const QUERY_CHECKPOINT_ISSUES = gql`
-  query fetch_project_issues($checkpointName: String!, $projectId: Int!) {
-    project_issues(where: { project_id: { _eq: $projectId }, checkpoint_name: { _eq: $checkpointName } }) {
-      ...ProjectIssueFragment
-    }
-  }
-  ${PROJECT_ISSUE_FRAGMENT}
-`;
-
-const QUERY_TOTAL_IDEA_COUNT = gql`
-  query fetch_ideas {
-    ideas_aggregate {
-      aggregate {
-        count
-      }
-    }
-  }
 `;
 
 const QUERY_USER_LIKES = gql`
@@ -119,15 +63,10 @@ const QUERY_USER_DETAILED_CONTRIBUTIONS_IDEAS = gql`
 `;
 
 export {
-  QUERY_CHECKPOINT_ISSUES,
-  QUERY_PROJECT_DETAILS,
   QUERY_USER_CHECK,
-  QUERY_USER_DETAILS,
-  QUERY_IDEA_DETAILS,
-  QUERY_LIMITED_IDEA_DETAILS,
-  QUERY_TOTAL_IDEA_COUNT,
-  QUERY_USER_LIKES,
-  QUERY_USER_MINIMAL_CONTRIBUTIONS,
+  QUERY_USER_DETAILED_CONTRIBUTIONS_IDEAS,
   QUERY_USER_DETAILED_CONTRIBUTIONS_PROJECTS,
-  QUERY_USER_DETAILED_CONTRIBUTIONS_IDEAS
+  QUERY_USER_DETAILS,
+  QUERY_USER_LIKES,
+  QUERY_USER_MINIMAL_CONTRIBUTIONS
 };

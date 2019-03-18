@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { IdeaService } from '@app/core/idea/idea.service';
 import { MatDialog } from '@angular/material';
 import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
+import { ErrorHandlerService } from '@app/core/error-handler.service';
 
 @Component({
   selector: 'app-idea-feed',
@@ -9,12 +10,18 @@ import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
   styleUrls: ['./idea-feed.component.scss']
 })
 export class IdeaFeedComponent implements OnInit {
-  length: number;
-  ideaList: any;
-  pageIndex = 0;
-  pageSize = 5;
-  pageEvent: any;
-  constructor(private ideaService: IdeaService, public dialog: MatDialog) {}
+  length = -1;
+  currentCount = 0;
+  ideasList: any[][] = [];
+  constructor(private ideaService: IdeaService, public dialog: MatDialog, private errorHandler: ErrorHandlerService) {
+    this.errorHandler.ideaWindowScrolled.subscribe(message => {
+      if (length !== this.ideasList.length) {
+        if (message === 'fetchIdeas') {
+          this.getIdeasFromServer(8, this.currentCount);
+        }
+      }
+    });
+  }
 
   openDialog(idea: any): void {
     const dialogRef = this.dialog.open(IdeaCardComponent, {
@@ -30,12 +37,22 @@ export class IdeaFeedComponent implements OnInit {
     this.ideaService.getTotalIdeaCount().subscribe(data => {
       this.length = data.data.ideas_aggregate.aggregate.count;
     });
-    this.getIdeasFromServer({ pageSize: 5, pageIndex: 0 });
+    this.getIdeasFromServer(12, 0);
   }
 
-  getIdeasFromServer(event: any) {
-    this.ideaService.getNIdeas(event.pageSize, event.pageIndex).subscribe(data => {
-      this.ideaList = data.data.ideas;
+  getIdeasFromServer(number: number, offset: number) {
+    this.ideaService.getNIdeas(number, offset).subscribe(data => {
+      for (let i = 0; i < data.data.ideas.length; i += 4) {
+        const tempArray = [];
+        for (let j = 0; j < 4; j++) {
+          if (i + j >= data.data.ideas.length) {
+            continue;
+          }
+          tempArray.push(data.data.ideas[i + j]);
+        }
+        this.ideasList.push(tempArray);
+      }
     });
+    console.log(this.ideasList);
   }
 }

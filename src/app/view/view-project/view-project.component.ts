@@ -40,6 +40,7 @@ export class ViewProjectComponent implements OnInit {
       .pipe(finalize(() => {}))
       .subscribe(
         (data: any) => {
+          console.log(data);
           if (data.length === 0) {
             this.router.navigate(['not-found']);
           } else {

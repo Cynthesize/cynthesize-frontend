@@ -2,8 +2,12 @@ import { Injectable } from '@angular/core';
 import { Idea } from '@app/shared/idea';
 import { map } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
-import { MUTATION_ADD_IDEA, MUTATION_LIKE_IDEA, MUTATION_DELETE_IDEA } from '@app/shared/mutations';
-import { QUERY_IDEA_DETAILS, QUERY_LIMITED_IDEA_DETAILS, QUERY_TOTAL_IDEA_COUNT } from '@app/shared/queries';
+import { MUTATION_ADD_IDEA, MUTATION_DELETE_IDEA, MUTATION_LIKE_IDEA } from '@app/shared/mutations/idea-mutations';
+import {
+  QUERY_IDEA_DETAILS,
+  QUERY_LIMITED_IDEA_DETAILS,
+  QUERY_TOTAL_IDEA_COUNT
+} from '@app/shared/queries/idea-queries';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +26,6 @@ export class IdeaService {
           objects: {
             idea_name: context.idea_name,
             description: context.description,
-            require_assistance: context.require_assistance,
             owner: localStorage.getItem('userId')
           }
         }
