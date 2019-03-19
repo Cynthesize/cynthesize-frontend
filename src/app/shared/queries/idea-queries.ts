@@ -36,4 +36,40 @@ const QUERY_TOTAL_IDEA_COUNT = gql`
   }
 `;
 
-export { QUERY_IDEA_DETAILS, QUERY_LIMITED_IDEA_DETAILS, QUERY_TOTAL_IDEA_COUNT };
+const QUERY_POPULAR_IDEAS = gql`
+  query fetch_popular_ideas($limit: Int!, $offset: Int!) {
+    ideas(order_by: { upvotes: desc }, limit: $limit, offset: $offset) {
+      id
+      idea_name
+      description
+      upvotes
+      userByowner {
+        username
+        profile_pic
+      }
+    }
+  }
+`;
+
+const QUERY_NEWEST_IDEAS = gql`
+  query fetch_newest_ideas($limit: Int!, $offset: Int!) {
+    ideas(order_by: { timestamp: desc }, limit: $limit, offset: $offset) {
+      id
+      idea_name
+      description
+      upvotes
+      userByowner {
+        username
+        profile_pic
+      }
+    }
+  }
+`;
+
+export {
+  QUERY_IDEA_DETAILS,
+  QUERY_LIMITED_IDEA_DETAILS,
+  QUERY_TOTAL_IDEA_COUNT,
+  QUERY_NEWEST_IDEAS,
+  QUERY_POPULAR_IDEAS
+};

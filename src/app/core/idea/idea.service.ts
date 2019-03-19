@@ -6,7 +6,9 @@ import { MUTATION_ADD_IDEA, MUTATION_DELETE_IDEA, MUTATION_LIKE_IDEA } from '@ap
 import {
   QUERY_IDEA_DETAILS,
   QUERY_LIMITED_IDEA_DETAILS,
-  QUERY_TOTAL_IDEA_COUNT
+  QUERY_TOTAL_IDEA_COUNT,
+  QUERY_NEWEST_IDEAS,
+  QUERY_POPULAR_IDEAS
 } from '@app/shared/queries/idea-queries';
 
 @Injectable({
@@ -76,10 +78,23 @@ export class IdeaService {
   /**
    * getNIdeas
    */
-  public getNIdeas(limit: number, offset: number) {
+  public getNIdeas(limit: number, offset: number, context: any) {
+    let Query = QUERY_LIMITED_IDEA_DETAILS;
+    switch (context) {
+      case 'newest':
+        Query = QUERY_NEWEST_IDEAS;
+        break;
+
+      case 'popular':
+        Query = QUERY_POPULAR_IDEAS;
+        break;
+
+      default:
+        break;
+    }
     return this.apollo
       .watchQuery<any>({
-        query: QUERY_LIMITED_IDEA_DETAILS,
+        query: Query,
         variables: {
           limit: limit,
           offset: offset
