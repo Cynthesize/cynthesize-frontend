@@ -52,6 +52,7 @@ export class IdeaFeedComponent implements OnInit {
     this.ideasList = [];
     this.getIdeasFromServer(12, 0, this.activeContext);
     this.currentCount = 0;
+    this.isLoading = true;
   }
 
   private _insert_ideas(data: any) {

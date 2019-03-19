@@ -7,8 +7,8 @@
 }
 
 .card-image {
-  width: 144px;
-  height: 144px;
+  width: 100px;
+  height: 100px;
   padding: 10px;
   background-color: black;
 }
@@ -37,9 +37,15 @@
 .card-icons {
   position: absolute;
   bottom: 10px;
+  right: 5px;
   display: flex;
   align-items: center;
 }
 .card-icons > mat-icon {
   margin: 5px;
+}
+
+.active-context {
+  color: blue;
+  font-weight: bold;
 }

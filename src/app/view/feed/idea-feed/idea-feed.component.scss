@@ -14,6 +14,7 @@
 .idea-card-details {
   flex-direction: column;
   padding: 10px;
+  margin-bottom: 30px;
 }
 
 .idea-card-project-name {
@@ -40,4 +41,20 @@
 .active-context {
   color: blue;
   font-weight: bold;
+}
+
+@media (max-width: 1050px) {
+  .idea-feed-data {
+    flex-direction: column;
+  }
+  .idea-card {
+    min-height: 200px;
+  }
+  .page-search {
+    flex-direction: column;
+  }
+  .page-sort {
+    align-self: flex-start;
+    padding-left: 12px;
+  }
 }
