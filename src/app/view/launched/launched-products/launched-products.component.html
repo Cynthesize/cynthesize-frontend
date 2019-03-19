@@ -11,7 +11,28 @@
           <mat-icon matPrefix>search</mat-icon>
         </mat-form-field>
       </div>
-      <div class="page-sort"><span>POPULAR</span>&nbsp;|&nbsp;<span>NEWEST</span></div>
+      <div class="page-sort">
+        <span
+          class="pointer"
+          [ngClass]="{ 'active-context': activeContext === 'popular' }"
+          (click)="changeContext('popular')"
+          >POPULAR</span
+        >
+        &nbsp;|&nbsp;
+        <span
+          class="pointer"
+          [ngClass]="{ 'active-context': activeContext === 'newest' }"
+          (click)="changeContext('newest')"
+          >NEWEST</span
+        >
+        &nbsp;|&nbsp;
+        <span
+          class="pointer"
+          [ngClass]="{ 'active-context': activeContext === 'default' }"
+          (click)="changeContext('default')"
+          >DEFAULT</span
+        >
+      </div>
     </div>
     <div class="page-data">
       <mat-card class="card">
@@ -33,5 +54,6 @@
         </div>
       </mat-card>
     </div>
+    <mat-progress-bar mode="query" *ngIf="isLoading"></mat-progress-bar>
   </div>
 </div>
