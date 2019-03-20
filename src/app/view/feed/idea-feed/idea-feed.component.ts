@@ -1,8 +1,11 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { IdeaService } from '@app/core/idea/idea.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatBottomSheet } from '@angular/material';
 import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
+import { IdeaComponent } from '@app/view/idea/idea.component';
+import { Router } from '@angular/router';
+import { ShareSheetComponent } from './share-sheet/share-sheet.component';
 
 @Component({
   selector: 'app-idea-feed',
@@ -16,7 +19,12 @@ export class IdeaFeedComponent implements OnInit {
   activeContext = 'newest';
   isLoading = true;
 
-  constructor(private ideaService: IdeaService, public dialog: MatDialog, private errorHandler: ErrorHandlerService) {
+  constructor(
+    private ideaService: IdeaService,
+    public dialog: MatDialog,
+    private errorHandler: ErrorHandlerService,
+    private bottomSheet: MatBottomSheet
+  ) {
     this.errorHandler.ideaWindowScrolled.subscribe(message => {
       if (this.length >= this.ideasList.length && message === 'fetchIdeas') {
         this.isLoading = true;
@@ -51,11 +59,32 @@ export class IdeaFeedComponent implements OnInit {
     });
   }
 
+  openShareSheet(): void {
+    this.bottomSheet.open(ShareSheetComponent);
+  }
+
   changeContext(context: string) {
     this.activeContext = context;
     this.ideasList = [];
     this.getIdeasFromServer(12, 0, this.activeContext);
     this.currentCount = 0;
     this.isLoading = true;
+  }
+}
+@Component({
+  template: ''
+})
+export class DialogEntryComponent {
+  constructor(public dialog: MatDialog, private router: Router) {
+    this.openDialog();
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(IdeaComponent, {
+      width: '250px',
+      data: this.router.url.split('/')[this.router.url.split('/').length - 1]
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.router.navigate(['/view/feed/ideas']);
+    });
   }
 }

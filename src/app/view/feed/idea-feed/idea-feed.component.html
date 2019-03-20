@@ -39,8 +39,8 @@
           <div class="idea-card-links">
             <div class="idea-card-icons pointer">
               <app-like [ideaId]="idea.id" [upvotes]="idea.upvotes" class="icon"></app-like>
-              <mat-icon class="icon">comment</mat-icon> 98
-              <mat-icon class="icon">share</mat-icon>
+              <mat-icon class="icon" [routerLink]="['/view/feed/ideas', idea.id]">comment</mat-icon> 98
+              <mat-icon class="icon" (click)="openShareSheet()">share</mat-icon>
             </div>
           </div>
         </mat-card>
@@ -49,3 +49,4 @@
     <mat-progress-bar mode="query" [ngClass]="{ hidden: !isLoading }" style="margin-bottom: 30px;"></mat-progress-bar>
   </div>
 </div>
+<router-outlet></router-outlet>

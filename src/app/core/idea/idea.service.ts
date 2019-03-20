@@ -66,7 +66,7 @@ export class IdeaService {
   /**
    * getIdea
    */
-  public getIdea(id: string) {
+  public getIdea(id: number) {
     return this.apollo
       .watchQuery<any>({
         query: QUERY_IDEA_DETAILS,

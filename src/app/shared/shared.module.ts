@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialModule } from '@app/material.module';
-import { LoaderComponent } from './loader/loader.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CommentsComponent } from './comments/comments.component';
 import { SimplemdeModule } from 'ngx-simplemde';
@@ -39,7 +38,6 @@ export const config: CloudinaryConfiguration = {
     CloudinaryModule.forRoot(cloudinary, config)
   ],
   declarations: [
-    LoaderComponent,
     NotFoundComponent,
     CommentsComponent,
     EditableDirective,
@@ -48,6 +46,6 @@ export const config: CloudinaryConfiguration = {
     IdeaCardComponent,
     LikeComponent
   ],
-  exports: [LoaderComponent, LikeComponent, CommentsComponent]
+  exports: [LikeComponent, CommentsComponent]
 })
 export class SharedModule {}
