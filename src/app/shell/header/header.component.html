@@ -14,13 +14,12 @@
       >
     </div>
     <span fxFlex></span>
-    <div class="v-desktop">
+    <div class="v-desktop" fxHide.lt-md>
       <button class="header__link" mat-button routerLink="/view/feed/ideas" routerLinkActive="active">
         <span translate>Ideas</span>
       </button>
       <button class="header__link" mat-button [matMenuTriggerFor]="menu" routerLinkActive="active">
         <span translate>Collaborate </span>
-        <!-- <mat-icon>add_circle</mat-icon> -->
       </button>
       <mat-menu #menu="matMenu">
         <button class="header__link" mat-menu-item routerLink="/add/idea" routerLinkActive="active">

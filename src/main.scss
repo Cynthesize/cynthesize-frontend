@@ -149,3 +149,16 @@ body {
 .custom-dialog-container .mat-dialog-container {
   padding: 0;
 }
+
+@media (max-width: 1050px) {
+  .page-search {
+    flex-direction: column;
+  }
+  .page-sort {
+    align-self: flex-start;
+    padding-left: 12px;
+  }
+  .container {
+    width: 90%;
+  }
+}

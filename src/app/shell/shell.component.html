@@ -4,14 +4,22 @@
       <nav>
         <mat-list>
           <a mat-list-item routerLink="/view/feed/ideas" routerLinkActive="active" (click)="sidenav.close()">
-            <span translate>Idea Feed</span>
-          </a>
-          <mat-divider></mat-divider>
-          <a mat-list-item routerLink="/add/idea" routerLinkActive="active" (click)="sidenav.close()">
-            <span translate>Add Idea</span>
+            <span translate>Ideas</span>
           </a>
           <a mat-list-item routerLink="/add/project" routerLinkActive="active" (click)="sidenav.close()">
-            <span translate>Add Project</span>
+            <span translate>Collaborate</span>
+          </a>
+          <a mat-list-item routerLink="/add/idea" routerLinkActive="active" (click)="sidenav.close()">
+            <span translate><mat-icon>right</mat-icon>Add Idea</span>
+          </a>
+          <a mat-list-item routerLink="/add/project" routerLinkActive="active" (click)="sidenav.close()">
+            <span translate><mat-icon>right</mat-icon>Add Project</span>
+          </a>
+          <a mat-list-item routerLink="/add/project" routerLinkActive="active" (click)="sidenav.close()">
+            <span translate>Become a mentor</span>
+          </a>
+          <a mat-list-item routerLink="/add/project" routerLinkActive="active" (click)="sidenav.close()">
+            <span translate>Launched Products</span>
           </a>
         </mat-list>
       </nav>
