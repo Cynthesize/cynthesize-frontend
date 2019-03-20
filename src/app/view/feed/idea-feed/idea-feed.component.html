@@ -25,18 +25,11 @@
           (click)="changeContext('newest')"
           >NEWEST</span
         >
-        &nbsp;|&nbsp;
-        <span
-          class="pointer"
-          [ngClass]="{ 'active-context': activeContext === 'default' }"
-          (click)="changeContext('default')"
-          >DEFAULT</span
-        >
       </div>
     </div>
     <div class="page-data">
-      <div class="idea-feed-data" *ngFor="let ideaList of ideasList">
-        <mat-card class="idea-card" *ngFor="let idea of ideaList">
+      <div class="idea-feed-data">
+        <mat-card class="idea-card" *ngFor="let idea of ideasList">
           <div class="idea-card-details">
             <div class="idea-card-project-name">{{ idea.idea_name }}</div>
             <div class="idea-card-project-description">
@@ -44,14 +37,15 @@
             </div>
           </div>
           <div class="idea-card-links">
-            <div class="idea-card-icons">
-              <mat-icon>whatshot</mat-icon> {{ idea.upvotes }} <mat-icon>comment</mat-icon> 98
-              <mat-icon>share</mat-icon>
+            <div class="idea-card-icons pointer">
+              <app-like [ideaId]="idea.id" [upvotes]="idea.upvotes" class="icon"></app-like>
+              <mat-icon class="icon">comment</mat-icon> 98
+              <mat-icon class="icon">share</mat-icon>
             </div>
           </div>
         </mat-card>
       </div>
     </div>
-    <mat-progress-bar mode="query" *ngIf="isLoading"></mat-progress-bar>
+    <mat-progress-bar mode="query" *ngIf="isLoading" style="margin-bottom: 30px;"></mat-progress-bar>
   </div>
 </div>

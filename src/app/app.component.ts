@@ -31,7 +31,13 @@ export class AppComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.errorHandler.subj_notification.subscribe(message => {
-      this.snackBar.open(message, 'Okay', {
+      let messageString = '';
+      if (typeof message === 'string') {
+        messageString = message;
+      } else {
+        messageString = message.error;
+      }
+      this.snackBar.open(messageString, 'Okay', {
         duration: 4000
       });
     });

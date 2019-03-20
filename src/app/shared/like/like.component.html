@@ -1,0 +1,6 @@
+<span [ngClass]="{ liked: isIdeaLikedByLoggedInUser(ideaId) }" class="icon">
+  <mat-icon (click)="upvoteIdea(ideaId, isIdeaLikedByLoggedInUser(ideaId))" [class.disabled]="isLoading">
+    whatshot
+  </mat-icon>
+  {{ upvotes }}
+</span>

@@ -12,14 +12,19 @@ import { ErrorHandlerService } from '@app/core/error-handler.service';
 export class IdeaFeedComponent implements OnInit {
   length = -1;
   currentCount = 0;
-  ideasList: any[][] = [];
-  activeContext = 'default';
+  ideasList: any[] = [];
+  activeContext = 'newest';
   isLoading = true;
 
   constructor(private ideaService: IdeaService, public dialog: MatDialog, private errorHandler: ErrorHandlerService) {
     this.errorHandler.ideaWindowScrolled.subscribe(message => {
-      if (length !== this.ideasList.length && message === 'fetchIdeas') {
-        this.getIdeasFromServer(8, this.currentCount, this.activeContext);
+      if (this.length >= this.ideasList.length && message === 'fetchIdeas') {
+        this.isLoading = true;
+        this.ideaService.getNIdeas(4, this.currentCount, this.activeContext).subscribe(data => {
+          this.currentCount += data.data.ideas.length;
+          this.ideasList.push(...data.data.ideas);
+          this.isLoading = false;
+        });
       }
     });
   }
@@ -38,12 +43,14 @@ export class IdeaFeedComponent implements OnInit {
     this.ideaService.getTotalIdeaCount().subscribe(data => {
       this.length = data.data.ideas_aggregate.aggregate.count;
     });
-    this.getIdeasFromServer(12, 0, this.activeContext);
+    this.getIdeasFromServer(9, this.currentCount, this.activeContext);
   }
 
   getIdeasFromServer(number: number, offset: number, context: any) {
     this.ideaService.getNIdeas(number, offset, context).subscribe(data => {
-      this._insert_ideas(data);
+      this.currentCount += data.data.ideas.length;
+      this.ideasList = data.data.ideas;
+      this.isLoading = false;
     });
   }
 
@@ -53,20 +60,5 @@ export class IdeaFeedComponent implements OnInit {
     this.getIdeasFromServer(12, 0, this.activeContext);
     this.currentCount = 0;
     this.isLoading = true;
-  }
-
-  private _insert_ideas(data: any) {
-    this.currentCount += data.data.ideas.length;
-    for (let i = 0; i < data.data.ideas.length; i += 4) {
-      const tempArray = [];
-      for (let j = 0; j < 4; j++) {
-        if (i + j >= data.data.ideas.length) {
-          continue;
-        }
-        tempArray.push(data.data.ideas[i + j]);
-      }
-      this.ideasList.push(tempArray);
-    }
-    this.isLoading = false;
   }
 }

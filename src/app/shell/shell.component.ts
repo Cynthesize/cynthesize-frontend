@@ -22,11 +22,15 @@ export class ShellComponent implements OnInit {
       .pipe(filter((change: MediaChange) => change.mqAlias !== 'xs' && change.mqAlias !== 'sm'))
       .subscribe(() => this.sidenav.close());
   }
-  @HostListener('scroll', ['$event'])
+  @HostListener('window:scroll', ['$event'])
   onWindowScroll(event: any) {
-    const max = document.documentElement.scrollHeight;
-    if (event.target.scrollTop + 35 === max && this.router.url === '/view/feed/ideas') {
-      this.errorHandler.ideaWindowScrolled.next('fetchIdeas');
+    if (
+      event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight &&
+      this.router.url === '/view/feed/ideas'
+    ) {
+      setTimeout(() => {
+        this.errorHandler.ideaWindowScrolled.next('fetchIdeas');
+      }, 200);
     }
   }
 }

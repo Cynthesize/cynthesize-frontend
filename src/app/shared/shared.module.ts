@@ -5,7 +5,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@app/material.module';
 import { LoaderComponent } from './loader/loader.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { LikingComponent } from './liking/liking.component';
 import { CommentsComponent } from './comments/comments.component';
 import { SimplemdeModule } from 'ngx-simplemde';
 import { EditableDirective } from './editable.directive';
@@ -18,7 +17,7 @@ import { RouterModule } from '@angular/router';
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
 import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
 import { IdeaCardComponent } from './idea-card/idea-card.component';
-import { ScrollingDirective } from './scrolling.directive';
+import { LikeComponent } from './like/like.component';
 
 export const cloudinary = {
   Cloudinary: CloudinaryCore
@@ -42,14 +41,13 @@ export const config: CloudinaryConfiguration = {
   declarations: [
     LoaderComponent,
     NotFoundComponent,
-    LikingComponent,
     CommentsComponent,
     EditableDirective,
     EditableCommentComponent,
     TimeDiffPipe,
     IdeaCardComponent,
-    ScrollingDirective
+    LikeComponent
   ],
-  exports: [LoaderComponent, LikingComponent, CommentsComponent]
+  exports: [LoaderComponent, LikeComponent, CommentsComponent]
 })
 export class SharedModule {}

@@ -28,6 +28,12 @@ export class AuthenticationService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('user_id');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('commentsLikedByLoggedInUser');
+    localStorage.removeItem('user_profile_pic');
+    localStorage.removeItem('username');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('ideaUpvotedByLoggedInUser');
+    localStorage.removeItem('projectsLikedByLoggedInUser');
     this.router.navigate(['/login']);
   }
 
@@ -42,7 +48,6 @@ export class AuthenticationService {
   public handleAuthentication(): void {
     this.auth0.parseHash((err: any, authResult: any) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        console.log(authResult);
         this.handleUserDatabaseEntry(authResult);
         window.location.hash = '';
         this.setSession(authResult);
@@ -78,7 +83,7 @@ export class AuthenticationService {
               }
             })
             .subscribe(data => {
-              localStorage.setItem('userLikedComments', JSON.stringify([]));
+              localStorage.setItem('commentsLikedByUser', JSON.stringify([]));
               localStorage.setItem('user_profile_pic', data.data.insert_user.returning[0].profile_pic);
               localStorage.setItem('username', data.data.insert_user.returning[0].username);
               localStorage.setItem('userId', data.data.insert_user.returning[0].id);
@@ -92,26 +97,23 @@ export class AuthenticationService {
               }
             })
             .valueChanges.subscribe((likes: any) => {
-              const projectIssuesCommentsLikessByuserId: any = [];
-              const ideaUpvotessByuserId: any = [];
-              const ideasCommentsLikesByuserId: any = [];
+              const likedComments: any = [];
+              const upvotedIdeas: any = [];
+              const likedProjects: any = [];
 
-              likes.data.user[0].ideaUpvotessByuserId.forEach((commentUserLikes: any) => {
-                ideaUpvotessByuserId.push(commentUserLikes.comment_id);
+              likes.data.user[0].commentLikessByuserId.forEach((commentUserLikes: any) => {
+                likedComments.push(commentUserLikes.comment_id);
               });
-              likes.data.user[0].ideasCommentsLikesByuserId.forEach((commentUserLikes: any) => {
-                ideasCommentsLikesByuserId.push(commentUserLikes.comment_id);
+              likes.data.user[0].ideaLikessByuserId.forEach((commentUserLikes: any) => {
+                upvotedIdeas.push(commentUserLikes.idea_id);
               });
-              likes.data.user[0].projectIssuesCommentsLikessByuserId.forEach((commentUserLikes: any) => {
-                projectIssuesCommentsLikessByuserId.push(commentUserLikes.comment_id);
+              likes.data.user[0].projectLikessByuserId.forEach((commentUserLikes: any) => {
+                likedProjects.push(commentUserLikes.project_id);
               });
 
-              localStorage.setItem('ideaUpvotessByuserId', JSON.stringify(ideaUpvotessByuserId));
-              localStorage.setItem('ideasCommentsLikesByuserId', JSON.stringify(ideasCommentsLikesByuserId));
-              localStorage.setItem(
-                'projectIssuesCommentsLikessByuserId',
-                JSON.stringify(projectIssuesCommentsLikessByuserId)
-              );
+              localStorage.setItem('ideaUpvotedByLoggedInUser', JSON.stringify(upvotedIdeas));
+              localStorage.setItem('commentsLikedByLoggedInUser', JSON.stringify(likedComments));
+              localStorage.setItem('projectsLikedByLoggedInUser', JSON.stringify(likedProjects));
             });
           localStorage.setItem('user_profile_pic', res.data.user[0].profile_pic);
           localStorage.setItem('username', res.data.user[0].username);

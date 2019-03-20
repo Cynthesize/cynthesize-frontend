@@ -2,7 +2,12 @@ import { Injectable } from '@angular/core';
 import { Idea } from '@app/shared/idea';
 import { map } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
-import { MUTATION_ADD_IDEA, MUTATION_DELETE_IDEA, MUTATION_LIKE_IDEA } from '@app/shared/mutations/idea-mutations';
+import {
+  MUTATION_ADD_IDEA,
+  MUTATION_DELETE_IDEA,
+  MUTATION_LIKE_IDEA,
+  MUTATION_DISLIKE_IDEA
+} from '@app/shared/mutations/idea-mutations';
 import {
   QUERY_IDEA_DETAILS,
   QUERY_LIMITED_IDEA_DETAILS,
@@ -109,13 +114,20 @@ export class IdeaService {
   /**
    * LikeIdea
    */
-  public likeIdea(ideaId: string) {
+  public likeIdea(ideaId: number, isAlreadyLiked: boolean) {
+    let mutation = MUTATION_LIKE_IDEA;
+    let counter = 1;
+    if (isAlreadyLiked) {
+      mutation = MUTATION_DISLIKE_IDEA;
+      counter = -1;
+    }
     return this.apollo
       .mutate<any>({
-        mutation: MUTATION_LIKE_IDEA,
+        mutation: mutation,
         variables: {
-          idea_id: ideaId,
-          user_id: localStorage.getItem('userId')
+          likesOffsetCounter: counter,
+          ideaId: ideaId,
+          userId: localStorage.getItem('userId')
         }
       })
       .pipe(

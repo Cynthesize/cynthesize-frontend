@@ -40,7 +40,7 @@
       <mat-icon> person </mat-icon>
     </button>
     <button mat-raised-button *ngIf="!authenticationService.isAuthenticated()" (click)="authenticationService.login()">
-      Login
+      Login/Signup
     </button>
     <mat-menu #userMenu="matMenu" class="profile-menu">
       <div class="user-info ">
