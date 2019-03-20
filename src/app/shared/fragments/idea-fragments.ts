@@ -8,8 +8,7 @@ const IDEA_REPLY_FRAGMENT = gql`
     userByrespondent {
       ...UserProfilePicFragment
     }
-    likes
-    dislikes
+    upvotes
     timestamp
   }
   ${USER_PROFILE_PIC_FRAGMENT}
@@ -21,7 +20,6 @@ const IDEA_COMMENTS_FRAGMENT = gql`
     comment_text
     idea_id
     likes
-    dislikes
     timestamp
     userBycommenter {
       ...UserProfilePicFragment

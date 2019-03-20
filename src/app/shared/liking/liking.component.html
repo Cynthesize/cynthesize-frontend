@@ -1,6 +1,0 @@
-<div class="loader" *ngIf="isPageLoading"><mat-spinner></mat-spinner></div>
-<div class="btn--container" *ngIf="!isPageLoading" [hidden]="!authenticationService.isAuthenticated()">
-  <button class="btn--like" mat-raised-button color="{{ isLiked() }}" (click)="like(ideaId)">
-    <mat-icon class="btn--icon">thumb_up</mat-icon>{{ likes }}
-  </button>
-</div>
