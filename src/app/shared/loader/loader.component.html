@@ -1,4 +1,1 @@
-<div [hidden]="!isLoading">
-  <mat-progress-bar mode="buffer"></mat-progress-bar>
-  <span class="message">{{message}}</span>
-</div>
+<mat-progress-bar mode="query" *ngIf="isLoading" style="margin-bottom: 30px;"></mat-progress-bar>

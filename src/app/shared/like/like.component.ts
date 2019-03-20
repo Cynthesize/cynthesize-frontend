@@ -31,6 +31,7 @@ export class LikeComponent implements OnInit {
     this.ideaService.likeIdea(ideaId, isAlreadyLiked).subscribe(
       data => {
         this.isLoading = false;
+        this.upvotes = data.data.update_ideas.returning[0].upvotes;
       },
       error => {
         this.errorHandler.subj_notification.next(error.message);

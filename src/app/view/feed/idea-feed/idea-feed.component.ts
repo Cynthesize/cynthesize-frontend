@@ -20,11 +20,7 @@ export class IdeaFeedComponent implements OnInit {
     this.errorHandler.ideaWindowScrolled.subscribe(message => {
       if (this.length >= this.ideasList.length && message === 'fetchIdeas') {
         this.isLoading = true;
-        this.ideaService.getNIdeas(4, this.currentCount, this.activeContext).subscribe(data => {
-          this.currentCount += data.data.ideas.length;
-          this.ideasList.push(...data.data.ideas);
-          this.isLoading = false;
-        });
+        this.getIdeasFromServer(4, this.currentCount, this.activeContext);
       }
     });
   }
@@ -47,9 +43,10 @@ export class IdeaFeedComponent implements OnInit {
   }
 
   getIdeasFromServer(number: number, offset: number, context: any) {
+    console.log('ideas init');
     this.ideaService.getNIdeas(number, offset, context).subscribe(data => {
       this.currentCount += data.data.ideas.length;
-      this.ideasList = data.data.ideas;
+      this.ideasList.push(...data.data.ideas);
       this.isLoading = false;
     });
   }

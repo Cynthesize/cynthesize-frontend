@@ -4,6 +4,7 @@ import { MatSidenav } from '@angular/material';
 import { filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
+import { SelectPipe } from 'apollo-angular';
 
 @Component({
   selector: 'app-shell',
@@ -13,6 +14,7 @@ import { ErrorHandlerService } from '@app/core/error-handler.service';
 export class ShellComponent implements OnInit {
   @ViewChild('sidenav')
   sidenav: MatSidenav;
+  flag = 0;
 
   constructor(private media: ObservableMedia, private router: Router, private errorHandler: ErrorHandlerService) {}
 
@@ -25,12 +27,14 @@ export class ShellComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(event: any) {
     if (
-      event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight &&
-      this.router.url === '/view/feed/ideas'
+      event.target.offsetHeight + event.target.scrollTop === event.target.scrollHeight &&
+      this.router.url === '/view/feed/ideas' &&
+      event.target.scrollHeight !== this.flag
     ) {
-      setTimeout(() => {
-        this.errorHandler.ideaWindowScrolled.next('fetchIdeas');
-      }, 200);
+      this.flag = event.target.scrollHeight;
+      console.log(this.flag);
+
+      this.errorHandler.ideaWindowScrolled.next('fetchIdeas');
     }
   }
 }

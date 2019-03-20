@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Idea } from '@app/shared/idea';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
   MUTATION_ADD_IDEA,
@@ -105,7 +105,8 @@ export class IdeaService {
           offset: offset
         }
       })
-      .valueChanges.pipe(
+      .valueChanges.pipe(take(1))
+      .pipe(
         map((res: any) => {
           return res;
         })
