@@ -47,7 +47,6 @@ export class LaunchedProductsComponent implements OnInit {
 
   getlaunchedProjectsFromServer(number: number, offset: number, context: any) {
     this.projectService.getNProjects(number, offset, context).subscribe(data => {
-      console.log(data);
       this.currentCount += data.data.launched_projects.length;
       this.projectList.push(...data.data.launched_projects);
       this.isLoading = false;

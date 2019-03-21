@@ -31,18 +31,18 @@
       <mat-card class="card" *ngFor="let project of projectList">
         <div class="card-image"></div>
         <div class="card-details">
-          <div class="card-project-name">Project Name</div>
+          <div class="card-project-name">{{ project.projectssBylaunchedId[0].project_name }}</div>
           <div class="card-project-description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati aspernatur maiores asperiores laudantium
-            minus, unde iure alias amet cupiditate earum nobis, rerum illum aliquid ex accusamus sequi. Tempora, ad
-            doloremque.
+            {{ project.projectssBylaunchedId[0].abstract }}
           </div>
         </div>
         <div class="card-links">
-          <div><a href="https://www.website.com" target="_blank">www.website.com</a></div>
+          <div>
+            <a href="{{ project.website }}" target="_blank">{{ project.website }}</a>
+          </div>
           <div class="card-icons pointer">
             <app-like [projectId]="project.id" [likes]="project.likes" class="icon"></app-like>
-            <mat-icon class="icon" [routerLink]="['/view/feed/projects']">comment</mat-icon> 98
+            <mat-icon class="icon" [routerLink]="['/view/launched', project.id]">comment</mat-icon> 98
             <mat-icon class="icon" (click)="openShareSheet()">share</mat-icon>
           </div>
         </div>
