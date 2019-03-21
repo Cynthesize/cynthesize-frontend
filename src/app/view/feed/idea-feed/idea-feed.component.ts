@@ -5,7 +5,7 @@ import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { IdeaComponent } from '@app/view/idea/idea.component';
 import { Router } from '@angular/router';
-import { ShareSheetComponent } from './share-sheet/share-sheet.component';
+import { ShareSheetComponent } from '@app/shared/share-sheet/share-sheet.component';
 
 @Component({
   selector: 'app-idea-feed',
@@ -60,7 +60,13 @@ export class IdeaFeedComponent implements OnInit {
   }
 
   openShareSheet(): void {
-    this.bottomSheet.open(ShareSheetComponent);
+    this.bottomSheet.open(ShareSheetComponent, {
+      data: {
+        facebookUrl: 'https://www.facebook.com/sharer/sharer.php?u=',
+        twitterUrl: 'https://twitter.com/home?status=',
+        linkedInUrl: 'https://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source='
+      }
+    });
   }
 
   changeContext(context: string) {

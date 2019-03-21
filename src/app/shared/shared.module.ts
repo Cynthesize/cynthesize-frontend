@@ -17,6 +17,8 @@ import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
 import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
 import { IdeaCardComponent } from './idea-card/idea-card.component';
 import { LikeComponent } from './like/like.component';
+import { ShareSheetComponent } from './share-sheet/share-sheet.component';
+import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA, MatBottomSheetModule } from '@angular/material';
 
 export const cloudinary = {
   Cloudinary: CloudinaryCore
@@ -34,6 +36,7 @@ export const config: CloudinaryConfiguration = {
     SimplemdeModule.forRoot(),
     FormsModule,
     CovalentTextEditorModule,
+    MatBottomSheetModule,
     CovalentMarkdownModule,
     CloudinaryModule.forRoot(cloudinary, config)
   ],
@@ -44,8 +47,11 @@ export const config: CloudinaryConfiguration = {
     EditableCommentComponent,
     TimeDiffPipe,
     IdeaCardComponent,
-    LikeComponent
+    LikeComponent,
+    ShareSheetComponent
   ],
-  exports: [LikeComponent, CommentsComponent]
+  exports: [LikeComponent, CommentsComponent, ShareSheetComponent],
+  entryComponents: [ShareSheetComponent],
+  providers: [{ provide: MatBottomSheetRef, useValue: {} }, { provide: MAT_BOTTOM_SHEET_DATA, useValue: [] }]
 })
 export class SharedModule {}

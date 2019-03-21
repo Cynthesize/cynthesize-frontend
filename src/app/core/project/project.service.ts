@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import BACKEND_URLS from '@app/shared/backend-urls';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
   MUTATION_ADD_PROJECT,
@@ -9,9 +9,17 @@ import {
   MUTATION_ADD_ISSUE_COMMENT_REPLY,
   MUTATION_ADD_ISSUE,
   MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT,
-  MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE
+  MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE,
+  MUTATION_LIKE_LAUNCHED_PROJECT,
+  MUTATION_DISLIKE_LAUNCHED_PROJECT
 } from '@app/shared/mutations/project-mutations';
-import { QUERY_CHECKPOINT_ISSUES, QUERY_PROJECT_DETAILS } from '@app/shared/queries/project-queries';
+import {
+  QUERY_CHECKPOINT_ISSUES,
+  QUERY_PROJECT_DETAILS,
+  QUERY_NEWEST_LAUNCHED_PROJECTS,
+  QUERY_POPULAR_LAUNCHED_PROJECTS,
+  QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT
+} from '@app/shared/queries/project-queries';
 
 @Injectable({
   providedIn: 'root'
@@ -189,6 +197,80 @@ export class ProjectService {
           userId: localStorage.getItem('userId')
         }
       })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * LikeProject
+   */
+  public likeProject(launchedProjectId: number, isAlreadyLiked: boolean) {
+    let mutation = MUTATION_LIKE_LAUNCHED_PROJECT;
+    let counter = 1;
+    if (isAlreadyLiked) {
+      mutation = MUTATION_DISLIKE_LAUNCHED_PROJECT;
+      counter = -1;
+    }
+    return this.apollo
+      .mutate<any>({
+        mutation: mutation,
+        variables: {
+          likesOffsetCounter: counter,
+          launchedProjectId: launchedProjectId,
+          userId: localStorage.getItem('userId')
+        }
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * getTotalLaunchedProjectsCount
+   */
+  public getTotalLaunchedProjectsCount() {
+    return this.apollo
+      .query({
+        query: QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * getNProjects
+   */
+  public getNProjects(limit: number, offset: number, context: any) {
+    let Query = QUERY_NEWEST_LAUNCHED_PROJECTS;
+    switch (context) {
+      case 'newest':
+        Query = QUERY_NEWEST_LAUNCHED_PROJECTS;
+        break;
+
+      case 'popular':
+        Query = QUERY_POPULAR_LAUNCHED_PROJECTS;
+        break;
+
+      default:
+        break;
+    }
+    return this.apollo
+      .watchQuery<any>({
+        query: Query,
+        variables: {
+          limit: limit,
+          offset: offset
+        }
+      })
+      .valueChanges.pipe(take(1))
       .pipe(
         map((res: any) => {
           return res;
