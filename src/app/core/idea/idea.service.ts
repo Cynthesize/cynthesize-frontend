@@ -80,6 +80,7 @@ export class IdeaService {
         })
       );
   }
+
   /**
    * getNIdeas
    */
@@ -112,6 +113,7 @@ export class IdeaService {
         })
       );
   }
+
   /**
    * LikeIdea
    */

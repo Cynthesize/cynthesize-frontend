@@ -10,7 +10,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
 import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
 import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
-import { ShareSheetComponent } from './idea-feed/share-sheet/share-sheet.component';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA, MatBottomSheetModule } from '@angular/material';
 
 export const cloudinary = {
@@ -22,7 +21,7 @@ export const config: CloudinaryConfiguration = {
 };
 
 @NgModule({
-  declarations: [IdeaFeedComponent, IssuesFeedComponent, DialogEntryComponent, ShareSheetComponent],
+  declarations: [IdeaFeedComponent, IssuesFeedComponent, DialogEntryComponent],
   imports: [
     CommonModule,
     FeedRoutingModule,
@@ -32,7 +31,6 @@ export const config: CloudinaryConfiguration = {
     NgxPaginationModule,
     CloudinaryModule.forRoot(cloudinary, config)
   ],
-  entryComponents: [IdeaCardComponent, DialogEntryComponent, ShareSheetComponent],
-  providers: [{ provide: MatBottomSheetRef, useValue: {} }, { provide: MAT_BOTTOM_SHEET_DATA, useValue: [] }]
+  entryComponents: [IdeaCardComponent, DialogEntryComponent]
 })
 export class FeedModule {}

@@ -6,7 +6,7 @@
     <div class="page-search">
       <div class="page-search-box">
         <mat-form-field appearance="fill">
-          <mat-label>Search Launched Products</mat-label>
+          <mat-label>Search Launched Projects</mat-label>
           <input matInput />
           <mat-icon matPrefix>search</mat-icon>
         </mat-form-field>
@@ -25,17 +25,10 @@
           (click)="changeContext('newest')"
           >NEWEST</span
         >
-        &nbsp;|&nbsp;
-        <span
-          class="pointer"
-          [ngClass]="{ 'active-context': activeContext === 'default' }"
-          (click)="changeContext('default')"
-          >DEFAULT</span
-        >
       </div>
     </div>
     <div class="page-data">
-      <mat-card class="card">
+      <mat-card class="card" *ngFor="let project of projectList">
         <div class="card-image"></div>
         <div class="card-details">
           <div class="card-project-name">Project Name</div>
@@ -46,14 +39,16 @@
           </div>
         </div>
         <div class="card-links">
-          <div>www.website.com</div>
-          <div class="card-icons">
-            <mat-icon>whatshot</mat-icon> 654 <mat-icon>comment</mat-icon> 98
-            <mat-icon>share</mat-icon>
+          <div><a href="https://www.website.com" target="_blank">www.website.com</a></div>
+          <div class="card-icons pointer">
+            <app-like [projectId]="project.id" [likes]="project.likes" class="icon"></app-like>
+            <mat-icon class="icon" [routerLink]="['/view/feed/projects']">comment</mat-icon> 98
+            <mat-icon class="icon" (click)="openShareSheet()">share</mat-icon>
           </div>
         </div>
       </mat-card>
     </div>
-    <mat-progress-bar mode="query" *ngIf="isLoading"></mat-progress-bar>
   </div>
+  <mat-progress-bar mode="query" [ngClass]="{ hidden: !isLoading }" style="margin-bottom: 30px;"></mat-progress-bar>
 </div>
+<router-outlet></router-outlet>

@@ -85,11 +85,49 @@ const MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE = gql`
   }
 `;
 
+const MUTATION_LIKE_LAUNCHED_PROJECT = gql`
+  mutation update_likes($likesOffsetCounter: Int!, $launchedProjectId: Int!, $userId: Int!) {
+    update_launched_projects(where: { id: { _eq: $launchedProjectId } }, _inc: { likes: $likesOffsetCounter }) {
+      affected_rows
+      returning {
+        id
+        likes
+      }
+    }
+    insert_launched_projects_likes(objects: { user_id: $userId, project_id: $launchedProjectId }) {
+      affected_rows
+      returning {
+        project_id
+      }
+    }
+  }
+`;
+
+const MUTATION_DISLIKE_LAUNCHED_PROJECT = gql`
+  mutation update_likes($likesOffsetCounter: Int!, $launchedProjectId: Int!, $userId: Int!) {
+    update_launched_projects(where: { id: { _eq: $launchedProjectId } }, _inc: { likes: $likesOffsetCounter }) {
+      affected_rows
+      returning {
+        id
+        likes
+      }
+    }
+    delete_launched_projects_likes(where: { user_id: { _eq: $userId }, project_id: { _eq: $launchedProjectId } }) {
+      affected_rows
+      returning {
+        project_id
+      }
+    }
+  }
+`;
+
 export {
   MUTATION_ADD_ISSUE,
   MUTATION_ADD_ISSUE_COMMENT,
   MUTATION_ADD_ISSUE_COMMENT_REPLY,
   MUTATION_ADD_PROJECT,
   MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE,
-  MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT
+  MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT,
+  MUTATION_LIKE_LAUNCHED_PROJECT,
+  MUTATION_DISLIKE_LAUNCHED_PROJECT
 };

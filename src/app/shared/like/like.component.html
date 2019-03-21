@@ -1,4 +1,5 @@
 <span
+  *ngIf="ideaId"
   [ngClass]="{ liked: isIdeaLikedByLoggedInUser(ideaId) }"
   (click)="upvoteIdea(ideaId, isIdeaLikedByLoggedInUser(ideaId))"
   class="icon"
@@ -7,4 +8,15 @@
     whatshot
   </mat-icon>
   {{ upvotes }}
+</span>
+<span
+  *ngIf="projectId"
+  [ngClass]="{ liked: isProjectLikedByLoggedInUser(projectId) }"
+  (click)="upvoteProject(projectId, isProjectLikedByLoggedInUser(projectId))"
+  class="icon"
+>
+  <mat-icon [class.disabled]="isLoading">
+    whatshot
+  </mat-icon>
+  {{ likes }}
 </span>

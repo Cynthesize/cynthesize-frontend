@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IdeaService } from '@app/core/idea/idea.service';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
+import { ProjectService } from '@app/core/project/project.service';
 
 @Component({
   selector: 'app-like',
@@ -9,10 +10,16 @@ import { ErrorHandlerService } from '@app/core/error-handler.service';
 })
 export class LikeComponent implements OnInit {
   @Input() ideaId: number;
+  @Input() projectId: number;
   @Input() upvotes: number;
+  @Input() likes: number;
   isLoading = false;
 
-  constructor(private ideaService: IdeaService, private errorHandler: ErrorHandlerService) {}
+  constructor(
+    private ideaService: IdeaService,
+    private errorHandler: ErrorHandlerService,
+    private projectService: ProjectService
+  ) {}
 
   ngOnInit() {}
 
@@ -38,6 +45,42 @@ export class LikeComponent implements OnInit {
       }
     );
     this._updateLikedIdeasInLocalStorage(ideaId, isAlreadyLiked);
+  }
+
+  isProjectLikedByLoggedInUser(projectId: number) {
+    let flag = false;
+    JSON.parse(localStorage.getItem('projectsLikedByLoggedInUser')).forEach((likedProjectIds: any) => {
+      if (projectId === likedProjectIds) {
+        flag = true;
+      }
+    });
+    return flag;
+  }
+
+  upvoteProject(projectId: number, isAlreadyLiked: boolean) {
+    this.isLoading = true;
+    this.projectService.likeProject(projectId, isAlreadyLiked).subscribe(
+      data => {
+        this.isLoading = false;
+        this.upvotes = data.data.update_projects.returning[0].upvotes;
+      },
+      error => {
+        this.errorHandler.subj_notification.next(error.message);
+      }
+    );
+    this._updateLikedProjectsInLocalStorage(projectId, isAlreadyLiked);
+  }
+
+  private _updateLikedProjectsInLocalStorage(projectId: number, shouldRemove: boolean) {
+    const upvotedProjects = JSON.parse(localStorage.getItem('projectsLikedByLoggedInUser'));
+    if (shouldRemove) {
+      for (let i = 0; i < upvotedProjects.length; i++) {
+        upvotedProjects.splice(i, 1);
+      }
+    } else {
+      upvotedProjects.push(projectId);
+    }
+    localStorage.setItem('projectsLikedByLoggedInUser', JSON.stringify(upvotedProjects));
   }
 
   private _updateLikedIdeasInLocalStorage(ideaId: number, shouldRemove: boolean) {
