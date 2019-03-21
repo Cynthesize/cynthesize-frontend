@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { IdeaService } from '@app/core/idea/idea.service';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { ProjectService } from '@app/core/project/project.service';
+import { AuthenticationService } from '@app/core';
+import { MatDialog } from '@angular/material';
+import { LoginComponent } from '@app/auth/login/login.component';
 
 @Component({
   selector: 'app-like',
@@ -18,10 +21,22 @@ export class LikeComponent implements OnInit {
   constructor(
     private ideaService: IdeaService,
     private errorHandler: ErrorHandlerService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    public authService: AuthenticationService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {}
+
+  openLoginDialog(): void {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 
   isIdeaLikedByLoggedInUser(ideaId: number) {
     let flag = false;
@@ -62,7 +77,7 @@ export class LikeComponent implements OnInit {
     this.projectService.likeProject(projectId, isAlreadyLiked).subscribe(
       data => {
         this.isLoading = false;
-        this.upvotes = data.data.update_projects.returning[0].upvotes;
+        this.likes = data.data.update_launched_projects.returning[0].likes;
       },
       error => {
         this.errorHandler.subj_notification.next(error.message);

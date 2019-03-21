@@ -94,10 +94,10 @@ const MUTATION_LIKE_LAUNCHED_PROJECT = gql`
         likes
       }
     }
-    insert_launched_projects_likes(objects: { user_id: $userId, project_id: $launchedProjectId }) {
+    insert_launched_projects_likes(objects: { user_id: $userId, launched_projects_id: $launchedProjectId }) {
       affected_rows
       returning {
-        project_id
+        launched_projects_id
       }
     }
   }
@@ -112,10 +112,12 @@ const MUTATION_DISLIKE_LAUNCHED_PROJECT = gql`
         likes
       }
     }
-    delete_launched_projects_likes(where: { user_id: { _eq: $userId }, project_id: { _eq: $launchedProjectId } }) {
+    delete_launched_projects_likes(
+      where: { user_id: { _eq: $userId }, launched_projects_id: { _eq: $launchedProjectId } }
+    ) {
       affected_rows
       returning {
-        project_id
+        launched_projects_id
       }
     }
   }

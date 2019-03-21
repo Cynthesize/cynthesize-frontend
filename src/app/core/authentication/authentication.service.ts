@@ -34,12 +34,16 @@ export class AuthenticationService {
     localStorage.removeItem('userId');
     localStorage.removeItem('ideaUpvotedByLoggedInUser');
     localStorage.removeItem('projectsLikedByLoggedInUser');
-    this.router.navigate(['/login']);
   }
 
   public isAuthenticated(): boolean {
     const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
-    return new Date().getTime() < expiresAt;
+    if (new Date().getTime() < expiresAt) {
+      return true;
+    } else {
+      this.logout();
+      return false;
+    }
   }
   public login(): void {
     this.auth0.authorize();

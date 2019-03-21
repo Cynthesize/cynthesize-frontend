@@ -1,22 +1,25 @@
 <span
-  *ngIf="ideaId"
+  *ngIf="ideaId && authService.isAuthenticated()"
   [ngClass]="{ liked: isIdeaLikedByLoggedInUser(ideaId) }"
   (click)="upvoteIdea(ideaId, isIdeaLikedByLoggedInUser(ideaId))"
   class="icon"
 >
-  <mat-icon [class.disabled]="isLoading">
-    whatshot
-  </mat-icon>
-  {{ upvotes }}
+  <mat-icon [class.disabled]="isLoading">whatshot</mat-icon>{{ upvotes }}
 </span>
+
+<span *ngIf="ideaId && !authService.isAuthenticated()" (click)="openLoginDialog()" class="icon">
+  <mat-icon [class.disabled]="isLoading">whatshot</mat-icon>{{ upvotes }}
+</span>
+
 <span
-  *ngIf="projectId"
+  *ngIf="projectId && authService.isAuthenticated()"
   [ngClass]="{ liked: isProjectLikedByLoggedInUser(projectId) }"
   (click)="upvoteProject(projectId, isProjectLikedByLoggedInUser(projectId))"
   class="icon"
 >
-  <mat-icon [class.disabled]="isLoading">
-    whatshot
-  </mat-icon>
-  {{ likes }}
+  <mat-icon [class.disabled]="isLoading">whatshot</mat-icon>{{ likes }}
+</span>
+
+<span *ngIf="projectId && !authService.isAuthenticated()" (click)="openLoginDialog()" class="icon">
+  <mat-icon [class.disabled]="isLoading">whatshot</mat-icon>{{ likes }}
 </span>
