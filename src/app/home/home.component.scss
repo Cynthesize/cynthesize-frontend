@@ -1,5 +1,4 @@
 @import "../../sass/declarations";
-
 .home-content {
   width: 425px;
   margin: 0 auto;
@@ -103,15 +102,18 @@
   display: flex;
   flex-direction: column;
 }
+
 .home-section1 {
   background-color: white;
   padding: 125px 0;
 }
+
 .home-community {
   text-align: center;
   width: 400px;
   margin: 40px auto 0 auto;
 }
+
 .community-button {
   width: 100%;
   margin-top: 10px;

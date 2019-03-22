@@ -23,11 +23,11 @@ const QUERY_POPULAR_LAUNCHED_PROJECTS = gql`
   query fetch_popular_launched_projects($limit: Int!, $offset: Int!) {
     launched_projects(order_by: { upvotes: desc }, limit: $limit, offset: $offset) {
       id
-      likes
-      website
       projectssBylaunchedId {
         project_name
         abstract
+        likes
+        website
         userByowner {
           username
           profile_pic
@@ -41,11 +41,11 @@ const QUERY_NEWEST_LAUNCHED_PROJECTS = gql`
   query fetch_newest_launched_projects($limit: Int!, $offset: Int!) {
     launched_projects(order_by: { timestamp: desc }, limit: $limit, offset: $offset) {
       id
-      likes
-      website
       projectssBylaunchedId {
         project_name
         abstract
+        likes
+        website
         userByowner {
           username
           profile_pic
@@ -65,10 +65,67 @@ const QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT = gql`
   }
 `;
 
+const QUERY_POPULAR_ONGOING_PROJECTS = gql`
+  query fetch_popular_ongoing_projects($limit: Int!, $offset: Int!) {
+    projects(order_by: { likes: desc }, limit: $limit, offset: $offset, where: { is_public: { _eq: true } }) {
+      id
+      project_name
+      created_on
+      current_stage
+      tech_stack
+      website
+      roles_opened
+      is_public
+      abstract
+      icon
+      likes
+      userByowner {
+        username
+        profile_pic
+      }
+    }
+  }
+`;
+
+const QUERY_NEWEST_ONGOING_PROJECTS = gql`
+  query fetch_newest_ongoing_projects($limit: Int!, $offset: Int!) {
+    projects(order_by: { created_on: desc }, limit: $limit, offset: $offset, where: { is_public: { _eq: true } }) {
+      id
+      project_name
+      created_on
+      current_stage
+      tech_stack
+      website
+      roles_opened
+      is_public
+      abstract
+      icon
+      likes
+      userByowner {
+        username
+        profile_pic
+      }
+    }
+  }
+`;
+
+const QUERY_TOTAL_ONGOING_PROJECTS_COUNT = gql`
+  query fetch_ongoing_projects {
+    projects_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+
 export {
   QUERY_CHECKPOINT_ISSUES,
   QUERY_PROJECT_DETAILS,
   QUERY_NEWEST_LAUNCHED_PROJECTS,
   QUERY_POPULAR_LAUNCHED_PROJECTS,
-  QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT
+  QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT,
+  QUERY_POPULAR_ONGOING_PROJECTS,
+  QUERY_TOTAL_ONGOING_PROJECTS_COUNT,
+  QUERY_NEWEST_ONGOING_PROJECTS
 };

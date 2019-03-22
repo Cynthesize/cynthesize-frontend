@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FeedRoutingModule } from './feed-routing.module';
-import { IssuesFeedComponent } from './issues-feed/issues-feed.component';
+import { IdeaFeedRoutingModule } from './idea-feed-routing.module';
+import { IdeaFeedComponent, DialogEntryComponent } from './idea-feed.component';
 import { SharedModule } from '@app/shared';
+import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
 import { MaterialModule } from '@app/material.module';
+import { MatBottomSheetModule } from '@angular/material';
 import { NgxPaginationModule } from 'ngx-pagination';
+
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
 import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
-import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
-import { MatBottomSheetModule } from '@angular/material';
-import { FeedProjectComponent } from './feed-project/feed-project.component';
 
 export const cloudinary = {
   Cloudinary: CloudinaryCore
@@ -21,16 +21,16 @@ export const config: CloudinaryConfiguration = {
 };
 
 @NgModule({
-  declarations: [IssuesFeedComponent, FeedProjectComponent],
+  declarations: [IdeaFeedComponent, DialogEntryComponent],
   imports: [
     CommonModule,
-    FeedRoutingModule,
+    IdeaFeedRoutingModule,
     SharedModule,
     MaterialModule,
     MatBottomSheetModule,
     NgxPaginationModule,
     CloudinaryModule.forRoot(cloudinary, config)
   ],
-  entryComponents: [IdeaCardComponent, FeedProjectComponent]
+  entryComponents: [IdeaCardComponent, DialogEntryComponent]
 })
-export class FeedModule {}
+export class IdeaFeedModule {}

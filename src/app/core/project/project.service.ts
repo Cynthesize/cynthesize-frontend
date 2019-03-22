@@ -18,7 +18,10 @@ import {
   QUERY_PROJECT_DETAILS,
   QUERY_NEWEST_LAUNCHED_PROJECTS,
   QUERY_POPULAR_LAUNCHED_PROJECTS,
-  QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT
+  QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT,
+  QUERY_NEWEST_ONGOING_PROJECTS,
+  QUERY_POPULAR_ONGOING_PROJECTS,
+  QUERY_TOTAL_ONGOING_PROJECTS_COUNT
 } from '@app/shared/queries/project-queries';
 
 @Injectable({
@@ -257,6 +260,54 @@ export class ProjectService {
 
       case 'popular':
         Query = QUERY_POPULAR_LAUNCHED_PROJECTS;
+        break;
+
+      default:
+        break;
+    }
+    return this.apollo
+      .watchQuery<any>({
+        query: Query,
+        variables: {
+          limit: limit,
+          offset: offset
+        }
+      })
+      .valueChanges.pipe(take(1))
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * getTotalOngoingProjectsCount
+   */
+  public getTotalOngoingProjectsCount() {
+    return this.apollo
+      .query({
+        query: QUERY_TOTAL_ONGOING_PROJECTS_COUNT
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * getNProjects
+   */
+  public getNOngoingProjects(limit: number, offset: number, context: any) {
+    let Query = QUERY_NEWEST_ONGOING_PROJECTS;
+    switch (context) {
+      case 'newest':
+        Query = QUERY_NEWEST_ONGOING_PROJECTS;
+        break;
+
+      case 'popular':
+        Query = QUERY_POPULAR_ONGOING_PROJECTS;
         break;
 
       default:

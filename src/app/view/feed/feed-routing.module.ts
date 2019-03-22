@@ -1,22 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IdeaFeedComponent, DialogEntryComponent } from './idea-feed/idea-feed.component';
-import { IssuesFeedComponent } from './issues-feed/issues-feed.component';
 
 const routes: Routes = [
   {
     path: 'ideas',
-    component: IdeaFeedComponent,
-    children: [
-      {
-        path: ':ideaId',
-        component: DialogEntryComponent
-      }
-    ]
+    loadChildren: 'app/view/feed/idea-feed/idea-feed.module#IdeaFeedModule'
   },
   {
-    path: 'issue',
-    component: IssuesFeedComponent
+    path: 'projects/launched',
+    loadChildren: 'app/view/feed/launched/launched.module#LaunchedModule'
+  },
+  {
+    path: 'projects/ongoing',
+    loadChildren: 'app/view/feed/ongoing/ongoing.module#OngoingModule'
   },
   {
     path: '**',
