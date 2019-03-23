@@ -1,0 +1,74 @@
+.idea-card {
+  width: 100%;
+  margin: 10px;
+  min-height: 300px;
+  flex-basis: 23%;
+}
+
+.idea-feed-data {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.idea-card-details {
+  flex-direction: column;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.idea-card-project-name {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.idea-card-project-description {
+  padding: 5px 0 0 0;
+  line-height: 1.6;
+}
+
+.idea-card-icons {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 15px;
+}
+.idea-card-icons > .icon {
+  margin: 5px;
+  color: blue;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.active-context {
+  color: blue;
+  font-weight: bold;
+}
+
+@media (max-width: 1340px) {
+  .idea-card {
+    min-height: 200px;
+    flex-basis: 30%;
+  }
+}
+
+@media (max-width: 500px) {
+  .idea-card {
+    flex-basis: 100%;
+  }
+}
+
+.hidden {
+  visibility: hidden;
+}
+.profile-project-page {
+  background-color: white;
+  padding: 40px;
+  margin: 15px auto;
+  border-radius: 20px;
+}
+
+.profile-heading {
+  font-size: 1.2rem;
+  font-weight: 600;
+}

@@ -5,7 +5,7 @@ import BACKEND_URLS from '@app/shared/backend-urls';
 import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs';
 import { Apollo } from 'apollo-angular';
-import { QUERY_USER_DETAILS, QUERY_PROJECTS_BY_USER } from '@app/shared/queries/user-queries';
+import { QUERY_USER_DETAILS, QUERY_PROJECTS_BY_USER, QUERY_IDEAS_BY_USER } from '@app/shared/queries/user-queries';
 import { MUTATION_UPDATE_USER_DETAILS } from '@app/shared/mutations/user-mutations';
 import { take } from 'rxjs/operators';
 
@@ -59,6 +59,25 @@ export class ProfileService {
     return this.apollo
       .watchQuery<any>({
         query: QUERY_PROJECTS_BY_USER,
+        variables: {
+          username: username
+        }
+      })
+      .valueChanges.pipe(take(1))
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * getUserProjects
+   */
+  public getUserIdeas(username: string) {
+    return this.apollo
+      .watchQuery<any>({
+        query: QUERY_IDEAS_BY_USER,
         variables: {
           username: username
         }

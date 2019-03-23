@@ -14,7 +14,7 @@ const routes: Routes = [
       },
       {
         path: 'ideas',
-        loadChildren: 'app/view/feed/idea-feed/idea-feed.module#IdeaFeedModule'
+        loadChildren: 'app/profile/user/ideas/ideas.module#IdeasModule'
       },
       {
         path: 'projects',

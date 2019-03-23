@@ -6,6 +6,7 @@ import {
   ONGOING_USER_PROJECT_DETAILS_FRAGMENT,
   LAUNCHED_USER_PROJECT_DETAILS_FRAGMENT
 } from '../fragments/user-fragments';
+import { IDEA_FEED_FRAGMENT } from '../fragments/idea-fragments';
 
 const QUERY_USER_CHECK = gql`
   query fetch_user($email: String!) {
@@ -47,4 +48,13 @@ const QUERY_PROJECTS_BY_USER = gql`
   ${ONGOING_USER_PROJECT_DETAILS_FRAGMENT}
 `;
 
-export { QUERY_USER_CHECK, QUERY_USER_DETAILS, QUERY_USER_LIKES, QUERY_PROJECTS_BY_USER };
+const QUERY_IDEAS_BY_USER = gql`
+  query fetch_newest_ongoing_projects($username: String!) {
+    user(where: { username: { _eq: $username } }) {
+      ...IdeaFeedFragment
+    }
+  }
+  ${IDEA_FEED_FRAGMENT}
+`;
+
+export { QUERY_USER_CHECK, QUERY_USER_DETAILS, QUERY_USER_LIKES, QUERY_PROJECTS_BY_USER, QUERY_IDEAS_BY_USER };
