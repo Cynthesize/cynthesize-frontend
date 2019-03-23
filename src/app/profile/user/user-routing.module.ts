@@ -1,11 +1,31 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DetailsComponent } from './details/details.component';
+import { UserComponent } from './user.component';
 
 const routes: Routes = [
   {
     path: ':username',
-    component: DetailsComponent
+    component: UserComponent,
+    children: [
+      {
+        path: 'profile',
+        loadChildren: 'app/profile/user/details/details.module#DetailsModule'
+      },
+      {
+        path: 'ideas',
+        loadChildren: 'app/view/feed/idea-feed/idea-feed.module#IdeaFeedModule'
+      },
+      {
+        path: 'projects',
+        loadChildren: 'app/profile/user/projects/projects.module#ProjectsModule'
+      },
+      {
+        path: '**',
+        redirectTo: 'profile',
+        pathMatch: 'full'
+      }
+    ]
   },
   {
     path: '**',

@@ -28,6 +28,7 @@ export const config: CloudinaryConfiguration = {
     MatBottomSheetModule,
     CloudinaryModule.forRoot(cloudinary, config)
   ],
-  entryComponents: [ProjectDialogEntryComponent]
+  entryComponents: [ProjectDialogEntryComponent],
+  exports: [OngoingProjectsComponent]
 })
 export class OngoingModule {}

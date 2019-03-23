@@ -3,9 +3,8 @@ import {
   USER_PROFILE_PIC_FRAGMENT,
   USER_DETAILS_FRAGMENT,
   USER_LIKES_FRAGMENT,
-  USER_MINIMAL_CONTRIBUTIONS_FRAGMENT,
-  USER_DETAILED_CONTRIBUTIONS_PROJECTS_FRAGMENT,
-  USER_DETAILED_CONTRIBUTIONS_IDEAS_FRAGMENT
+  ONGOING_USER_PROJECT_DETAILS_FRAGMENT,
+  LAUNCHED_USER_PROJECT_DETAILS_FRAGMENT
 } from '../fragments/user-fragments';
 
 const QUERY_USER_CHECK = gql`
@@ -35,38 +34,17 @@ const QUERY_USER_LIKES = gql`
   ${USER_LIKES_FRAGMENT}
 `;
 
-const QUERY_USER_MINIMAL_CONTRIBUTIONS = gql`
-  query users_minimal_contributions($username: String!) {
-    user(where: { username: { _eq: $username } }) {
-      ...UserMinimalContributionsFragment
+const QUERY_PROJECTS_BY_USER = gql`
+  query fetch_newest_ongoing_projects($username: String!) {
+    user(limit: 4, where: { username: { _eq: $username } }) {
+      ...LaunchedUserProjectDetailsFragment
+    }
+    user(limit: 4, where: { username: { _eq: $username } }) {
+      ...OngoingUserProjectDetailsFragment
     }
   }
-  ${USER_MINIMAL_CONTRIBUTIONS_FRAGMENT}
+  ${LAUNCHED_USER_PROJECT_DETAILS_FRAGMENT}
+  ${ONGOING_USER_PROJECT_DETAILS_FRAGMENT}
 `;
 
-const QUERY_USER_DETAILED_CONTRIBUTIONS_PROJECTS = gql`
-  query users_minimal_contributions($username: String!) {
-    user(where: { username: { _eq: $username } }) {
-      ...UserDetailedContributionsProjectsFragment
-    }
-  }
-  ${USER_DETAILED_CONTRIBUTIONS_PROJECTS_FRAGMENT}
-`;
-
-const QUERY_USER_DETAILED_CONTRIBUTIONS_IDEAS = gql`
-  query users_minimal_contributions($username: String!) {
-    user(where: { username: { _eq: $username } }) {
-      ...UserDetailedContributionsIdeasFragment
-    }
-  }
-  ${USER_DETAILED_CONTRIBUTIONS_IDEAS_FRAGMENT}
-`;
-
-export {
-  QUERY_USER_CHECK,
-  QUERY_USER_DETAILED_CONTRIBUTIONS_IDEAS,
-  QUERY_USER_DETAILED_CONTRIBUTIONS_PROJECTS,
-  QUERY_USER_DETAILS,
-  QUERY_USER_LIKES,
-  QUERY_USER_MINIMAL_CONTRIBUTIONS
-};
+export { QUERY_USER_CHECK, QUERY_USER_DETAILS, QUERY_USER_LIKES, QUERY_PROJECTS_BY_USER };

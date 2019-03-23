@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatBottomSheet } from '@angular/material';
 import { ShareSheetComponent } from '@app/shared/share-sheet/share-sheet.component';
 import { ProjectService } from '@app/core/project/project.service';

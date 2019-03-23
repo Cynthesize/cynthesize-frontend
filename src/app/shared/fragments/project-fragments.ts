@@ -1,5 +1,4 @@
 import gql from 'graphql-tag';
-import { USER_PROFILE_PIC_FRAGMENT } from './user-fragments';
 
 const ISSUE_COMMENT_REPLY_FRAGMENT = gql`
   fragment IssueCommentReplyFragment on reply {
@@ -49,21 +48,46 @@ const PROJECT_ISSUE_FRAGMENT = gql`
   ${ISSUE_COMMENT_FRAGMENT}
 `;
 
-const PROJECT_DETAILS_FRAGMENT = gql`
-  fragment ProjectDetailsFragment on projects {
-    current_stage
-    description
+const LAUNCHED_PROJECT_DETAILS_FRAGMENT = gql`
+  fragment LaunchedProjectDetailsFragment on launched_projects {
     id
+    projectssBylaunchedId {
+      project_name
+      abstract
+      likes
+      website
+    }
     userByowner {
-      ...UserProfilePicFragment
+      username
+      profile_pic
     }
-    issuessByprojectId(distinct_on: [checkpoint_name]) {
-      id
-      checkpoint_name
-    }
-    project_name
   }
-  ${USER_PROFILE_PIC_FRAGMENT}
 `;
 
-export { ISSUE_COMMENT_FRAGMENT, ISSUE_COMMENT_REPLY_FRAGMENT, PROJECT_DETAILS_FRAGMENT, PROJECT_ISSUE_FRAGMENT };
+const ONGOING_PROJECT_DETAILS_FRAGMENT = gql`
+  fragment OngoingProjectDetailsFragment on projects {
+    id
+    project_name
+    created_on
+    current_stage
+    tech_stack
+    website
+    roles_opened
+    is_public
+    abstract
+    icon
+    likes
+    userByowner {
+      username
+      profile_pic
+    }
+  }
+`;
+
+export {
+  ISSUE_COMMENT_FRAGMENT,
+  ISSUE_COMMENT_REPLY_FRAGMENT,
+  LAUNCHED_PROJECT_DETAILS_FRAGMENT,
+  ONGOING_PROJECT_DETAILS_FRAGMENT,
+  PROJECT_ISSUE_FRAGMENT
+};

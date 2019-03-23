@@ -15,7 +15,6 @@ import {
 } from '@app/shared/mutations/project-mutations';
 import {
   QUERY_CHECKPOINT_ISSUES,
-  QUERY_PROJECT_DETAILS,
   QUERY_NEWEST_LAUNCHED_PROJECTS,
   QUERY_POPULAR_LAUNCHED_PROJECTS,
   QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT,
@@ -23,6 +22,7 @@ import {
   QUERY_POPULAR_ONGOING_PROJECTS,
   QUERY_TOTAL_ONGOING_PROJECTS_COUNT
 } from '@app/shared/queries/project-queries';
+import { QUERY_PROJECTS_BY_USER } from '@app/shared/queries/user-queries';
 
 @Injectable({
   providedIn: 'root'
@@ -77,21 +77,21 @@ export class ProjectService {
   /**
    * GET PROJECT DETAILS
    */
-  public getProject(id: string, name: string) {
-    return this.apollo
-      .watchQuery<any>({
-        query: QUERY_PROJECT_DETAILS,
-        variables: {
-          id: id,
-          name: name
-        }
-      })
-      .valueChanges.pipe(
-        map((res: any) => {
-          return res.data.projects;
-        })
-      );
-  }
+  // public getProject(id: string, name: string) {
+  //   return this.apollo
+  //     .watchQuery<any>({
+  //       query: QUERY_PROJECT_DETAILS,
+  //       variables: {
+  //         id: id,
+  //         name: name
+  //       }
+  //     })
+  //     .valueChanges.pipe(
+  //       map((res: any) => {
+  //         return res.data.projects;
+  //       })
+  //     );
+  // }
 
   /**
    * FETCH IDEA

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AddRoutingModule } from './add-routing.module';
 import { AddProjectComponent } from './project/project.component';
-import { AddIdeaComponent } from './add-idea/idea.component';
+import { AddIdeaComponent } from './add-idea/add-idea.component';
 import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

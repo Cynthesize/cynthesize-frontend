@@ -1,15 +1,15 @@
+import { Component, OnInit } from '@angular/core';
+import { User } from '@app/core/profile/user';
+import { FormGroup, FormControl } from '@angular/forms';
+import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { ProfileService } from '@app/core/profile/profile.service';
 import { IdeaService } from '@app/core/idea/idea.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { finalize } from 'rxjs/internal/operators/finalize';
-import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
-import { User } from '@app/core/profile/user';
-import { MatChipInputEvent, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { FormGroup, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatChipInputEvent } from '@angular/material';
 import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
+import { SocialDialogComponent } from './details/details.component';
+import { finalize } from 'rxjs/operators';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -20,15 +20,14 @@ export interface SocialLinks {
 }
 
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
 })
-export class DetailsComponent implements OnInit {
+export class UserComponent implements OnInit {
   userProjects: Array<Object>;
   userIdeas: Array<Object>;
-  user: User = new User();
+  user: User;
   isPageLoaded = false;
   username: string;
   sociallinks: any = [];
@@ -169,7 +168,7 @@ export class DetailsComponent implements OnInit {
   deleteIdea(id: any) {
     this.ideaService.deleteIdea(id).subscribe(data => {
       this.userIdeas = this.userIdeas.filter((obj: any) => {
-        return obj.id != data.data.delete_ideas.returning[0].id;
+        return obj.id !== data.data.delete_ideas.returning[0].id;
       });
     });
   }
@@ -188,20 +187,5 @@ export class DetailsComponent implements OnInit {
     if (index >= 0) {
       this.listOfTech.splice(index, 1);
     }
-  }
-}
-
-@Component({
-  selector: 'app-social-dialog',
-  templateUrl: './social-dialog.component.html',
-  styleUrls: ['./social-dialog.component.scss']
-})
-export class SocialDialogComponent {
-  socialLinks: FormGroup;
-
-  constructor(public dialogRef: MatDialogRef<SocialDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 }

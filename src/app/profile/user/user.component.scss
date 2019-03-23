@@ -1,0 +1,68 @@
+.link-active {
+  color: orange !important;
+}
+
+.profile-header {
+  background-color: #ffb03a;
+  border-radius: 20px !important;
+  display: flex !important;
+  flex: 1;
+  padding: 35px !important;
+  align-items: baseline;
+  margin-top: 30px;
+}
+
+.header-info {
+  display: flex;
+  align-items: center;
+  justify-items: start;
+}
+
+cl-image > img {
+  border-radius: 50%;
+}
+
+.short-detail {
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+}
+
+.full-name {
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: white;
+}
+
+.bio {
+  color: white;
+  line-height: 1.6;
+  max-width: 200px;
+  font-weight: 600;
+}
+
+.header-icons {
+  display: flex;
+  background-color: white;
+  padding: 30px 0 40px 50px;
+}
+
+#project > img,
+#profile > img,
+#idea > img {
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+}
+
+#project,
+#profile,
+#idea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 50px;
+  font-weight: 600;
+  color: grey;
+  font-size: smaller;
+}

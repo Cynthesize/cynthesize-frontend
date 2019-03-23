@@ -8,6 +8,7 @@ import { MaterialModule } from '@app/material.module';
 
 @NgModule({
   declarations: [LaunchedProductsComponent],
-  imports: [CommonModule, LaunchedRoutingModule, SharedModule, MaterialModule]
+  imports: [CommonModule, LaunchedRoutingModule, SharedModule, MaterialModule],
+  exports: [LaunchedProductsComponent]
 })
 export class LaunchedModule {}
