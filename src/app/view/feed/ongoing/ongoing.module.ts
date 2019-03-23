@@ -29,6 +29,6 @@ export const config: CloudinaryConfiguration = {
     CloudinaryModule.forRoot(cloudinary, config)
   ],
   entryComponents: [ProjectDialogEntryComponent],
-  exports: [OngoingProjectsComponent]
+  exports: [ProjectDialogEntryComponent]
 })
 export class OngoingModule {}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatBottomSheet } from '@angular/material';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FeedProjectComponent } from '../../feed-project/feed-project.component';
 import { ProjectService } from '@app/core/project/project.service';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
@@ -80,7 +80,7 @@ export class OngoingProjectsComponent implements OnInit {
   template: ''
 })
 export class ProjectDialogEntryComponent {
-  constructor(public dialog: MatDialog, private router: Router) {
+  constructor(public dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
     this.openDialog();
   }
   openDialog(): void {
@@ -89,7 +89,7 @@ export class ProjectDialogEntryComponent {
       data: this.router.url.split('/')[this.router.url.split('/').length - 1]
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.router.navigate(['/view/feed/projects/ongoing']);
+      this.router.navigate(['../'], { relativeTo: this.route });
     });
   }
 }

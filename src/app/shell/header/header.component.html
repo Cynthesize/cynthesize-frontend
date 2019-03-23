@@ -43,17 +43,18 @@
       Login/Signup
     </button>
     <mat-menu #userMenu="matMenu" class="profile-menu">
-      <div class="user-info ">
-        <div class="profile-header-info-nav__photo">
-          <cl-image height="50" crop="scale" public-id="{{ profilepPic }}" secure="true"></cl-image>
+      <div>
+        <div class="user-info">
+          <div class="user-image">
+            <cl-image height="50" crop="scale" public-id="{{ profilepPic }}" secure="true"></cl-image>
+          </div>
+          <div class="username">{{ username }}</div>
         </div>
-        <p class="helper-text" translate>Logged in as</p>
-        <h4 class="username">{{ username }}</h4>
-      </div>
-      <mat-divider></mat-divider>
-      <div class="user-links">
-        <div class="user-link" routerLink="/user/{{ username }}">Profile</div>
-        <div class="user-link" (click)="logout()">Logout</div>
+        <mat-divider></mat-divider>
+        <div class="user-links">
+          <div class="user-link" routerLink="/user/{{ username }}">Profile</div>
+          <div class="user-link" (click)="logout()">Logout</div>
+        </div>
       </div>
     </mat-menu>
   </div>

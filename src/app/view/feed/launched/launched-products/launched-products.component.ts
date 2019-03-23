@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MatBottomSheet } from '@angular/material';
+import { MatBottomSheet, MatDialog } from '@angular/material';
 import { ShareSheetComponent } from '@app/shared/share-sheet/share-sheet.component';
 import { ProjectService } from '@app/core/project/project.service';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
+import { FeedProjectComponent } from '../../feed-project/feed-project.component';
 
 @Component({
   selector: 'app-launched-products',
@@ -18,7 +19,8 @@ export class LaunchedProductsComponent implements OnInit {
   constructor(
     private bottomSheet: MatBottomSheet,
     private projectService: ProjectService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private dialog: MatDialog
   ) {
     this.errorHandler.ideaWindowScrolled.subscribe(message => {
       if (this.length >= this.projectList.length && message === 'fetchLaunchedProjects') {
@@ -26,6 +28,16 @@ export class LaunchedProductsComponent implements OnInit {
         this.getlaunchedProjectsFromServer(4, this.currentCount, this.activeContext);
       }
     });
+  }
+
+  openDialog(idea: any): void {
+    const dialogRef = this.dialog.open(FeedProjectComponent, {
+      panelClass: 'custom-dialog-container',
+      width: 'auto',
+      data: { idea }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {});
   }
 
   ngOnInit() {
