@@ -37,45 +37,22 @@
   height: 90px !important;
 }
 
-.profile-header-info-nav {
-  &__photo {
-    height: 5rem;
-    width: 5rem;
-    border-radius: 50%;
-    float: right;
-    justify-content: center;
-    overflow: hidden;
-  }
-}
-.ng-trigger-transformMenu {
-  background-color: white;
-  box-shadow: 0 0 2px #555555;
-
+.user-info {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: 25rem;
-  color: black;
-}
-
-.helper-text {
-  display: block;
-  font-size: 1.3rem;
-  color: #444;
-  font-family: "gothamlight", sans-serif;
+  padding: 10px 20px;
+  align-items: center;
 }
 
 .username {
-  font-size: 2rem;
-}
-
-.user-info {
-  padding: 2rem;
+  color: black;
+  padding: 15px;
+  font-weight: 600;
+  font-size: 1.2rem;
 }
 
 .user-link {
-  padding: 1rem 2rem;
-  font-size: 1.4rem;
+  padding: 1rem;
+  font-size: 1rem;
   color: $color-primary-dark;
   cursor: pointer;
 
@@ -84,7 +61,7 @@
   }
 }
 
-.mat-raised-button {
+.container > .mat-raised-button {
   width: 150px;
   background-color: orange;
 }

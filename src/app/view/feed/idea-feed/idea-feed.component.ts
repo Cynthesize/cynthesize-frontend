@@ -4,7 +4,7 @@ import { MatDialog, MatBottomSheet } from '@angular/material';
 import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { IdeaComponent } from '@app/view/idea/idea.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ShareSheetComponent } from '@app/shared/share-sheet/share-sheet.component';
 
 @Component({
@@ -81,7 +81,7 @@ export class IdeaFeedComponent implements OnInit {
   template: ''
 })
 export class DialogEntryComponent {
-  constructor(public dialog: MatDialog, private router: Router) {
+  constructor(public dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
     this.openDialog();
   }
   openDialog(): void {
@@ -90,7 +90,7 @@ export class DialogEntryComponent {
       data: this.router.url.split('/')[this.router.url.split('/').length - 1]
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.router.navigate(['/view/feed/ideas']);
+      this.router.navigate(['../'], { relativeTo: this.route });
     });
   }
 }

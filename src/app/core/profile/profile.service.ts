@@ -5,13 +5,9 @@ import BACKEND_URLS from '@app/shared/backend-urls';
 import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs';
 import { Apollo } from 'apollo-angular';
-import {
-  QUERY_USER_DETAILS,
-  QUERY_USER_MINIMAL_CONTRIBUTIONS,
-  QUERY_USER_DETAILED_CONTRIBUTIONS_IDEAS,
-  QUERY_USER_DETAILED_CONTRIBUTIONS_PROJECTS
-} from '@app/shared/queries/user-queries';
+import { QUERY_USER_DETAILS, QUERY_PROJECTS_BY_USER, QUERY_IDEAS_BY_USER } from '@app/shared/queries/user-queries';
 import { MUTATION_UPDATE_USER_DETAILS } from '@app/shared/mutations/user-mutations';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -37,63 +33,6 @@ export class ProfileService {
       );
   }
 
-  /*
-   * getUserMinimalContributions
-   */
-  public getUserMinimalContributions(username: string) {
-    return this.apollo
-      .watchQuery<any>({
-        query: QUERY_USER_MINIMAL_CONTRIBUTIONS,
-        variables: {
-          username: username
-        }
-      })
-      .valueChanges.pipe(
-        map((res: any) => {
-          return res.data;
-        })
-      );
-  }
-
-  /*
-   * getUserDetailedContributions
-   */
-  public getUserDetailedContributions(username: string, context: string) {
-    let query = QUERY_USER_DETAILED_CONTRIBUTIONS_IDEAS;
-    if (context === 'projects' || context === 'project') {
-      query = QUERY_USER_DETAILED_CONTRIBUTIONS_PROJECTS;
-    }
-    return this.apollo
-      .watchQuery<any>({
-        query: query,
-        variables: {
-          username: username
-        }
-      })
-      .valueChanges.pipe(
-        map((res: any) => {
-          return res.data;
-        })
-      );
-  }
-
-  /**
-   * getUserContributions
-   */
-  public getUserContributions() {
-    return this.http
-      .get(BACKEND_URLS.USER_CONTRIBUTIONS_DETAILS, {
-        params: {
-          username: this.router.url.split('/')[2]
-        }
-      })
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
   /**
    * UpdateUserDetails
    */
@@ -106,6 +45,44 @@ export class ProfileService {
           updateObject: updateObject
         }
       })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * getUserProjects
+   */
+  public getUserProjects(username: string) {
+    return this.apollo
+      .watchQuery<any>({
+        query: QUERY_PROJECTS_BY_USER,
+        variables: {
+          username: username
+        }
+      })
+      .valueChanges.pipe(take(1))
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * getUserProjects
+   */
+  public getUserIdeas(username: string) {
+    return this.apollo
+      .watchQuery<any>({
+        query: QUERY_IDEAS_BY_USER,
+        variables: {
+          username: username
+        }
+      })
+      .valueChanges.pipe(take(1))
       .pipe(
         map((res: any) => {
           return res;

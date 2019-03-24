@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FeedRoutingModule } from './feed-routing.module';
-import { IdeaFeedComponent, DialogEntryComponent } from './idea-feed/idea-feed.component';
 import { IssuesFeedComponent } from './issues-feed/issues-feed.component';
 import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
@@ -10,7 +9,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
 import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
 import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
-import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA, MatBottomSheetModule } from '@angular/material';
+import { MatBottomSheetModule } from '@angular/material';
+import { FeedProjectComponent } from './feed-project/feed-project.component';
 
 export const cloudinary = {
   Cloudinary: CloudinaryCore
@@ -21,7 +21,7 @@ export const config: CloudinaryConfiguration = {
 };
 
 @NgModule({
-  declarations: [IdeaFeedComponent, IssuesFeedComponent, DialogEntryComponent],
+  declarations: [IssuesFeedComponent, FeedProjectComponent],
   imports: [
     CommonModule,
     FeedRoutingModule,
@@ -31,6 +31,6 @@ export const config: CloudinaryConfiguration = {
     NgxPaginationModule,
     CloudinaryModule.forRoot(cloudinary, config)
   ],
-  entryComponents: [IdeaCardComponent, DialogEntryComponent]
+  entryComponents: [IdeaCardComponent, FeedProjectComponent]
 })
 export class FeedModule {}

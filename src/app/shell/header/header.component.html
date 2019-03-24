@@ -15,24 +15,24 @@
     </div>
     <span fxFlex></span>
     <div class="v-desktop" fxHide.lt-md>
-      <button class="header__link" mat-button routerLink="/view/feed/ideas" routerLinkActive="active">
+      <button class="header__link" mat-button routerLink="/view/feed/ideas">
         <span translate>Ideas</span>
       </button>
-      <button class="header__link" mat-button [matMenuTriggerFor]="menu" routerLinkActive="active">
+      <button class="header__link" mat-button routerLink="/view/feed/projects/ongoing" [matMenuTriggerFor]="menu">
         <span translate>Collaborate </span>
       </button>
       <mat-menu #menu="matMenu">
-        <button class="header__link" mat-menu-item routerLink="/add/idea" routerLinkActive="active">
+        <button class="header__link" mat-menu-item routerLink="/add/idea">
           <span translate>New Idea</span>
         </button>
-        <button class="header__link" mat-menu-item routerLink="/add/project" routerLinkActive="active">
+        <button class="header__link" mat-menu-item routerLink="/add/project">
           <span translate>New Project</span>
         </button>
       </mat-menu>
-      <button class="header__link" mat-button routerLink="/" routerLinkActive="active">
+      <button class="header__link" mat-button routerLink="/">
         <span translate>Become a mentor</span>
       </button>
-      <button class="header__link" mat-button routerLink="/view/launched" routerLinkActive="active">
+      <button class="header__link" mat-button routerLink="/view/feed/projects/launched">
         <span translate>Launched Projects</span>
       </button>
     </div>
@@ -43,17 +43,18 @@
       Login/Signup
     </button>
     <mat-menu #userMenu="matMenu" class="profile-menu">
-      <div class="user-info ">
-        <div class="profile-header-info-nav__photo">
-          <cl-image height="50" crop="scale" public-id="{{ profilepPic }}" secure="true"></cl-image>
+      <div>
+        <div class="user-info">
+          <div class="user-image">
+            <cl-image height="50" crop="scale" public-id="{{ profilepPic }}" secure="true"></cl-image>
+          </div>
+          <div class="username">{{ username }}</div>
         </div>
-        <p class="helper-text" translate>Logged in as</p>
-        <h4 class="username">{{ username }}</h4>
-      </div>
-      <mat-divider></mat-divider>
-      <div class="user-links">
-        <div class="user-link" routerLink="/user/{{ username }}">Profile</div>
-        <div class="user-link" (click)="logout()">Logout</div>
+        <mat-divider></mat-divider>
+        <div class="user-links">
+          <div class="user-link" routerLink="/user/{{ username }}">Profile</div>
+          <div class="user-link" (click)="logout()">Logout</div>
+        </div>
       </div>
     </mat-menu>
   </div>

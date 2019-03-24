@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialModule } from '@app/material.module';
-import { AddIdeaComponent } from './idea.component';
+import { AddIdeaComponent } from './add-idea.component';
 
 describe('IdeaComponent', () => {
   let component: AddIdeaComponent;

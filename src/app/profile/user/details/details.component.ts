@@ -80,16 +80,6 @@ export class DetailsComponent implements OnInit {
         this.errorHandler.subj_notification.next(error);
       }
     );
-
-    this.profileService.getUserMinimalContributions(this.username).subscribe(
-      (res: any) => {
-        this.userIdeas = res.user[0].ideasByOwner;
-        this.userProjects = res.user[0].projectsByowner;
-      },
-      (err: any) => {
-        this.errorHandler.subj_notification.next(err);
-      }
-    );
   }
 
   openDialog(idea: any): void {
@@ -109,23 +99,6 @@ export class DetailsComponent implements OnInit {
       this.socialLinks = result;
     });
   }
-
-  fetchContributions(context: string) {
-    this.username = this.router.url.split('/')[2];
-    this.profileService.getUserDetailedContributions(this.username, context).subscribe(
-      (res: any) => {
-        if (context === 'projects' || context === 'project') {
-          this.userProjects = res.user[0].projectsByowner;
-        } else {
-          this.userIdeas = res.user[0].ideasByOwner;
-        }
-      },
-      (err: any) => {
-        this.errorHandler.subj_notification.next(err);
-      }
-    );
-  }
-
   toggleFormFields(toggle: boolean) {
     this.isFieldEditable = toggle;
   }
@@ -215,21 +188,6 @@ export class DetailsComponent implements OnInit {
     if (index >= 0) {
       this.listOfTech.splice(index, 1);
     }
-  }
-
-  fetchUserContributions() {
-    this.profileService
-      .getUserContributions()
-      .pipe(finalize(() => {}))
-      .subscribe(
-        (data: any) => {
-          this.user.idea_list = data.idea_list;
-          this.user.project_list = data.project_list;
-        },
-        (error: any) => {
-          this.errorHandler.subj_notification.next(error);
-        }
-      );
   }
 }
 

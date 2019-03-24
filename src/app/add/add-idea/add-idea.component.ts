@@ -16,9 +16,9 @@ export interface Tags {
 const log = new Logger('Idea');
 
 @Component({
-  selector: 'app-idea',
-  templateUrl: './idea.component.html',
-  styleUrls: ['./idea.component.scss']
+  selector: 'app-add-idea',
+  templateUrl: './add-idea.component.html',
+  styleUrls: ['./add-idea.component.scss']
 })
 export class AddIdeaComponent implements OnInit {
   version: string = environment.version;

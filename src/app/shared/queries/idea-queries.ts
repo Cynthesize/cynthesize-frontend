@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { IDEA_DETAILS_FRAGMENT } from '../fragments/idea-fragments';
+import { IDEA_DETAILS_FRAGMENT, IDEA_FEED_FRAGMENT } from '../fragments/idea-fragments';
 
 const QUERY_IDEA_DETAILS = gql`
   query fetch_ideas($ideaId: Int!) {
@@ -54,16 +54,10 @@ const QUERY_POPULAR_IDEAS = gql`
 const QUERY_NEWEST_IDEAS = gql`
   query fetch_newest_ideas($limit: Int!, $offset: Int!) {
     ideas(order_by: { timestamp: desc }, limit: $limit, offset: $offset) {
-      id
-      idea_name
-      description
-      upvotes
-      userByowner {
-        username
-        profile_pic
-      }
+      ...IdeaFeedFragment
     }
   }
+  ${IDEA_FEED_FRAGMENT}
 `;
 
 export {

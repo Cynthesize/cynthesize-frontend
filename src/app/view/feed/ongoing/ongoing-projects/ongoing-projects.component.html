@@ -1,12 +1,12 @@
 <div class="container">
   <div class="page">
     <div class="page-header">
-      <div class="page-heading">PROJECTS</div>
+      <div class="page-heading">ONGOING PROJECTS</div>
     </div>
     <div class="page-search">
       <div class="page-search-box">
         <mat-form-field appearance="fill">
-          <mat-label>Search Launched Projects</mat-label>
+          <mat-label>Search Active Projects</mat-label>
           <input matInput />
           <mat-icon matPrefix>search</mat-icon>
         </mat-form-field>
@@ -28,12 +28,12 @@
       </div>
     </div>
     <div class="page-data">
-      <mat-card class="card" *ngFor="let project of projectList">
+      <mat-card class="card" *ngFor="let project of projectsList">
         <div class="card-image"></div>
         <div class="card-details">
-          <div class="card-project-name">{{ project.projectssBylaunchedId[0].project_name }}</div>
+          <div class="card-project-name">{{ project.project_name }}</div>
           <div class="card-project-description">
-            {{ project.projectssBylaunchedId[0].abstract }}
+            {{ project.abstract }}
           </div>
         </div>
         <div class="card-links">
@@ -41,8 +41,8 @@
             <a href="{{ project.website }}" target="_blank">{{ project.website }}</a>
           </div>
           <div class="card-icons pointer">
-            <app-like [projectId]="project.id" [likes]="project.likes" class="icon"></app-like>
-            <mat-icon class="icon" [routerLink]="['/view/launched', project.id]">comment</mat-icon> 98
+            <app-like [projectId]="project.id" [likes]="project.likes || 0" class="icon"></app-like>
+            <mat-icon class="icon" [routerLink]="['/view/feed/projects/ongoing', project.id]">comment</mat-icon> 98
             <mat-icon class="icon" (click)="openShareSheet()">share</mat-icon>
           </div>
         </div>

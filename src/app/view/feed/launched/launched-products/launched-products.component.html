@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="page">
+    <div class="page-header">
+      <div class="page-heading">PROJECTS</div>
+    </div>
+    <div class="page-search">
+      <div class="page-search-box">
+        <mat-form-field appearance="fill">
+          <mat-label>Search Launched Projects</mat-label>
+          <input matInput />
+          <mat-icon matPrefix>search</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="page-sort">
+        <span
+          class="pointer"
+          [ngClass]="{ 'active-context': activeContext === 'popular' }"
+          (click)="changeContext('popular')"
+          >POPULAR</span
+        >
+        &nbsp;|&nbsp;
+        <span
+          class="pointer"
+          [ngClass]="{ 'active-context': activeContext === 'newest' }"
+          (click)="changeContext('newest')"
+          >NEWEST</span
+        >
+      </div>
+    </div>
+    <div class="page-data">
+      <mat-card class="card" *ngFor="let project of projectList">
+        <div class="card-image"></div>
+        <div class="card-details">
+          <div class="card-project-name">{{ project.projectssBylaunchedId[0].project_name }}</div>
+          <div class="card-project-description">
+            {{ project.projectssBylaunchedId[0].abstract }}
+          </div>
+        </div>
+        <div class="card-links">
+          <div>
+            <a href="{{ project.projectssBylaunchedId[0].website }}" target="_blank">{{
+              project.projectssBylaunchedId[0].website
+            }}</a>
+          </div>
+          <div class="card-icons pointer">
+            <app-like [projectId]="project.id" [likes]="project.projectssBylaunchedId[0].likes" class="icon"></app-like>
+            <mat-icon class="icon" [routerLink]="['/view/feed/projects/launched', project.id]">comment</mat-icon> 98
+            <mat-icon class="icon" (click)="openShareSheet()">share</mat-icon>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <mat-progress-bar mode="query" [ngClass]="{ hidden: !isLoading }" style="margin-bottom: 30px;"></mat-progress-bar>
+</div>
+<router-outlet></router-outlet>

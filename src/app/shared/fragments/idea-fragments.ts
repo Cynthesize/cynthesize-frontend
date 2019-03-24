@@ -49,4 +49,19 @@ const IDEA_DETAILS_FRAGMENT = gql`
   ${IDEA_COMMENTS_FRAGMENT}
 `;
 
-export { IDEA_DETAILS_FRAGMENT, IDEA_COMMENTS_FRAGMENT, IDEA_REPLY_FRAGMENT };
+const IDEA_FEED_FRAGMENT = gql`
+  fragment IdeaFeedFragment on user {
+    ideassByowner(limit: 8) {
+      id
+      idea_name
+      description
+      upvotes
+      userByowner {
+        username
+        profile_pic
+      }
+    }
+  }
+`;
+
+export { IDEA_DETAILS_FRAGMENT, IDEA_COMMENTS_FRAGMENT, IDEA_REPLY_FRAGMENT, IDEA_FEED_FRAGMENT };

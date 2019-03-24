@@ -1,0 +1,29 @@
+<div class="container" *ngIf="user">
+  <mat-card class="profile-header">
+    <div class="header-info">
+      <div class="image">
+        <cl-image height="200" crop="scale" public-id="{{ user.profile_pic }}" secure="true"></cl-image>
+      </div>
+      <div class="short-detail">
+        <div class="full-name">{{ user.username }}</div>
+        <div class="bio">I'm a cool cool developer who loves to travel and eat.</div>
+      </div>
+    </div>
+  </mat-card>
+  <div class="profile-icons">
+    <div class="header-icons">
+      <div id="profile" [routerLink]="['/user', username, 'profile']" routerLinkActive="link-active">
+        <img src="../../../../assets/images/profile.svg" />PROFILE
+      </div>
+      <div id="project" [routerLink]="['/user', username, 'projects']" routerLinkActive="link-active">
+        <img src="../../../../assets/images/briefing.svg" />PROJECTS
+      </div>
+      <div id="idea" [routerLink]="['/user', username, 'ideas']" routerLinkActive="link-active">
+        <img src="../../../../assets/images/idea.svg" />IDEAS
+      </div>
+    </div>
+  </div>
+</div>
+<div class="profile-project-page container">
+  <router-outlet></router-outlet>
+</div>
