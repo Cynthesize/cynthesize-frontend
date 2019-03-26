@@ -43,7 +43,12 @@
             }}</a>
           </div>
           <div class="card-icons pointer">
-            <app-like [projectId]="project.id" [likes]="project.projectssBylaunchedId[0].likes" class="icon"></app-like>
+            <app-like
+              [activityId]="project.id"
+              [activityType]="project"
+              [likes]="project.projectssBylaunchedId[0].likes"
+              class="icon"
+            ></app-like>
             <mat-icon class="icon" [routerLink]="['/view/feed/projects/launched', project.id]">comment</mat-icon> 98
             <mat-icon class="icon" (click)="openShareSheet()">share</mat-icon>
           </div>

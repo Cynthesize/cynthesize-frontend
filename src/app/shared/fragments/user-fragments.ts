@@ -6,6 +6,7 @@ const USER_PROFILE_PIC_FRAGMENT = gql`
     id
     profile_pic
     username
+    is_mentor
   }
 `;
 

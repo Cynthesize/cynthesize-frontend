@@ -67,7 +67,7 @@ export class DetailsComponent implements OnInit {
       website: new FormControl()
     });
 
-    this.profileService.getUserDetails(this.username).subscribe(
+    this.profileService.getUserDetails(this.router.url.split('/')[2]).subscribe(
       (data: any) => {
         if (data.user.length === 0) {
           this.router.navigate(['not-found']);

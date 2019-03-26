@@ -13,7 +13,7 @@
         </div>
         <div class="idea-card-links">
           <div class="idea-card-icons pointer">
-            <app-like [ideaId]="idea.id" [upvotes]="idea.upvotes" class="icon"></app-like>
+            <app-like [activityId]="idea.id" [activityType]="idea" [likes]="idea.upvotes" class="icon"></app-like>
             <mat-icon class="icon" [routerLink]="['/view/feed/ideas', idea.id]">comment</mat-icon> 98
             <mat-icon class="icon" (click)="openShareSheet()">share</mat-icon>
           </div>

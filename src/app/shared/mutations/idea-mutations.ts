@@ -25,8 +25,8 @@ const MUTATION_DELETE_IDEA = gql`
 `;
 
 const MUTATION_LIKE_IDEA = gql`
-  mutation update_upvotes($likesOffsetCounter: Int!, $ideaId: Int!, $userId: Int!) {
-    update_ideas(where: { id: { _eq: $ideaId } }, _inc: { upvotes: $likesOffsetCounter }) {
+  mutation update_upvotes($ideaId: Int!, $userId: Int!) {
+    update_ideas(where: { id: { _eq: $ideaId } }, _inc: { upvotes: 1 }) {
       affected_rows
       returning {
         id
@@ -43,8 +43,8 @@ const MUTATION_LIKE_IDEA = gql`
 `;
 
 const MUTATION_DISLIKE_IDEA = gql`
-  mutation update_upvotes($likesOffsetCounter: Int!, $ideaId: Int!, $userId: Int!) {
-    update_ideas(where: { id: { _eq: $ideaId } }, _inc: { upvotes: $likesOffsetCounter }) {
+  mutation update_upvotes($ideaId: Int!, $userId: Int!) {
+    update_ideas(where: { id: { _eq: $ideaId } }, _inc: { upvotes: -1 }) {
       affected_rows
       returning {
         id

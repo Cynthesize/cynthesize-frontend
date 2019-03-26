@@ -8,8 +8,6 @@ import { ProjectService } from '@app/core/project/project.service';
   styleUrls: ['./feed-project.component.scss']
 })
 export class FeedProjectComponent implements OnInit {
-  idea: any;
-
   constructor(
     public dialogRef: MatDialogRef<FeedProjectComponent>,
     @Inject(MAT_DIALOG_DATA) public data: number,
@@ -19,5 +17,7 @@ export class FeedProjectComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.data);
+  }
 }

@@ -1,5 +1,4 @@
-<!-- Idea Comment Section -->
-<div class="loader" *ngIf="isLoading"><mat-spinner></mat-spinner></div>
+<!-- <div class="loader" *ngIf="isLoading"><mat-spinner></mat-spinner></div>
 <div *ngIf="activityType === 'idea' && !isLoading">
   <div *ngFor="let comment of commentsArray">
     {{ comment.comment_text }} by {{ comment.commenter }} at {{ comment.timestamp | date }}
@@ -10,7 +9,6 @@
   </div>
 </div>
 
-<!-- Issue Comment Section  -->
 <div class="loader" *ngIf="isLoading"><mat-spinner></mat-spinner></div>
 <div *ngIf="issueCommentObject && !isLoading">
   <div *ngFor="let comment of issueCommentObject">
@@ -24,5 +22,68 @@
     <td-text-editor [(ngModel)]="comment" [options]="options" *ngIf="commentingOnIssue"></td-text-editor>
     <button mat-button (click)="cancel()">Cancel</button>
     <button mat-button (click)="addNewComment(projectId, activityId)">Post Comment</button>
+  </div>
+</div> -->
+
+<div class="comment-box">
+  <div class="comment-container">
+    <div class="add-comment">
+      <div class="user-icon">
+        <cl-image height="32" crop="scale" public-id="{{ user_pic }}" secure="true"></cl-image>
+      </div>
+      <div class="init-comment-input">
+        Write Comment
+      </div>
+    </div>
+    <div class="comments" *ngIf="commentObject">
+      <!-- Comments here -->
+      <div class="comment-unit" *ngFor="let comment of commentObject">
+        <div class="comment-info">
+          <div class="user-icon">
+            <img src=" " class="user-profile-icon" />
+          </div>
+          <div class="user-name">
+            <p style="font-size: 1rem; font-weight: 600;">WickedBrat</p>
+            <p style="font-size: 0.7rem;">Some text that would make sense.</p>
+          </div>
+        </div>
+        <div class="comment-text-box">
+          <p class="comment-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla explicabo suscipit cupiditate, fugit beatae
+            velit iste corrupti quo magni sed impedit aliquam ut quidem aperiam adipisci illum nostrum vitae rerum?
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas tenetur debitis voluptate voluptates autem
+            laudantium eius ipsum asperiores, labore dicta quasi reiciendis. Voluptate, distinctio! Dolorem, laboriosam
+            exercitationem. Optio, ullam repudiandae.
+          </p>
+          <div class="comment-icons">
+            <mat-icon class="icon">whatshot</mat-icon>12 Like <mat-icon class="icon">reply</mat-icon> Reply
+          </div>
+          <!-- Replies here -->
+          <div class="comment-unit" *ngFor="let reply of comment.replysBycommentId">
+            <div class="comment-info">
+              <div class="user-icon">
+                <img src=" " class="user-profile-icon" />
+              </div>
+              <div class="user-name">
+                <p style="font-size: 1rem; font-weight: 600;">WickedBrat</p>
+                <p style="font-size: 0.7rem;">Some text that would make sense.</p>
+              </div>
+            </div>
+            <div class="comment-text-box">
+              <p class="comment-text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla explicabo suscipit cupiditate, fugit
+                beatae velit iste corrupti quo magni sed impedit aliquam ut quidem aperiam adipisci illum nostrum vitae
+                rerum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas tenetur debitis voluptate
+                voluptates autem laudantium eius ipsum asperiores, labore dicta quasi reiciendis. Voluptate, distinctio!
+                Dolorem, laboriosam exercitationem. Optio, ullam repudiandae.
+              </p>
+              <div class="comment-icons">
+                <mat-icon class="icon">whatshot</mat-icon>12 Like <mat-icon class="icon">reply</mat-icon> Reply
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

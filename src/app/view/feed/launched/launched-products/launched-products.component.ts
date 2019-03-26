@@ -30,16 +30,6 @@ export class LaunchedProductsComponent implements OnInit {
     });
   }
 
-  openDialog(idea: any): void {
-    const dialogRef = this.dialog.open(FeedProjectComponent, {
-      panelClass: 'custom-dialog-container',
-      width: 'auto',
-      data: { idea }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {});
-  }
-
   ngOnInit() {
     this.projectService.getTotalLaunchedProjectsCount().subscribe(data => {
       this.length = data.data.launched_projects_aggregate.aggregate.count;

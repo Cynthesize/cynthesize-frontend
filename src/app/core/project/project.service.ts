@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import BACKEND_URLS from '@app/shared/backend-urls';
 import { map, take } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
@@ -28,7 +26,7 @@ import { QUERY_PROJECTS_BY_USER } from '@app/shared/queries/user-queries';
   providedIn: 'root'
 })
 export class ProjectService {
-  constructor(private http: HttpClient, private apollo: Apollo) {}
+  constructor(private apollo: Apollo) {}
 
   /**
    * ADD A PROJECT
@@ -92,23 +90,6 @@ export class ProjectService {
   //       })
   //     );
   // }
-
-  /**
-   * FETCH IDEA
-   */
-  public fetchIdea(idList: string) {
-    return this.http
-      .get(BACKEND_URLS.FETCH_ISSUE_OBJECT, {
-        params: {
-          id: idList
-        }
-      })
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
 
   /**
    * Add Comments for an issue in the project.

@@ -1,1 +1,78 @@
-<div class="container"></div>
+<div class="modal-container">
+  <div class="project-heading">
+    <div class="project-icon"></div>
+    <div class="project-basic-info">
+      <div class="project-name">Cynthesize</div>
+      <div class="project-abstract">Cynthesize is a platform to join students with mentors.</div>
+      <div class="card-icons pointer">
+        <app-like
+          [activityId]="data.activityId"
+          [activityType]="project"
+          [likes]="project.projectssBylaunchedId[0].likes"
+          class="icon"
+        ></app-like>
+        <mat-icon class="icon" [routerLink]="['/view/feed/projects/launched', data.activityId]">comment</mat-icon> 98
+        <mat-icon class="icon" (click)="openShareSheet()">share</mat-icon>
+      </div>
+    </div>
+    <div class="project-buttons">
+      <button mat-raised-button class="project-btn orange-btn">Collaborate</button>
+      <button mat-raised-button color="primary" class="project-btn">
+        Website
+      </button>
+    </div>
+  </div>
+
+  <div class="project-image-slideshow">
+    <div></div>
+  </div>
+
+  <div class="comment-text">Comments</div>
+  <div class="project-comment">
+    <app-comments [activityId]="" [activityType]=""></app-comments>
+  </div>
+</div>
+<style>
+  .modal-container {
+    background-color: rgb(247, 247, 247);
+  }
+  .project-heading {
+    display: flex;
+    padding: 20px;
+  }
+  .project-icon {
+    width: 150px;
+    height: 150px;
+    background-color: black;
+    flex: 1;
+  }
+  .project-basic-info {
+    display: flex;
+    flex-direction: column;
+    flex: 5;
+  }
+  .project-name {
+    font-size: 2rem;
+    padding: 10px 10px 5px 10px;
+    font-weight: 700;
+  }
+  .project-abstract {
+    font-size: 0.7rem;
+    padding: 0 10px 15px 10px;
+  }
+  .project-buttons {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .project-btn {
+    padding: 5px;
+    margin: 5px;
+  }
+  .orange-btn {
+    background-color: orange;
+  }
+  modal-dialog-container {
+    background-color: rgb(247, 247, 247) !important;
+  }
+</style>

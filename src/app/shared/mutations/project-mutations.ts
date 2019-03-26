@@ -85,9 +85,9 @@ const MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE = gql`
   }
 `;
 
-const MUTATION_LIKE_LAUNCHED_PROJECT = gql`
-  mutation update_likes($likesOffsetCounter: Int!, $launchedProjectId: Int!, $userId: Int!) {
-    update_launched_projects(where: { id: { _eq: $launchedProjectId } }, _inc: { likes: $likesOffsetCounter }) {
+const MUTATION_LIKE_PROJECT = gql`
+  mutation update_likes($launchedProjectId: Int!, $userId: Int!) {
+    update_launched_projects(where: { id: { _eq: $launchedProjectId } }, _inc: { likes: 1 }) {
       affected_rows
       returning {
         id
@@ -103,9 +103,9 @@ const MUTATION_LIKE_LAUNCHED_PROJECT = gql`
   }
 `;
 
-const MUTATION_DISLIKE_LAUNCHED_PROJECT = gql`
-  mutation update_likes($likesOffsetCounter: Int!, $launchedProjectId: Int!, $userId: Int!) {
-    update_launched_projects(where: { id: { _eq: $launchedProjectId } }, _inc: { likes: $likesOffsetCounter }) {
+const MUTATION_DISLIKE_PROJECT = gql`
+  mutation update_likes($launchedProjectId: Int!, $userId: Int!) {
+    update_launched_projects(where: { id: { _eq: $launchedProjectId } }, _inc: { likes: -1 }) {
       affected_rows
       returning {
         id
@@ -130,6 +130,6 @@ export {
   MUTATION_ADD_PROJECT,
   MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE,
   MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT,
-  MUTATION_LIKE_LAUNCHED_PROJECT,
-  MUTATION_DISLIKE_LAUNCHED_PROJECT
+  MUTATION_LIKE_PROJECT,
+  MUTATION_DISLIKE_PROJECT
 };

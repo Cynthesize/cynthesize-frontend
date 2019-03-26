@@ -61,6 +61,7 @@ const LAUNCHED_PROJECT_DETAILS_FRAGMENT = gql`
       username
       profile_pic
     }
+    parent_project_id
   }
 `;
 

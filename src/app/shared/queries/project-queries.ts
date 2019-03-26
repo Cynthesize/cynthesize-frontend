@@ -4,6 +4,7 @@ import {
   ONGOING_PROJECT_DETAILS_FRAGMENT,
   LAUNCHED_PROJECT_DETAILS_FRAGMENT
 } from '../fragments/project-fragments';
+import { USER_PROFILE_PIC_FRAGMENT } from '../fragments/user-fragments';
 
 const QUERY_CHECKPOINT_ISSUES = gql`
   query fetch_project_issues($checkpointName: String!, $projectId: Int!) {
@@ -70,6 +71,64 @@ const QUERY_TOTAL_ONGOING_PROJECTS_COUNT = gql`
   }
 `;
 
+const QUERY_FETCH_ISSUE_COMMENTS = gql`
+  query fetch_idea_comments($ideaId: Int!) {
+    comment(where: { idea_id: { _eq: $ideaId } }) {
+      id
+      comment_text
+      userBycommenter {
+        ...UserProfilePicFragment
+      }
+      replysBycommentId {
+        comment_id
+        reply_text
+        id
+        userByrespondent {
+          ...UserProfilePicFragment
+        }
+        upvotes
+        timestamp
+        previous_edits
+        idea_id
+      }
+      likes
+      timestamp
+      previous_edits
+      issue_id
+    }
+  }
+  ${USER_PROFILE_PIC_FRAGMENT}
+`;
+
+const QUERY_FETCH_PUBLIC_PROJECT_COMMENTS = gql`
+  query fetch_idea_comments($ideaId: Int!) {
+    comment(where: { idea_id: { _eq: $ideaId } }) {
+      id
+      comment_text
+      userBycommenter {
+        ...UserProfilePicFragment
+      }
+      replysBycommentId {
+        comment_id
+        reply_text
+        id
+        userByrespondent {
+          ...UserProfilePicFragment
+        }
+        upvotes
+        timestamp
+        previous_edits
+        idea_id
+      }
+      likes
+      timestamp
+      previous_edits
+      launched_projects_id
+    }
+  }
+  ${USER_PROFILE_PIC_FRAGMENT}
+`;
+
 export {
   QUERY_CHECKPOINT_ISSUES,
   QUERY_NEWEST_LAUNCHED_PROJECTS,
@@ -77,5 +136,7 @@ export {
   QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT,
   QUERY_POPULAR_ONGOING_PROJECTS,
   QUERY_TOTAL_ONGOING_PROJECTS_COUNT,
-  QUERY_NEWEST_ONGOING_PROJECTS
+  QUERY_NEWEST_ONGOING_PROJECTS,
+  QUERY_FETCH_PUBLIC_PROJECT_COMMENTS,
+  QUERY_FETCH_ISSUE_COMMENTS
 };
