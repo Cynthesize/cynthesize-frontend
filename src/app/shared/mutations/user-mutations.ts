@@ -48,8 +48,8 @@ const MUTATION_ADD_COMMENT = gql`
 `;
 
 const MUTATION_LIKE_COMMENT = gql`
-  mutation update_upvotes($commentId: Int!, $userId: Int!) {
-    update_comment(where: { id: { _eq: $commentId } }, _inc: { upvotes: 1 }) {
+  mutation update_likes($commentId: Int!, $userId: Int!) {
+    update_comment(where: { id: { _eq: $commentId } }, _inc: { likes: 1 }) {
       affected_rows
       returning {
         id
@@ -66,15 +66,15 @@ const MUTATION_LIKE_COMMENT = gql`
 `;
 
 const MUTATION_DISLIKE_COMMENT = gql`
-  mutation update_upvotes($commentId: Int!, $userId: Int!) {
-    update_comment(where: { id: { _eq: $commentId } }, _inc: { upvotes: -1 }) {
+  mutation update_likes($commentId: Int!, $userId: Int!) {
+    update_comment(where: { id: { _eq: $commentId } }, _inc: { likes: -1 }) {
       affected_rows
       returning {
         id
         likes
       }
     }
-    delete_comment_likes(where: { user_id: { _eq: $userId }, id: { _eq: $commentId } }) {
+    delete_comment_likes(where: { user_id: { _eq: $userId }, comment_id: { _eq: $commentId } }) {
       affected_rows
       returning {
         comment_id
@@ -84,15 +84,15 @@ const MUTATION_DISLIKE_COMMENT = gql`
 `;
 
 const MUTATION_LIKE_REPLY = gql`
-  mutation update_upvotes($replyId: Int!, $userId: Int!) {
-    update_reply(where: { id: { _eq: $replyId } }, _inc: { upvotes: 1 }) {
+  mutation update_likes($replyId: Int!, $userId: Int!) {
+    update_reply(where: { id: { _eq: $replyId } }, _inc: { likes: 1 }) {
       affected_rows
       returning {
         id
         likes
       }
     }
-    insert_reply_likes(objects: { user_id: $userId, id: $replyId }) {
+    insert_reply_likes(objects: { user_id: $userId, reply_id: $replyId }) {
       affected_rows
       returning {
         reply_id
@@ -102,8 +102,8 @@ const MUTATION_LIKE_REPLY = gql`
 `;
 
 const MUTATION_DISLIKE_REPLY = gql`
-  mutation update_upvotes($replyId: Int!, $userId: Int!) {
-    update_reply(where: { id: { _eq: $replyId } }, _inc: { upvotes: -1 }) {
+  mutation update_likes($replyId: Int!, $userId: Int!) {
+    update_reply(where: { id: { _eq: $replyId } }, _inc: { likes: -1 }) {
       affected_rows
       returning {
         id

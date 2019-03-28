@@ -19,18 +19,19 @@ export class CommentsService {
   public fetchComments(activityId: number, activityType: string) {
     let Query = QUERY_FETCH_IDEA_COMMENTS;
     const variableQueryObject = {};
+    console.log(activityType);
     switch (activityType) {
-      case 'publicProject':
+      case 'project':
         Query = QUERY_FETCH_PUBLIC_PROJECT_COMMENTS;
-        variableQueryObject['launched_projects_id'] = activityId;
+        variableQueryObject['projectId'] = activityId;
         break;
       case 'issue':
         Query = QUERY_FETCH_ISSUE_COMMENTS;
-        variableQueryObject['issue_id'] = activityId;
+        variableQueryObject['issueId'] = activityId;
         break;
       case 'idea':
         Query = QUERY_FETCH_IDEA_COMMENTS;
-        variableQueryObject['idea_id'] = activityId;
+        variableQueryObject['ideaId'] = activityId;
         break;
       default:
         break;

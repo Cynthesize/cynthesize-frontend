@@ -34,6 +34,7 @@ export class AuthenticationService {
     localStorage.removeItem('userId');
     localStorage.removeItem('ideaUpvotedByLoggedInUser');
     localStorage.removeItem('projectsLikedByLoggedInUser');
+    localStorage.removeItem('repliesLikedByLoggedInUser');
   }
 
   public isAuthenticated(): boolean {
@@ -104,6 +105,7 @@ export class AuthenticationService {
               const likedComments: any = [];
               const upvotedIdeas: any = [];
               const likedProjects: any = [];
+              const likedReplies: any = [];
 
               likes.data.user[0].commentLikessByuserId.forEach((commentUserLikes: any) => {
                 likedComments.push(commentUserLikes.comment_id);
@@ -114,10 +116,14 @@ export class AuthenticationService {
               likes.data.user[0].projectLikessByuserId.forEach((commentUserLikes: any) => {
                 likedProjects.push(commentUserLikes.project_id);
               });
+              likes.data.user[0].replyLikessByuserId.forEach((replyUserLikes: any) => {
+                likedReplies.push(replyUserLikes.reply_id);
+              });
 
               localStorage.setItem('ideaUpvotedByLoggedInUser', JSON.stringify(upvotedIdeas));
               localStorage.setItem('commentsLikedByLoggedInUser', JSON.stringify(likedComments));
               localStorage.setItem('projectsLikedByLoggedInUser', JSON.stringify(likedProjects));
+              localStorage.setItem('repliesLikedByLoggedInUser', JSON.stringify(likedReplies));
             });
           localStorage.setItem('user_profile_pic', res.data.user[0].profile_pic);
           localStorage.setItem('username', res.data.user[0].username);

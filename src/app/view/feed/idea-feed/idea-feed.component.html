@@ -37,11 +37,12 @@
             </div>
           </div>
           <div class="idea-card-links">
-            <div class="idea-card-icons pointer">
-              <app-like [activityId]="idea.id" [activityType]="'idea'" [likes]="idea.upvotes" class="icon"></app-like>
-              <mat-icon class="icon" [routerLink]="['/view/feed/ideas', idea.id]">comment</mat-icon> 98
-              <mat-icon class="icon" (click)="openShareSheet()">share</mat-icon>
-            </div>
+            <app-activity-actions
+              [id]="idea.id"
+              [type]="'idea'"
+              [likes]="idea.upvotes"
+              [url]="'/view/feed/ideas/' + idea.id"
+            ></app-activity-actions>
           </div>
         </mat-card>
       </div>

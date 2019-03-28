@@ -72,8 +72,8 @@ const QUERY_TOTAL_ONGOING_PROJECTS_COUNT = gql`
 `;
 
 const QUERY_FETCH_ISSUE_COMMENTS = gql`
-  query fetch_idea_comments($ideaId: Int!) {
-    comment(where: { idea_id: { _eq: $ideaId } }) {
+  query fetch_issue_comments($issueId: Int!) {
+    comment(where: { issue_id: { _eq: $issueId } }) {
       id
       comment_text
       userBycommenter {
@@ -86,10 +86,10 @@ const QUERY_FETCH_ISSUE_COMMENTS = gql`
         userByrespondent {
           ...UserProfilePicFragment
         }
-        upvotes
+        likes
         timestamp
         previous_edits
-        idea_id
+        issue_id
       }
       likes
       timestamp
@@ -101,29 +101,50 @@ const QUERY_FETCH_ISSUE_COMMENTS = gql`
 `;
 
 const QUERY_FETCH_PUBLIC_PROJECT_COMMENTS = gql`
-  query fetch_idea_comments($ideaId: Int!) {
-    comment(where: { idea_id: { _eq: $ideaId } }) {
+  query fetch_project_comments($projectId: Int!) {
+    comment(where: { launched_projects_id: { _eq: $projectId } }) {
       id
       comment_text
-      userBycommenter {
+      user {
         ...UserProfilePicFragment
       }
-      replysBycommentId {
+      replies {
         comment_id
         reply_text
         id
         userByrespondent {
           ...UserProfilePicFragment
         }
-        upvotes
+        likes
         timestamp
         previous_edits
-        idea_id
       }
       likes
       timestamp
       previous_edits
       launched_projects_id
+    }
+  }
+  ${USER_PROFILE_PIC_FRAGMENT}
+`;
+
+const QUERY_FETCH_BASIC_PROJECT_DETAILS = gql`
+  query fetch_basic_project_details($projectId: Int!) {
+    launched_projects(where: { id: { _eq: $projectId } }) {
+      id
+      projectsByparentProjectId {
+        project_name
+        abstract
+        created_on
+        website
+        roles_opened
+        icon
+        current_stage
+      }
+      likes
+      userByowner {
+        ...UserProfilePicFragment
+      }
     }
   }
   ${USER_PROFILE_PIC_FRAGMENT}
@@ -138,5 +159,6 @@ export {
   QUERY_TOTAL_ONGOING_PROJECTS_COUNT,
   QUERY_NEWEST_ONGOING_PROJECTS,
   QUERY_FETCH_PUBLIC_PROJECT_COMMENTS,
-  QUERY_FETCH_ISSUE_COMMENTS
+  QUERY_FETCH_ISSUE_COMMENTS,
+  QUERY_FETCH_BASIC_PROJECT_DETAILS
 };

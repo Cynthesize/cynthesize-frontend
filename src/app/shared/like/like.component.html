@@ -4,9 +4,9 @@
   (click)="likeOrDislike()"
   class="icon"
 >
-  <mat-icon [class.disabled]="isLoading">whatshot</mat-icon>{{ likes }}
+  <mat-icon [class.disabled]="isLoading">favorite</mat-icon>&nbsp;{{ likes }}
 </span>
 
 <span *ngIf="activityId && !authService.isAuthenticated()" (click)="openLoginDialog()" class="icon">
-  <mat-icon [class.disabled]="isLoading">whatshot</mat-icon>{{ likes }}
+  <mat-icon [class.disabled]="isLoading">favorite</mat-icon>{{ likes }}
 </span>

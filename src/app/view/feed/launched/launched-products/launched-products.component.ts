@@ -37,16 +37,6 @@ export class LaunchedProductsComponent implements OnInit {
     this.getlaunchedProjectsFromServer(6, this.currentCount, this.activeContext);
   }
 
-  openShareSheet(): void {
-    this.bottomSheet.open(ShareSheetComponent, {
-      data: {
-        facebookUrl: 'https://www.facebook.com/sharer/sharer.php?u=',
-        twitterUrl: 'https://twitter.com/home?status=',
-        linkedInUrl: 'https://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source='
-      }
-    });
-  }
-
   getlaunchedProjectsFromServer(number: number, offset: number, context: any) {
     this.projectService.getNProjects(number, offset, context).subscribe(data => {
       this.currentCount += data.data.launched_projects.length;

@@ -34,7 +34,9 @@ export class LikeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.filteredInfo = this._filterActivityType(this.activityId, this.activityType);
+    if (this.authService.isAuthenticated()) {
+      this.filteredInfo = this._filterActivityType(this.activityId, this.activityType);
+    }
   }
 
   openLoginDialog(): void {
@@ -60,8 +62,8 @@ export class LikeComponent implements OnInit {
   }
 
   handleLikeOperationUponResponse(responseData: any, filteredInfo: object) {
-    if (filteredInfo['projectId']) {
-      this.likes = responseData.data.update_launched_products.returning[0].likes;
+    if (filteredInfo['launchedProjectId']) {
+      this.likes = responseData.data.update_launched_projects.returning[0].likes;
       this._updateLikedProjectsInLocalStorage(this.activityId, this.isAlreadyLiked);
     } else if (filteredInfo['ideaId']) {
       this.likes = responseData.data.update_ideas.returning[0].upvotes;

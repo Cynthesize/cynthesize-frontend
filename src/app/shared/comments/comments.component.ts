@@ -20,26 +20,15 @@ import { CommentsService } from '@app/core/comments/comments.service';
   encapsulation: ViewEncapsulation.None
 })
 export class CommentsComponent implements OnInit, OnChanges {
-  // @Input() activityId: number;
-  // @Input() activityType: string;
-  // @Input() issueCommentObject: [IssueComments];
-  // @Input() comments: any;
-  // @Input() projectId: any;
-  // @Output() commentsUpdated = new EventEmitter();
-  // @ViewChild(EditableDirective) newCommentEditor: any;
-
-  // options: any = {
-  //   lineWrapping: true
-  // };
-  // comment = '';
-  // commentsArray = [Object];
-  // commentingOnIssue = false;
-  // isLoading = false;
-
   @Input() activityType: string;
   @Input() activityId: number;
   commentObject: any[] = [];
   user_pic = localStorage.getItem('user_profile_pic');
+
+  isCommenting = false;
+  options: any = {
+    lineWrapping: true
+  };
 
   constructor(
     private commentService: CommentsService,
@@ -48,18 +37,10 @@ export class CommentsComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    // if (this.activityType === 'issue') {
-    // } else if (this.activityType === 'idea') {
-    //   this.fetchIdeaComments();
-    // }
     this.fetchComments();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    // if (changes.comments && changes.comments.currentValue === undefined) {
-    //   this.comments = [];
-    // }
-  }
+  ngOnChanges(changes: SimpleChanges) {}
 
   fetchComments(): void {
     this.commentService.fetchComments(this.activityId, this.activityType).subscribe(
@@ -71,28 +52,6 @@ export class CommentsComponent implements OnInit, OnChanges {
       }
     );
   }
-
-  // addNewComment(projectId: string, issueId: string) {
-  //   this.isLoading = true;
-  //   this.projectService
-  //     .addComment(this.comment, projectId, issueId)
-  //     .pipe(
-  //       finalize(() => {
-  //         this.isLoading = false;
-  //         this.commentingOnIssue = false;
-  //       })
-  //     )
-  //     .subscribe(
-  //       comment => {
-  //         this.isLoading = false;
-  //         this.issueCommentObject.push(comment.data.insert_project_issues_comments.returning[0]);
-  //       },
-  //       error => {
-  //         this.isLoading = false;
-  //         this.errorHandler.subj_notification.next(error.error.message);
-  //       }
-  //     );
-  // }
 
   // onCommentEdited(comment: any, content: any) {
   //   const comments = this.comments.slice();

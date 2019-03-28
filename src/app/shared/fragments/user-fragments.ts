@@ -21,6 +21,9 @@ const USER_LIKES_FRAGMENT = gql`
     projectLikessByuserId {
       project_id
     }
+    replyLikessByuserId {
+      reply_id
+    }
   }
 `;
 

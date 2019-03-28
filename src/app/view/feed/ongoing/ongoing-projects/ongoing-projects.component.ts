@@ -78,7 +78,7 @@ export class ProjectDialogEntryComponent {
       width: 'auto',
       data: {
         activityId: this.router.url.split('/')[this.router.url.split('/').length - 1],
-        activityType: 'publicProject'
+        activityType: this.router.url.split('/')[this.router.url.split('/').length - 2]
       }
     });
     dialogRef.afterClosed().subscribe(result => {

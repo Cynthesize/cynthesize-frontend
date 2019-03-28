@@ -45,7 +45,7 @@
     <mat-menu #userMenu="matMenu" class="profile-menu">
       <div>
         <div class="user-info">
-          <div class="user-image">
+          <div class="user-image" *ngIf="profilepPic">
             <cl-image height="50" crop="scale" public-id="{{ profilepPic }}" secure="true"></cl-image>
           </div>
           <div class="username">{{ username }}</div>
