@@ -40,11 +40,12 @@
           <div>
             <a href="{{ project.website }}" target="_blank">{{ project.website }}</a>
           </div>
-          <div class="card-icons pointer">
-            <app-like [projectId]="project.id" [likes]="project.likes || 0" class="icon"></app-like>
-            <mat-icon class="icon" [routerLink]="['/view/feed/projects/ongoing', project.id]">comment</mat-icon> 98
-            <mat-icon class="icon" (click)="openShareSheet()">share</mat-icon>
-          </div>
+          <app-activity-actions
+            [id]="project.id"
+            [type]="'project'"
+            [likes]="project.likes"
+            [url]="'/view/feed/projects/ongoing/' + project.id"
+          ></app-activity-actions>
         </div>
       </mat-card>
     </div>

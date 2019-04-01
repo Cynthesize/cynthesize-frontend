@@ -17,14 +17,14 @@ const ISSUE_COMMENT_FRAGMENT = gql`
   fragment IssueCommentFragment on comment {
     id
     comment_text
-    userBycommenter {
+    user {
       username
       profile_pic
     }
     issue_id
     likes
     timestamp
-    replysBycommentId {
+    replies {
       ...IssueCommentReplyFragment
     }
   }
@@ -61,6 +61,7 @@ const LAUNCHED_PROJECT_DETAILS_FRAGMENT = gql`
       username
       profile_pic
     }
+    parent_project_id
   }
 `;
 

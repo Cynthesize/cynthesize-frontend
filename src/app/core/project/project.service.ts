@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import BACKEND_URLS from '@app/shared/backend-urls';
 import { map, take } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
@@ -9,9 +7,7 @@ import {
   MUTATION_ADD_ISSUE_COMMENT_REPLY,
   MUTATION_ADD_ISSUE,
   MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT,
-  MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE,
-  MUTATION_LIKE_LAUNCHED_PROJECT,
-  MUTATION_DISLIKE_LAUNCHED_PROJECT
+  MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE
 } from '@app/shared/mutations/project-mutations';
 import {
   QUERY_CHECKPOINT_ISSUES,
@@ -20,7 +16,8 @@ import {
   QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT,
   QUERY_NEWEST_ONGOING_PROJECTS,
   QUERY_POPULAR_ONGOING_PROJECTS,
-  QUERY_TOTAL_ONGOING_PROJECTS_COUNT
+  QUERY_TOTAL_ONGOING_PROJECTS_COUNT,
+  QUERY_FETCH_BASIC_PROJECT_DETAILS
 } from '@app/shared/queries/project-queries';
 import { QUERY_PROJECTS_BY_USER } from '@app/shared/queries/user-queries';
 
@@ -28,7 +25,7 @@ import { QUERY_PROJECTS_BY_USER } from '@app/shared/queries/user-queries';
   providedIn: 'root'
 })
 export class ProjectService {
-  constructor(private http: HttpClient, private apollo: Apollo) {}
+  constructor(private apollo: Apollo) {}
 
   /**
    * ADD A PROJECT
@@ -92,23 +89,6 @@ export class ProjectService {
   //       })
   //     );
   // }
-
-  /**
-   * FETCH IDEA
-   */
-  public fetchIdea(idList: string) {
-    return this.http
-      .get(BACKEND_URLS.FETCH_ISSUE_OBJECT, {
-        params: {
-          id: idList
-        }
-      })
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
 
   /**
    * Add Comments for an issue in the project.
@@ -208,32 +188,6 @@ export class ProjectService {
   }
 
   /**
-   * LikeProject
-   */
-  public likeProject(launchedProjectId: number, isAlreadyLiked: boolean) {
-    let mutation = MUTATION_LIKE_LAUNCHED_PROJECT;
-    let counter = 1;
-    if (isAlreadyLiked) {
-      mutation = MUTATION_DISLIKE_LAUNCHED_PROJECT;
-      counter = -1;
-    }
-    return this.apollo
-      .mutate<any>({
-        mutation: mutation,
-        variables: {
-          likesOffsetCounter: counter,
-          launchedProjectId: launchedProjectId,
-          userId: localStorage.getItem('userId')
-        }
-      })
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  /**
    * getTotalLaunchedProjectsCount
    */
   public getTotalLaunchedProjectsCount() {
@@ -289,6 +243,25 @@ export class ProjectService {
       .query({
         query: QUERY_TOTAL_ONGOING_PROJECTS_COUNT
       })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * fetchBasicProjectDetails
+   */
+  public fetchBasicProjectDetails(projectId: number) {
+    return this.apollo
+      .watchQuery<any>({
+        query: QUERY_FETCH_BASIC_PROJECT_DETAILS,
+        variables: {
+          projectId: projectId
+        }
+      })
+      .valueChanges.pipe(take(1))
       .pipe(
         map((res: any) => {
           return res;

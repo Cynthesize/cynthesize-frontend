@@ -1,1 +1,34 @@
-<div class="container"></div>
+<div class="modal-container" *ngIf="project">
+  <div class="project-heading">
+    <div><img class="project-icon" [src]="project.projectsByparentProjectId.icon" /></div>
+    <div class="project-basic-info">
+      <div class="project-name">{{ project.projectsByparentProjectId.project_name }}</div>
+      <app-user-name
+        [username]="project.userByowner.username"
+        [time]="project.projectsByparentProjectId.created_on"
+        [isMentor]="project.userByowner.is_mentor"
+      ></app-user-name>
+      <div class="project-abstract">{{ project.projectsByparentProjectId.abstract }}</div>
+      <div class="card-icons pointer">
+        <app-like [activityId]="project.id" [activityType]="'project'" [likes]="project.likes" class="icon"></app-like>
+        <mat-icon class="icon" [routerLink]="['/view/feed/projects/launched', project.id]">chat</mat-icon>
+        <mat-icon class="icon" (click)="openShareSheet()">share</mat-icon>
+      </div>
+    </div>
+    <div class="project-buttons">
+      <button mat-raised-button class="project-btn orange-btn">Collaborate</button>
+      <button mat-raised-button color="primary" class="project-btn">
+        Website
+      </button>
+    </div>
+  </div>
+
+  <div class="project-image-slideshow">
+    <div></div>
+  </div>
+
+  <div class="comment-text">Comments</div>
+  <div class="project-comment">
+    <app-comments [activityId]="project.id" [activityType]="'project'"></app-comments>
+  </div>
+</div>

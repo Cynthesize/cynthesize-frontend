@@ -32,16 +32,6 @@ export class OngoingProjectsComponent implements OnInit {
     });
   }
 
-  openDialog(idea: any): void {
-    const dialogRef = this.dialog.open(FeedProjectComponent, {
-      panelClass: 'custom-dialog-container',
-      width: 'auto',
-      data: { idea }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {});
-  }
-
   ngOnInit() {
     this.projectService.getTotalOngoingProjectsCount().subscribe(data => {
       this.length = data.data.projects_aggregate.aggregate.count;
@@ -85,8 +75,11 @@ export class ProjectDialogEntryComponent {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(FeedProjectComponent, {
-      width: '250px',
-      data: this.router.url.split('/')[this.router.url.split('/').length - 1]
+      width: 'auto',
+      data: {
+        activityId: this.router.url.split('/')[this.router.url.split('/').length - 1],
+        activityType: this.router.url.split('/')[this.router.url.split('/').length - 2]
+      }
     });
     dialogRef.afterClosed().subscribe(result => {
       this.router.navigate(['../'], { relativeTo: this.route });

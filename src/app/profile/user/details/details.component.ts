@@ -67,7 +67,7 @@ export class DetailsComponent implements OnInit {
       website: new FormControl()
     });
 
-    this.profileService.getUserDetails(this.username).subscribe(
+    this.profileService.getUserDetails(this.router.url.split('/')[2]).subscribe(
       (data: any) => {
         if (data.user.length === 0) {
           this.router.navigate(['not-found']);
@@ -130,7 +130,6 @@ export class DetailsComponent implements OnInit {
       profile_pic: profileUrl,
       social_links: this.socialLinks
     };
-    console.log(userUpdateObject);
     const trimmedUserChangeObject = {};
     Object.keys(userUpdateObject).forEach(key => {
       if (userUpdateObject[key] || (key === 'technologies' && userUpdateObject[key].length === 0)) {

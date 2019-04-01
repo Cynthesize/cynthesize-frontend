@@ -8,7 +8,7 @@ const IDEA_REPLY_FRAGMENT = gql`
     userByrespondent {
       ...UserProfilePicFragment
     }
-    upvotes
+    likes
     timestamp
   }
   ${USER_PROFILE_PIC_FRAGMENT}
@@ -21,10 +21,10 @@ const IDEA_COMMENTS_FRAGMENT = gql`
     idea_id
     likes
     timestamp
-    userBycommenter {
+    user {
       ...UserProfilePicFragment
     }
-    replysBycommentId {
+    replies {
       ...IdeaReplyFragment
     }
   }
@@ -39,9 +39,10 @@ const IDEA_DETAILS_FRAGMENT = gql`
       ...UserProfilePicFragment
     }
     idea_name
+    timestamp
     description
-    upvotes
-    commentsByideaId {
+    likes
+    comments {
       ...IdeaCommentFragment
     }
   }
@@ -55,7 +56,7 @@ const IDEA_FEED_FRAGMENT = gql`
       id
       idea_name
       description
-      upvotes
+      likes
       userByowner {
         username
         profile_pic

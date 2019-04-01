@@ -1,0 +1,45 @@
+.modal-container {
+  background-color: rgb(247, 247, 247);
+}
+modal-dialog-container {
+  background-color: rgb(247, 247, 247) !important;
+}
+.project-heading {
+  display: flex;
+  padding: 20px;
+  align-items: center;
+}
+.project-icon {
+  width: 100px;
+  height: auto;
+  flex: 1;
+  border-radius: 6px;
+  margin-right: 20px;
+}
+.project-basic-info {
+  display: flex;
+  flex-direction: column;
+  flex: 5;
+}
+.project-name {
+  font-size: 3rem;
+  padding: 10px 10px 5px 10px;
+  font-weight: 700;
+}
+.project-abstract {
+  font-size: 1rem;
+  padding: 0 10px 15px 10px;
+}
+.project-buttons {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.project-btn {
+  padding: 5px;
+  margin: 5px;
+  color: white;
+}
+.orange-btn {
+  background-color: orange;
+}

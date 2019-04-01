@@ -1,125 +1,62 @@
-@import "../../../sass/declarations";
-
-.comment {
-  background-color: #ffffff;
-  border-radius: 2px;
-  font-size: 1.3rem;
-
-  border-radius: 0.5rem;
+.comment-box {
+  background-color: white;
+  border-radius: 5px;
+}
+.comment-container {
+  padding: 20px;
+}
+.add-comment {
+  background-color: rgb(247, 247, 247);
   display: flex;
-
-  &__left-pane {
-    padding: 0 1rem;
-    margin: 0rem 0rem 1rem 0rem;
-  }
-
-  &__right-pane {
-    padding: 0rem 2rem 0rem 1rem;
-  }
-
-  &__info {
-    display: flex;
-    align-items: center;
-    font-size: 1.6rem;
-
-    &--photo {
-      border-radius: 50%;
-      margin-right: 1rem;
-      overflow: hidden;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      img {
-        height: auto;
-        width: 55px;
-      }
-    }
-
-    &--user {
-      margin-right: 1rem;
-      cursor: pointer;
-    }
-
-    &--time {
-      color: #aaaaaa;
-    }
-  }
-
-  &__text {
-    margin-bottom: 0.8rem;
-    font-size: 1.6rem;
-  }
-
-  &__replies {
-    display: flex;
-    flex-direction: column;
-    margin-left: -1rem;
-  }
+  border-radius: 5px;
+  align-items: center;
+  padding: 15px;
 }
-
-.reply {
-  padding: 1rem 0;
+cl-image > img {
+  border-radius: 50%;
+}
+.user-icon {
+  padding-right: 10px;
+}
+.init-comment-input {
+  background-color: white;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  align-items: center;
+  width: 450px;
   display: flex;
-
-  &:not(:last-of-type) {
-    border-bottom: 1px solid rgb(221, 221, 221);
-  }
-
-  &__text {
-    font-size: 1.5rem;
-  }
-
-  &__left-pane {
-    padding: 0 1rem;
-  }
-
-  &__info {
-    display: flex;
-    align-items: center;
-    font-size: 1.5rem;
-
-    &--photo {
-      height: 4rem;
-      width: 4rem;
-      border-radius: 50%;
-      margin-right: 1rem;
-      overflow: hidden;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      img {
-        height: 100%;
-        width: auto;
-      }
-    }
-
-    &--user {
-      margin-right: 1rem;
-    }
-
-    &--time {
-      color: #aaaaaa;
-    }
-  }
+  padding: 25px;
+  height: 50px;
+  color: grey;
+}
+.comment-unit {
+}
+.comment-info {
+  padding: 15px;
+  display: flex;
+  border-radius: 5px;
+  align-items: center;
+}
+.user-name {
+}
+.comment-text-box {
+  margin-left: 60px;
+}
+.comment-text {
+  font-size: 0.94rem;
+  line-height: 0.98;
+  margin-bottom: 10px;
+}
+.comment-icons {
+  display: flex;
+  align-items: center;
+  color: grey;
 }
 
-.editor-statusbar {
-  display: none;
+.icon {
+  color: blue;
+  margin: 0 5px;
 }
-
-.CodeMirror {
-  max-height: 30px;
-  min-height: 200px !important;
-}
-.new_comment {
-  font-size: 1.6rem;
-}
-
-.gap {
-  margin: 0 1rem;
-  color: #aaaaaa;
+mat-dialog-container {
+  background-color: rgb(247, 247, 247) !important;
 }

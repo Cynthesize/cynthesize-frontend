@@ -11,9 +11,9 @@ import { ErrorHandlerService } from '@app/core/error-handler.service';
 })
 export class EditableCommentComponent implements OnInit {
   @Input() comment: any;
+  @Input() reply: any;
   // If a comment was edited this event will be emitted
   @Output() commentEdited = new EventEmitter();
-  reply = '';
 
   options: any = {
     lineWrapping: true

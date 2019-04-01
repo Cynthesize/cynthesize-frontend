@@ -1,6 +1,11 @@
-<div *ngIf="idea">
-  <p>
-    idea works!
-  </p>
+<div *ngIf="idea" class="modal-container">
   <h1>{{ idea.idea_name }}</h1>
+  <app-user-name
+    [username]="idea.userByowner.username"
+    [time]="idea.timestamp"
+    [isMentor]="idea.userByowner.is_mentor"
+  ></app-user-name>
+  <p>{{ idea.description }}</p>
+  <h3>Platforms: WebApp</h3>
+  <app-comments [activityType]="'idea'" [activityId]="idea.id"></app-comments>
 </div>
