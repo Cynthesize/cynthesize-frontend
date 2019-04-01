@@ -130,7 +130,6 @@ export class DetailsComponent implements OnInit {
       profile_pic: profileUrl,
       social_links: this.socialLinks
     };
-    console.log(userUpdateObject);
     const trimmedUserChangeObject = {};
     Object.keys(userUpdateObject).forEach(key => {
       if (userUpdateObject[key] || (key === 'technologies' && userUpdateObject[key].length === 0)) {

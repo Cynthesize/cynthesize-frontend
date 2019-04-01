@@ -199,17 +199,6 @@ body {
   flex: 0.35;
 }
 
-.card-icons {
-  position: absolute;
-  bottom: 10px;
-  right: 5px;
-  display: flex;
-  align-items: center;
-}
-.card-icons > mat-icon {
-  margin: 5px;
-}
-
 .active-context {
   color: blue;
   font-weight: bold;

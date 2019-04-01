@@ -1,6 +1,9 @@
 .modal-container {
   background-color: rgb(247, 247, 247);
 }
+modal-dialog-container {
+  background-color: rgb(247, 247, 247) !important;
+}
 .project-heading {
   display: flex;
   padding: 20px;
@@ -39,7 +42,4 @@
 }
 .orange-btn {
   background-color: orange;
-}
-modal-dialog-container {
-  background-color: rgb(247, 247, 247) !important;
 }

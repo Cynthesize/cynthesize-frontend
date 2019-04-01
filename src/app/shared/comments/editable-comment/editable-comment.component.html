@@ -5,7 +5,7 @@
     </div>
     <div class="user-name">
       <p style="font-size: 1rem; font-weight: 600;">{{ comment.user.username }}</p>
-      <p style="font-size: 0.7rem;">Some text that would make sense.</p>
+      <p style="font-size: 0.7rem;">{{ comment.timestamp | timeDiff }}</p>
     </div>
   </div>
   <div class="comment-text-box">
@@ -26,7 +26,7 @@
     </div>
     <div class="user-name">
       <p style="font-size: 1rem; font-weight: 600;">{{ reply.userByrespondent.username }}</p>
-      <p style="font-size: 0.7rem;">Some text that would make sense.</p>
+      <p style="font-size: 0.7rem;">{{ reply.timestamp | timeDiff }}</p>
     </div>
   </div>
   <div class="comment-text-box">

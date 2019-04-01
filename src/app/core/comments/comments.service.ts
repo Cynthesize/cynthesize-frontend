@@ -19,7 +19,6 @@ export class CommentsService {
   public fetchComments(activityId: number, activityType: string) {
     let Query = QUERY_FETCH_IDEA_COMMENTS;
     const variableQueryObject = {};
-    console.log(activityType);
     switch (activityType) {
       case 'project':
         Query = QUERY_FETCH_PUBLIC_PROJECT_COMMENTS;

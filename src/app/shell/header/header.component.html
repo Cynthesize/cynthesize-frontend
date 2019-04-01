@@ -35,27 +35,32 @@
       <button class="header__link" mat-button routerLink="/view/feed/projects/launched">
         <span translate>Launched Projects</span>
       </button>
-    </div>
-    <button mat-icon-button [matMenuTriggerFor]="userMenu" *ngIf="authenticationService.isAuthenticated()">
-      <mat-icon> person </mat-icon>
-    </button>
-    <button mat-raised-button *ngIf="!authenticationService.isAuthenticated()" (click)="authenticationService.login()">
-      Login/Signup
-    </button>
-    <mat-menu #userMenu="matMenu" class="profile-menu">
-      <div>
-        <div class="user-info">
-          <div class="user-image" *ngIf="profilepPic">
-            <cl-image height="50" crop="scale" public-id="{{ profilepPic }}" secure="true"></cl-image>
+      <button mat-icon-button [matMenuTriggerFor]="userMenu" *ngIf="authenticationService.isAuthenticated()">
+        <mat-icon> person </mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        style="background-color: orange; color: white;"
+        *ngIf="!authenticationService.isAuthenticated()"
+        (click)="authenticationService.login()"
+      >
+        Login/Signup
+      </button>
+      <mat-menu #userMenu="matMenu" class="profile-menu">
+        <div>
+          <div class="user-info">
+            <div class="user-image" *ngIf="profilepPic">
+              <cl-image height="50" crop="scale" public-id="{{ profilepPic }}" secure="true"></cl-image>
+            </div>
+            <div class="username">{{ username }}</div>
           </div>
-          <div class="username">{{ username }}</div>
+          <mat-divider></mat-divider>
+          <div class="user-links">
+            <div class="user-link" routerLink="/user/{{ username }}">Profile</div>
+            <div class="user-link" (click)="logout()">Logout</div>
+          </div>
         </div>
-        <mat-divider></mat-divider>
-        <div class="user-links">
-          <div class="user-link" routerLink="/user/{{ username }}">Profile</div>
-          <div class="user-link" (click)="logout()">Logout</div>
-        </div>
-      </div>
-    </mat-menu>
+      </mat-menu>
+    </div>
   </div>
 </mat-toolbar>

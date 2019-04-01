@@ -66,7 +66,7 @@ export class LikeComponent implements OnInit {
       this.likes = responseData.data.update_launched_projects.returning[0].likes;
       this._updateLikedProjectsInLocalStorage(this.activityId, this.isAlreadyLiked);
     } else if (filteredInfo['ideaId']) {
-      this.likes = responseData.data.update_ideas.returning[0].upvotes;
+      this.likes = responseData.data.update_ideas.returning[0].likes;
       this._updateLikedIdeasInLocalStorage(this.activityId, this.isAlreadyLiked);
     } else if (filteredInfo['commentId']) {
       this.likes = responseData.data.update_comment.returning[0].likes;

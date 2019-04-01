@@ -25,7 +25,6 @@ export class FeedProjectComponent implements OnInit {
       this.projectService.fetchBasicProjectDetails(this.data['activityId']).subscribe(
         data => {
           this.project = data.data.launched_projects[0];
-          console.log(this.project, this.data);
         },
         error => {
           this.errorHandler.subj_notification.next(error);

@@ -20,6 +20,7 @@ import { LikeComponent } from './like/like.component';
 import { ShareSheetComponent } from './share-sheet/share-sheet.component';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA, MatBottomSheetModule } from '@angular/material';
 import { ActivityActionsComponent } from './activity-actions/activity-actions.component';
+import { UserNameComponent } from './user-name/user-name.component';
 
 export const cloudinary = {
   Cloudinary: CloudinaryCore
@@ -50,9 +51,17 @@ export const config: CloudinaryConfiguration = {
     IdeaCardComponent,
     LikeComponent,
     ShareSheetComponent,
-    ActivityActionsComponent
+    ActivityActionsComponent,
+    UserNameComponent
   ],
-  exports: [LikeComponent, CommentsComponent, ShareSheetComponent, ActivityActionsComponent],
+  exports: [
+    LikeComponent,
+    CommentsComponent,
+    ShareSheetComponent,
+    ActivityActionsComponent,
+    TimeDiffPipe,
+    UserNameComponent
+  ],
   entryComponents: [ShareSheetComponent],
   providers: [{ provide: MatBottomSheetRef, useValue: {} }, { provide: MAT_BOTTOM_SHEET_DATA, useValue: [] }]
 })

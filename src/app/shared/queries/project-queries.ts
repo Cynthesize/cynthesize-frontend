@@ -17,7 +17,7 @@ const QUERY_CHECKPOINT_ISSUES = gql`
 
 const QUERY_POPULAR_LAUNCHED_PROJECTS = gql`
   query fetch_popular_launched_projects($limit: Int!, $offset: Int!) {
-    launched_projects(order_by: { upvotes: desc }, limit: $limit, offset: $offset) {
+    launched_projects(order_by: { likes: desc }, limit: $limit, offset: $offset) {
       ...LaunchedProjectDetailsFragment
     }
   }
@@ -76,10 +76,10 @@ const QUERY_FETCH_ISSUE_COMMENTS = gql`
     comment(where: { issue_id: { _eq: $issueId } }) {
       id
       comment_text
-      userBycommenter {
+      user {
         ...UserProfilePicFragment
       }
-      replysBycommentId {
+      replies {
         comment_id
         reply_text
         id

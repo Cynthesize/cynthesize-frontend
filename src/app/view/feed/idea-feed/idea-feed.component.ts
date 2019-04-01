@@ -51,7 +51,6 @@ export class IdeaFeedComponent implements OnInit {
   }
 
   getIdeasFromServer(number: number, offset: number, context: any) {
-    console.log('ideas init');
     this.ideaService.getNIdeas(number, offset, context).subscribe(data => {
       this.currentCount += data.data.ideas.length;
       this.ideasList.push(...data.data.ideas);
@@ -86,7 +85,7 @@ export class DialogEntryComponent {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(IdeaComponent, {
-      width: '250px',
+      width: 'auto',
       data: this.router.url.split('/')[this.router.url.split('/').length - 1]
     });
     dialogRef.afterClosed().subscribe(result => {

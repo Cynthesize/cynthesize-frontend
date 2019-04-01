@@ -20,9 +20,7 @@ export class ViewProjectComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private errorHandler: ErrorHandlerService
-  ) {
-    // this.getProject();
-  }
+  ) {}
 
   ngOnInit() {}
 
@@ -35,22 +33,6 @@ export class ViewProjectComponent implements OnInit {
       id.shift();
       projectNameByUrl = id.join(' ');
     });
-    // this.projectService
-    //   .getProject(projectIdByUrl, projectNameByUrl)
-    //   .pipe(finalize(() => {}))
-    //   .subscribe(
-    //     (data: any) => {
-    //       console.log(data);
-    //       if (data.length === 0) {
-    //         this.router.navigate(['not-found']);
-    //       } else {
-    //         this.project = data[0];
-    //       }
-    //     },
-    //     (error: any) => {
-    //       this.errorHandler.subj_notification.next(error);
-    //     }
-    //   );
   }
   setBarActive(checkpointName: string) {
     this.currentActiveBar = checkpointName;

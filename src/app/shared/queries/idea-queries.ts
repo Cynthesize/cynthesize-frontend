@@ -17,7 +17,7 @@ const QUERY_LIMITED_IDEA_DETAILS = gql`
       id
       idea_name
       description
-      upvotes
+      likes
       userByowner {
         username
         profile_pic
@@ -39,11 +39,11 @@ const QUERY_TOTAL_IDEA_COUNT = gql`
 
 const QUERY_POPULAR_IDEAS = gql`
   query fetch_popular_ideas($limit: Int!, $offset: Int!) {
-    ideas(order_by: { upvotes: desc }, limit: $limit, offset: $offset) {
+    ideas(order_by: { likes: desc }, limit: $limit, offset: $offset) {
       id
       idea_name
       description
-      upvotes
+      likes
       userByowner {
         username
         profile_pic
@@ -58,7 +58,7 @@ const QUERY_NEWEST_IDEAS = gql`
       id
       idea_name
       description
-      upvotes
+      likes
       userByowner {
         username
         profile_pic
@@ -72,20 +72,19 @@ const QUERY_FETCH_IDEA_COMMENTS = gql`
     comment(where: { idea_id: { _eq: $ideaId } }) {
       id
       comment_text
-      userBycommenter {
+      user {
         ...UserProfilePicFragment
       }
-      replysBycommentId {
+      replies {
         comment_id
         reply_text
         id
         userByrespondent {
           ...UserProfilePicFragment
         }
-        upvotes
+        likes
         timestamp
         previous_edits
-        idea_id
       }
       likes
       timestamp
