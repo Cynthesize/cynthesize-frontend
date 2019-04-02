@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AddRoutingModule } from './add-routing.module';
-import { AddProjectComponent } from './project/project.component';
+import { AddProjectComponent } from './add-project/add-project.component';
 import { AddIdeaComponent } from './add-idea/add-idea.component';
 import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';

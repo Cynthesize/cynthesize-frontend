@@ -7,8 +7,8 @@ import { ErrorHandlerService } from '@app/core/error-handler.service';
 
 @Component({
   selector: 'app-project',
-  templateUrl: './project.component.html',
-  styleUrls: ['./project.component.scss']
+  templateUrl: './add-project.component.html',
+  styleUrls: ['./add-project.component.scss']
 })
 export class AddProjectComponent implements OnInit {
   isLinear = false;

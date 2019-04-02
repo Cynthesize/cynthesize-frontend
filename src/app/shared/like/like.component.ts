@@ -142,7 +142,7 @@ export class LikeComponent implements OnInit {
 
   isReplyLikedByLoggedInUser(replyId: number) {
     let flag = false;
-    JSON.parse(localStorage.getItem('replyLikedByLoggedInUser')).forEach((likedReplyIds: any) => {
+    JSON.parse(localStorage.getItem('repliesLikedByLoggedInUser')).forEach((likedReplyIds: any) => {
       if (replyId === likedReplyIds) {
         flag = true;
       }

@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
         messageString = message.error;
       }
       this.snackBar.open(messageString, 'Okay', {
-        duration: 4000
+        duration: 10000
       });
     });
   }

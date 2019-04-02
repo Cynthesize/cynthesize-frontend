@@ -56,7 +56,7 @@ const MUTATION_LIKE_COMMENT = gql`
         likes
       }
     }
-    insert_comment_likes(objects: { user_id: $userId, id: $commentId }) {
+    insert_comment_likes(objects: { user_id: $userId, comment_id: $commentId }) {
       affected_rows
       returning {
         comment_id
@@ -110,7 +110,7 @@ const MUTATION_DISLIKE_REPLY = gql`
         likes
       }
     }
-    delete_reply_likes(where: { user_id: { _eq: $userId }, id: { _eq: $replyId } }) {
+    delete_reply_likes(where: { user_id: { _eq: $userId }, reply_id: { _eq: $replyId } }) {
       affected_rows
       returning {
         reply_id
