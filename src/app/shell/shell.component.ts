@@ -27,7 +27,7 @@ export class ShellComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(event: any) {
     if (
-      event.target.offsetHeight + event.target.scrollTop === event.target.scrollHeight &&
+      event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight &&
       this.router.url === '/view/feed/ideas' &&
       event.target.scrollHeight !== this.flag
     ) {
@@ -35,7 +35,7 @@ export class ShellComponent implements OnInit {
       this.errorHandler.ideaWindowScrolled.next('fetchIdeas');
     } else {
       if (
-        event.target.offsetHeight + event.target.scrollTop === event.target.scrollHeight &&
+        event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight &&
         this.router.url === '/view/launched' &&
         event.target.scrollHeight !== this.flag
       ) {

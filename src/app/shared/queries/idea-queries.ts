@@ -18,13 +18,13 @@ const QUERY_LIMITED_IDEA_DETAILS = gql`
       idea_name
       description
       likes
+      timestamp
       userByowner {
-        username
-        profile_pic
+        ...UserProfilePicFragment
       }
     }
   }
-  ${IDEA_DETAILS_FRAGMENT}
+  ${USER_PROFILE_PIC_FRAGMENT}
 `;
 
 const QUERY_TOTAL_IDEA_COUNT = gql`
@@ -44,12 +44,13 @@ const QUERY_POPULAR_IDEAS = gql`
       idea_name
       description
       likes
+      timestamp
       userByowner {
-        username
-        profile_pic
+        ...UserProfilePicFragment
       }
     }
   }
+  ${USER_PROFILE_PIC_FRAGMENT}
 `;
 
 const QUERY_NEWEST_IDEAS = gql`
@@ -59,12 +60,13 @@ const QUERY_NEWEST_IDEAS = gql`
       idea_name
       description
       likes
+      timestamp
       userByowner {
-        username
-        profile_pic
+        ...UserProfilePicFragment
       }
     }
   }
+  ${USER_PROFILE_PIC_FRAGMENT}
 `;
 
 const QUERY_FETCH_IDEA_COMMENTS = gql`

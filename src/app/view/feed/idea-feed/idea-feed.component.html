@@ -32,6 +32,11 @@
         <mat-card class="idea-card" *ngFor="let idea of ideasList">
           <div class="idea-card-details">
             <div class="idea-card-project-name">{{ idea.idea_name }}</div>
+            <app-user-name
+              [username]="idea.userByowner.username"
+              [time]="idea.timestamp"
+              [isMentor]="idea.userByowner.is_mentor"
+            ></app-user-name>
             <div class="idea-card-project-description">
               {{ idea.description }}
             </div>
