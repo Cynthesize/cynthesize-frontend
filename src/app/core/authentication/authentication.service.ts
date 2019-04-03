@@ -107,7 +107,7 @@ export class AuthenticationService {
               const likedProjects: any = [];
               const likedReplies: any = [];
 
-              likes.data.user[0].commentLikessByuserId.forEach((commentUserLikes: any) => {
+              likes.data.user[0].comment_likes.forEach((commentUserLikes: any) => {
                 likedComments.push(commentUserLikes.comment_id);
               });
               likes.data.user[0].ideaLikessByuserId.forEach((commentUserLikes: any) => {

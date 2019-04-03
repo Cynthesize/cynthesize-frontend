@@ -150,6 +150,29 @@ const QUERY_FETCH_BASIC_PROJECT_DETAILS = gql`
   ${USER_PROFILE_PIC_FRAGMENT}
 `;
 
+const QUERY_FETCH_ONGOING_PROJECT_DETAILS = gql`
+  query fetch_ongoing_project_details($projectId: Int!) {
+    projects(where: { id: { _eq: $projectId } }) {
+      id
+      project_name
+      abstract
+      created_on
+      website
+      roles_opened
+      icon
+      current_stage
+      likes
+      userByowner {
+        ...UserProfilePicFragment
+      }
+      launchedProjectsBylaunchedId {
+        id
+      }
+    }
+  }
+  ${USER_PROFILE_PIC_FRAGMENT}
+`;
+
 export {
   QUERY_CHECKPOINT_ISSUES,
   QUERY_NEWEST_LAUNCHED_PROJECTS,
@@ -160,5 +183,6 @@ export {
   QUERY_NEWEST_ONGOING_PROJECTS,
   QUERY_FETCH_PUBLIC_PROJECT_COMMENTS,
   QUERY_FETCH_ISSUE_COMMENTS,
-  QUERY_FETCH_BASIC_PROJECT_DETAILS
+  QUERY_FETCH_BASIC_PROJECT_DETAILS,
+  QUERY_FETCH_ONGOING_PROJECT_DETAILS
 };

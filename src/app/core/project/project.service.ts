@@ -17,7 +17,8 @@ import {
   QUERY_NEWEST_ONGOING_PROJECTS,
   QUERY_POPULAR_ONGOING_PROJECTS,
   QUERY_TOTAL_ONGOING_PROJECTS_COUNT,
-  QUERY_FETCH_BASIC_PROJECT_DETAILS
+  QUERY_FETCH_BASIC_PROJECT_DETAILS,
+  QUERY_FETCH_ONGOING_PROJECT_DETAILS
 } from '@app/shared/queries/project-queries';
 import { QUERY_PROJECTS_BY_USER } from '@app/shared/queries/user-queries';
 
@@ -257,6 +258,25 @@ export class ProjectService {
     return this.apollo
       .watchQuery<any>({
         query: QUERY_FETCH_BASIC_PROJECT_DETAILS,
+        variables: {
+          projectId: projectId
+        }
+      })
+      .valueChanges.pipe(take(1))
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * fetchOngoingProjectDetails
+   */
+  public fetchOngoingProjectDetails(projectId: number) {
+    return this.apollo
+      .watchQuery<any>({
+        query: QUERY_FETCH_ONGOING_PROJECT_DETAILS,
         variables: {
           projectId: projectId
         }
