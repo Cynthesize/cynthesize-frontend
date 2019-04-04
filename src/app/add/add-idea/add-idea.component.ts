@@ -32,7 +32,7 @@ export class AddIdeaComponent implements OnInit {
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  tags: Tags[] = [{ name: 'Artificial Intelligence' }, { name: 'Robotics' }, { name: 'Web Application' }];
+  tags: Tags[] = [];
 
   constructor(
     private formBuilder: FormBuilder,

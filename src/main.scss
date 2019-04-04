@@ -150,14 +150,21 @@ body {
   padding: 0;
 }
 
+.orange-btn {
+  background-color: orange;
+  color: white;
+}
+
 @media (max-width: 1050px) {
   .page-search {
     flex-direction: column;
   }
+
   .page-sort {
     align-self: flex-start;
     padding-left: 12px;
   }
+
   .container {
     width: 90%;
   }
@@ -207,6 +214,7 @@ body {
 .hidden {
   visibility: hidden;
 }
+
 .modal-container {
   width: 75vw;
 }

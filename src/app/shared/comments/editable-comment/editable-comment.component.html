@@ -12,10 +12,14 @@
     <p class="comment-text">
       {{ comment.comment_text }}
     </p>
-    <div class="comment-icons">
+    <div class="comment-icons pointer">
       <app-like [activityId]="comment.id" [activityType]="'comment'" [likes]="comment.likes" class="icon"></app-like>
-      <mat-icon class="icon">reply</mat-icon> Reply
+      <mat-icon class="icon">reply</mat-icon>Reply
+      <mat-icon class="icon" mat-icon-button [matMenuTriggerFor]="more">more_vert</mat-icon>
     </div>
+    <mat-menu #more="matMenu" class="more-menu pointer">
+      <mat-icon class="icon">flag</mat-icon>Report <mat-icon class="icon">edit</mat-icon>Edit
+    </mat-menu>
   </div>
 </div>
 
@@ -33,9 +37,13 @@
     <p class="comment-text">
       {{ reply.reply_text }}
     </p>
-    <div class="comment-icons">
+    <div class="comment-icons pointer">
       <app-like [activityId]="reply.id" [activityType]="'reply'" [likes]="reply.likes" class="icon"></app-like>
       <mat-icon class="icon">reply</mat-icon> Reply
+      <mat-icon class="icon" mat-icon-button [matMenuTriggerFor]="more">more_vert</mat-icon>
     </div>
+    <mat-menu #more="matMenu" class="more-menu pointer">
+      <mat-icon class="icon">flag</mat-icon>Report <mat-icon class="icon">edit</mat-icon>Edit
+    </mat-menu>
   </div>
 </div>

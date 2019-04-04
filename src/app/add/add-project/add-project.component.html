@@ -1,58 +1,86 @@
-<div class="loader" *ngIf="isPageLoading"><mat-spinner></mat-spinner></div>
-<div class="addproject-background" *ngIf="!isPageLoading">
-  <div class="addproject-container--add-project">
-    <div class="addproject-content">
-      <h1 class="addproject-heading--xl">Add Project</h1>
-      <form [formGroup]="project" (keydown.enter)="$event.preventDefault()">
-        <div class="addproject-form">
-          <div *ngIf="formNotfilled"><i>Please fill all the fields.</i></div>
-          <mat-vertical-stepper [linear]="isLinear" #stepper>
-            <mat-step [stepControl]="project">
-              <ng-template matStepLabel>Think of a cool name for your project. </ng-template>
-              <mat-form-field class="addproject-text">
-                <input matInput placeholder="Eg: Cynthesize" formControlName="projectName" required />
-              </mat-form-field>
-              <div><button mat-button class="button button--forward" matStepperNext>Next</button></div>
-            </mat-step>
-            <mat-step [stepControl]="project">
-              <ng-template matStepLabel>Describe your project - a bit of detail would do!</ng-template>
-              <td-text-editor formControlName="description" [options]="options"></td-text-editor>
-              <div *ngIf="project.controls['description'].hasError('minlength')">
-                <i>Please enter atleast 150 characters</i>
-              </div>
-              <div>
-                <button
-                  [disabled]="project.controls['description'].hasError('minlength')"
-                  class="button button--forward"
-                  mat-button
-                  matStepperNext
-                >
-                  Next
-                </button>
-              </div>
-            </mat-step>
-            <mat-step [stepControl]="project">
-              <ng-template matStepLabel
-                >Which of these stages would you say are closest to your project’s completion?</ng-template
-              >
-              <mat-form-field>
-                <mat-select placeholder="Select a stage" formControlName="currentStage">
-                  <mat-option *ngFor="let stage of stages" [value]="stage"> {{ stage }} </mat-option>
-                </mat-select>
-              </mat-form-field>
-              <div><button class="button button--forward" mat-button matStepperNext>Next</button></div>
-            </mat-step>
-            <mat-step>
-              <ng-template matStepLabel>Hit Submit!</ng-template>
-              <div>
-                <button mat-button class="button button--warning" (click)="stepper.reset()">Reset</button>
-                <button mat-button class="button button--forward" (click)="addProject()">Submit</button>
-              </div>
-            </mat-step>
-          </mat-vertical-stepper>
-        </div>
-      </form>
+<div class="loader" *ngIf="isLoading"><mat-spinner></mat-spinner></div>
+<div class="container">
+  <div class="page" *ngIf="!isLoading">
+    <div class="page-header">
+      <div class="page-heading">ADD PROJECT</div>
     </div>
-    <div class="addproject-picture"></div>
+    <mat-card class="add-project-card" [style.fontSize]="'1rem'">
+      <form autocomplete="off" [formGroup]="project" (ngSubmit)="addProject(project.value)">
+        <div class="field">
+          <h3>Project Name</h3>
+          <mat-form-field appearance="outline" class="field">
+            <mat-label>Enter project title</mat-label>
+            <input matInput formControlName="projectName" placeholder="Enter project title" />
+            <mat-hint>Tip: Project name is usually a one word name that you want for your project.</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="field">
+          <h3>Project Abstract</h3>
+          <mat-form-field appearance="outline" class="field">
+            <mat-label>Enter project abstract</mat-label>
+            <textarea matInput formControlName="abstract" placeholder="Enter project description"></textarea>
+            <mat-hint
+              >Tip: The project abstract is a short description that is visible to the community (developers and
+              mentors). The abstract is to give a one lining idea of what your project is. This is used to gather
+              traffic for your project even when it is under construction, giving you a medium to get help from other
+              developers in context of a team.
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="field">
+          <h3>Project Description</h3>
+          <mat-form-field appearance="outline" class="field">
+            <mat-label>Enter project description</mat-label>
+            <textarea matInput formControlName="description" placeholder="Enter project description"></textarea>
+            <mat-hint
+              >Tip: Please elaborate the project properly. How is it different from other things, what impact it'll
+              create and other useful information that might encourage other developers and mentors to provide their
+              inputs.
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="field">
+          <h3>Tags</h3>
+          <mat-form-field class="field">
+            <mat-chip-list #chipList aria-label="Fruit selection">
+              <mat-chip
+                *ngFor="let tag of tags"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(tag)"
+              >
+                {{ tag.name }}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input
+                placeholder="Type a new tag"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)"
+              />
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+        <div class="field">
+          <h3>Website Link</h3>
+          <mat-form-field appearance="outline" class="field">
+            <mat-label>Enter website link</mat-label>
+            <input matInput formControlName="website" placeholder="Enter website link" />
+            <mat-hint>Tip: </mat-hint>
+          </mat-form-field>
+        </div>
+        <h3>Thumbnail</h3>
+        <!-- TODO -->
+        <p>Coming Soon</p>
+
+        <div class="field">
+          <h3>Make your project abstract public?</h3>
+          <mat-checkbox formControlName="isPublic">Yes</mat-checkbox>
+          <mat-checkbox formControlName="isPrivate">No</mat-checkbox>
+        </div>
+        <button mat-raised-button class="orange-btn">Post Idea</button>
+      </form>
+    </mat-card>
   </div>
 </div>

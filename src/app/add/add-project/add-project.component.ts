@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ProjectService } from '@app/core/project/project.service';
 import { finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
+import { MatChipInputEvent } from '@angular/material';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-project',
@@ -19,7 +21,7 @@ export class AddProjectComponent implements OnInit {
   options: any = {
     lineWrapping: true
   };
-
+  tags: any[] = [];
   stages: String[] = [
     'Ideation',
     'Execution Ongoing',
@@ -30,20 +32,31 @@ export class AddProjectComponent implements OnInit {
     'In Production'
   ];
 
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
   constructor(
     private _formBuilder: FormBuilder,
     private projectService: ProjectService,
     private router: Router,
     private errorHandler: ErrorHandlerService
-  ) {}
-
-  ngOnInit() {
+  ) {
     this.project = this._formBuilder.group({
       projectName: ['', Validators.required],
+      abstract: ['', [Validators.required, Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.minLength(150)]],
-      currentStage: ['', Validators.required]
+      currentStage: ['', Validators.required],
+      website: ['', Validators.required],
+      isPublic: false,
+      isPrivate: true
     });
   }
+
+  ngOnInit() {}
 
   addProject() {
     this.isPageLoading = true;
@@ -82,6 +95,27 @@ export class AddProjectComponent implements OnInit {
             this.errorHandler.subj_notification.next(error);
           }
         );
+    }
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || '').trim()) {
+      this.tags.push({ name: value.trim() });
+    }
+
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(tags: any): void {
+    const index = this.tags.indexOf(tags);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
     }
   }
 }

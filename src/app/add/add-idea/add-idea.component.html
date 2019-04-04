@@ -1,53 +1,45 @@
 <div class="loader" *ngIf="isLoading"><mat-spinner></mat-spinner></div>
-<div class="addidea-background" *ngIf="!isLoading">
-  <div class="addidea-add-idea-container">
-    <div class="addidea-form-container">
-      <h1 class="addidea-mb-l">Add Idea</h1>
-
-      <form class="addidea-add-idea-form" (ngSubmit)="addIdea()" [formGroup]="addIdeaForm" novalidate>
-        <mat-form-field class="addidea-input">
-          <input
-            type="text"
-            class="addidea-input__text"
-            matInput
-            formControlName="idea_name"
-            [autocomplete]="false"
-            placeholder="Add an idea name."
-            required
-          />
-          <mat-error *ngIf="addIdeaForm.controls.idea_name.valid || addIdeaForm.controls.idea_name.untouched">
-            <span translate>Idea Name is required!</span>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="addidea-input" hintLabel="Enter atleast 50 characters">
-          <input
-            #input
-            minlength="50"
-            type="text"
-            matInput
-            formControlName="description"
-            autocomplete="description"
-            placeholder="Add a brief description about the idea."
-            required
-          />
-
-          <mat-error *ngIf="addIdeaForm.controls.description.valid || addIdeaForm.controls.description.untouched">
-            <span translate>Description is required!</span>
-          </mat-error>
-        </mat-form-field>
-
-        <button
-          mat-raised-button
-          color="primary"
-          class="addidea-submit-button"
-          type="submit"
-          [disabled]="addIdeaForm.invalid || isLoading"
-        >
-          <span translate>Add Idea</span>
-        </button>
-      </form>
+<div class="container">
+  <div class="page" *ngIf="!isLoading">
+    <div class="page-header">
+      <div class="page-heading">ADD IDEA</div>
     </div>
-    <div class="addidea-artwork-container"><img src="../../../assets/images/add-issue.svg" /></div>
+    <mat-card class="add-idea-card" [style.fontSize]="'1rem'">
+      <h3>Idea Title</h3>
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Enter idea title</mat-label>
+        <input matInput placeholder="Enter idea title" />
+        <mat-hint
+          >Tip: Keep the idea title short and crisp. It's easier for other developers to remember it
+          correctly.</mat-hint
+        >
+      </mat-form-field>
+      <h3>Idea Description</h3>
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Enter idea description</mat-label>
+        <textarea matInput placeholder="Enter idea description"></textarea>
+        <mat-hint
+          >Tip: Please elaborate the idea properly. How is it different from other things, what impact it'll create and
+          other useful information that might encourage other developers and mentors to provide their inputs.
+        </mat-hint>
+      </mat-form-field>
+      <h3>Tags</h3>
+      <mat-form-field class="example-chip-list" class="field">
+        <mat-chip-list #chipList aria-label="Fruit selection">
+          <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
+            {{ tag.name }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="Type a new tag"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"
+          />
+        </mat-chip-list>
+      </mat-form-field>
+      <button mat-raised-button class="orange-btn">Post Idea</button>
+    </mat-card>
   </div>
 </div>
