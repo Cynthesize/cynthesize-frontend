@@ -1,0 +1,29 @@
+<div class="profile-project-page">
+  <div class="page-header">
+    <div class="profile-heading">Ideas</div>
+  </div>
+  <div class="page-data">
+    <div class="idea-feed-data">
+      <mat-card class="idea-card" *ngFor="let idea of ideasList">
+        <div class="idea-card-details">
+          <div class="idea-card-project-name">{{ idea.idea_name }}</div>
+          <div class="idea-card-project-description">
+            {{ idea.description }}
+          </div>
+        </div>
+        <div class="idea-card-links">
+          <div class="idea-card-icons pointer">
+            <app-activity-actions
+              [id]="idea.id"
+              [type]="'idea'"
+              [likes]="idea.likes"
+              [url]="'/view/feed/ideas/' + idea.id"
+            ></app-activity-actions>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <div class="loader" [ngClass]="{ hidden: !isLoading }"><mat-spinner></mat-spinner></div>
+  <router-outlet></router-outlet>
+</div>
