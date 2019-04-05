@@ -7,40 +7,65 @@
     <mat-card class="add-project-card" [style.fontSize]="'1rem'">
       <form autocomplete="off" [formGroup]="project" (ngSubmit)="addProject(project.value)">
         <div class="field">
-          <h3>Project Name</h3>
+          <h3>
+            Project Name
+            <mat-icon
+              [matTooltipPosition]="'right'"
+              matTooltipClass="tooltip"
+              matTooltip="Tip: Project name is usually a one word name that you want for your project."
+              >help_outline</mat-icon
+            >
+          </h3>
           <mat-form-field appearance="outline" class="field">
             <mat-label>Enter project title</mat-label>
             <input matInput formControlName="projectName" placeholder="Enter project title" />
-            <mat-hint>Tip: Project name is usually a one word name that you want for your project.</mat-hint>
           </mat-form-field>
         </div>
         <div class="field">
-          <h3>Project Abstract</h3>
+          <h3>
+            Project Abstract
+            <mat-icon
+              [matTooltipPosition]="'right'"
+              matTooltipClass="tooltip"
+              matTooltip="Tip: The project abstract is a short description that is visible to the community (developers and
+            mentors). The abstract is to give a one lining idea of what your project is. This is used to gather
+            traffic for your project even when it is under construction, giving you a medium to get help from other
+            developers in context of a team."
+              >help_outline</mat-icon
+            >
+          </h3>
           <mat-form-field appearance="outline" class="field">
             <mat-label>Enter project abstract</mat-label>
             <textarea matInput formControlName="abstract" placeholder="Enter project description"></textarea>
-            <mat-hint
-              >Tip: The project abstract is a short description that is visible to the community (developers and
-              mentors). The abstract is to give a one lining idea of what your project is. This is used to gather
-              traffic for your project even when it is under construction, giving you a medium to get help from other
-              developers in context of a team.
-            </mat-hint>
           </mat-form-field>
         </div>
         <div class="field">
-          <h3>Project Description</h3>
+          <h3>
+            Project Description
+            <mat-icon
+              [matTooltipPosition]="'right'"
+              matTooltipClass="tooltip"
+              matTooltip="Tip: Please elaborate the project properly. How is it different from other things, what impact it'll
+            create and other useful information that might encourage other developers and mentors to provide their
+            inputs."
+              >help_outline</mat-icon
+            >
+          </h3>
           <mat-form-field appearance="outline" class="field">
             <mat-label>Enter project description</mat-label>
             <textarea matInput formControlName="description" placeholder="Enter project description"></textarea>
-            <mat-hint
-              >Tip: Please elaborate the project properly. How is it different from other things, what impact it'll
-              create and other useful information that might encourage other developers and mentors to provide their
-              inputs.
-            </mat-hint>
           </mat-form-field>
         </div>
         <div class="field">
-          <h3>Tags</h3>
+          <h3>
+            Tags
+            <mat-icon
+              [matTooltipPosition]="'right'"
+              matTooltipClass="tooltip"
+              matTooltip="Tip: Add tags that describe your idea best. Helps others find your idea in searches."
+              >help_outline</mat-icon
+            >
+          </h3>
           <mat-form-field class="field">
             <mat-chip-list #chipList aria-label="Fruit selection">
               <mat-chip
@@ -63,19 +88,42 @@
           </mat-form-field>
         </div>
         <div class="field">
-          <h3>Website Link</h3>
+          <h3>
+            Website Link
+            <mat-icon
+              [matTooltipPosition]="'right'"
+              matTooltipClass="tooltip"
+              matTooltip="Tip: Enter any website URL that depicts your project. Leave empty if none."
+              >help_outline</mat-icon
+            >
+          </h3>
           <mat-form-field appearance="outline" class="field">
             <mat-label>Enter website link</mat-label>
             <input matInput formControlName="website" placeholder="Enter website link" />
-            <mat-hint>Tip: </mat-hint>
           </mat-form-field>
         </div>
-        <h3>Thumbnail</h3>
+        <h3>
+          Thumbnail
+          <mat-icon
+            [matTooltipPosition]="'right'"
+            matTooltipClass="tooltip"
+            matTooltip="Tip: Add tags that describe your idea best. Helps others find your idea in searches."
+            >help_outline</mat-icon
+          >
+        </h3>
         <!-- TODO -->
         <p>Coming Soon</p>
 
         <div class="field">
-          <h3>Make your project abstract public?</h3>
+          <h3>
+            Make your project abstract public?
+            <mat-icon
+              [matTooltipPosition]="'right'"
+              matTooltipClass="tooltip"
+              matTooltip="Tip: Do you want to display the abstract of your project to all the users on the platform?"
+              >help_outline</mat-icon
+            >
+          </h3>
           <mat-checkbox formControlName="isPublic">Yes</mat-checkbox>
           <mat-checkbox formControlName="isPrivate">No</mat-checkbox>
         </div>

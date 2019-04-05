@@ -41,7 +41,7 @@ export class LikeComponent implements OnInit {
 
   openLoginDialog(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
-      width: '500px'
+      width: 'auto'
     });
 
     dialogRef.afterClosed().subscribe(result => {});

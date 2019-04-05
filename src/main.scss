@@ -207,7 +207,7 @@ body {
 }
 
 .active-context {
-  color: blue;
+  color: #2196f3;
   font-weight: bold;
 }
 
@@ -217,4 +217,14 @@ body {
 
 .modal-container {
   width: 75vw;
+}
+.tooltip {
+  font-size: 0.8rem;
+}
+h3 {
+  display: flex;
+}
+
+mat-icon {
+  margin-left: 10px;
 }
