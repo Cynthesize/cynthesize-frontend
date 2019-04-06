@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ProjectService } from '@app/core/project/project.service';
-import { finalize } from 'rxjs/operators';
+import { finalize, startWith, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
-import { MatChipInputEvent } from '@angular/material';
+import { MatChipInputEvent, MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-project',
@@ -21,7 +22,6 @@ export class AddProjectComponent implements OnInit {
   options: any = {
     lineWrapping: true
   };
-  tags: any[] = [];
   stages: String[] = [
     'Ideation',
     'Execution Ongoing',
@@ -36,8 +36,36 @@ export class AddProjectComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  tagCtrl = new FormControl();
+  filteredTags: Observable<string[]>;
+  tags: string[] = [];
 
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+
+  allTags = [
+    'Artificial Intelligence',
+    'Productivity',
+    'Home Automation',
+    'Internet of Things',
+    'Analytics',
+    'Web Application',
+    'Android',
+    'iOS',
+    'Blockchain',
+    'Health and Fitness',
+    'Social Media',
+    'Security',
+    'Robotics',
+    'Chat Messaging',
+    'Video Conferencing',
+    'Augmented Reality',
+    'VR',
+    'Dating',
+    'Music',
+    'Books'
+  ];
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -54,6 +82,10 @@ export class AddProjectComponent implements OnInit {
       isPublic: false,
       isPrivate: true
     });
+    this.filteredTags = this.tagCtrl.valueChanges.pipe(
+      startWith(null),
+      map((tag: string | null) => (tag ? this._filter(tag) : this.allTags.slice()))
+    );
   }
 
   ngOnInit() {}
@@ -99,23 +131,38 @@ export class AddProjectComponent implements OnInit {
   }
 
   add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
+    if (!this.matAutocomplete.isOpen) {
+      const input = event.input;
+      const value = event.value;
 
-    if ((value || '').trim()) {
-      this.tags.push({ name: value.trim() });
-    }
+      if ((value || '').trim()) {
+        this.tags.push(value.trim());
+      }
+      if (input) {
+        input.value = '';
+      }
 
-    if (input) {
-      input.value = '';
+      this.tagCtrl.setValue(null);
     }
   }
 
-  remove(tags: any): void {
-    const index = this.tags.indexOf(tags);
+  remove(tag: string): void {
+    const index = this.tags.indexOf(tag);
 
     if (index >= 0) {
       this.tags.splice(index, 1);
     }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.tags.push(event.option.viewValue);
+    this.tagInput.nativeElement.value = '';
+    this.tagCtrl.setValue(null);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allTags.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
   }
 }
