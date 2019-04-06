@@ -32,33 +32,93 @@ export class AddIdeaComponent implements OnInit {
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl();
-  filteredTags: Observable<string[]>;
-  tags: string[] = [];
+  filteredTags: Observable<any[]>;
+  tags: any[] = [];
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   allTags = [
-    'Artificial Intelligence',
-    'Productivity',
-    'Home Automation',
-    'Internet of Things',
-    'Analytics',
-    'Web Application',
-    'Android',
-    'iOS',
-    'Blockchain',
-    'Health and Fitness',
-    'Social Media',
-    'Security',
-    'Robotics',
-    'Chat Messaging',
-    'Video Conferencing',
-    'Augmented Reality',
-    'VR',
-    'Dating',
-    'Music',
-    'Books'
+    {
+      tag_name: 'Artificial Intelligence',
+      tag_id: 1
+    },
+    {
+      tag_name: 'Productivity',
+      tag_id: 2
+    },
+    {
+      tag_name: 'Home Automation',
+      tag_id: 3
+    },
+    {
+      tag_name: 'Internet of Things',
+      tag_id: 4
+    },
+    {
+      tag_name: 'Analytics',
+      tag_id: 5
+    },
+    {
+      tag_name: 'Web Application',
+      tag_id: 6
+    },
+    {
+      tag_name: 'Android',
+      tag_id: 7
+    },
+    {
+      tag_name: 'iOS',
+      tag_id: 8
+    },
+    {
+      tag_name: 'Blockchain',
+      tag_id: 9
+    },
+    {
+      tag_name: 'Health and Fitness',
+      tag_id: 10
+    },
+    {
+      tag_name: 'Social Media',
+      tag_id: 11
+    },
+    {
+      tag_name: 'Security',
+      tag_id: 12
+    },
+    {
+      tag_name: 'Robotics',
+      tag_id: 13
+    },
+    {
+      tag_name: 'Chat Messaging',
+      tag_id: 14
+    },
+    {
+      tag_name: 'Video Conferencing',
+      tag_id: 15
+    },
+    {
+      tag_name: 'Augmented Reality',
+      tag_id: 16
+    },
+    {
+      tag_name: 'VR',
+      tag_id: 17
+    },
+    {
+      tag_name: 'Dating',
+      tag_id: 18
+    },
+    {
+      tag_name: 'Music',
+      tag_id: 19
+    },
+    {
+      tag_name: 'Books',
+      tag_id: 20
+    }
   ];
 
   constructor(
@@ -70,7 +130,7 @@ export class AddIdeaComponent implements OnInit {
     this.createForm();
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
-      map((tag: string | null) => (tag ? this._filter(tag) : this.allTags.slice()))
+      map((tag: any | null) => (tag ? this._filter(tag) : this.allTags.slice()))
     );
   }
   add(event: MatChipInputEvent): void {
@@ -89,7 +149,7 @@ export class AddIdeaComponent implements OnInit {
     }
   }
 
-  remove(tag: string): void {
+  remove(tag: any): void {
     const index = this.tags.indexOf(tag);
 
     if (index >= 0) {
@@ -98,7 +158,7 @@ export class AddIdeaComponent implements OnInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.tags.push(event.option.viewValue);
+    this.tags.push(event.option.value);
     this.tagInput.nativeElement.value = '';
     this.tagCtrl.setValue(null);
   }
@@ -119,10 +179,12 @@ export class AddIdeaComponent implements OnInit {
         })
       )
       .subscribe(
-        credentials => {
+        data => {
+          this.ideaService.addIdeaTags(this.tags, data.data.insert_ideas.returning[0].id).subscribe((ret: any) => {
+            this.isLoading = false;
+            this.router.navigate(['/view/feed/ideas']);
+          });
           log.debug(`Idea Added`);
-          this.isLoading = false;
-          this.router.navigate(['/view/feed/ideas']);
         },
         error => {
           this.isLoading = false;
@@ -140,9 +202,10 @@ export class AddIdeaComponent implements OnInit {
     });
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  private _filter(value: any): any[] {
+    let filterValue = value.tag_name || value;
+    filterValue = filterValue.toLowerCase();
 
-    return this.allTags.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
+    return this.allTags.filter(tag => tag.tag_name.toLowerCase().indexOf(filterValue) === 0);
   }
 }

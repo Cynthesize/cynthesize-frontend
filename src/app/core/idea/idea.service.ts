@@ -6,7 +6,8 @@ import {
   MUTATION_ADD_IDEA,
   MUTATION_DELETE_IDEA,
   MUTATION_LIKE_IDEA,
-  MUTATION_DISLIKE_IDEA
+  MUTATION_DISLIKE_IDEA,
+  MUTATION_ADD_IDEA_TAGS
 } from '@app/shared/mutations/idea-mutations';
 import {
   QUERY_IDEA_DETAILS,
@@ -40,6 +41,28 @@ export class IdeaService {
       .pipe(
         map((res: any) => {
           return res;
+        })
+      );
+  }
+
+  /**
+   * addIdeaTags
+   */
+  public addIdeaTags(tags: any, ideaId: any) {
+    const tagTBP: any[] = [];
+    tags.forEach((tag: any) => {
+      tagTBP.push({ idea_id: ideaId, tag_id: tag.tag_id });
+    });
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_ADD_IDEA_TAGS,
+        variables: {
+          objects: tagTBP
+        }
+      })
+      .pipe(
+        map((resp: any) => {
+          return resp;
         })
       );
   }

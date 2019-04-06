@@ -12,6 +12,14 @@ const MUTATION_ADD_IDEA = gql`
   }
 `;
 
+const MUTATION_ADD_IDEA_TAGS = gql`
+  mutation insert_tag_links($objects: [tags_links_insert_input!]!) {
+    insert_tags_links(objects: $objects) {
+      affected_rows
+    }
+  }
+`;
+
 const MUTATION_DELETE_IDEA = gql`
   mutation delete_ideas($ideaId: Int!) {
     delete_ideas(where: { id: { _eq: $ideaId } }) {
@@ -60,4 +68,4 @@ const MUTATION_DISLIKE_IDEA = gql`
   }
 `;
 
-export { MUTATION_ADD_IDEA, MUTATION_DELETE_IDEA, MUTATION_LIKE_IDEA, MUTATION_DISLIKE_IDEA };
+export { MUTATION_ADD_IDEA, MUTATION_DELETE_IDEA, MUTATION_LIKE_IDEA, MUTATION_DISLIKE_IDEA, MUTATION_ADD_IDEA_TAGS };
