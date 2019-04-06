@@ -21,6 +21,7 @@ import {
   QUERY_FETCH_ONGOING_PROJECT_DETAILS
 } from '@app/shared/queries/project-queries';
 import { QUERY_PROJECTS_BY_USER } from '@app/shared/queries/user-queries';
+import { MUTATION_ADD_IDEA_TAGS } from '@app/shared/mutations/idea-mutations';
 
 @Injectable({
   providedIn: 'root'
@@ -285,6 +286,28 @@ export class ProjectService {
       .pipe(
         map((res: any) => {
           return res;
+        })
+      );
+  }
+
+  /**
+   * addProjectTags
+   */
+  public addProjectTags(tags: any, projectId: any) {
+    const tagTBP: any[] = [];
+    tags.forEach((tag: any) => {
+      tagTBP.push({ project_id: projectId, tag_id: tag.tag_id });
+    });
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_ADD_IDEA_TAGS,
+        variables: {
+          objects: tagTBP
+        }
+      })
+      .pipe(
+        map((resp: any) => {
+          return resp;
         })
       );
   }

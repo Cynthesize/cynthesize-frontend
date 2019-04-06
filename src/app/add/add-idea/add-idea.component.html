@@ -5,57 +5,72 @@
       <div class="page-heading">ADD IDEA</div>
     </div>
     <mat-card class="add-idea-card" [style.fontSize]="'1rem'">
-      <h3>
-        Idea Title
-        <mat-icon
-          [matTooltipPosition]="'right'"
-          matTooltipClass="tooltip"
-          matTooltip="Tip: Keep the idea title short and crisp. It's easier for other developers to remember it correctly."
-          >help_outline</mat-icon
-        >
-      </h3>
-      <mat-form-field appearance="outline" class="field">
-        <mat-label>Enter idea title</mat-label>
-        <input matInput placeholder="Enter idea title" />
-      </mat-form-field>
-      <h3>
-        Idea Description
-        <mat-icon
-          [matTooltipPosition]="'right'"
-          matTooltipClass="tooltip"
-          matTooltip="Tip: Please elaborate the idea properly. How is it different from other things, what impact it'll create and other useful information that might encourage other developers and mentors to provide their inputs."
-          >help_outline</mat-icon
-        >
-      </h3>
-      <mat-form-field appearance="outline" class="field">
-        <mat-label>Enter idea description</mat-label>
-        <textarea matInput placeholder="Enter idea description"></textarea>
-      </mat-form-field>
-      <h3>
-        Tags
-        <mat-icon
-          [matTooltipPosition]="'right'"
-          matTooltipClass="tooltip"
-          matTooltip="Tip: Add tags that describe your idea best. Helps others find your idea in searches."
-          >help_outline</mat-icon
-        >
-      </h3>
-      <mat-form-field class="example-chip-list" class="field">
-        <mat-chip-list #chipList aria-label="Fruit selection">
-          <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
-            {{ tag.name }}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-          </mat-chip>
-          <input
-            placeholder="Type a new tag"
-            [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="add($event)"
-          />
-        </mat-chip-list>
-      </mat-form-field>
-      <button mat-raised-button class="orange-btn">Post Idea</button>
+      <form [formGroup]="addIdeaForm" (ngSubmit)="addIdea()">
+        <h3>
+          Idea Title
+          <mat-icon
+            [matTooltipPosition]="'right'"
+            matTooltipClass="tooltip"
+            matTooltip="Tip: Keep the idea title short and crisp. It's easier for other developers to remember it correctly."
+            >help_outline</mat-icon
+          >
+        </h3>
+        <mat-form-field appearance="outline" class="field">
+          <mat-label>Enter idea title</mat-label>
+          <input matInput placeholder="Enter idea title" formControlName="idea_name" />
+        </mat-form-field>
+        <h3>
+          Idea Description
+          <mat-icon
+            [matTooltipPosition]="'right'"
+            matTooltipClass="tooltip"
+            matTooltip="Tip: Please elaborate the idea properly. How is it different from other things, what impact it'll create and other useful information that might encourage other developers and mentors to provide their inputs."
+            >help_outline</mat-icon
+          >
+        </h3>
+        <mat-form-field appearance="outline" class="field">
+          <mat-label>Enter idea description</mat-label>
+          <textarea matInput placeholder="Enter idea description" formControlName="description"></textarea>
+        </mat-form-field>
+        <h3>
+          Tags
+          <mat-icon
+            [matTooltipPosition]="'right'"
+            matTooltipClass="tooltip"
+            matTooltip="Tip: Add tags that describe your idea best. Helps others find your idea in searches."
+            >help_outline</mat-icon
+          >
+        </h3>
+        <mat-form-field class="field">
+          <mat-chip-list #chipList>
+            <mat-chip
+              *ngFor="let tag of tags"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove(tag)"
+            >
+              {{ tag.tag_name }}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="New tag..."
+              #tagInput
+              [formControl]="tagCtrl"
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)"
+            />
+          </mat-chip-list>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let tag of (filteredTags | async)" [value]="tag">
+              {{ tag.tag_name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <button mat-raised-button class="orange-btn">Post Idea</button>
+      </form>
     </mat-card>
   </div>
 </div>

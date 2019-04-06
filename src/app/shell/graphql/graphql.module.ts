@@ -27,7 +27,7 @@ export class GraphqlModule {
     authHeader = new HttpHeaders()
       .set('X-Hasura-Access-Key', HASURA_ACCESS_KEY)
       .set('Content-Type', 'application/json')
-      .set('Authorization', `Bearer ${localStorage.getItem('access_token')}`)
+      .set('Authorization', `Bearer ${localStorage.getItem('id_token')}`)
       .set('X-Hasura-Role', 'admin');
 
     // Create a HTTP Link with the URI and the header.
