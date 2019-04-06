@@ -11,7 +11,6 @@
       <div class="project-abstract">{{ project.abstract }}</div>
       <div class="card-icons pointer">
         <app-like [activityId]="project.id" [activityType]="'project'" [likes]="project.likes" class="icon"></app-like>
-        <mat-icon class="icon" [routerLink]="['/view/feed/projects/launched', project.id]">chat</mat-icon>
         <mat-icon class="icon" (click)="openShareSheet()">share</mat-icon>
       </div>
     </div>
