@@ -64,6 +64,7 @@
     "optimism": "^0.6.8",
     "rxjs": "^6.4.0",
     "subscriptions-transport-ws": "^0.9.16",
+    "typed.js": "^2.0.10",
     "zone.js": "^0.8.29"
   },
   "devDependencies": {
