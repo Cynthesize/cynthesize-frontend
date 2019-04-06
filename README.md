@@ -1,6 +1,6 @@
 # Cynthesize
 
-[![Join the chat at https://gitter.im/oppia/oppia-chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Cynthesize-gitter/Lobby)
+[![Join the chat at https://gitter.im/Cynthesize-gitter/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Cynthesize-gitter/Lobby)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/bb4cca25-6173-4ced-b955-8d1662820686/deploy-status)](https://app.netlify.com/sites/cynthesize-develop/deploys)
 
 ![](https://files.gitter.im/WickedBrat/wq4g/banner.jpg)

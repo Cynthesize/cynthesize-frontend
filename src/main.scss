@@ -228,3 +228,9 @@ h3 {
 mat-icon {
   margin-left: 10px;
 }
+
+// Needs to be here, doesn't work in home.component.scss
+.typed-cursor {
+  color: orange;
+  margin: 10px;
+}
