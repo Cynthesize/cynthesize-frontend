@@ -14,7 +14,7 @@
     </p>
     <div class="comment-icons pointer">
       <app-like [activityId]="comment.id" [activityType]="'comment'" [likes]="comment.likes" class="icon"></app-like>
-      <mat-icon class="icon">reply</mat-icon>Reply
+      <i class="icon fa fa-reply"></i> Reply
       <mat-icon class="icon" mat-icon-button [matMenuTriggerFor]="more">more_vert</mat-icon>
     </div>
     <mat-menu #more="matMenu" class="more-menu pointer">
@@ -39,7 +39,7 @@
     </p>
     <div class="comment-icons pointer">
       <app-like [activityId]="reply.id" [activityType]="'reply'" [likes]="reply.likes" class="icon"></app-like>
-      <mat-icon class="icon">reply</mat-icon> Reply
+      <i class="icon fa fa-reply"></i> Reply
       <mat-icon class="icon" mat-icon-button [matMenuTriggerFor]="more">more_vert</mat-icon>
     </div>
     <mat-menu #more="matMenu" class="more-menu pointer">
