@@ -10,14 +10,13 @@ import { ShareSheetComponent } from '../share-sheet/share-sheet.component';
 export class ActivityActionsComponent implements OnInit {
   @Input() likes: any;
   @Input() type: any;
+  @Input() parentProjectId: any;
   @Input() id: any;
   @Input() url: any;
 
   constructor(private bottomSheet: MatBottomSheet) {}
 
-  ngOnInit() {
-    console.log(this.url);
-  }
+  ngOnInit() {}
 
   openShareSheet(): void {
     this.bottomSheet.open(ShareSheetComponent, {

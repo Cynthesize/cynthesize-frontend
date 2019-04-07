@@ -38,7 +38,9 @@ export class ProjectService {
           objects: [
             {
               project_name: projectDetails['projectName'],
-              description: projectDetails['description'],
+              abstract: projectDetails['abstract'],
+              website: projectDetails['website'],
+              is_public: projectDetails['isPublic'],
               current_stage: projectDetails['currentStage'],
               owner: localStorage.getItem('userId')
             }

@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { IDEA_DETAILS_FRAGMENT, IDEA_FEED_FRAGMENT } from '../fragments/idea-fragments';
+import { IDEA_DETAILS_FRAGMENT } from '../fragments/idea-fragments';
 import { USER_PROFILE_PIC_FRAGMENT } from '../fragments/user-fragments';
 
 const QUERY_IDEA_DETAILS = gql`

@@ -1,5 +1,7 @@
 <div *ngIf="idea" class="modal-container">
   <h1>{{ idea.idea_name }}</h1>
+  <h4>Tags:</h4>
+  <span *ngFor="let tags of idea.tagsLinkssByideaId">{{ tags.tagsBytagId.tag_name }}</span>
   <app-user-name
     [username]="idea.userByowner.username"
     [time]="idea.timestamp"

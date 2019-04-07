@@ -18,6 +18,7 @@ export class AddProjectComponent implements OnInit {
   project: FormGroup;
   formNotfilled = false;
   isPageLoading = false;
+  isFormSubmitted = false;
   projectDescription = '';
   options: any = {
     lineWrapping: true
@@ -137,9 +138,8 @@ export class AddProjectComponent implements OnInit {
     this.project = this._formBuilder.group({
       projectName: ['', Validators.required],
       abstract: ['', [Validators.required, Validators.maxLength(100)]],
-      description: ['', [Validators.required, Validators.minLength(150)]],
       currentStage: ['', Validators.required],
-      website: ['', Validators.required],
+      website: ['https://', Validators.required],
       isPublic: false,
       isPrivate: true
     });
@@ -152,45 +152,33 @@ export class AddProjectComponent implements OnInit {
   ngOnInit() {}
 
   addProject() {
-    this.isPageLoading = true;
-    if (
-      this.project.get('projectName').value === '' ||
-      this.project.get('description').value === '' ||
-      this.project.get('currentStage').value === ''
-    ) {
-      this.formNotfilled = true;
-    } else {
-      const projectDetails = {
-        projectName: this.project.get('projectName').value.toLowerCase(),
-        description: this.project.get('description').value,
-        currentStage: this.project.get('currentStage').value
-      };
-
-      projectDetails.projectName = projectDetails.projectName
+    this.isFormSubmitted = true;
+    const projectDetails = {
+      projectName: this.project
+        .get('projectName')
+        .value.toLowerCase()
         .replace(/\s+/g, ' ')
         .trim()
-        .replace(/ /g, '-');
-      this.projectService
-        .addProject(projectDetails)
-        .pipe(
-          finalize(() => {
-            this.isPageLoading = false;
-          })
-        )
-        .subscribe(
-          (data: any) => {
-            this.projectService
-              .addProjectTags(this.tags, data.data.insert_projects.returning[0].id)
-              .subscribe((ret: any) => {
-                this.router.navigate(['/view/project/' + ret.data.insert_projects.returning['0'].project_name]);
-              });
-          },
-          (error: any) => {
-            this.isPageLoading = false;
-            this.errorHandler.subj_notification.next(error);
-          }
-        );
-    }
+        .replace(/ /g, '-'),
+      currentStage: this.project.get('currentStage').value,
+      abstract: this.project.get('abstract').value.trim(),
+      isPublic: this.project.get('isPrivate').value || this.project.get('isPublic').value,
+      website: this.project.get('website').value
+    };
+
+    this.projectService.addProject(projectDetails).subscribe(
+      (data: any) => {
+        this.projectService
+          .addProjectTags(this.tags, data.data.insert_projects.returning[0].id)
+          .subscribe((ret: any) => {
+            this.router.navigate(['/view/project/' + data.data.insert_projects.returning[0].project_name]);
+          });
+      },
+      (error: any) => {
+        this.isFormSubmitted = false;
+        this.errorHandler.subj_notification.next(error);
+      }
+    );
   }
 
   add(event: MatChipInputEvent): void {

@@ -21,6 +21,7 @@ import { MUTATION_LIKE_IDEA, MUTATION_DISLIKE_IDEA } from '../mutations/idea-mut
 export class LikeComponent implements OnInit {
   @Input() activityId: number;
   @Input() activityType: string;
+  @Input() parentProjectId: number;
   @Input() likes: number;
   filteredInfo = {};
   isAlreadyLiked = false;
@@ -63,7 +64,7 @@ export class LikeComponent implements OnInit {
 
   handleLikeOperationUponResponse(responseData: any, filteredInfo: object) {
     if (filteredInfo['launchedProjectId']) {
-      this.likes = responseData.data.update_launched_projects.returning[0].likes;
+      this.likes = responseData.data.update_projects.returning[0].likes;
       this._updateLikedProjectsInLocalStorage(this.activityId, this.isAlreadyLiked);
     } else if (filteredInfo['ideaId']) {
       this.likes = responseData.data.update_ideas.returning[0].likes;
@@ -83,6 +84,7 @@ export class LikeComponent implements OnInit {
       case 'project':
         this.isAlreadyLiked = this.isProjectLikedByLoggedInUser(activityId);
         _object['launchedProjectId'] = activityId;
+        _object['projectId'] = this.parentProjectId;
         _object['mutation'] = this.isAlreadyLiked ? MUTATION_DISLIKE_PROJECT : MUTATION_LIKE_PROJECT;
         break;
 

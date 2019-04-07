@@ -62,6 +62,11 @@ const LAUNCHED_PROJECT_DETAILS_FRAGMENT = gql`
       abstract
       icon
       likes
+      tagsLinkssByprojectId {
+        tagsBytagId {
+          tag_name
+        }
+      }
     }
     userByowner {
       username

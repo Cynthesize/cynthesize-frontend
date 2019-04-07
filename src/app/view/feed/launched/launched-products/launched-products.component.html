@@ -45,6 +45,7 @@
           <app-activity-actions
             [id]="project.id"
             [type]="'project'"
+            [parentProjectId]="project.parent_project_id"
             [likes]="project.projectssBylaunchedId[0].likes"
             [url]="'/view/feed/projects/' + project.projectssBylaunchedId[0].project_name"
           ></app-activity-actions>

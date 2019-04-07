@@ -86,38 +86,36 @@ const MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE = gql`
 `;
 
 const MUTATION_LIKE_PROJECT = gql`
-  mutation update_likes($launchedProjectId: Int!, $userId: Int!) {
-    update_launched_projects(where: { id: { _eq: $launchedProjectId } }, _inc: { likes: 1 }) {
+  mutation update_likes($launchedProjectId: Int!, $userId: Int!, $projectId: Int!) {
+    update_projects(where: { launched_id: { _eq: $launchedProjectId } }, _inc: { likes: 1 }) {
       affected_rows
       returning {
         id
         likes
       }
     }
-    insert_launched_projects_likes(objects: { user_id: $userId, launched_projects_id: $launchedProjectId }) {
+    insert_project_likes(objects: { user_id: $userId, project_id: $projectId }) {
       affected_rows
       returning {
-        launched_projects_id
+        project_id
       }
     }
   }
 `;
 
 const MUTATION_DISLIKE_PROJECT = gql`
-  mutation update_likes($launchedProjectId: Int!, $userId: Int!) {
-    update_launched_projects(where: { id: { _eq: $launchedProjectId } }, _inc: { likes: -1 }) {
+  mutation update_likes($launchedProjectId: Int!, $userId: Int!, $projectId: Int!) {
+    update_projects(where: { launched_id: { _eq: $launchedProjectId } }, _inc: { likes: -1 }) {
       affected_rows
       returning {
         id
         likes
       }
     }
-    delete_launched_projects_likes(
-      where: { user_id: { _eq: $userId }, launched_projects_id: { _eq: $launchedProjectId } }
-    ) {
+    delete_project_likes(where: { user_id: { _eq: $userId }, project_id: { _eq: $projectId } }) {
       affected_rows
       returning {
-        launched_projects_id
+        project_id
       }
     }
   }

@@ -41,19 +41,20 @@
         </div>
         <div class="field">
           <h3>
-            Project Description
+            Current Stage
             <mat-icon
               [matTooltipPosition]="'right'"
               matTooltipClass="tooltip"
-              matTooltip="Tip: Please elaborate the project properly. How is it different from other things, what impact it'll
-            create and other useful information that might encourage other developers and mentors to provide their
-            inputs."
+              matTooltip="Tip: Tell us what stage your project is currently at."
               >help_outline</mat-icon
             >
           </h3>
-          <mat-form-field appearance="outline" class="field">
-            <mat-label>Enter project description</mat-label>
-            <textarea matInput formControlName="description" placeholder="Enter project description"></textarea>
+          <mat-form-field class="field" appearance="outline">
+            <mat-select formControlName="currentStage">
+              <mat-option *ngFor="let stage of stages" [value]="stage">
+                {{ stage }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
         <div class="field">

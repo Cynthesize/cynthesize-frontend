@@ -42,6 +42,11 @@ const IDEA_DETAILS_FRAGMENT = gql`
     timestamp
     description
     likes
+    tagsLinkssByideaId {
+      tagsBytagId {
+        tag_name
+      }
+    }
     comments {
       ...IdeaCommentFragment
     }
