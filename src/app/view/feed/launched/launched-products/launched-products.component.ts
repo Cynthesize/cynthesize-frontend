@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatBottomSheet, MatDialog } from '@angular/material';
-import { ShareSheetComponent } from '@app/shared/share-sheet/share-sheet.component';
 import { ProjectService } from '@app/core/project/project.service';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { FeedProjectComponent } from '../../feed-project/feed-project.component';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-launched-products',
@@ -16,12 +16,7 @@ export class LaunchedProductsComponent implements OnInit {
   projectList: any[] = [];
   activeContext = 'newest';
   isLoading = true;
-  constructor(
-    private bottomSheet: MatBottomSheet,
-    private projectService: ProjectService,
-    private errorHandler: ErrorHandlerService,
-    private dialog: MatDialog
-  ) {
+  constructor(private projectService: ProjectService, private errorHandler: ErrorHandlerService) {
     this.errorHandler.ideaWindowScrolled.subscribe(message => {
       if (this.length >= this.projectList.length && message === 'fetchLaunchedProjects') {
         this.isLoading = true;
@@ -48,5 +43,35 @@ export class LaunchedProductsComponent implements OnInit {
     this.activeContext = context;
     this.projectList = [];
     this.currentCount = 0;
+  }
+
+  displayableName(str: string) {
+    str = str.replace(/-/g, ' ');
+    const splitStr = str.toLowerCase().split(' ');
+    for (let i = 0; i < splitStr.length; i++) {
+      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(' ');
+  }
+}
+
+@Component({
+  template: ''
+})
+export class ProjectDialogEntryComponent {
+  constructor(public dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
+    this.openDialog();
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(FeedProjectComponent, {
+      width: 'auto',
+      data: {
+        activityId: this.router.url.split('/')[this.router.url.split('/').length - 1],
+        activityType: this.router.url.split('/')[this.router.url.split('/').length - 2]
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.router.navigate(['../'], { relativeTo: this.route });
+    });
   }
 }

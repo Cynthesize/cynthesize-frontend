@@ -15,14 +15,17 @@ export class ActivityActionsComponent implements OnInit {
 
   constructor(private bottomSheet: MatBottomSheet) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.url);
+  }
 
   openShareSheet(): void {
     this.bottomSheet.open(ShareSheetComponent, {
       data: {
-        facebookUrl: 'https://www.facebook.com/sharer/sharer.php?u=',
-        twitterUrl: 'https://twitter.com/home?status=',
-        linkedInUrl: 'https://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source='
+        facebookUrl: 'https://www.facebook.com/sharer/sharer.php?u=https://cynthesize.co' + this.url,
+        twitterUrl: 'https://twitter.com/home?status=https://cynthesize.co' + this.url,
+        linkedInUrl:
+          'https://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source=https://cynthesize.co' + this.url
       }
     });
   }

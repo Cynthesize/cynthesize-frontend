@@ -29,9 +29,9 @@
     </div>
     <div class="page-data">
       <mat-card class="card" *ngFor="let project of projectList">
-        <div class="card-image"></div>
+        <div><img class="project-icon" [src]="project.projectssBylaunchedId[0].icon" /></div>
         <div class="card-details">
-          <div class="card-project-name">{{ project.projectssBylaunchedId[0].project_name }}</div>
+          <div class="card-project-name">{{ displayableName(project.projectssBylaunchedId[0].project_name) }}</div>
           <div class="card-project-description">
             {{ project.projectssBylaunchedId[0].abstract }}
           </div>
@@ -46,7 +46,7 @@
             [id]="project.id"
             [type]="'project'"
             [likes]="project.projectssBylaunchedId[0].likes"
-            [url]="'/view/feed/projects/launched/' + project.id"
+            [url]="'/view/feed/projects/' + project.projectssBylaunchedId[0].project_name"
           ></app-activity-actions>
         </div>
       </mat-card>

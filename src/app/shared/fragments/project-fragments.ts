@@ -53,9 +53,15 @@ const LAUNCHED_PROJECT_DETAILS_FRAGMENT = gql`
     id
     projectssBylaunchedId {
       project_name
-      abstract
-      likes
+      created_on
+      current_stage
+      tech_stack
       website
+      roles_opened
+      is_public
+      abstract
+      icon
+      likes
     }
     userByowner {
       username
@@ -65,30 +71,9 @@ const LAUNCHED_PROJECT_DETAILS_FRAGMENT = gql`
   }
 `;
 
-const ONGOING_PROJECT_DETAILS_FRAGMENT = gql`
-  fragment OngoingProjectDetailsFragment on projects {
-    id
-    project_name
-    created_on
-    current_stage
-    tech_stack
-    website
-    roles_opened
-    is_public
-    abstract
-    icon
-    likes
-    userByowner {
-      username
-      profile_pic
-    }
-  }
-`;
-
 export {
   ISSUE_COMMENT_FRAGMENT,
   ISSUE_COMMENT_REPLY_FRAGMENT,
   LAUNCHED_PROJECT_DETAILS_FRAGMENT,
-  ONGOING_PROJECT_DETAILS_FRAGMENT,
   PROJECT_ISSUE_FRAGMENT
 };

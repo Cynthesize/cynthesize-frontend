@@ -7,12 +7,8 @@ const routes: Routes = [
     loadChildren: 'app/view/feed/idea-feed/idea-feed.module#IdeaFeedModule'
   },
   {
-    path: 'projects/launched',
+    path: 'projects',
     loadChildren: 'app/view/feed/launched/launched.module#LaunchedModule'
-  },
-  {
-    path: 'projects/ongoing',
-    loadChildren: 'app/view/feed/ongoing/ongoing.module#OngoingModule'
   },
   {
     path: '**',

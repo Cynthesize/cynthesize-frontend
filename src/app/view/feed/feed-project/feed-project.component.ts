@@ -33,30 +33,26 @@ export class FeedProjectComponent implements OnInit {
     });
   }
   ngOnInit() {
-    if (this.data['activityType'] === 'launched') {
-      this.projectService.fetchBasicProjectDetails(this.data['activityId']).subscribe(
-        data => {
-          Object.keys(data.data.launched_projects[0].projectsByparentProjectId).forEach(key => {
-            this.project[key] = data.data.launched_projects[0].projectsByparentProjectId[key];
-          });
-          this.project['id'] = data.data.launched_projects[0]['id'];
-          this.project['likes'] = data.data.launched_projects[0]['likes'];
-          this.project['userByowner'] = data.data.launched_projects[0]['userByowner'];
-        },
-        error => {
-          this.errorHandler.subj_notification.next(error);
-        }
-      );
-    } else if (this.data['activityType'] === 'ongoing') {
-      this.projectService.fetchOngoingProjectDetails(this.data['activityId']).subscribe(
-        data => {
-          this.project = data.data.projects[0];
-          this.project['id'] = this.project.launchedProjectsBylaunchedId['id'];
-        },
-        error => {
-          this.errorHandler.subj_notification.next(error);
-        }
-      );
+    this.projectService.fetchBasicProjectDetails(this.data['activityId']).subscribe(
+      data => {
+        Object.keys(data.data.launched_projects[0].projectsByparentProjectId).forEach(key => {
+          this.project[key] = data.data.launched_projects[0].projectsByparentProjectId[key];
+        });
+        this.project['id'] = data.data.launched_projects[0]['id'];
+        this.project['likes'] = data.data.launched_projects[0]['likes'];
+        this.project['userByowner'] = data.data.launched_projects[0]['userByowner'];
+      },
+      error => {
+        this.errorHandler.subj_notification.next(error);
+      }
+    );
+  }
+  displayableName(str: string) {
+    str = str.replace(/-/g, ' ');
+    const splitStr = str.toLowerCase().split(' ');
+    for (let i = 0; i < splitStr.length; i++) {
+      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
     }
+    return splitStr.join(' ');
   }
 }

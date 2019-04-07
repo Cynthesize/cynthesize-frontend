@@ -166,7 +166,10 @@ export class AddProjectComponent implements OnInit {
         currentStage: this.project.get('currentStage').value
       };
 
-      projectDetails.projectName = projectDetails.projectName.replace(/\s+/g, ' ').trim();
+      projectDetails.projectName = projectDetails.projectName
+        .replace(/\s+/g, ' ')
+        .trim()
+        .replace(/ /g, '-');
       this.projectService
         .addProject(projectDetails)
         .pipe(
@@ -179,13 +182,7 @@ export class AddProjectComponent implements OnInit {
             this.projectService
               .addProjectTags(this.tags, data.data.insert_projects.returning[0].id)
               .subscribe((ret: any) => {
-                const project_name =
-                  ret.data.insert_projects.returning['0'].id +
-                  '-' +
-                  data.data.insert_projects.returning['0'].project_name;
-                let str = project_name;
-                str = str.replace(/\s+/g, '-').toLowerCase();
-                this.router.navigate(['/view/project/' + str]);
+                this.router.navigate(['/view/project/' + ret.data.insert_projects.returning['0'].project_name]);
               });
           },
           (error: any) => {

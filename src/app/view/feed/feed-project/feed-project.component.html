@@ -2,7 +2,7 @@
   <div class="project-heading">
     <div><img class="project-icon" [src]="project.icon" /></div>
     <div class="project-basic-info">
-      <div class="project-name">{{ project.project_name }}</div>
+      <div class="project-name">{{ displayableName(project.project_name) }}</div>
       <app-user-name
         [username]="project.userByowner.username"
         [time]="project.created_on"

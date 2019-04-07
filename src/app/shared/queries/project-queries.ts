@@ -1,9 +1,5 @@
 import gql from 'graphql-tag';
-import {
-  PROJECT_ISSUE_FRAGMENT,
-  ONGOING_PROJECT_DETAILS_FRAGMENT,
-  LAUNCHED_PROJECT_DETAILS_FRAGMENT
-} from '../fragments/project-fragments';
+import { PROJECT_ISSUE_FRAGMENT, LAUNCHED_PROJECT_DETAILS_FRAGMENT } from '../fragments/project-fragments';
 import { USER_PROFILE_PIC_FRAGMENT } from '../fragments/user-fragments';
 
 const QUERY_CHECKPOINT_ISSUES = gql`
@@ -41,24 +37,6 @@ const QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT = gql`
       }
     }
   }
-`;
-
-const QUERY_POPULAR_ONGOING_PROJECTS = gql`
-  query fetch_popular_ongoing_projects($limit: Int!, $offset: Int!) {
-    projects(order_by: { likes: desc }, limit: $limit, offset: $offset, where: { is_public: { _eq: true } }) {
-      ...OngoingProjectDetailsFragment
-    }
-  }
-  ${ONGOING_PROJECT_DETAILS_FRAGMENT}
-`;
-
-const QUERY_NEWEST_ONGOING_PROJECTS = gql`
-  query fetch_newest_ongoing_projects($limit: Int!, $offset: Int!) {
-    projects(order_by: { created_on: desc }, limit: $limit, offset: $offset, where: { is_public: { _eq: true } }) {
-      ...OngoingProjectDetailsFragment
-    }
-  }
-  ${ONGOING_PROJECT_DETAILS_FRAGMENT}
 `;
 
 const QUERY_TOTAL_ONGOING_PROJECTS_COUNT = gql`
@@ -129,8 +107,8 @@ const QUERY_FETCH_PUBLIC_PROJECT_COMMENTS = gql`
 `;
 
 const QUERY_FETCH_BASIC_PROJECT_DETAILS = gql`
-  query fetch_basic_project_details($projectId: Int!) {
-    launched_projects(where: { id: { _eq: $projectId } }) {
+  query fetch_basic_project_details($projectName: Int!) {
+    launched_projects(where: { project_name: { _eq: $projectName } }) {
       id
       projectsByparentProjectId {
         project_name
@@ -178,9 +156,7 @@ export {
   QUERY_NEWEST_LAUNCHED_PROJECTS,
   QUERY_POPULAR_LAUNCHED_PROJECTS,
   QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT,
-  QUERY_POPULAR_ONGOING_PROJECTS,
   QUERY_TOTAL_ONGOING_PROJECTS_COUNT,
-  QUERY_NEWEST_ONGOING_PROJECTS,
   QUERY_FETCH_PUBLIC_PROJECT_COMMENTS,
   QUERY_FETCH_ISSUE_COMMENTS,
   QUERY_FETCH_BASIC_PROJECT_DETAILS,

@@ -14,8 +14,6 @@ import {
   QUERY_NEWEST_LAUNCHED_PROJECTS,
   QUERY_POPULAR_LAUNCHED_PROJECTS,
   QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT,
-  QUERY_NEWEST_ONGOING_PROJECTS,
-  QUERY_POPULAR_ONGOING_PROJECTS,
   QUERY_TOTAL_ONGOING_PROJECTS_COUNT,
   QUERY_FETCH_BASIC_PROJECT_DETAILS,
   QUERY_FETCH_ONGOING_PROJECT_DETAILS
@@ -255,12 +253,12 @@ export class ProjectService {
   /**
    * fetchBasicProjectDetails
    */
-  public fetchBasicProjectDetails(projectId: number) {
+  public fetchBasicProjectDetails(projectName: number) {
     return this.apollo
       .watchQuery<any>({
         query: QUERY_FETCH_BASIC_PROJECT_DETAILS,
         variables: {
-          projectId: projectId
+          projectName: projectName
         }
       })
       .valueChanges.pipe(take(1))
@@ -308,39 +306,6 @@ export class ProjectService {
       .pipe(
         map((resp: any) => {
           return resp;
-        })
-      );
-  }
-
-  /**
-   * getNProjects
-   */
-  public getNOngoingProjects(limit: number, offset: number, context: any) {
-    let Query = QUERY_NEWEST_ONGOING_PROJECTS;
-    switch (context) {
-      case 'newest':
-        Query = QUERY_NEWEST_ONGOING_PROJECTS;
-        break;
-
-      case 'popular':
-        Query = QUERY_POPULAR_ONGOING_PROJECTS;
-        break;
-
-      default:
-        break;
-    }
-    return this.apollo
-      .watchQuery<any>({
-        query: Query,
-        variables: {
-          limit: limit,
-          offset: offset
-        }
-      })
-      .valueChanges.pipe(take(1))
-      .pipe(
-        map((res: any) => {
-          return res;
         })
       );
   }

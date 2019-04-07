@@ -1,5 +1,4 @@
 import gql from 'graphql-tag';
-import { LAUNCHED_PROJECT_DETAILS_FRAGMENT, ONGOING_PROJECT_DETAILS_FRAGMENT } from './project-fragments';
 
 const USER_PROFILE_PIC_FRAGMENT = gql`
   fragment UserProfilePicFragment on user {

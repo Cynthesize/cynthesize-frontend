@@ -29,36 +29,5 @@
     </mat-card>
   </div>
 </div>
-<div class="profile-project-page">
-  <div class="page-header">
-    <div class="profile-heading">Ongoing Projects</div>
-  </div>
-  <div class="page-data">
-    <mat-card class="card" *ngFor="let project of launchedProjects">
-      <div class="card-image"></div>
-      <div class="card-details">
-        <div class="card-project-name">{{ project.projectssBylaunchedId[0].project_name }}</div>
-        <div class="card-project-description">
-          {{ project.projectssBylaunchedId[0].abstract }}
-        </div>
-      </div>
-      <div class="card-links">
-        <div>
-          <a href="{{ project.projectssBylaunchedId[0].website }}" target="_blank">{{
-            project.projectssBylaunchedId[0].website
-          }}</a>
-        </div>
-        <div class="card-icons pointer">
-          <app-activity-actions
-            [id]="project.id"
-            [type]="'project'"
-            [likes]="project.projectssBylaunchedId[0].likes"
-            [url]="'/view/launched/' + project.id"
-          ></app-activity-actions>
-        </div>
-      </div>
-    </mat-card>
-  </div>
-</div>
 <mat-spinner class="loader" [ngClass]="{ hidden: !isLoading }"></mat-spinner>
 <router-outlet></router-outlet>
