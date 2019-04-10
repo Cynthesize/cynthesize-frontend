@@ -14,11 +14,9 @@ import {
   QUERY_NEWEST_LAUNCHED_PROJECTS,
   QUERY_POPULAR_LAUNCHED_PROJECTS,
   QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT,
-  QUERY_TOTAL_ONGOING_PROJECTS_COUNT,
   QUERY_FETCH_BASIC_PROJECT_DETAILS,
-  QUERY_FETCH_ONGOING_PROJECT_DETAILS
+  QUERY_FETCH_PROJECT_DETAILS
 } from '@app/shared/queries/project-queries';
-import { QUERY_PROJECTS_BY_USER } from '@app/shared/queries/user-queries';
 import { MUTATION_ADD_IDEA_TAGS } from '@app/shared/mutations/idea-mutations';
 
 @Injectable({
@@ -76,21 +74,21 @@ export class ProjectService {
   /**
    * GET PROJECT DETAILS
    */
-  // public getProject(id: string, name: string) {
-  //   return this.apollo
-  //     .watchQuery<any>({
-  //       query: QUERY_PROJECT_DETAILS,
-  //       variables: {
-  //         id: id,
-  //         name: name
-  //       }
-  //     })
-  //     .valueChanges.pipe(
-  //       map((res: any) => {
-  //         return res.data.projects;
-  //       })
-  //     );
-  // }
+  public getProject(id: number, name: string) {
+    return this.apollo
+      .watchQuery<any>({
+        query: QUERY_FETCH_PROJECT_DETAILS,
+        variables: {
+          projectId: id,
+          projectName: name
+        }
+      })
+      .valueChanges.pipe(
+        map((res: any) => {
+          return res.data.projects;
+        })
+      );
+  }
 
   /**
    * Add Comments for an issue in the project.
@@ -238,21 +236,6 @@ export class ProjectService {
   }
 
   /**
-   * getTotalOngoingProjectsCount
-   */
-  public getTotalOngoingProjectsCount() {
-    return this.apollo
-      .query({
-        query: QUERY_TOTAL_ONGOING_PROJECTS_COUNT
-      })
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  /**
    * fetchBasicProjectDetails
    */
   public fetchBasicProjectDetails(projectName: number) {
@@ -261,25 +244,6 @@ export class ProjectService {
         query: QUERY_FETCH_BASIC_PROJECT_DETAILS,
         variables: {
           projectName: projectName
-        }
-      })
-      .valueChanges.pipe(take(1))
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  /**
-   * fetchOngoingProjectDetails
-   */
-  public fetchOngoingProjectDetails(projectId: number) {
-    return this.apollo
-      .watchQuery<any>({
-        query: QUERY_FETCH_ONGOING_PROJECT_DETAILS,
-        variables: {
-          projectId: projectId
         }
       })
       .valueChanges.pipe(take(1))

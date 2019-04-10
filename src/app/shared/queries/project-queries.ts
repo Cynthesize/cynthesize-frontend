@@ -39,16 +39,6 @@ const QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT = gql`
   }
 `;
 
-const QUERY_TOTAL_ONGOING_PROJECTS_COUNT = gql`
-  query fetch_ongoing_projects {
-    projects_aggregate {
-      aggregate {
-        count
-      }
-    }
-  }
-`;
-
 const QUERY_FETCH_ISSUE_COMMENTS = gql`
   query fetch_issue_comments($issueId: Int!) {
     comment(where: { issue_id: { _eq: $issueId } }) {
@@ -128,18 +118,21 @@ const QUERY_FETCH_BASIC_PROJECT_DETAILS = gql`
   ${USER_PROFILE_PIC_FRAGMENT}
 `;
 
-const QUERY_FETCH_ONGOING_PROJECT_DETAILS = gql`
-  query fetch_ongoing_project_details($projectId: Int!) {
-    projects(where: { id: { _eq: $projectId } }) {
+const QUERY_FETCH_PROJECT_DETAILS = gql`
+  query fetch_project_details($projectId: Int!, $projectName: String!) {
+    projects(where: { id: { _eq: $projectId }, project_name: $projectName }) {
       id
       project_name
       abstract
+      description
       created_on
+      tech_stack
       website
       roles_opened
       icon
       current_stage
       likes
+      platform
       userByowner {
         ...UserProfilePicFragment
       }
@@ -156,9 +149,8 @@ export {
   QUERY_NEWEST_LAUNCHED_PROJECTS,
   QUERY_POPULAR_LAUNCHED_PROJECTS,
   QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT,
-  QUERY_TOTAL_ONGOING_PROJECTS_COUNT,
   QUERY_FETCH_PUBLIC_PROJECT_COMMENTS,
   QUERY_FETCH_ISSUE_COMMENTS,
   QUERY_FETCH_BASIC_PROJECT_DETAILS,
-  QUERY_FETCH_ONGOING_PROJECT_DETAILS
+  QUERY_FETCH_PROJECT_DETAILS
 };

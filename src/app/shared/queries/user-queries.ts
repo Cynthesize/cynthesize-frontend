@@ -3,7 +3,6 @@ import {
   USER_PROFILE_PIC_FRAGMENT,
   USER_DETAILS_FRAGMENT,
   USER_LIKES_FRAGMENT,
-  ONGOING_USER_PROJECT_DETAILS_FRAGMENT,
   LAUNCHED_USER_PROJECT_DETAILS_FRAGMENT
 } from '../fragments/user-fragments';
 import { IDEA_FEED_FRAGMENT } from '../fragments/idea-fragments';
@@ -36,20 +35,16 @@ const QUERY_USER_LIKES = gql`
 `;
 
 const QUERY_PROJECTS_BY_USER = gql`
-  query fetch_newest_ongoing_projects($username: String!) {
+  query fetch_newest_projects($username: String!) {
     user(limit: 4, where: { username: { _eq: $username } }) {
       ...LaunchedUserProjectDetailsFragment
     }
-    user(limit: 4, where: { username: { _eq: $username } }) {
-      ...OngoingUserProjectDetailsFragment
-    }
   }
   ${LAUNCHED_USER_PROJECT_DETAILS_FRAGMENT}
-  ${ONGOING_USER_PROJECT_DETAILS_FRAGMENT}
 `;
 
 const QUERY_IDEAS_BY_USER = gql`
-  query fetch_newest_ongoing_projects($username: String!) {
+  query fetch_newest_projects($username: String!) {
     user(where: { username: { _eq: $username } }) {
       ...IdeaFeedFragment
     }

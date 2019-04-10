@@ -10,7 +10,6 @@ import { ProfileService } from '@app/core/profile/profile.service';
 export class ProjectsComponent implements OnInit {
   username: string;
   launchedProjects: any[] = [];
-  ongoingProjects: any[] = [];
   isLoading = true;
 
   constructor(private router: Router, private profileService: ProfileService) {
@@ -24,7 +23,6 @@ export class ProjectsComponent implements OnInit {
   getUserProjectsContributions() {
     this.profileService.getUserProjects(this.router.url.split('/')[2]).subscribe(data => {
       this.launchedProjects = data.data.user[0].launchedProjectssByowner;
-      this.ongoingProjects = data.data.user[0].projectssByowner;
       this.isLoading = false;
     });
   }
