@@ -121,6 +121,27 @@ const MUTATION_DISLIKE_PROJECT = gql`
   }
 `;
 
+const MUTATION_UNREPORT_COMMENT = gql`
+  mutation unreport_comment($commentId: Int!, $userId: Int!) {
+    delete_comment_flag(where: { user_id: { _eq: $userId }, comment_id: { _eq: $commentId } }) {
+      affected_rows
+      returning {
+        comment_id
+      }
+    }
+  }
+`;
+
+const MUTATION_REPORT_COMMENT = gql`
+  mutation report_comment($userId: Int!, $commentId: Int!) {
+    insert_comment_flag(objects: { user_id: $userId, comment_id: $commentId }) {
+      affected_rows
+      returning {
+        comment_id
+      }
+    }
+  }
+`;
 export {
   MUTATION_ADD_ISSUE,
   MUTATION_ADD_ISSUE_COMMENT,
@@ -129,5 +150,7 @@ export {
   MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE,
   MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT,
   MUTATION_LIKE_PROJECT,
-  MUTATION_DISLIKE_PROJECT
+  MUTATION_DISLIKE_PROJECT,
+  MUTATION_REPORT_COMMENT,
+  MUTATION_UNREPORT_COMMENT
 };

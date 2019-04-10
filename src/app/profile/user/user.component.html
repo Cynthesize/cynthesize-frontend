@@ -4,15 +4,16 @@
       <div class="image">
         <cl-image height="200" crop="scale" public-id="{{ user.profile_pic }}" secure="true"></cl-image>
       </div>
+      <mat-icon [routerLink]="'/user/' + username + '/edit'">edit</mat-icon>
       <div class="short-detail">
         <div class="full-name">{{ user.username }}</div>
-        <div class="bio">I'm a cool cool developer who loves to travel and eat.</div>
+        <div class="bio">{{ user.bio }}</div>
       </div>
     </div>
   </mat-card>
   <div class="profile-icons">
     <div class="header-icons">
-      <div id="profile" [routerLink]="['/user', username, 'profile']" routerLinkActive="link-active">
+      <div id="profile" [routerLink]="['/user', username]" [ngClass]="{ 'link-active': checkRoute() }">
         <img src="../../../../assets/images/profile.svg" />PROFILE
       </div>
       <div id="project" [routerLink]="['/user', username, 'projects']" routerLinkActive="link-active">
@@ -25,5 +26,6 @@
   </div>
 </div>
 <div class="profile-project-page container">
+  <div *ngIf="checkRoute()"><app-details></app-details></div>
   <router-outlet></router-outlet>
 </div>
