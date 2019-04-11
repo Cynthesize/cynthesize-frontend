@@ -8,7 +8,8 @@ import {
   MUTATION_ADD_ISSUE,
   MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT,
   MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE,
-  MUTATION_UPDATE_PROJECT_DESCRIPTION
+  MUTATION_UPDATE_PROJECT_DESCRIPTION,
+  MUTATION_ADD_PROJECT_DESCRIPTION
 } from '@app/shared/mutations/project-mutations';
 import {
   QUERY_CHECKPOINT_ISSUES,
@@ -58,9 +59,12 @@ export class ProjectService {
   public addProjectDescription(projectId: number) {
     return this.apollo
       .mutate<any>({
-        mutation: MUTATION_ADD_PROJECT,
+        mutation: MUTATION_ADD_PROJECT_DESCRIPTION,
         variables: {
-          projectId: projectId
+          projectId: projectId,
+          initTimeline: {
+            'Project Created': Date.now()
+          }
         }
       })
       .pipe(

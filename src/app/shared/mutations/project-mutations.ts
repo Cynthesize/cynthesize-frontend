@@ -14,8 +14,14 @@ const MUTATION_ADD_PROJECT = gql`
 `;
 
 const MUTATION_ADD_PROJECT_DESCRIPTION = gql`
-  mutation insert_project_description($projectId: Int!) {
+  mutation insert_project_description($projectId: Int!, $initTimeline: jsonb) {
     insert_project_description(objects: { project_id: $projectId }) {
+      affected_rows
+      returning {
+        id
+      }
+    }
+    insert_project_events(objects: { project_id: $projectId, timeline: $initTimeline }) {
       affected_rows
       returning {
         id
