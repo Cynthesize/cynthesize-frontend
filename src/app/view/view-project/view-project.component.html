@@ -1,47 +1,39 @@
-<div class="viewproject-background" *ngIf="project">
-  <div class="panel-topics">
-    <div class="project">
-      <div class="project--logo"><img src="../../../assets/images/image-login.jpg" class="project--logo__image" /></div>
-      <div class="project--name">
-        <h2>{{ project.project_name }}</h2>
-      </div>
-      <div class="project--status">{{ project.current_stage }}</div>
-    </div>
-    <div class="checkpoint-list">
-      <ul class="checkpoint-list__list">
-        <li [ngClass]="{ active: currentActiveBar === 'Home' }" class="checkpoint-list__item">
-          <a
-            (click)="setBarActive('Home')"
-            class="checkpoint-list__item"
-            [routerLink]="['/view/project/', project.id + '-' + project.project_name, 'Home']"
-            ><div>Home</div></a
-          >
-        </li>
-      </ul>
-      <h2 class="checkpoint-list__heading">Checkpoints</h2>
-      <ul>
-        <li
-          [ngClass]="{ active: currentActiveBar === checkpoint.checkpoint_name }"
-          class="checkpoint-list__item"
-          *ngFor="let checkpoint of project.projectIssuessByprojectId"
-        >
-          <a
-            (click)="setBarActive(checkpoint.checkpoint_name)"
-            class="checkpoint-list__item"
-            [routerLink]="['/view/project/', project.id + '-' + project.project_name, checkpoint.checkpoint_name]"
-            ><div>{{ checkpoint.checkpoint_name }}</div></a
-          >
-        </li>
-      </ul>
-    </div>
-  </div>
+<mat-calendar [selected]="fnc(selectedDate)" (selectedChange)="selectedDate = $event" class="greed-card">
+</mat-calendar>
 
-  <div class="panel-main">
-    <app-issue
-      [projectDetails]="project"
-      [projectId]="project.id"
-      [checkpoints]="project.projectIssuessByprojectId"
-      [activeCheckpoint]="currentActiveBar"
-    ></app-issue>
-  </div>
-</div>
+<!-- Description Card -->
+<mat-card>
+  <div *ngIf="!editingDescription && project; else displayTextualDescription"></div>
+  <ng-template #displayTextualDescription>
+    <div *ngIf="editingDescription && project">
+      <form (ngSubmit)="updateDescription(project.id)" [formGroup]="descriptionDataForm">
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="xyz" value="{{ project.project_descriptions[0].xyz }}" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            formControlName="distinguishing_factor"
+            value="{{ project.project_descriptions[0].distinguishing_factor }}"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="future_scope" value="{{ project.project_descriptions[0].future_scope }}" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="progress" value="{{ project.project_descriptions[0].progress }}" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="revenue_model" value="{{ project.project_descriptions[0].revenue_model }}" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="why_product" value="{{ project.project_descriptions[0].why_product }}" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="wow_factor" value="{{ project.project_descriptions[0].wow_factor }}" />
+        </mat-form-field>
+        <button mat-raised-button>Update Description</button>
+      </form>
+    </div>
+  </ng-template>
+</mat-card>

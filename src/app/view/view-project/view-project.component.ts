@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Project } from '@app/shared/objects';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-view-project',
@@ -13,20 +14,25 @@ import { ErrorHandlerService } from '@app/core/error-handler.service';
 })
 export class ViewProjectComponent implements OnInit {
   project: Observable<Project>;
-  currentActiveBar = 'Home';
+  editingDescription = false;
+
+  descriptionDataForm: FormGroup;
 
   constructor(
     private projectService: ProjectService,
     private router: Router,
     private route: ActivatedRoute,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private formBuilder: FormBuilder
   ) {
     const routeParams = this.router.url.split('/')[3].split('-');
     const projectId = parseInt(routeParams[0], 10);
     routeParams.splice(0, 1);
     this.projectService.getProject(projectId, routeParams.join('-')).subscribe(
       (data: any) => {
-        console.log(data);
+        this.project = data;
+        this.editingDescription = true;
+        this.initDescriptionForm();
       },
       (error: any) => {
         this.errorHandler.subj_notification.next(error);
@@ -36,21 +42,43 @@ export class ViewProjectComponent implements OnInit {
 
   ngOnInit() {}
 
-  getProject() {
-    let projectIdByUrl = '';
-    let projectNameByUrl = '';
-    this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      const id = paramMap.get('id').split('-');
-      projectIdByUrl = id[0];
-      id.shift();
-      projectNameByUrl = id.join(' ');
-    });
-  }
-  setBarActive(checkpointName: string) {
-    this.currentActiveBar = checkpointName;
+  fnc(selectedDate: Date) {
+    const dates = document.getElementsByClassName('mat-calendar-body-cell-content');
+    for (let index = 0; index < dates.length; index++) {
+      // Update this according to your needs @neil.
+      dates[index]['style']['backgroundColor'] = '#' + (index * 6 + 4000);
+    }
   }
 
-  initCheckpoint(el: any) {
-    this.currentActiveBar = el;
+  initDescriptionForm() {
+    this.descriptionDataForm = this.formBuilder.group({
+      xyz: [this.project['project_descriptions'][0].xyz],
+      distinguishing_factor: [this.project['project_descriptions'][0].distinguishing_factor],
+      progress: [this.project['project_descriptions'][0].progress],
+      why_product: [this.project['project_descriptions'][0].why_product],
+      revenue_model: [this.project['project_descriptions'][0].revenue_model],
+      future_scope: [this.project['project_descriptions'][0].future_scope],
+      wow_factor: [this.project['project_descriptions'][0].wow_factor]
+    });
+  }
+
+  updateDescription(projectId: number) {
+    const descriptionDataToBeUpdated = {
+      xyz: this.descriptionDataForm.get('xyz').value,
+      distinguishing_factor: this.descriptionDataForm.get('distinguishing_factor').value,
+      progress: this.descriptionDataForm.get('progress').value,
+      why_product: this.descriptionDataForm.get('why_product').value,
+      revenue_model: this.descriptionDataForm.get('revenue_model').value,
+      future_scope: this.descriptionDataForm.get('future_scope').value,
+      wow_factor: this.descriptionDataForm.get('wow_factor').value
+    };
+    this.projectService.updateProjectDescription(descriptionDataToBeUpdated, projectId).subscribe(
+      (updatedDescription: any) => {
+        this.project['project_descriptions'][0] = updatedDescription.data.update_project_description.returning[0];
+      },
+      (error: any) => {
+        this.errorHandler.subj_notification.next(error);
+      }
+    );
   }
 }

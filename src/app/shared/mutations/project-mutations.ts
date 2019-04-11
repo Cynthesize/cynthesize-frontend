@@ -13,6 +13,17 @@ const MUTATION_ADD_PROJECT = gql`
   }
 `;
 
+const MUTATION_ADD_PROJECT_DESCRIPTION = gql`
+  mutation insert_project_description($projectId: Int!) {
+    insert_project_description(objects: { project_id: $projectId }) {
+      affected_rows
+      returning {
+        id
+      }
+    }
+  }
+`;
+
 const MUTATION_ADD_ISSUE = gql`
   mutation insert_issues($objects: [issues_insert_input!]!) {
     insert_issues(objects: $objects) {
@@ -85,6 +96,26 @@ const MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE = gql`
   }
 `;
 
+const MUTATION_UPDATE_PROJECT_DESCRIPTION = gql`
+  mutation update_project_description($project_id: Int!, $updateObject: project_description_set_input!) {
+    update_project_description(where: { project_id: { _eq: $project_id } }, _set: $updateObject) {
+      affected_rows
+      returning {
+        id
+        project_id
+        xyz
+        distinguishing_factor
+        progress
+        why_product
+        revenue_model
+        future_scope
+        wow_factor
+        green_card
+      }
+    }
+  }
+`;
+
 const MUTATION_LIKE_PROJECT = gql`
   mutation update_likes($launchedProjectId: Int!, $userId: Int!, $projectId: Int!) {
     update_projects(where: { launched_id: { _eq: $launchedProjectId } }, _inc: { likes: 1 }) {
@@ -152,5 +183,7 @@ export {
   MUTATION_LIKE_PROJECT,
   MUTATION_DISLIKE_PROJECT,
   MUTATION_REPORT_COMMENT,
-  MUTATION_UNREPORT_COMMENT
+  MUTATION_UNREPORT_COMMENT,
+  MUTATION_ADD_PROJECT_DESCRIPTION,
+  MUTATION_UPDATE_PROJECT_DESCRIPTION
 };

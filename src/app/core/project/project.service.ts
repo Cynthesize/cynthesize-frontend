@@ -7,7 +7,8 @@ import {
   MUTATION_ADD_ISSUE_COMMENT_REPLY,
   MUTATION_ADD_ISSUE,
   MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT,
-  MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE
+  MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE,
+  MUTATION_UPDATE_PROJECT_DESCRIPTION
 } from '@app/shared/mutations/project-mutations';
 import {
   QUERY_CHECKPOINT_ISSUES,
@@ -26,7 +27,7 @@ export class ProjectService {
   constructor(private apollo: Apollo) {}
 
   /**
-   * ADD A PROJECT
+   * Adds a project.
    */
   public addProject(projectDetails: Object) {
     return this.apollo
@@ -43,6 +44,23 @@ export class ProjectService {
               owner: localStorage.getItem('userId')
             }
           ]
+        }
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+  /**
+   * Add Project Description
+   */
+  public addProjectDescription(projectId: number) {
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_ADD_PROJECT,
+        variables: {
+          projectId: projectId
         }
       })
       .pipe(
@@ -255,7 +273,7 @@ export class ProjectService {
   }
 
   /**
-   * addProjectTags
+   * Adds Project Tags
    */
   public addProjectTags(tags: any, projectId: any) {
     const tagTBP: any[] = [];
@@ -272,6 +290,28 @@ export class ProjectService {
       .pipe(
         map((resp: any) => {
           return resp;
+        })
+      );
+  }
+
+  /**
+   * Updates project description data
+   */
+  public updateProjectDescription(updatedData: Object, projectId: number) {
+    console.log(projectId);
+
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_UPDATE_PROJECT_DESCRIPTION,
+        variables: {
+          project_id: projectId,
+          updateObject: updatedData
+        }
+      })
+      .pipe(take(1))
+      .pipe(
+        map((res: any) => {
+          return res;
         })
       );
   }

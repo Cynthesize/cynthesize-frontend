@@ -171,8 +171,16 @@ export class AddProjectComponent implements OnInit {
         this.projectService
           .addProjectTags(this.tags, data.data.insert_projects.returning[0].id)
           .subscribe((ret: any) => {
-            this.router.navigate(['/view/project/' + data.data.insert_projects.returning[0].project_name]);
+            console.log('Tags added for the project.');
           });
+        this.projectService.addProjectDescription(data.data.insert_projects.returning[0].id).subscribe((ret: any) => {
+          this.router.navigate([
+            '/view/project/' +
+              data.data.insert_projects.returning[0].id +
+              '-' +
+              data.data.insert_projects.returning[0].project_name
+          ]);
+        });
       },
       (error: any) => {
         this.isFormSubmitted = false;

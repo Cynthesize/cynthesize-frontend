@@ -139,6 +139,18 @@ const QUERY_FETCH_PROJECT_DETAILS = gql`
       launchedProjectsBylaunchedId {
         id
       }
+      project_descriptions {
+        id
+        project_id
+        xyz
+        distinguishing_factor
+        progress
+        why_product
+        revenue_model
+        future_scope
+        wow_factor
+        green_card
+      }
     }
   }
   ${USER_PROFILE_PIC_FRAGMENT}
