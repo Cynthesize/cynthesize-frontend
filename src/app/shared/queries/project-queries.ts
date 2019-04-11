@@ -149,7 +149,6 @@ const QUERY_FETCH_PROJECT_DETAILS = gql`
         revenue_model
         future_scope
         wow_factor
-        green_card
       }
     }
   }

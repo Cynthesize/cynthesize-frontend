@@ -1,11 +1,10 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '@app/core/project/project.service';
-import { finalize } from 'rxjs/operators';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Project } from '@app/shared/objects';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-view-project',
@@ -21,7 +20,6 @@ export class ViewProjectComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private router: Router,
-    private route: ActivatedRoute,
     private errorHandler: ErrorHandlerService,
     private formBuilder: FormBuilder
   ) {
