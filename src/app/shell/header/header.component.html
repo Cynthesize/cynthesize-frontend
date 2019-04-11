@@ -32,19 +32,13 @@
       <button class="header__link" mat-button routerLink="/">
         <span translate>Become a mentor</span>
       </button>
-      <button class="header__link" mat-button routerLink="/view/feed/projects/launched">
+      <button class="header__link"  style="background-color: orange; color: white;
+      border-radius: 10px;
+      margin-left: 30px;" mat-button routerLink="/view/feed/projects/launched">
         <span translate>Launched Projects</span>
       </button>
       <button mat-icon-button [matMenuTriggerFor]="userMenu" *ngIf="authenticationService.isAuthenticated()">
         <mat-icon> person </mat-icon>
-      </button>
-      <button
-        mat-raised-button
-        style="background-color: orange; color: white;"
-        *ngIf="!authenticationService.isAuthenticated()"
-        (click)="authenticationService.login()"
-      >
-        Login/Signup
       </button>
       <mat-menu #userMenu="matMenu" class="profile-menu">
         <div>
