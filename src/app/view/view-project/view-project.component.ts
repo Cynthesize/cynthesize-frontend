@@ -20,7 +20,19 @@ export class ViewProjectComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private errorHandler: ErrorHandlerService
-  ) {}
+  ) {
+    const routeParams = this.router.url.split('/')[3].split('-');
+    const projectId = parseInt(routeParams[0], 10);
+    routeParams.splice(0, 1);
+    this.projectService.getProject(projectId, routeParams.join('-')).subscribe(
+      (data: any) => {
+        console.log(data);
+      },
+      (error: any) => {
+        this.errorHandler.subj_notification.next(error);
+      }
+    );
+  }
 
   ngOnInit() {}
 

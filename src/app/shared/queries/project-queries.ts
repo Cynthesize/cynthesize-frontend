@@ -120,7 +120,7 @@ const QUERY_FETCH_BASIC_PROJECT_DETAILS = gql`
 
 const QUERY_FETCH_PROJECT_DETAILS = gql`
   query fetch_project_details($projectId: Int!, $projectName: String!) {
-    projects(where: { id: { _eq: $projectId }, project_name: $projectName }) {
+    projects(where: { id: { _eq: $projectId }, project_name: { _eq: $projectName } }) {
       id
       project_name
       abstract

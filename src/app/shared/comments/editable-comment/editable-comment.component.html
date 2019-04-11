@@ -20,7 +20,7 @@
       <mat-icon class="icon" mat-icon-button [matMenuTriggerFor]="more">more_vert</mat-icon>
     </div>
     <mat-menu #more="matMenu" class="more-menu pointer">
-      <mat-icon class="icon">flag</mat-icon>Report <mat-icon class="icon">edit</mat-icon>Edit
+      <mat-icon class="icon" (click)="reportComment()">flag</mat-icon>Report <mat-icon class="icon">edit</mat-icon>Edit
     </mat-menu>
   </div>
 </div>
@@ -47,7 +47,7 @@
       <mat-icon class="icon" mat-icon-button [matMenuTriggerFor]="more">more_vert</mat-icon>
     </div>
     <mat-menu #more="matMenu" class="more-menu pointer">
-      <mat-icon class="icon">flag</mat-icon>Report <mat-icon class="icon">edit</mat-icon>Edit
+      <mat-icon class="icon" (click)="reportComment()">flag</mat-icon>Report <mat-icon class="icon">edit</mat-icon>Edit
     </mat-menu>
   </div>
 </div>

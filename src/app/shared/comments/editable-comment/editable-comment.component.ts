@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, ViewEncapsulation, EventEmitter } fro
 import { ProjectService } from '@app/core/project/project.service';
 import { finalize } from 'rxjs/operators';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
+import { CommentsService } from '@app/core/comments/comments.service';
 
 @Component({
   selector: 'app-editable-comment',
@@ -20,7 +21,11 @@ export class EditableCommentComponent implements OnInit {
   };
   replying = false;
 
-  constructor(public projectService: ProjectService, private errorHandler: ErrorHandlerService) {}
+  constructor(
+    public projectService: ProjectService,
+    private errorHandler: ErrorHandlerService,
+    private commentService: CommentsService
+  ) {}
 
   ngOnInit() {}
 
@@ -54,6 +59,17 @@ export class EditableCommentComponent implements OnInit {
     this.projectService.incrementOrDecrementLikeCounter(commentId).subscribe(
       (data: any) => {},
       (error: any) => {
+        this.errorHandler.subj_notification.next(error);
+      }
+    );
+  }
+
+  reportComment() {
+    this.commentService.reportAComment(this.comment.id).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
         this.errorHandler.subj_notification.next(error);
       }
     );

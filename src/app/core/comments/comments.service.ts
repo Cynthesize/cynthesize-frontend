@@ -4,6 +4,7 @@ import { Apollo } from 'apollo-angular';
 import { MUTATION_ADD_REPLY, MUTATION_ADD_COMMENT } from '@app/shared/mutations/user-mutations';
 import { QUERY_FETCH_IDEA_COMMENTS } from '@app/shared/queries/idea-queries';
 import { QUERY_FETCH_PUBLIC_PROJECT_COMMENTS, QUERY_FETCH_ISSUE_COMMENTS } from '@app/shared/queries/project-queries';
+import { MUTATION_REPORT_COMMENT } from '@app/shared/mutations/project-mutations';
 
 @Injectable({
   providedIn: 'root'
@@ -98,6 +99,24 @@ export class CommentsService {
             comment_id: commentId,
             previous_edits: []
           }
+        }
+      })
+      .pipe(take(1))
+      .pipe(res => {
+        return res;
+      });
+  }
+
+  /**
+   * reportAComment
+   */
+  public reportAComment(commentId: number) {
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_REPORT_COMMENT,
+        variables: {
+          userId: localStorage.getItem('userId'),
+          commentId: commentId
         }
       })
       .pipe(take(1))

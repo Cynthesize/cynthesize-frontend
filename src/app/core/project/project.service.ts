@@ -85,7 +85,7 @@ export class ProjectService {
       })
       .valueChanges.pipe(
         map((res: any) => {
-          return res.data.projects;
+          return res.data.projects[0];
         })
       );
   }
