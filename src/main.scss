@@ -56,7 +56,7 @@ body {
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
-  background: #f7f8fb;
+  background: white;
   color: white;
   font-size: 0.8rem;
 }
@@ -68,11 +68,13 @@ body {
 }
 
 .top-margin-120 {
-  margin: 120px 0;
+  margin: 0px 0;
 }
 
 .pointer {
   cursor: pointer;
+  color:#0264FB;
+  font-weight: bold;
 }
 
 .page {
@@ -105,7 +107,7 @@ body {
 }
 
 .mat-form-field-appearance-fill .mat-form-field-flex {
-  border-radius: 40px !important;
+  border-radius: 10px !important;
   background-color: white;
   border: #8e8e8e solid;
 }
@@ -200,7 +202,7 @@ body {
 }
 
 .active-context {
-  color: blue;
+  color:blue;
   font-weight: bold;
 }
 
