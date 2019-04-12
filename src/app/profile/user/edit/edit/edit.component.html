@@ -1,0 +1,47 @@
+<mat-card>
+  <form (ngSubmit)="submitUserUpdateForm()">
+    <mat-form-field>
+      <input matInput placeholder="Bio" value="{{ previousDetails.bio }}" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Location" value="{{ previousDetails.location }}" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="website" value="{{ previousDetails.website }}" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="username" value="{{ previousDetails.username }}" />
+    </mat-form-field>
+    <mat-icon (click)="openSocialDialog()">
+      add_circle
+    </mat-icon>
+    <mat-form-field class="input">
+      <input
+        matInput
+        [matDatepicker]="myDatepicker"
+        value="{{ previousDetails.date_of_birth }}"
+        placeholder="Select a date"
+      />
+      <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+      <mat-datepicker #myDatepicker></mat-datepicker>
+    </mat-form-field>
+    <mat-chip-list *ngFor="let tech of previousDetails.technologies">
+      <mat-chip>{{ tech }}</mat-chip>
+    </mat-chip-list>
+    <mat-form-field class="input">
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let tech of previousDetails.technologies" [removable]="removable" (removed)="remove(tech)">
+          {{ tech }}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event)"
+        />
+      </mat-chip-list>
+    </mat-form-field>
+    <button mat-raised-button type="submit">Submit</button>
+  </form>
+</mat-card>

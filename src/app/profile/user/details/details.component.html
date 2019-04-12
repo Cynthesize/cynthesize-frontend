@@ -187,4 +187,16 @@
     </div>
   </form>
 </div> -->
-yo bitch
+<div *ngIf="user">
+  <mat-card>
+    <div>
+      <p>Bio: {{ user.bio }}</p>
+      <p>Location: {{ user.location }}</p>
+      <p>Email: {{ user.email }}</p>
+      <p>Username: {{ user.username }}</p>
+      <p>Name: {{ user.name }}</p>
+      <p>Date of birth: {{ user.date_of_birth }}</p>
+    </div>
+    <div></div>
+  </mat-card>
+</div>

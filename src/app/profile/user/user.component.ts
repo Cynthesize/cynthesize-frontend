@@ -8,8 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { MatDialog, MatChipInputEvent } from '@angular/material';
 import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
-import { SocialDialogComponent } from './details/details.component';
 import { finalize } from 'rxjs/operators';
+import { SocialDialogComponent } from './details/details.component';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -100,6 +100,15 @@ export class UserComponent implements OnInit {
   }
   toggleFormFields(toggle: boolean) {
     this.isFieldEditable = toggle;
+  }
+
+  checkRoute() {
+    const thisRoute = this.router.url.split('/')[3];
+    if (thisRoute) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   onSubmit() {

@@ -4,7 +4,9 @@
       <cl-image height="45" crop="scale" public-id="{{ comment.user.profile_pic }}" secure="true"></cl-image>
     </div>
     <div class="user-name">
-      <p style="font-size: 1rem; font-weight: 600;">{{ comment.user.username }}</p>
+      <a [routerLink]="['/user', comment.user.username]" style="font-size: 1rem; font-weight: 600;">{{
+        comment.user.username
+      }}</a>
       <p style="font-size: 0.7rem;">{{ comment.timestamp | timeDiff }}</p>
     </div>
   </div>
@@ -29,7 +31,9 @@
       <cl-image height="45" crop="scale" public-id="{{ reply.userByrespondent.profile_pic }}" secure="true"></cl-image>
     </div>
     <div class="user-name">
-      <p style="font-size: 1rem; font-weight: 600;">{{ reply.userByrespondent.username }}</p>
+      <a [routerLink]="['/user', reply.userByrespondent.username]" style="font-size: 1rem; font-weight: 600;">{{
+        reply.userByrespondent.username
+      }}</a>
       <p style="font-size: 0.7rem;">{{ reply.timestamp | timeDiff }}</p>
     </div>
   </div>

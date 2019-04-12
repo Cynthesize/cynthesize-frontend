@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DetailsComponent } from './details/details.component';
 import { UserComponent } from './user.component';
 
 const routes: Routes = [
@@ -9,8 +8,8 @@ const routes: Routes = [
     component: UserComponent,
     children: [
       {
-        path: 'profile',
-        loadChildren: 'app/profile/user/details/details.module#DetailsModule'
+        path: 'edit',
+        loadChildren: 'app/profile/user/edit/edit.module#EditModule'
       },
       {
         path: 'ideas',
