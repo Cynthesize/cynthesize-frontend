@@ -9,7 +9,8 @@ import {
   MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT,
   MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE,
   MUTATION_UPDATE_PROJECT_DESCRIPTION,
-  MUTATION_ADD_PROJECT_DESCRIPTION
+  MUTATION_ADD_PROJECT_DESCRIPTION,
+  MUTATION_UPDATE_PROJECT_EVENTS
 } from '@app/shared/mutations/project-mutations';
 import {
   QUERY_CHECKPOINT_ISSUES,
@@ -309,6 +310,28 @@ export class ProjectService {
         mutation: MUTATION_UPDATE_PROJECT_DESCRIPTION,
         variables: {
           project_id: projectId,
+          updateObject: updatedData
+        }
+      })
+      .pipe(take(1))
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * Updates project events data
+   */
+  public updateProjectEvents(updatedData: Object, projectId: number) {
+    console.log(projectId);
+
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_UPDATE_PROJECT_EVENTS,
+        variables: {
+          projectId: projectId,
           updateObject: updatedData
         }
       })

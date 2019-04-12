@@ -150,6 +150,11 @@ const QUERY_FETCH_PROJECT_DETAILS = gql`
         future_scope
         wow_factor
       }
+      project_events {
+        id
+        green_board
+        timeline
+      }
     }
   }
   ${USER_PROFILE_PIC_FRAGMENT}
