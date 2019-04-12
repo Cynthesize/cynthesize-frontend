@@ -14,6 +14,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class ViewProjectComponent implements OnInit {
   project: Observable<Project>;
   editingDescription = false;
+  selectedDate: Date;
 
   descriptionDataForm: FormGroup;
 
