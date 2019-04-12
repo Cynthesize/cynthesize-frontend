@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SocialDialogComponent } from '../../details/details.component';
-import { MatDialog } from '@angular/material';
+import { MatChipInputEvent, MatDialog } from '@angular/material';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-edit',
@@ -8,11 +9,21 @@ import { MatDialog } from '@angular/material';
   styleUrls: ['./edit.component.scss']
 })
 export class EditComponent implements OnInit {
-  @Input() previousDetails = {};
+  @Input() previousDetails: {
+    bio: '';
+    date_of_birth: '';
+    location: '';
+    website: '';
+    username: '';
+    technologies: [];
+  };
   sociallinks: any = [];
+  listOfTech: any = [];
 
   constructor(private dialog: MatDialog) {}
 
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   ngOnInit() {}
 
   openSocialDialog(): void {
@@ -23,6 +34,17 @@ export class EditComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.sociallinks = result;
     });
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+    if ((value || '').trim()) {
+      this.listOfTech.push(value.trim());
+    }
+    if (input) {
+      input.value = '';
+    }
   }
 
   submitUserUpdateForm() {
