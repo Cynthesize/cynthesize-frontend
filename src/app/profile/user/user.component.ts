@@ -10,6 +10,7 @@ import { MatDialog, MatChipInputEvent } from '@angular/material';
 import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
 import { finalize } from 'rxjs/operators';
 import { SocialDialogComponent } from './details/details.component';
+import { Param } from 'cloudinary-core';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -33,7 +34,7 @@ export class UserComponent implements OnInit {
   sociallinks: any = [];
   isFieldEditable = false;
   socialLinks: any;
-  isSameUser = localStorage.getItem('username') === this.router.url.split('/')[2];
+  isSameUser: boolean;
 
   editForm: FormGroup;
 
@@ -53,7 +54,23 @@ export class UserComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private dialog: MatDialog
   ) {
-    this.username = this.route.snapshot.params.username;
+    this.route.params.subscribe((param: Param) => {
+      this.username = param['username'];
+      this.isSameUser = param['username'] === localStorage.getItem('username');
+      this.profileService.getUserDetails(param['username']).subscribe(
+        (data: any) => {
+          if (data.user.length === 0) {
+            this.router.navigate(['not-found']);
+          }
+          this.isPageLoaded = true;
+          this.user = data.user[0];
+          this.listOfTech = data.user[0].technologies || [];
+        },
+        (error: any) => {
+          this.errorHandler.subj_notification.next(error);
+        }
+      );
+    });
   }
 
   ngOnInit() {
@@ -65,20 +82,6 @@ export class UserComponent implements OnInit {
       location: new FormControl(),
       website: new FormControl()
     });
-
-    this.profileService.getUserDetails(this.username).subscribe(
-      (data: any) => {
-        if (data.user.length === 0) {
-          this.router.navigate(['not-found']);
-        }
-        this.isPageLoaded = true;
-        this.user = data.user[0];
-        this.listOfTech = data.user[0].technologies || [];
-      },
-      (error: any) => {
-        this.errorHandler.subj_notification.next(error);
-      }
-    );
   }
 
   openDialog(idea: any): void {

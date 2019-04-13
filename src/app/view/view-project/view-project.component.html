@@ -37,8 +37,19 @@
     <div *ngFor="let event of (project['project_events'][0]['timeline'] | keyvalue)">
       {{ event.key }}: {{ event.value | date }}
     </div>
-    <button mat-icon-button>
+    <button mat-icon-button (click)="initAddTimelineEvent()">
       <mat-icon> add </mat-icon>
     </button>
+    <form (ngSubmit)="addTimelineEvent()" [formGroup]="timelineDataForm" *ngIf="addingTimelineEvent">
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="eventName" placeholder="Add your recent opportunity." />
+      </mat-form-field>
+      <button mat-icon-button (click)="addTimelineEvent()">
+        <mat-icon> done </mat-icon>
+      </button>
+      <button mat-icon-button (click)="addingTimelineEvent = false">
+        <mat-icon> cancel </mat-icon>
+      </button>
+    </form>
   </mat-card>
 </div>

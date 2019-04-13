@@ -28,28 +28,47 @@
       </div>
     </div>
     <div class="page-data">
-      <mat-card class="card" *ngFor="let project of projectList">
-        <div><img class="project-icon" [src]="project.projectssBylaunchedId[0].icon" /></div>
-        <div class="card-details">
-          <div class="card-project-name">{{ displayableName(project.projectssBylaunchedId[0].project_name) }}</div>
-          <div class="card-project-description">
-            {{ project.projectssBylaunchedId[0].abstract }}
+      <mat-card *ngFor="let project of projectList">
+        <div class="card">
+          <div><img class="project-icon" [src]="project.projectssBylaunchedId[0].icon" /></div>
+          <div class="card-details">
+            <div class="card-project-name">{{ displayableName(project.projectssBylaunchedId[0].project_name) }}</div>
+            <div class="card-project-description">
+              {{ project.projectssBylaunchedId[0].abstract }}
+              <br />
+              Started on platform: {{ project.projectssBylaunchedId[0].created_on | timeDiff }}
+              <br />
+              Tags on project:
+              <span *ngFor="let tag of project.projectssBylaunchedId[0].tagsLinkssByprojectId">
+                {{ tag.tagsBytagId.tag_name }},
+              </span>
+            </div>
+          </div>
+          <div class="card-links">
+            <div>
+              <a href="{{ project.projectssBylaunchedId[0].website }}" target="_blank">
+                <button mat-raised-button>Visit</button>
+              </a>
+            </div>
+            <app-activity-actions
+              [id]="project.id"
+              [type]="'project'"
+              [parentProjectId]="project.parent_project_id"
+              [likes]="project.projectssBylaunchedId[0].likes"
+              [url]="'/view/feed/projects/' + project.projectssBylaunchedId[0].project_name"
+            ></app-activity-actions>
           </div>
         </div>
-        <div class="card-links">
-          <div>
-            <a href="{{ project.projectssBylaunchedId[0].website }}" target="_blank">{{
-              project.projectssBylaunchedId[0].website
-            }}</a>
-          </div>
-          <app-activity-actions
-            [id]="project.id"
-            [type]="'project'"
-            [parentProjectId]="project.parent_project_id"
-            [likes]="project.projectssBylaunchedId[0].likes"
-            [url]="'/view/feed/projects/' + project.projectssBylaunchedId[0].project_name"
-          ></app-activity-actions>
-        </div>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header> </mat-expansion-panel-header>
+            <div>
+              <h3>Required:</h3>
+              <p *ngFor="let role of project.projectssBylaunchedId[0].roles_opened">{{ role }}</p>
+              <button mat-button>Collaborate!</button>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
       </mat-card>
     </div>
   </div>

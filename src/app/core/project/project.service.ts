@@ -332,7 +332,7 @@ export class ProjectService {
         mutation: MUTATION_UPDATE_PROJECT_EVENTS,
         variables: {
           projectId: projectId,
-          updateObject: updatedData
+          objects: updatedData
         }
       })
       .pipe(take(1))

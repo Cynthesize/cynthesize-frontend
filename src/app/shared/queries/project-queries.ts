@@ -97,7 +97,7 @@ const QUERY_FETCH_PUBLIC_PROJECT_COMMENTS = gql`
 `;
 
 const QUERY_FETCH_BASIC_PROJECT_DETAILS = gql`
-  query fetch_basic_project_details($projectName: Int!) {
+  query fetch_basic_project_details($projectName: String!) {
     launched_projects(where: { project_name: { _eq: $projectName } }) {
       id
       projectsByparentProjectId {

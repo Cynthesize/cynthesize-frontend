@@ -31,7 +31,7 @@ const MUTATION_ADD_PROJECT_DESCRIPTION = gql`
 `;
 
 const MUTATION_UPDATE_PROJECT_EVENTS = gql`
-  mutation update_project_events($objects: project_events_set_insert!, $projectId: Int!) {
+  mutation update_project_events($objects: project_events_set_input!, $projectId: Int!) {
     update_project_events(where: { project_id: { _eq: $projectId } }, _set: $objects) {
       affected_rows
       returning {

@@ -4,7 +4,7 @@
       <div class="image">
         <cl-image height="200" crop="scale" public-id="{{ user.profile_pic }}" secure="true"></cl-image>
       </div>
-      <mat-icon [routerLink]="'/user/' + username + '/edit'">edit</mat-icon>
+      <mat-icon *ngIf="isSameUser" [routerLink]="'/user/' + username + '/edit'">edit</mat-icon>
       <div class="short-detail">
         <div class="full-name">{{ user.username }}</div>
         <div class="bio">{{ user.bio }}</div>
@@ -26,6 +26,8 @@
   </div>
 </div>
 <div class="profile-project-page container">
-  <div *ngIf="checkRoute()"><app-details></app-details></div>
+  <div *ngIf="checkRoute()">
+    <app-details [user]="user"></app-details>
+  </div>
   <router-outlet></router-outlet>
 </div>

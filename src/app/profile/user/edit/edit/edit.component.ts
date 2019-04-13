@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SocialDialogComponent } from '../../details/details.component';
 import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit',
@@ -11,7 +12,11 @@ export class EditComponent implements OnInit {
   @Input() previousDetails = {};
   sociallinks: any = [];
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private router: Router) {
+    if (this.router.url.split('/')[2] !== localStorage.getItem('username')) {
+      this.router.navigate(['/user', localStorage.getItem('username')]);
+    }
+  }
 
   ngOnInit() {}
 
