@@ -37,7 +37,6 @@ export class LaunchedProductsComponent implements OnInit {
       this.currentCount += data.data.launched_projects.length;
       this.projectList.push(...data.data.launched_projects);
       console.log(this.projectList);
-
       this.isLoading = false;
     });
   }

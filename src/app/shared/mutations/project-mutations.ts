@@ -190,6 +190,15 @@ const MUTATION_REPORT_COMMENT = gql`
     }
   }
 `;
+
+const MUTATION_APPLY_FOR_COLLABORATION = gql`
+  mutation apply_for_collaboration($userId: Int!, $projectId: Int!, $role: String!) {
+    insert_project_collaboration_requests(objects: { user_id: $userId, project_id: $projectId, for_role: $role }) {
+      affected_rows
+    }
+  }
+`;
+
 export {
   MUTATION_ADD_ISSUE,
   MUTATION_ADD_ISSUE_COMMENT,
@@ -203,5 +212,6 @@ export {
   MUTATION_UNREPORT_COMMENT,
   MUTATION_ADD_PROJECT_DESCRIPTION,
   MUTATION_UPDATE_PROJECT_DESCRIPTION,
-  MUTATION_UPDATE_PROJECT_EVENTS
+  MUTATION_UPDATE_PROJECT_EVENTS,
+  MUTATION_APPLY_FOR_COLLABORATION
 };

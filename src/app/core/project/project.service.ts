@@ -10,7 +10,8 @@ import {
   MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE,
   MUTATION_UPDATE_PROJECT_DESCRIPTION,
   MUTATION_ADD_PROJECT_DESCRIPTION,
-  MUTATION_UPDATE_PROJECT_EVENTS
+  MUTATION_UPDATE_PROJECT_EVENTS,
+  MUTATION_APPLY_FOR_COLLABORATION
 } from '@app/shared/mutations/project-mutations';
 import {
   QUERY_CHECKPOINT_ISSUES,
@@ -325,14 +326,32 @@ export class ProjectService {
    * Updates project events data
    */
   public updateProjectEvents(updatedData: Object, projectId: number) {
-    console.log(projectId);
-
     return this.apollo
       .mutate<any>({
         mutation: MUTATION_UPDATE_PROJECT_EVENTS,
         variables: {
           projectId: projectId,
           objects: updatedData
+        }
+      })
+      .pipe(take(1))
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+  /**
+   * Apply for project collaboration for a given role.
+   */
+  public applyForProjectCollaboration(role: string, projectId: number) {
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_APPLY_FOR_COLLABORATION,
+        variables: {
+          projectId: projectId,
+          role: role,
+          userId: localStorage.getItem('userId')
         }
       })
       .pipe(take(1))
