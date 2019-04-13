@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SocialDialogComponent } from '../../details/details.component';
-import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
+import { MatChipInputEvent, MatDialog } from '@angular/material';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-edit',
@@ -9,8 +10,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./edit.component.scss']
 })
 export class EditComponent implements OnInit {
-  @Input() previousDetails = {};
+  @Input() previousDetails: {
+    bio: '';
+    date_of_birth: '';
+    location: '';
+    website: '';
+    username: '';
+    technologies: [];
+  };
   sociallinks: any = [];
+  listOfTech: any = [];
+
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(private dialog: MatDialog, private router: Router) {
     if (this.router.url.split('/')[2] !== localStorage.getItem('username')) {
@@ -28,6 +40,17 @@ export class EditComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.sociallinks = result;
     });
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+    if ((value || '').trim()) {
+      this.listOfTech.push(value.trim());
+    }
+    if (input) {
+      input.value = '';
+    }
   }
 
   submitUserUpdateForm() {

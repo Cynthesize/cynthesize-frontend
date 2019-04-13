@@ -15,6 +15,7 @@ export class ViewProjectComponent implements OnInit {
   project: Observable<Project>;
   editingDescription = false;
   addingTimelineEvent = false;
+  selectedDate: Date;
 
   descriptionDataForm: FormGroup;
   timelineDataForm: FormGroup;
