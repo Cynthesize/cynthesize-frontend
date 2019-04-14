@@ -26,6 +26,8 @@ export class LaunchedProductsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(localStorage.getItem('username'));
+
     this.projectService.getTotalLaunchedProjectsCount().subscribe(data => {
       this.length = data.data.launched_projects_aggregate.aggregate.count;
     });

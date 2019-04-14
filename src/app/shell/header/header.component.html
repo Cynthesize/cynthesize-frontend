@@ -35,17 +35,24 @@
       <button class="header__link" mat-button routerLink="/view/feed/projects">
         <span translate>Launched Projects</span>
       </button>
-      <button mat-icon-button [matMenuTriggerFor]="userMenu" *ngIf="authenticationService.isAuthenticated()">
-        <mat-icon> person </mat-icon>
-      </button>
-      <button
-        mat-raised-button
-        style="background-color: orange; color: white; font-weight: 600;"
-        *ngIf="!authenticationService.isAuthenticated()"
-        (click)="authenticationService.login()"
+
+      <div *ngIf="(authenticationService.user$ | async); then authenticated; else guest"></div>
+
+      <ng-template #authenticated>
+        <button mat-icon-button [matMenuTriggerFor]="userMenu">
+          <mat-icon> person </mat-icon>
+        </button></ng-template
       >
-        Sign in
-      </button>
+      <ng-template #guest>
+        <button
+          mat-raised-button
+          style="background-color: orange; color: white; font-weight: 600;"
+          (click)="authenticationService.googleSignin()"
+        >
+          Sign in
+        </button></ng-template
+      >
+
       <mat-menu #userMenu="matMenu" class="profile-menu">
         <div>
           <div class="user-info">

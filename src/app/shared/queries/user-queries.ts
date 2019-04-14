@@ -26,8 +26,8 @@ const QUERY_USER_DETAILS = gql`
 `;
 
 const QUERY_USER_LIKES = gql`
-  query users_likes($userId: Int!) {
-    user(where: { id: { _eq: $userId } }) {
+  query users_likes($userName: String!) {
+    user(where: { username: { _eq: $userName } }) {
       ...UserLikesFragment
     }
   }

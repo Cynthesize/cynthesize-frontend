@@ -17,6 +17,18 @@ export const config: CloudinaryConfiguration = {
   cloud_name: 'cynthesize',
   upload_preset: 'qdninpjl'
 };
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+const config1 = {
+  apiKey: 'AIzaSyD2oozKEveW6wK7y17LW2UHnkvF5_Efa14',
+  authDomain: 'cynthesize-dev.firebaseapp.com',
+  databaseURL: 'https://cynthesize-dev.firebaseio.com',
+  projectId: 'cynthesize-dev',
+  storageBucket: 'cynthesize-dev.appspot.com',
+  messagingSenderId: '733243062921'
+};
 
 @NgModule({
   imports: [
@@ -26,7 +38,10 @@ export const config: CloudinaryConfiguration = {
     MaterialModule,
     RouterModule,
     GraphqlModule,
-    CloudinaryModule.forRoot(cloudinary, config)
+    CloudinaryModule.forRoot(cloudinary, config),
+    AngularFireModule.initializeApp(config),
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   declarations: [HeaderComponent, ShellComponent]
 })
