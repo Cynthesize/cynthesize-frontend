@@ -11,14 +11,15 @@ import { LoginComponent } from './login/login.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { firebaseapp } from '../../environments/.env';
 
 const config = {
-  apiKey: 'AIzaSyD2oozKEveW6wK7y17LW2UHnkvF5_Efa14',
-  authDomain: 'cynthesize-dev.firebaseapp.com',
-  databaseURL: 'https://cynthesize-dev.firebaseio.com',
-  projectId: 'cynthesize-dev',
-  storageBucket: 'cynthesize-dev.appspot.com',
-  messagingSenderId: '733243062921'
+  apiKey: firebaseapp.apiKey,
+  authDomain: firebaseapp.authDomain,
+  databaseURL: firebaseapp.databaseURL,
+  projectId: firebaseapp.projectId,
+  storageBucket: firebaseapp.storageBucket,
+  messagingSenderId: firebaseapp.messagingSenderId
 };
 
 @NgModule({

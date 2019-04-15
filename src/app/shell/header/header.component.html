@@ -64,7 +64,7 @@
           <mat-divider></mat-divider>
           <div class="user-links">
             <div class="user-link" routerLink="/user/{{ username }}">Profile</div>
-            <div class="user-link" (click)="logout()">Logout</div>
+            <div class="user-link" (click)="authenticationService.logout()">Logout</div>
           </div>
         </div>
       </mat-menu>

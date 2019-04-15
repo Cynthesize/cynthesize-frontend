@@ -6,12 +6,13 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   user$: Observable<any>;
+  token$: Observable<any>;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -26,6 +27,11 @@ export class AuthenticationService {
         } else {
           return of(null);
         }
+      })
+    );
+    this.token$ = this.afAuth.idToken.pipe(
+      map(data => {
+        return data;
       })
     );
   }
