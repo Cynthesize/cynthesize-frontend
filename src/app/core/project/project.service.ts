@@ -344,20 +344,48 @@ export class ProjectService {
   /**
    * Apply for project collaboration for a given role.
    */
-  public applyForProjectCollaboration(role: string, projectId: number) {
+  public applyForProjectCollaboration(role: string, projectId: number, additionalInfo: string = null) {
+    const applyObject = {
+      project_id: projectId,
+      for_role: role,
+      user_id: localStorage.getItem('userId')
+    };
+    if (additionalInfo) {
+      applyObject['additional_info'] = additionalInfo;
+    }
     return this.apollo
       .mutate<any>({
         mutation: MUTATION_APPLY_FOR_COLLABORATION,
-        variables: {
-          projectId: projectId,
-          role: role,
-          userId: localStorage.getItem('userId')
-        }
+        variables: applyObject
       })
       .pipe(take(1))
       .pipe(
         map((res: any) => {
           return res;
+        })
+      );
+  }
+
+  /**
+   * applyForReview
+   */
+  public applyForReview(stage: string, answers: Object) {
+    switch (stage) {
+      case 'idea':
+        break;
+
+      default:
+        break;
+    }
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_ADD_IDEA_TAGS,
+        variables: answers
+      })
+      .pipe(take(1))
+      .pipe(
+        map((arg: any) => {
+          return arg;
         })
       );
   }

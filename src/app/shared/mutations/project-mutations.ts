@@ -192,8 +192,8 @@ const MUTATION_REPORT_COMMENT = gql`
 `;
 
 const MUTATION_APPLY_FOR_COLLABORATION = gql`
-  mutation apply_for_collaboration($userId: Int!, $projectId: Int!, $role: String!) {
-    insert_project_collaboration_requests(objects: { user_id: $userId, project_id: $projectId, for_role: $role }) {
+  mutation apply_for_collaboration($objects: [project_collaboration_requests_insert_input!]!) {
+    insert_project_collaboration_requests(objects: $objects) {
       affected_rows
     }
   }

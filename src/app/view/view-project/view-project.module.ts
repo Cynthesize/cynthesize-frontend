@@ -10,9 +10,10 @@ import { IssueComponent, AddIssueComponent } from './issue/issue.component';
 import { DetachedIssueComponent } from './issue/detached-issue/detached-issue.component';
 import { CovalentMarkdownModule } from '@covalent/markdown';
 import { CovalentTextEditorModule } from '@covalent/text-editor';
+import { ReviewComponent } from './review/review.component';
 
 @NgModule({
-  declarations: [ViewProjectComponent, IssueComponent, DetachedIssueComponent, AddIssueComponent],
+  declarations: [ViewProjectComponent, IssueComponent, DetachedIssueComponent, AddIssueComponent, ReviewComponent],
   imports: [
     CommonModule,
     ViewRoutingModule,
@@ -23,6 +24,6 @@ import { CovalentTextEditorModule } from '@covalent/text-editor';
     CovalentTextEditorModule,
     FormsModule
   ],
-  entryComponents: [AddIssueComponent]
+  entryComponents: [AddIssueComponent, ReviewComponent]
 })
 export class ViewProjectModule {}

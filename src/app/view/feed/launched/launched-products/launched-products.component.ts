@@ -54,6 +54,17 @@ export class LaunchedProductsComponent implements OnInit {
     }
     return splitStr.join(' ');
   }
+
+  applyForCollab(role: string, projectId: number) {
+    this.projectService.applyForProjectCollaboration(role, projectId).subscribe(
+      data => {
+        console.log('Applied');
+      },
+      error => {
+        this.errorHandler.subj_notification.next(error);
+      }
+    );
+  }
 }
 
 @Component({

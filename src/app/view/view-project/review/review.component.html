@@ -1,0 +1,6 @@
+<form [formGroup]="reviewForm" (ngSubmit)="submitReviewForm()">
+  <mat-form-field *ngFor="let control of (reviewForm.controls | keyvalue)">
+    <input matInput [formControlName]="control.key" [placeholder]="control.key" />
+  </mat-form-field>
+  <button mat-raised-button type="submit">Submit</button>
+</form>

@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { Project } from '@app/shared/objects';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { ReviewComponent } from './review/review.component';
 
 @Component({
   selector: 'app-view-project',
@@ -24,7 +26,8 @@ export class ViewProjectComponent implements OnInit {
     private projectService: ProjectService,
     private router: Router,
     private errorHandler: ErrorHandlerService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog
   ) {
     const routeParams = this.router.url.split('/')[3].split('-');
     const projectId = parseInt(routeParams[0], 10);
@@ -103,5 +106,12 @@ export class ViewProjectComponent implements OnInit {
           this.errorHandler.subj_notification.next(error);
         }
       );
+  }
+
+  openReviewModel() {
+    this.dialog.open(ReviewComponent, {
+      width: '250px',
+      data: { context: '' }
+    });
   }
 }
