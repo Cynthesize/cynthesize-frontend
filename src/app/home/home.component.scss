@@ -7,7 +7,7 @@
 }
 
 .home-description {
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 500;
 }
 
@@ -17,16 +17,63 @@
 }
 
 .home-card {
-  display: inline-block;
-  flex-basis: 17%;
+  // height: 30rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-basis: auto;
   text-align: center;
+  width: 20%;
   margin: 10px;
+  padding: 30px;
 }
 
-@media screen and (max-width: 1134px) {
-  .home-info-cards {
-    flex-direction: column;
-  }
+.home-card-blue {
+  // height: 35rem;
+  background-color: $color-primary-dark;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-basis: auto;
+  text-align: center;
+  width: 20%;
+  margin: 10px;
+  padding: 30px;
+  color: white;
+}
+
+.home-card-yellow {
+  // height: 35rem;
+  background-color: orange;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-basis: auto;
+  text-align: center;
+  width: 20%;
+  margin: 10px;
+  padding: 30px;
+  color: white;
+}
+
+.home-card-button {
+  margin-top: 2px;
+  padding: 2rem 2rem;
+}
+.home-card-button-blue {
+  background-color: $color-primary-dark;
+  margin-top: 2px;
+  padding: 2rem 2rem;
+  color: white;
+}
+.home-card-button-yellow {
+  background-color: orange;
+  margin-top: 2px;
+  padding: 2rem 2rem;
+  color: white;
 }
 
 .home-contact-heading {
@@ -82,7 +129,7 @@
 }
 
 .card-heading {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 500;
   margin-bottom: 20px;
   font-weight: 500;
@@ -116,4 +163,47 @@
 .community-button {
   width: 100%;
   margin-top: 10px;
+}
+
+@media screen and (max-width: 1134px) {
+  .home-info-cards {
+    flex-direction: column;
+  }
+
+  .home-card {
+    // height: 30rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-basis: auto;
+    text-align: center;
+    width: 100%;
+    margin: 10px;
+    padding: 30px;
+  }
+  .home-card-blue {
+    // height: 30rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-basis: auto;
+    text-align: center;
+    width: 100%;
+    margin: 10px;
+    padding: 30px;
+  }
+  .home-card-yellow {
+    // height: 30rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-basis: auto;
+    text-align: center;
+    width: 100%;
+    margin: 10px;
+    padding: 30px;
+  }
 }
