@@ -43,7 +43,6 @@ export class UserService {
       })
       .subscribe(
         data => {
-          console.log(data);
           this.saveLocalStorageValues(
             '[]',
             additionalUserInfo.profile.picture,
@@ -53,7 +52,6 @@ export class UserService {
             '[]',
             '[]'
           );
-          return data;
         },
         error => {
           console.log(error);
