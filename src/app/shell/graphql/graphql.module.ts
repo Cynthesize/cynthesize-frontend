@@ -3,7 +3,7 @@ import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { GRAPHQL_URL, HASURA_ACCESS_KEY } from '../../../environments/.env';
+import { GRAPHQL_URL, HASURA_ACCESS_KEY } from '../../../environments/environment';
 import { AuthenticationService } from '@app/core';
 
 @NgModule({

@@ -7,3 +7,15 @@ export const environment = {
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US', 'fr-FR']
 };
+export const HASURA_ACCESS_KEY = '***';
+export const GRAPHQL_URL = '***';
+export const REALTIME_GRAPHQL_URL = '***';
+
+export const firebaseapp = {
+  apiKey: '***',
+  authDomain: '***',
+  databaseURL: '***',
+  projectId: '***',
+  storageBucket: '***',
+  messagingSenderId: '***'
+};
