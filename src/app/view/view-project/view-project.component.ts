@@ -18,13 +18,11 @@ import { AddIssueComponent } from './issue/issue.component';
 export class ViewProjectComponent implements OnInit {
   project: Observable<Project>;
   editingDescription = false;
-  addingTimelineEvent = false;
   selectedDate: Date;
   isMobile = false;
   issueActive = false;
 
   descriptionDataForm: FormGroup;
-  timelineDataForm: FormGroup;
 
   constructor(
     private projectService: ProjectService,
@@ -96,27 +94,6 @@ export class ViewProjectComponent implements OnInit {
         this.errorHandler.subj_notification.next(error);
       }
     );
-  }
-
-  initAddTimelineEvent() {
-    this.timelineDataForm = this.formBuilder.group({
-      eventName: ['']
-    });
-    this.addingTimelineEvent = true;
-  }
-
-  addTimelineEvent() {
-    this.project['project_events'][0]['timeline'][this.timelineDataForm.get('eventName').value] = Date.now();
-    this.projectService
-      .updateProjectEvents({ timeline: this.project['project_events'][0]['timeline'] }, this.project['id'])
-      .subscribe(
-        (data: any) => {
-          console.log(data);
-        },
-        (error: any) => {
-          this.errorHandler.subj_notification.next(error);
-        }
-      );
   }
 
   openAddIssueDialog(): void {

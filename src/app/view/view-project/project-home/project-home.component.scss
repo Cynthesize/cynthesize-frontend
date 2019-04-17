@@ -1,9 +1,18 @@
 .banner-image {
   width: 100%;
-  height: 440px;
+  height: 370px;
   overflow: hidden;
   background-color: blue;
+  display: flex;
+  align-items: center;
 }
 .checkpoint-name {
   font-size: 3rem;
+}
+.progress-heading {
+  display: flex;
+  justify-content: space-between;
+}
+.project-home-card {
+  margin: 10px;
 }

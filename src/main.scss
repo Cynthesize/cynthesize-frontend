@@ -19,7 +19,7 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include covalent-markdown-theme($theme);
 @include angular-material-theme($app-theme);
 $custom-typography: mat-typography-config(
-  $font-family: "'Poppins', sans-serif"
+  $font-family: "'Open Sans', sans-serif"
 );
 @include mat-core($custom-typography);
 
@@ -48,6 +48,15 @@ body {
   background: #f7f8fb;
   color: white;
   font-size: 0.8rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
 }
 
 p {
@@ -249,10 +258,6 @@ a {
 }
 h3 {
   display: flex;
-}
-
-mat-icon {
-  margin-left: 10px;
 }
 
 // Needs to be here, doesn't work in home.component.scss

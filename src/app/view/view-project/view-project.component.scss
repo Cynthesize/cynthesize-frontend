@@ -7,7 +7,7 @@
   flex: 1;
   background-color: white;
   border: 1px #dddddd solid;
-  height: -webkit-fill-available;
+  min-height: 90.5vh;
   padding: 40px;
 }
 
@@ -19,7 +19,6 @@
 
 .project-page {
   display: flex;
-  margin-top: 25px;
 }
 .issue-link-active {
   color: blue;

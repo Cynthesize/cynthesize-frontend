@@ -12,14 +12,41 @@
       <a [routerLink]="['/user', project.userByowner.username]">{{ project.userByowner.username }}</a>
     </b>
   </p>
-  <mat-card>
-    <div>
+  <mat-card class="project-home-card">
+    <div class="progress-heading">
       <h1>Progress</h1>
       <button mat-raised-button (click)="openReviewModel()">Submit for review</button>
     </div>
   </mat-card>
-  <mat-card>
+  <mat-card class="project-home-card">
     <h1>Description</h1>
     <p>{{ project.description }}</p>
+  </mat-card>
+  <mat-card class="project-home-card">
+    <div class="progress-heading">
+      <h1>Community Collaboration</h1>
+      <button mat-raised-button (click)="askForCollboration()">Ask for Collaboration</button>
+    </div>
+    <div *ngIf="openingRoles">
+      <p>Add names for the roles you want other developers/designers/contributers to see. Add proper punctuation.</p>
+      <form [formGroup]="rolesDataForm">
+        <div class="add-event">
+          <mat-form-field appearance="outline">
+            <mat-label>Separate using commas (,)</mat-label>
+            <input matInput formControlName="roles" />
+          </mat-form-field>
+          <button mat-icon-button (click)="addRoles()">
+            <mat-icon> done </mat-icon>
+          </button>
+          <button mat-icon-button (click)="openingRoles = false">
+            <mat-icon> cancel </mat-icon>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div>
+      <p><span>Roles Open: </span><i *ngIf="!project.roles_opened">Currently you have no roles open.</i></p>
+      <p *ngFor="let role of project.roles_opened">{{ role }}</p>
+    </div>
   </mat-card>
 </div>

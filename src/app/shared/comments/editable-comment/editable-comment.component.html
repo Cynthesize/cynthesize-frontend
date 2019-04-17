@@ -12,7 +12,7 @@
   </div>
   <div class="comment-text-box">
     <p class="comment-text">
-      {{ comment.comment_text }}
+      <td-markdown>{{ comment.comment_text }}</td-markdown>
     </p>
     <div class="comment-icons pointer">
       <app-like [activityId]="comment.id" [activityType]="'comment'" [likes]="comment.likes" class="icon"></app-like>
@@ -39,7 +39,7 @@
   </div>
   <div class="comment-text-box">
     <p class="comment-text">
-      {{ reply.reply_text }}
+      <td-markdown>{{ reply.reply_text }}</td-markdown>
     </p>
     <div class="comment-icons pointer">
       <app-like [activityId]="reply.id" [activityType]="'reply'" [likes]="reply.likes" class="icon"></app-like>

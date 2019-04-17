@@ -82,30 +82,34 @@
 <div *ngIf="issues" class="open-sans">
   <h1 class="checkpoint-name">{{ checkpointName }}</h1>
   <p>Issues Resolved: {{ issues.length - unresolvedIssues }} . Issues Unresolved: {{ unresolvedIssues }}</p>
-  <mat-accordion *ngFor="let issue of issues">
-    <mat-expansion-panel [expanded]="false" hideToggle *ngIf="issue.is_resolved" class="open-sans">
-      <mat-expansion-panel-header>
-        <mat-panel-title> Issue # {{ issue.id }} </mat-panel-title>
-        Resolved<mat-icon>done</mat-icon>
-      </mat-expansion-panel-header>
-      {{ issue.description }}
-      <mat-action-row>
-        <button mat-button color="warn" (click)="issueResolution(issue.id, false)">Mark as Unresolved</button>
-      </mat-action-row>
-    </mat-expansion-panel>
+  <mat-accordion>
+    <section *ngFor="let issue of issues">
+      <mat-expansion-panel [expanded]="false" hideToggle *ngIf="issue.is_resolved" class="open-sans">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Issue # {{ issue.id }} </mat-panel-title>
+          Resolved<mat-icon>done</mat-icon>
+        </mat-expansion-panel-header>
+        <td-markdown> {{ issue.description }} </td-markdown>
+        <mat-action-row>
+          <button mat-button color="warn" (click)="issueResolution(issue.id, false)">Mark as Unresolved</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </section>
   </mat-accordion>
 
-  <mat-accordion *ngFor="let issue of issues">
-    <mat-expansion-panel [expanded]="true" hideToggle *ngIf="!issue.is_resolved" class="open-sans">
-      <mat-expansion-panel-header>
-        <mat-panel-title> Issue # {{ issue.id }} </mat-panel-title>
-        Not Resolved<mat-icon>clear</mat-icon>
-      </mat-expansion-panel-header>
-      {{ issue.description }}
-      <app-comments [activityId]="issue.id" [activityType]="'issue'"></app-comments>
-      <mat-action-row>
-        <button mat-button color="primary" (click)="issueResolution(issue.id, true)">Mark as Resolved</button>
-      </mat-action-row>
-    </mat-expansion-panel>
+  <mat-accordion>
+    <section *ngFor="let issue of issues">
+      <mat-expansion-panel [expanded]="true" hideToggle *ngIf="!issue.is_resolved" class="open-sans">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Issue # {{ issue.id }} </mat-panel-title>
+          Not Resolved<mat-icon>clear</mat-icon>
+        </mat-expansion-panel-header>
+        <td-markdown> {{ issue.description }} </td-markdown>
+        <app-comments [activityId]="issue.id" [activityType]="'issue'"></app-comments>
+        <mat-action-row>
+          <button mat-button color="primary" (click)="issueResolution(issue.id, true)">Mark as Resolved</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </section>
   </mat-accordion>
 </div>

@@ -145,6 +145,28 @@ const MUTATION_UPDATE_PROJECT_DESCRIPTION = gql`
   }
 `;
 
+const MUTATION_UPDATE_PROJECT_DETAILS = gql`
+  mutation update_project_details($projectId: Int!, $objects: projects_set_input!) {
+    update_projects(where: { id: { _eq: $projectId } }, _set: $objects) {
+      affected_rows
+      returning {
+        id
+        project_name
+        abstract
+        description
+        created_on
+        tech_stack
+        website
+        roles_opened
+        icon
+        current_stage
+        likes
+        platform
+      }
+    }
+  }
+`;
+
 const MUTATION_LIKE_PROJECT = gql`
   mutation update_likes($launchedProjectId: Int!, $userId: Int!, $projectId: Int!) {
     update_projects(where: { launched_id: { _eq: $launchedProjectId } }, _inc: { likes: 1 }) {
@@ -226,5 +248,6 @@ export {
   MUTATION_ADD_PROJECT_DESCRIPTION,
   MUTATION_UPDATE_PROJECT_DESCRIPTION,
   MUTATION_UPDATE_PROJECT_EVENTS,
-  MUTATION_APPLY_FOR_COLLABORATION
+  MUTATION_APPLY_FOR_COLLABORATION,
+  MUTATION_UPDATE_PROJECT_DETAILS
 };

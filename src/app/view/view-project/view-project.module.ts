@@ -7,20 +7,20 @@ import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { IssueComponent, AddIssueComponent } from './issue/issue.component';
-import { DetachedIssueComponent } from './issue/detached-issue/detached-issue.component';
 import { CovalentMarkdownModule } from '@covalent/markdown';
 import { CovalentTextEditorModule } from '@covalent/text-editor';
 import { ReviewComponent } from './review/review.component';
 import { ProjectHomeComponent } from './project-home/project-home.component';
+import { ProjectTimelineComponent } from './project-timeline/project-timeline.component';
 
 @NgModule({
   declarations: [
     ViewProjectComponent,
     IssueComponent,
-    DetachedIssueComponent,
     AddIssueComponent,
     ReviewComponent,
-    ProjectHomeComponent
+    ProjectHomeComponent,
+    ProjectTimelineComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +32,6 @@ import { ProjectHomeComponent } from './project-home/project-home.component';
     CovalentTextEditorModule,
     FormsModule
   ],
-  entryComponents: [AddIssueComponent, ReviewComponent, ProjectHomeComponent]
+  entryComponents: [AddIssueComponent, ReviewComponent, ProjectHomeComponent, ProjectTimelineComponent]
 })
 export class ViewProjectModule {}

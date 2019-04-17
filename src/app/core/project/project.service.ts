@@ -11,7 +11,8 @@ import {
   MUTATION_UPDATE_PROJECT_DESCRIPTION,
   MUTATION_ADD_PROJECT_DESCRIPTION,
   MUTATION_UPDATE_PROJECT_EVENTS,
-  MUTATION_APPLY_FOR_COLLABORATION
+  MUTATION_APPLY_FOR_COLLABORATION,
+  MUTATION_UPDATE_PROJECT_DETAILS
 } from '@app/shared/mutations/project-mutations';
 import {
   QUERY_CHECKPOINT_ISSUES,
@@ -213,6 +214,25 @@ export class ProjectService {
     return this.apollo
       .mutate<any>({
         mutation: MUTATION_UPDATE_PROJECT_EVENTS,
+        variables: {
+          projectId: projectId,
+          objects: updatedData
+        }
+      })
+      .pipe(take(1))
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+  /**
+   * Updates project details data
+   */
+  public updateProjectDetails(updatedData: Object, projectId: number) {
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_UPDATE_PROJECT_DETAILS,
         variables: {
           projectId: projectId,
           objects: updatedData
