@@ -77,25 +77,6 @@ export class ProjectService {
   }
 
   /**
-   * fetchIssueInCheckpoint
-   */
-  public fetchIssueInCheckpoint(checkpointName: string, projectId: number) {
-    return this.apollo
-      .watchQuery<any>({
-        query: QUERY_CHECKPOINT_ISSUES,
-        variables: {
-          checkpointName: checkpointName,
-          projectId: projectId
-        }
-      })
-      .valueChanges.pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  /**
    * GET PROJECT DETAILS
    */
   public getProject(id: number, name: string) {
@@ -110,103 +91,6 @@ export class ProjectService {
       .valueChanges.pipe(
         map((res: any) => {
           return res.data.projects[0];
-        })
-      );
-  }
-
-  /**
-   * Add Comments for an issue in the project.
-   */
-  public addComment(commentText: string, projectId: string, issueId: string) {
-    return this.apollo
-      .mutate<any>({
-        mutation: MUTATION_ADD_ISSUE_COMMENT,
-        variables: {
-          objects: {
-            comment_text: commentText,
-            project_id: projectId,
-            issue_id: issueId,
-            commenter: localStorage.getItem('userId')
-          }
-        }
-      })
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  /**
-   * Add Reply for a comment in the project.
-   */
-  public addReply(commentId: string, replyText: string) {
-    return this.apollo
-      .mutate<any>({
-        mutation: MUTATION_ADD_ISSUE_COMMENT_REPLY,
-        variables: {
-          objects: {
-            reply_text: replyText,
-            comment_id: commentId,
-            respondent: localStorage.getItem('userId')
-          }
-        }
-      })
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  /**
-   * Add Issue for a checkpoint in the project.
-   */
-  public addIssue(checkpointName: string, issuesDescription: string, projectId: string) {
-    return this.apollo
-      .mutate({
-        mutation: MUTATION_ADD_ISSUE,
-        variables: {
-          objects: {
-            checkpoint_name: checkpointName,
-            description: issuesDescription,
-            project_id: projectId,
-            created_by: localStorage.getItem('userId')
-          }
-        }
-      })
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  /**
-   * incrementOrDecrementLikeCounter
-   */
-  public incrementOrDecrementLikeCounter(commentId: number) {
-    let mutationTBU = MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT;
-    let likeOffset = 1;
-    if (this._checkCommentStatus(commentId)) {
-      mutationTBU = MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE;
-      likeOffset = -1;
-      this._updateLocalStorage(false, commentId);
-    } else {
-      this._updateLocalStorage(true, commentId);
-    }
-    return this.apollo
-      .mutate({
-        mutation: mutationTBU,
-        variables: {
-          likesOffCounter: likeOffset,
-          commentId: commentId,
-          userId: localStorage.getItem('userId')
-        }
-      })
-      .pipe(
-        map((res: any) => {
-          return res;
         })
       );
   }
@@ -388,32 +272,5 @@ export class ProjectService {
           return arg;
         })
       );
-  }
-
-  private _checkCommentStatus(commentId: number) {
-    const userCommentArray = JSON.parse(localStorage.getItem('projectIssuesCommentsLikessByuserId'));
-    let flag = false;
-    userCommentArray.forEach((comment_id: any) => {
-      if (comment_id === commentId) {
-        flag = true;
-      }
-    });
-    return flag;
-  }
-
-  private _updateLocalStorage(insert: boolean, commentId?: number) {
-    const userCommentArray = JSON.parse(localStorage.getItem('projectIssuesCommentsLikessByuserId'));
-
-    if (insert) {
-      userCommentArray.push(commentId);
-      localStorage.setItem('projectIssuesCommentsLikessByuserId', JSON.stringify(userCommentArray));
-      return;
-    }
-    for (let i = 0; i < userCommentArray.length; i++) {
-      if (userCommentArray[i] === commentId) {
-        userCommentArray.splice(i, 1);
-      }
-    }
-    localStorage.setItem('projectIssuesCommentsLikessByuserId', JSON.stringify(userCommentArray));
   }
 }

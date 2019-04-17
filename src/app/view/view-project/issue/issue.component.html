@@ -78,6 +78,7 @@
   </div>
 </div>
 -->
+<div *ngIf="!issues" class="loader"><mat-spinner></mat-spinner></div>
 <div *ngIf="issues">
   <h1>{{ checkpointName }}</h1>
   <p>Issues Resolved: {{ issues.length - unresolvedIssues }} . Issues Unresolved: {{ unresolvedIssues }}</p>
@@ -89,7 +90,7 @@
       </mat-expansion-panel-header>
       {{ issue.description }}
       <mat-action-row>
-        <button mat-button color="warn">Mark as Unresolved</button>
+        <button mat-button color="warn" (click)="issueResolution(issue.id, false)">Mark as Unresolved</button>
       </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>
@@ -103,7 +104,7 @@
       {{ issue.description }}
       <app-comments [activityId]="issue.id" [activityType]="'issue'"></app-comments>
       <mat-action-row>
-        <button mat-button color="primary">Mark as Resolved</button>
+        <button mat-button color="primary" (click)="issueResolution(issue.id, true)">Mark as Resolved</button>
       </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>

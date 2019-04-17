@@ -140,6 +140,13 @@ a {
   font-style: italic;
 }
 
+.loader {
+  display: flex;
+  align-items: center;
+  height: 85vh;
+  justify-content: center;
+}
+
 // overriding  mat-dialog-container
 .custom-dialog-container .mat-dialog-container {
   padding: 0;

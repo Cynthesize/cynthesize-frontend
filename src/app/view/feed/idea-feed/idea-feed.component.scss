@@ -1,7 +1,6 @@
 @import "../../../../sass/declarations";
 
 .idea-card {
-  width: 100%;
   margin: 10px;
   min-height: 300px;
   flex-basis: 23%;
@@ -10,6 +9,7 @@
 .idea-feed-data {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .idea-card-details {

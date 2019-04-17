@@ -78,6 +78,18 @@ const MUTATION_ADD_ISSUE_COMMENT_REPLY = gql`
   ${ISSUE_COMMENT_REPLY_FRAGMENT}
 `;
 
+const MUTATION_MARK_ISSUE_RESOLVED_OR_UNRESOLVED = gql`
+  mutation mark_resolved_or_unresolved($issueId: Int!, $resolution: Boolean!) {
+    update_issues(where: { id: { _eq: $issueId } }, _set: { is_resolved: $resolution }) {
+      affected_rows
+      returning {
+        id
+        is_resolved
+      }
+    }
+  }
+`;
+
 const MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT = gql`
   mutation update_likes($likesOffCounter: Int!, $commentId: Int!, $userId: Int!) {
     update_comment(where: { id: { _eq: $commentId } }, _inc: { likes: $likesOffCounter }) {
@@ -203,6 +215,7 @@ export {
   MUTATION_ADD_ISSUE,
   MUTATION_ADD_ISSUE_COMMENT,
   MUTATION_ADD_ISSUE_COMMENT_REPLY,
+  MUTATION_MARK_ISSUE_RESOLVED_OR_UNRESOLVED,
   MUTATION_ADD_PROJECT,
   MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE,
   MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT,
