@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { ReviewComponent } from './review/review.component';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { AddIssueComponent } from './issue/issue.component';
 
 @Component({
   selector: 'app-view-project',
@@ -117,5 +118,13 @@ export class ViewProjectComponent implements OnInit {
           this.errorHandler.subj_notification.next(error);
         }
       );
+  }
+
+  openAddIssueDialog(): void {
+    const dialogRef = this.dialog.open(AddIssueComponent, {
+      width: '900px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {});
   }
 }

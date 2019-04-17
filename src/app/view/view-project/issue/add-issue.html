@@ -1,5 +1,5 @@
 <h1>Add Issue</h1>
-<div style="font-size: 1.6rem;">
+<div>
   <form>
     <mat-form-field>
       <mat-select [formControl]="checkpointName" placeholder="Select checkpoint" required>
@@ -13,6 +13,6 @@
   </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button (click)="onNoClick()">No Thanks</button>
-  <button mat-raised-button (click)="addIssue()" cdkFocusInitial>Add Issue</button>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="addIssue()" cdkFocusInitial>Add Issue</button>
 </div>

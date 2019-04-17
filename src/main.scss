@@ -22,20 +22,9 @@ $custom-typography: mat-typography-config(
   $font-family: "Montserrat"
 );
 @include mat-core($custom-typography);
+
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800");
 @import "theme/theme";
-
-@font-face {
-  font-family: "gothambold";
-  src: url("./theme/fonts/gothambold.eot");
-  src: local("gothambold"), url("./theme/fonts/gothambold.woff") format("woff"),
-    url("./theme/fonts/gothambold.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "gothamlight";
-  src: url("./theme/fonts/gothamlight.otf");
-}
 
 * {
   margin: 0;
