@@ -1,9 +1,15 @@
+a {
+  outline: 0;
+}
+
 .greed-card {
   width: 400px;
 }
 
 .sidebar {
   width: 280px;
+  display: flex;
+  flex-direction: column;
   flex: 1;
   background-color: white;
   border: 1px #dddddd solid;
@@ -27,4 +33,9 @@
 .checkpoint {
   font-size: 1rem;
   padding: 5px 10px;
+}
+.issue-button {
+  width: 50%;
+  margin-top: 1rem;
+  transform: translateX(6px);
 }
