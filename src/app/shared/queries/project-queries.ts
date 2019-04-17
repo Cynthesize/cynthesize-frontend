@@ -155,6 +155,9 @@ const QUERY_FETCH_PROJECT_DETAILS = gql`
         green_board
         timeline
       }
+      issuessByprojectId(where: { project_id: { _eq: $projectId } }, distinct_on: checkpoint_name) {
+        checkpoint_name
+      }
     }
   }
   ${USER_PROFILE_PIC_FRAGMENT}

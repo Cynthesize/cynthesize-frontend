@@ -1,3 +1,21 @@
 .greed-card {
   width: 400px;
 }
+
+.sidebar {
+  width: 280px;
+  text-align: center;
+  flex: 1;
+  background-color: white;
+  border: 1px #dddddd solid;
+}
+
+.content {
+  background-color: white;
+  flex: 4.5;
+}
+
+.project-page {
+  display: flex;
+  margin-top: 25px;
+}

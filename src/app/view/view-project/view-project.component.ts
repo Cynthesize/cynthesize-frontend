@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProjectService } from '@app/core/project/project.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -7,6 +7,7 @@ import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { ReviewComponent } from './review/review.component';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-view-project',
@@ -18,16 +19,21 @@ export class ViewProjectComponent implements OnInit {
   editingDescription = false;
   addingTimelineEvent = false;
   selectedDate: Date;
+  isMobile = false;
+  mobileQuery: MediaQueryList;
 
   descriptionDataForm: FormGroup;
   timelineDataForm: FormGroup;
+  private _mobileQueryListener: () => void;
 
   constructor(
     private projectService: ProjectService,
     private router: Router,
     private errorHandler: ErrorHandlerService,
     private formBuilder: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher
   ) {
     const routeParams = this.router.url.split('/')[3].split('-');
     const projectId = parseInt(routeParams[0], 10);
@@ -43,10 +49,15 @@ export class ViewProjectComponent implements OnInit {
         this.errorHandler.subj_notification.next(error);
       }
     );
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
   ngOnInit() {}
-
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
   fnc(selectedDate: Date) {
     const dates = document.getElementsByClassName('mat-calendar-body-cell-content');
     for (let index = 0; index < dates.length; index++) {
@@ -106,12 +117,5 @@ export class ViewProjectComponent implements OnInit {
           this.errorHandler.subj_notification.next(error);
         }
       );
-  }
-
-  openReviewModel() {
-    this.dialog.open(ReviewComponent, {
-      width: '250px',
-      data: { context: '' }
-    });
   }
 }

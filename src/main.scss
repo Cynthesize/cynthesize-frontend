@@ -61,6 +61,12 @@ body {
   font-size: 0.8rem;
 }
 
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+}
+
 .center-divs {
   display: flex;
   justify-content: center;

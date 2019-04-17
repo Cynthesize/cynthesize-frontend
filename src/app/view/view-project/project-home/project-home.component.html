@@ -1,0 +1,34 @@
+<div>
+  <!-- Banner Image -->
+  <div class="banner-image"><img src="../../../../assets/images/project_banner.svg" /></div>
+  <h1>{{ displayableName(project.project_name) }}</h1>
+  <p>
+    Owned by:
+    <b>
+      <a [routerLink]="['/user', project.userByowner.username]">{{ project.userByowner.username }}</a>
+    </b>
+    | Mentored By:
+    <b>
+      <a [routerLink]="['/user', project.userByowner.username]">{{ project.userByowner.username }}</a>
+    </b>
+  </p>
+  <mat-card>
+    <h1>Journey</h1>
+    <button mat-raised-button (click)="openReviewModel()">Submit for review</button>
+  </mat-card>
+  <mat-card>
+    <h1>Description</h1>
+    {{ project.description }}
+    {{ project.description }}
+    {{ project.description }}
+    {{ project.description }}
+    {{ project.description }}
+    {{ project.description }}
+    {{ project.description }}
+    {{ project.description }}
+    {{ project.description }}
+    {{ project.description }}
+    {{ project.description }}
+    {{ project.description }}
+  </mat-card>
+</div>

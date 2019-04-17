@@ -1,7 +1,6 @@
-<mat-calendar [selected]="fnc(selectedDate)" (selectedChange)="selectedDate = $event" class="greed-card">
+<!-- <mat-calendar [selected]="fnc(selectedDate)" (selectedChange)="selectedDate = $event" class="greed-card">
 </mat-calendar>
 
-<!-- Description Card -->
 <div *ngIf="editingDescription && project">
   <mat-card>
     <form (ngSubmit)="updateDescription(project.id)" [formGroup]="descriptionDataForm">
@@ -52,5 +51,48 @@
       </button>
     </form>
   </mat-card>
-  <button mat-raised-button (click)="openReviewModel()">Submit for review</button>
+</div> -->
+
+<div *ngIf="project" class="project-page">
+  <div class="left-sidebar sidebar">
+    <div>
+      <div>
+        <img [src]="'https://www.shareicon.net/download/2016/07/08/117547_developer_512x512.png'" width="90px" />
+      </div>
+      <a [routerLink]="['/view/project', project.id + '-' + project.project_name]">Home</a>
+    </div>
+    <mat-divider></mat-divider>
+    <div>
+      <p *ngFor="let checkpoint of project.issuessByprojectId.checkpoint_name">{{ checkpoint }}</p>
+    </div>
+    <button mat-raised-button>Add issue</button>
+  </div>
+
+  <div class="content">
+    <app-project-home [project]="project"></app-project-home>
+    <!-- If viewing issues pages -->
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="right-sidebar sidebar">
+    <h2>Timeline</h2>
+    <div *ngFor="let event of (project['project_events'][0]['timeline'] | keyvalue)">
+      {{ event.key }}: {{ event.value | date }}
+    </div>
+    <button mat-icon-button (click)="initAddTimelineEvent()">
+      <mat-icon> add </mat-icon>
+    </button>
+    <form (ngSubmit)="addTimelineEvent()" [formGroup]="timelineDataForm" *ngIf="addingTimelineEvent">
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="eventName" placeholder="Add your recent opportunity." />
+      </mat-form-field>
+      <button mat-icon-button (click)="addTimelineEvent()">
+        <mat-icon> done </mat-icon>
+      </button>
+      <button mat-icon-button (click)="addingTimelineEvent = false">
+        <mat-icon> cancel </mat-icon>
+      </button>
+    </form>
+    <h2>Mentors Involved</h2>
+  </div>
 </div>
