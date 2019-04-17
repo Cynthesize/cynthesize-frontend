@@ -1,14 +1,50 @@
+a {
+  outline: 0;
+}
+
 .greed-card {
   width: 400px;
 }
 
 .sidebar {
   width: 280px;
+  display: flex;
+  flex-direction: column;
   flex: 1;
   background-color: white;
   border: 1px #dddddd solid;
   height: -webkit-fill-available;
-  padding: 40px;
+
+  img {
+    margin: 1rem 0;
+    border-radius: 50%;
+    transform: translateX(-0.5rem);
+  }
+
+  mat-divider {
+    width: 100%;
+  }
+  a {
+    font-size: 130%;
+    display: block;
+    padding: 0.5rem;
+    text-decoration: none;
+  }
+
+  .left-sidebar-text-bottom {
+    padding: 0.5rem;
+    opacity: 0.8;
+    font-weight: 700;
+  }
+
+  .left-padding {
+    padding-left: 40px;
+    // background-color: blue;
+  }
+}
+
+.left-sidebar {
+  text-align: left;
 }
 
 .content {
@@ -28,4 +64,9 @@
 .checkpoint {
   font-size: 1rem;
   padding: 5px 10px;
+}
+.issue-button {
+  width: 50%;
+  margin-top: 1rem;
+  transform: translateX(6px);
 }

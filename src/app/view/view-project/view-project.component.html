@@ -34,34 +34,44 @@
   >
 </div> -->
 
-<div *ngIf="!project" class="loader"><mat-spinner></mat-spinner></div>
+<div *ngIf="!project" class="loader">
+  <mat-spinner></mat-spinner>
+</div>
 <div *ngIf="project" class="project-page">
   <div class="left-sidebar sidebar">
-    <div>
-      <div>
+    <div class="left-padding">
+      <div style="padding-right: 1rem;">
         <img [src]="project.icon" width="90px" />
-      </div>
-      <div
-        class="open-sans cursor checkpoint"
-        [routerLink]="['/view/project', project.id + '-' + project.project_name]"
-        [routerLinkActiveOptions]="{ exact: true }"
-        routerLinkActive="issue-link-active"
-      >
-        Home
+        <a
+          [routerLink]="['/view/project', project.id + '-' + project.project_name]"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="issue-link-active"
+          style="margin-bottom: 1rem;"
+          class="open-sans cursor checkpoint"
+        >
+          Home
+        </a>
       </div>
     </div>
     <mat-divider></mat-divider>
-    <div>
-      <div
-        class="checkpoint pointer open-sans"
-        *ngFor="let checkpoint of project.issuessByprojectId"
-        [routerLink]="['/view/project', project.id + '-' + project.project_name, 'issues', checkpoint.checkpoint_name]"
-        routerLinkActive="issue-link-active"
-      >
-        #{{ checkpoint.checkpoint_name.toLowerCase() }}
+    <div class="left-padding">
+      <div style="text-align: left; text-transform: lowercase; margin-top: 1rem;">
+        <a
+          *ngFor="let checkpoint of project.issuessByprojectId"
+          [routerLink]="[
+            '/view/project',
+            project.id + '-' + project.project_name,
+            'issues',
+            checkpoint.checkpoint_name
+          ]"
+          routerLinkActive="issue-link-active"
+          class="checkpoint pointer open-sans left-sidebar-text-bottom"
+        >
+          #{{ checkpoint.checkpoint_name }}
+        </a>
       </div>
+      <button mat-raised-button class="issue-button" (click)="openAddIssueDialog()">Add issue</button>
     </div>
-    <button mat-raised-button (click)="openAddIssueDialog()">Add issue</button>
   </div>
 
   <div class="content">
