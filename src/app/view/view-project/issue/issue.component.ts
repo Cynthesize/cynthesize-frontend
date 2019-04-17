@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Input, Inject, SimpleChanges, OnChanges } from '@angular/core';
 import { ProjectService } from '@app/core/project/project.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
@@ -15,37 +15,39 @@ const SharedProjectId = '';
   encapsulation: ViewEncapsulation.None
 })
 export class IssueComponent implements OnInit, OnChanges {
-  @Input()
-  checkpoints: any;
-  @Input()
-  projectId: any;
-  @Input()
-  activeCheckpoint: any;
-  @Input()
-  projectDetails: any;
-
+  checkpointName: string;
+  projectId: number;
+  projectName: string;
   issues: Observable<any>;
-  checkpointList = {};
-  sub: any;
-
-  SharedProjectId = this.projectId;
+  unresolvedIssues: number;
 
   constructor(
     private projectService: ProjectService,
-    private router: Router,
+    private route: ActivatedRoute,
     public dialog: MatDialog,
     private errorHandler: ErrorHandlerService
-  ) {}
+  ) {
+    this.route.parent.params.subscribe(params => {
+      this.projectId = params.id.split('-')[0];
+      this.projectName = params.id.slice(params.id.indexOf('-') + 1);
+    });
+    this.route.params.subscribe(params => {
+      this.checkpointName = params.checkpoint_name;
+      this.projectService.fetchIssueInCheckpoint(params.checkpoint_name, this.projectId).subscribe(
+        (data: any) => {
+          this.issues = data.data.issues;
+          this.unresolvedIssues = data.data.issues_aggregate.aggregate.count;
+        },
+        error => {
+          this.errorHandler.subj_notification.next(error);
+        }
+      );
+    });
+  }
 
   ngOnInit() {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.projectService
-      .fetchIssueInCheckpoint(changes.activeCheckpoint.currentValue, this.projectId)
-      .subscribe((data: any) => {
-        this.issues = data.data.project_issues;
-      });
-  }
+  ngOnChanges(changes: SimpleChanges): void {}
 
   initAddIssueDialogue() {
     this.openDialog();

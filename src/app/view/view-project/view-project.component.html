@@ -38,7 +38,7 @@
   <div class="left-sidebar sidebar">
     <div>
       <div>
-        <img [src]="'https://www.shareicon.net/download/2016/07/08/117547_developer_512x512.png'" width="90px" />
+        <img [src]="project.icon" width="90px" />
       </div>
       <a
         [routerLink]="['/view/project', project.id + '-' + project.project_name]"
@@ -55,14 +55,16 @@
         [routerLink]="['/view/project', project.id + '-' + project.project_name, 'issues', checkpoint.checkpoint_name]"
         routerLinkActive="issue-link-active"
       >
-        {{ checkpoint.checkpoint_name }}
+        <div>
+          {{ checkpoint.checkpoint_name }}
+        </div>
       </a>
     </div>
     <button mat-raised-button (click)="openAddIssueDialog()">Add issue</button>
   </div>
 
   <div class="content">
-    <app-project-home [project]="project"></app-project-home>
+    <app-project-home [project]="project" *ngIf="issueActive"></app-project-home>
     <!-- If viewing issues pages -->
     <router-outlet></router-outlet>
   </div>

@@ -39,13 +39,11 @@ const PROJECT_ISSUE_FRAGMENT = gql`
     created_on
     userBycreatedBy {
       username
+      profile_pic
+      is_mentor
     }
     is_resolved
-    commentsByissueId {
-      ...IssueCommentFragment
-    }
   }
-  ${ISSUE_COMMENT_FRAGMENT}
 `;
 
 const LAUNCHED_PROJECT_DETAILS_FRAGMENT = gql`

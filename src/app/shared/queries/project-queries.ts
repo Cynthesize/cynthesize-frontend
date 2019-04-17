@@ -7,6 +7,13 @@ const QUERY_CHECKPOINT_ISSUES = gql`
     issues(where: { project_id: { _eq: $projectId }, checkpoint_name: { _eq: $checkpointName } }) {
       ...ProjectIssueFragment
     }
+    issues_aggregate(
+      where: { is_resolved: { _eq: false }, project_id: { _eq: $projectId }, checkpoint_name: { _eq: $checkpointName } }
+    ) {
+      aggregate {
+        count
+      }
+    }
   }
   ${PROJECT_ISSUE_FRAGMENT}
 `;
