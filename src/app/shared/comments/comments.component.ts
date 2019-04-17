@@ -52,4 +52,8 @@ export class CommentsComponent implements OnInit, OnChanges {
       }
     );
   }
+
+  cancelComment() {
+    this.isCommenting = false;
+  }
 }

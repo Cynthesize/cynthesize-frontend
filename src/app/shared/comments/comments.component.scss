@@ -28,6 +28,11 @@ cl-image > img {
   padding-left: 30px;
   height: 50px;
   color: grey;
+  overflow: visible;
+}
+
+.td-editor-stuff {
+  width: 100%;
 }
 
 .comment-info {
@@ -58,4 +63,10 @@ cl-image > img {
 }
 mat-dialog-container {
   background-color: rgb(247, 247, 247) !important;
+}
+
+// td-markdown classes
+.editor-toolbar {
+  opacity: 1 !important;
+  background-color: white !important;
 }
