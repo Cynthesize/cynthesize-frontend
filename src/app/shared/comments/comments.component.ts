@@ -52,47 +52,4 @@ export class CommentsComponent implements OnInit, OnChanges {
       }
     );
   }
-
-  // onCommentEdited(comment: any, content: any) {
-  //   const comments = this.comments.slice();
-  //   // If the comment was edited with e zero length content, we
-  //   // will delete the comment from the list
-  //   if (content.length === 0) {
-  //     comments.splice(comments.indexOf(comment), 1);
-  //   } else {
-  //     // Otherwise we're replacing the existing comment
-  //     comments.splice(comments.indexOf(comment), 1, {
-  //       user: comment.user,
-  //       time: comment.time,
-  //       content
-  //     });
-  //   }
-  //   // Emit event so the updated comment list can be persisted
-  //   // outside the component
-  //   this.commentsUpdated.next(comments);
-  // }
-
-  // addCommentBox(): void {
-  //   this.commentingOnIssue = true;
-  //   this.isLoading = false;
-  // }
-
-  // cancel(): void {
-  //   this.commentingOnIssue = false;
-  //   this.isLoading = false;
-  // }
-
-  // fetchIdeaComments() {
-  //   this.isLoading = true;
-  //   this.ideaService.getIdeaComments(this.activityId).subscribe(
-  //     (data: any) => {
-  //       this.isLoading = false;
-  //       this.commentsArray = data.data.ideas[0].ideaCommentsByideaId;
-  //     },
-  //     (error: any) => {
-  //       this.isLoading = false;
-  //       this.errorHandler.subj_notification.next(error.error.message);
-  //     }
-  //   );
-  // }
 }

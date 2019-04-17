@@ -64,7 +64,6 @@ const QUERY_FETCH_ISSUE_COMMENTS = gql`
         likes
         timestamp
         previous_edits
-        issue_id
       }
       likes
       timestamp

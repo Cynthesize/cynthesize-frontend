@@ -81,17 +81,30 @@
 <div *ngIf="issues">
   <h1>{{ checkpointName }}</h1>
   <p>Issues Resolved: {{ issues.length - unresolvedIssues }} . Issues Unresolved: {{ unresolvedIssues }}</p>
-  <mat-accordion>
-    <mat-expansion-panel>
+  <mat-accordion *ngFor="let issue of issues">
+    <mat-expansion-panel [expanded]="false" hideToggle *ngIf="issue.is_resolved">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          This is the expansion title
-        </mat-panel-title>
-        <mat-panel-description>
-          This is a summary of the content
-        </mat-panel-description>
+        <mat-panel-title> Issue # {{ issue.id }} </mat-panel-title>
+        Resolved<mat-icon>done</mat-icon>
       </mat-expansion-panel-header>
-      <p>This is the primary content of the panel.</p>
+      {{ issue.description }}
+      <mat-action-row>
+        <button mat-button color="warn">Mark as Unresolved</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-accordion *ngFor="let issue of issues">
+    <mat-expansion-panel [expanded]="true" hideToggle *ngIf="!issue.is_resolved">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Issue # {{ issue.id }} </mat-panel-title>
+        Not Resolved<mat-icon>clear</mat-icon>
+      </mat-expansion-panel-header>
+      {{ issue.description }}
+      <app-comments [activityId]="issue.id" [activityType]="'issue'"></app-comments>
+      <mat-action-row>
+        <button mat-button color="primary">Mark as Resolved</button>
+      </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
