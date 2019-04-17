@@ -29,11 +29,12 @@
   padding: 30px;
 }
 
-.home-card-blue {
+.home-card:hover {
   // height: 35rem;
   background-color: $color-primary-dark;
   overflow: hidden;
   display: flex;
+  border: 1px #dddddd solid;
   flex-direction: column;
   justify-content: space-between;
   flex-basis: auto;
@@ -206,4 +207,8 @@
     margin: 10px;
     padding: 30px;
   }
+}
+.right-align-icon {
+  display: flex;
+  justify-content: flex-end;
 }

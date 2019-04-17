@@ -35,7 +35,7 @@
       </p>
     </div>
     <div class="home-info-cards">
-      <mat-card class="home-card">
+      <mat-card class="home-card pointer" [routerLink]="['/add/project']">
         <mat-card-header>
           <mat-card-title>START PROJECTS</mat-card-title>
         </mat-card-header>
@@ -45,13 +45,10 @@
             project that you started but are incomplete yet can be share and could be transform into real one.
           </p>
         </mat-card-content>
-        <mat-card-actions>
-          <mat-divider></mat-divider>
-          <button mat-flat-button class="home-card-button">Create a project</button>
-        </mat-card-actions>
+        <div class="right-align-icon"><mat-icon>arrow_right_alt</mat-icon></div>
       </mat-card>
 
-      <mat-card class="home-card-blue">
+      <mat-card class="home-card pointer" [routerLink]="['/add/idea']">
         <mat-card-header>
           <mat-card-title>IDEATE WITH OTHERS</mat-card-title>
         </mat-card-header>
@@ -62,12 +59,9 @@
             suggested by the certified mentor experts and move towards your first Series A funding!
           </p>
         </mat-card-content>
-        <mat-card-actions>
-          <mat-divider></mat-divider>
-          <button mat-flat-button class="home-card-button-blue">Submit your idea</button>
-        </mat-card-actions>
+        <div class="right-align-icon"><mat-icon>arrow_right_alt</mat-icon></div>
       </mat-card>
-      <mat-card class="home-card">
+      <mat-card class="home-card pointer" [routerLink]="['/view/feed/ideas']">
         <mat-card-header>
           <mat-card-title>COLLABORATE</mat-card-title>
         </mat-card-header>
@@ -78,12 +72,9 @@
             perspectives about the project.
           </p>
         </mat-card-content>
-        <mat-card-actions>
-          <mat-divider></mat-divider>
-          <button mat-flat-button class="home-card-button">Find projects</button>
-        </mat-card-actions>
+        <div class="right-align-icon"><mat-icon>arrow_right_alt</mat-icon></div>
       </mat-card>
-      <mat-card class="home-card">
+      <mat-card class="home-card pointer" [routerLink]="['/apply']">
         <mat-card-header>
           <mat-card-title>BECOME A MENTOR</mat-card-title>
         </mat-card-header>
@@ -93,12 +84,9 @@
             mentoring them in the process of idea to product.
           </p>
         </mat-card-content>
-        <mat-card-actions>
-          <mat-divider></mat-divider>
-          <button mat-flat-button class="home-card-button">Apply</button>
-        </mat-card-actions>
+        <div class="right-align-icon"><mat-icon>arrow_right_alt</mat-icon></div>
       </mat-card>
-      <mat-card class="home-card-yellow">
+      <mat-card class="home-card-yellow pointer" [routerLink]="['/view/feed/projects']">
         <mat-card-header>
           <mat-card-title>SEE PROJECTS</mat-card-title>
         </mat-card-header>
@@ -108,10 +96,7 @@
             publishing it! Explore your ideas and projects to make them more successful.
           </p>
         </mat-card-content>
-        <mat-card-actions>
-          <mat-divider></mat-divider>
-          <button mat-flat-button class="home-card-button-yellow">Published projects</button>
-        </mat-card-actions>
+        <div class="right-align-icon"><mat-icon>arrow_right_alt</mat-icon></div>
       </mat-card>
     </div>
   </section>
