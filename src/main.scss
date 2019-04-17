@@ -19,11 +19,11 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include covalent-markdown-theme($theme);
 @include angular-material-theme($app-theme);
 $custom-typography: mat-typography-config(
-  $font-family: "Montserrat"
+  $font-family: "'Poppins', sans-serif"
 );
 @include mat-core($custom-typography);
 
-@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800");
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800|Open+Sans:300,400,600,700,800,900");
 @import "theme/theme";
 
 * {
@@ -43,11 +43,22 @@ html {
 
 body {
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   background: #f7f8fb;
   color: white;
   font-size: 0.8rem;
+}
+
+p {
+  font-family: "Open Sans", sans-serif;
+  text-align: justify;
+  opacity: 0.8;
+  line-height: 1.8;
+}
+
+.mat-card-header-text {
+  margin: 0 0 5px 0 !important;
 }
 
 a {
@@ -59,7 +70,6 @@ a {
 .center-divs {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .top-margin-120 {
@@ -155,6 +165,11 @@ a {
 .orange-btn {
   background-color: orange;
   color: white;
+}
+
+.mat-card {
+  box-shadow: 0 0 !important;
+  border: 1px #dddddd solid;
 }
 
 @media (max-width: 1050px) {

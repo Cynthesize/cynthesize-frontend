@@ -7,7 +7,7 @@ import { filter, map, mergeMap } from 'rxjs/operators';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 import { environment } from '@env/environment';
-import { Logger, I18nService } from '@app/core';
+import { Logger } from '@app/core';
 import { ErrorHandlerService } from './core/error-handler.service';
 import { MatSnackBar } from '@angular/material';
 
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
       if (typeof message === 'string') {
         messageString = message;
       } else {
-        messageString = message.error;
+        messageString = message.message;
       }
       this.snackBar.open(messageString, 'Okay', {
         duration: 10000
