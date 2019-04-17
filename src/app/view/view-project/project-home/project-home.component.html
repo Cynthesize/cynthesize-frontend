@@ -1,7 +1,7 @@
 <div>
   <!-- Banner Image -->
   <div class="banner-image"><img src="../../../../assets/images/project_banner.svg" /></div>
-  <h1>{{ displayableName(project.project_name) }}</h1>
+  <h1 class="checkpoint-name">{{ displayableName(project.project_name) }}</h1>
   <p>
     Owned by:
     <b>
@@ -13,11 +13,13 @@
     </b>
   </p>
   <mat-card>
-    <h1>Journey</h1>
-    <button mat-raised-button (click)="openReviewModel()">Submit for review</button>
+    <div>
+      <h1>Progress</h1>
+      <button mat-raised-button (click)="openReviewModel()">Submit for review</button>
+    </div>
   </mat-card>
   <mat-card>
     <h1>Description</h1>
-    {{ project.description }}
+    <p>{{ project.description }}</p>
   </mat-card>
 </div>

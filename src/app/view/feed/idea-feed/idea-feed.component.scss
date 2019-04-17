@@ -4,6 +4,7 @@
   margin: 10px;
   min-height: 300px;
   flex-basis: 23%;
+  cursor: pointer;
 }
 
 .idea-feed-data {
@@ -24,6 +25,7 @@
 }
 
 .idea-card-project-description {
+  height: 220px;
   padding: 5px 0 0 0;
   line-height: 1.6;
 }

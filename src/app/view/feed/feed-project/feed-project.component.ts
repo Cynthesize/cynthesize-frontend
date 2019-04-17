@@ -35,6 +35,8 @@ export class FeedProjectComponent implements OnInit {
   ngOnInit() {
     this.projectService.fetchBasicProjectDetails(this.data['activityId']).subscribe(
       data => {
+        console.log(data);
+
         Object.keys(data.data.launched_projects[0].projectsByparentProjectId).forEach(key => {
           this.project[key] = data.data.launched_projects[0].projectsByparentProjectId[key];
         });

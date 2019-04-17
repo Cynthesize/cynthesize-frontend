@@ -4,16 +4,17 @@
 
 .sidebar {
   width: 280px;
-  text-align: center;
   flex: 1;
   background-color: white;
   border: 1px #dddddd solid;
   height: -webkit-fill-available;
+  padding: 40px;
 }
 
 .content {
   background-color: white;
   flex: 4.5;
+  padding: 20px;
 }
 
 .project-page {
@@ -22,4 +23,9 @@
 }
 .issue-link-active {
   color: blue;
+}
+
+.checkpoint {
+  font-size: 1rem;
+  padding: 5px 10px;
 }

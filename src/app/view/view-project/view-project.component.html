@@ -41,25 +41,25 @@
       <div>
         <img [src]="project.icon" width="90px" />
       </div>
-      <a
+      <div
+        class="open-sans cursor checkpoint"
         [routerLink]="['/view/project', project.id + '-' + project.project_name]"
         [routerLinkActiveOptions]="{ exact: true }"
         routerLinkActive="issue-link-active"
       >
         Home
-      </a>
+      </div>
     </div>
     <mat-divider></mat-divider>
     <div>
-      <a
+      <div
+        class="checkpoint pointer open-sans"
         *ngFor="let checkpoint of project.issuessByprojectId"
         [routerLink]="['/view/project', project.id + '-' + project.project_name, 'issues', checkpoint.checkpoint_name]"
         routerLinkActive="issue-link-active"
       >
-        <div>
-          {{ checkpoint.checkpoint_name }}
-        </div>
-      </a>
+        #{{ checkpoint.checkpoint_name.toLowerCase() }}
+      </div>
     </div>
     <button mat-raised-button (click)="openAddIssueDialog()">Add issue</button>
   </div>

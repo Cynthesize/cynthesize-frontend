@@ -79,11 +79,11 @@
 </div>
 -->
 <div *ngIf="!issues" class="loader"><mat-spinner></mat-spinner></div>
-<div *ngIf="issues">
-  <h1>{{ checkpointName }}</h1>
+<div *ngIf="issues" class="open-sans">
+  <h1 class="checkpoint-name">{{ checkpointName }}</h1>
   <p>Issues Resolved: {{ issues.length - unresolvedIssues }} . Issues Unresolved: {{ unresolvedIssues }}</p>
   <mat-accordion *ngFor="let issue of issues">
-    <mat-expansion-panel [expanded]="false" hideToggle *ngIf="issue.is_resolved">
+    <mat-expansion-panel [expanded]="false" hideToggle *ngIf="issue.is_resolved" class="open-sans">
       <mat-expansion-panel-header>
         <mat-panel-title> Issue # {{ issue.id }} </mat-panel-title>
         Resolved<mat-icon>done</mat-icon>
@@ -96,7 +96,7 @@
   </mat-accordion>
 
   <mat-accordion *ngFor="let issue of issues">
-    <mat-expansion-panel [expanded]="true" hideToggle *ngIf="!issue.is_resolved">
+    <mat-expansion-panel [expanded]="true" hideToggle *ngIf="!issue.is_resolved" class="open-sans">
       <mat-expansion-panel-header>
         <mat-panel-title> Issue # {{ issue.id }} </mat-panel-title>
         Not Resolved<mat-icon>clear</mat-icon>

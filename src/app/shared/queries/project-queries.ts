@@ -104,17 +104,15 @@ const QUERY_FETCH_PUBLIC_PROJECT_COMMENTS = gql`
 
 const QUERY_FETCH_BASIC_PROJECT_DETAILS = gql`
   query fetch_basic_project_details($projectName: String!) {
-    launched_projects(where: { project_name: { _eq: $projectName } }) {
+    projects(where: { project_name: { _eq: $projectName }, is_launched: { _eq: true } }) {
       id
-      projectsByparentProjectId {
-        project_name
-        abstract
-        created_on
-        website
-        roles_opened
-        icon
-        current_stage
-      }
+      project_name
+      abstract
+      created_on
+      website
+      roles_opened
+      icon
+      current_stage
       likes
       userByowner {
         ...UserProfilePicFragment
