@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ProjectService } from '@app/core/project/project.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Project } from '@app/shared/objects';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { ReviewComponent } from './review/review.component';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { AddIssueComponent } from './issue/issue.component';
 
 @Component({
   selector: 'app-view-project',
@@ -14,35 +18,43 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class ViewProjectComponent implements OnInit {
   project: Observable<Project>;
   editingDescription = false;
-  addingTimelineEvent = false;
   selectedDate: Date;
+  isMobile = false;
+  issueActive = false;
 
   descriptionDataForm: FormGroup;
-  timelineDataForm: FormGroup;
 
   constructor(
     private projectService: ProjectService,
+    private route: ActivatedRoute,
     private router: Router,
     private errorHandler: ErrorHandlerService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog
   ) {
-    const routeParams = this.router.url.split('/')[3].split('-');
-    const projectId = parseInt(routeParams[0], 10);
-    routeParams.splice(0, 1);
-    this.projectService.getProject(projectId, routeParams.join('-')).subscribe(
-      (data: any) => {
-        this.project = data;
-        this.editingDescription = true;
-        this.initDescriptionForm();
-        console.log(this.project);
-      },
-      (error: any) => {
-        this.errorHandler.subj_notification.next(error);
-      }
-    );
+    this.route.params.subscribe(params => {
+      this.projectService.getProject(params.id.split('-')[0], params.id.slice(params.id.indexOf('-') + 1)).subscribe(
+        (data: any) => {
+          this.project = data;
+          this.editingDescription = true;
+          this.initDescriptionForm();
+          console.log(this.project);
+        },
+        (error: any) => {
+          this.errorHandler.subj_notification.next(error);
+        }
+      );
+    });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.router.events.subscribe(val => {
+      if (this.project) {
+        this.issueActive =
+          this.router.url === '/view/project/' + this.project['id'] + '-' + this.project['project_name'];
+      }
+    });
+  }
 
   fnc(selectedDate: Date) {
     const dates = document.getElementsByClassName('mat-calendar-body-cell-content');
@@ -84,24 +96,9 @@ export class ViewProjectComponent implements OnInit {
     );
   }
 
-  initAddTimelineEvent() {
-    this.timelineDataForm = this.formBuilder.group({
-      eventName: ['']
+  openAddIssueDialog(): void {
+    this.dialog.open(AddIssueComponent, {
+      width: '900px'
     });
-    this.addingTimelineEvent = true;
-  }
-
-  addTimelineEvent() {
-    this.project['project_events'][0]['timeline'][this.timelineDataForm.get('eventName').value] = Date.now();
-    this.projectService
-      .updateProjectEvents({ timeline: this.project['project_events'][0]['timeline'] }, this.project['id'])
-      .subscribe(
-        (data: any) => {
-          console.log(data);
-        },
-        (error: any) => {
-          this.errorHandler.subj_notification.next(error);
-        }
-      );
   }
 }

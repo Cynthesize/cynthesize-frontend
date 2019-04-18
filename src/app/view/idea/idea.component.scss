@@ -1,3 +1,25 @@
 modal-dialog-container {
   background-color: rgb(247, 247, 247) !important;
 }
+
+.modal-container {
+  height: 70vh;
+  width: auto;
+}
+
+.portion {
+  flex: 1;
+  padding: 20px;
+}
+
+.idea-heading {
+  font-size: 3rem;
+}
+
+.idea-description {
+  font-size: 1.2rem;
+  background-color: white;
+  padding: 25px;
+  margin-top: 15px;
+  line-height: 1.65;
+}

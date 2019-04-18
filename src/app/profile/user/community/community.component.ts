@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ideas',
-  templateUrl: './ideas.component.html',
-  styleUrls: ['./ideas.component.scss']
+  templateUrl: './community.component.html',
+  styleUrls: ['./community.component.scss']
 })
-export class IdeasComponent implements OnInit {
+export class CommunityComponent implements OnInit {
   ideasList: any[] = [];
   isLoading = true;
 

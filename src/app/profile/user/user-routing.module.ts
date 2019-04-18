@@ -13,7 +13,7 @@ const routes: Routes = [
       },
       {
         path: 'ideas',
-        loadChildren: 'app/profile/user/ideas/ideas.module#IdeasModule'
+        loadChildren: 'app/profile/user/community/community.module#CommunityModule'
       },
       {
         path: 'projects',

@@ -19,23 +19,12 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include covalent-markdown-theme($theme);
 @include angular-material-theme($app-theme);
 $custom-typography: mat-typography-config(
-  $font-family: "Montserrat"
+  $font-family: "'Open Sans', sans-serif"
 );
 @include mat-core($custom-typography);
-@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800");
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800|Open+Sans:300,400,600,700,800,900");
 @import "theme/theme";
-
-@font-face {
-  font-family: "gothambold";
-  src: url("./theme/fonts/gothambold.eot");
-  src: local("gothambold"), url("./theme/fonts/gothambold.woff") format("woff"),
-    url("./theme/fonts/gothambold.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "gothamlight";
-  src: url("./theme/fonts/gothamlight.otf");
-}
 
 * {
   margin: 0;
@@ -54,17 +43,42 @@ html {
 
 body {
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   background: #f7f8fb;
   color: white;
   font-size: 0.8rem;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+p {
+  font-family: "Open Sans", sans-serif;
+  text-align: justify;
+  opacity: 0.8;
+  line-height: 1.8;
+}
+
+.mat-card-header-text {
+  margin: 0 0 5px 0 !important;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+}
+
 .center-divs {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .top-margin-120 {
@@ -109,6 +123,11 @@ body {
   background-color: white;
   border: #8e8e8e solid;
 }
+.mat-raised-button {
+  border: 1px #dddddd solid !important;
+  border-radius: 30px !important;
+  box-shadow: 0px 0px !important;
+}
 
 .mat-form-field-underline {
   display: none;
@@ -145,6 +164,13 @@ body {
   font-style: italic;
 }
 
+.loader {
+  display: flex;
+  align-items: center;
+  height: 85vh;
+  justify-content: center;
+}
+
 // overriding  mat-dialog-container
 .custom-dialog-container .mat-dialog-container {
   padding: 0;
@@ -153,6 +179,15 @@ body {
 .orange-btn {
   background-color: orange;
   color: white;
+}
+
+.mat-card {
+  box-shadow: 0 0 !important;
+  border: 1px #dddddd solid;
+}
+
+.open-sans {
+  font-family: "Open Sans", sans-serif;
 }
 
 @media (max-width: 1050px) {
@@ -221,16 +256,13 @@ body {
 .tooltip {
   font-size: 0.8rem;
 }
-h3 {
-  display: flex;
-}
-
-mat-icon {
-  margin-left: 10px;
-}
 
 // Needs to be here, doesn't work in home.component.scss
 .typed-cursor {
   color: orange;
   margin: 10px;
+}
+
+.mat-expansion-panel {
+  box-shadow: 0 0 !important;
 }

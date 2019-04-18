@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewEncapsulation, Input, Inject, SimpleChanges, OnChanges } from '@angular/core';
 import { ProjectService } from '@app/core/project/project.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
+import { IssueService } from '@app/core/issue/issue.service';
 
 const SharedProjectId = '';
 
@@ -14,41 +15,56 @@ const SharedProjectId = '';
   styleUrls: ['./issue.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class IssueComponent implements OnInit, OnChanges {
-  @Input()
-  checkpoints: any;
-  @Input()
-  projectId: any;
-  @Input()
-  activeCheckpoint: any;
-  @Input()
-  projectDetails: any;
-
+export class IssueComponent implements OnInit {
+  checkpointName: string;
+  projectId: number;
+  projectName: string;
   issues: Observable<any>;
-  checkpointList = {};
-  sub: any;
-
-  SharedProjectId = this.projectId;
+  unresolvedIssues: number;
 
   constructor(
-    private projectService: ProjectService,
-    private router: Router,
+    private issueService: IssueService,
+    private route: ActivatedRoute,
     public dialog: MatDialog,
     private errorHandler: ErrorHandlerService
-  ) {}
+  ) {
+    this.route.parent.params.subscribe(params => {
+      this.projectId = params.id.split('-')[0];
+      this.projectName = params.id.slice(params.id.indexOf('-') + 1);
+    });
+    this.route.params.subscribe(params => {
+      this.checkpointName = params.checkpoint_name;
+      this.issueService.fetchIssueInCheckpoint(params.checkpoint_name, this.projectId).subscribe(
+        (data: any) => {
+          this.issues = data.data.issues;
+          this.unresolvedIssues = data.data.issues_aggregate.aggregate.count;
+        },
+        error => {
+          this.errorHandler.subj_notification.next(error);
+        }
+      );
+    });
+  }
 
   ngOnInit() {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.projectService
-      .fetchIssueInCheckpoint(changes.activeCheckpoint.currentValue, this.projectId)
-      .subscribe((data: any) => {
-        this.issues = data.data.project_issues;
-      });
-  }
-
   initAddIssueDialogue() {
     this.openDialog();
+  }
+
+  issueResolution(issueId: number, resolution: boolean) {
+    this.issueService.markIssueResolvedOrUnsolved(issueId, resolution).subscribe(
+      (data: any) => {
+        this.issues.forEach(issue => {
+          if (issue.id === issueId) {
+            issue.is_resolved = data.data.update_issues.returning[0].is_resolved;
+          }
+        });
+      },
+      error => {
+        this.errorHandler.subj_notification.next(error);
+      }
+    );
   }
 
   openDialog(): void {
@@ -84,7 +100,7 @@ export class AddIssueComponent {
   };
   constructor(
     public dialogRef: MatDialogRef<AddIssueComponent>,
-    private projectService: ProjectService,
+    private issueService: IssueService,
     private errorHandler: ErrorHandlerService,
     private router: Router
   ) {}
@@ -93,7 +109,7 @@ export class AddIssueComponent {
     this.dialogRef.close();
   }
   addIssue() {
-    this.projectService
+    this.issueService
       .addIssue(this.checkpointName.value, this.issueText.value, this.router.url.split('/')[3].split('-')[0])
       .subscribe(
         data => {

@@ -13,6 +13,7 @@ import { CommentsService } from '@app/core/comments/comments.service';
 export class EditableCommentComponent implements OnInit {
   @Input() comment: any;
   @Input() reply: any;
+  @Input() activityId: number;
   // If a comment was edited this event will be emitted
   @Output() commentEdited = new EventEmitter();
 
@@ -37,28 +38,24 @@ export class EditableCommentComponent implements OnInit {
     this.replying = true;
   }
 
-  addCommentReply(commentId: string) {
-    this.projectService
-      .addReply(commentId, this.reply)
-      .pipe(
-        finalize(() => {
-          this.replying = false;
-        })
-      )
-      .subscribe(
-        reply => {
-          this.comment.projectIssuesReplysBycommentId.push(reply.data.insert_project_issues_reply.returning[0]);
-        },
-        error => {
-          this.errorHandler.subj_notification.next(error);
-        }
-      );
+  addComment(commentId: number, commentText: string) {
+    console.log(this.comment);
+    this.commentService.addComment(commentId, 'comment', commentText, this.activityId).subscribe(
+      comment => {
+        this.comment.push(comment.data.insert_comments.returning[0]);
+      },
+      error => {
+        this.errorHandler.subj_notification.next(error);
+      }
+    );
   }
-
-  public like(commentId: number) {
-    this.projectService.incrementOrDecrementLikeCounter(commentId).subscribe(
-      (data: any) => {},
-      (error: any) => {
+  addReply(replyId: number, replyText: string) {
+    console.log(this.reply);
+    this.commentService.addReplyToComment(replyText, replyId).subscribe(
+      reply => {
+        this.reply.push(reply.data.insert_replys.returning[0]);
+      },
+      error => {
         this.errorHandler.subj_notification.next(error);
       }
     );

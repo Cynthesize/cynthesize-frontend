@@ -7,8 +7,14 @@
 }
 
 .home-description {
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 500;
+}
+
+mat-card-title {
+  font-weight: 900;
+  font-size: 18px;
+  text-align: left;
 }
 
 .home-heading {
@@ -17,16 +23,53 @@
 }
 
 .home-card {
-  display: inline-block;
-  flex-basis: 17%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-basis: auto;
   text-align: center;
+  width: 20%;
   margin: 10px;
+  padding: 30px;
 }
 
-@media screen and (max-width: 1134px) {
-  .home-info-cards {
-    flex-direction: column;
-  }
+.home-card:hover {
+  background-color: $color-primary-dark;
+  border: 1px #dddddd solid;
+  color: white;
+  box-shadow: 0.5px 0.5px 3px 3px #dddddd;
+}
+
+.home-card-yellow {
+  background-color: orange;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-basis: auto;
+  text-align: center;
+  width: 20%;
+  margin: 10px;
+  padding: 30px;
+  color: white;
+}
+
+.home-card-button {
+  margin-top: 2px;
+  padding: 2rem 2rem;
+}
+.home-card-button-blue {
+  background-color: $color-primary-dark;
+  margin-top: 2px;
+  padding: 2rem 2rem;
+  color: white;
+}
+.home-card-button-yellow {
+  background-color: orange;
+  margin-top: 2px;
+  padding: 2rem 2rem;
+  color: white;
 }
 
 .home-contact-heading {
@@ -41,7 +84,6 @@
 
 .home-content-contact {
   display: inline-block;
-  width: 50%;
 }
 
 .home-section {
@@ -50,30 +92,34 @@
 }
 
 .home-contact-icons {
-  width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 
 .icons {
-  display: inline-block;
-  margin: 0 15px;
-  text-align: center;
+  display: flex;
+  margin: 7px 15px;
+  color: #6c6c6c;
+  align-items: center;
 }
 
 .social-icon {
   width: 40px;
-  margin: 10px;
-  font-size: 3rem;
+  color: #6c6c6c;
+  font-size: 1.5rem;
 }
 
 .contact {
   display: flex;
-  justify-content: center;
-  align-items: baseline;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .icon-details {
-  font-size: 0.8rem;
-  color: #2196f3;
+  font-size: 1rem;
+  margin-left: 13px;
+  color: #6c6c6c;
 }
 
 .icon-name {
@@ -82,7 +128,7 @@
 }
 
 .card-heading {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 500;
   margin-bottom: 20px;
   font-weight: 500;
@@ -100,6 +146,12 @@
 .home-banner {
   display: flex;
   flex-direction: column;
+  flex-basis: 50%;
+}
+.home-banner-image {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
 }
 
 .home-section1 {
@@ -116,4 +168,51 @@
 .community-button {
   width: 100%;
   margin-top: 10px;
+}
+
+@media screen and (max-width: 1134px) {
+  .home-info-cards {
+    flex-direction: column;
+  }
+
+  .home-card {
+    // height: 30rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-basis: auto;
+    text-align: center;
+    width: 100%;
+    margin: 10px;
+    padding: 30px;
+  }
+  .home-card-blue {
+    // height: 30rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-basis: auto;
+    text-align: center;
+    width: 100%;
+    margin: 10px;
+    padding: 30px;
+  }
+  .home-card-yellow {
+    // height: 30rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-basis: auto;
+    text-align: center;
+    width: 100%;
+    margin: 10px;
+    padding: 30px;
+  }
+}
+.right-align-icon {
+  display: flex;
+  justify-content: flex-end;
 }

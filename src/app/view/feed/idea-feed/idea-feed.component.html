@@ -29,7 +29,7 @@
     </div>
     <div class="page-data">
       <div class="idea-feed-data">
-        <mat-card class="idea-card" *ngFor="let idea of ideasList">
+        <mat-card class="idea-card" *ngFor="let idea of ideasList" [routerLink]="['/view/feed/ideas', idea.id]">
           <div class="idea-card-details">
             <div class="idea-card-project-name">{{ idea.idea_name }}</div>
             <app-user-name
@@ -38,7 +38,7 @@
               [isMentor]="idea.userByowner.is_mentor"
             ></app-user-name>
             <div class="idea-card-project-description">
-              {{ idea.description }}
+              <p>{{ idea.description }}</p>
             </div>
           </div>
           <div class="idea-card-links">

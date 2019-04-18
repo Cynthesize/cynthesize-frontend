@@ -25,12 +25,16 @@ cl-image > img {
   align-items: center;
   width: 450px;
   display: flex;
-  padding: 25px;
+  padding-left: 30px;
   height: 50px;
   color: grey;
+  overflow: visible;
 }
-.comment-unit {
+
+.td-editor-stuff {
+  width: 100%;
 }
+
 .comment-info {
   padding: 15px;
   display: flex;
@@ -59,4 +63,10 @@ cl-image > img {
 }
 mat-dialog-container {
   background-color: rgb(247, 247, 247) !important;
+}
+
+// td-markdown classes
+.editor-toolbar {
+  opacity: 1 !important;
+  background-color: white !important;
 }

@@ -1,7 +1,6 @@
-<mat-calendar [selected]="fnc(selectedDate)" (selectedChange)="selectedDate = $event" class="greed-card">
+<!-- <mat-calendar [selected]="fnc(selectedDate)" (selectedChange)="selectedDate = $event" class="greed-card">
 </mat-calendar>
 
-<!-- Description Card -->
 <div *ngIf="editingDescription && project">
   <mat-card>
     <form (ngSubmit)="updateDescription(project.id)" [formGroup]="descriptionDataForm">
@@ -33,23 +32,50 @@
       <button mat-raised-button>Update Description</button>
     </form></mat-card
   >
-  <mat-card>
-    <div *ngFor="let event of (project['project_events'][0]['timeline'] | keyvalue)">
-      {{ event.key }}: {{ event.value | date }}
+</div> -->
+
+<div *ngIf="!project" class="loader">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="project" class="project-page">
+  <div class="left-sidebar sidebar">
+    <div class="left-padding">
+      <div style="padding-right: 1rem;">
+        <img [src]="project.icon" width="90px" />
+        <div
+          [routerLink]="['/view/project', project.id + '-' + project.project_name]"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="issue-link-active"
+          class="open-sans cursor checkpoint"
+        >
+          Home
+        </div>
+      </div>
     </div>
-    <button mat-icon-button (click)="initAddTimelineEvent()">
-      <mat-icon> add </mat-icon>
-    </button>
-    <form (ngSubmit)="addTimelineEvent()" [formGroup]="timelineDataForm" *ngIf="addingTimelineEvent">
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="eventName" placeholder="Add your recent opportunity." />
-      </mat-form-field>
-      <button mat-icon-button (click)="addTimelineEvent()">
-        <mat-icon> done </mat-icon>
-      </button>
-      <button mat-icon-button (click)="addingTimelineEvent = false">
-        <mat-icon> cancel </mat-icon>
-      </button>
-    </form>
-  </mat-card>
+    <mat-divider></mat-divider>
+    <div class="left-padding">
+      <div
+        *ngFor="let checkpoint of project.issuessByprojectId"
+        [routerLink]="['/view/project', project.id + '-' + project.project_name, 'issues', checkpoint.checkpoint_name]"
+        routerLinkActive="issue-link-active"
+        class="checkpoint pointer open-sans left-sidebar-text-bottom"
+      >
+        #{{ checkpoint.checkpoint_name.toLowerCase() }}
+      </div>
+      <button mat-raised-button class="issue-button" (click)="openAddIssueDialog()">Add issue</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <app-project-home [project]="project" *ngIf="issueActive"></app-project-home>
+    <!-- If viewing issues pages -->
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="right-sidebar sidebar">
+    <app-project-timeline
+      [timeline]="project['project_events'][0]['timeline']"
+      [projectId]="project.id"
+    ></app-project-timeline>
+  </div>
 </div>

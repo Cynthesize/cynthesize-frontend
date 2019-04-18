@@ -7,13 +7,20 @@ const QUERY_CHECKPOINT_ISSUES = gql`
     issues(where: { project_id: { _eq: $projectId }, checkpoint_name: { _eq: $checkpointName } }) {
       ...ProjectIssueFragment
     }
+    issues_aggregate(
+      where: { is_resolved: { _eq: false }, project_id: { _eq: $projectId }, checkpoint_name: { _eq: $checkpointName } }
+    ) {
+      aggregate {
+        count
+      }
+    }
   }
   ${PROJECT_ISSUE_FRAGMENT}
 `;
 
 const QUERY_POPULAR_LAUNCHED_PROJECTS = gql`
   query fetch_popular_launched_projects($limit: Int!, $offset: Int!) {
-    launched_projects(order_by: { likes: desc }, limit: $limit, offset: $offset) {
+    projects(order_by: { likes: desc }, limit: $limit, offset: $offset, where: { is_launched: { _eq: true } }) {
       ...LaunchedProjectDetailsFragment
     }
   }
@@ -22,7 +29,7 @@ const QUERY_POPULAR_LAUNCHED_PROJECTS = gql`
 
 const QUERY_NEWEST_LAUNCHED_PROJECTS = gql`
   query fetch_newest_launched_projects($limit: Int!, $offset: Int!) {
-    launched_projects(order_by: { timestamp: desc }, limit: $limit, offset: $offset) {
+    projects(order_by: { created_on: desc }, limit: $limit, offset: $offset, where: { is_launched: { _eq: true } }) {
       ...LaunchedProjectDetailsFragment
     }
   }
@@ -31,7 +38,7 @@ const QUERY_NEWEST_LAUNCHED_PROJECTS = gql`
 
 const QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT = gql`
   query fetch_launched_projects {
-    launched_projects_aggregate {
+    projects_aggregate(where: { is_launched: { _eq: true } }) {
       aggregate {
         count
       }
@@ -57,7 +64,6 @@ const QUERY_FETCH_ISSUE_COMMENTS = gql`
         likes
         timestamp
         previous_edits
-        issue_id
       }
       likes
       timestamp
@@ -96,19 +102,45 @@ const QUERY_FETCH_PUBLIC_PROJECT_COMMENTS = gql`
   ${USER_PROFILE_PIC_FRAGMENT}
 `;
 
+const QUERY_FETCH_ONGIONG_PROJECT_COMMENTS = gql`
+  query fetch_project_comments($projectId: Int!) {
+    comment(where: { projects_id: { _eq: $projectId } }) {
+      id
+      comment_text
+      user {
+        ...UserProfilePicFragment
+      }
+      replies {
+        comment_id
+        reply_text
+        id
+        userByrespondent {
+          ...UserProfilePicFragment
+        }
+        likes
+        timestamp
+        previous_edits
+      }
+      likes
+      timestamp
+      previous_edits
+      launched_projects_id
+    }
+  }
+  ${USER_PROFILE_PIC_FRAGMENT}
+`;
+
 const QUERY_FETCH_BASIC_PROJECT_DETAILS = gql`
   query fetch_basic_project_details($projectName: String!) {
-    launched_projects(where: { project_name: { _eq: $projectName } }) {
+    projects(where: { project_name: { _eq: $projectName }, is_launched: { _eq: true } }) {
       id
-      projectsByparentProjectId {
-        project_name
-        abstract
-        created_on
-        website
-        roles_opened
-        icon
-        current_stage
-      }
+      project_name
+      abstract
+      created_on
+      website
+      roles_opened
+      icon
+      current_stage
       likes
       userByowner {
         ...UserProfilePicFragment
@@ -155,6 +187,9 @@ const QUERY_FETCH_PROJECT_DETAILS = gql`
         green_board
         timeline
       }
+      issuessByprojectId(where: { project_id: { _eq: $projectId } }, distinct_on: checkpoint_name) {
+        checkpoint_name
+      }
     }
   }
   ${USER_PROFILE_PIC_FRAGMENT}
@@ -168,5 +203,6 @@ export {
   QUERY_FETCH_PUBLIC_PROJECT_COMMENTS,
   QUERY_FETCH_ISSUE_COMMENTS,
   QUERY_FETCH_BASIC_PROJECT_DETAILS,
-  QUERY_FETCH_PROJECT_DETAILS
+  QUERY_FETCH_PROJECT_DETAILS,
+  QUERY_FETCH_ONGIONG_PROJECT_COMMENTS
 };

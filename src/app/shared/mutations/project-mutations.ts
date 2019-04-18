@@ -78,6 +78,18 @@ const MUTATION_ADD_ISSUE_COMMENT_REPLY = gql`
   ${ISSUE_COMMENT_REPLY_FRAGMENT}
 `;
 
+const MUTATION_MARK_ISSUE_RESOLVED_OR_UNRESOLVED = gql`
+  mutation mark_resolved_or_unresolved($issueId: Int!, $resolution: Boolean!) {
+    update_issues(where: { id: { _eq: $issueId } }, _set: { is_resolved: $resolution }) {
+      affected_rows
+      returning {
+        id
+        is_resolved
+      }
+    }
+  }
+`;
+
 const MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT = gql`
   mutation update_likes($likesOffCounter: Int!, $commentId: Int!, $userId: Int!) {
     update_comment(where: { id: { _eq: $commentId } }, _inc: { likes: $likesOffCounter }) {
@@ -133,9 +145,31 @@ const MUTATION_UPDATE_PROJECT_DESCRIPTION = gql`
   }
 `;
 
+const MUTATION_UPDATE_PROJECT_DETAILS = gql`
+  mutation update_project_details($projectId: Int!, $objects: projects_set_input!) {
+    update_projects(where: { id: { _eq: $projectId } }, _set: $objects) {
+      affected_rows
+      returning {
+        id
+        project_name
+        abstract
+        description
+        created_on
+        tech_stack
+        website
+        roles_opened
+        icon
+        current_stage
+        likes
+        platform
+      }
+    }
+  }
+`;
+
 const MUTATION_LIKE_PROJECT = gql`
-  mutation update_likes($launchedProjectId: Int!, $userId: Int!, $projectId: Int!) {
-    update_projects(where: { launched_id: { _eq: $launchedProjectId } }, _inc: { likes: 1 }) {
+  mutation update_likes($projectId: Int!, $userId: Int!) {
+    update_projects(where: { id: { _eq: $projectId } }, _inc: { likes: 1 }) {
       affected_rows
       returning {
         id
@@ -152,8 +186,8 @@ const MUTATION_LIKE_PROJECT = gql`
 `;
 
 const MUTATION_DISLIKE_PROJECT = gql`
-  mutation update_likes($launchedProjectId: Int!, $userId: Int!, $projectId: Int!) {
-    update_projects(where: { launched_id: { _eq: $launchedProjectId } }, _inc: { likes: -1 }) {
+  mutation update_likes($userId: Int!, $projectId: Int!) {
+    update_projects(where: { id: { _eq: $projectId } }, _inc: { likes: -1 }) {
       affected_rows
       returning {
         id
@@ -192,8 +226,8 @@ const MUTATION_REPORT_COMMENT = gql`
 `;
 
 const MUTATION_APPLY_FOR_COLLABORATION = gql`
-  mutation apply_for_collaboration($userId: Int!, $projectId: Int!, $role: String!) {
-    insert_project_collaboration_requests(objects: { user_id: $userId, project_id: $projectId, for_role: $role }) {
+  mutation apply_for_collaboration($objects: [project_collaboration_requests_insert_input!]!) {
+    insert_project_collaboration_requests(objects: $objects) {
       affected_rows
     }
   }
@@ -203,6 +237,7 @@ export {
   MUTATION_ADD_ISSUE,
   MUTATION_ADD_ISSUE_COMMENT,
   MUTATION_ADD_ISSUE_COMMENT_REPLY,
+  MUTATION_MARK_ISSUE_RESOLVED_OR_UNRESOLVED,
   MUTATION_ADD_PROJECT,
   MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE,
   MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT,
@@ -213,5 +248,6 @@ export {
   MUTATION_ADD_PROJECT_DESCRIPTION,
   MUTATION_UPDATE_PROJECT_DESCRIPTION,
   MUTATION_UPDATE_PROJECT_EVENTS,
-  MUTATION_APPLY_FOR_COLLABORATION
+  MUTATION_APPLY_FOR_COLLABORATION,
+  MUTATION_UPDATE_PROJECT_DETAILS
 };

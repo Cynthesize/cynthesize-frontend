@@ -1,12 +1,14 @@
-<div class="container" *ngIf="user">
+<!-- <div *ngIf="user">
   <mat-card class="profile-header">
     <div class="header-info">
       <div class="image">
-        <cl-image height="200" crop="scale" public-id="{{ user.profile_pic }}" secure="true"></cl-image>
+        <cl-image radius="max" height="200" crop="scale" public-id="{{ user.profile_pic }}" secure="true"> </cl-image>
       </div>
       <mat-icon *ngIf="isSameUser" [routerLink]="'/user/' + username + '/edit'">edit</mat-icon>
       <div class="short-detail">
-        <div class="full-name">{{ user.username }}</div>
+        <div class="full-name">
+          {{ user.name }} <span style="font-size: 1rem;">{{ user.username }}</span>
+        </div>
         <div class="bio">{{ user.bio }}</div>
       </div>
     </div>
@@ -17,10 +19,10 @@
         <img src="../../../../assets/images/profile.svg" />PROFILE
       </div>
       <div id="project" [routerLink]="['/user', username, 'projects']" routerLinkActive="link-active">
-        <img src="../../../../assets/images/briefing.svg" />PROJECTS
+        <img src="../../../../assets/images/briefing.svg" />My Projects
       </div>
-      <div id="idea" [routerLink]="['/user', username, 'ideas']" routerLinkActive="link-active">
-        <img src="../../../../assets/images/idea.svg" />IDEAS
+      <div id="idea" [routerLink]="['/user', username, 'community']" routerLinkActive="link-active">
+        <img src="../../../../assets/images/idea.svg" />Community
       </div>
     </div>
   </div>
@@ -30,4 +32,103 @@
     <app-details [user]="user"></app-details>
   </div>
   <router-outlet></router-outlet>
+</div> -->
+
+<div *ngIf="user">
+  <div class="banner"></div>
+  <div class="user">
+    <div class="info-bar">
+      <img [src]="user.profile_pic" class="image" />
+      <mat-card>
+        <div class="info-detail"><mat-icon>person</mat-icon>{{ user.bio }}</div>
+        <div class="info-detail"><mat-icon>email</mat-icon>{{ user.email }}</div>
+        <div class="info-detail"><mat-icon>cake</mat-icon>{{ user.date_of_birth }}</div>
+        <div class="info-detail"><mat-icon>location_on</mat-icon>{{ user.location }}</div>
+        <div class="info-detail"><mat-icon>rss_feed</mat-icon>{{ user.website }}</div>
+      </mat-card>
+    </div>
+    <div class="userinfo">
+      <div class="name">
+        <span style="font-size: 3rem; color: black;">{{ user.name }}</span>
+        <span style="font-size: 1rem; color: black;">{{ user.username }}</span>
+        <div class="contribution">
+          <div class="header-icons">
+            <div class="user-page-icon" [routerLink]="['/user', username, 'projects']" routerLinkActive="link-active">
+              <img id="project" src="../../../../assets/images/briefing.svg" width="51px" />Projects
+            </div>
+            <div class="user-page-icon" [routerLink]="['/user', username, 'ideas']" routerLinkActive="link-active">
+              <img id="idea" src="../../../../assets/images/idea.svg" width="70px" />Ideas
+            </div>
+          </div>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<style>
+  .link-active {
+    color: orange;
+  }
+  .header-icons {
+    display: flex;
+  }
+  .user-page-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #project {
+    margin: 15px;
+  }
+  #idea {
+    margin: 10px;
+  }
+  .contribution {
+    margin: 25px 0 0 25px;
+    width: 85%;
+  }
+
+  .info-detail {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 1rem;
+  }
+  .info-detail > mat-icon {
+    margin-right: 10px;
+  }
+  .banner {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    background-color: orange;
+  }
+  .user {
+    display: flex;
+    position: absolute;
+    top: 100px;
+    left: 10%;
+  }
+  .info-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+  }
+  .image {
+    border-radius: 50%;
+    border: 15px white solid;
+    width: 250px;
+    height: 260px;
+  }
+  .userinfo {
+    flex: 3;
+    display: flex;
+    padding: 125px 0 0 0;
+  }
+  .name {
+    font-weight: 700;
+  }
+</style>

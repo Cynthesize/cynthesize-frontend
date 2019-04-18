@@ -1,21 +1,21 @@
 @import "../../../../sass/declarations";
 
 .idea-card {
-  width: 100%;
   margin: 10px;
   min-height: 300px;
   flex-basis: 23%;
+  cursor: pointer;
 }
 
 .idea-feed-data {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .idea-card-details {
   flex-direction: column;
   padding: 10px;
-  margin-bottom: 30px;
 }
 
 .idea-card-project-name {
@@ -24,6 +24,7 @@
 }
 
 .idea-card-project-description {
+  height: 200px;
   padding: 5px 0 0 0;
   line-height: 1.6;
 }

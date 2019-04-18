@@ -11,7 +11,8 @@ import {
   MUTATION_UPDATE_PROJECT_DESCRIPTION,
   MUTATION_ADD_PROJECT_DESCRIPTION,
   MUTATION_UPDATE_PROJECT_EVENTS,
-  MUTATION_APPLY_FOR_COLLABORATION
+  MUTATION_APPLY_FOR_COLLABORATION,
+  MUTATION_UPDATE_PROJECT_DETAILS
 } from '@app/shared/mutations/project-mutations';
 import {
   QUERY_CHECKPOINT_ISSUES,
@@ -77,25 +78,6 @@ export class ProjectService {
   }
 
   /**
-   * fetchIssueInCheckpoint
-   */
-  public fetchIssueInCheckpoint(checkpointName: string, projectId: number) {
-    return this.apollo
-      .watchQuery<any>({
-        query: QUERY_CHECKPOINT_ISSUES,
-        variables: {
-          checkpointName: checkpointName,
-          projectId: projectId
-        }
-      })
-      .valueChanges.pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  /**
    * GET PROJECT DETAILS
    */
   public getProject(id: number, name: string) {
@@ -110,103 +92,6 @@ export class ProjectService {
       .valueChanges.pipe(
         map((res: any) => {
           return res.data.projects[0];
-        })
-      );
-  }
-
-  /**
-   * Add Comments for an issue in the project.
-   */
-  public addComment(commentText: string, projectId: string, issueId: string) {
-    return this.apollo
-      .mutate<any>({
-        mutation: MUTATION_ADD_ISSUE_COMMENT,
-        variables: {
-          objects: {
-            comment_text: commentText,
-            project_id: projectId,
-            issue_id: issueId,
-            commenter: localStorage.getItem('userId')
-          }
-        }
-      })
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  /**
-   * Add Reply for a comment in the project.
-   */
-  public addReply(commentId: string, replyText: string) {
-    return this.apollo
-      .mutate<any>({
-        mutation: MUTATION_ADD_ISSUE_COMMENT_REPLY,
-        variables: {
-          objects: {
-            reply_text: replyText,
-            comment_id: commentId,
-            respondent: localStorage.getItem('userId')
-          }
-        }
-      })
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  /**
-   * Add Issue for a checkpoint in the project.
-   */
-  public addIssue(checkpointName: string, issuesDescription: string, projectId: string) {
-    return this.apollo
-      .mutate({
-        mutation: MUTATION_ADD_ISSUE,
-        variables: {
-          objects: {
-            checkpoint_name: checkpointName,
-            description: issuesDescription,
-            project_id: projectId,
-            created_by: localStorage.getItem('userId')
-          }
-        }
-      })
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  /**
-   * incrementOrDecrementLikeCounter
-   */
-  public incrementOrDecrementLikeCounter(commentId: number) {
-    let mutationTBU = MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT;
-    let likeOffset = 1;
-    if (this._checkCommentStatus(commentId)) {
-      mutationTBU = MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE;
-      likeOffset = -1;
-      this._updateLocalStorage(false, commentId);
-    } else {
-      this._updateLocalStorage(true, commentId);
-    }
-    return this.apollo
-      .mutate({
-        mutation: mutationTBU,
-        variables: {
-          likesOffCounter: likeOffset,
-          commentId: commentId,
-          userId: localStorage.getItem('userId')
-        }
-      })
-      .pipe(
-        map((res: any) => {
-          return res;
         })
       );
   }
@@ -342,16 +227,41 @@ export class ProjectService {
       );
   }
   /**
+   * Updates project details data
+   */
+  public updateProjectDetails(updatedData: Object, projectId: number) {
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_UPDATE_PROJECT_DETAILS,
+        variables: {
+          projectId: projectId,
+          objects: updatedData
+        }
+      })
+      .pipe(take(1))
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+  /**
    * Apply for project collaboration for a given role.
    */
-  public applyForProjectCollaboration(role: string, projectId: number) {
+  public applyForProjectCollaboration(role: string, projectId: number, additionalInfo: string = null) {
+    const applyObject = {
+      project_id: projectId,
+      for_role: role,
+      user_id: localStorage.getItem('userId')
+    };
+    if (additionalInfo) {
+      applyObject['additional_info'] = additionalInfo;
+    }
     return this.apollo
       .mutate<any>({
         mutation: MUTATION_APPLY_FOR_COLLABORATION,
         variables: {
-          projectId: projectId,
-          role: role,
-          userId: localStorage.getItem('userId')
+          objects: [applyObject]
         }
       })
       .pipe(take(1))
@@ -362,30 +272,27 @@ export class ProjectService {
       );
   }
 
-  private _checkCommentStatus(commentId: number) {
-    const userCommentArray = JSON.parse(localStorage.getItem('projectIssuesCommentsLikessByuserId'));
-    let flag = false;
-    userCommentArray.forEach((comment_id: any) => {
-      if (comment_id === commentId) {
-        flag = true;
-      }
-    });
-    return flag;
-  }
+  /**
+   * applyForReview
+   */
+  public applyForReview(stage: string, answers: Object) {
+    switch (stage) {
+      case 'idea':
+        break;
 
-  private _updateLocalStorage(insert: boolean, commentId?: number) {
-    const userCommentArray = JSON.parse(localStorage.getItem('projectIssuesCommentsLikessByuserId'));
-
-    if (insert) {
-      userCommentArray.push(commentId);
-      localStorage.setItem('projectIssuesCommentsLikessByuserId', JSON.stringify(userCommentArray));
-      return;
+      default:
+        break;
     }
-    for (let i = 0; i < userCommentArray.length; i++) {
-      if (userCommentArray[i] === commentId) {
-        userCommentArray.splice(i, 1);
-      }
-    }
-    localStorage.setItem('projectIssuesCommentsLikessByuserId', JSON.stringify(userCommentArray));
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_ADD_IDEA_TAGS,
+        variables: answers
+      })
+      .pipe(take(1))
+      .pipe(
+        map((arg: any) => {
+          return arg;
+        })
+      );
   }
 }

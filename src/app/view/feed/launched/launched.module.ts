@@ -8,10 +8,11 @@ import {
 } from './launched-products/launched-products.component';
 import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [LaunchedProductsComponent, ProjectDialogEntryComponent],
-  imports: [CommonModule, LaunchedRoutingModule, SharedModule, MaterialModule],
+  imports: [CommonModule, LaunchedRoutingModule, SharedModule, MaterialModule, FormsModule, ReactiveFormsModule],
   exports: [LaunchedProductsComponent]
 })
 export class LaunchedModule {}

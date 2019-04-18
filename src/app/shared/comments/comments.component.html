@@ -7,17 +7,19 @@
       <div class="init-comment-input" (click)="isCommenting = true" *ngIf="!isCommenting">
         Write Comment
       </div>
-      <div class="init-comment-input" *ngIf="isCommenting">
+      <div class="td-editor-stuff" *ngIf="isCommenting">
         <td-text-editor [(ngModel)]="comment" [options]="options"></td-text-editor>
+        <button mat-raised-button (click)="addComment(1, comment)">Add</button>
+        <button mat-raised-button (click)="cancelComment()">Cancel</button>
       </div>
     </div>
     <div class="comments" *ngIf="commentObject">
       <!-- Comments here -->
       <div class="comment-unit" *ngFor="let comment of commentObject">
-        <app-editable-comment [comment]="comment"></app-editable-comment>
+        <app-editable-comment [comment]="comment" [activityId]="activityId"></app-editable-comment>
         <!-- Replies here -->
         <div class="comment-unit" *ngFor="let reply of comment.replies">
-          <app-editable-comment [reply]="reply"></app-editable-comment>
+          <app-editable-comment [reply]="reply" [activityId]="activityId"></app-editable-comment>
         </div>
       </div>
     </div>

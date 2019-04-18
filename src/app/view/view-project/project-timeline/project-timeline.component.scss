@@ -1,0 +1,16 @@
+.add-event {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.timeline-event {
+  padding: 10px;
+  opacity: 0.8;
+  border-left: 1px rgb(112, 112, 112) solid;
+}
+
+.event-name {
+  font-weight: 700;
+  font-size: 1rem;
+}
