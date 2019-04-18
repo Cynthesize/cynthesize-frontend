@@ -11,6 +11,7 @@ const USER_PROFILE_PIC_FRAGMENT = gql`
 
 const USER_LIKES_FRAGMENT = gql`
   fragment UserLikesFragment on user {
+    id
     comment_likes {
       comment_id
     }

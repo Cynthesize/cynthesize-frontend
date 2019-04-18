@@ -1,5 +1,5 @@
 <span
-  *ngIf="activityId && authService.isAuthenticated()"
+  *ngIf="activityId && (authService.user$ | async); then authenticated; else guest"
   [ngClass]="{ liked: isAlreadyLiked }"
   (click)="likeOrDislike()"
   class="icon"
@@ -7,6 +7,14 @@
   <mat-icon [class.disabled]="isLoading">favorite</mat-icon>{{ likes }}
 </span>
 
-<span *ngIf="activityId && !authService.isAuthenticated()" (click)="openLoginDialog()" class="icon">
-  <mat-icon [class.disabled]="isLoading">favorite</mat-icon>{{ likes }}
-</span>
+
+<ng-template #authenticated>
+  <span [ngClass]="{ liked: isAlreadyLiked }" (click)="likeOrDislike()" class="icon">
+    <mat-icon [class.disabled]="isLoading">favorite</mat-icon>{{ likes }}
+  </span></ng-template
+>
+<ng-template #guest>
+  <span (click)="openLoginDialog()" class="icon">
+    <mat-icon [class.disabled]="isLoading">favorite</mat-icon>{{ likes }}
+  </span>
+</ng-template>

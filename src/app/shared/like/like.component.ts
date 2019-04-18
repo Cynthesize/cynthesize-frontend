@@ -34,9 +34,11 @@ export class LikeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.authService.isAuthenticated()) {
-      this.filteredInfo = this._filterActivityType(this.activityId, this.activityType);
-    }
+    this.authService.user$.subscribe(data => {
+      if (data) {
+        this.filteredInfo = this._filterActivityType(this.activityId, this.activityType);
+      }
+    });
   }
 
   openLoginDialog(): void {

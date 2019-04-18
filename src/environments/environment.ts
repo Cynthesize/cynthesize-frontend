@@ -12,10 +12,15 @@ export const environment = {
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US']
 };
-export const HASURA_ACCESS_KEY = 'secret';
-export const GRAPHQL_URL = 'https://cynthesize-back.herokuapp.com/v1alpha1/graphql';
-export const REALTIME_GRAPHQL_URL = 'wss://cynthesize-back.herokuapp.com/v1alpha1/graphql';
-export const authClientId = 'tEbTH2wRl3dHtWZ0m4nqoWPsN1GIu9dQ';
-export const authDomain = 'cynthesize.auth0.com';
-export const auth0Audience = 'https://cynthesize.auth0.com/userinfo';
-export const callbackUrl = 'http://localhost:4200/callback';
+export const HASURA_ACCESS_KEY = '***';
+export const GRAPHQL_URL = '***';
+export const REALTIME_GRAPHQL_URL = '***';
+
+export const firebaseapp = {
+  apiKey: '***',
+  authDomain: '***',
+  databaseURL: '***',
+  projectId: '***',
+  storageBucket: '***',
+  messagingSenderId: '***'
+};
