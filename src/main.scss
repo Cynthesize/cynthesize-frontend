@@ -256,12 +256,13 @@ a {
 .tooltip {
   font-size: 0.8rem;
 }
-h3 {
-  display: flex;
-}
 
 // Needs to be here, doesn't work in home.component.scss
 .typed-cursor {
   color: orange;
   margin: 10px;
+}
+
+.mat-expansion-panel {
+  box-shadow: 0 0 !important;
 }

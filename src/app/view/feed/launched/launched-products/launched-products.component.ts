@@ -16,6 +16,8 @@ export class LaunchedProductsComponent implements OnInit {
   projectList: any[] = [];
   activeContext = 'newest';
   isLoading = true;
+  additionalInfo: string;
+  applying = false;
   constructor(private projectService: ProjectService, private errorHandler: ErrorHandlerService) {
     this.errorHandler.ideaWindowScrolled.subscribe(message => {
       if (this.length >= this.projectList.length && message === 'fetchLaunchedProjects') {
@@ -27,15 +29,16 @@ export class LaunchedProductsComponent implements OnInit {
 
   ngOnInit() {
     this.projectService.getTotalLaunchedProjectsCount().subscribe(data => {
-      this.length = data.data.launched_projects_aggregate.aggregate.count;
+      this.length = data.data.projects_aggregate.aggregate.count;
     });
     this.getlaunchedProjectsFromServer(6, this.currentCount, this.activeContext);
   }
 
   getlaunchedProjectsFromServer(number: number, offset: number, context: any) {
     this.projectService.getNProjects(number, offset, context).subscribe(data => {
-      this.currentCount += data.data.launched_projects.length;
-      this.projectList.push(...data.data.launched_projects);
+      this.currentCount += data.data.projects.length;
+      console.log(data);
+      this.projectList.push(...data.data.projects);
       console.log(this.projectList);
       this.isLoading = false;
     });
@@ -56,9 +59,10 @@ export class LaunchedProductsComponent implements OnInit {
   }
 
   applyForCollab(role: string, projectId: number) {
-    this.projectService.applyForProjectCollaboration(role, projectId).subscribe(
+    this.projectService.applyForProjectCollaboration(role, projectId, this.additionalInfo).subscribe(
       data => {
-        console.log('Applied');
+        this.additionalInfo = '';
+        this.errorHandler.subj_notification.next('Successfully applied for role: ' + role);
       },
       error => {
         this.errorHandler.subj_notification.next(error);

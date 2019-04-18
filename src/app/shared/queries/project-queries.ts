@@ -20,7 +20,7 @@ const QUERY_CHECKPOINT_ISSUES = gql`
 
 const QUERY_POPULAR_LAUNCHED_PROJECTS = gql`
   query fetch_popular_launched_projects($limit: Int!, $offset: Int!) {
-    launched_projects(order_by: { likes: desc }, limit: $limit, offset: $offset) {
+    projects(order_by: { likes: desc }, limit: $limit, offset: $offset, where: { is_launched: { _eq: true } }) {
       ...LaunchedProjectDetailsFragment
     }
   }
@@ -29,7 +29,7 @@ const QUERY_POPULAR_LAUNCHED_PROJECTS = gql`
 
 const QUERY_NEWEST_LAUNCHED_PROJECTS = gql`
   query fetch_newest_launched_projects($limit: Int!, $offset: Int!) {
-    launched_projects(order_by: { timestamp: desc }, limit: $limit, offset: $offset) {
+    projects(order_by: { created_on: desc }, limit: $limit, offset: $offset, where: { is_launched: { _eq: true } }) {
       ...LaunchedProjectDetailsFragment
     }
   }
@@ -38,7 +38,7 @@ const QUERY_NEWEST_LAUNCHED_PROJECTS = gql`
 
 const QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT = gql`
   query fetch_launched_projects {
-    launched_projects_aggregate {
+    projects_aggregate(where: { is_launched: { _eq: true } }) {
       aggregate {
         count
       }
@@ -77,6 +77,34 @@ const QUERY_FETCH_ISSUE_COMMENTS = gql`
 const QUERY_FETCH_PUBLIC_PROJECT_COMMENTS = gql`
   query fetch_project_comments($projectId: Int!) {
     comment(where: { launched_projects_id: { _eq: $projectId } }) {
+      id
+      comment_text
+      user {
+        ...UserProfilePicFragment
+      }
+      replies {
+        comment_id
+        reply_text
+        id
+        userByrespondent {
+          ...UserProfilePicFragment
+        }
+        likes
+        timestamp
+        previous_edits
+      }
+      likes
+      timestamp
+      previous_edits
+      launched_projects_id
+    }
+  }
+  ${USER_PROFILE_PIC_FRAGMENT}
+`;
+
+const QUERY_FETCH_ONGIONG_PROJECT_COMMENTS = gql`
+  query fetch_project_comments($projectId: Int!) {
+    comment(where: { projects_id: { _eq: $projectId } }) {
       id
       comment_text
       user {
@@ -175,5 +203,6 @@ export {
   QUERY_FETCH_PUBLIC_PROJECT_COMMENTS,
   QUERY_FETCH_ISSUE_COMMENTS,
   QUERY_FETCH_BASIC_PROJECT_DETAILS,
-  QUERY_FETCH_PROJECT_DETAILS
+  QUERY_FETCH_PROJECT_DETAILS,
+  QUERY_FETCH_ONGIONG_PROJECT_COMMENTS
 };

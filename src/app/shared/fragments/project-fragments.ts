@@ -47,30 +47,28 @@ const PROJECT_ISSUE_FRAGMENT = gql`
 `;
 
 const LAUNCHED_PROJECT_DETAILS_FRAGMENT = gql`
-  fragment LaunchedProjectDetailsFragment on launched_projects {
+  fragment LaunchedProjectDetailsFragment on projects {
     id
-    projectssBylaunchedId {
-      project_name
-      created_on
-      current_stage
-      tech_stack
-      website
-      roles_opened
-      is_public
-      abstract
-      icon
-      likes
-      tagsLinkssByprojectId {
-        tagsBytagId {
-          tag_name
-        }
+    project_name
+    created_on
+    current_stage
+    tech_stack
+    website
+    roles_opened
+    is_public
+    abstract
+    icon
+    likes
+    tagsLinkssByprojectId {
+      tagsBytagId {
+        tag_name
       }
     }
     userByowner {
       username
       profile_pic
     }
-    parent_project_id
+    is_launched
   }
 `;
 

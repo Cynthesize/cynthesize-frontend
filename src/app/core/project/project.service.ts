@@ -260,7 +260,9 @@ export class ProjectService {
     return this.apollo
       .mutate<any>({
         mutation: MUTATION_APPLY_FOR_COLLABORATION,
-        variables: applyObject
+        variables: {
+          objects: [applyObject]
+        }
       })
       .pipe(take(1))
       .pipe(

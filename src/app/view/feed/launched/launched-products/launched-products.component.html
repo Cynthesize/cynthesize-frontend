@@ -28,48 +28,58 @@
       </div>
     </div>
     <div class="page-data">
-      <mat-card *ngFor="let project of projectList">
+      <mat-card *ngFor="let project of projectList" class="launched-project-page-card">
         <div class="card">
-          <div><img class="project-icon" [src]="project.projectssBylaunchedId[0].icon" /></div>
+          <div><img class="project-icon" [src]="project.icon" /></div>
           <div class="card-details">
-            <div class="card-project-name">{{ displayableName(project.projectssBylaunchedId[0].project_name) }}</div>
+            <div class="card-project-name">{{ displayableName(project.project_name) }}</div>
             <div class="card-project-description">
-              {{ project.projectssBylaunchedId[0].abstract }}
+              {{ project.abstract }}
               <br />
-              Started on platform: {{ project.projectssBylaunchedId[0].created_on | timeDiff }}
+              Started on platform: {{ project.created_on | timeDiff }}
               <br />
               Tags on project:
-              <span *ngFor="let tag of project.projectssBylaunchedId[0].tagsLinkssByprojectId">
-                {{ tag.tagsBytagId.tag_name }},
-              </span>
+              <span *ngFor="let tag of project.tagsLinkssByprojectId"> {{ tag.tagsBytagId.tag_name }}, </span>
             </div>
           </div>
           <div class="card-links">
             <div>
-              <a href="{{ project.projectssBylaunchedId[0].website }}" target="_blank">
-                <button mat-raised-button>Visit</button>
+              <a href="{{ project.website }}" target="_blank">
+                <button mat-raised-button style="width: -webkit-fill-available;">Visit</button>
               </a>
             </div>
             <app-activity-actions
               [id]="project.id"
               [type]="'project'"
               [parentProjectId]="project.parent_project_id"
-              [likes]="project.projectssBylaunchedId[0].likes"
-              [url]="'/view/feed/projects/' + project.projectssBylaunchedId[0].project_name"
+              [likes]="project.likes"
+              [url]="'/view/feed/projects/' + project.project_name"
             ></app-activity-actions>
           </div>
         </div>
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header> </mat-expansion-panel-header>
-            <div>
-              <h3>Required:</h3>
-              <p *ngFor="let role of project.projectssBylaunchedId[0].roles_opened">
-                {{ role }} <button mat-button (click)="applyForCollab(role, project.id)">Collaborate!</button>
-              </p>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> <b>Required</b> </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <div *ngFor="let role of project.roles_opened" class="apply-role">
+              {{ role }}
+              <div *ngIf="applying" class="apply-role">
+                <mat-form-field appearance="outline">
+                  <mat-label>Want to add something more?</mat-label>
+                  <input matInput [(ngModel)]="additionalInfo" />
+                </mat-form-field>
+                <button mat-icon-button (click)="applyForCollab(role, project.id)">
+                  <mat-icon> done </mat-icon>
+                </button>
+                <button mat-icon-button (click)="applying = false">
+                  <mat-icon> cancel </mat-icon>
+                </button>
+              </div>
+              <button mat-button (click)="applying = true">Collaborate!</button>
             </div>
-          </mat-expansion-panel>
-        </mat-accordion>
+          </div>
+        </mat-expansion-panel>
       </mat-card>
     </div>
   </div>
