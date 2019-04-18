@@ -84,7 +84,7 @@
   <p>Issues Resolved: {{ issues.length - unresolvedIssues }} . Issues Unresolved: {{ unresolvedIssues }}</p>
   <mat-accordion>
     <section *ngFor="let issue of issues">
-      <mat-expansion-panel [expanded]="false" hideToggle *ngIf="issue.is_resolved" class="open-sans">
+      <mat-expansion-panel [expanded]="false" hideToggle *ngIf="issue.is_resolved" class="issue-expansion open-sans">
         <mat-expansion-panel-header>
           <mat-panel-title> Issue # {{ issue.id }} </mat-panel-title>
           Resolved<mat-icon>done</mat-icon>
@@ -99,7 +99,7 @@
 
   <mat-accordion>
     <section *ngFor="let issue of issues">
-      <mat-expansion-panel [expanded]="true" hideToggle *ngIf="!issue.is_resolved" class="open-sans">
+      <mat-expansion-panel [expanded]="true" hideToggle *ngIf="!issue.is_resolved" class="issue-expansion open-sans">
         <mat-expansion-panel-header>
           <mat-panel-title> Issue # {{ issue.id }} </mat-panel-title>
           Not Resolved<mat-icon>clear</mat-icon>

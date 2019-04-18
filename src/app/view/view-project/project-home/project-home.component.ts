@@ -41,7 +41,7 @@ export class ProjectHomeComponent implements OnInit {
 
   askForCollboration() {
     this.rolesDataForm = this.formBuilder.group({
-      roles: ['']
+      roles: [this.project.roles_opened.join(',')]
     });
     this.openingRoles = true;
   }
