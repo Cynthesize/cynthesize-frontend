@@ -168,8 +168,8 @@ const MUTATION_UPDATE_PROJECT_DETAILS = gql`
 `;
 
 const MUTATION_LIKE_PROJECT = gql`
-  mutation update_likes($launchedProjectId: Int!, $userId: Int!, $projectId: Int!) {
-    update_projects(where: { launched_id: { _eq: $launchedProjectId } }, _inc: { likes: 1 }) {
+  mutation update_likes($projectId: Int!, $userId: Int!) {
+    update_projects(where: { id: { _eq: $projectId } }, _inc: { likes: 1 }) {
       affected_rows
       returning {
         id
@@ -186,8 +186,8 @@ const MUTATION_LIKE_PROJECT = gql`
 `;
 
 const MUTATION_DISLIKE_PROJECT = gql`
-  mutation update_likes($launchedProjectId: Int!, $userId: Int!, $projectId: Int!) {
-    update_projects(where: { launched_id: { _eq: $launchedProjectId } }, _inc: { likes: -1 }) {
+  mutation update_likes($userId: Int!, $projectId: Int!) {
+    update_projects(where: { id: { _eq: $projectId } }, _inc: { likes: -1 }) {
       affected_rows
       returning {
         id
