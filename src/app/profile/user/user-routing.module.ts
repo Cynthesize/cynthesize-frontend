@@ -12,8 +12,8 @@ const routes: Routes = [
         loadChildren: 'app/profile/user/edit/edit.module#EditModule'
       },
       {
-        path: 'ideas',
-        loadChildren: 'app/profile/user/ideas/ideas.module#IdeasModule'
+        path: 'community',
+        loadChildren: 'app/profile/user/community/community.module#CommunityModule'
       },
       {
         path: 'projects',
