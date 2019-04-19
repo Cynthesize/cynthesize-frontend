@@ -23,6 +23,7 @@ import {
   QUERY_FETCH_PROJECT_DETAILS
 } from '@app/shared/queries/project-queries';
 import { MUTATION_ADD_IDEA_TAGS } from '@app/shared/mutations/idea-mutations';
+import { MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE } from '@app/shared/mutations/review-mutation';
 
 @Injectable({
   providedIn: 'root'
@@ -275,18 +276,37 @@ export class ProjectService {
   /**
    * applyForReview
    */
-  public applyForReview(stage: string, answers: Object) {
+  public applyForReview(answers: Object, stage: string) {
+    let mutation;
     switch (stage) {
-      case 'idea':
+      case 'ideation_stage':
+        mutation = MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE;
         break;
-
+      case 'marketing_stage':
+        mutation = MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE;
+        break;
+      case 'prototype_development_stage':
+        mutation = MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE;
+        break;
+      case 'launching_stage':
+        mutation = MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE;
+        break;
+      case 'consumer_feedback_stage':
+        mutation = MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE;
+        break;
+      case 'funding_stage':
+        mutation = MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE;
+        break;
       default:
+        mutation = MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE;
         break;
     }
     return this.apollo
       .mutate<any>({
-        mutation: MUTATION_ADD_IDEA_TAGS,
-        variables: answers
+        mutation: MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE,
+        variables: {
+          objects: answers
+        }
       })
       .pipe(take(1))
       .pipe(

@@ -10,6 +10,7 @@ import {
   FUNDING_STAGE_QUESTIONS
 } from 'app/shared/constants';
 import { ProjectService } from '@app/core/project/project.service';
+import { ErrorHandlerService } from '@app/core/error-handler.service';
 
 @Component({
   selector: 'app-review',
@@ -24,7 +25,8 @@ export class ReviewComponent implements OnInit {
     public dialogRef: MatDialogRef<ReviewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private errorHandler: ErrorHandlerService
   ) {
     switch (data.context) {
       case 'ideation_stage':
@@ -33,10 +35,10 @@ export class ReviewComponent implements OnInit {
       case 'marketing_stage':
         this.questionsObject = MARKETING_STAGE_QUESTIONS;
         break;
-      case 'prototype_stage':
+      case 'prototype_development_stage':
         this.questionsObject = PRODUCT_DEVELOPMENT_STAGE_QUESTIONS;
         break;
-      case 'launching_stage':
+      case 'launching_and_testing_stage':
         this.questionsObject = LAUNCHING_AND_TESTING_STAGE_QUESTIONS;
         break;
       case 'consumer_feedback_stage':
@@ -63,8 +65,15 @@ export class ReviewComponent implements OnInit {
   ngOnInit() {}
 
   submitReviewForm() {
-    this.projectService.applyForReview(this.data.context, this.reviewForm.getRawValue()).subscribe((arg: any) => {
-      console.log(arg);
-    });
+    const answersObject = this.reviewForm.value;
+    answersObject['project_id'] = this.data.projectId;
+    this.projectService.applyForReview(answersObject, this.data.context).subscribe(
+      (arg: any) => {
+        console.log(arg);
+      },
+      error => {
+        this.errorHandler.subj_notification.next(error);
+      }
+    );
   }
 }

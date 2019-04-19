@@ -15,25 +15,61 @@
     }}</span
   >
 </div>
-<div class="review-modal">
+<div class="info-text" *ngIf="data.context !== 'waiting'">
+  Apply for the next stage? All the best from <b>Cynthesize</b>! Make sure that you answer the questions fully and upto
+  the mark.
+</div>
+<div class="review-modal" *ngIf="data.context !== 'waiting'">
   <div class="review-questions">
     <form [formGroup]="reviewForm" (ngSubmit)="submitReviewForm()">
       <div *ngFor="let control of (questionsObject | keyvalue)">
         <div>{{ control.value }}</div>
         <mat-form-field appearance="outline" class="review-form-field">
-          <textarea matInput [formControlName]="control.key" [placeholder]="control.value"></textarea>
+          <input matInput [formControlName]="control.key" placeholder="Enter your answer" />
         </mat-form-field>
       </div>
-      <button mat-raised-button type="submit">Submit</button>
+      <button mat-raised-button type="submit">Submit for review</button>
     </form>
   </div>
   <div class="review-illustration">
-    <img src="../../../../assets/stages/ideation_stage.svg" />
+    <img src="../../../../assets/stages/{{ data.context }}.svg" />
   </div>
 </div>
 
+<div class="waiting" *ngIf="data.context === 'waiting'">
+  <img src="../../../../assets/images/waiting.svg" />
+  <div>Have patience... Mentors are reviewing your answers.</div>
+</div>
+
 <style>
+  .waiting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
   .review-modal {
     display: flex;
+    margin: 30px;
+    font-family: 'Open sans', sans-serif;
+  }
+  .info-text {
+    font-family: 'Open sans', sans-serif;
+    font-size: 1rem;
+  }
+  .review-illustration {
+    width: 50%;
+    align-items: center;
+  }
+  .review-questions {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+  }
+  .review-illustration > img {
+    width: 90%;
   }
 </style>

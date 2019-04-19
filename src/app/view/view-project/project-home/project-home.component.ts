@@ -92,7 +92,7 @@ export class ProjectHomeComponent implements OnInit {
   openReviewModel() {
     this.dialog.open(ReviewComponent, {
       width: 'auto',
-      data: { context: this.currentStage }
+      data: { context: this.currentStage, projectId: this.project.id }
     });
   }
 
@@ -159,17 +159,28 @@ export class ProjectHomeComponent implements OnInit {
    * getCurrentStageForTheProject
    */
   private _getCurrentStageForTheProject(): string {
-    if (!this.project.stage_ideations.is_passed) {
+    if (
+      this.project.stage_ideations[0].is_applied ||
+      this.project.stage_marketings[0].is_applied ||
+      this.project.stage_product_developments[0].is_applied ||
+      this.project.stage_launchings[0].is_applied ||
+      this.project.stage_consumer_feedbacks[0].is_applied ||
+      this.project.stage_fundings[0].is_applied
+    ) {
+      return 'waiting';
+    }
+
+    if (!this.project.stage_ideations[0].is_passed) {
       return 'ideation_stage';
-    } else if (this.project.stage_ideations.is_passed && !this.project.stage_marketings.is_passed) {
+    } else if (this.project.stage_ideations[0].is_passed && !this.project.stage_marketings[0].is_passed) {
       return 'marketing_stage';
-    } else if (!this.project.stage_product_developments.is_passed && this.project.stage_marketings.is_passed) {
-      return 'prototype_stage';
-    } else if (!this.project.stage_launchings.is_passed && this.project.stage_product_developments.is_passed) {
-      return 'launching_stage';
-    } else if (!this.project.stage_consumer_feedbacks.is_passed && this.project.stage_launchings.is_passed) {
+    } else if (!this.project.stage_product_developments[0].is_passed && this.project.stage_marketings[0].is_passed) {
+      return 'prototype_development_stage';
+    } else if (!this.project.stage_launchings[0].is_passed && this.project.stage_product_developments[0].is_passed) {
+      return 'launching_and_testing_stage';
+    } else if (!this.project.stage_consumer_feedbacks[0].is_passed && this.project.stage_launchings[0].is_passed) {
       return 'consumer_feedback_stage';
-    } else if (!this.project.stage_fundings.is_passed && this.project.stage_consumer_feedbacks.is_passed) {
+    } else if (!this.project.stage_fundings[0].is_passed && this.project.stage_consumer_feedbacks[0].is_passed) {
       return 'funding_stage';
     } else {
       return 'ideation_stage';
