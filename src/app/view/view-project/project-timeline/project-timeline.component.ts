@@ -24,13 +24,14 @@ export class ProjectTimelineComponent implements OnInit {
 
   initAddTimelineEvent() {
     this.timelineDataForm = this.formBuilder.group({
-      eventName: ['']
+      eventName: [''],
+      date: [Date.now()]
     });
     this.addingTimelineEvent = true;
   }
 
   addTimelineEvent() {
-    this.timeline[this.timelineDataForm.get('eventName').value] = Date.now();
+    this.timeline[this.timelineDataForm.get('eventName').value] = this.timelineDataForm.get('date').value;
     this.projectService.updateProjectEvents({ timeline: this.timeline }, this.projectId).subscribe(
       (data: any) => {
         this.timelineDataForm.get('eventName').setValue('');

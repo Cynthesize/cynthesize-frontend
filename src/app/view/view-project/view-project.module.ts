@@ -12,6 +12,7 @@ import { CovalentTextEditorModule } from '@covalent/text-editor';
 import { ReviewComponent } from './review/review.component';
 import { ProjectHomeComponent } from './project-home/project-home.component';
 import { ProjectTimelineComponent } from './project-timeline/project-timeline.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ProjectTimelineComponent } from './project-timeline/project-timeline.co
     MaterialModule,
     ReactiveFormsModule,
     CovalentMarkdownModule,
+    ChartsModule,
     CovalentTextEditorModule,
     FormsModule
   ],

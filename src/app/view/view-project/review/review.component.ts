@@ -18,6 +18,7 @@ import { ProjectService } from '@app/core/project/project.service';
 })
 export class ReviewComponent implements OnInit {
   reviewForm: FormGroup;
+  questionsObject = {};
 
   constructor(
     public dialogRef: MatDialogRef<ReviewComponent>,
@@ -25,32 +26,31 @@ export class ReviewComponent implements OnInit {
     private fb: FormBuilder,
     private projectService: ProjectService
   ) {
-    let questionsObject = {};
     switch (data.context) {
       case 'ideation_stage':
-        questionsObject = IDEATION_STAGE_QUESTIONS;
+        this.questionsObject = IDEATION_STAGE_QUESTIONS;
         break;
       case 'marketing_stage':
-        questionsObject = MARKETING_STAGE_QUESTIONS;
+        this.questionsObject = MARKETING_STAGE_QUESTIONS;
         break;
       case 'prototype_stage':
-        questionsObject = PRODUCT_DEVELOPMENT_STAGE_QUESTIONS;
+        this.questionsObject = PRODUCT_DEVELOPMENT_STAGE_QUESTIONS;
         break;
       case 'launching_stage':
-        questionsObject = LAUNCHING_AND_TESTING_STAGE_QUESTIONS;
+        this.questionsObject = LAUNCHING_AND_TESTING_STAGE_QUESTIONS;
         break;
       case 'consumer_feedback_stage':
-        questionsObject = CONSUMER_FEEDBACK_AND_ITERATION_STAGE_QUESTIONS;
+        this.questionsObject = CONSUMER_FEEDBACK_AND_ITERATION_STAGE_QUESTIONS;
         break;
       case 'funding_stage':
-        questionsObject = FUNDING_STAGE_QUESTIONS;
+        this.questionsObject = FUNDING_STAGE_QUESTIONS;
         break;
       default:
-        questionsObject = IDEATION_STAGE_QUESTIONS;
+        this.questionsObject = IDEATION_STAGE_QUESTIONS;
         break;
     }
     const formFields = {};
-    Object.keys(questionsObject).forEach(fieldNames => {
+    Object.keys(this.questionsObject).forEach(fieldNames => {
       formFields[fieldNames] = [''];
     });
     this.reviewForm = this.fb.group(formFields);

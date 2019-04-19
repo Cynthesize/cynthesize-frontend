@@ -9,21 +9,29 @@
 }
 
 .banner-image {
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
   width: 100%;
   height: 370px;
   overflow: hidden;
   background-color: blue;
   display: flex;
-  align-items: center;
+  align-items: baseline;
+  justify-content: center;
 }
+
 .checkpoint-name {
   font-size: 3rem;
 }
+
 .progress-heading {
   display: flex;
   justify-content: space-between;
 }
+
 .project-home-card {
   margin: 10px;
+}
+
+.issue-expansion {
+  border: 1px #dddddd solid;
 }

@@ -190,6 +190,30 @@ const QUERY_FETCH_PROJECT_DETAILS = gql`
       issuessByprojectId(where: { project_id: { _eq: $projectId } }, distinct_on: checkpoint_name) {
         checkpoint_name
       }
+      stage_launchings(where: { project_id: { _eq: $projectId } }) {
+        is_passed
+        is_applied
+      }
+      stage_fundings(where: { project_id: { _eq: $projectId } }) {
+        is_passed
+        is_applied
+      }
+      stage_product_developments(where: { project_id: { _eq: $projectId } }) {
+        is_passed
+        is_applied
+      }
+      stage_consumer_feedbacks(where: { project_id: { _eq: $projectId } }) {
+        is_passed
+        is_applied
+      }
+      stage_marketings(where: { project_id: { _eq: $projectId } }) {
+        is_passed
+        is_applied
+      }
+      stage_ideations(where: { project_id: { _eq: $projectId } }) {
+        is_passed
+        is_applied
+      }
     }
   }
   ${USER_PROFILE_PIC_FRAGMENT}

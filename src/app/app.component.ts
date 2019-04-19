@@ -34,11 +34,14 @@ export class AppComponent implements OnInit {
       let messageString = '';
       if (typeof message === 'string') {
         messageString = message;
+      } else if (!message.message.indexOf('Network')) {
+        messageString =
+          'There appears to be something wrong with your internet connection. Please check and trry again';
       } else {
         messageString = message.message;
       }
       this.snackBar.open(messageString, 'Okay', {
-        duration: 10000
+        duration: 15000
       });
     });
   }

@@ -1,6 +1,39 @@
-<form [formGroup]="reviewForm" (ngSubmit)="submitReviewForm()">
-  <mat-form-field *ngFor="let control of (reviewForm.controls | keyvalue)">
-    <input matInput [formControlName]="control.key" [placeholder]="control.key" />
-  </mat-form-field>
-  <button mat-raised-button type="submit">Submit</button>
-</form>
+<div class="heading">
+  Review Submission
+  <span style="font-size:1.5rem;">
+    |
+    {{
+      data.context
+        .split('_')
+        .join(' ')
+        .charAt(0)
+        .toUpperCase() +
+        data.context
+          .split('_')
+          .join(' ')
+          .slice(1)
+    }}</span
+  >
+</div>
+<div class="review-modal">
+  <div class="review-questions">
+    <form [formGroup]="reviewForm" (ngSubmit)="submitReviewForm()">
+      <div *ngFor="let control of (questionsObject | keyvalue)">
+        <div>{{ control.value }}</div>
+        <mat-form-field appearance="outline" class="review-form-field">
+          <textarea matInput [formControlName]="control.key" [placeholder]="control.value"></textarea>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button type="submit">Submit</button>
+    </form>
+  </div>
+  <div class="review-illustration">
+    <img src="../../../../assets/stages/ideation_stage.svg" />
+  </div>
+</div>
+
+<style>
+  .review-modal {
+    display: flex;
+  }
+</style>

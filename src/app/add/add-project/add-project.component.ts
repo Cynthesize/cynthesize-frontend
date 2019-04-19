@@ -7,6 +7,7 @@ import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { MatChipInputEvent, MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
+import { TAGS } from '@app/shared/constants';
 
 @Component({
   selector: 'app-project',
@@ -46,88 +47,7 @@ export class AddProjectComponent implements OnInit {
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  allTags = [
-    {
-      tag_name: 'Artificial Intelligence',
-      tag_id: 1
-    },
-    {
-      tag_name: 'Productivity',
-      tag_id: 2
-    },
-    {
-      tag_name: 'Home Automation',
-      tag_id: 3
-    },
-    {
-      tag_name: 'Internet of Things',
-      tag_id: 4
-    },
-    {
-      tag_name: 'Analytics',
-      tag_id: 5
-    },
-    {
-      tag_name: 'Web Application',
-      tag_id: 6
-    },
-    {
-      tag_name: 'Android',
-      tag_id: 7
-    },
-    {
-      tag_name: 'iOS',
-      tag_id: 8
-    },
-    {
-      tag_name: 'Blockchain',
-      tag_id: 9
-    },
-    {
-      tag_name: 'Health and Fitness',
-      tag_id: 10
-    },
-    {
-      tag_name: 'Social Media',
-      tag_id: 11
-    },
-    {
-      tag_name: 'Security',
-      tag_id: 12
-    },
-    {
-      tag_name: 'Robotics',
-      tag_id: 13
-    },
-    {
-      tag_name: 'Chat Messaging',
-      tag_id: 14
-    },
-    {
-      tag_name: 'Video Conferencing',
-      tag_id: 15
-    },
-    {
-      tag_name: 'Augmented Reality',
-      tag_id: 16
-    },
-    {
-      tag_name: 'VR',
-      tag_id: 17
-    },
-    {
-      tag_name: 'Dating',
-      tag_id: 18
-    },
-    {
-      tag_name: 'Music',
-      tag_id: 19
-    },
-    {
-      tag_name: 'Books',
-      tag_id: 20
-    }
-  ];
+  allTags = TAGS;
 
   constructor(
     private _formBuilder: FormBuilder,

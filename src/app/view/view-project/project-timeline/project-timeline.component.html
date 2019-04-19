@@ -10,6 +10,10 @@
       <mat-label>Add an event</mat-label>
       <input matInput formControlName="eventName" />
     </mat-form-field>
+
+    <input matInput placeholder="Date" [matDatepicker]="picker" (focus)="picker.open()" formControlName="date" />
+    <mat-datepicker #picker> <mat-icon>date</mat-icon></mat-datepicker>
+
     <button mat-icon-button (click)="addTimelineEvent()">
       <mat-icon> done </mat-icon>
     </button>
