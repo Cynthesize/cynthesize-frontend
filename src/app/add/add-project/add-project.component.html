@@ -4,140 +4,148 @@
     <div class="page-header">
       <div class="page-heading">ADD PROJECT</div>
     </div>
-    <mat-card class="add-project-card" [style.fontSize]="'1rem'">
-      <form autocomplete="off" [formGroup]="project" (ngSubmit)="addProject(project.value)">
-        <div class="field">
-          <h3>
-            Project Name
-            <mat-icon
-              [matTooltipPosition]="'right'"
-              matTooltipClass="tooltip"
-              matTooltip="Tip: Project name is usually a one word name that you want for your project."
-              >help_outline</mat-icon
-            >
-          </h3>
-          <mat-form-field appearance="outline" class="field">
-            <mat-label>Enter project title</mat-label>
-            <input matInput formControlName="projectName" placeholder="Enter project title" />
-          </mat-form-field>
-        </div>
-        <div class="field">
-          <h3>
-            Project Abstract
-            <mat-icon
-              [matTooltipPosition]="'right'"
-              matTooltipClass="tooltip"
-              matTooltip="Tip: The project abstract is a short description that is visible to the community (developers and
-            mentors). The abstract is to give a one lining idea of what your project is. This is used to gather
-            traffic for your project even when it is under construction, giving you a medium to get help from other
-            developers in context of a team."
-              >help_outline</mat-icon
-            >
-          </h3>
-          <mat-form-field appearance="outline" class="field">
-            <mat-label>Enter project abstract</mat-label>
-            <textarea matInput formControlName="abstract" placeholder="Enter project description"></textarea>
-          </mat-form-field>
-        </div>
-        <div class="field">
-          <h3>
-            Current Stage
-            <mat-icon
-              [matTooltipPosition]="'right'"
-              matTooltipClass="tooltip"
-              matTooltip="Tip: Tell us what stage your project is currently at."
-              >help_outline</mat-icon
-            >
-          </h3>
-          <mat-form-field class="field" appearance="outline">
-            <mat-select formControlName="currentStage">
-              <mat-option *ngFor="let stage of stages" [value]="stage">
-                {{ stage }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="field">
-          <h3>
-            Tags
-            <mat-icon
-              [matTooltipPosition]="'right'"
-              matTooltipClass="tooltip"
-              matTooltip="Tip: Add tags that describe your idea best. Helps others find your idea in searches."
-              >help_outline</mat-icon
-            >
-          </h3>
-          <mat-form-field class="field">
-            <mat-chip-list #chipList>
-              <mat-chip
-                *ngFor="let tag of tags"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="remove(tag)"
+    <div style="display: flex; align-items: center;">
+      <div class="add-project-card-form">
+        <mat-card class="add-project-card" [style.fontSize]="'1rem'">
+          <form autocomplete="off" [formGroup]="project" (ngSubmit)="addProject(project.value)">
+            <div class="field">
+              <h3>
+                Project Name
+                <mat-icon
+                  [matTooltipPosition]="'right'"
+                  matTooltipClass="tooltip"
+                  matTooltip="Tip: Project name is usually a one word name that you want for your project."
+                  >help_outline</mat-icon
+                >
+              </h3>
+              <mat-form-field appearance="outline" class="field">
+                <mat-label>Enter project title</mat-label>
+                <input matInput formControlName="projectName" placeholder="Enter project title" />
+              </mat-form-field>
+            </div>
+            <div class="field">
+              <h3>
+                Project Abstract
+                <mat-icon
+                  [matTooltipPosition]="'right'"
+                  matTooltipClass="tooltip"
+                  matTooltip="Tip: The project abstract is a short description that is visible to the community (developers and
+                  mentors). The abstract is to give a one lining idea of what your project is. This is used to gather
+                  traffic for your project even when it is under construction, giving you a medium to get help from other
+                  developers in context of a team."
+                  >help_outline</mat-icon
+                >
+              </h3>
+              <mat-form-field appearance="outline" class="field">
+                <mat-label>Enter project abstract</mat-label>
+                <textarea matInput formControlName="abstract" placeholder="Enter project description"></textarea>
+              </mat-form-field>
+            </div>
+            <div class="field">
+              <h3>
+                Current Stage
+                <mat-icon
+                  [matTooltipPosition]="'right'"
+                  matTooltipClass="tooltip"
+                  matTooltip="Tip: Tell us what stage your project is currently at."
+                  >help_outline</mat-icon
+                >
+              </h3>
+              <mat-form-field class="field" appearance="outline">
+                <mat-label>Select from the list</mat-label>
+                <mat-select formControlName="currentStage">
+                  <mat-option *ngFor="let stage of stages" [value]="stage">
+                    {{ stage }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="field">
+              <h3>
+                Tags
+                <mat-icon
+                  [matTooltipPosition]="'right'"
+                  matTooltipClass="tooltip"
+                  matTooltip="Tip: Add tags that describe your idea best. Helps others find your idea in searches."
+                  >help_outline</mat-icon
+                >
+              </h3>
+              <mat-form-field class="field" appearance="outline">
+                <mat-chip-list #chipList>
+                  <mat-chip
+                    *ngFor="let tag of tags"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(tag)"
+                  >
+                    {{ tag.tag_name }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="New tag..."
+                    #tagInput
+                    [formControl]="tagCtrl"
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)"
+                  />
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let tag of (filteredTags | async)" [value]="tag">
+                    {{ tag.tag_name }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="field">
+              <h3>
+                Website Link
+                <mat-icon
+                  [matTooltipPosition]="'right'"
+                  matTooltipClass="tooltip"
+                  matTooltip="Tip: Enter any website URL that depicts your project. Leave empty if none."
+                  >help_outline</mat-icon
+                >
+              </h3>
+              <mat-form-field appearance="outline" class="field">
+                <mat-label>Enter website link</mat-label>
+                <input matInput formControlName="website" placeholder="Enter website link" />
+              </mat-form-field>
+            </div>
+            <h3>
+              Thumbnail
+              <mat-icon
+                [matTooltipPosition]="'right'"
+                matTooltipClass="tooltip"
+                matTooltip="Tip: Add tags that describe your idea best. Helps others find your idea in searches."
+                >help_outline</mat-icon
               >
-                {{ tag.tag_name }}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-              </mat-chip>
-              <input
-                placeholder="New tag..."
-                #tagInput
-                [formControl]="tagCtrl"
-                [matAutocomplete]="auto"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
-                (matChipInputTokenEnd)="add($event)"
-              />
-            </mat-chip-list>
-            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-              <mat-option *ngFor="let tag of (filteredTags | async)" [value]="tag">
-                {{ tag.tag_name }}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-        </div>
-        <div class="field">
-          <h3>
-            Website Link
-            <mat-icon
-              [matTooltipPosition]="'right'"
-              matTooltipClass="tooltip"
-              matTooltip="Tip: Enter any website URL that depicts your project. Leave empty if none."
-              >help_outline</mat-icon
-            >
-          </h3>
-          <mat-form-field appearance="outline" class="field">
-            <mat-label>Enter website link</mat-label>
-            <input matInput formControlName="website" placeholder="Enter website link" />
-          </mat-form-field>
-        </div>
-        <h3>
-          Thumbnail
-          <mat-icon
-            [matTooltipPosition]="'right'"
-            matTooltipClass="tooltip"
-            matTooltip="Tip: Add tags that describe your idea best. Helps others find your idea in searches."
-            >help_outline</mat-icon
-          >
-        </h3>
-        <!-- TODO -->
-        <p>Coming Soon</p>
+            </h3>
+            <!-- TODO -->
+            <p>Coming Soon</p>
 
-        <div class="field">
-          <h3>
-            Make your project abstract public?
-            <mat-icon
-              [matTooltipPosition]="'right'"
-              matTooltipClass="tooltip"
-              matTooltip="Tip: Do you want to display the abstract of your project to all the users on the platform?"
-              >help_outline</mat-icon
-            >
-          </h3>
-          <mat-checkbox formControlName="isPublic">Yes</mat-checkbox>
-          <mat-checkbox formControlName="isPrivate">No</mat-checkbox>
-        </div>
-        <button mat-raised-button class="orange-btn">Post Idea</button>
-      </form>
-    </mat-card>
+            <div class="field">
+              <h3>
+                Make your project abstract public?
+                <mat-icon
+                  [matTooltipPosition]="'right'"
+                  matTooltipClass="tooltip"
+                  matTooltip="Tip: Do you want to display the abstract of your project to all the users on the platform?"
+                  >help_outline</mat-icon
+                >
+              </h3>
+              <mat-radio-group formControlName="isPublic">
+                <mat-radio-button value="true">Yes</mat-radio-button>
+                <mat-radio-button value="false">False</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <button mat-raised-button class="orange-btn">Post Idea</button>
+          </form>
+        </mat-card>
+      </div>
+      <div class="add-project-image"><img src="../../../assets/add-idea.svg" /></div>
+    </div>
   </div>
 </div>

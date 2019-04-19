@@ -60,8 +60,7 @@ export class AddProjectComponent implements OnInit {
       abstract: ['', [Validators.required, Validators.maxLength(100)]],
       currentStage: ['', Validators.required],
       website: ['https://', Validators.required],
-      isPublic: false,
-      isPrivate: true
+      isPublic: false
     });
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
@@ -82,7 +81,7 @@ export class AddProjectComponent implements OnInit {
         .replace(/ /g, '-'),
       currentStage: this.project.get('currentStage').value,
       abstract: this.project.get('abstract').value.trim(),
-      isPublic: this.project.get('isPrivate').value || this.project.get('isPublic').value,
+      isPublic: this.project.get('isPublic').value,
       website: this.project.get('website').value
     };
 
