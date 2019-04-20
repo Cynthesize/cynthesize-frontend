@@ -1,0 +1,44 @@
+.add-idea-card {
+  padding: 2rem;
+}
+
+.field {
+  width: 100%;
+  min-width: -webkit-fill-available;
+  margin: 5px;
+}
+
+h3 {
+  display: flex;
+  align-items: center;
+}
+
+h3 > mat-icon {
+  padding: 3px 0 0 8px;
+  font-size: 1.2rem;
+  align-self: center;
+}
+
+.add-project-image {
+  width: 50%;
+  height: 70vh;
+  align-items: center;
+  padding-left: 20px;
+}
+.add-project-image > img {
+  width: 100%;
+}
+
+.add-project-card-form {
+  width: 50%;
+}
+
+@media (max-width: 750px) {
+  .add-project-image {
+    display: none;
+  }
+
+  .add-project-card-form {
+    width: 100%;
+  }
+}

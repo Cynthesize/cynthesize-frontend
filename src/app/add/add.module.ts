@@ -9,9 +9,10 @@ import { MaterialModule } from '@app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CovalentTextEditorModule } from '@covalent/text-editor';
 import { CovalentMarkdownModule } from '@covalent/markdown';
+import { MentorComponent } from './mentor/mentor.component';
 
 @NgModule({
-  declarations: [AddProjectComponent, AddIdeaComponent],
+  declarations: [AddProjectComponent, AddIdeaComponent, MentorComponent],
   imports: [
     CommonModule,
     AddRoutingModule,

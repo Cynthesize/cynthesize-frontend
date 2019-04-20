@@ -148,6 +148,14 @@ const MUTATION_DISLIKE_REPLY = gql`
   }
 `;
 
+const MUTATION_APPLY_FOR_MENTORSHIP = gql`
+  mutation apply_for_mentorship($objects: [mentor_data_insert_input!]!) {
+    insert_mentor_data(objects: $objects) {
+      affected_rows
+    }
+  }
+`;
+
 export {
   MUTATION_ADD_USER,
   MUTATION_UPDATE_USER_DETAILS,
@@ -156,5 +164,6 @@ export {
   MUTATION_LIKE_COMMENT,
   MUTATION_DISLIKE_COMMENT,
   MUTATION_LIKE_REPLY,
-  MUTATION_DISLIKE_REPLY
+  MUTATION_DISLIKE_REPLY,
+  MUTATION_APPLY_FOR_MENTORSHIP
 };

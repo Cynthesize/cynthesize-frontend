@@ -1,0 +1,82 @@
+<div class="loader" *ngIf="isLoading"><mat-spinner></mat-spinner></div>
+<div class="container">
+  <div class="page" *ngIf="!isLoading && !ifAlreadyApplied">
+    <div class="page-header">
+      <div class="page-heading">INTERESTED IN BECOMING A MENTOR?</div>
+    </div>
+    <div style="display: flex; align-items: center;">
+      <div class="add-project-card-form">
+        <mat-card class="add-project-card" [style.fontSize]="'1rem'">
+          <form autocomplete="off" [formGroup]="mentorForm" (ngSubmit)="requestForMentorship(mentorForm.value, $event)">
+            <div class="field">
+              <h3>
+                What's your current profession?
+              </h3>
+              <mat-form-field appearance="outline" class="field">
+                <mat-label>Enter your profession</mat-label>
+                <input matInput formControlName="current_profession" />
+              </mat-form-field>
+            </div>
+            <div class="field">
+              <h3>
+                Provide the experience have in your field of expertise.
+              </h3>
+              <mat-form-field appearance="outline" class="field">
+                <mat-label>Provide your experience</mat-label>
+                <input matInput formControlName="experience" />
+              </mat-form-field>
+            </div>
+            <div class="field">
+              <h3>
+                As a mentor on the platform, what would be your aim?
+              </h3>
+              <mat-form-field appearance="outline" class="field">
+                <mat-label>Enter your view</mat-label>
+                <input matInput formControlName="aim" />
+              </mat-form-field>
+            </div>
+            <div class="field">
+              <h3>
+                Among the following stages, what would you consider to be your expertise?
+              </h3>
+              <mat-form-field appearance="outline" class="field">
+                <mat-label>Select all that apply</mat-label>
+                <mat-select [formControl]="levels" multiple>
+                  <mat-option *ngFor="let level of (levelList | keyvalue)" [value]="level.value">{{
+                    level.key
+                  }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="field">
+              <h3>
+                Are you looking for projects to provide potential investment?
+              </h3>
+              <mat-form-field appearance="outline" class="field">
+                <mat-label>Enter your orientation</mat-label>
+                <input matInput formControlName="potential_investment" />
+              </mat-form-field>
+            </div>
+            <div class="field">
+              <h3>
+                Are you a venture capitalist or and investor?
+              </h3>
+              <mat-form-field appearance="outline" class="field">
+                <mat-label>Enter your answer</mat-label>
+                <input matInput formControlName="vc" />
+              </mat-form-field>
+            </div>
+            <button mat-raised-button class="orange-btn">Apply</button>
+          </form>
+        </mat-card>
+      </div>
+      <div class="add-project-image"><img src="../../../assets/images/become-mentor.svg" /></div>
+    </div>
+  </div>
+  <div class="page" *ngIf="!isLoading && ifAlreadyApplied">
+    <div class="add-project-image">
+      <img src="../../../assets/images/become-mentor.svg" />
+      <div>We have recieved your request and are verifying your answers. You'll be notified soon!</div>
+    </div>
+  </div>
+</div>

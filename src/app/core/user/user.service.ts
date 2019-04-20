@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { QUERY_USER_LIKES } from '@app/shared/queries/user-queries';
-import { MUTATION_ADD_USER } from '@app/shared/mutations/user-mutations';
+import { QUERY_USER_LIKES, QUERY_APPLIED_FOR_MENTORSHIP } from '@app/shared/queries/user-queries';
+import { MUTATION_ADD_USER, MUTATION_APPLY_FOR_MENTORSHIP } from '@app/shared/mutations/user-mutations';
+import { take, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,45 @@ export class UserService {
     localStorage.setItem('access_token', credential.credential['accessToken']);
     localStorage.setItem('user_id', credential.additionalUserInfo.profile['id']);
     localStorage.setItem('id_token', credential.credential['idToken']);
+  }
+
+  /**
+   * applyForMentorship
+   */
+  public applyForMentorship(formData: any) {
+    formData['user_id'] = localStorage.getItem('userId');
+    return this.apollo
+      .mutate<any>({
+        mutation: MUTATION_APPLY_FOR_MENTORSHIP,
+        variables: {
+          objects: formData
+        }
+      })
+      .pipe(take(1))
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * checkMentorshipData
+   */
+  public checkMentorshipData() {
+    return this.apollo
+      .query<any>({
+        query: QUERY_APPLIED_FOR_MENTORSHIP,
+        variables: {
+          userId: localStorage.getItem('userId')
+        }
+      })
+      .pipe(take(1))
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 
   private _addUserToDb(additionalUserInfo: any) {
