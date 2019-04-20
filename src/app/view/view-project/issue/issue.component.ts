@@ -1,13 +1,10 @@
-import { Component, OnInit, ViewEncapsulation, Input, Inject, SimpleChanges, OnChanges } from '@angular/core';
-import { ProjectService } from '@app/core/project/project.service';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { Observable } from 'rxjs';
+import { MatDialogRef, MatDialog } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { IssueService } from '@app/core/issue/issue.service';
-
-const SharedProjectId = '';
 
 @Component({
   selector: 'app-issue',
@@ -48,10 +45,6 @@ export class IssueComponent implements OnInit {
 
   ngOnInit() {}
 
-  initAddIssueDialogue() {
-    this.openDialog();
-  }
-
   issueResolution(issueId: number, resolution: boolean) {
     this.issueService.markIssueResolvedOrUnsolved(issueId, resolution).subscribe(
       (data: any) => {
@@ -65,14 +58,6 @@ export class IssueComponent implements OnInit {
         this.errorHandler.subj_notification.next(error);
       }
     );
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(AddIssueComponent, {
-      width: 'auto'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {});
   }
 }
 

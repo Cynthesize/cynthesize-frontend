@@ -13,14 +13,16 @@ import { CommentsService } from '@app/core/comments/comments.service';
 export class EditableCommentComponent implements OnInit {
   @Input() comment: any;
   @Input() reply: any;
+  @Input() correspondingComment: any;
   @Input() activityId: number;
   // If a comment was edited this event will be emitted
   @Output() commentEdited = new EventEmitter();
+  replyText = '';
 
   options: any = {
     lineWrapping: true
   };
-  replying = false;
+  isReplying = false;
 
   constructor(
     public projectService: ProjectService,
@@ -34,26 +36,13 @@ export class EditableCommentComponent implements OnInit {
     this.commentEdited.next(content);
   }
 
-  replyToComment() {
-    this.replying = true;
-  }
-
-  addComment(commentId: number, commentText: string) {
-    console.log(this.comment);
-    this.commentService.addComment(commentId, 'comment', commentText, this.activityId).subscribe(
-      comment => {
-        this.comment.push(comment.data.insert_comments.returning[0]);
-      },
-      error => {
-        this.errorHandler.subj_notification.next(error);
-      }
-    );
-  }
-  addReply(replyId: number, replyText: string) {
+  addReply() {
     console.log(this.reply);
-    this.commentService.addReplyToComment(replyText, replyId).subscribe(
+    this.commentService.addReplyToComment(this.replyText, this.reply.comment_id).subscribe(
       reply => {
-        this.reply.push(reply.data.insert_replys.returning[0]);
+        this.correspondingComment.replies.push(reply.data.insert_reply.returning[0]);
+        this.replyText = '';
+        this.isReplying = false;
       },
       error => {
         this.errorHandler.subj_notification.next(error);
@@ -64,15 +53,11 @@ export class EditableCommentComponent implements OnInit {
   reportComment() {
     this.commentService.reportAComment(this.comment.id).subscribe(
       data => {
-        console.log(data);
+        this.errorHandler.subj_notification.next('This comment has reported! We will look into it.');
       },
       error => {
         this.errorHandler.subj_notification.next(error);
       }
     );
-  }
-
-  cancel(): void {
-    this.replying = false;
   }
 }

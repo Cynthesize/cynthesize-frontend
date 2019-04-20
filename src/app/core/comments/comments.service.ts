@@ -60,19 +60,18 @@ export class CommentsService {
   /**
    * addComment
    */
-  public addComment(activityId: number, activityType: string, commentText: string, projectId: number = null) {
+  public addComment(activityId: number, activityType: string, commentText: string) {
     const objectToBeAdded = {
-      reply_text: commentText,
-      commenter: this.loggedInUserId,
+      comment_text: commentText,
+      commenter: localStorage.getItem('userId'),
       previous_edits: '[]'
     };
     switch (activityType) {
-      case 'publicProject':
+      case 'launched_project':
         objectToBeAdded['launched_projects_id'] = activityId;
         break;
       case 'issue':
         objectToBeAdded['issue_id'] = activityId;
-        objectToBeAdded['project_id'] = projectId;
         break;
       case 'idea':
         objectToBeAdded['idea_id'] = activityId;
@@ -103,7 +102,7 @@ export class CommentsService {
         variables: {
           objects: {
             reply_text: replyText,
-            respondent: this.loggedInUserId,
+            respondent: localStorage.getItem('userId'),
             comment_id: commentId,
             previous_edits: []
           }

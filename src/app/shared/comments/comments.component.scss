@@ -2,9 +2,11 @@
   background-color: white;
   border-radius: 5px;
 }
+
 .comment-container {
   padding: 20px;
 }
+
 .add-comment {
   background-color: rgb(247, 247, 247);
   display: flex;
@@ -12,12 +14,15 @@
   align-items: center;
   padding: 15px;
 }
+
 cl-image > img {
   border-radius: 50%;
 }
+
 .user-icon {
   padding-right: 10px;
 }
+
 .init-comment-input {
   background-color: white;
   border-radius: 5px;
@@ -36,21 +41,30 @@ cl-image > img {
 }
 
 .comment-info {
-  padding: 15px;
+  padding: 15px 0 0 10px;
   display: flex;
   border-radius: 5px;
   align-items: center;
 }
+
 .user-name {
+  display: flex;
 }
+
+.user-name > a {
+  margin-right: 5px;
+}
+
 .comment-text-box {
   margin-left: 60px;
 }
+
 .comment-text {
   font-size: 0.94rem;
   line-height: 0.98;
   margin-bottom: 10px;
 }
+
 .comment-icons {
   display: flex;
   align-items: center;
@@ -61,6 +75,7 @@ cl-image > img {
   color: #2196f3;
   margin: 0 5px;
 }
+
 mat-dialog-container {
   background-color: rgb(247, 247, 247) !important;
 }

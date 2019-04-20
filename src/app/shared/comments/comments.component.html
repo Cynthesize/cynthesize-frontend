@@ -8,9 +8,9 @@
         Write Comment
       </div>
       <div class="td-editor-stuff" *ngIf="isCommenting">
-        <td-text-editor [(ngModel)]="comment" [options]="options"></td-text-editor>
-        <button mat-raised-button (click)="addComment(1, comment)">Add</button>
-        <button mat-raised-button (click)="cancelComment()">Cancel</button>
+        <td-text-editor [(ngModel)]="commentText" [options]="options"></td-text-editor>
+        <button mat-raised-button (click)="addComment()">Add</button>
+        <button mat-raised-button (click)="this.isCommenting = false">Cancel</button>
       </div>
     </div>
     <div class="comments" *ngIf="commentObject">
@@ -19,7 +19,11 @@
         <app-editable-comment [comment]="comment" [activityId]="activityId"></app-editable-comment>
         <!-- Replies here -->
         <div class="comment-unit" *ngFor="let reply of comment.replies">
-          <app-editable-comment [reply]="reply" [activityId]="activityId"></app-editable-comment>
+          <app-editable-comment
+            [reply]="reply"
+            [correspondingComment]="comment"
+            [activityId]="activityId"
+          ></app-editable-comment>
         </div>
       </div>
     </div>

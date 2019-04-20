@@ -24,6 +24,7 @@ export class CommentsComponent implements OnInit, OnChanges {
   @Input() activityId: number;
   commentObject: any[] = [];
   user_pic = localStorage.getItem('user_profile_pic');
+  commentText = '';
 
   isCommenting = false;
   options: any = {
@@ -53,7 +54,16 @@ export class CommentsComponent implements OnInit, OnChanges {
     );
   }
 
-  cancelComment() {
-    this.isCommenting = false;
+  addComment() {
+    this.commentService.addComment(this.activityId, this.activityType, this.commentText).subscribe(
+      comment => {
+        this.commentText = '';
+        this.commentObject.push(comment.data.insert_comment.returning[0]);
+        this.isCommenting = false;
+      },
+      error => {
+        this.errorHandler.subj_notification.next(error);
+      }
+    );
   }
 }

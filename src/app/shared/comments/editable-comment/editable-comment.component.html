@@ -16,7 +16,7 @@
     </p>
     <div class="comment-icons pointer">
       <app-like [activityId]="comment.id" [activityType]="'comment'" [likes]="comment.likes" class="icon"></app-like>
-      <i class="icon fa fa-reply"></i> Reply
+      <span (click)="isReplying = true"><i class="icon fa fa-reply"></i> Reply</span>
       <mat-icon class="icon" mat-icon-button [matMenuTriggerFor]="more">more_vert</mat-icon>
     </div>
     <mat-menu #more="matMenu" class="more-menu pointer">
@@ -31,7 +31,7 @@
       <cl-image height="45" crop="scale" public-id="{{ reply.userByrespondent.profile_pic }}" secure="true"></cl-image>
     </div>
     <div class="user-name">
-      <a [routerLink]="['/user', reply.userByrespondent.username]" style="font-size: 1rem; font-weight: 600;">{{
+      <a [routerLink]="['/user', reply.userByrespondent.username]" style="font-size: 1.2rem; font-weight: 600;">{{
         reply.userByrespondent.username
       }}</a>
       <p style="font-size: 0.7rem;">{{ reply.timestamp | timeDiff }}</p>
@@ -43,11 +43,18 @@
     </p>
     <div class="comment-icons pointer">
       <app-like [activityId]="reply.id" [activityType]="'reply'" [likes]="reply.likes" class="icon"></app-like>
-      <i class="icon fa fa-reply"></i> Reply
+      <span (click)="isReplying = true"><i class="icon fa fa-reply"></i> Reply</span>
       <mat-icon class="icon" mat-icon-button [matMenuTriggerFor]="more">more_vert</mat-icon>
     </div>
     <mat-menu #more="matMenu" class="more-menu pointer">
       <mat-icon class="icon" (click)="reportComment()">flag</mat-icon>Report <mat-icon class="icon">edit</mat-icon>Edit
     </mat-menu>
+  </div>
+  <div class="add-comment" *ngIf="isReplying">
+    <div class="td-editor-stuff">
+      <td-text-editor [(ngModel)]="replyText" [options]="options"></td-text-editor>
+      <button mat-raised-button (click)="addReply()">Add Reply</button>
+      <button mat-raised-button (click)="isReplying = false; replyText = ''">Cancel</button>
+    </div>
   </div>
 </div>

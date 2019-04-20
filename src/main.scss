@@ -76,6 +76,10 @@ a {
   color: black;
 }
 
+.mat-dialog-container {
+  height: inherit !important;
+}
+
 .center-divs {
   display: flex;
   justify-content: center;
