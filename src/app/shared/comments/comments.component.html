@@ -4,9 +4,17 @@
       <div class="user-icon">
         <cl-image height="45" crop="scale" public-id="{{ user_pic }}" secure="true"></cl-image>
       </div>
-      <div class="init-comment-input" (click)="isCommenting = true" *ngIf="!isCommenting">
-        Write Comment
-      </div>
+      <div *ngIf="(authenticationService.user$ | async); then authenticated; else guest"></div>
+      <ng-template #authenticated>
+        <div class="init-comment-input" (click)="checkForLogin()" *ngIf="!isCommenting">
+          Write Comment
+        </div>
+      </ng-template>
+      <ng-template #guest>
+        <div class="init-comment-input" (click)="checkForLogin()" *ngIf="!isCommenting">
+          Write Comment
+        </div>
+      </ng-template>
       <div class="td-editor-stuff" *ngIf="isCommenting">
         <td-text-editor [(ngModel)]="commentText" [options]="options"></td-text-editor>
         <button mat-raised-button (click)="addComment()">Add</button>

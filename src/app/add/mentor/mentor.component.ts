@@ -19,6 +19,7 @@ export class MentorComponent implements OnInit {
   };
 
   isAlreadyApplied = false;
+  isLoading = true;
 
   levels = new FormControl();
 
@@ -35,6 +36,7 @@ export class MentorComponent implements OnInit {
         this.errorHandler.subj_notification.next(error);
       }
     );
+    this.isLoading = false;
   }
 
   ngOnInit() {
@@ -49,6 +51,7 @@ export class MentorComponent implements OnInit {
 
   requestForMentorship(formData: any, e: Event) {
     e.preventDefault();
+    this.isLoading = true;
     const mentorData = formData;
     mentorData['levels'] = this.levels.value;
     this.userService.applyForMentorship(mentorData).subscribe(
@@ -61,5 +64,6 @@ export class MentorComponent implements OnInit {
         this.errorHandler.subj_notification.next(error);
       }
     );
+    this.isLoading = false;
   }
 }

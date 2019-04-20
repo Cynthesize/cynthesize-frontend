@@ -12,6 +12,7 @@ import {
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { CommentsService } from '@app/core/comments/comments.service';
+import { AuthenticationService } from '@app/core';
 
 @Component({
   selector: 'app-comments',
@@ -19,7 +20,7 @@ import { CommentsService } from '@app/core/comments/comments.service';
   styleUrls: ['./comments.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class CommentsComponent implements OnInit, OnChanges {
+export class CommentsComponent implements OnInit {
   @Input() activityType: string;
   @Input() activityId: number;
   commentObject: any[] = [];
@@ -33,15 +34,13 @@ export class CommentsComponent implements OnInit, OnChanges {
 
   constructor(
     private commentService: CommentsService,
-    private router: Router,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    public authenticationService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
     this.fetchComments();
   }
-
-  ngOnChanges(changes: SimpleChanges) {}
 
   fetchComments(): void {
     this.commentService.fetchComments(this.activityId, this.activityType).subscribe(
