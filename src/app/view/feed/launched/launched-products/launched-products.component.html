@@ -3,7 +3,7 @@
     <div class="page-header">
       <div class="page-heading">PROJECTS</div>
     </div>
-    <div class="page-search">
+    <!-- <div class="page-search">
       <div class="page-search-box">
         <mat-form-field appearance="fill">
           <mat-label>Search Launched Projects</mat-label>
@@ -26,7 +26,7 @@
           >NEWEST</span
         >
       </div>
-    </div>
+    </div> -->
     <div class="page-data">
       <mat-card *ngFor="let project of projectList" class="launched-project-page-card">
         <div class="card">
@@ -59,29 +59,6 @@
             ></app-activity-actions>
           </div>
         </div>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title> <b>Required</b> </mat-panel-title>
-          </mat-expansion-panel-header>
-          <div>
-            <div *ngFor="let role of project.roles_opened" class="apply-role">
-              {{ role }}
-              <div *ngIf="applying" class="apply-role">
-                <mat-form-field appearance="outline">
-                  <mat-label>Want to add something more?</mat-label>
-                  <input matInput [(ngModel)]="additionalInfo" />
-                </mat-form-field>
-                <button mat-icon-button (click)="applyForCollab(role, project.id)">
-                  <mat-icon> done </mat-icon>
-                </button>
-                <button mat-icon-button (click)="applying = false">
-                  <mat-icon> cancel </mat-icon>
-                </button>
-              </div>
-              <button mat-button (click)="applying = true">Collaborate!</button>
-            </div>
-          </div>
-        </mat-expansion-panel>
       </mat-card>
     </div>
   </div>

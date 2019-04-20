@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { CommentsService } from '@app/core/comments/comments.service';
 import { AuthenticationService } from '@app/core';
+import { LoginComponent } from '@app/auth/login/login.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-comments',
@@ -35,7 +37,8 @@ export class CommentsComponent implements OnInit {
   constructor(
     private commentService: CommentsService,
     private errorHandler: ErrorHandlerService,
-    public authenticationService: AuthenticationService
+    public authenticationService: AuthenticationService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -64,5 +67,11 @@ export class CommentsComponent implements OnInit {
         this.errorHandler.subj_notification.next(error);
       }
     );
+  }
+
+  openLoginDialog(): void {
+    this.dialog.open(LoginComponent, {
+      width: 'auto'
+    });
   }
 }

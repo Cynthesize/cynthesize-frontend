@@ -24,11 +24,14 @@ export class GraphqlModule {
      */
     let authHeader: any;
 
-    authHeader = new HttpHeaders()
-      .set('X-Hasura-Access-Key', HASURA_ACCESS_KEY)
-      .set('Content-Type', 'application/json')
-      .set('Authorization', `Bearer ${localStorage.getItem('id_token')}`)
-      .set('X-Hasura-Role', 'admin');
+    if (localStorage.getItem('user_id')) {
+      authHeader = new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        .set('Authorization', `Bearer ${localStorage.getItem('id_token')}`)
+        .set('user_id', `Bearer ${localStorage.getItem('userId')}`);
+    } else {
+      authHeader = new HttpHeaders().set('Content-Type', 'application/json');
+    }
 
     // Create a HTTP Link with the URI and the header.
     const http = httpLink.create({ uri, headers: authHeader });

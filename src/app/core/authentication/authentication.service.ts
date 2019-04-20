@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -14,12 +13,7 @@ export class AuthenticationService {
   user$: Observable<any>;
   token$: Observable<any>;
 
-  constructor(
-    private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
-    private router: Router,
-    private userService: UserService
-  ) {
+  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private userService: UserService) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
@@ -40,6 +34,9 @@ export class AuthenticationService {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.auth.signInWithPopup(provider);
 
+    credential.user.getIdTokenResult().then(token => {
+      localStorage.setItem('id_token', token.token);
+    });
     this.userService.HandleUserData(credential);
     return this.updateUserData(credential.user);
   }

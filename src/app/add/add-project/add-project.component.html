@@ -124,7 +124,13 @@
                 <mat-radio-button value="false">False</mat-radio-button>
               </mat-radio-group>
             </div>
-            <button mat-raised-button class="orange-btn">Post Idea</button>
+            <div *ngIf="(authenticationService.user$ | async); then authenticated; else guest"></div>
+            <ng-template #authenticated>
+              <button mat-raised-button class="orange-btn">Post</button>
+            </ng-template>
+            <ng-template #guest>
+              <button mat-raised-button class="orange-btn" disabled>You need to be logged to post the project.</button>
+            </ng-template>
           </form>
         </mat-card>
       </div>

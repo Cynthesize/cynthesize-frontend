@@ -6,19 +6,19 @@
       </div>
       <div *ngIf="(authenticationService.user$ | async); then authenticated; else guest"></div>
       <ng-template #authenticated>
-        <div class="init-comment-input" (click)="checkForLogin()" *ngIf="!isCommenting">
+        <div class="init-comment-input" (click)="isCommenting = true" *ngIf="!isCommenting">
           Write Comment
         </div>
       </ng-template>
       <ng-template #guest>
-        <div class="init-comment-input" (click)="checkForLogin()" *ngIf="!isCommenting">
-          Write Comment
+        <div class="init-comment-input" (click)="openLoginDialog()">
+          You need to be logged into comment.
         </div>
       </ng-template>
       <div class="td-editor-stuff" *ngIf="isCommenting">
         <td-text-editor [(ngModel)]="commentText" [options]="options"></td-text-editor>
         <button mat-raised-button (click)="addComment()">Add</button>
-        <button mat-raised-button (click)="this.isCommenting = false">Cancel</button>
+        <button mat-raised-button (click)="isCommenting = false">Cancel</button>
       </div>
     </div>
     <div class="comments" *ngIf="commentObject">

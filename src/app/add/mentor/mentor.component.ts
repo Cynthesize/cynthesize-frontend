@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserService } from '@app/core/user/user.service';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
+import { AuthenticationService } from '@app/core';
 
 @Component({
   selector: 'app-mentor',
@@ -25,7 +26,12 @@ export class MentorComponent implements OnInit {
 
   mentorForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private errorHandler: ErrorHandlerService) {
+  constructor(
+    private fb: FormBuilder,
+    public authenticationService: AuthenticationService,
+    private userService: UserService,
+    private errorHandler: ErrorHandlerService
+  ) {
     this.userService.checkMentorshipData().subscribe(
       (data: any) => {
         if (data.data.mentor_data.length !== 0) {
@@ -33,7 +39,7 @@ export class MentorComponent implements OnInit {
         }
       },
       (error: any) => {
-        this.errorHandler.subj_notification.next(error);
+        // Nothing is done if user is not logged in.
       }
     );
     this.isLoading = false;

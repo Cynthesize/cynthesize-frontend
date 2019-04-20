@@ -24,7 +24,6 @@ export class UserService {
     }
     localStorage.setItem('access_token', credential.credential['accessToken']);
     localStorage.setItem('user_id', credential.additionalUserInfo.profile['id']);
-    localStorage.setItem('id_token', credential.credential['idToken']);
   }
 
   /**

@@ -8,6 +8,7 @@ import { MatChipInputEvent, MatAutocomplete, MatAutocompleteSelectedEvent } from
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { TAGS } from '@app/shared/constants';
+import { AuthenticationService } from '@app/core';
 
 @Component({
   selector: 'app-project',
@@ -53,7 +54,8 @@ export class AddProjectComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private projectService: ProjectService,
     private router: Router,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    public authenticationService: AuthenticationService
   ) {
     this.project = this._formBuilder.group({
       projectName: ['', Validators.required],
