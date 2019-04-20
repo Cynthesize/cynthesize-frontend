@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { AddRoutingModule } from './add-routing.module';
 import { AddProjectComponent } from './add-project/add-project.component';
-import { AddIdeaComponent } from './add-idea/add-idea.component';
 import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,7 +11,7 @@ import { CovalentMarkdownModule } from '@covalent/markdown';
 import { MentorComponent } from './mentor/mentor.component';
 
 @NgModule({
-  declarations: [AddProjectComponent, AddIdeaComponent, MentorComponent],
+  declarations: [AddProjectComponent, MentorComponent],
   imports: [
     CommonModule,
     AddRoutingModule,

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { map, take } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { MUTATION_ADD_REPLY, MUTATION_ADD_COMMENT } from '@app/shared/mutations/user-mutations';
-import { QUERY_FETCH_IDEA_COMMENTS } from '@app/shared/queries/idea-queries';
 import {
   QUERY_FETCH_PUBLIC_PROJECT_COMMENTS,
   QUERY_FETCH_ISSUE_COMMENTS,
@@ -22,7 +21,7 @@ export class CommentsService {
    * fetchComments
    */
   public fetchComments(activityId: number, activityType: string) {
-    let Query = QUERY_FETCH_IDEA_COMMENTS;
+    let Query = QUERY_FETCH_PUBLIC_PROJECT_COMMENTS;
     const variableQueryObject = {};
     switch (activityType) {
       case 'project':
@@ -36,10 +35,6 @@ export class CommentsService {
       case 'issue':
         Query = QUERY_FETCH_ISSUE_COMMENTS;
         variableQueryObject['issueId'] = activityId;
-        break;
-      case 'idea':
-        Query = QUERY_FETCH_IDEA_COMMENTS;
-        variableQueryObject['ideaId'] = activityId;
         break;
       default:
         break;
@@ -72,9 +67,6 @@ export class CommentsService {
         break;
       case 'issue':
         objectToBeAdded['issue_id'] = activityId;
-        break;
-      case 'idea':
-        objectToBeAdded['idea_id'] = activityId;
         break;
       default:
         break;

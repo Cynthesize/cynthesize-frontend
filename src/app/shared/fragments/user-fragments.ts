@@ -15,9 +15,6 @@ const USER_LIKES_FRAGMENT = gql`
     comment_likes {
       comment_id
     }
-    ideaLikessByuserId {
-      idea_id
-    }
     projectLikessByuserId {
       project_id
     }

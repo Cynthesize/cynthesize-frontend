@@ -89,7 +89,6 @@ export class UserService {
             data.data.insert_user.returning[0].username,
             data.data.insert_user.returning[0].id,
             '[]',
-            '[]',
             '[]'
           );
         },
@@ -110,15 +109,11 @@ export class UserService {
       .valueChanges.subscribe(
         (likes: any) => {
           const likedComments: any = [];
-          const upvotedIdeas: any = [];
           const likedProjects: any = [];
           const likedReplies: any = [];
 
           likes.data.user[0].comment_likes.forEach((commentUserLikes: any) => {
             likedComments.push(commentUserLikes.comment_id);
-          });
-          likes.data.user[0].ideaLikessByuserId.forEach((commentUserLikes: any) => {
-            upvotedIdeas.push(commentUserLikes.idea_id);
           });
           likes.data.user[0].projectLikessByuserId.forEach((commentUserLikes: any) => {
             likedProjects.push(commentUserLikes.project_id);
@@ -131,7 +126,6 @@ export class UserService {
             picture,
             username,
             likes.data.user[0].id,
-            JSON.stringify(upvotedIdeas),
             JSON.stringify(likedProjects),
             JSON.stringify(likedReplies)
           );
@@ -147,14 +141,12 @@ export class UserService {
     pic: string,
     username: string,
     userId: string,
-    ideaLikes: string,
     projectLikes: string,
     replyLikes: string
   ) {
     localStorage.setItem('user_profile_pic', pic);
     localStorage.setItem('username', username);
     localStorage.setItem('userId', userId);
-    localStorage.setItem('ideaUpvotedByLoggedInUser', ideaLikes);
     localStorage.setItem('commentsLikedByLoggedInUser', commentLikes);
     localStorage.setItem('projectsLikedByLoggedInUser', projectLikes);
     localStorage.setItem('repliesLikedByLoggedInUser', replyLikes);

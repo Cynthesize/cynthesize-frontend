@@ -3,13 +3,10 @@ import { User } from '@app/core/profile/user';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { ProfileService } from '@app/core/profile/profile.service';
-import { IdeaService } from '@app/core/idea/idea.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { MatDialog, MatChipInputEvent } from '@angular/material';
-import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
 import { finalize } from 'rxjs/operators';
-import { SocialDialogComponent } from './details/details.component';
 import { Param } from 'cloudinary-core';
 
 class ImageSnippet {
@@ -27,7 +24,6 @@ export interface SocialLinks {
 })
 export class UserComponent implements OnInit {
   userProjects: Array<Object>;
-  userIdeas: Array<Object>;
   user: User;
   isPageLoaded = false;
   username: string;
@@ -48,7 +44,6 @@ export class UserComponent implements OnInit {
 
   constructor(
     private profileService: ProfileService,
-    private ideaService: IdeaService,
     private route: ActivatedRoute,
     private router: Router,
     private errorHandler: ErrorHandlerService,
@@ -84,23 +79,6 @@ export class UserComponent implements OnInit {
     });
   }
 
-  openDialog(idea: any): void {
-    const dialogRef = this.dialog.open(IdeaCardComponent, {
-      width: 'auto',
-      data: { idea }
-    });
-    dialogRef.afterClosed().subscribe(result => {});
-  }
-
-  openSocialDialog(): void {
-    const dialogRef = this.dialog.open(SocialDialogComponent, {
-      width: 'auto',
-      data: this.user.social_links
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.socialLinks = result;
-    });
-  }
   toggleFormFields(toggle: boolean) {
     this.isFieldEditable = toggle;
   }
@@ -174,14 +152,6 @@ export class UserComponent implements OnInit {
     if (input) {
       input.value = '';
     }
-  }
-
-  deleteIdea(id: any) {
-    this.ideaService.deleteIdea(id).subscribe(data => {
-      this.userIdeas = this.userIdeas.filter((obj: any) => {
-        return obj.id !== data.data.delete_ideas.returning[0].id;
-      });
-    });
   }
 
   processFile(imageInput: any) {

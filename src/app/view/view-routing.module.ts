@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ViewProjectModule } from './view-project/view-project.module';
-import { IdeaComponent } from './idea/idea.component';
 
 const routes: Routes = [
   {
@@ -19,10 +17,6 @@ const routes: Routes = [
   {
     path: 'feed',
     loadChildren: 'app/view/feed/feed.module#FeedModule'
-  },
-  {
-    path: '/idea/:ideaId',
-    component: IdeaComponent
   }
 ];
 

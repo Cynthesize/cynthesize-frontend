@@ -8,7 +8,6 @@ import { MaterialModule } from '@app/material.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
 import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
-import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
 import { MatBottomSheetModule } from '@angular/material';
 import { FeedProjectComponent } from './feed-project/feed-project.component';
 
@@ -31,6 +30,6 @@ export const config: CloudinaryConfiguration = {
     NgxPaginationModule,
     CloudinaryModule.forRoot(cloudinary, config)
   ],
-  entryComponents: [IdeaCardComponent, FeedProjectComponent]
+  entryComponents: [FeedProjectComponent]
 })
 export class FeedModule {}

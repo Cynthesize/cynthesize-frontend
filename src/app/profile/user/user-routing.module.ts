@@ -5,18 +5,7 @@ import { UserComponent } from './user.component';
 const routes: Routes = [
   {
     path: ':username',
-    component: UserComponent,
-    children: [
-      {
-        path: 'edit',
-        loadChildren: 'app/profile/user/edit/edit.module#EditModule'
-      },
-      {
-        path: '**',
-        redirectTo: 'profile',
-        pathMatch: 'full'
-      }
-    ]
+    component: UserComponent
   },
   {
     path: '**',

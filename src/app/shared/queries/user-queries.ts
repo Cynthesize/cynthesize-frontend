@@ -5,7 +5,6 @@ import {
   USER_LIKES_FRAGMENT,
   LAUNCHED_USER_PROJECT_DETAILS_FRAGMENT
 } from '../fragments/user-fragments';
-import { IDEA_FEED_FRAGMENT } from '../fragments/idea-fragments';
 
 const QUERY_USER_CHECK = gql`
   query fetch_user($email: String!) {
@@ -43,15 +42,6 @@ const QUERY_PROJECTS_BY_USER = gql`
   ${LAUNCHED_USER_PROJECT_DETAILS_FRAGMENT}
 `;
 
-const QUERY_IDEAS_BY_USER = gql`
-  query fetch_newest_projects($username: String!) {
-    user(where: { username: { _eq: $username } }) {
-      ...IdeaFeedFragment
-    }
-  }
-  ${IDEA_FEED_FRAGMENT}
-`;
-
 const QUERY_APPLIED_FOR_MENTORSHIP = gql`
   query applied_for_mentorship($userId: Int!) {
     mentor_data(where: { user_id: { _eq: $userId } }) {
@@ -63,11 +53,4 @@ const QUERY_APPLIED_FOR_MENTORSHIP = gql`
   }
 `;
 
-export {
-  QUERY_USER_CHECK,
-  QUERY_USER_DETAILS,
-  QUERY_USER_LIKES,
-  QUERY_PROJECTS_BY_USER,
-  QUERY_IDEAS_BY_USER,
-  QUERY_APPLIED_FOR_MENTORSHIP
-};
+export { QUERY_USER_CHECK, QUERY_USER_DETAILS, QUERY_USER_LIKES, QUERY_PROJECTS_BY_USER, QUERY_APPLIED_FOR_MENTORSHIP };

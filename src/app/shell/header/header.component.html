@@ -15,28 +15,17 @@
     </div>
     <span fxFlex></span>
     <div class="v-desktop" fxHide.lt-md>
-      <button class="header__link" mat-button routerLink="/view/feed/ideas">
-        <span translate>Ideas</span>
+      <button class="header__link" mat-button routerLink="/add/project">
+        <span>Add Project</span>
       </button>
-      <button class="header__link" mat-button [matMenuTriggerFor]="menu">
-        <span translate>Collaborate </span>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button class="header__link" mat-menu-item routerLink="/add/idea">
-          <span translate>New Idea</span>
-        </button>
-        <button class="header__link" mat-menu-item routerLink="/add/project">
-          <span translate>New Project</span>
-        </button>
-      </mat-menu>
       <button class="header__link" mat-button routerLink="/add/mentor">
-        <span translate>Become a mentor</span>
+        <span>Become a mentor</span>
       </button>
       <button class="header__link" mat-button routerLink="/view/issues">
-        <span translate>See Open Issues</span>
+        <span>See Open Issues</span>
       </button>
       <button class="header__link" mat-button routerLink="/view/feed/projects">
-        <span translate>Launched Projects</span>
+        <span>Launched Projects</span>
       </button>
 
       <div *ngIf="(authenticationService.user$ | async); then authenticated; else guest"></div>

@@ -3,11 +3,6 @@ import { map, take } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
   MUTATION_ADD_PROJECT,
-  MUTATION_ADD_ISSUE_COMMENT,
-  MUTATION_ADD_ISSUE_COMMENT_REPLY,
-  MUTATION_ADD_ISSUE,
-  MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT,
-  MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE,
   MUTATION_UPDATE_PROJECT_DESCRIPTION,
   MUTATION_ADD_PROJECT_DESCRIPTION,
   MUTATION_UPDATE_PROJECT_EVENTS,
@@ -15,14 +10,13 @@ import {
   MUTATION_UPDATE_PROJECT_DETAILS
 } from '@app/shared/mutations/project-mutations';
 import {
-  QUERY_CHECKPOINT_ISSUES,
   QUERY_NEWEST_LAUNCHED_PROJECTS,
   QUERY_POPULAR_LAUNCHED_PROJECTS,
   QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT,
   QUERY_FETCH_BASIC_PROJECT_DETAILS,
   QUERY_FETCH_PROJECT_DETAILS
 } from '@app/shared/queries/project-queries';
-import { MUTATION_ADD_IDEA_TAGS } from '@app/shared/mutations/idea-mutations';
+import { MUTATION_ADD_TAGS_LINKS } from '@app/shared/mutations/project-mutations';
 import {
   MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE,
   MUTATION_SEND_PROJECT_FOR_MARKETING_STAGE,
@@ -182,7 +176,7 @@ export class ProjectService {
     });
     return this.apollo
       .mutate<any>({
-        mutation: MUTATION_ADD_IDEA_TAGS,
+        mutation: MUTATION_ADD_TAGS_LINKS,
         variables: {
           objects: tagTBP
         }

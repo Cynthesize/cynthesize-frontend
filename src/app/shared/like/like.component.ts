@@ -11,7 +11,6 @@ import {
   MUTATION_DISLIKE_REPLY,
   MUTATION_LIKE_REPLY
 } from '../mutations/user-mutations';
-import { MUTATION_LIKE_IDEA, MUTATION_DISLIKE_IDEA } from '../mutations/idea-mutations';
 
 @Component({
   selector: 'app-like',
@@ -67,9 +66,6 @@ export class LikeComponent implements OnInit {
     if (filteredInfo['projectId']) {
       this.likes = responseData.data.update_projects.returning[0].likes;
       this._updateLikedProjectsInLocalStorage(this.activityId, this.isAlreadyLiked);
-    } else if (filteredInfo['ideaId']) {
-      this.likes = responseData.data.update_ideas.returning[0].likes;
-      this._updateLikedIdeasInLocalStorage(this.activityId, this.isAlreadyLiked);
     } else if (filteredInfo['commentId']) {
       this.likes = responseData.data.update_comment.returning[0].likes;
       this._updateLikedCommentsInLocalStorage(this.activityId, this.isAlreadyLiked);
@@ -94,12 +90,6 @@ export class LikeComponent implements OnInit {
         _object['mutation'] = this.isAlreadyLiked ? MUTATION_DISLIKE_COMMENT : MUTATION_LIKE_COMMENT;
         break;
 
-      case 'idea':
-        this.isAlreadyLiked = this.isIdeaLikedByLoggedInUser(activityId);
-        _object['ideaId'] = activityId;
-        _object['mutation'] = this.isAlreadyLiked ? MUTATION_DISLIKE_IDEA : MUTATION_LIKE_IDEA;
-        break;
-
       case 'reply':
         this.isAlreadyLiked = this.isReplyLikedByLoggedInUser(activityId);
         _object['replyId'] = activityId;
@@ -116,16 +106,6 @@ export class LikeComponent implements OnInit {
     let flag = false;
     JSON.parse(localStorage.getItem('projectsLikedByLoggedInUser')).forEach((likedProjectIds: any) => {
       if (projectId === likedProjectIds) {
-        flag = true;
-      }
-    });
-    return flag;
-  }
-
-  isIdeaLikedByLoggedInUser(ideaId: number) {
-    let flag = false;
-    JSON.parse(localStorage.getItem('ideaUpvotedByLoggedInUser')).forEach((likedIdeaIds: any) => {
-      if (ideaId === likedIdeaIds) {
         flag = true;
       }
     });
@@ -198,21 +178,5 @@ export class LikeComponent implements OnInit {
       this.isAlreadyLiked = true;
     }
     localStorage.setItem('repliesLikedByLoggedInUser', JSON.stringify(upvotedReplies));
-  }
-
-  private _updateLikedIdeasInLocalStorage(ideaId: number, shouldRemove: boolean) {
-    const upvotedIdeas = JSON.parse(localStorage.getItem('ideaUpvotedByLoggedInUser'));
-    if (shouldRemove) {
-      for (let i = 0; i < upvotedIdeas.length; i++) {
-        if (upvotedIdeas[i] === ideaId) {
-          upvotedIdeas.splice(i, 1);
-        }
-      }
-      this.isAlreadyLiked = false;
-    } else {
-      upvotedIdeas.push(ideaId);
-      this.isAlreadyLiked = true;
-    }
-    localStorage.setItem('ideaUpvotedByLoggedInUser', JSON.stringify(upvotedIdeas));
   }
 }

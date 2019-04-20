@@ -18,8 +18,9 @@
         </p>
         <mat-card class="home-community">
           <h2 class="home-description">Wanna join the community?</h2>
-          <button mat-raised-button color="primary" class="community-button">See active projects</button>
-          <button mat-raised-button color="primary" class="community-button">Ideate with the community</button>
+          <button mat-raised-button color="primary" class="community-button" [routerLink]="['/view/feed/projects']">
+            See active projects
+          </button>
         </mat-card>
       </div>
       <div class="home-banner-image">
@@ -49,7 +50,7 @@
           <div class="right-align-icon"><mat-icon>arrow_right_alt</mat-icon></div>
         </mat-card>
 
-        <mat-card class="home-card pointer" [routerLink]="['/add/idea']">
+        <mat-card class="home-card pointer">
           <mat-card-header>
             <mat-card-title>IDEATE</mat-card-title>
           </mat-card-header>
@@ -62,7 +63,7 @@
           </mat-card-content>
           <div class="right-align-icon"><mat-icon>arrow_right_alt</mat-icon></div>
         </mat-card>
-        <mat-card class="home-card pointer" [routerLink]="['/view/feed/ideas']">
+        <mat-card class="home-card pointer">
           <mat-card-header>
             <mat-card-title>COLLABORATE</mat-card-title>
           </mat-card-header>
@@ -75,7 +76,7 @@
           </mat-card-content>
           <div class="right-align-icon"><mat-icon>arrow_right_alt</mat-icon></div>
         </mat-card>
-        <mat-card class="home-card pointer" [routerLink]="['/apply']">
+        <mat-card class="home-card pointer" [routerLink]="['/add/mentor']">
           <mat-card-header>
             <mat-card-title>BECOME A MENTOR</mat-card-title>
           </mat-card-header>

@@ -28,20 +28,11 @@ export class ShellComponent implements OnInit {
   onWindowScroll(event: any) {
     if (
       event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight &&
-      this.router.url === '/view/feed/ideas' &&
+      this.router.url === '/view/launched' &&
       event.target.scrollHeight !== this.flag
     ) {
       this.flag = event.target.scrollHeight;
-      this.errorHandler.ideaWindowScrolled.next('fetchIdeas');
-    } else {
-      if (
-        event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight &&
-        this.router.url === '/view/launched' &&
-        event.target.scrollHeight !== this.flag
-      ) {
-        this.flag = event.target.scrollHeight;
-        this.errorHandler.ideaWindowScrolled.next('fetchLaunchedProjects');
-      }
+      this.errorHandler.ideaWindowScrolled.next('fetchLaunchedProjects');
     }
   }
 }
