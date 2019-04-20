@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private snackBar: MatSnackBar
   ) {
+    angulartics2GoogleAnalytics.startTracking();
     this.errorHandler.subj_notification.subscribe(message => {
       let messageString = '';
       if (typeof message === 'string') {

@@ -15,11 +15,21 @@ export class ProjectsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private profileService: ProfileService) {
     this.route.params.subscribe(params => {
       this.profileService.getUserProjects(params.username).subscribe(data => {
-        this.launchedProjects = data.data.user[0].launchedProjectssByowner;
+        console.log(data);
+        this.launchedProjects = data.data.user[0].projectssByowner;
         this.isLoading = false;
       });
     });
   }
 
+  displayableName(str: string) {
+    str = str.replace(/-/g, ' ');
+    str = str.replace(/_/g, ' ');
+    const splitStr = str.toLowerCase().split(' ');
+    for (let i = 0; i < splitStr.length; i++) {
+      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(' ');
+  }
   ngOnInit() {}
 }

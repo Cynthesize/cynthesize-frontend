@@ -53,6 +53,7 @@ export class ProjectService {
               website: projectDetails['website'],
               is_public: projectDetails['isPublic'],
               current_stage: projectDetails['currentStage'],
+              icon: projectDetails['icon'],
               owner: localStorage.getItem('userId')
             }
           ]

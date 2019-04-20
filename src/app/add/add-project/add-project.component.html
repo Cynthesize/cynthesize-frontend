@@ -20,7 +20,7 @@
               </h3>
               <mat-form-field appearance="outline" class="field">
                 <mat-label>Enter project title</mat-label>
-                <input matInput formControlName="projectName" placeholder="Enter project title" />
+                <input matInput formControlName="projectName" />
               </mat-form-field>
             </div>
             <div class="field">
@@ -38,7 +38,7 @@
               </h3>
               <mat-form-field appearance="outline" class="field">
                 <mat-label>Enter project abstract</mat-label>
-                <textarea matInput formControlName="abstract" placeholder="Enter project description"></textarea>
+                <textarea matInput formControlName="abstract"></textarea>
               </mat-form-field>
             </div>
             <div class="field">
@@ -92,7 +92,7 @@
               </h3>
               <mat-form-field appearance="outline" class="field">
                 <mat-label>Enter website link</mat-label>
-                <input matInput formControlName="website" placeholder="Enter website link" />
+                <input matInput formControlName="website" />
               </mat-form-field>
             </div>
             <h3>
@@ -100,12 +100,14 @@
               <mat-icon
                 [matTooltipPosition]="'right'"
                 matTooltipClass="tooltip"
-                matTooltip="Tip: Add tags that describe your idea best. Helps others find your idea in searches."
+                matTooltip="Tip: Enter thumbnail URL. Please enter valid URL."
                 >help_outline</mat-icon
               >
             </h3>
-            <!-- TODO -->
-            <p>Coming Soon</p>
+            <mat-form-field appearance="outline" class="field">
+              <mat-label>Enter thumbnail url</mat-label>
+              <textarea matInput formControlName="icon"></textarea>
+            </mat-form-field>
 
             <div class="field">
               <h3>

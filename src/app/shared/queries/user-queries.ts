@@ -36,7 +36,7 @@ const QUERY_USER_LIKES = gql`
 
 const QUERY_PROJECTS_BY_USER = gql`
   query fetch_newest_projects($username: String!) {
-    user(limit: 4, where: { username: { _eq: $username } }) {
+    user(where: { username: { _eq: $username } }) {
       ...LaunchedUserProjectDetailsFragment
     }
   }

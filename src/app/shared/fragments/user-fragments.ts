@@ -29,18 +29,25 @@ const USER_LIKES_FRAGMENT = gql`
 
 const LAUNCHED_USER_PROJECT_DETAILS_FRAGMENT = gql`
   fragment LaunchedUserProjectDetailsFragment on user {
-    launchedProjectssByowner(limit: 4) {
+    id
+    projectssByowner {
       id
-      projectssBylaunchedId {
-        project_name
-        abstract
-        likes
-        website
+      project_name
+      created_on
+      current_stage
+      tech_stack
+      website
+      roles_opened
+      is_public
+      abstract
+      icon
+      likes
+      tagsLinkssByprojectId {
+        tagsBytagId {
+          tag_name
+        }
       }
-      userByowner {
-        username
-        profile_pic
-      }
+      is_launched
     }
   }
 `;

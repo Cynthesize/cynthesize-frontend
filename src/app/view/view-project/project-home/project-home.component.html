@@ -3,11 +3,7 @@
   <div class="banner-image"><img src="../../../../assets/images/project_banner.svg" /></div>
   <h1 class="checkpoint-name">{{ displayableName(project.project_name) }}</h1>
   <p>
-    Owned by:
-    <b>
-      <a [routerLink]="['/user', project.userByowner.username]">{{ project.userByowner.username }}</a>
-    </b>
-    | Mentored By:
+    Team leader:
     <b>
       <a [routerLink]="['/user', project.userByowner.username]">{{ project.userByowner.username }}</a>
     </b>

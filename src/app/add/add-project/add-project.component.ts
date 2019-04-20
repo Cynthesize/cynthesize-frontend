@@ -57,6 +57,7 @@ export class AddProjectComponent implements OnInit {
   ) {
     this.project = this._formBuilder.group({
       projectName: ['', Validators.required],
+      icon: ['', Validators.required],
       abstract: ['', [Validators.required, Validators.maxLength(100)]],
       website: ['https://', Validators.required],
       isPublic: false
@@ -81,7 +82,8 @@ export class AddProjectComponent implements OnInit {
       currentStage: 'ideation_stage',
       abstract: this.project.get('abstract').value.trim(),
       isPublic: this.project.get('isPublic').value,
-      website: this.project.get('website').value
+      website: this.project.get('website').value,
+      icon: this.project.get('icon').value
     };
 
     this.projectService.addProject(projectDetails).subscribe(

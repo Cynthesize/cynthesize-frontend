@@ -1,0 +1,64 @@
+.link-active {
+  color: orange;
+}
+.header-icons {
+  display: flex;
+}
+.user-page-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#project {
+  margin: 15px;
+}
+#idea {
+  margin: 10px;
+}
+.contribution {
+  margin: 25px 0 0 25px;
+  width: 85%;
+}
+
+.info-detail {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  font-size: 1rem;
+}
+.info-detail > mat-icon {
+  margin-right: 10px;
+}
+.banner {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  background-color: orange;
+}
+.user {
+  display: flex;
+  position: absolute;
+  top: 100px;
+  left: 10%;
+}
+.info-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+.image {
+  border-radius: 50%;
+  border: 15px white solid;
+  width: 250px;
+  height: 260px;
+}
+.userinfo {
+  flex: 3;
+  display: flex;
+  padding: 125px 0 0 0;
+}
+.name {
+  font-weight: 700;
+}

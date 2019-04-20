@@ -8,7 +8,7 @@ import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 
 @NgModule({
-  declarations: [ProjectsComponent],
+  declarations: [],
   imports: [CommonModule, ProjectsRoutingModule, LaunchedModule, SharedModule, MaterialModule]
 })
 export class ProjectsModule {}

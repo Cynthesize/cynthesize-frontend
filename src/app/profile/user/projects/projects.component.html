@@ -1,30 +1,35 @@
 <div class="profile-project-page">
   <div class="page-header">
-    <div class="profile-heading">Launched Projects</div>
+    <div class="profile-heading">Projects</div>
   </div>
   <div class="page-data">
     <mat-card class="card" *ngFor="let project of launchedProjects">
-      <div class="card-image"></div>
+      <div><img class="project-icon" [src]="project.icon" /></div>
       <div class="card-details">
-        <div class="card-project-name">{{ project.projectssBylaunchedId[0].project_name }}</div>
+        <div class="card-project-name">
+          {{ displayableName(project.project_name) }}
+          <span *ngFor="let tag of project.tagsLinkssByprojectId" class="tags">
+            {{ tag.tagsBytagId.tag_name }}
+          </span>
+        </div>
         <div class="card-project-description">
-          {{ project.projectssBylaunchedId[0].abstract }}
+          Started: {{ project.created_on | timeDiff }}
+          <br />
+          {{ project.abstract }}
         </div>
       </div>
       <div class="card-links">
         <div>
-          <a href="{{ project.projectssBylaunchedId[0].website }}" target="_blank">{{
-            project.projectssBylaunchedId[0].website
-          }}</a>
+          <a href="{{ project.website }}" target="_blank">
+            <button mat-raised-button style="width: -webkit-fill-available;">Visit</button>
+          </a>
         </div>
-        <div class="card-icons pointer">
-          <app-activity-actions
-            [id]="project.id"
-            [type]="'project'"
-            [likes]="project.projectssBylaunchedId[0].likes"
-            [url]="'/view/launched/' + project.id"
-          ></app-activity-actions>
-        </div>
+        <app-activity-actions
+          [id]="project.id"
+          [type]="'project'"
+          [likes]="project.likes"
+          [url]="'/view/feed/projects/' + project.project_name"
+        ></app-activity-actions>
       </div>
     </mat-card>
   </div>

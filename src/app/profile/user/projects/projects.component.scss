@@ -9,3 +9,23 @@
   font-size: 1.2rem;
   font-weight: 600;
 }
+.project-icon {
+  width: 100px;
+  height: auto;
+  flex: 1;
+  border-radius: 6px;
+  margin-right: 20px;
+}
+
+.launched-project-page-card {
+  padding: 20px 20px 0 20px;
+}
+
+.tags {
+  padding: 3px;
+  border: 1px #dddddd solid;
+  border-radius: 2px;
+  font-size: 0.7rem;
+  margin: 0 5px;
+  font-weight: 400;
+}

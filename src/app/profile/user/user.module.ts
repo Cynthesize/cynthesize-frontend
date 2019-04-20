@@ -10,6 +10,7 @@ import { IdeaCardComponent } from '@app/shared/idea-card/idea-card.component';
 import { UserComponent } from './user.component';
 import { SocialDialogComponent, DetailsComponent } from './details/details.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ProjectsComponent } from './projects/projects.component';
 
 export const cloudinary = {
   Cloudinary: CloudinaryCore
@@ -28,7 +29,7 @@ export const config: CloudinaryConfiguration = {
     ReactiveFormsModule,
     CloudinaryModule.forRoot(cloudinary, config)
   ],
-  declarations: [SocialDialogComponent, UserComponent, DetailsComponent],
+  declarations: [SocialDialogComponent, UserComponent, DetailsComponent, ProjectsComponent],
   entryComponents: [IdeaCardComponent, SocialDialogComponent],
   providers: [
     {
