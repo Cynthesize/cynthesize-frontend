@@ -19,12 +19,12 @@
         <span style="font-size: 1rem;">
           |
           {{
-            currentStage
+            project.current_stage
               .split('_')
               .join(' ')
               .charAt(0)
               .toUpperCase() +
-              currentStage
+              project.current_stage
                 .split('_')
                 .join(' ')
                 .slice(1)

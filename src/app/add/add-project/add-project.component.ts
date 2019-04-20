@@ -58,7 +58,6 @@ export class AddProjectComponent implements OnInit {
     this.project = this._formBuilder.group({
       projectName: ['', Validators.required],
       abstract: ['', [Validators.required, Validators.maxLength(100)]],
-      currentStage: ['', Validators.required],
       website: ['https://', Validators.required],
       isPublic: false
     });
@@ -79,7 +78,7 @@ export class AddProjectComponent implements OnInit {
         .replace(/\s+/g, ' ')
         .trim()
         .replace(/ /g, '-'),
-      currentStage: this.project.get('currentStage').value,
+      currentStage: 'ideation_stage',
       abstract: this.project.get('abstract').value.trim(),
       isPublic: this.project.get('isPublic').value,
       website: this.project.get('website').value

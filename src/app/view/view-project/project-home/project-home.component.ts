@@ -33,7 +33,7 @@ export class ProjectHomeComponent implements OnInit {
   rolesDataForm: FormGroup;
   descriptionDataForm: FormGroup;
   editingDescription = false;
-  currentStage: string;
+  currentStage = '';
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -78,7 +78,6 @@ export class ProjectHomeComponent implements OnInit {
 
   ngOnInit() {
     this.initDescriptionForm();
-    this.currentStage = this._getCurrentStageForTheProject();
   }
   displayableName(str: string) {
     str = str.replace(/-/g, ' ');
@@ -92,7 +91,10 @@ export class ProjectHomeComponent implements OnInit {
   openReviewModel() {
     this.dialog.open(ReviewComponent, {
       width: 'auto',
-      data: { context: this.currentStage, projectId: this.project.id }
+      data: {
+        context: this._getCurrentStageStatusWaiting() ? 'waiting' : this.project.current_stage,
+        projectId: this.project.id
+      }
     });
   }
 
@@ -155,35 +157,53 @@ export class ProjectHomeComponent implements OnInit {
     this.barChartType = this.barChartType === 'bar' ? 'line' : 'bar';
   }
 
-  /**
-   * getCurrentStageForTheProject
-   */
-  private _getCurrentStageForTheProject(): string {
-    if (
-      this.project.stage_ideations[0].is_applied ||
-      this.project.stage_marketings[0].is_applied ||
-      this.project.stage_product_developments[0].is_applied ||
-      this.project.stage_launchings[0].is_applied ||
-      this.project.stage_consumer_feedbacks[0].is_applied ||
-      this.project.stage_fundings[0].is_applied
-    ) {
-      return 'waiting';
-    }
-
-    if (!this.project.stage_ideations[0].is_passed) {
-      return 'ideation_stage';
-    } else if (this.project.stage_ideations[0].is_passed && !this.project.stage_marketings[0].is_passed) {
-      return 'marketing_stage';
-    } else if (!this.project.stage_product_developments[0].is_passed && this.project.stage_marketings[0].is_passed) {
-      return 'prototype_development_stage';
-    } else if (!this.project.stage_launchings[0].is_passed && this.project.stage_product_developments[0].is_passed) {
-      return 'launching_and_testing_stage';
-    } else if (!this.project.stage_consumer_feedbacks[0].is_passed && this.project.stage_launchings[0].is_passed) {
-      return 'consumer_feedback_stage';
-    } else if (!this.project.stage_fundings[0].is_passed && this.project.stage_consumer_feedbacks[0].is_passed) {
-      return 'funding_stage';
-    } else {
-      return 'ideation_stage';
+  private _getCurrentStageStatusWaiting() {
+    switch (this.project.current_stage) {
+      case 'ideation_stage':
+        if (this.project.stage_ideations.length > 0) {
+          if (this.project.stage_ideations[0].is_applied) {
+            return true;
+          }
+        }
+        break;
+      case 'marketing_stage':
+        if (this.project.stage_marketings.length > 0) {
+          if (this.project.stage_marketings[0].is_applied) {
+            return true;
+          }
+        }
+        break;
+      case 'prototype_development_stage':
+        if (this.project.stage_prototype_developments.length > 0) {
+          if (this.project.stage_prototype_developments[0].is_applied) {
+            return true;
+          }
+        }
+        break;
+      case 'launching_stage':
+        if (this.project.stage_launchings.length > 0) {
+          if (this.project.stage_launchings[0].is_applied) {
+            return true;
+          }
+        }
+        break;
+      case 'consumer_feedback_stage':
+        if (this.project.stage_consumer_feedbacks.length > 0) {
+          if (this.project.stage_consumer_feedbacks[0].is_applied) {
+            return true;
+          }
+        }
+        break;
+      case 'funding_stage':
+        if (this.project.stage_fundings.length > 0) {
+          if (this.project.stage_fundings[0].is_applied) {
+            return true;
+          }
+        }
+        break;
+      default:
+        return false;
+        break;
     }
   }
 }

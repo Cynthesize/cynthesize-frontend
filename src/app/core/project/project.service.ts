@@ -23,7 +23,14 @@ import {
   QUERY_FETCH_PROJECT_DETAILS
 } from '@app/shared/queries/project-queries';
 import { MUTATION_ADD_IDEA_TAGS } from '@app/shared/mutations/idea-mutations';
-import { MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE } from '@app/shared/mutations/review-mutation';
+import {
+  MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE,
+  MUTATION_SEND_PROJECT_FOR_MARKETING_STAGE,
+  MUTATION_SEND_PROJECT_FOR_PROTOTYPE_DEV_STAGE,
+  MUTATION_SEND_PROJECT_FOR_LAUNCHING_STAGE,
+  MUTATION_SEND_PROJECT_FOR_CONSUMER_FEEDBACK_STAGE,
+  MUTATION_SEND_PROJECT_FOR_FUNDING_STAGE
+} from '@app/shared/mutations/review-mutation';
 
 @Injectable({
   providedIn: 'root'
@@ -283,19 +290,19 @@ export class ProjectService {
         mutation = MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE;
         break;
       case 'marketing_stage':
-        mutation = MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE;
+        mutation = MUTATION_SEND_PROJECT_FOR_MARKETING_STAGE;
         break;
       case 'prototype_development_stage':
-        mutation = MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE;
+        mutation = MUTATION_SEND_PROJECT_FOR_PROTOTYPE_DEV_STAGE;
         break;
       case 'launching_stage':
-        mutation = MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE;
+        mutation = MUTATION_SEND_PROJECT_FOR_LAUNCHING_STAGE;
         break;
       case 'consumer_feedback_stage':
-        mutation = MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE;
+        mutation = MUTATION_SEND_PROJECT_FOR_CONSUMER_FEEDBACK_STAGE;
         break;
       case 'funding_stage':
-        mutation = MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE;
+        mutation = MUTATION_SEND_PROJECT_FOR_FUNDING_STAGE;
         break;
       default:
         mutation = MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE;
@@ -303,7 +310,7 @@ export class ProjectService {
     }
     return this.apollo
       .mutate<any>({
-        mutation: MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE,
+        mutation: mutation,
         variables: {
           objects: answers
         }

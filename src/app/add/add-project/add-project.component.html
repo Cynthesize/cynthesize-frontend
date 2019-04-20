@@ -43,25 +43,6 @@
             </div>
             <div class="field">
               <h3>
-                Current Stage
-                <mat-icon
-                  [matTooltipPosition]="'right'"
-                  matTooltipClass="tooltip"
-                  matTooltip="Tip: Tell us what stage your project is currently at."
-                  >help_outline</mat-icon
-                >
-              </h3>
-              <mat-form-field class="field" appearance="outline">
-                <mat-label>Select from the list</mat-label>
-                <mat-select formControlName="currentStage">
-                  <mat-option *ngFor="let stage of stages" [value]="stage">
-                    {{ stage }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="field">
-              <h3>
                 Tags
                 <mat-icon
                   [matTooltipPosition]="'right'"
