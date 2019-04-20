@@ -5,6 +5,10 @@ import { IdeaComponent } from './idea/idea.component';
 
 const routes: Routes = [
   {
+    path: 'issues',
+    loadChildren: 'app/view/issues/issues.module#IssuesModule'
+  },
+  {
     path: 'project/:id',
     loadChildren: 'app/view/view-project/view-project.module#ViewProjectModule'
   },

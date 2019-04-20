@@ -1,0 +1,92 @@
+<div class="issue">
+  <div class="issue-heading">
+    <h1 class="issue-project-checkpoint">
+      {{ displayableName(issue.projectsByprojectId.project_name) }}
+      <span class="issue-checkpoint"> | {{ displayableName(issue.projectsByprojectId.current_stage) }}</span>
+    </h1>
+    <a
+      class="issue-checkpoint"
+      [routerLink]="[
+        '/view/project',
+        issue.projectsByprojectId.id + '-' + issue.projectsByprojectId.project_name,
+        'issues',
+        issue.checkpoint_name
+      ]"
+      >Issue #{{ issue.id }}
+    </a>
+  </div>
+  <div class="issue-info">
+    <div class="issue-heading">
+      <h2>{{ issue.checkpoint_name }}</h2>
+      <span>{{ issue.created_on | timeDiff }}</span>
+    </div>
+    <div class="issue-user-info">
+      <!-- <div class="issue-user-pic"><img src="{{ issue.userBycreatedBy.profile_pic }}" /></div>
+      <div class="issue-user">
+        <div class="issue-user-name">{{ issue.userBycreatedBy.name }}</div>
+        <div class="issue-user-username">{{ issue.userBycreatedBy.username }}</div>
+      </div> -->
+      <div class="issue-info-description">
+        {{ issue.description }}
+      </div>
+    </div>
+
+    <div
+      style="cursor: pointer; display: flex; justify-content: flex-end; color: blue;"
+      [routerLink]="[
+        '/view/project',
+        issue.projectsByprojectId.id + '-' + issue.projectsByprojectId.project_name,
+        'issues',
+        issue.checkpoint_name
+      ]"
+    >
+      <mat-icon>arrow_right_alt</mat-icon>
+    </div>
+  </div>
+</div>
+
+<style>
+  .issue-info-description {
+    font-size: 1.2rem;
+    padding: 20px;
+    margin: 10px;
+    width: 100%;
+    background-color: rgb(236, 236, 236);
+  }
+  .issue-user-info {
+    display: flex;
+    align-items: center;
+  }
+  .issue-user-pic > img {
+    border-radius: 50%;
+    width: 50px;
+  }
+  .issue-user-name {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .issue-user-username {
+    font-size: 0.6rem;
+    font-weight: 600;
+  }
+  .issue-user {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+  }
+  .issue-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .issue-checkpoint {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .issue {
+    padding: 20px;
+  }
+  .issue-info {
+    margin: 10px;
+  }
+</style>

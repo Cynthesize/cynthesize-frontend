@@ -39,6 +39,7 @@ const PROJECT_ISSUE_FRAGMENT = gql`
     created_on
     userBycreatedBy {
       username
+      name
       profile_pic
       is_mentor
     }

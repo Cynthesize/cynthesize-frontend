@@ -1,6 +1,6 @@
 <div class="loader" *ngIf="isLoading"><mat-spinner></mat-spinner></div>
 <div class="container">
-  <div class="page" *ngIf="!isLoading && !ifAlreadyApplied">
+  <div class="page" *ngIf="!isLoading && !isAlreadyApplied">
     <div class="page-header">
       <div class="page-heading">INTERESTED IN BECOMING A MENTOR?</div>
     </div>
@@ -59,7 +59,7 @@
             </div>
             <div class="field">
               <h3>
-                Are you a venture capitalist or and investor?
+                Are you a venture capitalist or an investor?
               </h3>
               <mat-form-field appearance="outline" class="field">
                 <mat-label>Enter your answer</mat-label>
@@ -73,8 +73,8 @@
       <div class="add-project-image"><img src="../../../assets/images/become-mentor.svg" /></div>
     </div>
   </div>
-  <div class="page" *ngIf="!isLoading && ifAlreadyApplied">
-    <div class="add-project-image">
+  <div class="page" *ngIf="!isLoading && isAlreadyApplied">
+    <div class="already-applied">
       <img src="../../../assets/images/become-mentor.svg" />
       <div>We have recieved your request and are verifying your answers. You'll be notified soon!</div>
     </div>

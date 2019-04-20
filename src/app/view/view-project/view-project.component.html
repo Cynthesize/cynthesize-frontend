@@ -1,39 +1,3 @@
-<!-- <mat-calendar [selected]="fnc(selectedDate)" (selectedChange)="selectedDate = $event" class="greed-card">
-</mat-calendar>
-
-<div *ngIf="editingDescription && project">
-  <mat-card>
-    <form (ngSubmit)="updateDescription(project.id)" [formGroup]="descriptionDataForm">
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="xyz" value="{{ project.project_descriptions[0].xyz }}" />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <input
-          matInput
-          formControlName="distinguishing_factor"
-          value="{{ project.project_descriptions[0].distinguishing_factor }}"
-        />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="future_scope" value="{{ project.project_descriptions[0].future_scope }}" />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="progress" value="{{ project.project_descriptions[0].progress }}" />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="revenue_model" value="{{ project.project_descriptions[0].revenue_model }}" />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="why_product" value="{{ project.project_descriptions[0].why_product }}" />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="wow_factor" value="{{ project.project_descriptions[0].wow_factor }}" />
-      </mat-form-field>
-      <button mat-raised-button>Update Description</button>
-    </form></mat-card
-  >
-</div> -->
-
 <div *ngIf="!project" class="loader">
   <mat-spinner></mat-spinner>
 </div>

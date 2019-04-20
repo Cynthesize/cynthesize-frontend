@@ -18,6 +18,39 @@ const QUERY_CHECKPOINT_ISSUES = gql`
   ${PROJECT_ISSUE_FRAGMENT}
 `;
 
+const QUERY_OPEN_ISSUES = gql`
+  query fetch_open_issues {
+    issues(where: { is_resolved: { _eq: false } }, limit: 10) {
+      ...ProjectIssueFragment
+      projectsByprojectId {
+        id
+        project_name
+        current_stage
+      }
+    }
+    issues_aggregate(where: { is_resolved: { _eq: false } }) {
+      aggregate {
+        count
+      }
+    }
+  }
+  ${PROJECT_ISSUE_FRAGMENT}
+`;
+
+const QUERY_N_OPEN_ISSUES = gql`
+  query fetch_n_open_issues($current_count: Int!) {
+    issues(where: { is_resolved: { _eq: false } }, limit: 10, offset: $current_count) {
+      ...ProjectIssueFragment
+      projectsByprojectId {
+        id
+        project_name
+        current_stage
+      }
+    }
+  }
+  ${PROJECT_ISSUE_FRAGMENT}
+`;
+
 const QUERY_POPULAR_LAUNCHED_PROJECTS = gql`
   query fetch_popular_launched_projects($limit: Int!, $offset: Int!) {
     projects(order_by: { likes: desc }, limit: $limit, offset: $offset, where: { is_launched: { _eq: true } }) {
@@ -228,5 +261,7 @@ export {
   QUERY_FETCH_ISSUE_COMMENTS,
   QUERY_FETCH_BASIC_PROJECT_DETAILS,
   QUERY_FETCH_PROJECT_DETAILS,
-  QUERY_FETCH_ONGIONG_PROJECT_COMMENTS
+  QUERY_FETCH_ONGIONG_PROJECT_COMMENTS,
+  QUERY_OPEN_ISSUES,
+  QUERY_N_OPEN_ISSUES
 };

@@ -7,15 +7,15 @@ export const environment = {
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US', 'fr-FR']
 };
-export const HASURA_ACCESS_KEY = '***';
-export const GRAPHQL_URL = '***';
-export const REALTIME_GRAPHQL_URL = '***';
+export const HASURA_ACCESS_KEY = 'secret';
+export const GRAPHQL_URL = 'https://cynthesize-back.herokuapp.com/v1alpha1/graphql';
+export const REALTIME_GRAPHQL_URL = 'wss://cynthesize-back.herokuapp.com/v1alpha1/graphql';
 
 export const firebaseapp = {
-  apiKey: '***',
-  authDomain: '***',
-  databaseURL: '***',
-  projectId: '***',
-  storageBucket: '***',
-  messagingSenderId: '***'
+  apiKey: 'AIzaSyD2oozKEveW6wK7y17LW2UHnkvF5_Efa14',
+  authDomain: 'cynthesize-dev.firebaseapp.com',
+  databaseURL: 'https://cynthesize-dev.firebaseio.com',
+  projectId: 'cynthesize-dev',
+  storageBucket: 'cynthesize-dev.appspot.com',
+  messagingSenderId: '733243062921'
 };

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { QUERY_CHECKPOINT_ISSUES } from '@app/shared/queries/project-queries';
+import { QUERY_CHECKPOINT_ISSUES, QUERY_OPEN_ISSUES } from '@app/shared/queries/project-queries';
 import { map, take } from 'rxjs/operators';
 import {
   MUTATION_ADD_ISSUE,
@@ -26,6 +26,22 @@ export class IssueService {
           checkpointName: checkpointName,
           projectId: projectId
         }
+      })
+      .valueChanges.pipe(take(1))
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * fetchOpenIssues
+   */
+  public fetchOpenIssues() {
+    return this.apollo
+      .watchQuery<any>({
+        query: QUERY_OPEN_ISSUES
       })
       .valueChanges.pipe(take(1))
       .pipe(
