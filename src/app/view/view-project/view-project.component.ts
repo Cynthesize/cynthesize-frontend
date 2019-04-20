@@ -38,15 +38,19 @@ export class ViewProjectComponent implements OnInit {
         }
       );
     });
+    setInterval(() => {
+      this.checkRoute();
+    }, 1000);
   }
 
   ngOnInit() {
-    this.router.events.subscribe(val => {
-      if (this.project) {
-        this.issueActive =
-          this.router.url === '/view/project/' + this.project['id'] + '-' + this.project['project_name'];
-      }
-    });
+    this.checkRoute();
+  }
+
+  checkRoute() {
+    if (this.project) {
+      this.issueActive = this.router.url === '/view/project/' + this.project['id'] + '-' + this.project['project_name'];
+    }
   }
 
   fnc(selectedDate: Date) {
