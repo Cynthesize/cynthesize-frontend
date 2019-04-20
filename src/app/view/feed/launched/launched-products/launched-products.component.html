@@ -32,14 +32,16 @@
         <div class="card">
           <div><img class="project-icon" [src]="project.icon" /></div>
           <div class="card-details">
-            <div class="card-project-name">{{ displayableName(project.project_name) }}</div>
+            <div class="card-project-name">
+              {{ displayableName(project.project_name) }}
+              <span *ngFor="let tag of project.tagsLinkssByprojectId" class="tags">
+                {{ tag.tagsBytagId.tag_name }}
+              </span>
+            </div>
             <div class="card-project-description">
               {{ project.abstract }}
               <br />
-              Started on platform: {{ project.created_on | timeDiff }}
-              <br />
-              Tags on project:
-              <span *ngFor="let tag of project.tagsLinkssByprojectId"> {{ tag.tagsBytagId.tag_name }}, </span>
+              Started: {{ project.created_on | timeDiff }}
             </div>
           </div>
           <div class="card-links">
