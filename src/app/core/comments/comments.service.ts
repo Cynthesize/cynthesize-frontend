@@ -13,7 +13,7 @@ import { MUTATION_REPORT_COMMENT } from '@app/shared/mutations/project-mutations
   providedIn: 'root'
 })
 export class CommentsService {
-  loggedInUserId: number = JSON.parse(localStorage.getItem('userId'));
+  loggedInUserId: number = JSON.parse(localStorage.getItem('user_id'));
 
   constructor(private apollo: Apollo) {}
 
@@ -58,7 +58,7 @@ export class CommentsService {
   public addComment(activityId: number, activityType: string, commentText: string) {
     const objectToBeAdded = {
       comment_text: commentText,
-      commenter: localStorage.getItem('userId'),
+      commenter: localStorage.getItem('user_id'),
       previous_edits: '[]'
     };
     switch (activityType) {
@@ -94,7 +94,7 @@ export class CommentsService {
         variables: {
           objects: {
             reply_text: replyText,
-            respondent: localStorage.getItem('userId'),
+            respondent: localStorage.getItem('user_id'),
             comment_id: commentId,
             previous_edits: []
           }
@@ -114,7 +114,7 @@ export class CommentsService {
       .mutate<any>({
         mutation: MUTATION_REPORT_COMMENT,
         variables: {
-          userId: localStorage.getItem('userId'),
+          userId: localStorage.getItem('user_id'),
           commentId: commentId
         }
       })

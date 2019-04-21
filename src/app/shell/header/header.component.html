@@ -28,7 +28,7 @@
         <span>Launched Projects</span>
       </button>
 
-      <div *ngIf="(authenticationService.user$ | async); then authenticated; else guest"></div>
+      <div *ngIf="authenticationService.isAuthenticated(); then authenticated; else guest"></div>
 
       <ng-template #authenticated>
         <button mat-icon-button [matMenuTriggerFor]="userMenu">
@@ -39,7 +39,7 @@
         <button
           mat-raised-button
           style="background-color: orange; color: white; font-weight: 600;"
-          (click)="authenticationService.googleSignin()"
+          (click)="authenticationService.login()"
         >
           Sign in
         </button></ng-template

@@ -91,7 +91,7 @@ const MUTATION_MARK_ISSUE_RESOLVED_OR_UNRESOLVED = gql`
 `;
 
 const MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT = gql`
-  mutation update_likes($likesOffCounter: Int!, $commentId: Int!, $userId: Int!) {
+  mutation update_likes($likesOffCounter: Int!, $commentId: Int!, $userId: String!) {
     update_comment(where: { id: { _eq: $commentId } }, _inc: { likes: $likesOffCounter }) {
       affected_rows
       returning {
@@ -109,7 +109,7 @@ const MUTATION_UPDATE_LIKE_COUNTER_WITH_INSERT = gql`
 `;
 
 const MUTATION_UPDATE_LIKE_COUNTER_WITH_DELETE = gql`
-  mutation update_likes($likesOffCounter: Int!, $commentId: Int!, $userId: Int!) {
+  mutation update_likes($likesOffCounter: Int!, $commentId: Int!, $userId: String!) {
     update_comment(where: { id: { _eq: $commentId } }, _inc: { likes: $likesOffCounter }) {
       affected_rows
       returning {
@@ -167,7 +167,7 @@ const MUTATION_UPDATE_PROJECT_DETAILS = gql`
 `;
 
 const MUTATION_LIKE_PROJECT = gql`
-  mutation update_likes($projectId: Int!, $userId: Int!) {
+  mutation update_likes($projectId: Int!, $userId: String!) {
     update_projects(where: { id: { _eq: $projectId } }, _inc: { likes: 1 }) {
       affected_rows
       returning {
@@ -185,7 +185,7 @@ const MUTATION_LIKE_PROJECT = gql`
 `;
 
 const MUTATION_DISLIKE_PROJECT = gql`
-  mutation update_likes($userId: Int!, $projectId: Int!) {
+  mutation update_likes($userId: String!, $projectId: Int!) {
     update_projects(where: { id: { _eq: $projectId } }, _inc: { likes: -1 }) {
       affected_rows
       returning {
@@ -203,7 +203,7 @@ const MUTATION_DISLIKE_PROJECT = gql`
 `;
 
 const MUTATION_UNREPORT_COMMENT = gql`
-  mutation unreport_comment($commentId: Int!, $userId: Int!) {
+  mutation unreport_comment($commentId: Int!, $userId: String!) {
     delete_comment_flag(where: { user_id: { _eq: $userId }, comment_id: { _eq: $commentId } }) {
       affected_rows
       returning {
@@ -214,7 +214,7 @@ const MUTATION_UNREPORT_COMMENT = gql`
 `;
 
 const MUTATION_REPORT_COMMENT = gql`
-  mutation report_comment($userId: Int!, $commentId: Int!) {
+  mutation report_comment($userId: String!, $commentId: Int!) {
     insert_comment_flag(objects: { user_id: $userId, comment_id: $commentId }) {
       affected_rows
       returning {

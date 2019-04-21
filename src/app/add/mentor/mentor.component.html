@@ -66,7 +66,7 @@
                 <input matInput formControlName="vc" />
               </mat-form-field>
             </div>
-            <div *ngIf="(authenticationService.user$ | async); then authenticated; else guest"></div>
+            <div *ngIf="authenticationService.isAuthenticated(); then authenticated; else guest"></div>
             <ng-template #authenticated>
               <button mat-raised-button class="orange-btn">Apply</button>
             </ng-template>

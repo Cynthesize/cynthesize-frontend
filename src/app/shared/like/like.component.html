@@ -1,12 +1,11 @@
 <span
-  *ngIf="activityId && (authService.user$ | async); then authenticated; else guest"
+  *ngIf="activityId && authService.isAuthenticated(); then authenticated; else guest"
   [ngClass]="{ liked: isAlreadyLiked }"
   (click)="likeOrDislike()"
   class="icon"
 >
   <mat-icon [class.disabled]="isLoading">favorite</mat-icon>{{ likes }}
 </span>
-
 
 <ng-template #authenticated>
   <span [ngClass]="{ liked: isAlreadyLiked }" (click)="likeOrDislike()" class="icon">

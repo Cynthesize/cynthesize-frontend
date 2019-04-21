@@ -27,7 +27,7 @@ const USER_LIKES_FRAGMENT = gql`
 const LAUNCHED_USER_PROJECT_DETAILS_FRAGMENT = gql`
   fragment LaunchedUserProjectDetailsFragment on user {
     id
-    projectssByowner {
+    projects {
       id
       project_name
       created_on

@@ -124,7 +124,7 @@
                 <mat-radio-button value="false">False</mat-radio-button>
               </mat-radio-group>
             </div>
-            <div *ngIf="(authenticationService.user$ | async); then authenticated; else guest"></div>
+            <div *ngIf="authenticationService.isAuthenticated(); then authenticated; else guest"></div>
             <ng-template #authenticated>
               <button mat-raised-button class="orange-btn">Post</button>
             </ng-template>

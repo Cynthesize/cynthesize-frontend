@@ -30,7 +30,7 @@ export class UserService {
    * applyForMentorship
    */
   public applyForMentorship(formData: any) {
-    formData['user_id'] = localStorage.getItem('userId');
+    formData['user_id'] = localStorage.getItem('user_id');
     return this.apollo
       .mutate<any>({
         mutation: MUTATION_APPLY_FOR_MENTORSHIP,
@@ -54,7 +54,7 @@ export class UserService {
       .query<any>({
         query: QUERY_APPLIED_FOR_MENTORSHIP,
         variables: {
-          userId: localStorage.getItem('userId')
+          userId: localStorage.getItem('user_id')
         }
       })
       .pipe(take(1))

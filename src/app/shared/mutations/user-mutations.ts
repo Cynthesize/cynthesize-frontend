@@ -14,7 +14,7 @@ const MUTATION_ADD_USER = gql`
 `;
 
 const MUTATION_UPDATE_USER_DETAILS = gql`
-  mutation update_user_details($updateObject: user_set_input!, $userId: Int!) {
+  mutation update_user_details($updateObject: user_set_input!, $userId: String!) {
     update_user(where: { id: { _eq: $userId } }, _set: $updateObject) {
       affected_rows
       returning {
@@ -77,7 +77,7 @@ const MUTATION_ADD_COMMENT = gql`
 `;
 
 const MUTATION_LIKE_COMMENT = gql`
-  mutation update_likes($commentId: Int!, $userId: Int!) {
+  mutation update_likes($commentId: Int!, $userId: String!) {
     update_comment(where: { id: { _eq: $commentId } }, _inc: { likes: 1 }) {
       affected_rows
       returning {
@@ -95,7 +95,7 @@ const MUTATION_LIKE_COMMENT = gql`
 `;
 
 const MUTATION_DISLIKE_COMMENT = gql`
-  mutation update_likes($commentId: Int!, $userId: Int!) {
+  mutation update_likes($commentId: Int!, $userId: String!) {
     update_comment(where: { id: { _eq: $commentId } }, _inc: { likes: -1 }) {
       affected_rows
       returning {
@@ -113,7 +113,7 @@ const MUTATION_DISLIKE_COMMENT = gql`
 `;
 
 const MUTATION_LIKE_REPLY = gql`
-  mutation update_likes($replyId: Int!, $userId: Int!) {
+  mutation update_likes($replyId: Int!, $userId: String!) {
     update_reply(where: { id: { _eq: $replyId } }, _inc: { likes: 1 }) {
       affected_rows
       returning {
@@ -131,7 +131,7 @@ const MUTATION_LIKE_REPLY = gql`
 `;
 
 const MUTATION_DISLIKE_REPLY = gql`
-  mutation update_likes($replyId: Int!, $userId: Int!) {
+  mutation update_likes($replyId: Int!, $userId: String!) {
     update_reply(where: { id: { _eq: $replyId } }, _inc: { likes: -1 }) {
       affected_rows
       returning {

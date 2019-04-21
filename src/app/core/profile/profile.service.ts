@@ -40,7 +40,7 @@ export class ProfileService {
       .mutate<any>({
         mutation: MUTATION_UPDATE_USER_DETAILS,
         variables: {
-          userId: localStorage.getItem('userId'),
+          userId: localStorage.getItem('user_id'),
           updateObject: updateObject
         }
       })

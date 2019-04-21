@@ -7,7 +7,7 @@ import { filter, map, mergeMap } from 'rxjs/operators';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 import { environment } from '@env/environment';
-import { Logger } from '@app/core';
+import { Logger, AuthenticationService } from '@app/core';
 import { ErrorHandlerService } from './core/error-handler.service';
 import { MatSnackBar } from '@angular/material';
 
@@ -28,8 +28,10 @@ export class AppComponent implements OnInit {
     // this injection initializes page tracking through the router
     private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
     private errorHandler: ErrorHandlerService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authService: AuthenticationService
   ) {
+    this.authService.handleAuthentication();
     angulartics2GoogleAnalytics.startTracking();
     this.errorHandler.subj_notification.subscribe(message => {
       let messageString = '';

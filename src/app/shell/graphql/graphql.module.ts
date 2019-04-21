@@ -28,7 +28,7 @@ export class GraphqlModule {
       authHeader = new HttpHeaders()
         .set('Content-Type', 'application/json')
         .set('Authorization', `Bearer ${localStorage.getItem('id_token')}`)
-        .set('x-hasura-cynthesize-user-id', localStorage.getItem('userId'));
+        .set('x-hasura-cynthesize-user-id', localStorage.getItem('user_id'));
     } else {
       authHeader = new HttpHeaders().set('Content-Type', 'application/json');
     }

@@ -63,7 +63,7 @@ export class IssueService {
             comment_text: commentText,
             project_id: projectId,
             issue_id: issueId,
-            commenter: localStorage.getItem('userId')
+            commenter: localStorage.getItem('user_id')
           }
         }
       })
@@ -86,7 +86,7 @@ export class IssueService {
           objects: {
             reply_text: replyText,
             comment_id: commentId,
-            respondent: localStorage.getItem('userId')
+            respondent: localStorage.getItem('user_id')
           }
         }
       })
@@ -110,7 +110,7 @@ export class IssueService {
             checkpoint_name: checkpointName,
             description: issuesDescription,
             project_id: projectId,
-            created_by: localStorage.getItem('userId')
+            created_by: localStorage.getItem('user_id')
           }
         }
       })

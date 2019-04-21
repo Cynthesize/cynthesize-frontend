@@ -65,7 +65,7 @@ const LAUNCHED_PROJECT_DETAILS_FRAGMENT = gql`
         tag_name
       }
     }
-    userByowner {
+    user {
       username
       profile_pic
     }

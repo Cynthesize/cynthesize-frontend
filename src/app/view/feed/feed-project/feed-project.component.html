@@ -4,9 +4,9 @@
     <div class="project-basic-info">
       <div class="project-name">{{ displayableName(project.project_name) }}</div>
       <app-user-name
-        [username]="project.userByowner.username"
+        [username]="project.user.username"
         [time]="project.created_on"
-        [isMentor]="project.userByowner.is_mentor"
+        [isMentor]="project.user.is_mentor"
       ></app-user-name>
       <div class="project-abstract">{{ project.abstract }}</div>
       <div class="card-icons pointer">

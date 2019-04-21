@@ -48,7 +48,7 @@ export class ProjectService {
               is_public: projectDetails['isPublic'],
               current_stage: projectDetails['currentStage'],
               icon: projectDetails['icon'],
-              owner: localStorage.getItem('userId')
+              owner: localStorage.getItem('user_id')
             }
           ]
         }
@@ -255,7 +255,7 @@ export class ProjectService {
     const applyObject = {
       project_id: projectId,
       for_role: role,
-      user_id: localStorage.getItem('userId')
+      user_id: localStorage.getItem('user_id')
     };
     if (additionalInfo) {
       applyObject['additional_info'] = additionalInfo;

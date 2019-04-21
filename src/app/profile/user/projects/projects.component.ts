@@ -16,7 +16,7 @@ export class ProjectsComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.profileService.getUserProjects(params.username).subscribe(data => {
         console.log(data);
-        this.launchedProjects = data.data.user[0].projectssByowner;
+        this.launchedProjects = data.data.user[0].projects;
         this.isLoading = false;
       });
     });

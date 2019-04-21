@@ -53,7 +53,7 @@ const QUERY_N_OPEN_ISSUES = gql`
 
 const QUERY_POPULAR_LAUNCHED_PROJECTS = gql`
   query fetch_popular_launched_projects($limit: Int!, $offset: Int!) {
-    projects(order_by: { likes: desc }, limit: $limit, offset: $offset, where: { is_launched: { _eq: true } }) {
+    projects(order_by: { likes: desc }, limit: $limit, offset: $offset, where: { is_public: { _eq: true } }) {
       ...LaunchedProjectDetailsFragment
     }
   }
@@ -62,7 +62,7 @@ const QUERY_POPULAR_LAUNCHED_PROJECTS = gql`
 
 const QUERY_NEWEST_LAUNCHED_PROJECTS = gql`
   query fetch_newest_launched_projects($limit: Int!, $offset: Int!) {
-    projects(order_by: { created_on: desc }, limit: $limit, offset: $offset, where: { is_launched: { _eq: true } }) {
+    projects(order_by: { created_on: desc }, limit: $limit, offset: $offset, where: { is_public: { _eq: true } }) {
       ...LaunchedProjectDetailsFragment
     }
   }
@@ -71,7 +71,7 @@ const QUERY_NEWEST_LAUNCHED_PROJECTS = gql`
 
 const QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT = gql`
   query fetch_launched_projects {
-    projects_aggregate(where: { is_launched: { _eq: true } }) {
+    projects_aggregate(where: { is_public: { _eq: true } }) {
       aggregate {
         count
       }
@@ -165,7 +165,7 @@ const QUERY_FETCH_ONGIONG_PROJECT_COMMENTS = gql`
 
 const QUERY_FETCH_BASIC_PROJECT_DETAILS = gql`
   query fetch_basic_project_details($projectName: String!) {
-    projects(where: { project_name: { _eq: $projectName }, is_launched: { _eq: true } }) {
+    projects(where: { project_name: { _eq: $projectName }, is_public: { _eq: true } }) {
       id
       project_name
       abstract
@@ -175,7 +175,7 @@ const QUERY_FETCH_BASIC_PROJECT_DETAILS = gql`
       icon
       current_stage
       likes
-      userByowner {
+      user {
         ...UserProfilePicFragment
       }
     }
@@ -197,7 +197,7 @@ const QUERY_FETCH_PROJECT_DETAILS = gql`
       current_stage
       likes
       platform
-      userByowner {
+      user {
         ...UserProfilePicFragment
       }
       launchedProjectsBylaunchedId {

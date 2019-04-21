@@ -33,19 +33,15 @@ export class LikeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authService.user$.subscribe(data => {
-      if (data) {
-        this.filteredInfo = this._filterActivityType(this.activityId, this.activityType);
-      }
-    });
+    if (this.authService.isAuthenticated()) {
+      this.filteredInfo = this._filterActivityType(this.activityId, this.activityType);
+    }
   }
 
   openLoginDialog(): void {
-    const dialogRef = this.dialog.open(LoginComponent, {
+    this.dialog.open(LoginComponent, {
       width: 'auto'
     });
-
-    dialogRef.afterClosed().subscribe(result => {});
   }
 
   likeOrDislike() {
@@ -98,7 +94,7 @@ export class LikeComponent implements OnInit {
       default:
         break;
     }
-    _object['userId'] = JSON.parse(localStorage.getItem('userId'));
+    _object['userId'] = JSON.parse(localStorage.getItem('user_id'));
     return _object;
   }
 

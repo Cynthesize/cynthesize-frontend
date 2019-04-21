@@ -8,19 +8,6 @@ import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { LoginRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { firebaseapp } from '../../environments/environment';
-
-const config = {
-  apiKey: firebaseapp.apiKey,
-  authDomain: firebaseapp.authDomain,
-  databaseURL: firebaseapp.databaseURL,
-  projectId: firebaseapp.projectId,
-  storageBucket: firebaseapp.storageBucket,
-  messagingSenderId: firebaseapp.messagingSenderId
-};
 
 @NgModule({
   imports: [
@@ -30,10 +17,7 @@ const config = {
     SharedModule,
     FlexLayoutModule,
     MaterialModule,
-    LoginRoutingModule,
-    AngularFireModule.initializeApp(config),
-    AngularFirestoreModule,
-    AngularFireAuthModule
+    LoginRoutingModule
   ],
   declarations: [LoginComponent]
 })

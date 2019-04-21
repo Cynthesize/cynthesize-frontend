@@ -43,7 +43,7 @@ const QUERY_PROJECTS_BY_USER = gql`
 `;
 
 const QUERY_APPLIED_FOR_MENTORSHIP = gql`
-  query applied_for_mentorship($userId: Int!) {
+  query applied_for_mentorship($userId: String!) {
     mentor_data(where: { user_id: { _eq: $userId } }) {
       id
       user {
