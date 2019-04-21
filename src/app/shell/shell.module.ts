@@ -17,18 +17,10 @@ export const config: CloudinaryConfiguration = {
   cloud_name: 'cynthesize',
   upload_preset: 'qdninpjl'
 };
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-
-const config1 = {
-  apiKey: 'AIzaSyD2oozKEveW6wK7y17LW2UHnkvF5_Efa14',
-  authDomain: 'cynthesize-dev.firebaseapp.com',
-  databaseURL: 'https://cynthesize-dev.firebaseio.com',
-  projectId: 'cynthesize-dev',
-  storageBucket: 'cynthesize-dev.appspot.com',
-  messagingSenderId: '733243062921'
-};
+import { RequestsComponent } from './header/requests/requests.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '@app/shared';
+import { MatInputModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -39,10 +31,12 @@ const config1 = {
     RouterModule,
     GraphqlModule,
     CloudinaryModule.forRoot(cloudinary, config),
-    AngularFireModule.initializeApp(config),
-    AngularFirestoreModule,
-    AngularFireAuthModule
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
+    MatInputModule
   ],
-  declarations: [HeaderComponent, ShellComponent]
+  declarations: [HeaderComponent, ShellComponent, RequestsComponent],
+  entryComponents: [RequestsComponent]
 })
 export class ShellModule {}

@@ -7,15 +7,9 @@ export const environment = {
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US', 'fr-FR']
 };
-export const HASURA_ACCESS_KEY = 'secret';
-export const GRAPHQL_URL = 'https://cynthesize-back.herokuapp.com/v1alpha1/graphql';
+export const GRAPHQL_URL = 'https://cynthesize-pre-prod.herokuapp.com/v1alpha1/graphql';
 export const REALTIME_GRAPHQL_URL = 'wss://cynthesize-back.herokuapp.com/v1alpha1/graphql';
-
-export const firebaseapp = {
-  apiKey: 'AIzaSyD2oozKEveW6wK7y17LW2UHnkvF5_Efa14',
-  authDomain: 'cynthesize-dev.firebaseapp.com',
-  databaseURL: 'https://cynthesize-dev.firebaseio.com',
-  projectId: 'cynthesize-dev',
-  storageBucket: 'cynthesize-dev.appspot.com',
-  messagingSenderId: '733243062921'
-};
+export const authClientId = 'tEbTH2wRl3dHtWZ0m4nqoWPsN1GIu9dQ';
+export const authDomain = 'cynthesize.auth0.com';
+export const auth0Audience = 'https://cynthesize.auth0.com/userinfo';
+export const callbackUrl = 'http://cynthesize-develop.netlify.com';

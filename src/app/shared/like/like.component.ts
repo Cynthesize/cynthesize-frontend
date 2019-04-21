@@ -94,13 +94,13 @@ export class LikeComponent implements OnInit {
       default:
         break;
     }
-    _object['userId'] = JSON.parse(localStorage.getItem('user_id'));
+    _object['userId'] = localStorage.getItem('user_id');
     return _object;
   }
 
   isProjectLikedByLoggedInUser(projectId: number) {
     let flag = false;
-    JSON.parse(localStorage.getItem('projectsLikedByLoggedInUser')).forEach((likedProjectIds: any) => {
+    JSON.parse(localStorage.getItem('projectsLikedByLoggedInUser') || '[]').forEach((likedProjectIds: any) => {
       if (projectId === likedProjectIds) {
         flag = true;
       }
@@ -110,7 +110,7 @@ export class LikeComponent implements OnInit {
 
   isCommentLikedByLoggedInUser(commentId: number) {
     let flag = false;
-    JSON.parse(localStorage.getItem('commentsLikedByLoggedInUser')).forEach((likedCommentIds: any) => {
+    JSON.parse(localStorage.getItem('commentsLikedByLoggedInUser') || '[]').forEach((likedCommentIds: any) => {
       if (commentId === likedCommentIds) {
         flag = true;
       }
@@ -120,7 +120,7 @@ export class LikeComponent implements OnInit {
 
   isReplyLikedByLoggedInUser(replyId: number) {
     let flag = false;
-    JSON.parse(localStorage.getItem('repliesLikedByLoggedInUser')).forEach((likedReplyIds: any) => {
+    JSON.parse(localStorage.getItem('repliesLikedByLoggedInUser') || '[]').forEach((likedReplyIds: any) => {
       if (replyId === likedReplyIds) {
         flag = true;
       }

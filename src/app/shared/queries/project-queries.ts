@@ -91,7 +91,7 @@ const QUERY_FETCH_ISSUE_COMMENTS = gql`
         comment_id
         reply_text
         id
-        userByrespondent {
+        user {
           ...UserProfilePicFragment
         }
         likes
@@ -119,7 +119,7 @@ const QUERY_FETCH_PUBLIC_PROJECT_COMMENTS = gql`
         comment_id
         reply_text
         id
-        userByrespondent {
+        user {
           ...UserProfilePicFragment
         }
         likes
@@ -147,7 +147,7 @@ const QUERY_FETCH_ONGIONG_PROJECT_COMMENTS = gql`
         comment_id
         reply_text
         id
-        userByrespondent {
+        user {
           ...UserProfilePicFragment
         }
         likes

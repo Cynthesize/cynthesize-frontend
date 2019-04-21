@@ -37,10 +37,19 @@ export class EditableCommentComponent implements OnInit {
   }
 
   addReply() {
-    console.log(this.reply);
-    this.commentService.addReplyToComment(this.replyText, this.reply.comment_id).subscribe(
+    let comment_id: number;
+    if (this.reply) {
+      comment_id = this.reply.comment_id;
+    } else {
+      comment_id = this.comment.id;
+    }
+    this.commentService.addReplyToComment(this.replyText, comment_id).subscribe(
       reply => {
-        this.correspondingComment.replies.push(reply.data.insert_reply.returning[0]);
+        if (this.reply) {
+          this.correspondingComment.replies.push(reply.data.insert_reply.returning[0]);
+        } else {
+          this.comment.replies.push(reply.data.insert_reply.returning[0]);
+        }
         this.replyText = '';
         this.isReplying = false;
       },

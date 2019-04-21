@@ -102,7 +102,7 @@ export class AddIssueComponent {
           location.reload();
         },
         error => {
-          this.errorHandler.subj_notification.next(error.error.errors[0].message);
+          this.errorHandler.subj_notification.next(error);
         }
       );
   }

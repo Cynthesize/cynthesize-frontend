@@ -1,4 +1,4 @@
-<div class="container" [@enterAnimation]>
+<div class="container">
   <!-- Banner Image -->
   <div class="banner-image"><img src="../../../../assets/images/project_banner.svg" /></div>
   <h1 class="checkpoint-name">{{ displayableName(project.project_name) }}</h1>
@@ -50,8 +50,11 @@
   <mat-card class="project-home-card">
     <div class="progress-heading">
       <h1>FAQs | Description</h1>
-      <button mat-raised-button (click)="editingDescription = true">
+      <button mat-raised-button (click)="editingDescription = true" *ngIf="editingDescription === false">
         Edit
+      </button>
+      <button mat-raised-button (click)="editingDescription = false" *ngIf="editingDescription === true">
+        Cancel
       </button>
     </div>
     <mat-accordion class="example-headers-align">

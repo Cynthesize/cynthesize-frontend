@@ -33,7 +33,7 @@ const MUTATION_ADD_REPLY = gql`
         comment_id
         reply_text
         id
-        userByrespondent {
+        user {
           ...UserProfilePicFragment
         }
         likes
@@ -59,7 +59,7 @@ const MUTATION_ADD_COMMENT = gql`
           comment_id
           reply_text
           id
-          userByrespondent {
+          user {
             ...UserProfilePicFragment
           }
           likes

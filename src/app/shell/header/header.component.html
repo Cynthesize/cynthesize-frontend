@@ -21,7 +21,7 @@
       <button class="header__link" mat-button routerLink="/add/mentor">
         <span>Become a mentor</span>
       </button>
-      <button class="header__link" mat-button routerLink="/view/issues">
+      <button class="header__link" mat-button routerLink="/view/issues" *ngIf="isMentor === 'true'">
         <span>See Open Issues</span>
       </button>
       <button class="header__link" mat-button routerLink="/view/feed/projects">
@@ -60,6 +60,10 @@
           </div>
         </div>
       </mat-menu>
+
+      <button class="header__link" mat-icon-button (click)="openModal()">
+        <mat-icon>sentiment_dissatisfied</mat-icon>
+      </button>
     </div>
   </div>
 </mat-toolbar>

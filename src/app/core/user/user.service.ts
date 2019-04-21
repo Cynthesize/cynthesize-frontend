@@ -3,6 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { QUERY_USER_LIKES, QUERY_APPLIED_FOR_MENTORSHIP } from '@app/shared/queries/user-queries';
 import { MUTATION_ADD_USER, MUTATION_APPLY_FOR_MENTORSHIP } from '@app/shared/mutations/user-mutations';
 import { take, map } from 'rxjs/operators';
+import gql from 'graphql-tag';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,31 @@ export class UserService {
     }
     localStorage.setItem('access_token', credential.credential['accessToken']);
     localStorage.setItem('user_id', credential.additionalUserInfo.profile['id']);
+  }
+
+  /**
+   * sendReq
+   */
+  public sendReq(formData: any) {
+    return this.apollo
+      .mutate<any>({
+        mutation: gql`
+          mutation send_req($objects: [requests_insert_input!]!) {
+            insert_requests(objects: $objects) {
+              affected_rows
+            }
+          }
+        `,
+        variables: {
+          objects: formData
+        }
+      })
+      .pipe(take(1))
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 
   /**

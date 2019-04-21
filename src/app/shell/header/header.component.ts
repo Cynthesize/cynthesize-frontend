@@ -1,8 +1,9 @@
 import { Title } from '@angular/platform-browser';
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav, MatDialog } from '@angular/material';
 import { AuthenticationService, I18nService } from '@app/core';
+import { RequestsComponent } from './requests/requests.component';
 
 @Component({
   selector: 'app-header',
@@ -13,8 +14,9 @@ import { AuthenticationService, I18nService } from '@app/core';
 export class HeaderComponent implements OnInit {
   @Input()
   sidenav: MatSidenav;
+  isMentor = localStorage.getItem('is_mentor');
 
-  constructor(public authenticationService: AuthenticationService) {}
+  constructor(public authenticationService: AuthenticationService, private dialog: MatDialog) {}
 
   ngOnInit() {}
 
@@ -23,5 +25,11 @@ export class HeaderComponent implements OnInit {
   }
   get profilepPic(): string {
     return localStorage.getItem('user_profile_pic');
+  }
+
+  openModal() {
+    this.dialog.open(RequestsComponent, {
+      width: 'auto'
+    });
   }
 }

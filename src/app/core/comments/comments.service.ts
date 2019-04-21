@@ -13,7 +13,7 @@ import { MUTATION_REPORT_COMMENT } from '@app/shared/mutations/project-mutations
   providedIn: 'root'
 })
 export class CommentsService {
-  loggedInUserId: number = JSON.parse(localStorage.getItem('user_id'));
+  loggedInUserId: string = localStorage.getItem('user_id');
 
   constructor(private apollo: Apollo) {}
 

@@ -69,7 +69,7 @@ export class ReviewComponent implements OnInit {
     answersObject['project_id'] = this.data.projectId;
     this.projectService.applyForReview(answersObject, this.data.context).subscribe(
       (arg: any) => {
-        console.log(arg);
+        this.data.context = 'waiting';
       },
       error => {
         this.errorHandler.subj_notification.next(error);

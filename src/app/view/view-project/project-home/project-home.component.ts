@@ -11,19 +11,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 @Component({
   selector: 'app-project-home',
   templateUrl: './project-home.component.html',
-  styleUrls: ['./project-home.component.scss'],
-  animations: [
-    trigger('enterAnimation', [
-      transition(':enter', [
-        style({ transform: 'translateX(100%)', opacity: 0 }),
-        animate('500ms', style({ transform: 'translateX(0)', opacity: 1 }))
-      ]),
-      transition(':leave', [
-        style({ transform: 'translateX(0)', opacity: 1 }),
-        animate('500ms', style({ transform: 'translateX(100%)', opacity: 0 }))
-      ])
-    ])
-  ]
+  styleUrls: ['./project-home.component.scss']
 })
 export class ProjectHomeComponent implements OnInit {
   @Input() project: any;
@@ -112,7 +100,7 @@ export class ProjectHomeComponent implements OnInit {
         (data: any) => {
           this.rolesDataForm.get('roles').setValue('');
           this.openingRoles = false;
-          console.log(data);
+          this.errorHandler.subj_notification.next('Updated!');
         },
         (error: any) => {
           this.errorHandler.subj_notification.next(error);
@@ -146,6 +134,7 @@ export class ProjectHomeComponent implements OnInit {
     this.projectService.updateProjectDescription(descriptionDataToBeUpdated, projectId).subscribe(
       (updatedDescription: any) => {
         this.project['project_descriptions'][0] = updatedDescription.data.update_project_description.returning[0];
+        this.errorHandler.subj_notification.next('Updated!');
       },
       (error: any) => {
         this.errorHandler.subj_notification.next(error);

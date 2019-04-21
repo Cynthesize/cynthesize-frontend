@@ -28,11 +28,11 @@
 <div *ngIf="reply" style="margin-left:70px">
   <div class="comment-info">
     <div class="user-icon">
-      <cl-image height="45" crop="scale" public-id="{{ reply.userByrespondent.profile_pic }}" secure="true"></cl-image>
+      <cl-image height="45" crop="scale" public-id="{{ reply.user.profile_pic }}" secure="true"></cl-image>
     </div>
     <div class="user-name">
-      <a [routerLink]="['/user', reply.userByrespondent.username]" style="font-size: 1.2rem; font-weight: 600;">{{
-        reply.userByrespondent.username
+      <a [routerLink]="['/user', reply.user.username]" style="font-size: 1.2rem; font-weight: 600;">{{
+        reply.user.username
       }}</a>
       <p style="font-size: 0.7rem;">{{ reply.timestamp | timeDiff }}</p>
     </div>
@@ -50,11 +50,11 @@
       <mat-icon class="icon" (click)="reportComment()">flag</mat-icon>Report <mat-icon class="icon">edit</mat-icon>Edit
     </mat-menu>
   </div>
-  <div class="add-comment" *ngIf="isReplying">
-    <div class="td-editor-stuff">
-      <td-text-editor [(ngModel)]="replyText" [options]="options"></td-text-editor>
-      <button mat-raised-button (click)="addReply()">Add Reply</button>
-      <button mat-raised-button (click)="isReplying = false; replyText = ''">Cancel</button>
-    </div>
+</div>
+<div class="add-comment" *ngIf="isReplying">
+  <div class="td-editor-stuff">
+    <td-text-editor [(ngModel)]="replyText" [options]="options"></td-text-editor>
+    <button mat-raised-button (click)="addReply()">Add Reply</button>
+    <button mat-raised-button (click)="isReplying = false; replyText = ''">Cancel</button>
   </div>
 </div>

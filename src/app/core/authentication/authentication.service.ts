@@ -88,16 +88,19 @@ export class AuthenticationService {
             })
             .subscribe(data => {
               localStorage.setItem('commentsLikedByUser', JSON.stringify([]));
+              localStorage.setItem('projectsLikedByLoggedInUser', JSON.stringify([]));
+              localStorage.setItem('repliesLikedByLoggedInUser', JSON.stringify([]));
               localStorage.setItem('user_profile_pic', data.data.insert_user.returning[0].profile_pic);
               localStorage.setItem('username', data.data.insert_user.returning[0].username);
               localStorage.setItem('userId', data.data.insert_user.returning[0].id);
+              localStorage.setItem('is_mentor', 'false');
             });
         } else {
           this.apollo
             .watchQuery<any>({
               query: QUERY_USER_LIKES,
               variables: {
-                userId: res.data.user[0].id
+                userName: res.data.user[0].username
               }
             })
             .valueChanges.subscribe((likes: any) => {
@@ -108,10 +111,10 @@ export class AuthenticationService {
               likes.data.user[0].comment_likes.forEach((commentUserLikes: any) => {
                 likedComments.push(commentUserLikes.comment_id);
               });
-              likes.data.user[0].projectLikessByuserId.forEach((commentUserLikes: any) => {
+              likes.data.user[0].project_likes.forEach((commentUserLikes: any) => {
                 likedProjects.push(commentUserLikes.project_id);
               });
-              likes.data.user[0].replyLikessByuserId.forEach((replyUserLikes: any) => {
+              likes.data.user[0].reply_likes.forEach((replyUserLikes: any) => {
                 likedReplies.push(replyUserLikes.reply_id);
               });
 
@@ -121,6 +124,7 @@ export class AuthenticationService {
             });
           localStorage.setItem('user_profile_pic', res.data.user[0].profile_pic);
           localStorage.setItem('username', res.data.user[0].username);
+          localStorage.setItem('is_mentor', JSON.stringify(res.data.user[0].is_mentor));
           localStorage.setItem('userId', res.data.user[0].id);
         }
       });
@@ -132,6 +136,6 @@ export class AuthenticationService {
     localStorage.setItem('user_id', authResult.idTokenPayload.sub);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    location.reload();
+    // location.reload();
   }
 }

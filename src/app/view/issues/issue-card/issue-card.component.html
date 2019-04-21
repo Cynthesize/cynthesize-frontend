@@ -21,10 +21,10 @@
       <span>{{ issue.created_on | timeDiff }}</span>
     </div>
     <div class="issue-user-info">
-      <!-- <div class="issue-user-pic"><img src="{{ issue.userBycreatedBy.profile_pic }}" /></div>
+      <!-- <div class="issue-user-pic"><img src="{{ issue.user.profile_pic }}" /></div>
       <div class="issue-user">
-        <div class="issue-user-name">{{ issue.userBycreatedBy.name }}</div>
-        <div class="issue-user-username">{{ issue.userBycreatedBy.username }}</div>
+        <div class="issue-user-name">{{ issue.user.name }}</div>
+        <div class="issue-user-username">{{ issue.user.username }}</div>
       </div> -->
       <div class="issue-info-description">
         {{ issue.description }}

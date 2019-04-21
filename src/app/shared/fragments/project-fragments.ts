@@ -4,7 +4,7 @@ const ISSUE_COMMENT_REPLY_FRAGMENT = gql`
   fragment IssueCommentReplyFragment on reply {
     id
     reply_text
-    userByrespondent {
+    user {
       username
       profile_pic
     }
@@ -37,7 +37,7 @@ const PROJECT_ISSUE_FRAGMENT = gql`
     description
     checkpoint_name
     created_on
-    userBycreatedBy {
+    user {
       username
       name
       profile_pic

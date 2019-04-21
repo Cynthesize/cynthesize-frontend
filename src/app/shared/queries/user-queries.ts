@@ -10,6 +10,7 @@ const QUERY_USER_CHECK = gql`
   query fetch_user($email: String!) {
     user(where: { email: { _eq: $email } }) {
       ...UserProfilePicFragment
+      is_mentor
     }
   }
   ${USER_PROFILE_PIC_FRAGMENT}
