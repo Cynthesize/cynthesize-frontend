@@ -189,7 +189,6 @@ const QUERY_FETCH_PROJECT_DETAILS = gql`
       id
       project_name
       abstract
-      description
       created_on
       tech_stack
       website

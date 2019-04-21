@@ -15,7 +15,7 @@ export class UserService {
    */
   public HandleUserData(credential: any) {
     if (credential.additionalUserInfo.isNewUser) {
-      this._addUserToDb(credential.additionalUserInfo);
+      this._addUserToDb(credential);
     } else {
       this._fetchUserDetails(
         credential.additionalUserInfo.profile['email'].split('@')[0],
@@ -65,17 +65,18 @@ export class UserService {
       );
   }
 
-  private _addUserToDb(additionalUserInfo: any) {
+  private _addUserToDb(credential: any) {
     this.apollo
       .mutate<any>({
         mutation: MUTATION_ADD_USER,
         variables: {
           objects: [
             {
-              email: additionalUserInfo.profile.email,
-              name: additionalUserInfo.profile.name,
-              username: additionalUserInfo.profile.email.split('@')[0],
-              profile_pic: additionalUserInfo.profile.picture
+              user_id: credential.user.uid,
+              email: credential.additionalUserInfo.profile['email'],
+              name: credential.additionalUserInfo.profile['name'],
+              username: credential.additionalUserInfo.profile['email'].split('@')[0],
+              profile_pic: credential.additionalUserInfo.profile['picture']
             }
           ]
         }
@@ -84,7 +85,7 @@ export class UserService {
         data => {
           this.saveLocalStorageValues(
             '[]',
-            additionalUserInfo.profile.picture,
+            credential.additionalUserInfo.profile.picture,
             data.data.insert_user.returning[0].username,
             data.data.insert_user.returning[0].id,
             '[]',
@@ -114,10 +115,10 @@ export class UserService {
           likes.data.user[0].comment_likes.forEach((commentUserLikes: any) => {
             likedComments.push(commentUserLikes.comment_id);
           });
-          likes.data.user[0].projectLikessByuserId.forEach((commentUserLikes: any) => {
+          likes.data.user[0].project_likes.forEach((commentUserLikes: any) => {
             likedProjects.push(commentUserLikes.project_id);
           });
-          likes.data.user[0].replyLikessByuserId.forEach((replyUserLikes: any) => {
+          likes.data.user[0].reply_likes.forEach((replyUserLikes: any) => {
             likedReplies.push(replyUserLikes.reply_id);
           });
           this.saveLocalStorageValues(
@@ -149,5 +150,8 @@ export class UserService {
     localStorage.setItem('commentsLikedByLoggedInUser', commentLikes);
     localStorage.setItem('projectsLikedByLoggedInUser', projectLikes);
     localStorage.setItem('repliesLikedByLoggedInUser', replyLikes);
+    setTimeout(() => {
+      location.reload();
+    }, 100);
   }
 }

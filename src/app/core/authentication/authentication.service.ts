@@ -34,9 +34,7 @@ export class AuthenticationService {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.auth.signInWithPopup(provider);
 
-    credential.user.getIdTokenResult().then(token => {
-      localStorage.setItem('id_token', token.token);
-    });
+    localStorage.setItem('id_token', credential.credential['idToken']);
     this.userService.HandleUserData(credential);
     return this.updateUserData(credential.user);
   }

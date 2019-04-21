@@ -12,8 +12,8 @@ export const environment = {
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US']
 };
-export const HASURA_ACCESS_KEY = 'secret';
-export const GRAPHQL_URL = 'https://cynthesize-back.herokuapp.com/v1alpha1/graphql';
+export const HASURA_ACCESS_KEY = 'extra_secret';
+export const GRAPHQL_URL = 'https://cynthesize-pre-prod.herokuapp.com/v1alpha1/graphql';
 export const REALTIME_GRAPHQL_URL = 'wss://cynthesize-back.herokuapp.com/v1alpha1/graphql';
 
 export const firebaseapp = {
