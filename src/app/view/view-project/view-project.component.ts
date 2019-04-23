@@ -31,7 +31,6 @@ export class ViewProjectComponent implements OnInit {
         (data: any) => {
           this.project = data;
           this.editingDescription = true;
-          console.log(this.project);
         },
         (error: any) => {
           this.errorHandler.subj_notification.next(error);

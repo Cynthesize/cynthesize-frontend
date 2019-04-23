@@ -36,7 +36,6 @@ export class ProjectTimelineComponent implements OnInit {
       (data: any) => {
         this.timelineDataForm.get('eventName').setValue('');
         this.addingTimelineEvent = false;
-        console.log(data);
       },
       (error: any) => {
         this.errorHandler.subj_notification.next(error);

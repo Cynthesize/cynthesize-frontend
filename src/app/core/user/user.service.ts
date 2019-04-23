@@ -118,9 +118,7 @@ export class UserService {
             '[]'
           );
         },
-        error => {
-          console.log(error);
-        }
+        error => {}
       );
   }
 
@@ -156,9 +154,7 @@ export class UserService {
             JSON.stringify(likedReplies)
           );
         },
-        error => {
-          console.log(error);
-        }
+        error => {}
       );
   }
 

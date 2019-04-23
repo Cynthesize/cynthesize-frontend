@@ -192,8 +192,6 @@ export class ProjectService {
    * Updates project description data
    */
   public updateProjectDescription(updatedData: Object, projectId: number) {
-    console.log(projectId);
-
     return this.apollo
       .mutate<any>({
         mutation: MUTATION_UPDATE_PROJECT_DESCRIPTION,

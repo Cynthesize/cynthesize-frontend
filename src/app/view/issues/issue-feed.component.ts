@@ -18,7 +18,6 @@ export class IssueFeedComponent implements OnInit {
     }
     this.issueService.fetchOpenIssues().subscribe(
       (data: any) => {
-        console.log(data.data.issues);
         this.openIssuesList = data.data.issues;
       },
       (error: any) => {

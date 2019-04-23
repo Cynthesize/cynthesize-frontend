@@ -15,7 +15,6 @@ export class ProjectsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private profileService: ProfileService) {
     this.route.params.subscribe(params => {
       this.profileService.getUserProjects(params.username).subscribe(data => {
-        console.log(data);
         this.launchedProjects = data.data.user[0].projects;
         this.isLoading = false;
       });
