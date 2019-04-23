@@ -1,10 +1,18 @@
 <span *ngIf="activityId && authService.isAuthenticated(); then authenticated; else guest"> </span>
 
 <ng-template #authenticated>
-  <button mat-icon-button [ngClass]="{ liked: isAlreadyLiked }" (click)="likeOrDislike()" class="icon">
+  <button
+    mat-icon-button
+    [disabled]="isLoading"
+    [ngClass]="{ liked: isAlreadyLiked }"
+    (click)="likeOrDislike()"
+    class="icon"
+  >
     <mat-icon>favorite</mat-icon>{{ likes }}
   </button>
 </ng-template>
 <ng-template #guest>
-  <button mat-icon-button (click)="openLoginDialog()" class="icon"><mat-icon>favorite</mat-icon>{{ likes }}</button>
+  <button mat-icon-button [disabled]="isLoading" (click)="openLoginDialog()" class="icon">
+    <mat-icon>favorite</mat-icon>{{ likes }}
+  </button>
 </ng-template>

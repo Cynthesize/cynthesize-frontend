@@ -53,6 +53,7 @@ export class LikeComponent implements OnInit {
         this.handleLikeOperationUponResponse(data, this.filteredInfo);
       },
       error => {
+        this.isLoading = false;
         this.errorHandler.subj_notification.next(error.message);
       }
     );
