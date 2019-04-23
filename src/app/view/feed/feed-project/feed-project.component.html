@@ -1,24 +1,33 @@
 <div class="modal-container" *ngIf="project['id']">
   <div class="project-heading">
-    <div><img class="project-icon" [src]="project.icon" /></div>
+    <div class="img-box"><img [src]="project.icon" width="125px" /></div>
     <div class="project-basic-info">
-      <div class="project-name">{{ displayableName(project.project_name) }}</div>
-      <app-user-name
-        [username]="project.user.username"
-        [time]="project.created_on"
-        [isMentor]="project.user.is_mentor"
-      ></app-user-name>
-      <div class="project-abstract">{{ project.abstract }}</div>
-      <div class="card-icons pointer">
-        <app-like [activityId]="project.id" [activityType]="'project'" [likes]="project.likes" class="icon"></app-like>
-        <mat-icon class="icon" (click)="openShareSheet()">share</mat-icon>
+      <div>
+        <div class="project-name">{{ displayableName(project.project_name) }}</div>
+        <app-user-name
+          [username]="project.user.username"
+          [time]="project.created_on"
+          [isMentor]="project.user.is_mentor"
+        ></app-user-name>
+        <div class="project-abstract">{{ project.abstract }}</div>
+        <div class="card-icons pointer">
+          <app-like
+            [activityId]="project.id"
+            [activityType]="'project'"
+            [likes]="project.likes"
+            class="icon"
+          ></app-like>
+          <button mat-icon-button><mat-icon class="icon" (click)="openShareSheet()">share</mat-icon></button>
+        </div>
       </div>
     </div>
     <div class="project-buttons">
-      <button mat-raised-button class="project-btn orange-btn">Collaborate</button>
-      <button mat-raised-button color="primary" class="project-btn">
-        Website
-      </button>
+      <!-- <button mat-raised-button class="project-btn orange-btn">Collaborate</button> -->
+      <a href="{{ project.website }}" target="_blank">
+        <button mat-raised-button color="primary" class="project-btn">
+          Website
+        </button>
+      </a>
     </div>
   </div>
 

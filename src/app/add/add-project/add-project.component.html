@@ -120,8 +120,14 @@
                 >
               </h3>
               <mat-radio-group formControlName="isPublic">
+                <p>
+                  <i
+                    >We recommend making the project public for possible collaborate and reaching out to people. No info
+                    related to the project, will be public except that of what is taken input in this form.</i
+                  >
+                </p>
                 <mat-radio-button value="true">Yes</mat-radio-button>
-                <mat-radio-button value="false">False</mat-radio-button>
+                <mat-radio-button value="false">No</mat-radio-button>
               </mat-radio-group>
             </div>
             <div *ngIf="authenticationService.isAuthenticated(); then authenticated; else guest"></div>
@@ -129,7 +135,7 @@
               <button mat-raised-button class="orange-btn">Post</button>
             </ng-template>
             <ng-template #guest>
-              <button mat-raised-button class="orange-btn" disabled>You need to be logged to post the project.</button>
+              <button mat-raised-button class="orange-btn" disabled>Please login to post.</button>
             </ng-template>
           </form>
         </mat-card>

@@ -1,7 +1,7 @@
 <div class="comment-box">
   <div class="comment-container">
     <div class="add-comment">
-      <div class="user-icon">
+      <div class="user-icon" *ngIf="authenticationService.isAuthenticated()">
         <cl-image height="45" crop="scale" public-id="{{ user_pic }}" secure="true"></cl-image>
       </div>
       <div *ngIf="authenticationService.isAuthenticated(); then authenticated; else guest"></div>

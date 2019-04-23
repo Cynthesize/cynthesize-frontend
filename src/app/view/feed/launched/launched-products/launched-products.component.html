@@ -30,8 +30,10 @@
     <div class="page-data">
       <mat-card *ngFor="let project of projectList" class="launched-project-page-card">
         <div class="card">
-          <div><img class="project-icon" [src]="project.icon" /></div>
-          <div class="card-details">
+          <a class="img-box" [routerLink]="['/view/feed/projects', project.project_name]"
+            ><img class="project-icon" [src]="project.icon"
+          /></a>
+          <a class="card-details" [routerLink]="['/view/feed/projects', project.project_name]">
             <div class="card-project-name">
               {{ displayableName(project.project_name) }}
               <span *ngFor="let tag of project.tagsLinkssByprojectId" class="tags">
@@ -43,7 +45,7 @@
               <br />
               {{ project.abstract }}
             </div>
-          </div>
+          </a>
           <div class="card-links">
             <div>
               <a href="{{ project.website }}" target="_blank">

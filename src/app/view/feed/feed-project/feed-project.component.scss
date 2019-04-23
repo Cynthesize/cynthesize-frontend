@@ -1,45 +1,56 @@
 .modal-container {
   background-color: rgb(247, 247, 247);
 }
+
 modal-dialog-container {
   background-color: rgb(247, 247, 247) !important;
 }
+
 .project-heading {
   display: flex;
   padding: 20px;
   align-items: center;
+  justify-content: space-between;
 }
-.project-icon {
-  width: 100px;
-  height: auto;
-  flex: 1;
-  border-radius: 6px;
-  margin-right: 20px;
-}
+
 .project-basic-info {
-  display: flex;
-  flex-direction: column;
-  flex: 5;
+  width: 100%;
+  margin-left: 30px;
 }
+
+.img-box {
+  display: flex;
+  align-items: center;
+}
+
 .project-name {
   font-size: 3rem;
-  padding: 10px 10px 5px 10px;
   font-weight: 700;
 }
+
 .project-abstract {
   font-size: 1rem;
-  padding: 0 10px 15px 10px;
+  color: #5c5c5c;
 }
+
 .project-buttons {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  width: 150px;
 }
+
 .project-btn {
-  padding: 5px;
-  margin: 5px;
   color: white;
+  width: 100%;
+  padding: 8px;
 }
+
 .orange-btn {
   background-color: orange;
+}
+
+@media (max-width: 870px) {
+  .project-heading {
+    flex-direction: column;
+  }
 }

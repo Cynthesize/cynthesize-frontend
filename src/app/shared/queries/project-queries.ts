@@ -200,9 +200,6 @@ const QUERY_FETCH_PROJECT_DETAILS = gql`
       user {
         ...UserProfilePicFragment
       }
-      launchedProjectsBylaunchedId {
-        id
-      }
       project_descriptions {
         id
         project_id
