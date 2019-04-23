@@ -16,12 +16,17 @@
         <p class="home-description">
           <!-- Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum, dolor sit amet. -->
         </p>
-        <mat-card class="home-community">
-          <h2 class="home-description">Wanna join the community?</h2>
-          <button mat-raised-button color="primary" class="community-button" [routerLink]="['/view/feed/projects']">
-            See active projects
-          </button>
-        </mat-card>
+        <div class="home-community-card">
+          <mat-card class="home-community">
+            <h2 class="home-description">Wanna join the community?</h2>
+            <button mat-raised-button color="primary" class="community-button" [routerLink]="['/view/feed/projects']">
+              See active projects
+            </button>
+            <button mat-raised-button color="primary" class="community-button" [routerLink]="['/add/projects']">
+              Add your own project
+            </button>
+          </mat-card>
+        </div>
       </div>
       <div class="home-banner-image">
         <img src="../../assets/images/building.svg" />
@@ -113,18 +118,24 @@
         </p>
       </div>
       <div class="home-contact-icons center-divs">
-        <div class="icons">
-          <i class="fa fa-envelope social-icon"></i>
-          <div class="icon-details">hello@cynthesize.co</div>
-        </div>
-        <div class="icons">
-          <i class="fa fa-twitter social-icon"></i>
-          <div class="icon-details">@CynthesizeHQ</div>
-        </div>
-        <div class="icons">
-          <i class="social-icon fa fa-facebook"></i>
-          <div class="icon-details">cynthesizetech</div>
-        </div>
+        <a href="mailto:hello@cynthesize.co">
+          <div class="icons">
+            <i class="fa fa-envelope social-icon"></i>
+            <div class="icon-details">hello@cynthesize.co</div>
+          </div>
+        </a>
+        <a href="https://twitter.com/CynthesizeHQ" target="_blank">
+          <div class="icons">
+            <i class="fa fa-twitter social-icon"></i>
+            <div class="icon-details">@CynthesizeHQ</div>
+          </div>
+        </a>
+        <a href="https://facebook.com/cynthesizetech">
+          <div class="icons">
+            <i class="social-icon fa fa-facebook"></i>
+            <div class="icon-details">cynthesizetech</div>
+          </div>
+        </a>
       </div>
     </div>
   </section>

@@ -27,43 +27,42 @@
       <button class="header__link" mat-button routerLink="/view/feed/projects">
         <span>Projects</span>
       </button>
-
-      <div *ngIf="authenticationService.isAuthenticated(); then authenticated; else guest"></div>
-
-      <ng-template #authenticated>
-        <button mat-icon-button [matMenuTriggerFor]="userMenu">
-          <mat-icon> person </mat-icon>
-        </button></ng-template
-      >
-      <ng-template #guest>
-        <button
-          mat-raised-button
-          style="background-color: orange; color: white; font-weight: 600;"
-          (click)="authenticationService.login()"
-        >
-          Sign in
-        </button></ng-template
-      >
-
-      <mat-menu #userMenu="matMenu" class="profile-menu">
-        <div>
-          <div class="user-info">
-            <div class="user-image" *ngIf="profilepPic">
-              <cl-image height="50" crop="scale" public-id="{{ profilepPic }}" secure="true"></cl-image>
-            </div>
-            <div class="username">{{ username }}</div>
-          </div>
-          <mat-divider></mat-divider>
-          <div class="user-links">
-            <div class="user-link" routerLink="/user/{{ username }}">Profile</div>
-            <div class="user-link" (click)="authenticationService.logout()">Logout</div>
-          </div>
-        </div>
-      </mat-menu>
-
-      <button class="header__link" mat-icon-button (click)="openModal()">
-        <mat-icon>sentiment_dissatisfied</mat-icon>
-      </button>
     </div>
+
+    <div *ngIf="authenticationService.isAuthenticated(); then authenticated; else guest"></div>
+
+    <ng-template #authenticated>
+      <button mat-icon-button [matMenuTriggerFor]="userMenu">
+        <mat-icon> person </mat-icon>
+      </button></ng-template
+    >
+    <ng-template #guest>
+      <button
+        mat-raised-button
+        style="background-color: orange; color: white; font-weight: 600;"
+        (click)="authenticationService.login()"
+      >
+        Sign in
+      </button>
+    </ng-template>
+    <mat-menu #userMenu="matMenu" class="profile-menu">
+      <div>
+        <div class="user-info">
+          <div class="user-image" *ngIf="profilepPic">
+            <cl-image height="50" crop="scale" public-id="{{ profilepPic }}" secure="true"></cl-image>
+          </div>
+          <div class="username">{{ username }}</div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="user-links">
+          <div class="user-link" routerLink="/user/{{ username }}">Profile</div>
+          <div class="user-link" (click)="authenticationService.logout()">Logout</div>
+        </div>
+      </div>
+    </mat-menu>
+
+    <button class="header__link" mat-icon-button (click)="openModal()">
+      <mat-icon>sentiment_dissatisfied</mat-icon>
+    </button>
   </div>
 </mat-toolbar>

@@ -9,7 +9,7 @@
 .home-description {
   font-size: 0.8rem;
   font-weight: 500;
-  align-items: center;
+  text-align: center;
 }
 
 mat-card-title {
@@ -162,8 +162,28 @@ mat-card-title {
 
 .home-community {
   text-align: center;
-  width: 400px;
-  margin: 40px auto 0 auto;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.home-community-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 30px 0;
+}
+
+@media (max-width: 500px) {
+  .home-heading {
+    font-size: 2rem;
+  }
+  .home-banner {
+    flex-basis: 100%;
+  }
+  .home-banner-image {
+    display: none;
+  }
 }
 
 .community-button {
