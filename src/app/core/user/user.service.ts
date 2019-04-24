@@ -172,6 +172,5 @@ export class UserService {
     localStorage.setItem('commentsLikedByLoggedInUser', commentLikes);
     localStorage.setItem('projectsLikedByLoggedInUser', projectLikes);
     localStorage.setItem('repliesLikedByLoggedInUser', replyLikes);
-    location.reload();
   }
 }
