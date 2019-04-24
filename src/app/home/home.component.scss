@@ -1,9 +1,10 @@
 @import "../../sass/declarations";
 .home-content {
-  width: 425px;
-  margin: 0 auto;
-  padding: 80px 0;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 100px 0;
 }
 
 .home-description {
@@ -23,6 +24,10 @@ mat-card-title {
   color: #2196f3;
 }
 
+.home-banner .home-heading {
+  height: 200px;
+}
+
 .home-card {
   overflow: hidden;
   display: flex;
@@ -33,6 +38,10 @@ mat-card-title {
   width: 20%;
   margin: 10px;
   padding: 30px;
+}
+
+.home-card mat-card-content {
+  margin: 30px 0;
 }
 
 .home-card:hover {
@@ -83,6 +92,10 @@ mat-card-title {
   font-size: 1rem;
 }
 
+.home-content .home-contact-description {
+  text-align: center;
+}
+
 .home-content-contact {
   display: inline-block;
 }
@@ -90,6 +103,7 @@ mat-card-title {
 .home-section {
   height: 300px;
   background-color: white;
+  margin-top: 180px;
 }
 
 .home-contact-icons {
@@ -162,7 +176,7 @@ mat-card-title {
 
 .home-community {
   text-align: center;
-  width: 350px;
+  width: 330px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -204,7 +218,7 @@ mat-card-title {
     justify-content: space-between;
     flex-basis: auto;
     text-align: center;
-    width: 100%;
+    width: 96%;
     margin: 10px;
     padding: 30px;
   }
