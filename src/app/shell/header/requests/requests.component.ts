@@ -23,7 +23,8 @@ export class RequestsComponent implements OnInit {
   ngOnInit() {
     this.reqForm = this.fb.group({
       is_bug: [false, Validators.required],
-      text: ['', Validators.required]
+      text: ['', Validators.required],
+      name: ['Anonymous', Validators.required]
     });
   }
 
