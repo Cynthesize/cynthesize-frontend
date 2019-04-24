@@ -44,7 +44,6 @@ const LAUNCHED_USER_PROJECT_DETAILS_FRAGMENT = gql`
           tag_name
         }
       }
-      is_launched
     }
   }
 `;

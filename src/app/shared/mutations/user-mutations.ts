@@ -69,7 +69,6 @@ const MUTATION_ADD_COMMENT = gql`
         likes
         timestamp
         previous_edits
-        launched_projects_id
       }
     }
   }

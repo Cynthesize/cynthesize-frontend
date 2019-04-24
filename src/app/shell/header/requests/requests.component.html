@@ -1,9 +1,8 @@
 <h1>Something not working right?</h1>
 <h2>Inform us and help us improve <mat-icon>mood</mat-icon></h2>
 <br />
-<br />
 <form (ngSubmit)="submitRequest()" [formGroup]="reqForm">
-  <mat-label>Is this a bus? (Select "No", if you want a new feature ;) )</mat-label>
+  <mat-label>Is this a bug? Select "No", if you want a <b>new feature</b> ;) </mat-label>
   <br />
   <mat-radio-group formControlName="is_bug">
     <mat-radio-button value="true">Yes</mat-radio-button>

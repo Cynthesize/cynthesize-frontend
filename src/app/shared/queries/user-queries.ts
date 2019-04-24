@@ -54,4 +54,20 @@ const QUERY_APPLIED_FOR_MENTORSHIP = gql`
   }
 `;
 
-export { QUERY_USER_CHECK, QUERY_USER_DETAILS, QUERY_USER_LIKES, QUERY_PROJECTS_BY_USER, QUERY_APPLIED_FOR_MENTORSHIP };
+const QUERY_IS_MENTOR = gql`
+  query is_mentor($userId: String!) {
+    user(where: { user_id: { _eq: $userId } }) {
+      id
+      is_mentor
+    }
+  }
+`;
+
+export {
+  QUERY_USER_CHECK,
+  QUERY_USER_DETAILS,
+  QUERY_USER_LIKES,
+  QUERY_PROJECTS_BY_USER,
+  QUERY_APPLIED_FOR_MENTORSHIP,
+  QUERY_IS_MENTOR
+};

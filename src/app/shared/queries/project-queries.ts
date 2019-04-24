@@ -129,7 +129,6 @@ const QUERY_FETCH_PUBLIC_PROJECT_COMMENTS = gql`
       likes
       timestamp
       previous_edits
-      launched_projects_id
     }
   }
   ${USER_PROFILE_PIC_FRAGMENT}
@@ -157,7 +156,6 @@ const QUERY_FETCH_ONGIONG_PROJECT_COMMENTS = gql`
       likes
       timestamp
       previous_edits
-      launched_projects_id
     }
   }
   ${USER_PROFILE_PIC_FRAGMENT}
@@ -217,13 +215,16 @@ const QUERY_FETCH_PROJECT_DETAILS = gql`
         timeline
       }
       issuessByprojectId(where: { project_id: { _eq: $projectId } }, distinct_on: checkpoint_name) {
+        id
         checkpoint_name
       }
       stage_launchings(where: { project_id: { _eq: $projectId } }) {
+        id
         is_passed
         is_applied
       }
       stage_fundings(where: { project_id: { _eq: $projectId } }) {
+        id
         is_passed
         is_applied
       }

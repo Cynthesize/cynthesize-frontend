@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
         messageString = message;
       } else if (!message.message.indexOf('Network')) {
         messageString =
-          'There appears to be something wrong with your internet connection. Please check and trry again';
+          'There appears to be something wrong with your internet connection. Please check and try again.';
       } else {
         messageString = message.message;
       }

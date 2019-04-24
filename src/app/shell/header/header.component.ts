@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatSidenav, MatDialog } from '@angular/material';
 import { AuthenticationService, I18nService } from '@app/core';
 import { RequestsComponent } from './requests/requests.component';
+import { ProfileService } from '@app/core/profile/profile.service';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,19 @@ export class HeaderComponent implements OnInit {
   sidenav: MatSidenav;
   isMentor = localStorage.getItem('is_mentor');
 
-  constructor(public authenticationService: AuthenticationService, private dialog: MatDialog) {}
+  constructor(
+    public authenticationService: AuthenticationService,
+    private dialog: MatDialog,
+    private profileService: ProfileService
+  ) {
+    this.profileService.checkIfUserIsMentor().subscribe(
+      data => {
+        console.log(data);
+        // this.isMentor = data.data.returning[0].user
+      },
+      error => {}
+    );
+  }
 
   ngOnInit() {}
 

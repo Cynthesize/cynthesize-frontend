@@ -4,9 +4,9 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-not-found',
   template: `
     <div class="not-found">
-      <img src="../../../assets/not_found.svg" width="500px" />
+      <img src="../../../assets/unauthorised.svg" width="500px" />
       <p>
-        We looked for it, but couldn't find the page for you. Go back to exploring
+        Oops you tried accessing something you shouldn't be. Go back to exploring
         <a routerLink="['']">Cynthesize</a>
       </p>
     </div>
@@ -37,7 +37,7 @@ import { Component, OnInit } from '@angular/core';
     `
   ]
 })
-export class NotFoundComponent implements OnInit {
+export class UnauthorisedComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}

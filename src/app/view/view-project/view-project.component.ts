@@ -33,6 +33,7 @@ export class ViewProjectComponent implements OnInit {
           this.editingDescription = true;
         },
         (error: any) => {
+          this.router.navigate(['/not-found']);
           this.errorHandler.subj_notification.next(error);
         }
       );

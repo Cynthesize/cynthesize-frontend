@@ -5,6 +5,7 @@ const ISSUE_COMMENT_REPLY_FRAGMENT = gql`
     id
     reply_text
     user {
+      id
       username
       profile_pic
     }
@@ -18,6 +19,7 @@ const ISSUE_COMMENT_FRAGMENT = gql`
     id
     comment_text
     user {
+      id
       username
       profile_pic
     }
@@ -38,6 +40,7 @@ const PROJECT_ISSUE_FRAGMENT = gql`
     checkpoint_name
     created_on
     user {
+      id
       username
       name
       profile_pic
@@ -62,14 +65,15 @@ const LAUNCHED_PROJECT_DETAILS_FRAGMENT = gql`
     likes
     tagsLinkssByprojectId {
       tagsBytagId {
+        tag_id
         tag_name
       }
     }
     user {
+      id
       username
       profile_pic
     }
-    is_launched
   }
 `;
 

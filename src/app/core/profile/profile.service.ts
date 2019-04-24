@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs';
 import { Apollo } from 'apollo-angular';
-import { QUERY_USER_DETAILS, QUERY_PROJECTS_BY_USER } from '@app/shared/queries/user-queries';
+import { QUERY_USER_DETAILS, QUERY_PROJECTS_BY_USER, QUERY_IS_MENTOR } from '@app/shared/queries/user-queries';
 import { MUTATION_UPDATE_USER_DETAILS } from '@app/shared/mutations/user-mutations';
 import { take } from 'rxjs/operators';
 
@@ -23,6 +23,24 @@ export class ProfileService {
         query: QUERY_USER_DETAILS,
         variables: {
           username: username
+        }
+      })
+      .valueChanges.pipe(
+        map((res: any) => {
+          return res.data;
+        })
+      );
+  }
+
+  /*
+   * Check if the logged in user is a mentor
+   */
+  public checkIfUserIsMentor() {
+    return this.apollo
+      .watchQuery<any>({
+        query: QUERY_IS_MENTOR,
+        variables: {
+          userId: localStorage.getItem('user_id') || ''
         }
       })
       .valueChanges.pipe(

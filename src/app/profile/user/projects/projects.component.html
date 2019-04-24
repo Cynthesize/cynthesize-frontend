@@ -40,5 +40,5 @@
     </mat-card>
   </div>
 </div>
-<mat-spinner class="loader" [ngClass]="{ hidden: !isLoading }"></mat-spinner>
+<mat-spinner class="loader" *ngIf="isLoading"></mat-spinner>
 <router-outlet></router-outlet>

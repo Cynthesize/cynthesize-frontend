@@ -41,6 +41,7 @@
   position: absolute;
   top: 100px;
   left: 10%;
+  flex-wrap: wrap;
 }
 .info-bar {
   display: flex;
@@ -61,4 +62,9 @@
 }
 .name {
   font-weight: 700;
+}
+@media (max-width: 570px) {
+  .user {
+    left: 5%;
+  }
 }

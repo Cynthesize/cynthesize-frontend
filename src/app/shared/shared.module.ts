@@ -19,6 +19,7 @@ import { ShareSheetComponent } from './share-sheet/share-sheet.component';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA, MatBottomSheetModule } from '@angular/material';
 import { ActivityActionsComponent } from './activity-actions/activity-actions.component';
 import { UserNameComponent } from './user-name/user-name.component';
+import { UnauthorisedComponent } from './unauthorized/unauthorized.component';
 
 export const cloudinary = {
   Cloudinary: CloudinaryCore
@@ -42,6 +43,7 @@ export const config: CloudinaryConfiguration = {
   ],
   declarations: [
     NotFoundComponent,
+    UnauthorisedComponent,
     CommentsComponent,
     EditableCommentComponent,
     TimeDiffPipe,
