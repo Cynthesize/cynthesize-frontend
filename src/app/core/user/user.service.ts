@@ -172,8 +172,6 @@ export class UserService {
     localStorage.setItem('commentsLikedByLoggedInUser', commentLikes);
     localStorage.setItem('projectsLikedByLoggedInUser', projectLikes);
     localStorage.setItem('repliesLikedByLoggedInUser', replyLikes);
-    setTimeout(() => {
-      location.reload();
-    }, 100);
+    location.reload();
   }
 }
