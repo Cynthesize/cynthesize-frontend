@@ -94,6 +94,7 @@ export class AuthenticationService {
               localStorage.setItem('username', data.data.insert_user.returning[0].username);
               localStorage.setItem('userId', data.data.insert_user.returning[0].id);
               localStorage.setItem('is_mentor', 'false');
+              location.reload();
             });
         } else {
           this.apollo
@@ -126,6 +127,7 @@ export class AuthenticationService {
           localStorage.setItem('username', res.data.user[0].username);
           localStorage.setItem('is_mentor', JSON.stringify(res.data.user[0].is_mentor));
           localStorage.setItem('userId', res.data.user[0].id);
+          location.reload();
         }
       });
   }
@@ -136,6 +138,5 @@ export class AuthenticationService {
     localStorage.setItem('user_id', authResult.idTokenPayload.sub);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    location.reload();
   }
 }
