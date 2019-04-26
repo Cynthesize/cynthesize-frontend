@@ -73,6 +73,7 @@ export class AddProjectComponent implements OnInit {
   ngOnInit() {}
 
   addProject() {
+    this.isLoading = true;
     this.isFormSubmitted = true;
     const projectDetails = {
       projectName: this.project
@@ -96,6 +97,7 @@ export class AddProjectComponent implements OnInit {
             console.log('Tags added for the project.');
           });
         this.projectService.addProjectDescription(data.data.insert_projects.returning[0].id).subscribe((ret: any) => {
+          this.isLoading = false;
           this.router.navigate([
             '/view/project/' +
               data.data.insert_projects.returning[0].id +
@@ -105,6 +107,7 @@ export class AddProjectComponent implements OnInit {
         });
       },
       (error: any) => {
+        this.isLoading = false;
         this.isFormSubmitted = false;
         this.errorHandler.subj_notification.next(error);
       }

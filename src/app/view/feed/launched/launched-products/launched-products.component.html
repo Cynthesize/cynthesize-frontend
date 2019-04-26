@@ -47,7 +47,7 @@
             </div>
           </a>
           <div class="card-links">
-            <div>
+            <div *ngIf="project.website">
               <a href="{{ project.website }}" target="_blank">
                 <button mat-raised-button style="width: -webkit-fill-available;">Visit</button>
               </a>

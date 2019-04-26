@@ -7,13 +7,11 @@ a {
 }
 
 .sidebar {
-  width: 280px;
   display: flex;
   flex-direction: column;
   flex: 1;
   background-color: white;
   border: 1px #dddddd solid;
-  min-height: 93.5vh;
   padding: 40px;
 }
 
@@ -25,6 +23,7 @@ a {
 
 .project-page {
   display: flex;
+  flex-wrap: wrap;
 }
 .issue-link-active {
   color: blue;
@@ -35,7 +34,7 @@ a {
   padding: 5px 10px;
 }
 .issue-button {
-  width: 50%;
+  width: 150px;
   margin-top: 1rem;
   transform: translateX(6px);
 }

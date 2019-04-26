@@ -1,6 +1,6 @@
 <div class="container">
   <!-- Banner Image -->
-  <div class="banner-image"><img src="../../../../assets/images/project_banner.svg" /></div>
+  <!-- <div class="banner-image"><img src="../../../../assets/images/project_banner.svg" /></div> -->
   <h1 class="checkpoint-name">{{ displayableName(project.project_name) }}</h1>
   <p>
     Team leader:
@@ -63,10 +63,10 @@
           <mat-expansion-panel-header>
             <mat-panel-title>
               Defining the XYZ
+              <mat-panel-description>
+                | We help X to Y by doing Z.
+              </mat-panel-description>
             </mat-panel-title>
-            <mat-panel-description>
-              We help X to Y by doing Z.
-            </mat-panel-description>
             <mat-icon>developer_mode</mat-icon>
           </mat-expansion-panel-header>
           <div class="description-text" *ngIf="!editingDescription">{{ project.project_descriptions[0].xyz }}</div>
@@ -90,10 +90,10 @@
           <mat-expansion-panel-header>
             <mat-panel-title>
               Distinguishing Factor
+              <mat-panel-description>
+                | This makes us special.
+              </mat-panel-description>
             </mat-panel-title>
-            <mat-panel-description>
-              This makes us special.
-            </mat-panel-description>
             <mat-icon>compare</mat-icon>
           </mat-expansion-panel-header>
           <div class="description-text" *ngIf="!editingDescription">
@@ -124,10 +124,10 @@
           <mat-expansion-panel-header>
             <mat-panel-title>
               Future Scope
+              <mat-panel-description>
+                | Along with our MVP, this is what we could provide.
+              </mat-panel-description>
             </mat-panel-title>
-            <mat-panel-description>
-              Along with our MVP, this is what we could provide.
-            </mat-panel-description>
             <mat-icon>cloud</mat-icon>
           </mat-expansion-panel-header>
           <div class="description-text" *ngIf="!editingDescription">
@@ -155,10 +155,10 @@
           <mat-expansion-panel-header>
             <mat-panel-title>
               Progress
+              <mat-panel-description>
+                | Here we are.
+              </mat-panel-description>
             </mat-panel-title>
-            <mat-panel-description>
-              Here we are.
-            </mat-panel-description>
             <mat-icon>show_chart</mat-icon>
           </mat-expansion-panel-header>
           <div class="description-text" *ngIf="!editingDescription">{{ project.project_descriptions[0].progress }}</div>
@@ -183,10 +183,10 @@
           <mat-expansion-panel-header>
             <mat-panel-title>
               Revenue Model
+              <mat-panel-description>
+                | If we talk about money, here's how we can earn.
+              </mat-panel-description>
             </mat-panel-title>
-            <mat-panel-description>
-              If we talk about money, here's how we can earn.
-            </mat-panel-description>
             <mat-icon>monetization_on</mat-icon>
           </mat-expansion-panel-header>
           <div class="description-text" *ngIf="!editingDescription">
@@ -218,10 +218,10 @@
           <mat-expansion-panel-header>
             <mat-panel-title>
               Why us?
+              <mat-panel-description>
+                | Because we can do this.
+              </mat-panel-description>
             </mat-panel-title>
-            <mat-panel-description>
-              Because we can do this.
-            </mat-panel-description>
             <mat-icon>category</mat-icon>
           </mat-expansion-panel-header>
           <div class="description-text" *ngIf="!editingDescription">
@@ -249,10 +249,10 @@
           <mat-expansion-panel-header>
             <mat-panel-title>
               The Wow Factor
+              <mat-panel-description>
+                | This will sweep you off your feet!
+              </mat-panel-description>
             </mat-panel-title>
-            <mat-panel-description>
-              This will sweep you off your feet!
-            </mat-panel-description>
             <mat-icon>mood</mat-icon>
           </mat-expansion-panel-header>
           <div class="description-text" *ngIf="!editingDescription">

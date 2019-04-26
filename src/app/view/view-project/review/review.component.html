@@ -20,7 +20,7 @@
   the mark.
 </div>
 <div class="review-modal" *ngIf="data.context !== 'waiting'">
-  <div class="review-questions">
+  <div class="flex-center flex-1 font-1">
     <form [formGroup]="reviewForm" (ngSubmit)="submitReviewForm()">
       <div *ngFor="let control of (questionsObject | keyvalue)">
         <div>{{ control.value }}</div>
@@ -31,7 +31,7 @@
       <button mat-raised-button type="submit">Submit for review</button>
     </form>
   </div>
-  <div class="review-illustration">
+  <div class="flex-1 flex-center">
     <img src="../../../../assets/stages/{{ data.context }}.svg" />
   </div>
 </div>
@@ -58,18 +58,8 @@
     font-family: 'Open sans', sans-serif;
     font-size: 1rem;
   }
-  .review-illustration {
-    width: 50%;
-    align-items: center;
-  }
-  .review-questions {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-  }
-  .review-illustration > img {
-    width: 90%;
+  .flex-center > img {
+    width: 75%;
+    height: 560px;
   }
 </style>

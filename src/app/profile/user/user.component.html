@@ -1,3 +1,6 @@
+<div *ngIf="!user" class="loader">
+  <mat-spinner></mat-spinner>
+</div>
 <div *ngIf="user">
   <div class="banner"></div>
   <div class="user">
@@ -12,12 +15,12 @@
     </div>
     <div class="userinfo">
       <div class="name">
-        <span style="font-size: 3rem; color: black;">{{ user.name }}</span>
-        <span style="font-size: 1rem; color: black;">{{ user.username }}</span>
+        <span style="font-size: 3rem; color: black;">{{ user.name }} </span>
+        <span style="font-size: 1rem; color: black;">{{ user.username }} </span>
         <mat-icon class="pointer" (click)="editingProfile = true">edit</mat-icon>
         <div class="contribution">
           <div class="header-icons"></div>
-          <app-projects></app-projects>
+          <app-projects><mat-spinner></mat-spinner></app-projects>
         </div>
       </div>
     </div>

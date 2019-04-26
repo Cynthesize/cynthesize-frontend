@@ -3,6 +3,7 @@
     <div class="profile-heading">Projects</div>
   </div>
   <div class="page-data">
+    {{ nullText }}
     <mat-card class="card" *ngFor="let project of launchedProjects">
       <div><img class="project-icon" [src]="project.icon" /></div>
       <div class="card-details">
@@ -25,7 +26,7 @@
         </div>
       </div>
       <div class="card-links">
-        <div>
+        <div *ngIf="project.website">
           <a href="{{ project.website }}" target="_blank">
             <button mat-raised-button style="width: -webkit-fill-available;">Visit</button>
           </a>
@@ -40,5 +41,4 @@
     </mat-card>
   </div>
 </div>
-<mat-spinner class="loader" *ngIf="isLoading"></mat-spinner>
 <router-outlet></router-outlet>

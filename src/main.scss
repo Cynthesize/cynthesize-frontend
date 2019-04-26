@@ -66,6 +66,31 @@ p {
   line-height: 1.8;
 }
 
+// General classes
+
+.flex-center {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+
+.flex-1 {
+  display: flex;
+  flex: 1;
+}
+
+.font-1 {
+  font-size: 1rem;
+}
+
+.font-2 {
+  font-size: 2rem;
+}
+
+.font-3 {
+  font-size: 3rem;
+}
+
 .mat-card-header-text {
   margin: 0 0 5px 0 !important;
 }
@@ -277,4 +302,15 @@ a {
   align-items: center;
   margin: 5px 0;
   justify-content: space-around;
+}
+
+button mat-spinner,
+button mat-spinner svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.orange-btn .mat-button-wrapper {
+  display: flex;
+  align-items: center;
 }

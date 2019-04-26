@@ -132,7 +132,9 @@
             </div>
             <div *ngIf="authenticationService.isAuthenticated(); then authenticated; else guest"></div>
             <ng-template #authenticated>
-              <button mat-raised-button class="orange-btn">Post</button>
+              <button mat-raised-button [disabled]="isLoading" class="orange-btn">
+                <mat-spinner *ngIf="isLoading"></mat-spinner> Submit Project
+              </button>
             </ng-template>
             <ng-template #guest>
               <button mat-raised-button class="orange-btn" disabled>Please login to post.</button>

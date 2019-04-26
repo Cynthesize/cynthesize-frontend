@@ -62,14 +62,16 @@ export class MentorComponent implements OnInit {
     mentorData['levels'] = this.levels.value;
     this.userService.applyForMentorship(mentorData).subscribe(
       (data: any) => {
+        this.isLoading = false;
         this.errorHandler.subj_notification.next(
           'You have succesfully applied for mentorship. Please wait while we look up your answers.'
         );
+        this.isAlreadyApplied = true;
       },
       (error: any) => {
+        this.isLoading = false;
         this.errorHandler.subj_notification.next(error);
       }
     );
-    this.isLoading = false;
   }
 }

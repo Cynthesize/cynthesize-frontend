@@ -11,11 +11,15 @@ export class ProjectsComponent implements OnInit {
   username: string;
   launchedProjects: any[] = [];
   isLoading = true;
+  nullText: string = null;
 
   constructor(private route: ActivatedRoute, private profileService: ProfileService) {
     this.route.params.subscribe(params => {
       this.profileService.getUserProjects(params.username).subscribe(data => {
         this.launchedProjects = data.data.user[0].projects;
+        if (this.launchedProjects.length === 0) {
+          this.nullText = 'No projects exists.';
+        }
         this.isLoading = false;
       });
     });
