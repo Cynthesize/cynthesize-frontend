@@ -10,9 +10,11 @@
       <mat-label>Add an event</mat-label>
       <input matInput formControlName="eventName" />
     </mat-form-field>
-
-    <input matInput placeholder="Date" [matDatepicker]="picker" (focus)="picker.open()" formControlName="date" />
-    <mat-datepicker #picker> <mat-icon>date</mat-icon></mat-datepicker>
+    <input matInput [matDatepicker]="myDatepicker" formControlName="date" style="display:none;" />
+    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+    <mat-datepicker #myDatepicker></mat-datepicker>
+    <!-- <input matInput placeholder="Date" [matDatepicker]="picker" (focus)="picker.open()" />
+    <mat-datepicker #picker> <mat-icon>date</mat-icon></mat-datepicker> -->
 
     <button mat-icon-button (click)="addTimelineEvent()">
       <mat-icon> done </mat-icon>
@@ -23,6 +25,6 @@
   </div>
 </form>
 <div class="timeline-event open-sans" *ngFor="let event of (timeline | keyvalue)">
-  <p class="event-name">{{ event.key }}</p>
-  {{ event.value | date }}
+  <p class="event-name">{{ event.value }}</p>
+  {{ event.key | date }}
 </div>

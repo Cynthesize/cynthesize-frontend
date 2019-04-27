@@ -31,7 +31,7 @@ export class ProjectTimelineComponent implements OnInit {
   }
 
   addTimelineEvent() {
-    this.timeline[this.timelineDataForm.get('eventName').value] = this.timelineDataForm.get('date').value;
+    this.timeline[this.timelineDataForm.get('date').value] = this.timelineDataForm.get('eventName').value;
     this.projectService.updateProjectEvents({ timeline: this.timeline }, this.projectId).subscribe(
       (data: any) => {
         this.timelineDataForm.get('eventName').setValue('');
