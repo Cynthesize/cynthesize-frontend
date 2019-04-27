@@ -2,27 +2,69 @@
   <mat-spinner></mat-spinner>
 </div>
 <div *ngIf="user">
-  <div class="banner"></div>
-  <div class="user">
-    <div class="info-bar">
-      <img [src]="user.profile_pic" class="image" />
-      <mat-card>
-        <div class="info-detail"><mat-icon>person</mat-icon>{{ user.bio }}</div>
-        <div class="info-detail"><mat-icon>email</mat-icon>{{ user.email }}</div>
-        <div class="info-detail"><mat-icon>person_pin</mat-icon>{{ user.location }}</div>
-        <div class="info-detail"><mat-icon>public</mat-icon>{{ user.website }}</div>
-      </mat-card>
-    </div>
-    <div class="userinfo">
-      <div class="name">
-        <span style="font-size: 3rem; color: black;">{{ user.name }} </span>
-        <span style="font-size: 1rem; color: black;">{{ user.username }} </span>
-        <mat-icon class="pointer" (click)="editingProfile = true">edit</mat-icon>
-        <div class="contribution">
-          <div class="header-icons"></div>
-          <app-projects><mat-spinner></mat-spinner></app-projects>
+  <form [formGroup]="editForm" (ngSubmit)="updateUserData($event)">
+    <div class="banner"></div>
+    <div class="user">
+      <div class="info-bar">
+        <img [src]="user.profile_pic" class="image" />
+        <mat-card>
+          <div class="info-detail">
+            <mat-icon>person</mat-icon>
+            <div *ngIf="!editingProfile">{{ user.bio }}</div>
+            <mat-form-field *ngIf="editingProfile" appearance="outline">
+              <mat-label>Let everyone know about you</mat-label>
+              <input matInput formControlName="bio" />
+            </mat-form-field>
+          </div>
+          <div class="info-detail"><mat-icon>email</mat-icon>{{ user.email }}</div>
+          <div class="info-detail">
+            <mat-icon>person_pin</mat-icon>
+            <div *ngIf="!editingProfile">{{ user.location }}</div>
+            <mat-form-field *ngIf="editingProfile" appearance="outline">
+              <mat-label>Where are you currently at?</mat-label>
+              <input matInput formControlName="location" />
+            </mat-form-field>
+          </div>
+
+          <div class="info-detail">
+            <mat-icon>public</mat-icon>
+            <div *ngIf="!editingProfile">{{ user.website }}</div>
+            <mat-form-field *ngIf="editingProfile" appearance="outline">
+              <mat-label>Your website</mat-label>
+              <input matInput formControlName="website" />
+            </mat-form-field>
+          </div>
+        </mat-card>
+      </div>
+      <div class="userinfo">
+        <div class="name">
+          <div class="name-edit">
+            <span style="font-size: 3rem; color: black;">{{ user.name }} </span>
+            <span style="font-size: 1rem; color: black;"
+              ><div *ngIf="!editingProfile">{{ user.username }}</div>
+              <mat-form-field *ngIf="editingProfile" appearance="outline">
+                <mat-label>New username</mat-label>
+                <input matInput formControlName="username" /> </mat-form-field
+            ></span>
+
+            <button mat-icon-button *ngIf="isSameUser && !editingProfile">
+              <mat-icon class="pointer" (click)="editingProfile = true">
+                edit
+              </mat-icon>
+            </button>
+            <button mat-icon-button type="submit" *ngIf="editingProfile">
+              <mat-icon class="pointer">done</mat-icon>
+            </button>
+            <button mat-icon-button *ngIf="editingProfile">
+              <mat-icon class="pointer" (click)="editingProfile = false">cancel</mat-icon>
+            </button>
+          </div>
+          <div class="contribution">
+            <div class="header-icons"></div>
+            <app-projects></app-projects>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>

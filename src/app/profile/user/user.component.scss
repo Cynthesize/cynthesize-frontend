@@ -43,6 +43,10 @@
   left: 10%;
   flex-wrap: wrap;
 }
+.name-edit {
+  display: flex;
+  align-items: baseline;
+}
 .info-bar {
   display: flex;
   flex-direction: column;

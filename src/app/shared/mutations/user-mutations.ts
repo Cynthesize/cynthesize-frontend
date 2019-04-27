@@ -15,7 +15,7 @@ const MUTATION_ADD_USER = gql`
 
 const MUTATION_UPDATE_USER_DETAILS = gql`
   mutation update_user_details($updateObject: user_set_input!, $userId: String!) {
-    update_user(where: { id: { _eq: $userId } }, _set: $updateObject) {
+    update_user(where: { user_id: { _eq: $userId } }, _set: $updateObject) {
       affected_rows
       returning {
         ...UserDetailsFragment

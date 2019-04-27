@@ -60,6 +60,12 @@ export class UserComponent implements OnInit {
           this.isPageLoaded = true;
           this.user = data.user[0];
           this.listOfTech = data.user[0].technologies || [];
+          this.editForm = new FormGroup({
+            username: new FormControl(this.user.username),
+            bio: new FormControl(this.user.bio),
+            location: new FormControl(this.user['location']),
+            website: new FormControl(this.user['website'])
+          });
         },
         (error: any) => {
           this.errorHandler.subj_notification.next(error);
@@ -68,16 +74,7 @@ export class UserComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.editForm = new FormGroup({
-      username: new FormControl(),
-      bio: new FormControl(),
-      dob: new FormControl(),
-      listOfTech: new FormControl([]),
-      location: new FormControl(),
-      website: new FormControl()
-    });
-  }
+  ngOnInit() {}
 
   toggleFormFields(toggle: boolean) {
     this.isFieldEditable = toggle;
@@ -92,32 +89,29 @@ export class UserComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    if (!this.selectedFile) {
-      this.updateUserData();
-    } else {
-      this.profileService.uploadImage(this.selectedFile.file).subscribe(
-        (res: any) => {
-          const profileUrl = 'v' + res.version + '/' + res.public_id + '.' + res.format;
-          this.updateUserData(profileUrl);
-        },
-        (err: any) => {
-          this.errorHandler.subj_notification.next(err);
-        }
-      );
-    }
-  }
+  // onSubmit() {
+  //   if (!this.selectedFile) {
+  //     this.updateUserData();
+  //   } else {
+  //     this.profileService.uploadImage(this.selectedFile.file).subscribe(
+  //       (res: any) => {
+  //         const profileUrl = 'v' + res.version + '/' + res.public_id + '.' + res.format;
+  //         this.updateUserData(profileUrl);
+  //       },
+  //       (err: any) => {
+  //         this.errorHandler.subj_notification.next(err);
+  //       }
+  //     );
+  //   }
+  // }
 
-  updateUserData(profileUrl?: string) {
+  updateUserData(e: Event) {
+    e.preventDefault();
     const userUpdateObject = {
       username: this.editForm.get('username').value,
       bio: this.editForm.get('bio').value,
       location: this.editForm.get('location').value,
-      technologies: this.listOfTech,
-      date_of_birth: this.editForm.get('dob').value,
-      website: this.editForm.get('website').value,
-      profile_pic: profileUrl,
-      social_links: this.socialLinks
+      website: this.editForm.get('website').value
     };
     const trimmedUserChangeObject = {};
     Object.keys(userUpdateObject).forEach(key => {
