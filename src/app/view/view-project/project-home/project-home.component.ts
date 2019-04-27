@@ -110,13 +110,13 @@ export class ProjectHomeComponent implements OnInit {
 
   initDescriptionForm() {
     this.descriptionDataForm = this.formBuilder.group({
-      xyz: [this.project['project_descriptions'][0].xyz],
-      distinguishing_factor: [this.project['project_descriptions'][0].distinguishing_factor],
-      progress: [this.project['project_descriptions'][0].progress],
-      why_product: [this.project['project_descriptions'][0].why_product],
-      revenue_model: [this.project['project_descriptions'][0].revenue_model],
-      future_scope: [this.project['project_descriptions'][0].future_scope],
-      wow_factor: [this.project['project_descriptions'][0].wow_factor]
+      xyz: [this.project.project_descriptions[0].xyz],
+      distinguishing_factor: [this.project.project_descriptions[0].distinguishing_factor],
+      progress: [this.project.project_descriptions[0].progress],
+      why_product: [this.project.project_descriptions[0].why_product],
+      revenue_model: [this.project.project_descriptions[0].revenue_model],
+      future_scope: [this.project.project_descriptions[0].future_scope],
+      wow_factor: [this.project.project_descriptions[0].wow_factor]
     });
   }
 

@@ -50,7 +50,11 @@
   <mat-card class="project-home-card">
     <div class="progress-heading">
       <h1>FAQs | Description</h1>
-      <button mat-raised-button (click)="editingDescription = true" *ngIf="editingDescription === false">
+      <button
+        mat-raised-button
+        (click)="editingDescription = true; initDescriptionForm()"
+        *ngIf="editingDescription === false"
+      >
         Edit
       </button>
       <button mat-raised-button (click)="editingDescription = false" *ngIf="editingDescription === true">

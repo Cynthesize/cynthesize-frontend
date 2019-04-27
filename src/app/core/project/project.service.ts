@@ -70,7 +70,8 @@ export class ProjectService {
           projectId: projectId,
           initTimeline: {
             'Project Created': Date.now()
-          }
+          },
+          projectOwner: localStorage.getItem('user_id')
         }
       })
       .pipe(

@@ -7,23 +7,20 @@
     <mat-card class="card" *ngFor="let project of launchedProjects">
       <div><img class="project-icon" [src]="project.icon" /></div>
       <div class="card-details">
-        <div
-          class="card-project-name pointer"
-          [routerLink]="['/view/project', project.id + '-' + project.project_name]"
-        >
+        <a class="card-project-name pointer" [routerLink]="['/view/project', project.id + '-' + project.project_name]">
           {{ displayableName(project.project_name) }}
           <span *ngFor="let tag of project.tagsLinkssByprojectId" class="tags">
             {{ tag.tagsBytagId.tag_name }}
           </span>
-        </div>
-        <div
+        </a>
+        <a
           class="card-project-description pointer"
           [routerLink]="['/view/project', project.id + '-' + project.project_name]"
         >
           Started: {{ project.created_on | timeDiff }}
           <br />
           {{ project.abstract }}
-        </div>
+        </a>
       </div>
       <div class="card-links">
         <div *ngIf="project.website">
