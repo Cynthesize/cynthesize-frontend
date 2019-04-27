@@ -170,8 +170,11 @@ mat-card-title {
 }
 
 .home-section1 {
-  background-color: white;
-  padding: 125px 0;
+  background: url("../../assets/intersection.svg");
+  height: 94vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-community {
