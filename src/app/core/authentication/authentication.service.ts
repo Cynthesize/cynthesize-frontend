@@ -141,6 +141,8 @@ export class AuthenticationService {
     localStorage.setItem('user_id', authResult.idTokenPayload.sub);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    return await expiresAt;
+    setTimeout(() => {
+      return expiresAt;
+    }, 1000);
   }
 }
