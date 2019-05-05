@@ -16,6 +16,7 @@ export class ViewProjectComponent implements OnInit {
   project: Observable<Project>;
   editingDescription = false;
   selectedDate: Date;
+  project_name = '';
   isMobile = false;
   issueActive = false;
 
@@ -30,6 +31,7 @@ export class ViewProjectComponent implements OnInit {
       this.projectService.getProject(params.id.split('-')[0], params.id.slice(params.id.indexOf('-') + 1)).subscribe(
         (data: any) => {
           this.project = data;
+          this.project_name = this.displayableName(this.project['project_name']);
           this.editingDescription = true;
         },
         (error: any) => {
@@ -59,6 +61,15 @@ export class ViewProjectComponent implements OnInit {
       // Update this according to your needs @neil.
       dates[index]['style']['backgroundColor'] = '#' + (index * 6 + 4000);
     }
+  }
+
+  displayableName(str: string) {
+    str = str.replace(/-/g, ' ');
+    const splitStr = str.toLowerCase().split(' ');
+    for (let i = 0; i < splitStr.length; i++) {
+      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(' ');
   }
 
   openAddIssueDialog(): void {

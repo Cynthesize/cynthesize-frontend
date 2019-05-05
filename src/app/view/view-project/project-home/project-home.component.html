@@ -1,288 +1,36 @@
-<div class="container">
-  <!-- Banner Image -->
-  <!-- <div class="banner-image"><img src="../../../../assets/images/project_banner.svg" /></div> -->
-  <h1 class="checkpoint-name">{{ displayableName(project.project_name) }}</h1>
-  <p>
-    Team leader:
-    <b>
-      <a [routerLink]="['/user', project.user.username]">{{ project.user.username }}</a>
-    </b>
-  </p>
-  <mat-card class="project-home-card">
-    <div class="progress-heading">
-      <h1>
-        Progress
-        <span style="font-size: 1rem;">
-          |
-          {{
-            project.current_stage
-              .split('_')
-              .join(' ')
-              .charAt(0)
-              .toUpperCase() +
-              project.current_stage
-                .split('_')
-                .join(' ')
-                .slice(1)
-          }}
-        </span>
-      </h1>
-      <button mat-raised-button (click)="openReviewModel()">Submit for review</button>
-    </div>
-    <div>
-      <div>
-        <div>
-          <div style="display: block">
-            <canvas
-              baseChart
-              [datasets]="barChartData"
-              [labels]="barChartLabels"
-              [options]="barChartOptions"
-              [legend]="barChartLegend"
-              [chartType]="barChartType"
-            ></canvas>
-          </div>
-          <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button>
+<div class="description-container">
+  <div class="left-column">
+    <mat-card>
+      <div class="left-container">
+        <div class="project-decription">
+          <h2>Description</h2>
+        </div>
+        <div class="project-progress">
+          <h2>Progress</h2>
+          <app-project-progress></app-project-progress>
         </div>
       </div>
-    </div>
-  </mat-card>
-  <mat-card class="project-home-card">
-    <div class="progress-heading">
-      <h1>FAQs | Description</h1>
-      <button
-        mat-raised-button
-        (click)="editingDescription = true; initDescriptionForm()"
-        *ngIf="editingDescription === false"
-      >
-        Edit
-      </button>
-      <button mat-raised-button (click)="editingDescription = false" *ngIf="editingDescription === true">
-        Cancel
-      </button>
-    </div>
-    <mat-accordion class="example-headers-align">
-      <form [formGroup]="descriptionDataForm">
-        <mat-expansion-panel [expanded]="step === 0" (opened)="step = 0" hideToggle class="issue-expansion">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Defining the XYZ
-              <mat-panel-description>
-                | We help X to Y by doing Z.
-              </mat-panel-description>
-            </mat-panel-title>
-            <mat-icon>developer_mode</mat-icon>
-          </mat-expansion-panel-header>
-          <div class="description-text" *ngIf="!editingDescription">{{ project.project_descriptions[0].xyz }}</div>
-          <mat-form-field appearance="outline" *ngIf="editingDescription">
-            <input matInput formControlName="xyz" value="{{ project.project_descriptions[0].xyz }}" />
-          </mat-form-field>
-          <mat-action-row>
-            <button
-              mat-button
-              color="primary"
-              (click)="updateDescription(project.id, $event)"
-              *ngIf="editingDescription"
-            >
-              Update Data
-            </button>
-            <button mat-button color="primary" (click)="step = step + 1">Next</button>
-          </mat-action-row>
-        </mat-expansion-panel>
+    </mat-card>
+  </div>
+  <div class="right-column">
+    <app-project-timeline
+      [timeline]="project['project_events'][0]['timeline']"
+      [projectId]="project.id"
+    ></app-project-timeline>
+  </div>
+</div>
 
-        <mat-expansion-panel [expanded]="step === 1" (opened)="step = 1" hideToggle class="issue-expansion">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Distinguishing Factor
-              <mat-panel-description>
-                | This makes us special.
-              </mat-panel-description>
-            </mat-panel-title>
-            <mat-icon>compare</mat-icon>
-          </mat-expansion-panel-header>
-          <div class="description-text" *ngIf="!editingDescription">
-            {{ project.project_descriptions[0].distinguishing_factor }}
-          </div>
-          <mat-form-field appearance="outline" *ngIf="editingDescription">
-            <input
-              matInput
-              formControlName="distinguishing_factor"
-              value="{{ project.project_descriptions[0].distinguishing_factor }}"
-            />
-          </mat-form-field>
-          <mat-action-row>
-            <button
-              mat-button
-              color="primary"
-              (click)="updateDescription(project.id, $event)"
-              *ngIf="editingDescription"
-            >
-              Update Data
-            </button>
-            <button mat-button color="warn" (click)="step = step - 1">Previous</button>
-            <button mat-button color="primary" (click)="step = step + 1">Next</button>
-          </mat-action-row>
-        </mat-expansion-panel>
+<style>
+  .description-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .left-column {
+    width: 100%;
+  }
+</style>
 
-        <mat-expansion-panel [expanded]="step === 2" (opened)="step = 2" hideToggle class="issue-expansion">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Future Scope
-              <mat-panel-description>
-                | Along with our MVP, this is what we could provide.
-              </mat-panel-description>
-            </mat-panel-title>
-            <mat-icon>cloud</mat-icon>
-          </mat-expansion-panel-header>
-          <div class="description-text" *ngIf="!editingDescription">
-            {{ project.project_descriptions[0].future_scope }}
-          </div>
-
-          <mat-form-field appearance="outline" *ngIf="editingDescription">
-            <input matInput formControlName="future_scope" value="{{ project.project_descriptions[0].future_scope }}" />
-          </mat-form-field>
-          <mat-action-row>
-            <button
-              mat-button
-              color="primary"
-              (click)="updateDescription(project.id, $event)"
-              *ngIf="editingDescription"
-            >
-              Update Data
-            </button>
-            <button mat-button color="warn" (click)="step = step - 1">Previous</button>
-            <button mat-button color="primary" (click)="step = step + 1">Next</button>
-          </mat-action-row>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel [expanded]="step === 3" (opened)="step = 3" hideToggle class="issue-expansion">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Progress
-              <mat-panel-description>
-                | Here we are.
-              </mat-panel-description>
-            </mat-panel-title>
-            <mat-icon>show_chart</mat-icon>
-          </mat-expansion-panel-header>
-          <div class="description-text" *ngIf="!editingDescription">{{ project.project_descriptions[0].progress }}</div>
-          <mat-form-field appearance="outline" *ngIf="editingDescription">
-            <input matInput formControlName="progress" value="{{ project.project_descriptions[0].progress }}" />
-          </mat-form-field>
-          <mat-action-row>
-            <button
-              mat-button
-              color="primary"
-              (click)="updateDescription(project.id, $event)"
-              *ngIf="editingDescription"
-            >
-              Update Data
-            </button>
-            <button mat-button color="warn" (click)="step = step - 1">Previous</button>
-            <button mat-button color="primary" (click)="step = step + 1">Next</button>
-          </mat-action-row>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel [expanded]="step === 4" (opened)="step = 4" hideToggle class="issue-expansion">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Revenue Model
-              <mat-panel-description>
-                | If we talk about money, here's how we can earn.
-              </mat-panel-description>
-            </mat-panel-title>
-            <mat-icon>monetization_on</mat-icon>
-          </mat-expansion-panel-header>
-          <div class="description-text" *ngIf="!editingDescription">
-            {{ project.project_descriptions[0].revenue_model }}
-          </div>
-
-          <mat-form-field appearance="outline" *ngIf="editingDescription">
-            <input
-              matInput
-              formControlName="revenue_model"
-              value="{{ project.project_descriptions[0].revenue_model }}"
-            />
-          </mat-form-field>
-          <mat-action-row>
-            <button
-              mat-button
-              color="primary"
-              (click)="updateDescription(project.id, $event)"
-              *ngIf="editingDescription"
-            >
-              Update Data
-            </button>
-            <button mat-button color="warn" (click)="step = step - 1">Previous</button>
-            <button mat-button color="primary" (click)="step = step + 1">Next</button>
-          </mat-action-row>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel [expanded]="step === 5" (opened)="step = 5" hideToggle class="issue-expansion">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Why us?
-              <mat-panel-description>
-                | Because we can do this.
-              </mat-panel-description>
-            </mat-panel-title>
-            <mat-icon>category</mat-icon>
-          </mat-expansion-panel-header>
-          <div class="description-text" *ngIf="!editingDescription">
-            {{ project.project_descriptions[0].why_product }}
-          </div>
-
-          <mat-form-field appearance="outline" *ngIf="editingDescription">
-            <input matInput formControlName="why_product" value="{{ project.project_descriptions[0].why_product }}" />
-          </mat-form-field>
-          <mat-action-row>
-            <button
-              mat-button
-              color="primary"
-              (click)="updateDescription(project.id, $event)"
-              *ngIf="editingDescription"
-            >
-              Update Data
-            </button>
-            <button mat-button color="warn" (click)="step = step - 1">Previous</button>
-            <button mat-button color="primary" (click)="step = step + 1">Next</button>
-          </mat-action-row>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel [expanded]="step === 6" (opened)="step = 6" hideToggle class="issue-expansion">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              The Wow Factor
-              <mat-panel-description>
-                | This will sweep you off your feet!
-              </mat-panel-description>
-            </mat-panel-title>
-            <mat-icon>mood</mat-icon>
-          </mat-expansion-panel-header>
-          <div class="description-text" *ngIf="!editingDescription">
-            {{ project.project_descriptions[0].wow_factor }}
-          </div>
-
-          <mat-form-field appearance="outline" *ngIf="editingDescription">
-            <input matInput formControlName="wow_factor" value="{{ project.project_descriptions[0].wow_factor }}" />
-          </mat-form-field>
-          <mat-action-row>
-            <button
-              mat-button
-              color="primary"
-              (click)="updateDescription(project.id, $event)"
-              *ngIf="editingDescription"
-            >
-              Update Data
-            </button>
-            <button mat-button color="warn" (click)="step = step - 1">Previous</button>
-            <button mat-button color="primary" (click)="step = step + 1">End</button>
-          </mat-action-row>
-        </mat-expansion-panel>
-      </form>
-    </mat-accordion>
-  </mat-card>
-  <!-- <mat-card class="project-home-card">
+<!-- <mat-card class="project-home-card">
     <div class="progress-heading">
       <h1>Community Collaboration</h1>
       <button mat-raised-button (click)="askForCollboration()">Ask for Collaboration</button>
@@ -309,4 +57,3 @@
       <p *ngFor="let role of project.roles_opened">{{ role }}</p>
     </div>
   </mat-card> -->
-</div>

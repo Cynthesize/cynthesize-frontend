@@ -1,0 +1,88 @@
+<div class="accordion" #accordion>
+  <div>
+    <div class="unit-heading">
+      <div class="unit-heading-name">Ideation</div>
+      <div class="unit-heading-date">10 days ago</div>
+      <div class="unit-icon completed" #level0icon><i class="fa fa-lightbulb"></i></div>
+      <div class="unit-level completed-text">Level 0</div>
+    </div>
+  </div>
+  <div class="line" #line [style.width.px]="accordion.offsetWidth / 4.2" [style.left.px]="level0icon.offsetLeft"></div>
+  <div>
+    <div class="unit-heading">
+      <div class="unit-heading-name">Prototyping</div>
+      <div class="unit-heading-date">5 days ago</div>
+      <div class="unit-icon completed" #level1icon><i class="fa fa-dice-d6"></i></div>
+      <div class="unit-level completed-text">Level 1</div>
+    </div>
+  </div>
+  <div class="line" [style.width.px]="accordion.offsetWidth / 4.2" [style.left.px]="level1icon.offsetLeft"></div>
+  <div>
+    <div class="unit-heading">
+      <div class="unit-heading-name">Testing</div>
+      <div class="unit-icon" #level2icon><i class="fa fa-street-view"></i></div>
+      <div class="unit-level">Level 2</div>
+    </div>
+  </div>
+  <div class="line" [style.width.px]="accordion.offsetWidth / 4.2" [style.left.px]="level2icon.offsetLeft"></div>
+  <div>
+    <div class="unit-heading">
+      <div class="unit-heading-name">Launch</div>
+      <div class="unit-icon" #level3icon><i class="fa fa-rocket"></i></div>
+      <div class="unit-level">Level 3</div>
+    </div>
+  </div>
+  <div class="line" [style.width.px]="accordion.offsetWidth / 4.2" [style.left.px]="level3icon.offsetLeft"></div>
+  <div>
+    <div class="unit-heading">
+      <div class="unit-heading-name">Funding</div>
+      <div class="unit-icon"><i class="fa fa-money-bill"></i></div>
+      <div class="unit-level">Level 4</div>
+    </div>
+  </div>
+</div>
+<style>
+  .accordion {
+    display: flex;
+    height: 400px;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .unit-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 16px;
+  }
+  .unit-icon {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    z-index: 1;
+    display: flex;
+    background-color: #d4d4d4;
+    justify-content: center;
+  }
+  .unit-icon i {
+    font-size: 1.3rem;
+    color: white;
+  }
+  .line {
+    border: 1px #d4d4d4 solid;
+    position: absolute;
+    bottom: 80px;
+  }
+  .completed {
+    background-color: #2b06ff;
+  }
+  .unit-level {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #d4d4d4;
+  }
+  .completed-text {
+    color: #2b06ff;
+  }
+</style>

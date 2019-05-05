@@ -1,30 +1,32 @@
-<div class="add-event">
-  <h2>Timeline</h2>
-  <button mat-button (click)="initAddTimelineEvent()" *ngIf="!addingTimelineEvent">
-    <mat-icon> add_circle </mat-icon> Add Event
-  </button>
-</div>
-<form [formGroup]="timelineDataForm" *ngIf="addingTimelineEvent">
+<mat-card>
   <div class="add-event">
-    <mat-form-field appearance="outline">
-      <mat-label>Add an event</mat-label>
-      <input matInput formControlName="eventName" />
-    </mat-form-field>
-    <input matInput [matDatepicker]="myDatepicker" formControlName="date" style="display:none;" />
-    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-    <mat-datepicker #myDatepicker></mat-datepicker>
-    <!-- <input matInput placeholder="Date" [matDatepicker]="picker" (focus)="picker.open()" />
-    <mat-datepicker #picker> <mat-icon>date</mat-icon></mat-datepicker> -->
-
-    <button mat-icon-button (click)="addTimelineEvent()">
-      <mat-icon> done </mat-icon>
-    </button>
-    <button mat-icon-button (click)="addingTimelineEvent = false">
-      <mat-icon> cancel </mat-icon>
+    <h2>Timeline</h2>
+    <button mat-button (click)="initAddTimelineEvent()" *ngIf="!addingTimelineEvent">
+      <mat-icon> add_circle </mat-icon> Add Event
     </button>
   </div>
-</form>
-<div class="timeline-event open-sans" *ngFor="let event of (timeline | keyvalue)">
-  <p class="event-name">{{ event.value }}</p>
-  {{ event.key | date }}
-</div>
+  <form [formGroup]="timelineDataForm" *ngIf="addingTimelineEvent">
+    <div class="add-event">
+      <mat-form-field appearance="outline">
+        <mat-label>Add an event</mat-label>
+        <input matInput formControlName="eventName" />
+      </mat-form-field>
+      <input matInput [matDatepicker]="myDatepicker" formControlName="date" style="display:none;" />
+      <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+      <mat-datepicker #myDatepicker></mat-datepicker>
+      <!-- <input matInput placeholder="Date" [matDatepicker]="picker" (focus)="picker.open()" />
+          <mat-datepicker #picker> <mat-icon>date</mat-icon></mat-datepicker> -->
+
+      <button mat-icon-button (click)="addTimelineEvent()">
+        <mat-icon> done </mat-icon>
+      </button>
+      <button mat-icon-button (click)="addingTimelineEvent = false">
+        <mat-icon> cancel </mat-icon>
+      </button>
+    </div>
+  </form>
+  <div class="timeline-event open-sans" *ngFor="let event of (timeline | keyvalue)">
+    <p class="event-name">{{ event.value }}</p>
+    {{ event.key | date }}
+  </div>
+</mat-card>
