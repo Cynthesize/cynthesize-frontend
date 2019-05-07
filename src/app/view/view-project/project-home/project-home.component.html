@@ -2,12 +2,86 @@
   <div class="left-column">
     <mat-card>
       <div class="left-container">
-        <div class="project-decription">
+        <div class="home-content flex-center project-decription">
           <h2>Description</h2>
+          <button mat-raised-button *ngIf="!editingDescription && canEdit" (click)="editingDescription = true">
+            Edit
+          </button>
+          <button mat-raised-button *ngIf="editingDescription" (click)="updateDescription(project.id, $event)">
+            Save
+          </button>
+          <button mat-raised-button *ngIf="editingDescription" (click)="editingDescription = false">Cancel</button>
         </div>
-        <div class="project-progress">
-          <h2>Progress</h2>
-          <app-project-progress></app-project-progress>
+        <form [formGroup]="descriptionDataForm" (ngSubmit)="updateDescription()">
+          <div class="description-fields">
+            <b>We help X to Y by doing Z.</b>
+            <div class="description-text" *ngIf="!editingDescription">
+              {{ project.project_descriptions[0].xyz || 'Not entered' }}
+            </div>
+            <mat-form-field appearance="outline" *ngIf="editingDescription">
+              <input matInput formControlName="xyz" value="{{ project.project_descriptions[0].xyz }}" />
+            </mat-form-field>
+          </div>
+          <div class="description-fields">
+            <b>What we bring new to the market?</b>
+            <div class="description-text" *ngIf="!editingDescription">
+              {{ project.project_descriptions[0].distinguishing_factor || 'Not entered' }}
+            </div>
+            <mat-form-field appearance="outline" *ngIf="editingDescription">
+              <input
+                matInput
+                formControlName="distinguishing_factor"
+                value="{{ project.project_descriptions[0].distinguishing_factor }}"
+              />
+            </mat-form-field>
+          </div>
+          <div class="description-fields">
+            <b>What makes your project make people go 'Woah!'?</b>
+            <div class="description-text" *ngIf="!editingDescription">
+              {{ project.project_descriptions[0].wow_factor || 'Not entered' }}
+            </div>
+            <mat-form-field appearance="outline" *ngIf="editingDescription">
+              <input matInput formControlName="wow_factor" value="{{ project.project_descriptions[0].wow_factor }}" />
+            </mat-form-field>
+          </div>
+          <div class="description-fields">
+            <b>Currently we've completed this much.</b>
+            <div class="description-text" *ngIf="!editingDescription">
+              {{ project.project_descriptions[0].progress || 'Not entered' }}
+            </div>
+            <mat-form-field appearance="outline" *ngIf="editingDescription">
+              <input matInput formControlName="progress" value="{{ project.project_descriptions[0].progress }}" />
+            </mat-form-field>
+          </div>
+          <div class="description-fields">
+            <b>This is how we can earn money.</b>
+            <div class="description-text" *ngIf="!editingDescription">
+              {{ project.project_descriptions[0].revenue_model || 'Not entered' }}
+            </div>
+            <mat-form-field appearance="outline" *ngIf="editingDescription">
+              <input
+                matInput
+                formControlName="revenue_model"
+                value="{{ project.project_descriptions[0].revenue_model }}"
+              />
+            </mat-form-field>
+          </div>
+          <div class="description-fields">
+            <b>Why would people want this project?</b>
+            <div class="description-text" *ngIf="!editingDescription">
+              {{ project.project_descriptions[0].why_product || 'Not entered' }}
+            </div>
+            <mat-form-field appearance="outline" *ngIf="editingDescription">
+              <input matInput formControlName="why_product" value="{{ project.project_descriptions[0].why_product }}" />
+            </mat-form-field>
+          </div>
+        </form>
+        <div class="home-content project-progress">
+          <div class="project-home-heads">
+            <h2>Progress</h2>
+            <button mat-raised-button *ngIf="canEdit" (click)="openReviewModel()">Submit for review</button>
+          </div>
+          <app-project-progress [currentStage]="this.project.current_stage"></app-project-progress>
         </div>
       </div>
     </mat-card>
@@ -21,12 +95,42 @@
 </div>
 
 <style>
+  .home-content {
+    margin: 10px;
+    justify-content: space-between;
+  }
+  .description-fields {
+    display: flex;
+    align-items: center;
+    font-size: initial;
+    margin: 5px 0;
+  }
+  .description-fields b {
+    margin: 5px;
+    flex: 1;
+  }
+  .description-text {
+    margin: 5px;
+    flex: 2;
+  }
+  .description-fields mat-form-field {
+    flex: 2;
+  }
   .description-container {
     display: flex;
     justify-content: space-between;
   }
   .left-column {
-    width: 100%;
+    flex: 3;
+    margin-right: 20px;
+  }
+  .right-column {
+    flex: 1;
+  }
+  .project-home-heads {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 </style>
 

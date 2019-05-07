@@ -1,42 +1,101 @@
 <div class="accordion" #accordion>
-  <div>
-    <div class="unit-heading">
+  <div class="level">
+    <div
+      class="unit-heading"
+      [ngClass]="{
+        'current-text': currentStage === 'ideation_stage',
+        'completed-text': completedStages['ideation_stage']
+      }"
+    >
       <div class="unit-heading-name">Ideation</div>
-      <div class="unit-heading-date">10 days ago</div>
-      <div class="unit-icon completed" #level0icon><i class="fa fa-lightbulb"></i></div>
-      <div class="unit-level completed-text">Level 0</div>
+      <div class="unit-heading-date"></div>
+      <div
+        class="unit-icon"
+        [ngClass]="{ current: currentStage === 'ideation_stage', completed: completedStages['ideation_stage'] }"
+        #level0icon
+      >
+        <i class="fa fa-lightbulb"></i>
+      </div>
+      <div class="unit-level">Level 0</div>
     </div>
   </div>
   <div class="line" #line [style.width.px]="accordion.offsetWidth / 4.2" [style.left.px]="level0icon.offsetLeft"></div>
   <div>
-    <div class="unit-heading">
+    <div
+      class="unit-heading"
+      [ngClass]="{
+        'current-text': currentStage === 'prototyping_stage',
+        'completed-text': completedStages['prototyping_stage']
+      }"
+    >
       <div class="unit-heading-name">Prototyping</div>
-      <div class="unit-heading-date">5 days ago</div>
-      <div class="unit-icon completed" #level1icon><i class="fa fa-dice-d6"></i></div>
-      <div class="unit-level completed-text">Level 1</div>
+      <div class="unit-heading-date"></div>
+      <div
+        class="unit-icon"
+        [ngClass]="{ current: currentStage === 'prototyping_stage', completed: completedStages['prototyping_stage'] }"
+        #level1icon
+      >
+        <i class="fa fa-dice-d6"></i>
+      </div>
+      <div class="unit-level">Level 1</div>
     </div>
   </div>
   <div class="line" [style.width.px]="accordion.offsetWidth / 4.2" [style.left.px]="level1icon.offsetLeft"></div>
   <div>
-    <div class="unit-heading">
-      <div class="unit-heading-name">Testing</div>
-      <div class="unit-icon" #level2icon><i class="fa fa-street-view"></i></div>
+    <div
+      class="unit-heading"
+      [ngClass]="{
+        'current-text': currentStage === 'feedback_stage',
+        'completed-text': completedStages['feedback_stage']
+      }"
+    >
+      <div class="unit-heading-name">Feedback</div>
+      <div
+        class="unit-icon"
+        [ngClass]="{ current: currentStage === 'feedback_stage', completed: completedStages['feedback_stage'] }"
+        #level2icon
+      >
+        <i class="fa fa-street-view"></i>
+      </div>
       <div class="unit-level">Level 2</div>
     </div>
   </div>
   <div class="line" [style.width.px]="accordion.offsetWidth / 4.2" [style.left.px]="level2icon.offsetLeft"></div>
   <div>
-    <div class="unit-heading">
+    <div
+      class="unit-heading"
+      [ngClass]="{
+        'current-text': currentStage === 'launching_stage',
+        'completed-text': completedStages['launching_stage']
+      }"
+    >
       <div class="unit-heading-name">Launch</div>
-      <div class="unit-icon" #level3icon><i class="fa fa-rocket"></i></div>
+      <div
+        class="unit-icon"
+        [ngClass]="{ current: currentStage === 'launching_stage', completed: completedStages['launching_stage'] }"
+        #level3icon
+      >
+        <i class="fa fa-rocket"></i>
+      </div>
       <div class="unit-level">Level 3</div>
     </div>
   </div>
   <div class="line" [style.width.px]="accordion.offsetWidth / 4.2" [style.left.px]="level3icon.offsetLeft"></div>
   <div>
-    <div class="unit-heading">
+    <div
+      class="unit-heading"
+      [ngClass]="{
+        'current-text': currentStage === 'funding_stage',
+        'completed-text': completedStages['funding_stage']
+      }"
+    >
       <div class="unit-heading-name">Funding</div>
-      <div class="unit-icon"><i class="fa fa-money-bill"></i></div>
+      <div
+        class="unit-icon"
+        [ngClass]="{ current: currentStage === 'funding_stage', completed: completedStages['funding_stage'] }"
+      >
+        <i class="fa fa-money-bill"></i>
+      </div>
       <div class="unit-level">Level 4</div>
     </div>
   </div>
@@ -53,6 +112,7 @@
     flex-direction: column;
     align-items: center;
     margin: 16px;
+    color: #d4d4d4;
   }
   .unit-icon {
     margin: 10px;
@@ -72,7 +132,7 @@
   .line {
     border: 1px #d4d4d4 solid;
     position: absolute;
-    bottom: 80px;
+    bottom: 90px;
   }
   .completed {
     background-color: #2b06ff;
@@ -80,9 +140,14 @@
   .unit-level {
     font-size: 1rem;
     font-weight: 700;
-    color: #d4d4d4;
   }
   .completed-text {
     color: #2b06ff;
+  }
+  .current-text {
+    color: orange;
+  }
+  .current {
+    background-color: orange;
   }
 </style>

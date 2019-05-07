@@ -36,11 +36,14 @@
 }
 .project-abstract {
   padding-top: 5px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   max-width: 85%;
 }
 .project-user-info {
   font-size: 0.8rem;
+}
+.project-user-info a {
+  color: white;
 }
 .project-icon {
   margin-right: 45px;
@@ -50,12 +53,14 @@
 }
 .project-buttons {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   padding: 20px;
   background-color: white;
 }
 .buttons-container {
-  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .project-nav-button {
   margin: 0 10px;

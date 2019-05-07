@@ -36,7 +36,6 @@ export class ViewProjectComponent implements OnInit {
         },
         (error: any) => {
           this.router.navigate(['/not-found']);
-          this.errorHandler.subj_notification.next(error);
         }
       );
     });

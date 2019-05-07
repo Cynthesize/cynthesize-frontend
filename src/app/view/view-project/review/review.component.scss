@@ -1,7 +1,34 @@
 .heading {
   font-size: 3rem;
   font-weight: 700;
+  background: #e7e7e7;
+  padding: 20px 20px 0 20px;
 }
 .review-form-field {
+  width: 100%;
+}
+.waiting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+.review-modal {
+  display: flex;
+  font-family: "Open sans", sans-serif;
+}
+.info-text {
+  font-family: "Open sans", sans-serif;
+  font-size: 1rem;
+  background: #e7e7e7;
+  padding: 0 20px;
+}
+.flex-center > img {
+  height: 400px;
+  width: 400px;
+}
+.image-container {
+  background-color: #e7e7e7;
   width: 100%;
 }

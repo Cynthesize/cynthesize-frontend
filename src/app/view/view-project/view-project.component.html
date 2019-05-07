@@ -54,26 +54,29 @@
             Started {{ project.created_on | timeDiff }} by
             <a [routerLink]="['/user', project.user.username]">{{ project.user.username }}</a>
           </div>
-          <div class="project-abstract">{{ project.abstract }}</div>
+          <div class="project-abstract open-sans">{{ project.abstract }}</div>
         </div>
       </div>
     </div>
   </div>
   <div class="project-buttons">
-    <div class="buttons-container">
-      <a
-        class="project-nav-button"
-        [routerLink]="['/view/project', project.id + '-' + project.project_name]"
-        routerLinkActive="router-link-active"
-        >Home
-      </a>
-      <a
-        class="project-nav-button"
-        [routerLink]="['/view/project', project.id + '-' + project.project_name, 'issues']"
-        routerLinkActive="router-link-active"
-        >Opened Issues
-      </a>
-    </div>
+    <button
+      mat-button
+      class="project-nav-button"
+      [routerLink]="['/view/project', project.id + '-' + project.project_name]"
+      routerLinkActive="router-link-active"
+    >
+      Home
+    </button>
+    <button
+      mat-button
+      class="project-nav-button"
+      [routerLink]="['/view/project', project.id + '-' + project.project_name, 'issues']"
+      routerLinkActive="router-link-active"
+    >
+      Opened Issues
+    </button>
+    <div><button mat-raised-button class="issue-button" (click)="openAddIssueDialog()">Add issue</button></div>
   </div>
   <div class="project-content">
     <app-project-home [project]="project" *ngIf="issueActive"></app-project-home>

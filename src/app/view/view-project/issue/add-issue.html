@@ -1,24 +1,26 @@
-<h1>Add Issue</h1>
-<div>
-  <form>
-    <mat-form-field appearance="outline">
-      <mat-select [formControl]="checkpointName" placeholder="Select checkpoint" required>
-        <mat-option>--</mat-option>
-        <mat-option *ngFor="let checkpoint of checkpoints" [value]="checkpoint"> {{ checkpoint }} </mat-option>
-      </mat-select>
-      <mat-error *ngIf="checkpointName.hasError('required')">Please choose a checkpoint.</mat-error>
-      <mat-hint></mat-hint>
-    </mat-form-field>
-    <i>
-      <p>
-        Please enter detailed description for the issue you're facing. You wouldn't want to waste your time on
-        explaining it in the comments.
-      </p>
-    </i>
-    <td-text-editor [formControl]="issueText" [options]="options"></td-text-editor>
-  </form>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="addIssue()" cdkFocusInitial>Add Issue</button>
-  <button mat-button (click)="onNoClick()">Cancel</button>
+<div class="mat-dialog-pad">
+  <h1>Add Issue</h1>
+  <div>
+    <form>
+      <mat-form-field appearance="outline">
+        <mat-select [formControl]="checkpointName" placeholder="Select checkpoint" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let checkpoint of checkpoints" [value]="checkpoint"> {{ checkpoint }} </mat-option>
+        </mat-select>
+        <mat-error *ngIf="checkpointName.hasError('required')">Please choose a checkpoint.</mat-error>
+        <mat-hint></mat-hint>
+      </mat-form-field>
+      <i>
+        <p>
+          Please enter detailed description for the issue you're facing. You wouldn't want to waste your time on
+          explaining it in the comments.
+        </p>
+      </i>
+      <td-text-editor [formControl]="issueText" [options]="options"></td-text-editor>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="addIssue()" cdkFocusInitial>Add Issue</button>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+  </div>
 </div>

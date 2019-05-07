@@ -19,20 +19,38 @@
   Apply for the next stage? All the best from <b>Cynthesize</b>! Make sure that you answer the questions fully and upto
   the mark.
 </div>
-<div class="review-modal" *ngIf="data.context !== 'waiting'">
-  <div class="flex-center flex-1 font-1">
-    <form [formGroup]="reviewForm" (ngSubmit)="submitReviewForm()">
-      <div *ngFor="let control of (questionsObject | keyvalue)">
-        <div>{{ control.value }}</div>
-        <mat-form-field appearance="outline" class="review-form-field">
-          <input matInput [formControlName]="control.key" placeholder="Enter your answer" />
-        </mat-form-field>
-      </div>
-      <button mat-raised-button type="submit">Submit for review</button>
-    </form>
-  </div>
-  <div class="flex-1 flex-center">
+<div class="review-modal flex-column" *ngIf="data.context !== 'waiting'">
+  <div class="flex-1 flex-center image-container">
     <img src="../../../../assets/stages/{{ data.context }}.svg" />
+  </div>
+  <div class="flex-center flex-1 font-1 flex-column">
+    <div *ngIf="errorMessage" class="flex-center" style="color: red;">
+      <i>{{ errorMessage }}</i>
+    </div>
+    <form [formGroup]="reviewForm" (ngSubmit)="submitReviewForm()">
+      <mat-horizontal-stepper [linear]="true" #stepper>
+        <mat-step *ngFor="let control of (questionsObject | keyvalue); let i = index" label="Ques {{ i + 1 }}">
+          Question {{ i + 1 }} of {{ totalQuestions }}
+          <div>{{ control.value }}</div>
+          <mat-form-field appearance="outline">
+            <textarea matInput placeholder="Your answer..." [formControlName]="control.key" required></textarea>
+          </mat-form-field>
+          <div class="flex-end">
+            <button mat-button matStepperPrevious type="button" *ngIf="i !== 0">Back</button>
+            <button mat-button matStepperNext type="button" *ngIf="i !== totalQuestions - 1">Next</button>
+            <button
+              mat-raised-button
+              matStepperNext
+              type="button"
+              (click)="submitReviewForm()"
+              *ngIf="i === totalQuestions - 1"
+            >
+              Submit for review
+            </button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </form>
   </div>
 </div>
 
@@ -40,26 +58,3 @@
   <img src="../../../../assets/images/waiting.svg" />
   <div>Have patience... Mentors are reviewing your answers.</div>
 </div>
-
-<style>
-  .waiting {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-  }
-  .review-modal {
-    display: flex;
-    margin: 30px;
-    font-family: 'Open sans', sans-serif;
-  }
-  .info-text {
-    font-family: 'Open sans', sans-serif;
-    font-size: 1rem;
-  }
-  .flex-center > img {
-    width: 75%;
-    height: 560px;
-  }
-</style>
