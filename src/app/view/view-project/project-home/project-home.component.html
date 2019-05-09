@@ -3,7 +3,7 @@
     <mat-card>
       <div class="left-container">
         <div class="home-content flex-center project-decription">
-          <h2>Description</h2>
+          <h1>Description</h1>
           <button mat-raised-button *ngIf="!editingDescription && canEdit" (click)="editingDescription = true">
             Edit
           </button>
@@ -36,7 +36,7 @@
             </mat-form-field>
           </div>
           <div class="description-fields">
-            <b>What makes your project make people go 'Woah!'?</b>
+            <b>What about your project makes it's users go 'Woah!'?</b>
             <div class="description-text" *ngIf="!editingDescription">
               {{ project.project_descriptions[0].wow_factor || 'Not entered' }}
             </div>
@@ -78,7 +78,7 @@
         </form>
         <div class="home-content project-progress">
           <div class="project-home-heads">
-            <h2>Progress</h2>
+            <h1>Progress</h1>
             <button mat-raised-button *ngIf="canEdit" (click)="openReviewModel()">Submit for review</button>
           </div>
           <app-project-progress [currentStage]="this.project.current_stage"></app-project-progress>

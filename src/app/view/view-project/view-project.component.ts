@@ -31,11 +31,14 @@ export class ViewProjectComponent implements OnInit {
       this.projectService.getProject(params.id.split('-')[0], params.id.slice(params.id.indexOf('-') + 1)).subscribe(
         (data: any) => {
           this.project = data;
+          if (!this.project) {
+            this.router.navigate(['/not-found']);
+          }
           this.project_name = this.displayableName(this.project['project_name']);
           this.editingDescription = true;
         },
         (error: any) => {
-          this.router.navigate(['/not-found']);
+          this.router.navigate(['unauthorized']);
         }
       );
     });

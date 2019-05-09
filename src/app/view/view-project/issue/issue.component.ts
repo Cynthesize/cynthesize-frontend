@@ -29,18 +29,16 @@ export class IssueComponent implements OnInit {
       this.projectId = params.id.split('-')[0];
       this.projectName = params.id.slice(params.id.indexOf('-') + 1);
     });
-    this.route.params.subscribe(params => {
-      this.checkpointName = params.checkpoint_name;
-      this.issueService.fetchIssueInCheckpoint(params.checkpoint_name, this.projectId).subscribe(
-        (data: any) => {
-          this.issues = data.data.issues;
-          this.unresolvedIssues = data.data.issues_aggregate.aggregate.count;
-        },
-        error => {
-          this.errorHandler.subj_notification.next(error);
-        }
-      );
-    });
+    this.issueService.fetchIssueInCheckpoint(this.projectId).subscribe(
+      (data: any) => {
+        this.issues = data.data.issues;
+        this.unresolvedIssues = data.data.issues_aggregate.aggregate.count;
+        console.log(this.issues);
+      },
+      error => {
+        this.errorHandler.subj_notification.next(error);
+      }
+    );
   }
 
   ngOnInit() {}
@@ -83,6 +81,7 @@ export class AddIssueComponent {
   options: any = {
     lineWrapping: true
   };
+  errorMessage: string;
   constructor(
     public dialogRef: MatDialogRef<AddIssueComponent>,
     private issueService: IssueService,
@@ -94,16 +93,20 @@ export class AddIssueComponent {
     this.dialogRef.close();
   }
   addIssue() {
-    this.issueService
-      .addIssue(this.checkpointName.value, this.issueText.value, this.router.url.split('/')[3].split('-')[0])
-      .subscribe(
-        data => {
-          this.onNoClick();
-          location.reload();
-        },
-        error => {
-          this.errorHandler.subj_notification.next(error);
-        }
-      );
+    if (this.checkpointName.value && this.issueText.value.trim().length > 100) {
+      this.issueService
+        .addIssue(this.checkpointName.value, this.issueText.value, this.router.url.split('/')[3].split('-')[0])
+        .subscribe(
+          data => {
+            this.onNoClick();
+            location.reload();
+          },
+          error => {
+            this.errorHandler.subj_notification.next(error);
+          }
+        );
+    } else {
+      this.errorMessage = 'Please select the checkpoint name and type in your issue completely.';
+    }
   }
 }

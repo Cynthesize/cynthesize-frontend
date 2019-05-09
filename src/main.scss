@@ -224,6 +224,11 @@ form mat-horizontal-stepper .mat-horizontal-stepper-header-container {
 .mat-dialog-container {
   padding: 0 !important;
 }
+
+.mat-drawer-container {
+  background: #f1f1f1 !important;
+}
+
 .mat-horizontal-content-container {
   padding: 24px !important;
 }
@@ -240,6 +245,10 @@ form mat-horizontal-stepper .mat-horizontal-stepper-header-container {
 
 .open-sans {
   font-family: "Open Sans", sans-serif;
+}
+
+.error-message {
+  color: red;
 }
 
 @media (max-width: 1050px) {

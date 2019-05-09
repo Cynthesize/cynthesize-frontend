@@ -1,6 +1,7 @@
 <div class="mat-dialog-pad">
   <h1>Add Issue</h1>
   <div>
+    <div *ngIf="errorMessage" class="open-sans error-message">{{ errorMessage }}</div>
     <form>
       <mat-form-field appearance="outline">
         <mat-select [formControl]="checkpointName" placeholder="Select checkpoint" required>
