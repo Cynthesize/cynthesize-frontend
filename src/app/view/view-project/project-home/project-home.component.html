@@ -12,7 +12,7 @@
           </button>
           <button mat-raised-button *ngIf="editingDescription" (click)="editingDescription = false">Cancel</button>
         </div>
-        <form [formGroup]="descriptionDataForm" (ngSubmit)="updateDescription()">
+        <form [formGroup]="descriptionDataForm" (ngSubmit)="updateDescription(project.id, $event)">
           <div class="description-fields">
             <b>We help X to Y by doing Z.</b>
             <div class="description-text" *ngIf="!editingDescription">
