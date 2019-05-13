@@ -6,6 +6,7 @@ import { Project } from '@app/shared/objects';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { MatDialog } from '@angular/material';
 import { AddIssueComponent } from './issue/issue.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-view-project',
@@ -16,7 +17,7 @@ export class ViewProjectComponent implements OnInit {
   project: Observable<Project>;
   editingDescription = false;
   selectedDate: Date;
-  project_name = '';
+  projectName = '';
   isMobile = false;
   issueActive = false;
 
@@ -25,7 +26,8 @@ export class ViewProjectComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private errorHandler: ErrorHandlerService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private title: Title
   ) {
     this.route.params.subscribe(params => {
       this.projectService.getProject(params.id.split('-')[0], params.id.slice(params.id.indexOf('-') + 1)).subscribe(
@@ -34,7 +36,8 @@ export class ViewProjectComponent implements OnInit {
           if (!this.project) {
             this.router.navigate(['/not-found']);
           }
-          this.project_name = this.displayableName(this.project['project_name']);
+          this.projectName = this.displayableName(this.project['project_name']);
+          this.title.setTitle('Cynthesize | ' + this.projectName);
           this.editingDescription = true;
         },
         (error: any) => {

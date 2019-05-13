@@ -4,6 +4,7 @@ import { ProjectService } from '@app/core/project/project.service';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { FeedProjectComponent } from '../../feed-project/feed-project.component';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-launched-products',
@@ -18,13 +19,14 @@ export class LaunchedProductsComponent implements OnInit {
   isLoading = true;
   additionalInfo: string;
   applying = false;
-  constructor(private projectService: ProjectService, private errorHandler: ErrorHandlerService) {
+  constructor(private projectService: ProjectService, private errorHandler: ErrorHandlerService, private title: Title) {
     this.errorHandler.ideaWindowScrolled.subscribe(message => {
       if (this.length >= this.projectList.length && message === 'fetchLaunchedProjects') {
         this.isLoading = true;
         this.getlaunchedProjectsFromServer(4, this.currentCount, this.activeContext);
       }
     });
+    this.title.setTitle('Cynthesize | Projects');
   }
 
   ngOnInit() {

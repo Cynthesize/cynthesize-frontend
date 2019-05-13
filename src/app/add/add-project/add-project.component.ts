@@ -9,6 +9,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { TAGS } from '@app/shared/constants';
 import { AuthenticationService } from '@app/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-project',
@@ -55,6 +56,7 @@ export class AddProjectComponent implements OnInit {
     private projectService: ProjectService,
     private router: Router,
     private errorHandler: ErrorHandlerService,
+    private title: Title,
     public authenticationService: AuthenticationService
   ) {
     this.project = this._formBuilder.group({
@@ -68,6 +70,7 @@ export class AddProjectComponent implements OnInit {
       startWith(null),
       map((tag: any | null) => (tag ? this._filter(tag) : this.allTags.slice()))
     );
+    this.title.setTitle('Cynthesize | Add Project');
   }
 
   ngOnInit() {}
