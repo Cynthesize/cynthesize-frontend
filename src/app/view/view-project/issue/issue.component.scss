@@ -5,3 +5,26 @@
 .issue-expansion {
   border: 1px #dddddd solid;
 }
+
+.issue-list {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+}
+
+.issue-tab {
+  display: flex;
+}
+
+.nav-container {
+  margin-left: 30px;
+  font-size: 1rem;
+}
+.checkpoint-nav-name {
+  border-left: 2px blue solid;
+  padding-left: 15px;
+  color: black;
+}
+.category-issue {
+  margin: 15px 0;
+}

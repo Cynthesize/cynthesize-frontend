@@ -16,12 +16,14 @@ export class IssueComponent implements OnInit {
   checkpointName: string;
   projectId: number;
   projectName: string;
-  issues: Observable<any>;
+  issues = {};
+  isLoading = true;
   unresolvedIssues: number;
 
   constructor(
     private issueService: IssueService,
     private route: ActivatedRoute,
+    private router: Router,
     public dialog: MatDialog,
     private errorHandler: ErrorHandlerService
   ) {
@@ -31,9 +33,15 @@ export class IssueComponent implements OnInit {
     });
     this.issueService.fetchIssueInCheckpoint(this.projectId).subscribe(
       (data: any) => {
-        this.issues = data.data.issues;
         this.unresolvedIssues = data.data.issues_aggregate.aggregate.count;
-        console.log(this.issues);
+        data.data.issues.forEach((issue: any) => {
+          if (this.issues[issue.checkpoint_name]) {
+            this.issues[issue.checkpoint_name] = this.issues[issue.checkpoint_name].push(issue);
+          } else {
+            this.issues[issue.checkpoint_name] = [issue];
+          }
+        });
+        this.isLoading = false;
       },
       error => {
         this.errorHandler.subj_notification.next(error);
@@ -43,10 +51,14 @@ export class IssueComponent implements OnInit {
 
   ngOnInit() {}
 
-  issueResolution(issueId: number, resolution: boolean) {
+  scrollToCheckpoint(checkpointName: string) {
+    document.getElementById(checkpointName).scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
+  }
+
+  issueResolution(issueId: number, resolution: boolean, checkpointName: string) {
     this.issueService.markIssueResolvedOrUnsolved(issueId, resolution).subscribe(
       (data: any) => {
-        this.issues.forEach(issue => {
+        this.issues[checkpointName].forEach((issue: any) => {
           if (issue.id === issueId) {
             issue.is_resolved = data.data.update_issues.returning[0].is_resolved;
           }
@@ -93,7 +105,7 @@ export class AddIssueComponent {
     this.dialogRef.close();
   }
   addIssue() {
-    if (this.checkpointName.value && this.issueText.value.trim().length > 100) {
+    if (this.checkpointName.value && this.issueText.value) {
       this.issueService
         .addIssue(this.checkpointName.value, this.issueText.value, this.router.url.split('/')[3].split('-')[0])
         .subscribe(
