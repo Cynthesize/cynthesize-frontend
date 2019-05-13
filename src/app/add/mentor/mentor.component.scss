@@ -1,52 +1,46 @@
-.add-idea-card {
-  padding: 2rem;
-}
-
-.field {
-  width: 100%;
-  min-width: -webkit-fill-available;
-  margin: 5px;
-}
-
-h3 {
+.add-mentor {
   display: flex;
+  justify-content: center;
   align-items: center;
+  height: 100%;
+  background: white;
 }
 
-h3 > mat-icon {
-  padding: 3px 0 0 8px;
-  font-size: 1.2rem;
-  align-self: center;
+.add-mentor-right {
+  height: 100%;
+  flex: 1.55;
+  display: flex;
+  background: #737373;
+  justify-content: center;
 }
 
-.add-project-image {
-  width: 50%;
-  height: 70vh;
-  align-items: center;
-  padding-left: 20px;
-}
-.add-project-image > img {
-  width: 100%;
+.add-mentor-right > img {
+  width: 65%;
 }
 
-.add-project-card-form {
-  width: 50%;
+.add-mentor-left {
+  display: flex;
+  flex: 1;
+  justify-content: center;
 }
 
-@media (max-width: 750px) {
-  .add-project-image {
-    display: none;
-  }
-
-  .add-project-card-form {
-    width: 100%;
-  }
+.add-mentor-heading {
+  margin-bottom: 1rem;
 }
+
+.add-mentor-stepper {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .already-applied {
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  font-size: 1rem;
-  font-family: "Open Sans", sans-serif;
+}
+
+.already-applied > img {
+  width: 30%;
+  margin-bottom: 30px;
 }

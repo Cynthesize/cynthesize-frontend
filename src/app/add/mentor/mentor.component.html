@@ -1,40 +1,37 @@
 <div class="loader" *ngIf="isLoading"><mat-spinner></mat-spinner></div>
-<div class="container">
-  <div class="page" *ngIf="!isLoading && !isAlreadyApplied">
-    <div class="page-header">
-      <div class="page-heading">INTERESTED IN BECOMING A MENTOR?</div>
-    </div>
-    <div style="display: flex; align-items: center;">
-      <div class="add-project-card-form">
-        <mat-card class="add-project-card" [style.fontSize]="'1rem'">
-          <form autocomplete="off" [formGroup]="mentorForm" (ngSubmit)="requestForMentorship(mentorForm.value, $event)">
+<div class="add-mentor" *ngIf="!isLoading && !isAlreadyApplied">
+  <div class="add-mentor-left">
+    <div>
+      <div class="add-mentor-heading">
+        <div class="page-heading">Interested in becoming a mentor?</div>
+        <p>Answer a few questions please for us to optimise your experience on the platform.</p>
+      </div>
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+      <mat-horizontal-stepper #stepper>
+        <mat-step [stepControl]="mentorForm">
+          <form [formGroup]="mentorForm">
+            <ng-template matStepLabel>LinkedIn</ng-template>
+
             <div class="field">
               <h3>
-                What's your current profession?
+                Enter your LinkedIn profile...
               </h3>
               <mat-form-field appearance="outline" class="field">
-                <mat-label>Enter your profession</mat-label>
-                <input matInput formControlName="current_profession" />
-              </mat-form-field>
-            </div>
-            <div class="field">
-              <h3>
-                Provide the experience have in your field of expertise.
-              </h3>
-              <mat-form-field appearance="outline" class="field">
-                <mat-label>Provide your experience</mat-label>
-                <input matInput formControlName="experience" />
-              </mat-form-field>
-            </div>
-            <div class="field">
-              <h3>
-                As a mentor on the platform, what would be your aim?
-              </h3>
-              <mat-form-field appearance="outline" class="field">
-                <mat-label>Enter your view</mat-label>
+                <mat-label>Enter your LinkedIn profile...</mat-label>
                 <input matInput formControlName="aim" />
               </mat-form-field>
             </div>
+            <div class="add-mentor-stepper">
+              <div *ngIf="!authenticationService.isAuthenticated(); then guest"></div>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="mentorForm">
+          <form [formGroup]="mentorForm">
+            <ng-template matStepLabel>Expertise</ng-template>
             <div class="field">
               <h3>
                 Among the following stages, what would you consider to be your expertise?
@@ -48,43 +45,56 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <div class="field">
-              <h3>
-                Are you looking for projects to provide potential investment?
-              </h3>
-              <mat-form-field appearance="outline" class="field">
-                <mat-label>Enter your orientation</mat-label>
-                <input matInput formControlName="potential_investment" />
-              </mat-form-field>
+            <div class="add-mentor-stepper">
+              <div *ngIf="!authenticationService.isAuthenticated(); then guest"></div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
             </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="mentorForm">
+          <form [formGroup]="mentorForm">
+            <ng-template matStepLabel>Investment</ng-template>
+
             <div class="field">
               <h3>
-                Are you a venture capitalist or an investor?
+                Are you up for poential investment in projects?
               </h3>
               <mat-form-field appearance="outline" class="field">
-                <mat-label>Enter your answer</mat-label>
+                <mat-label>Eg: Yes, I'm a VC and I'm willing to fund projects.</mat-label>
                 <input matInput formControlName="vc" />
               </mat-form-field>
             </div>
-            <div *ngIf="authenticationService.isAuthenticated(); then authenticated; else guest"></div>
-            <ng-template #authenticated>
-              <button mat-raised-button [disabled]="isLoading" class="orange-btn">
-                <mat-spinner *ngIf="isLoading"></mat-spinner> Apply
-              </button>
-            </ng-template>
-            <ng-template #guest>
-              <button mat-raised-button class="orange-btn" disabled>You need to be logged to apply.</button>
-            </ng-template>
+            <div class="add-mentor-stepper">
+              <button mat-button matStepperPrevious>Back</button>
+              <div *ngIf="authenticationService.isAuthenticated(); then authenticated; else guest"></div>
+              <ng-template #authenticated>
+                <button
+                  mat-raised-button
+                  [disabled]="isApplying"
+                  class="orange-btn"
+                  (click)="requestForMentorship(mentorForm.value, $event)"
+                >
+                  <mat-spinner *ngIf="isApplying"></mat-spinner> Apply
+                </button>
+              </ng-template>
+              <ng-template #guest>
+                <button mat-raised-button (click)="authenticationService.login()">
+                  Click to login to apply.
+                </button>
+              </ng-template>
+            </div>
           </form>
-        </mat-card>
-      </div>
-      <div class="add-project-image"><img src="../../../assets/images/become-mentor.svg" /></div>
+        </mat-step>
+      </mat-horizontal-stepper>
     </div>
   </div>
-  <div class="page" *ngIf="!isLoading && isAlreadyApplied">
-    <div class="already-applied">
-      <img src="../../../assets/images/become-mentor.svg" />
-      <div>We have recieved your request and are verifying your answers. You'll be notified soon!</div>
-    </div>
+  <div class="add-mentor-right"><img src="../../../assets/images/become-mentor.svg" /></div>
+</div>
+
+<div class="page full-height" *ngIf="!isLoading && isAlreadyApplied">
+  <div class="already-applied full-height">
+    <img src="../../../assets/images/waiting.svg" />
+    <p class="open-sans font-1">Please wait while we're accepting you as a mentor. You'll be notified via mail!</p>
   </div>
 </div>

@@ -91,6 +91,14 @@ p {
   font-size: 3rem;
 }
 
+.flex-column {
+  flex-direction: column;
+}
+
+.full-height {
+  height: 100%;
+}
+
 .mat-card-header-text {
   margin: 0 0 5px 0 !important;
 }
@@ -118,10 +126,6 @@ a {
   cursor: pointer;
 }
 
-.page {
-  margin: 30px 0 0 0;
-}
-
 .page-heading {
   color: orange;
   font-size: 2.5rem;
@@ -143,8 +147,12 @@ a {
 }
 
 .mat-form-field {
-  max-width: 500px;
   width: 100%;
+}
+
+.error-message {
+  color: red;
+  font-style: italic;
 }
 
 .mat-form-field-appearance-fill .mat-form-field-flex {
