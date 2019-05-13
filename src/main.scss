@@ -122,10 +122,6 @@ a {
   cursor: pointer;
 }
 
-.page {
-  margin: 30px;
-}
-
 .page-heading {
   color: orange;
   font-size: 2.5rem;
@@ -156,6 +152,11 @@ form mat-horizontal-stepper .mat-horizontal-stepper-header-container {
 
 .review-modal-card {
   padding: 0;
+}
+
+.error-message {
+  color: red;
+  font-style: italic;
 }
 
 .mat-form-field-appearance-fill .mat-form-field-flex {
@@ -245,10 +246,6 @@ form mat-horizontal-stepper .mat-horizontal-stepper-header-container {
 
 .open-sans {
   font-family: "Open Sans", sans-serif;
-}
-
-.error-message {
-  color: red;
 }
 
 @media (max-width: 1050px) {

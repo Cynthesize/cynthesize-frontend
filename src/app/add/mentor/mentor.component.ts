@@ -21,6 +21,8 @@ export class MentorComponent implements OnInit {
 
   isAlreadyApplied = false;
   isLoading = true;
+  isApplying = false;
+  errorMessage = '';
 
   levels = new FormControl();
 
@@ -57,21 +59,28 @@ export class MentorComponent implements OnInit {
 
   requestForMentorship(formData: any, e: Event) {
     e.preventDefault();
-    this.isLoading = true;
+    this.isApplying = true;
     const mentorData = formData;
     mentorData['levels'] = this.levels.value;
-    this.userService.applyForMentorship(mentorData).subscribe(
-      (data: any) => {
-        this.isLoading = false;
-        this.errorHandler.subj_notification.next(
-          'You have succesfully applied for mentorship. Please wait while we look up your answers.'
-        );
-        this.isAlreadyApplied = true;
-      },
-      (error: any) => {
-        this.isLoading = false;
-        this.errorHandler.subj_notification.next(error);
-      }
-    );
+    console.log(mentorData);
+    if (mentorData.vc.trim() === '' || mentorData.aim.trim() === '' || mentorData.levels.length === 0) {
+      this.errorMessage = 'Please answer all the fields.';
+      this.isApplying = false;
+    } else {
+      this.errorMessage = '';
+      this.userService.applyForMentorship(mentorData).subscribe(
+        (data: any) => {
+          this.isApplying = false;
+          this.errorHandler.subj_notification.next(
+            'You have succesfully applied for mentorship. Please wait for a while.'
+          );
+          this.isAlreadyApplied = true;
+        },
+        (error: any) => {
+          this.isApplying = false;
+          this.errorHandler.subj_notification.next(error);
+        }
+      );
+    }
   }
 }
