@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: 'app/view/view-project/view-project.module#ViewProjectModule'
   },
   {
+    path: 'review-answer',
+    loadChildren: 'app/view/review-answers/review-answers.module#ReviewAnswersModule'
+  },
+  {
     path: 'feed',
     loadChildren: 'app/view/feed/feed.module#FeedModule'
   }

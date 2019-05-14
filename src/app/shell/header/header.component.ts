@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit {
     this.profileService.checkIfUserIsMentor().subscribe(
       data => {
         this.isMentor = data.user[0].is_mentor;
+        localStorage.setItem('is_mentor', this.isMentor);
       },
       error => {}
     );
