@@ -8,9 +8,10 @@
       <div class="add-project-card-form">
         <mat-card class="add-project-card" [style.fontSize]="'1rem'">
           <form autocomplete="off" [formGroup]="project" (ngSubmit)="addProject(project.value)">
+            <div class="error-message">{{ errorMessage }}</div>
             <div class="field">
               <h3>
-                Project Name
+                Project Name *
                 <mat-icon
                   [matTooltipPosition]="'right'"
                   matTooltipClass="tooltip"
@@ -25,7 +26,7 @@
             </div>
             <div class="field">
               <h3>
-                Project Abstract
+                Project Abstract *
                 <mat-icon
                   [matTooltipPosition]="'right'"
                   matTooltipClass="tooltip"
@@ -95,32 +96,36 @@
                 <input matInput formControlName="website" />
               </mat-form-field>
             </div>
-            <h3>
-              Thumbnail
-              <mat-icon
-                [matTooltipPosition]="'right'"
-                matTooltipClass="tooltip"
-                matTooltip="Tip: Enter thumbnail URL. Please enter valid URL."
-                >help_outline</mat-icon
-              >
-            </h3>
-            <mat-form-field appearance="outline" class="field">
-              <mat-label>Enter thumbnail url</mat-label>
-              <textarea matInput formControlName="icon"></textarea>
-            </mat-form-field>
-
-            <div class="field">
+            <div class="img-field">
               <h3>
-                Make your project abstract public?
+                Thumbnail
                 <mat-icon
                   [matTooltipPosition]="'right'"
                   matTooltipClass="tooltip"
-                  matTooltip="Tip: Do you want to display the abstract of your project to all the users on the platform?"
+                  matTooltip="Tip: Enter thumbnail URL. Please enter valid URL."
                   >help_outline</mat-icon
                 >
               </h3>
+              <div class="avatar-upload">
+                <div class="avatar-edit">
+                  <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" (change)="readURL($event.target)" />
+                  <label for="imageUpload"></label>
+                </div>
+                <div class="avatar-preview">
+                  <div
+                    id="imagePreview"
+                    style="background-image: url(https://s3.amazonaws.com/static.graphemica.com/glyphs/i500s/000/010/184/original/002B-500x500.png);"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <h3>
+                Make your project abstract public? *
+              </h3>
               <mat-radio-group formControlName="isPublic">
-                <p>
+                <p style="font-size: 0.8rem;">
                   <i
                     >We recommend making the project public for possible collaborate and reaching out to people. No info
                     related to the project will be public, except that of what is taken input in this form.</i
@@ -132,8 +137,8 @@
             </div>
             <div *ngIf="authenticationService.isAuthenticated(); then authenticated; else guest"></div>
             <ng-template #authenticated>
-              <button mat-raised-button [disabled]="isLoading" class="orange-btn">
-                <mat-spinner *ngIf="isLoading"></mat-spinner> Submit Project
+              <button mat-raised-button [disabled]="isFormSubmitted" class="orange-btn">
+                <mat-spinner *ngIf="isFormSubmitted"></mat-spinner> Submit Project
               </button>
             </ng-template>
             <ng-template #guest>
