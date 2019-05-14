@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { TAGS } from '@app/shared/constants';
 import { AuthenticationService } from '@app/core';
 import { Title } from '@angular/platform-browser';
+import { ProfileService } from '@app/core/profile/profile.service';
 
 @Component({
   selector: 'app-project',
@@ -20,6 +21,7 @@ export class AddProjectComponent implements OnInit {
   isLinear = false;
   project: FormGroup;
   formNotfilled = false;
+  errorMessage = '';
   isPageLoading = false;
   isFormSubmitted = false;
   projectDescription = '';
@@ -54,6 +56,7 @@ export class AddProjectComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private projectService: ProjectService,
+    private profileService: ProfileService,
     private router: Router,
     private errorHandler: ErrorHandlerService,
     private title: Title,
@@ -76,7 +79,6 @@ export class AddProjectComponent implements OnInit {
   ngOnInit() {}
 
   addProject() {
-    this.isLoading = true;
     this.isFormSubmitted = true;
     const projectDetails = {
       projectName: this.project
@@ -91,30 +93,34 @@ export class AddProjectComponent implements OnInit {
       website: this.project.get('website').value,
       icon: this.project.get('icon').value
     };
-
-    this.projectService.addProject(projectDetails).subscribe(
-      (data: any) => {
-        this.projectService
-          .addProjectTags(this.tags, data.data.insert_projects.returning[0].id)
-          .subscribe((ret: any) => {
-            console.log('Tags added for the project.');
+    if (!projectDetails.projectName || !projectDetails.abstract) {
+      this.errorMessage = 'Please enter the details correctly.';
+      this.isFormSubmitted = false;
+    } else {
+      this.errorMessage = '';
+      this.projectService.addProject(projectDetails).subscribe(
+        (data: any) => {
+          this.projectService
+            .addProjectTags(this.tags, data.data.insert_projects.returning[0].id)
+            .subscribe((ret: any) => {
+              console.log('Tags added for the project.');
+            });
+          this.projectService.addProjectDescription(data.data.insert_projects.returning[0].id).subscribe((ret: any) => {
+            this.isFormSubmitted = true;
+            this.router.navigate([
+              '/view/project/' +
+                data.data.insert_projects.returning[0].id +
+                '-' +
+                data.data.insert_projects.returning[0].project_name
+            ]);
           });
-        this.projectService.addProjectDescription(data.data.insert_projects.returning[0].id).subscribe((ret: any) => {
-          this.isLoading = false;
-          this.router.navigate([
-            '/view/project/' +
-              data.data.insert_projects.returning[0].id +
-              '-' +
-              data.data.insert_projects.returning[0].project_name
-          ]);
-        });
-      },
-      (error: any) => {
-        this.isLoading = false;
-        this.isFormSubmitted = false;
-        this.errorHandler.subj_notification.next(error);
-      }
-    );
+        },
+        (error: any) => {
+          this.isFormSubmitted = false;
+          this.errorHandler.subj_notification.next(error);
+        }
+      );
+    }
   }
 
   add(event: MatChipInputEvent): void {
@@ -145,6 +151,22 @@ export class AddProjectComponent implements OnInit {
     this.tags.push(event.option.value);
     this.tagInput.nativeElement.value = '';
     this.tagCtrl.setValue(null);
+  }
+
+  readURL(input: any) {
+    console.log(input);
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function(e: any) {
+        console.log(e);
+        document.getElementById('imagePreview').style.backgroundImage = 'url(' + e.target.result + ')';
+      };
+      reader.readAsDataURL(input.files[0]);
+      this.profileService.uploadImage(input.files[0]).subscribe((data: any) => {
+        console.log(data);
+        this.project.get('icon').setValue(data.url);
+      });
+    }
   }
 
   private _filter(value: any): any[] {

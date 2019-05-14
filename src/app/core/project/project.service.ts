@@ -63,15 +63,15 @@ export class ProjectService {
    * Add Project Description
    */
   public addProjectDescription(projectId: number) {
-    const date = Date.now();
+    const date = Date.now().toString();
+    const obj = {};
+    obj[date] = 'Project Created';
     return this.apollo
       .mutate<any>({
         mutation: MUTATION_ADD_PROJECT_DESCRIPTION,
         variables: {
           projectId: projectId,
-          initTimeline: {
-            date: 'Project Created'
-          },
+          initTimeline: obj,
           projectOwner: localStorage.getItem('user_id')
         }
       })
