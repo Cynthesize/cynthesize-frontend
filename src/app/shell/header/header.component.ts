@@ -15,7 +15,7 @@ import { ProfileService } from '@app/core/profile/profile.service';
 export class HeaderComponent implements OnInit {
   @Input()
   sidenav: MatSidenav;
-  isMentor = localStorage.getItem('is_mentor');
+  isMentor = JSON.parse(localStorage.getItem('is_mentor'));
 
   constructor(
     public authenticationService: AuthenticationService,
