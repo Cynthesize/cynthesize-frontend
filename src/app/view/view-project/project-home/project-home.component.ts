@@ -21,6 +21,7 @@ export class ProjectHomeComponent implements OnInit {
   rolesDataForm: FormGroup;
   descriptionDataForm: FormGroup;
   editingDescription = false;
+  canEdit = false;
   currentStage = '';
 
   public barChartOptions: ChartOptions = {
@@ -65,6 +66,7 @@ export class ProjectHomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.canEdit = localStorage.getItem('username') === this.project.user.username;
     this.initDescriptionForm();
   }
   displayableName(str: string) {
@@ -79,6 +81,7 @@ export class ProjectHomeComponent implements OnInit {
   openReviewModel() {
     this.dialog.open(ReviewComponent, {
       width: 'auto',
+      panelClass: 'review-modal-card',
       data: {
         context: this._getCurrentStageStatusWaiting() ? 'waiting' : this.project.current_stage,
         projectId: this.project.id

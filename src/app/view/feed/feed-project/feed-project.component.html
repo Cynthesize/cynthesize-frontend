@@ -10,15 +10,6 @@
           [isMentor]="project.user.is_mentor"
         ></app-user-name>
         <div class="project-abstract">{{ project.abstract }}</div>
-        <div class="card-icons pointer">
-          <app-like
-            [activityId]="project.id"
-            [activityType]="'project'"
-            [likes]="project.likes"
-            class="icon"
-          ></app-like>
-          <button mat-icon-button><mat-icon class="icon" (click)="openShareSheet()">share</mat-icon></button>
-        </div>
       </div>
     </div>
     <div class="project-buttons">
@@ -28,6 +19,10 @@
           Website
         </button>
       </a>
+      <div class="card-icons pointer">
+        <app-like [activityId]="project.id" [activityType]="'project'" [likes]="project.likes" class="icon"></app-like>
+        <button mat-icon-button><mat-icon class="icon" (click)="openShareSheet()">share</mat-icon></button>
+      </div>
     </div>
   </div>
 

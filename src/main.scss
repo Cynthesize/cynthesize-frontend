@@ -95,10 +95,6 @@ p {
   flex-direction: column;
 }
 
-.full-height {
-  height: 100%;
-}
-
 .mat-card-header-text {
   margin: 0 0 5px 0 !important;
 }
@@ -106,7 +102,7 @@ p {
 a {
   text-decoration: none;
   font-weight: bold;
-  color: black;
+  color: #8e8e8e;
 }
 
 .mat-dialog-container {
@@ -148,6 +144,14 @@ a {
 
 .mat-form-field {
   width: 100%;
+}
+
+form mat-horizontal-stepper .mat-horizontal-stepper-header-container {
+  display: none;
+}
+
+.review-modal-card {
+  padding: 0;
 }
 
 .error-message {
@@ -208,9 +212,26 @@ a {
   justify-content: center;
 }
 
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mat-dialog-pad {
+  padding: 24px;
+}
+
 // overriding  mat-dialog-container
-.custom-dialog-container .mat-dialog-container {
-  padding: 0;
+.mat-dialog-container {
+  padding: 0 !important;
+}
+
+.mat-drawer-container {
+  background: #f1f1f1 !important;
+}
+
+.mat-horizontal-content-container {
+  padding: 24px !important;
 }
 
 .orange-btn {
@@ -267,6 +288,7 @@ a {
 .card-project-name {
   font-weight: 700;
   font-size: 1.5rem;
+  color: black;
 }
 
 .card-project-description {
@@ -290,6 +312,7 @@ a {
 
 .modal-container {
   width: 75vw;
+  margin: 30px;
 }
 .tooltip {
   font-size: 0.8rem;

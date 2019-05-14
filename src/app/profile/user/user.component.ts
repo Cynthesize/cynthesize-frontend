@@ -8,6 +8,7 @@ import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { MatDialog, MatChipInputEvent } from '@angular/material';
 import { finalize } from 'rxjs/operators';
 import { Param } from 'cloudinary-core';
+import { Title } from '@angular/platform-browser';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -47,7 +48,8 @@ export class UserComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private errorHandler: ErrorHandlerService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private title: Title
   ) {
     this.route.params.subscribe((param: Param) => {
       this.username = param['username'];
@@ -60,6 +62,7 @@ export class UserComponent implements OnInit {
           this.isPageLoaded = true;
           this.user = data.user[0];
           this.listOfTech = data.user[0].technologies || [];
+          this.title.setTitle('Cynthesize | ' + this.user.username);
           this.editForm = new FormGroup({
             username: new FormControl(this.user.username),
             bio: new FormControl(this.user.bio),

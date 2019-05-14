@@ -1,40 +1,67 @@
-a {
-  outline: 0;
-}
-
-.greed-card {
-  width: 400px;
-}
-
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  background-color: white;
-  border: 1px #dddddd solid;
-  padding: 40px;
-}
-
-.content {
-  background-color: white;
-  flex: 4.5;
-  padding: 1rem;
-}
-
 .project-page {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
-.issue-link-active {
-  color: blue;
+.project-basic-info {
+  display: flex;
+  align-items: center;
+  color: white;
+  padding: 40px 0;
+  flex-basis: 90%;
 }
-
-.checkpoint {
-  font-size: 1rem;
-  padding: 5px 10px;
+.project-header-info {
+  display: flex;
+  max-width: 70%;
 }
-.issue-button {
-  width: 150px;
-  margin-top: 1rem;
-  transform: translateX(6px);
+.project-header {
+  background-color: #2196f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-header-name {
+  font-size: 3.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+.project-platform {
+  border-radius: 3px;
+  background-color: white;
+  color: #686868;
+  font-weight: 500;
+  font-size: 0.8rem;
+  padding: 2px 5px;
+  margin-left: 5px;
+}
+.project-abstract {
+  padding-top: 5px;
+  font-size: 1.1rem;
+  max-width: 85%;
+}
+.project-user-info {
+  font-size: 0.8rem;
+}
+.project-user-info a {
+  color: white;
+}
+.project-icon {
+  margin-right: 45px;
+}
+.project-buttons {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: white;
+}
+.buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-nav-button {
+  margin: 0 10px;
+}
+.project-content {
+  margin: 20px 20px 0px 20px;
 }

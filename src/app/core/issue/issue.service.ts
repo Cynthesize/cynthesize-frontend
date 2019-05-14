@@ -18,12 +18,11 @@ export class IssueService {
   /**
    * fetchIssueInCheckpoint
    */
-  public fetchIssueInCheckpoint(checkpointName: string, projectId: number) {
+  public fetchIssueInCheckpoint(projectId: number) {
     return this.apollo
       .watchQuery<any>({
         query: QUERY_CHECKPOINT_ISSUES,
         variables: {
-          checkpointName: checkpointName,
           projectId: projectId
         }
       })

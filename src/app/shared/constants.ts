@@ -101,6 +101,14 @@ const TAGS = [
   }
 ];
 
+const PROJECTS_INFO = {
+  Ideation: {},
+  Prototyping: {},
+  Testing: {},
+  Launching: {},
+  Funding: {}
+};
+
 export {
   IDEATION_STAGE_QUESTIONS,
   MARKETING_STAGE_QUESTIONS,
@@ -108,5 +116,6 @@ export {
   LAUNCHING_AND_TESTING_STAGE_QUESTIONS,
   CONSUMER_FEEDBACK_AND_ITERATION_STAGE_QUESTIONS,
   FUNDING_STAGE_QUESTIONS,
-  TAGS
+  TAGS,
+  PROJECTS_INFO
 };

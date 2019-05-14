@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { UserService } from '@app/core/user/user.service';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { AuthenticationService } from '@app/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-mentor',
@@ -32,7 +33,8 @@ export class MentorComponent implements OnInit {
     private fb: FormBuilder,
     public authenticationService: AuthenticationService,
     private userService: UserService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private title: Title
   ) {
     this.userService.checkMentorshipData().subscribe(
       (data: any) => {
@@ -45,6 +47,7 @@ export class MentorComponent implements OnInit {
       }
     );
     this.isLoading = false;
+    this.title.setTitle('Cynthesize | Become a mentor');
   }
 
   ngOnInit() {

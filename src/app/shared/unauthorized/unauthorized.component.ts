@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
     <div class="not-found">
       <img src="../../../assets/unauthorised.svg" width="500px" />
       <p>
-        Oops you tried accessing something you shouldn't be. Go back to exploring
+        Oops! You tried accessing something you shouldn't be. Try logging in or go back to exploring
         <a routerLink="['']">Cynthesize</a>
       </p>
     </div>
@@ -24,6 +24,9 @@ import { Component, OnInit } from '@angular/core';
         color: black;
         font-size: 1rem;
         text-align: center;
+      }
+      .not-found p a {
+        color: black;
       }
       @media (max-width: 650px) {
         .not-found img {

@@ -20,6 +20,9 @@ import { ErrorHandlerService } from '@app/core/error-handler.service';
 export class ReviewComponent implements OnInit {
   reviewForm: FormGroup;
   questionsObject = {};
+  totalQuestions = 0;
+  isIncomplete = false;
+  errorMessage: string;
 
   constructor(
     public dialogRef: MatDialogRef<ReviewComponent>,
@@ -51,6 +54,7 @@ export class ReviewComponent implements OnInit {
         this.questionsObject = IDEATION_STAGE_QUESTIONS;
         break;
     }
+    this.totalQuestions = Object.keys(this.questionsObject).length;
     const formFields = {};
     Object.keys(this.questionsObject).forEach(fieldNames => {
       formFields[fieldNames] = [''];
@@ -66,14 +70,21 @@ export class ReviewComponent implements OnInit {
 
   submitReviewForm() {
     const answersObject = this.reviewForm.value;
-    answersObject['project_id'] = this.data.projectId;
-    this.projectService.applyForReview(answersObject, this.data.context).subscribe(
-      (arg: any) => {
-        this.data.context = 'waiting';
-      },
-      error => {
-        this.errorHandler.subj_notification.next(error);
+    Object.keys(answersObject).forEach(answerKey => {
+      if (answersObject[answerKey].trim() === '') {
+        this.errorMessage = 'Please answer all the questions properly.';
       }
-    );
+    });
+    if (!this.errorMessage) {
+      answersObject['project_id'] = this.data.projectId;
+      this.projectService.applyForReview(answersObject, this.data.context).subscribe(
+        (arg: any) => {
+          this.data.context = 'waiting';
+        },
+        error => {
+          this.errorHandler.subj_notification.next(error);
+        }
+      );
+    }
   }
 }

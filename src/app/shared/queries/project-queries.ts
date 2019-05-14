@@ -3,13 +3,11 @@ import { PROJECT_ISSUE_FRAGMENT, LAUNCHED_PROJECT_DETAILS_FRAGMENT } from '../fr
 import { USER_PROFILE_PIC_FRAGMENT } from '../fragments/user-fragments';
 
 const QUERY_CHECKPOINT_ISSUES = gql`
-  query fetch_project_issues($checkpointName: String!, $projectId: Int!) {
-    issues(where: { project_id: { _eq: $projectId }, checkpoint_name: { _eq: $checkpointName } }) {
+  query fetch_project_issues($projectId: Int!) {
+    issues(where: { project_id: { _eq: $projectId } }) {
       ...ProjectIssueFragment
     }
-    issues_aggregate(
-      where: { is_resolved: { _eq: false }, project_id: { _eq: $projectId }, checkpoint_name: { _eq: $checkpointName } }
-    ) {
+    issues_aggregate(where: { is_resolved: { _eq: false }, project_id: { _eq: $projectId } }) {
       aggregate {
         count
       }

@@ -9,7 +9,7 @@ const routes: Routes = [
     component: ViewProjectComponent,
     children: [
       {
-        path: 'issues/:checkpoint_name',
+        path: 'issues',
         component: IssueComponent
       }
     ]

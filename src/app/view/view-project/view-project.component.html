@@ -2,7 +2,7 @@
   <mat-spinner></mat-spinner>
 </div>
 <div *ngIf="project" class="project-page">
-  <div class="left-sidebar sidebar">
+  <!-- <div class="left-sidebar sidebar">
     <div class="left-padding">
       <div style="padding-right: 1rem;">
         <img [src]="project.icon" width="90px" />
@@ -32,7 +32,6 @@
 
   <div class="content">
     <app-project-home [project]="project" *ngIf="issueActive"></app-project-home>
-    <!-- If viewing issues pages -->
     <router-outlet></router-outlet>
   </div>
 
@@ -41,5 +40,46 @@
       [timeline]="project['project_events'][0]['timeline']"
       [projectId]="project.id"
     ></app-project-timeline>
+  </div> -->
+
+  <div class="project-header">
+    <div class="project-basic-info">
+      <div class="project-icon"><img [src]="project.icon" width="190px;" /></div>
+      <div class="project-header-info">
+        <div class="project-header-container">
+          <div class="project-header-name">
+            {{ projectName }} <span class="project-platform">{{ project.platform }}</span>
+          </div>
+          <div class="project-user-info">
+            Started {{ project.created_on | timeDiff }} by
+            <a [routerLink]="['/user', project.user.username]">{{ project.user.username }}</a>
+          </div>
+          <div class="project-abstract open-sans">{{ project.abstract }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="project-buttons">
+    <button
+      mat-button
+      class="project-nav-button"
+      [routerLink]="['/view/project', project.id + '-' + project.project_name]"
+      routerLinkActive="router-link-active"
+    >
+      Home
+    </button>
+    <button
+      mat-button
+      class="project-nav-button"
+      [routerLink]="['/view/project', project.id + '-' + project.project_name, 'issues']"
+      routerLinkActive="router-link-active"
+    >
+      Opened Issues
+    </button>
+    <div><button mat-raised-button class="issue-button" (click)="openAddIssueDialog()">Add issue</button></div>
+  </div>
+  <div class="project-content">
+    <app-project-home [project]="project" *ngIf="issueActive"></app-project-home>
+    <router-outlet></router-outlet>
   </div>
 </div>

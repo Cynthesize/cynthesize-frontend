@@ -16,12 +16,14 @@ export class IssueComponent implements OnInit {
   checkpointName: string;
   projectId: number;
   projectName: string;
-  issues: Observable<any>;
+  issues = {};
+  isLoading = true;
   unresolvedIssues: number;
 
   constructor(
     private issueService: IssueService,
     private route: ActivatedRoute,
+    private router: Router,
     public dialog: MatDialog,
     private errorHandler: ErrorHandlerService
   ) {
@@ -29,26 +31,34 @@ export class IssueComponent implements OnInit {
       this.projectId = params.id.split('-')[0];
       this.projectName = params.id.slice(params.id.indexOf('-') + 1);
     });
-    this.route.params.subscribe(params => {
-      this.checkpointName = params.checkpoint_name;
-      this.issueService.fetchIssueInCheckpoint(params.checkpoint_name, this.projectId).subscribe(
-        (data: any) => {
-          this.issues = data.data.issues;
-          this.unresolvedIssues = data.data.issues_aggregate.aggregate.count;
-        },
-        error => {
-          this.errorHandler.subj_notification.next(error);
-        }
-      );
-    });
+    this.issueService.fetchIssueInCheckpoint(this.projectId).subscribe(
+      (data: any) => {
+        this.unresolvedIssues = data.data.issues_aggregate.aggregate.count;
+        data.data.issues.forEach((issue: any) => {
+          if (this.issues[issue.checkpoint_name]) {
+            this.issues[issue.checkpoint_name] = this.issues[issue.checkpoint_name].push(issue);
+          } else {
+            this.issues[issue.checkpoint_name] = [issue];
+          }
+        });
+        this.isLoading = false;
+      },
+      error => {
+        this.errorHandler.subj_notification.next(error);
+      }
+    );
   }
 
   ngOnInit() {}
 
-  issueResolution(issueId: number, resolution: boolean) {
+  scrollToCheckpoint(checkpointName: string) {
+    document.getElementById(checkpointName).scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
+  }
+
+  issueResolution(issueId: number, resolution: boolean, checkpointName: string) {
     this.issueService.markIssueResolvedOrUnsolved(issueId, resolution).subscribe(
       (data: any) => {
-        this.issues.forEach(issue => {
+        this.issues[checkpointName].forEach((issue: any) => {
           if (issue.id === issueId) {
             issue.is_resolved = data.data.update_issues.returning[0].is_resolved;
           }
@@ -83,6 +93,7 @@ export class AddIssueComponent {
   options: any = {
     lineWrapping: true
   };
+  errorMessage: string;
   constructor(
     public dialogRef: MatDialogRef<AddIssueComponent>,
     private issueService: IssueService,
@@ -94,16 +105,20 @@ export class AddIssueComponent {
     this.dialogRef.close();
   }
   addIssue() {
-    this.issueService
-      .addIssue(this.checkpointName.value, this.issueText.value, this.router.url.split('/')[3].split('-')[0])
-      .subscribe(
-        data => {
-          this.onNoClick();
-          location.reload();
-        },
-        error => {
-          this.errorHandler.subj_notification.next(error);
-        }
-      );
+    if (this.checkpointName.value && this.issueText.value) {
+      this.issueService
+        .addIssue(this.checkpointName.value, this.issueText.value, this.router.url.split('/')[3].split('-')[0])
+        .subscribe(
+          data => {
+            this.onNoClick();
+            location.reload();
+          },
+          error => {
+            this.errorHandler.subj_notification.next(error);
+          }
+        );
+    } else {
+      this.errorMessage = 'Please select the checkpoint name and type in your issue completely.';
+    }
   }
 }
