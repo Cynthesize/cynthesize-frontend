@@ -28,7 +28,7 @@
               "src/robots.txt",
               "src/manifest.json",
               "src/assets",
-              "_redirects"
+              "src/_redirects"
             ],
             "styles": ["src/main.scss", "node_modules/ngx-simplemde/src/index.css"],
             "scripts": ["node_modules/simplemde-antd/dist/simplemde.min.js"]
