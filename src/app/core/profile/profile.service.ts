@@ -25,7 +25,8 @@ export class ProfileService {
           username: username
         }
       })
-      .valueChanges.pipe(
+      .valueChanges.pipe(take(1))
+      .pipe(
         map((res: any) => {
           return res.data;
         })
@@ -43,7 +44,8 @@ export class ProfileService {
           userId: localStorage.getItem('user_id') || ''
         }
       })
-      .valueChanges.pipe(
+      .valueChanges.pipe(take(1))
+      .pipe(
         map((res: any) => {
           return res.data;
         })
@@ -62,6 +64,7 @@ export class ProfileService {
           updateObject: updateObject
         }
       })
+      .pipe(take(1))
       .pipe(
         map((res: any) => {
           return res;

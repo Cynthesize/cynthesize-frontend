@@ -53,6 +53,7 @@ export class ProjectService {
           ]
         }
       })
+      .pipe(take(1))
       .pipe(
         map((res: any) => {
           return res;
@@ -75,6 +76,7 @@ export class ProjectService {
           projectOwner: localStorage.getItem('user_id')
         }
       })
+      .pipe(take(1))
       .pipe(
         map((res: any) => {
           return res;
@@ -94,7 +96,8 @@ export class ProjectService {
           projectName: name
         }
       })
-      .valueChanges.pipe(
+      .valueChanges.pipe(take(1))
+      .pipe(
         map((res: any) => {
           return res.data.projects[0];
         })
@@ -109,6 +112,7 @@ export class ProjectService {
       .query({
         query: QUERY_TOTAL_LAUNCHED_PROJECTS_COUNT
       })
+      .pipe(take(1))
       .pipe(
         map((res: any) => {
           return res;
@@ -183,6 +187,7 @@ export class ProjectService {
           objects: tagTBP
         }
       })
+      .pipe(take(1))
       .pipe(
         map((resp: any) => {
           return resp;

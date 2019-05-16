@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,7 @@ export class LikeService {
         mutation: mutation,
         variables: filteredInfo
       })
+      .pipe(take(1))
       .pipe(
         map((res: any) => {
           return res;

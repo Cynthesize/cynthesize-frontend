@@ -130,7 +130,8 @@ export class UserService {
           userName: username
         }
       })
-      .valueChanges.subscribe(
+      .valueChanges.pipe(take(1))
+      .subscribe(
         (likes: any) => {
           const likedComments: any = [];
           const likedProjects: any = [];
