@@ -1,5 +1,5 @@
 <div *ngIf="isLoading" class="loader"><mat-spinner></mat-spinner></div>
-<div *ngIf="issues.length" class="open-sans issue-tab">
+<div *ngIf="unresolvedIssues + resolvedIssues" class="open-sans issue-tab">
   <div class="issue-list">
     <mat-tab-group>
       <div class="category-issue" *ngFor="let checkpoint of (issues | keyvalue)">
@@ -75,7 +75,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="!issues.length">
+<div *ngIf="!(unresolvedIssues + resolvedIssues)">
   <div class="flex-center">
     <img class="no-issue" src="../../../../assets/not_found.svg" />
   </div>
