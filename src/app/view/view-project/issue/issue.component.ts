@@ -19,6 +19,7 @@ export class IssueComponent implements OnInit {
   issues = {};
   isLoading = true;
   unresolvedIssues: number;
+  resolvedIssues: number;
 
   constructor(
     private issueService: IssueService,
@@ -33,7 +34,6 @@ export class IssueComponent implements OnInit {
     });
     this.issueService.fetchIssueInCheckpoint(this.projectId).subscribe(
       (data: any) => {
-        this.unresolvedIssues = data.data.issues_aggregate.aggregate.count;
         data.data.issues.forEach((issue: any) => {
           if (this.issues[issue.checkpoint_name]) {
             this.issues[issue.checkpoint_name] = this.issues[issue.checkpoint_name].push(issue);
@@ -41,9 +41,11 @@ export class IssueComponent implements OnInit {
             this.issues[issue.checkpoint_name] = [issue];
           }
         });
+        this.updateIssuesCounts();
         this.isLoading = false;
       },
       error => {
+        this.isLoading = false;
         this.errorHandler.subj_notification.next(error);
       }
     );
@@ -63,11 +65,26 @@ export class IssueComponent implements OnInit {
             issue.is_resolved = data.data.update_issues.returning[0].is_resolved;
           }
         });
+        this.updateIssuesCounts();
       },
       error => {
         this.errorHandler.subj_notification.next(error);
       }
     );
+  }
+
+  updateIssuesCounts() {
+    this.unresolvedIssues = 0;
+    this.resolvedIssues = 0;
+    Object.keys(this.issues).forEach((issueCategory: any) => {
+      this.issues[issueCategory].forEach((issue: any) => {
+        if (issue.is_resolved) {
+          this.resolvedIssues++;
+        } else {
+          this.unresolvedIssues++;
+        }
+      });
+    });
   }
 }
 

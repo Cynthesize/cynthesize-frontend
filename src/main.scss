@@ -74,6 +74,11 @@ p {
   justify-content: center;
 }
 
+.flex-align {
+  display: flex;
+  align-self: center;
+}
+
 .flex-1 {
   display: flex;
   flex: 1;
@@ -260,6 +265,20 @@ form mat-horizontal-stepper .mat-horizontal-stepper-header-container {
 
   .container {
     width: 90%;
+  }
+  .ext-container {
+    width: 90%;
+  }
+}
+
+.ext-container {
+  width: 90%;
+  margin: 20px auto;
+}
+
+@media (max-width: 1056px) {
+  .hide-mobile {
+    display: none;
   }
 }
 
