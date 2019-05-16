@@ -1,5 +1,5 @@
 <div *ngIf="isLoading" class="loader"><mat-spinner></mat-spinner></div>
-<div *ngIf="issues" class="open-sans issue-tab">
+<div *ngIf="issues.length" class="open-sans issue-tab">
   <div class="issue-list">
     <mat-tab-group>
       <div class="category-issue" *ngFor="let checkpoint of (issues | keyvalue)">
@@ -73,5 +73,13 @@
         </div>
       </mat-card>
     </div>
+  </div>
+</div>
+<div *ngIf="!issues.length">
+  <div class="flex-center">
+    <img class="no-issue" src="../../../../assets/not_found.svg" />
+  </div>
+  <div class="font-1 center-divs open-sans">
+    You haven't opened any issues till now. Click on "Add Issue" button and ask mentors.
   </div>
 </div>
