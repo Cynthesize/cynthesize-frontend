@@ -232,14 +232,6 @@ const MUTATION_APPLY_FOR_COLLABORATION = gql`
   }
 `;
 
-const MUTATION_ADD_TAGS_LINKS = gql`
-  mutation insert_tag_links($objects: [tags_links_insert_input!]!) {
-    insert_tags_links(objects: $objects) {
-      affected_rows
-    }
-  }
-`;
-
 export {
   MUTATION_ADD_ISSUE,
   MUTATION_ADD_ISSUE_COMMENT,
@@ -256,6 +248,5 @@ export {
   MUTATION_UPDATE_PROJECT_DESCRIPTION,
   MUTATION_UPDATE_PROJECT_EVENTS,
   MUTATION_APPLY_FOR_COLLABORATION,
-  MUTATION_UPDATE_PROJECT_DETAILS,
-  MUTATION_ADD_TAGS_LINKS
+  MUTATION_UPDATE_PROJECT_DETAILS
 };

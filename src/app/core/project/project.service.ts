@@ -16,7 +16,6 @@ import {
   QUERY_FETCH_BASIC_PROJECT_DETAILS,
   QUERY_FETCH_PROJECT_DETAILS
 } from '@app/shared/queries/project-queries';
-import { MUTATION_ADD_TAGS_LINKS } from '@app/shared/mutations/project-mutations';
 import {
   MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE,
   MUTATION_SEND_PROJECT_FOR_MARKETING_STAGE,
@@ -168,29 +167,6 @@ export class ProjectService {
       .pipe(
         map((res: any) => {
           return res;
-        })
-      );
-  }
-
-  /**
-   * Adds Project Tags
-   */
-  public addProjectTags(tags: any, projectId: any) {
-    const tagTBP: any[] = [];
-    tags.forEach((tag: any) => {
-      tagTBP.push({ project_id: projectId, tag_id: tag.tag_id });
-    });
-    return this.apollo
-      .mutate<any>({
-        mutation: MUTATION_ADD_TAGS_LINKS,
-        variables: {
-          objects: tagTBP
-        }
-      })
-      .pipe(take(1))
-      .pipe(
-        map((resp: any) => {
-          return resp;
         })
       );
   }

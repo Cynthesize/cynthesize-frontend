@@ -11,6 +11,7 @@ import { TAGS } from '@app/shared/constants';
 import { AuthenticationService } from '@app/core';
 import { Title } from '@angular/platform-browser';
 import { ProfileService } from '@app/core/profile/profile.service';
+import { TagsService } from '@app/core/tags/tags.service';
 
 @Component({
   selector: 'app-project',
@@ -51,28 +52,32 @@ export class AddProjectComponent implements OnInit {
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  allTags = TAGS;
+  allTags: Array<Object>;
 
   constructor(
     private _formBuilder: FormBuilder,
     private projectService: ProjectService,
     private profileService: ProfileService,
+    private tagsService: TagsService,
     private router: Router,
     private errorHandler: ErrorHandlerService,
     private title: Title,
     public authenticationService: AuthenticationService
   ) {
+    this.tagsService.getTagsFromDB().subscribe((data: any) => {
+      this.allTags = data.data.tags;
+      this.filteredTags = this.tagCtrl.valueChanges.pipe(
+        startWith(null),
+        map((tag: any | null) => (tag ? this._filter(tag) : this.allTags.slice()))
+      );
+    });
     this.project = this._formBuilder.group({
       projectName: ['', Validators.required],
       icon: ['', Validators.required],
       abstract: ['', [Validators.required, Validators.maxLength(100)]],
-      website: ['https://', Validators.required],
+      website: ['', Validators.required],
       isPublic: false
     });
-    this.filteredTags = this.tagCtrl.valueChanges.pipe(
-      startWith(null),
-      map((tag: any | null) => (tag ? this._filter(tag) : this.allTags.slice()))
-    );
     this.title.setTitle('Cynthesize | Add Project');
   }
 
@@ -98,9 +103,10 @@ export class AddProjectComponent implements OnInit {
       this.isFormSubmitted = false;
     } else {
       this.errorMessage = '';
+      this.addNewTags();
       this.projectService.addProject(projectDetails).subscribe(
         (data: any) => {
-          this.projectService
+          this.tagsService
             .addProjectTags(this.tags, data.data.insert_projects.returning[0].id)
             .subscribe((ret: any) => {
               console.log('Tags added for the project.');
@@ -129,7 +135,7 @@ export class AddProjectComponent implements OnInit {
       const value = event.value;
 
       if ((value || '').trim()) {
-        this.tags.push(value.trim());
+        this.tags.push({ tag_name: value.trim() });
       }
       if (input) {
         input.value = '';
@@ -169,10 +175,31 @@ export class AddProjectComponent implements OnInit {
     }
   }
 
+  addNewTags() {
+    const tagsToBeAdded: Array<object> = [];
+    this.tags.forEach((tags: object) => {
+      if (!tags['tag_id']) {
+        tagsToBeAdded.push({ tag_name: this.displayableName(tags['tag_name']) });
+      }
+    });
+    this.tagsService.addNewTagsToDb(tagsToBeAdded).subscribe((data: any) => {
+      console.log(data);
+    });
+  }
+
+  displayableName(str: string) {
+    str = str.replace(/ /g, ' ');
+    const splitStr = str.toLowerCase().split(' ');
+    for (let i = 0; i < splitStr.length; i++) {
+      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(' ');
+  }
+
   private _filter(value: any): any[] {
     let filterValue = value.tag_name || value;
     filterValue = filterValue.toLowerCase();
 
-    return this.allTags.filter(tag => tag.tag_name.toLowerCase().indexOf(filterValue) === 0);
+    return this.allTags.filter(tag => tag['tag_name'].toLowerCase().indexOf(filterValue) === 0);
   }
 }
