@@ -65,11 +65,7 @@ export class AddProjectComponent implements OnInit {
     public authenticationService: AuthenticationService
   ) {
     this.tagsService.getTagsFromDB().subscribe((data: any) => {
-      this.allTags = data.data.tags;
-      this.filteredTags = this.tagCtrl.valueChanges.pipe(
-        startWith(null),
-        map((tag: any | null) => (tag ? this._filter(tag) : this.allTags.slice()))
-      );
+      this.initTags(data);
     });
     this.project = this._formBuilder.group({
       projectName: ['', Validators.required],
@@ -103,7 +99,6 @@ export class AddProjectComponent implements OnInit {
       this.isFormSubmitted = false;
     } else {
       this.errorMessage = '';
-      this.addNewTags();
       this.projectService.addProject(projectDetails).subscribe(
         (data: any) => {
           this.tagsService
@@ -183,8 +178,25 @@ export class AddProjectComponent implements OnInit {
       }
     });
     this.tagsService.addNewTagsToDb(tagsToBeAdded).subscribe((data: any) => {
-      console.log(data);
+      this.tags.forEach((tag: object) => {
+        if (!tag['tag_id']) {
+          data.data.insert_tags.returning.forEach((returnedTag: any) => {
+            if (this.displayableName(tag['tag_name']) === returnedTag['tag_name']) {
+              tag['tag_id'] = returnedTag['tag_id'];
+            }
+          });
+        }
+      });
+      this.addProject();
     });
+  }
+
+  initTags(data: any) {
+    this.allTags = data.data.tags;
+    this.filteredTags = this.tagCtrl.valueChanges.pipe(
+      startWith(null),
+      map((tag: any | null) => (tag ? this._filter(tag) : this.allTags.slice()))
+    );
   }
 
   displayableName(str: string) {

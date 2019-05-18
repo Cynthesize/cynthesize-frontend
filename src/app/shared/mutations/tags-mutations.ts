@@ -12,6 +12,10 @@ const MUTATION_ADD_TAGS_TO_DB = gql`
   mutation insert_tags_to_db($objects: [tags_insert_input!]!) {
     insert_tags(objects: $objects) {
       affected_rows
+      returning {
+        tag_id
+        tag_name
+      }
     }
   }
 `;

@@ -7,7 +7,7 @@
     <div style="display: flex; align-items: center;">
       <div class="add-project-card-form">
         <mat-card class="add-project-card" [style.fontSize]="'1rem'">
-          <form autocomplete="off" [formGroup]="project" (ngSubmit)="addProject(project.value)">
+          <form autocomplete="off" [formGroup]="project" (ngSubmit)="addNewTags()">
             <div class="error-message">{{ errorMessage }}</div>
             <div class="field">
               <h3>
