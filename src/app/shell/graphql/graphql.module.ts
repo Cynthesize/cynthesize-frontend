@@ -10,7 +10,7 @@ import { AuthenticationService } from '@app/core';
   exports: [HttpClientModule, ApolloModule, HttpLinkModule]
 })
 export class GraphqlModule {
-  constructor(apollo: Apollo, httpLink: HttpLink, authenticationService: AuthenticationService) {
+  constructor(apollo: Apollo, httpLink: HttpLink, private authService: AuthenticationService) {
     // Replace this URL with your deployed endpoint of Hasura on Heroku.
     const uri = GRAPHQL_URL;
 
@@ -24,11 +24,11 @@ export class GraphqlModule {
      */
     let authHeader: any;
 
-    if (localStorage.getItem('user_id')) {
+    if (this.authService.user_id) {
       authHeader = new HttpHeaders()
         .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${localStorage.getItem('id_token')}`)
-        .set('x-hasura-cynthesize-user-id', localStorage.getItem('user_id'));
+        .set('Authorization', `Bearer ${this.authService.idToken}`)
+        .set('x-hasura-cynthesize-user-id', this.authService.user_id);
     } else {
       authHeader = new HttpHeaders().set('Content-Type', 'application/json');
     }

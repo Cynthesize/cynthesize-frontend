@@ -28,7 +28,7 @@ export class ShellComponent implements OnInit {
   onWindowScroll(event: any) {
     if (
       event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight &&
-      this.router.url === '/view/launched' &&
+      this.router.url === '/view/feed/projects' &&
       event.target.scrollHeight !== this.flag
     ) {
       this.flag = event.target.scrollHeight;

@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import { QUERY_USER_DETAILS, QUERY_PROJECTS_BY_USER, QUERY_IS_MENTOR } from '@app/shared/queries/user-queries';
 import { MUTATION_UPDATE_USER_DETAILS } from '@app/shared/mutations/user-mutations';
 import { take } from 'rxjs/operators';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  constructor(private http: HttpClient, private router: Router, private apollo: Apollo) {}
+  constructor(private http: HttpClient, private authService: AuthenticationService, private apollo: Apollo) {}
 
   /*
    * getUserDetails
@@ -41,7 +41,7 @@ export class ProfileService {
       .watchQuery<any>({
         query: QUERY_IS_MENTOR,
         variables: {
-          userId: localStorage.getItem('user_id') || ''
+          userId: this.authService.user_id || ''
         }
       })
       .valueChanges.pipe(take(1))
@@ -60,7 +60,7 @@ export class ProfileService {
       .mutate<any>({
         mutation: MUTATION_UPDATE_USER_DETAILS,
         variables: {
-          userId: localStorage.getItem('user_id'),
+          userId: this.authService.user_id,
           updateObject: updateObject
         }
       })

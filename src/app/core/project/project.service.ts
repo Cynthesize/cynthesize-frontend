@@ -24,12 +24,13 @@ import {
   MUTATION_SEND_PROJECT_FOR_CONSUMER_FEEDBACK_STAGE,
   MUTATION_SEND_PROJECT_FOR_FUNDING_STAGE
 } from '@app/shared/mutations/review-mutation';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo, private authService: AuthenticationService) {}
 
   /**
    * Adds a project.
@@ -47,7 +48,7 @@ export class ProjectService {
               is_public: projectDetails['isPublic'],
               current_stage: projectDetails['currentStage'],
               icon: projectDetails['icon'],
-              owner: localStorage.getItem('user_id')
+              owner: this.authService.user_id
             }
           ]
         }
@@ -72,7 +73,7 @@ export class ProjectService {
         variables: {
           projectId: projectId,
           initTimeline: obj,
-          projectOwner: localStorage.getItem('user_id')
+          projectOwner: this.authService.user_id
         }
       })
       .pipe(take(1))
@@ -236,7 +237,7 @@ export class ProjectService {
     const applyObject = {
       project_id: projectId,
       for_role: role,
-      user_id: localStorage.getItem('user_id')
+      user_id: this.authService.user_id
     };
     if (additionalInfo) {
       applyObject['additional_info'] = additionalInfo;

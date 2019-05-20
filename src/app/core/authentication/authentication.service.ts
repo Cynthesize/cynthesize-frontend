@@ -21,11 +21,34 @@ export class AuthenticationService {
     scope: 'openid profile email'
   });
 
-  constructor(private router: Router, private apollo: Apollo) {}
+  private _idToken: string;
+  private _accessToken: string;
+  private _userId: string;
+  private _expiresAt: number;
+
+  constructor(private router: Router, private apollo: Apollo) {
+    this._idToken = '';
+    this._accessToken = '';
+    this._expiresAt = 0;
+  }
+
+  get accessToken(): string {
+    return this._accessToken;
+  }
+  get user_id(): string {
+    return this._userId;
+  }
+
+  get idToken(): string {
+    return this._idToken;
+  }
+
+  public login(): void {
+    this.auth0.authorize();
+  }
 
   public logout(): void {
     localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
     localStorage.removeItem('user_id');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('commentsLikedByLoggedInUser');
@@ -33,27 +56,49 @@ export class AuthenticationService {
     localStorage.removeItem('username');
     localStorage.removeItem('projectsLikedByLoggedInUser');
     localStorage.removeItem('repliesLikedByLoggedInUser');
+    console.log('Logging out');
+    this._accessToken = '';
+    this._idToken = '';
+    this._expiresAt = 0;
+
+    this.auth0.logout({
+      returnTo: window.location.origin
+    });
   }
 
+  // public isAuthenticated(): boolean {
+  //   const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
+  //   if (new Date().getTime() < expiresAt) {
+  //     return true;
+  //   } else {
+  //     this.logout();
+  //     return false;
+  //   }
+  // }
+
   public isAuthenticated(): boolean {
-    const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
-    if (new Date().getTime() < expiresAt) {
-      return true;
-    } else {
-      this.logout();
-      return false;
-    }
+    return this._accessToken && Date.now() < this._expiresAt;
   }
-  public login(): void {
-    this.auth0.authorize();
+
+  public renewTokens(): void {
+    this.auth0.checkSession({}, (err, authResult) => {
+      if (authResult && authResult.accessToken && authResult.idToken) {
+        this.localLogin(authResult);
+      } else if (err) {
+        alert(`Could not get a new token (${err.error}: ${err.errorDescription}).`);
+        this.logout();
+      }
+    });
   }
 
   public handleAuthentication(): void {
     this.auth0.parseHash((err: any, authResult: any) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
+        console.log('Handling authentication');
+        this.localLogin(authResult);
         this.handleUserDatabaseEntry(authResult);
         window.location.hash = '';
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       } else if (err) {
         this.router.navigate(['/']);
       }
@@ -93,9 +138,6 @@ export class AuthenticationService {
               localStorage.setItem('username', data.data.insert_user.returning[0].username);
               localStorage.setItem('userId', data.data.insert_user.returning[0].id);
               localStorage.setItem('is_mentor', 'false');
-              this.setSession(authResult).then(() => {
-                location.reload();
-              });
             });
         } else {
           this.apollo
@@ -128,21 +170,16 @@ export class AuthenticationService {
           localStorage.setItem('username', res.data.user[0].username);
           localStorage.setItem('is_mentor', JSON.stringify(res.data.user[0].is_mentor));
           localStorage.setItem('userId', res.data.user[0].id);
-          this.setSession(authResult).then(() => {
-            location.reload();
-          });
         }
       });
   }
 
-  private async setSession(authResult: any) {
-    const expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime());
-    localStorage.setItem('access_token', authResult.accessToken);
-    localStorage.setItem('user_id', authResult.idTokenPayload.sub);
-    localStorage.setItem('id_token', authResult.idToken);
-    localStorage.setItem('expires_at', expiresAt);
-    setTimeout(() => {
-      return expiresAt;
-    }, 1000);
+  private localLogin(authResult: any): void {
+    // Set the time that the Access Token will expire at
+    const expiresAt = authResult.expiresIn * 1000 + Date.now();
+    this._accessToken = authResult.accessToken;
+    this._idToken = authResult.idToken;
+    this._expiresAt = expiresAt;
+    this._userId = authResult.idTokenPayload.sub;
   }
 }
