@@ -25,7 +25,7 @@ mat-card-title {
 }
 
 .home-banner .home-heading {
-  height: 200px;
+  min-height: 200px;
 }
 
 .home-card {
@@ -128,7 +128,6 @@ mat-card-title {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .icon-details {
@@ -211,6 +210,10 @@ mat-card-title {
 @media screen and (max-width: 1134px) {
   .home-info-cards {
     flex-direction: column;
+  }
+
+  .home-banner .home-heading {
+    min-height: 350px;
   }
 
   .home-card {
