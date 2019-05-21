@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs';
 import { Apollo } from 'apollo-angular';
@@ -12,7 +11,7 @@ import { take } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProfileService {
-  constructor(private http: HttpClient, private router: Router, private apollo: Apollo) {}
+  constructor(private http: HttpClient, private apollo: Apollo) {}
 
   /*
    * getUserDetails

@@ -4,9 +4,6 @@ import { MatDialog } from '@angular/material';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ProjectService } from '@app/core/project/project.service';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { Label } from 'ng2-charts';
-import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-project-home',
@@ -120,13 +117,6 @@ export class ProjectHomeComponent implements OnInit {
           }
         }
         break;
-      case 'marketing_stage':
-        if (this.project.stage_marketings.length > 0) {
-          if (this.project.stage_marketings[0].is_applied) {
-            return true;
-          }
-        }
-        break;
       case 'prototype_development_stage':
         if (this.project.stage_prototype_developments.length > 0) {
           if (this.project.stage_prototype_developments[0].is_applied) {
@@ -134,16 +124,16 @@ export class ProjectHomeComponent implements OnInit {
           }
         }
         break;
-      case 'launching_stage':
-        if (this.project.stage_launchings.length > 0) {
-          if (this.project.stage_launchings[0].is_applied) {
+      case 'consumer_feedback_stage':
+        if (this.project.stage_consumer_feedbacks.length > 0) {
+          if (this.project.stage_consumer_feedbacks[0].is_applied) {
             return true;
           }
         }
         break;
-      case 'consumer_feedback_stage':
-        if (this.project.stage_consumer_feedbacks.length > 0) {
-          if (this.project.stage_consumer_feedbacks[0].is_applied) {
+      case 'launching_stage':
+        if (this.project.stage_launchings.length > 0) {
+          if (this.project.stage_launchings[0].is_applied) {
             return true;
           }
         }
@@ -157,7 +147,6 @@ export class ProjectHomeComponent implements OnInit {
         break;
       default:
         return false;
-        break;
     }
   }
 }

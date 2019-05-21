@@ -1,8 +1,6 @@
-import { Title } from '@angular/platform-browser';
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
 import { MatSidenav, MatDialog } from '@angular/material';
-import { AuthenticationService, I18nService } from '@app/core';
+import { AuthenticationService } from '@app/core';
 import { RequestsComponent } from './requests/requests.component';
 import { ProfileService } from '@app/core/profile/profile.service';
 

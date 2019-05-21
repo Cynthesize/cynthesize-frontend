@@ -1,9 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '@app/core/project/project.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Project } from '@app/shared/objects';
-import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { MatDialog } from '@angular/material';
 import { AddIssueComponent } from './issue/issue.component';
 import { Title } from '@angular/platform-browser';
@@ -25,7 +24,6 @@ export class ViewProjectComponent implements OnInit {
     private projectService: ProjectService,
     private route: ActivatedRoute,
     private router: Router,
-    private errorHandler: ErrorHandlerService,
     private dialog: MatDialog,
     private title: Title
   ) {
@@ -60,13 +58,14 @@ export class ViewProjectComponent implements OnInit {
     }
   }
 
+  /*
   fnc(selectedDate: Date) {
     const dates = document.getElementsByClassName('mat-calendar-body-cell-content');
     for (let index = 0; index < dates.length; index++) {
       // Update this according to your needs @neil.
       dates[index]['style']['backgroundColor'] = '#' + (index * 6 + 4000);
     }
-  }
+  }*/
 
   displayableName(str: string) {
     str = str.replace(/-/g, ' ');

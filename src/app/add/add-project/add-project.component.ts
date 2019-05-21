@@ -1,13 +1,12 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ProjectService } from '@app/core/project/project.service';
-import { finalize, startWith, map } from 'rxjs/operators';
+import { startWith, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { MatChipInputEvent, MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
-import { TAGS } from '@app/shared/constants';
 import { AuthenticationService } from '@app/core';
 import { Title } from '@angular/platform-browser';
 import { ProfileService } from '@app/core/profile/profile.service';

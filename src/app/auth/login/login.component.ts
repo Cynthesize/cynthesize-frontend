@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { finalize } from 'rxjs/operators';
+import { FormGroup } from '@angular/forms';
 
 import { environment } from '@env/environment';
-import { Logger, I18nService, AuthenticationService } from '@app/core';
-import { ErrorHandlerService } from '@app/core/error-handler.service';
-
-const log = new Logger('Login');
+import { AuthenticationService } from '@app/core';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isLoading = false;
 
-  constructor(private router: Router, public authenticationService: AuthenticationService) {}
+  constructor(public authenticationService: AuthenticationService) {}
 
   ngOnInit() {}
 }

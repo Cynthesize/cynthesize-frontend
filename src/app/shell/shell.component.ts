@@ -4,7 +4,6 @@ import { MatSidenav } from '@angular/material';
 import { filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
-import { SelectPipe } from 'apollo-angular';
 
 @Component({
   selector: 'app-shell',
