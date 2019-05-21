@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   username: string = localStorage.getItem('username');
 
   constructor(private title: Title) {
-    this.title.setTitle('Cynthesize | Add Project');
+    this.title.setTitle('Cynthesize');
   }
 
   ngOnInit() {

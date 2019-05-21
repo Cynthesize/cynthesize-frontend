@@ -27,8 +27,7 @@ export class GraphqlModule {
     if (this.authService.user_id) {
       authHeader = new HttpHeaders()
         .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${this.authService.idToken}`)
-        .set('x-hasura-cynthesize-user-id', this.authService.user_id);
+        .set('Authorization', `Bearer ${this.authService.idToken}`);
     } else {
       authHeader = new HttpHeaders().set('Content-Type', 'application/json');
     }

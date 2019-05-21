@@ -3,14 +3,23 @@
     <mat-sidenav #sidenav mode="over" ngClass.gt-sm="has-border">
       <nav>
         <mat-list>
-          <a mat-list-item routerLink="/add/project" routerLinkActive="active" (click)="sidenav.close()">
-            <span>Add Project</span>
+          <a
+            mat-list-item
+            routerLink="/"
+            routerLinkActive="active-content"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="sidenav.close()"
+          >
+            <span>Home</span>
           </a>
-          <a mat-list-item routerLink="/add/mentor" routerLinkActive="active" (click)="sidenav.close()">
+          <a mat-list-item routerLink="/add/mentor" *ngIf="isMentor !== true">
             <span>Become a mentor</span>
           </a>
-          <a mat-list-item routerLink="/view/feed/projects" routerLinkActive="active" (click)="sidenav.close()">
-            <span>Products</span>
+          <a mat-list-item routerLink="/view/issues" *ngIf="isMentor === true">
+            <span>See Open Issues</span>
+          </a>
+          <a mat-list-item routerLink="/view/feed/projects" routerLinkActive="active-content" (click)="sidenav.close()">
+            <span>Projects</span>
           </a>
         </mat-list>
       </nav>
