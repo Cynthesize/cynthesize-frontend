@@ -4,9 +4,11 @@ import { MatSidenav } from '@angular/material';
 import { filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
+import { routerTransition } from '@app/animations/router.animations';
 
 @Component({
   selector: 'app-shell',
+  animations: [routerTransition],
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss']
 })
@@ -33,5 +35,9 @@ export class ShellComponent implements OnInit {
       this.flag = event.target.scrollHeight;
       this.errorHandler.ideaWindowScrolled.next('fetchLaunchedProjects');
     }
+  }
+
+  getState(outlet: any) {
+    return outlet.activatedRouteData.state;
   }
 }

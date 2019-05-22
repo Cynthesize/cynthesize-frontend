@@ -17,7 +17,9 @@
     </mat-sidenav>
     <mat-sidenav-content (scroll)="onWindowScroll($event)">
       <app-header [sidenav]="sidenav"></app-header>
-      <router-outlet></router-outlet>
+      <main [@routerTransition]="getState(o)">
+        <router-outlet #o="outlet"></router-outlet>
+      </main>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

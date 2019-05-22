@@ -6,11 +6,15 @@ import { UnauthorisedComponent } from './shared/unauthorized/unauthorized.compon
 
 const routes: Routes = [
   Shell.childRoutes([
-    { path: 'add', loadChildren: 'app/add/add.module#AddModule' },
-    { path: 'view', loadChildren: 'app/view/view.module#ViewModule' },
-    { path: 'user', loadChildren: 'app/profile/profile.module#ProfileModule' },
-    { path: 'not-found', component: NotFoundComponent, data: { title: 'Page not found! :(' } },
-    { path: 'unauthorized', component: UnauthorisedComponent, data: { title: 'Unauthorised Access' } }
+    { path: 'add', loadChildren: 'app/add/add.module#AddModule', data: { state: 'add' } },
+    { path: 'view', loadChildren: 'app/view/view.module#ViewModule', data: { state: 'view' } },
+    { path: 'user', loadChildren: 'app/profile/profile.module#ProfileModule', data: { state: 'user' } },
+    { path: 'not-found', component: NotFoundComponent, data: { title: 'Page not found! :(', state: 'not-found' } },
+    {
+      path: 'unauthorized',
+      component: UnauthorisedComponent,
+      data: { title: 'Unauthorised Access', state: 'unauthorized' }
+    }
   ]),
   // Fallback when no prior route is matched
   { path: '**', redirectTo: '', pathMatch: 'full' }
