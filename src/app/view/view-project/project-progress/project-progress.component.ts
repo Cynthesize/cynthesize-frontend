@@ -9,8 +9,8 @@ export class ProjectProgressComponent implements OnInit {
   @Input() currentStage = '';
   completedStages = {
     ideation_stage: false,
-    prototyping_stage: false,
-    feedback_stage: false,
+    prototype_development_stage: false,
+    consumer_feedback_stage: false,
     launching_stage: false,
     funding_stage: false
   };

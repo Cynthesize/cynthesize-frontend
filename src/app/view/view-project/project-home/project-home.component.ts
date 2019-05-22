@@ -31,6 +31,7 @@ export class ProjectHomeComponent implements OnInit {
   ngOnInit() {
     this.canEdit = localStorage.getItem('username') === this.project.user.username;
     this.initDescriptionForm();
+    console.log(this.project);
   }
   displayableName(str: string) {
     str = str.replace(/-/g, ' ');
@@ -118,8 +119,8 @@ export class ProjectHomeComponent implements OnInit {
         }
         break;
       case 'prototype_development_stage':
-        if (this.project.stage_prototype_developments.length > 0) {
-          if (this.project.stage_prototype_developments[0].is_applied) {
+        if (this.project.stage_product_developments.length > 0) {
+          if (this.project.stage_product_developments[0].is_applied) {
             return true;
           }
         }

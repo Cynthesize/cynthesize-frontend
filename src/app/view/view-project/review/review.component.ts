@@ -66,11 +66,17 @@ export class ReviewComponent implements OnInit {
 
   submitReviewForm() {
     const answersObject = this.reviewForm.value;
+    let flag = 0;
     Object.keys(answersObject).forEach(answerKey => {
       if (answersObject[answerKey].trim() === '') {
-        this.errorMessage = 'Please answer all the questions properly.';
+        flag = 1;
       }
     });
+    if (flag === 0) {
+      this.errorMessage = '';
+    } else {
+      this.errorMessage = 'Please answer all the questions properly.';
+    }
     if (!this.errorMessage) {
       answersObject['project_id'] = this.data.projectId;
       this.projectService.applyForReview(answersObject, this.data.context).subscribe(

@@ -24,15 +24,18 @@
     <div
       class="unit-heading"
       [ngClass]="{
-        'current-text': currentStage === 'prototyping_stage',
-        'completed-text': completedStages['prototyping_stage']
+        'current-text': currentStage === 'prototype_development_stage',
+        'completed-text': completedStages['prototype_development_stage']
       }"
     >
       <div class="unit-heading-name">Prototyping</div>
       <div class="unit-heading-date"></div>
       <div
         class="unit-icon"
-        [ngClass]="{ current: currentStage === 'prototyping_stage', completed: completedStages['prototyping_stage'] }"
+        [ngClass]="{
+          current: currentStage === 'prototype_development_stage',
+          completed: completedStages['prototype_development_stage']
+        }"
         #level1icon
       >
         <i class="fa fa-cube"></i>
@@ -45,14 +48,17 @@
     <div
       class="unit-heading"
       [ngClass]="{
-        'current-text': currentStage === 'feedback_stage',
-        'completed-text': completedStages['feedback_stage']
+        'current-text': currentStage === 'consumer_feedback_stage',
+        'completed-text': completedStages['consumer_feedback_stage']
       }"
     >
       <div class="unit-heading-name">Feedback</div>
       <div
         class="unit-icon"
-        [ngClass]="{ current: currentStage === 'feedback_stage', completed: completedStages['feedback_stage'] }"
+        [ngClass]="{
+          current: currentStage === 'consumer_feedback_stage',
+          completed: completedStages['consumer_feedback_stage']
+        }"
         #level2icon
       >
         <i class="fa fa-street-view"></i>
