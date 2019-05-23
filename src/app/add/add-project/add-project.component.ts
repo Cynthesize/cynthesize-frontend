@@ -93,34 +93,26 @@ export class AddProjectComponent implements OnInit {
       website: this.project.get('website').value,
       icon: this.project.get('icon').value
     };
-    if (!projectDetails.projectName || !projectDetails.abstract) {
-      this.errorMessage = 'Please enter the details correctly.';
-      this.isFormSubmitted = false;
-    } else {
-      this.errorMessage = '';
-      this.projectService.addProject(projectDetails).subscribe(
-        (data: any) => {
-          this.tagsService
-            .addProjectTags(this.tags, data.data.insert_projects.returning[0].id)
-            .subscribe((ret: any) => {
-              console.log('Tags added for the project.');
-            });
-          this.projectService.addProjectDescription(data.data.insert_projects.returning[0].id).subscribe((ret: any) => {
-            this.isFormSubmitted = true;
-            this.router.navigate([
-              '/view/project/' +
-                data.data.insert_projects.returning[0].id +
-                '-' +
-                data.data.insert_projects.returning[0].project_name
-            ]);
-          });
-        },
-        (error: any) => {
-          this.isFormSubmitted = false;
-          this.errorHandler.subj_notification.next(error);
-        }
-      );
-    }
+    this.projectService.addProject(projectDetails).subscribe(
+      (data: any) => {
+        this.tagsService.addProjectTags(this.tags, data.data.insert_projects.returning[0].id).subscribe((ret: any) => {
+          console.log('Tags added for the project.');
+        });
+        this.projectService.addProjectDescription(data.data.insert_projects.returning[0].id).subscribe((ret: any) => {
+          this.isFormSubmitted = true;
+          this.router.navigate([
+            '/view/project/' +
+              data.data.insert_projects.returning[0].id +
+              '-' +
+              data.data.insert_projects.returning[0].project_name
+          ]);
+        });
+      },
+      (error: any) => {
+        this.isFormSubmitted = false;
+        this.errorHandler.subj_notification.next(error);
+      }
+    );
   }
 
   add(event: MatChipInputEvent): void {
@@ -170,24 +162,30 @@ export class AddProjectComponent implements OnInit {
   }
 
   addNewTags() {
-    const tagsToBeAdded: Array<object> = [];
-    this.tags.forEach((tags: object) => {
-      if (!tags['tag_id']) {
-        tagsToBeAdded.push({ tag_name: this.displayableName(tags['tag_name']) });
-      }
-    });
-    this.tagsService.addNewTagsToDb(tagsToBeAdded).subscribe((data: any) => {
-      this.tags.forEach((tag: object) => {
-        if (!tag['tag_id']) {
-          data.data.insert_tags.returning.forEach((returnedTag: any) => {
-            if (this.displayableName(tag['tag_name']) === returnedTag['tag_name']) {
-              tag['tag_id'] = returnedTag['tag_id'];
-            }
-          });
+    if (!this.project.get('projectName').value || !this.project.get('abstract').value) {
+      this.errorMessage = 'Please enter the details correctly.';
+      this.isFormSubmitted = false;
+    } else {
+      this.errorMessage = '';
+      const tagsToBeAdded: Array<object> = [];
+      this.tags.forEach((tags: object) => {
+        if (!tags['tag_id']) {
+          tagsToBeAdded.push({ tag_name: this.displayableName(tags['tag_name']) });
         }
       });
-      this.addProject();
-    });
+      this.tagsService.addNewTagsToDb(tagsToBeAdded).subscribe((data: any) => {
+        this.tags.forEach((tag: object) => {
+          if (!tag['tag_id']) {
+            data.data.insert_tags.returning.forEach((returnedTag: any) => {
+              if (this.displayableName(tag['tag_name']) === returnedTag['tag_name']) {
+                tag['tag_id'] = returnedTag['tag_id'];
+              }
+            });
+          }
+        });
+        this.addProject();
+      });
+    }
   }
 
   initTags(data: any) {

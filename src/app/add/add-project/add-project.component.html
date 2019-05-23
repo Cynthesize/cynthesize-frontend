@@ -1,153 +1,194 @@
 <div class="loader" *ngIf="isLoading"><mat-spinner></mat-spinner></div>
 <div class="container">
-  <div class="page" *ngIf="!isLoading">
+  <div class="page flex-center flex-column" *ngIf="!isLoading">
     <div class="page-header">
       <div class="page-heading">ADD PROJECT</div>
     </div>
-    <div style="display: flex; align-items: center;">
-      <div class="add-project-card-form">
-        <mat-card class="add-project-card" [style.fontSize]="'1rem'">
-          <form autocomplete="off" [formGroup]="project" (ngSubmit)="addNewTags()">
-            <div class="error-message">{{ errorMessage }}</div>
-            <div class="field">
-              <h3>
-                Project Name *
-                <mat-icon
-                  [matTooltipPosition]="'right'"
-                  matTooltipClass="tooltip"
-                  matTooltip="Tip: Project name is usually a one word name that you want for your project."
-                  >help_outline</mat-icon
-                >
-              </h3>
-              <mat-form-field appearance="outline" class="field">
-                <mat-label>Enter project title</mat-label>
-                <input matInput formControlName="projectName" />
-              </mat-form-field>
-            </div>
-            <div class="field">
-              <h3>
-                Project Abstract *
-                <mat-icon
-                  [matTooltipPosition]="'right'"
-                  matTooltipClass="tooltip"
-                  matTooltip="Tip: The project abstract is a short description that is visible to the community (developers and
+    <div class="add-project flex-center flex-column font-1">
+      <div *ngIf="!authenticationService.isAuthenticated()" class="flex-center">
+        You need to be logged in to add project.
+        <a (click)="authenticationService.login()">Click here to login/signup.</a>
+      </div>
+      <div class="flex-center">
+        <div class="add-project-card-form">
+          <div class="error-message">{{ errorMessage }}</div>
+          <form autocomplete="off" [formGroup]="project">
+            <mat-vertical-stepper #stepper>
+              <mat-step>
+                <ng-template matStepLabel>Project Name</ng-template>
+                <div class="field">
+                  <h3>
+                    Project Name *
+                    <mat-icon
+                      [matTooltipPosition]="'right'"
+                      matTooltipClass="tooltip"
+                      matTooltip="Tip: Project name is usually a one word name that you want for your project."
+                      >help_outline</mat-icon
+                    >
+                  </h3>
+                  <mat-form-field appearance="outline" class="field">
+                    <mat-label>Enter project title</mat-label>
+                    <input matInput formControlName="projectName" required />
+                  </mat-form-field>
+                </div>
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button matStepperNext>Next</button>
+                </div>
+              </mat-step>
+              <mat-step>
+                <ng-template matStepLabel>Project Abstract</ng-template>
+                <div class="field">
+                  <h3>
+                    Project Abstract *
+                    <mat-icon
+                      [matTooltipPosition]="'right'"
+                      matTooltipClass="tooltip"
+                      matTooltip="Tip: The project abstract is a short description that is visible to the community (developers and
                   mentors). The abstract is to give a one lining idea of what your project is. This is used to gather
                   traffic for your project even when it is under construction, giving you a medium to get help from other
                   developers in context of a team."
-                  >help_outline</mat-icon
-                >
-              </h3>
-              <mat-form-field appearance="outline" class="field">
-                <mat-label>Enter project abstract</mat-label>
-                <textarea matInput formControlName="abstract"></textarea>
-              </mat-form-field>
-            </div>
-            <div class="field">
-              <h3>
-                Tags
-                <mat-icon
-                  [matTooltipPosition]="'right'"
-                  matTooltipClass="tooltip"
-                  matTooltip="Tip: Add tags that describe your idea best. Helps others find your idea in searches."
-                  >help_outline</mat-icon
-                >
-              </h3>
-              <mat-form-field class="field" appearance="outline">
-                <mat-chip-list #chipList>
-                  <mat-chip
-                    *ngFor="let tag of tags"
-                    [selectable]="selectable"
-                    [removable]="removable"
-                    (removed)="remove(tag)"
-                  >
-                    {{ tag.tag_name }}
-                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                  </mat-chip>
-                  <input
-                    placeholder="New tag..."
-                    #tagInput
-                    [formControl]="tagCtrl"
-                    [matAutocomplete]="auto"
-                    [matChipInputFor]="chipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                    [matChipInputAddOnBlur]="addOnBlur"
-                    (matChipInputTokenEnd)="add($event)"
-                  />
-                </mat-chip-list>
-                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                  <mat-option *ngFor="let tag of (filteredTags | async)" [value]="tag">
-                    {{ tag.tag_name }}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </div>
-            <div class="field">
-              <h3>
-                Website or relevant URL
-                <mat-icon
-                  [matTooltipPosition]="'right'"
-                  matTooltipClass="tooltip"
-                  matTooltip="Tip: Enter any website URL that depicts your project. Leave empty if none."
-                  >help_outline</mat-icon
-                >
-              </h3>
-              <mat-form-field appearance="outline" class="field">
-                <mat-label>Enter website link</mat-label>
-                <input matInput formControlName="website" />
-              </mat-form-field>
-            </div>
-            <div class="img-field">
-              <h3>
-                Thumbnail
-                <mat-icon
-                  [matTooltipPosition]="'right'"
-                  matTooltipClass="tooltip"
-                  matTooltip="Tip: Enter thumbnail URL. Please enter valid URL."
-                  >help_outline</mat-icon
-                >
-              </h3>
-              <div class="avatar-upload">
-                <div class="avatar-edit">
-                  <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" (change)="readURL($event.target)" />
-                  <label for="imageUpload"></label>
+                      >help_outline</mat-icon
+                    >
+                  </h3>
+                  <mat-form-field appearance="outline" class="field">
+                    <mat-label>Enter project abstract</mat-label>
+                    <textarea matInput formControlName="abstract"></textarea>
+                  </mat-form-field>
                 </div>
-                <div class="avatar-preview">
-                  <div
-                    id="imagePreview"
-                    style="background-image: url(https://s3.amazonaws.com/static.graphemica.com/glyphs/i500s/000/010/184/original/002B-500x500.png);"
-                  ></div>
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button matStepperNext>Next</button>
                 </div>
-              </div>
-            </div>
-
-            <div class="field">
-              <h3>
-                Make your project abstract public? *
-              </h3>
-              <mat-radio-group formControlName="isPublic">
-                <p style="font-size: 0.8rem;">
-                  <i
-                    >We recommend making the project public for possible collaborate and reaching out to people. No info
-                    related to the project will be public, except that of what is taken input in this form.</i
-                  >
-                </p>
-                <mat-radio-button value="true">Yes</mat-radio-button>
-                <mat-radio-button value="false">No</mat-radio-button>
-              </mat-radio-group>
-            </div>
-            <div *ngIf="authenticationService.isAuthenticated(); then authenticated; else guest"></div>
-            <ng-template #authenticated>
-              <button mat-raised-button [disabled]="isFormSubmitted" class="orange-btn">
-                <mat-spinner *ngIf="isFormSubmitted"></mat-spinner> Submit Project
-              </button>
-            </ng-template>
-            <ng-template #guest>
-              <button mat-raised-button class="orange-btn" disabled>Please login to post.</button>
-            </ng-template>
+              </mat-step>
+              <mat-step optional>
+                <ng-template matStepLabel>Website or relevant URL</ng-template>
+                <div class="field">
+                  <h3>
+                    Website or relevant URL
+                    <mat-icon
+                      [matTooltipPosition]="'right'"
+                      matTooltipClass="tooltip"
+                      matTooltip="Tip: Enter any website URL that depicts your project. Leave empty if none."
+                      >help_outline</mat-icon
+                    >
+                  </h3>
+                  <mat-form-field appearance="outline" class="field">
+                    <mat-label>Enter website link</mat-label>
+                    <input matInput formControlName="website" />
+                  </mat-form-field>
+                </div>
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button matStepperNext>Next</button>
+                </div>
+              </mat-step>
+              <mat-step optional>
+                <ng-template matStepLabel>Icon or Logo</ng-template>
+                <div class="img-field">
+                  <h3>
+                    Thumbnail
+                    <mat-icon
+                      [matTooltipPosition]="'right'"
+                      matTooltipClass="tooltip"
+                      matTooltip="Tip: Enter thumbnail URL. Please enter valid URL."
+                      >help_outline</mat-icon
+                    >
+                  </h3>
+                  <div class="avatar-upload">
+                    <div class="avatar-edit">
+                      <input
+                        type="file"
+                        id="imageUpload"
+                        accept=".png, .jpg, .jpeg"
+                        (change)="readURL($event.target)"
+                      />
+                      <label for="imageUpload"></label>
+                    </div>
+                    <div class="avatar-preview">
+                      <div
+                        id="imagePreview"
+                        style="background-image: url(https://s3.amazonaws.com/static.graphemica.com/glyphs/i500s/000/010/184/original/002B-500x500.png);"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button matStepperNext>Next</button>
+                </div>
+              </mat-step>
+              <mat-step>
+                <ng-template matStepLabel>Tags</ng-template>
+                <div class="field">
+                  <h3>
+                    Tags
+                    <mat-icon
+                      [matTooltipPosition]="'right'"
+                      matTooltipClass="tooltip"
+                      matTooltip="Tip: Add tags that describe your idea best. Helps others find your idea in searches."
+                      >help_outline</mat-icon
+                    >
+                  </h3>
+                  <mat-form-field class="field" appearance="outline">
+                    <mat-chip-list #chipList>
+                      <mat-chip
+                        *ngFor="let tag of tags"
+                        [selectable]="selectable"
+                        [removable]="removable"
+                        (removed)="remove(tag)"
+                      >
+                        {{ tag.tag_name }}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                      <input
+                        placeholder="New tag..."
+                        #tagInput
+                        [formControl]="tagCtrl"
+                        [matAutocomplete]="auto"
+                        [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="add($event)"
+                      />
+                    </mat-chip-list>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                      <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                        {{ tag.tag_name }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button matStepperNext>Next</button>
+                </div>
+              </mat-step>
+              <mat-step>
+                <ng-template matStepLabel>Submit</ng-template>
+                <div class="field">
+                  <h3>Click on the submit button to add your project.</h3>
+                </div>
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <div *ngIf="authenticationService.isAuthenticated(); then authenticated; else guest"></div>
+                  <ng-template #authenticated>
+                    <button mat-raised-button [disabled]="isFormSubmitted" (click)="addNewTags()" class="orange-btn">
+                      <mat-spinner *ngIf="isFormSubmitted"></mat-spinner> Submit Project
+                    </button>
+                  </ng-template>
+                  <ng-template #guest>
+                    <button mat-raised-button class="orange-btn" (click)="authenticationService.login()">
+                      Please login to post.
+                    </button>
+                  </ng-template>
+                </div>
+              </mat-step>
+            </mat-vertical-stepper>
           </form>
-        </mat-card>
+        </div>
+        <div class="add-project-image flex-center"><img src="../../../assets/add-idea.svg" /></div>
       </div>
-      <div class="add-project-image"><img src="../../../assets/add-idea.svg" /></div>
     </div>
   </div>
 </div>

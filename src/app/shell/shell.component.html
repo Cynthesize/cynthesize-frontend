@@ -16,6 +16,11 @@
       </nav>
     </mat-sidenav>
     <mat-sidenav-content (scroll)="onWindowScroll($event)">
+      <div class="feedback-icon">
+        <button class="header__link" mat-icon-button (click)="openModal()">
+          <mat-icon>sentiment_dissatisfied</mat-icon>
+        </button>
+      </div>
       <app-header [sidenav]="sidenav"></app-header>
       <main [@routerTransition]="getState(o)">
         <router-outlet #o="outlet"></router-outlet>

@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { MediaChange, ObservableMedia } from '@angular/flex-layout';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav, MatDialog } from '@angular/material';
 import { filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { routerTransition } from '@app/animations/router.animations';
+import { RequestsComponent } from './header/requests/requests.component';
 
 @Component({
   selector: 'app-shell',
@@ -17,7 +18,12 @@ export class ShellComponent implements OnInit {
   sidenav: MatSidenav;
   flag = 0;
 
-  constructor(private media: ObservableMedia, private router: Router, private errorHandler: ErrorHandlerService) {}
+  constructor(
+    private media: ObservableMedia,
+    private router: Router,
+    private errorHandler: ErrorHandlerService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.media
@@ -39,5 +45,11 @@ export class ShellComponent implements OnInit {
 
   getState(outlet: any) {
     return outlet.activatedRouteData.state;
+  }
+
+  openModal() {
+    this.dialog.open(RequestsComponent, {
+      width: 'auto'
+    });
   }
 }
