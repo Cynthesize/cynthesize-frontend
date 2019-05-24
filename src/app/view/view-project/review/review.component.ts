@@ -3,7 +3,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import {
   IDEATION_STAGE_QUESTIONS,
-  MARKETING_STAGE_QUESTIONS,
   PRODUCT_DEVELOPMENT_STAGE_QUESTIONS,
   LAUNCHING_AND_TESTING_STAGE_QUESTIONS,
   CONSUMER_FEEDBACK_AND_ITERATION_STAGE_QUESTIONS,
@@ -35,17 +34,14 @@ export class ReviewComponent implements OnInit {
       case 'ideation_stage':
         this.questionsObject = IDEATION_STAGE_QUESTIONS;
         break;
-      case 'marketing_stage':
-        this.questionsObject = MARKETING_STAGE_QUESTIONS;
-        break;
       case 'prototype_development_stage':
         this.questionsObject = PRODUCT_DEVELOPMENT_STAGE_QUESTIONS;
         break;
-      case 'launching_and_testing_stage':
-        this.questionsObject = LAUNCHING_AND_TESTING_STAGE_QUESTIONS;
-        break;
       case 'consumer_feedback_stage':
         this.questionsObject = CONSUMER_FEEDBACK_AND_ITERATION_STAGE_QUESTIONS;
+        break;
+      case 'launching_and_testing_stage':
+        this.questionsObject = LAUNCHING_AND_TESTING_STAGE_QUESTIONS;
         break;
       case 'funding_stage':
         this.questionsObject = FUNDING_STAGE_QUESTIONS;
@@ -70,11 +66,17 @@ export class ReviewComponent implements OnInit {
 
   submitReviewForm() {
     const answersObject = this.reviewForm.value;
+    let flag = 0;
     Object.keys(answersObject).forEach(answerKey => {
       if (answersObject[answerKey].trim() === '') {
-        this.errorMessage = 'Please answer all the questions properly.';
+        flag = 1;
       }
     });
+    if (flag === 0) {
+      this.errorMessage = '';
+    } else {
+      this.errorMessage = 'Please answer all the questions properly.';
+    }
     if (!this.errorMessage) {
       answersObject['project_id'] = this.data.projectId;
       this.projectService.applyForReview(answersObject, this.data.context).subscribe(

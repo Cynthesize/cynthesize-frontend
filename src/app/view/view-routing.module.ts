@@ -11,7 +11,7 @@ const routes: Routes = [
     loadChildren: 'app/view/view-project/view-project.module#ViewProjectModule'
   },
   {
-    path: 'review-answer',
+    path: 'review-answers',
     loadChildren: 'app/view/review-answers/review-answers.module#ReviewAnswersModule'
   },
   {

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
 import Typed from 'typed.js';
 import { Title } from '@angular/platform-browser';
 

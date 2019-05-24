@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MatBottomSheet, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { ProjectService } from '@app/core/project/project.service';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
 import { FeedProjectComponent } from '../../feed-project/feed-project.component';
