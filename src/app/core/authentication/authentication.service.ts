@@ -5,6 +5,7 @@ import { authClientId, authDomain, callbackUrl, auth0Audience } from '../../../e
 import { Apollo } from 'apollo-angular';
 import { QUERY_USER_CHECK, QUERY_USER_LIKES } from '@app/shared/queries/user-queries';
 import { MUTATION_ADD_USER } from '@app/shared/mutations/user-mutations';
+import { ErrorHandlerService } from '../error-handler.service';
 
 /**
  * Provides a base for authentication workflow.
@@ -21,18 +22,52 @@ export class AuthenticationService {
     scope: 'openid profile email'
   });
 
-  constructor(private router: Router, private apollo: Apollo) {}
+  private _idToken: string;
+  private _accessToken: string;
+  private _userId: string;
+  private _expiresAt: number;
+
+  constructor(private router: Router, private apollo: Apollo) {
+    this._idToken = localStorage.getItem('id_token');
+    this._accessToken = localStorage.getItem('access_token');
+    this._expiresAt = 0;
+  }
+
+  get accessToken(): string {
+    return this._accessToken;
+  }
+  get user_id(): string {
+    return localStorage.getItem('user_id');
+  }
+
+  get idToken(): string {
+    return this._idToken;
+  }
+
+  public login(): void {
+    localStorage.setItem('redirectURI', window.location.pathname || '/');
+    this.auth0.authorize();
+  }
 
   public logout(): void {
     localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
     localStorage.removeItem('user_id');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('is_mentor');
+    localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('commentsLikedByLoggedInUser');
     localStorage.removeItem('user_profile_pic');
     localStorage.removeItem('username');
     localStorage.removeItem('projectsLikedByLoggedInUser');
     localStorage.removeItem('repliesLikedByLoggedInUser');
+    this._accessToken = '';
+    this._idToken = '';
+    this._expiresAt = 0;
+
+    this.auth0.logout({
+      returnTo: window.location.origin
+    });
   }
 
   public isAuthenticated(): boolean {
@@ -40,22 +75,28 @@ export class AuthenticationService {
     if (new Date().getTime() < expiresAt) {
       return true;
     } else {
-      this.logout();
       return false;
     }
   }
-  public login(): void {
-    this.auth0.authorize();
+
+  public renewTokens(): void {
+    this.auth0.checkSession({}, (err, authResult) => {
+      if (authResult && authResult.accessToken && authResult.idToken) {
+        this.localLogin(authResult);
+      } else if (err) {
+        alert(`Could not get a new token (${err.error}: ${err.errorDescription}).`);
+        this.logout();
+      }
+    });
   }
 
   public handleAuthentication(): void {
     this.auth0.parseHash((err: any, authResult: any) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
+        this.localLogin(authResult);
         this.handleUserDatabaseEntry(authResult);
         window.location.hash = '';
-        this.router.navigate(['/home']);
       } else if (err) {
-        this.router.navigate(['/']);
       }
     });
   }
@@ -93,9 +134,10 @@ export class AuthenticationService {
               localStorage.setItem('username', data.data.insert_user.returning[0].username);
               localStorage.setItem('userId', data.data.insert_user.returning[0].id);
               localStorage.setItem('is_mentor', 'false');
-              this.setSession(authResult).then(() => {
-                location.reload();
-              });
+              this.router.navigate([localStorage.getItem('redirectURI')]);
+              setTimeout(() => {
+                window.location.reload();
+              }, 200);
             });
         } else {
           this.apollo
@@ -128,21 +170,24 @@ export class AuthenticationService {
           localStorage.setItem('username', res.data.user[0].username);
           localStorage.setItem('is_mentor', JSON.stringify(res.data.user[0].is_mentor));
           localStorage.setItem('userId', res.data.user[0].id);
-          this.setSession(authResult).then(() => {
-            location.reload();
-          });
+          this.router.navigate([localStorage.getItem('redirectURI')]);
+          setTimeout(() => {
+            window.location.reload();
+          }, 200);
         }
       });
   }
 
-  private async setSession(authResult: any) {
-    const expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime());
+  private localLogin(authResult: any): void {
+    // Set the time that the Access Token will expire at
+    const expiresAt = authResult.expiresIn * 1000 + Date.now();
+    this._accessToken = authResult.accessToken;
+    this._idToken = authResult.idToken;
+    this._expiresAt = expiresAt;
+    this._userId = authResult.idTokenPayload.sub;
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('user_id', authResult.idTokenPayload.sub);
     localStorage.setItem('id_token', authResult.idToken);
-    localStorage.setItem('expires_at', expiresAt);
-    setTimeout(() => {
-      return expiresAt;
-    }, 1000);
+    localStorage.setItem('expires_at', JSON.stringify(expiresAt));
   }
 }

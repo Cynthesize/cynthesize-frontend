@@ -4,6 +4,8 @@ import { MatSidenav, MatDialog } from '@angular/material';
 import { filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
+import { SelectPipe } from 'apollo-angular';
+import { ProfileService } from '@app/core/profile/profile.service';
 import { routerTransition } from '@app/animations/router.animations';
 import { RequestsComponent } from './header/requests/requests.component';
 
@@ -17,13 +19,23 @@ export class ShellComponent implements OnInit {
   @ViewChild('sidenav')
   sidenav: MatSidenav;
   flag = 0;
+  isMentor = JSON.parse(localStorage.getItem('is_mentor'));
 
   constructor(
     private media: ObservableMedia,
+    private dialog: MatDialog,
     private router: Router,
     private errorHandler: ErrorHandlerService,
-    private dialog: MatDialog
-  ) {}
+    private profileService: ProfileService
+  ) {
+    this.profileService.checkIfUserIsMentor().subscribe(
+      data => {
+        this.isMentor = data.user[0].is_mentor;
+        localStorage.setItem('is_mentor', this.isMentor);
+      },
+      error => {}
+    );
+  }
 
   ngOnInit() {
     this.media

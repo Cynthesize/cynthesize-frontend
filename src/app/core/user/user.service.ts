@@ -4,12 +4,13 @@ import { QUERY_USER_LIKES, QUERY_APPLIED_FOR_MENTORSHIP } from '@app/shared/quer
 import { MUTATION_ADD_USER, MUTATION_APPLY_FOR_MENTORSHIP } from '@app/shared/mutations/user-mutations';
 import { take, map } from 'rxjs/operators';
 import gql from 'graphql-tag';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo, private authService: AuthenticationService) {}
 
   /**
    * HandleUserData
@@ -56,7 +57,7 @@ export class UserService {
    * applyForMentorship
    */
   public applyForMentorship(formData: any) {
-    formData['user_id'] = localStorage.getItem('user_id');
+    formData['user_id'] = this.authService.user_id;
     return this.apollo
       .mutate<any>({
         mutation: MUTATION_APPLY_FOR_MENTORSHIP,
@@ -80,7 +81,7 @@ export class UserService {
       .query<any>({
         query: QUERY_APPLIED_FOR_MENTORSHIP,
         variables: {
-          userId: localStorage.getItem('user_id')
+          userId: this.authService.user_id
         }
       })
       .pipe(take(1))

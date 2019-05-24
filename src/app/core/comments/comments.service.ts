@@ -8,14 +8,17 @@ import {
   QUERY_FETCH_ONGIONG_PROJECT_COMMENTS
 } from '@app/shared/queries/project-queries';
 import { MUTATION_REPORT_COMMENT } from '@app/shared/mutations/project-mutations';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentsService {
-  loggedInUserId: string = localStorage.getItem('user_id');
+  loggedInUserId: string;
 
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo, authService: AuthenticationService) {
+    this.loggedInUserId = authService.user_id;
+  }
 
   /**
    * fetchComments
@@ -58,7 +61,7 @@ export class CommentsService {
   public addComment(activityId: number, activityType: string, commentText: string) {
     const objectToBeAdded = {
       comment_text: commentText,
-      commenter: localStorage.getItem('user_id'),
+      commenter: this.loggedInUserId,
       previous_edits: '[]'
     };
     switch (activityType) {
@@ -94,7 +97,7 @@ export class CommentsService {
         variables: {
           objects: {
             reply_text: replyText,
-            respondent: localStorage.getItem('user_id'),
+            respondent: this.loggedInUserId,
             comment_id: commentId,
             previous_edits: []
           }
@@ -114,7 +117,7 @@ export class CommentsService {
       .mutate<any>({
         mutation: MUTATION_REPORT_COMMENT,
         variables: {
-          userId: localStorage.getItem('user_id'),
+          userId: this.loggedInUserId,
           commentId: commentId
         }
       })

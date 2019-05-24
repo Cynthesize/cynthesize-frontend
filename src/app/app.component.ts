@@ -15,8 +15,6 @@ const log = new Logger('App');
 })
 export class AppComponent implements OnInit {
   constructor(
-    // do not remove the analytics injection, even if the call in ngOnInit() is removed
-    // this injection initializes page tracking through the router
     private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
     private errorHandler: ErrorHandlerService,
     private snackBar: MatSnackBar,
@@ -46,8 +44,9 @@ export class AppComponent implements OnInit {
       Logger.enableProductionMode();
     }
 
-    log.debug('init');
-
     this.angulartics2GoogleAnalytics.eventTrack(environment.version, { category: 'App initialized' });
+    if (this.authService.isAuthenticated()) {
+      this.authService.renewTokens();
+    }
   }
 }

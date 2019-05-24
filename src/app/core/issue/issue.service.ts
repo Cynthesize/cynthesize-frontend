@@ -8,12 +8,13 @@ import {
   MUTATION_ADD_ISSUE_COMMENT,
   MUTATION_MARK_ISSUE_RESOLVED_OR_UNRESOLVED
 } from '@app/shared/mutations/project-mutations';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IssueService {
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo, private authService: AuthenticationService) {}
 
   /**
    * fetchIssueInCheckpoint
@@ -62,7 +63,7 @@ export class IssueService {
             comment_text: commentText,
             project_id: projectId,
             issue_id: issueId,
-            commenter: localStorage.getItem('user_id')
+            commenter: this.authService.user_id
           }
         }
       })
@@ -85,7 +86,7 @@ export class IssueService {
           objects: {
             reply_text: replyText,
             comment_id: commentId,
-            respondent: localStorage.getItem('user_id')
+            respondent: this.authService.user_id
           }
         }
       })
@@ -109,7 +110,7 @@ export class IssueService {
             checkpoint_name: checkpointName,
             description: issuesDescription,
             project_id: projectId,
-            created_by: localStorage.getItem('user_id')
+            created_by: this.authService.user_id
           }
         }
       })

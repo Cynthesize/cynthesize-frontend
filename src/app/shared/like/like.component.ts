@@ -95,7 +95,7 @@ export class LikeComponent implements OnInit {
       default:
         break;
     }
-    _object['userId'] = localStorage.getItem('user_id');
+    _object['userId'] = this.authService.user_id;
     return _object;
   }
 
