@@ -36,11 +36,12 @@ export class IssueComponent implements OnInit {
       (data: any) => {
         data.data.issues.forEach((issue: any) => {
           if (this.issues[issue.checkpoint_name]) {
-            this.issues[issue.checkpoint_name] = this.issues[issue.checkpoint_name].push(issue);
+            this.issues[issue.checkpoint_name].push(issue);
           } else {
             this.issues[issue.checkpoint_name] = [issue];
           }
         });
+        console.log(this.issues);
         this.updateIssuesCounts();
         this.isLoading = false;
       },
