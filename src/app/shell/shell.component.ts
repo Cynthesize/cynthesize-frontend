@@ -8,6 +8,7 @@ import { SelectPipe } from 'apollo-angular';
 import { ProfileService } from '@app/core/profile/profile.service';
 import { routerTransition } from '@app/animations/router.animations';
 import { RequestsComponent } from './header/requests/requests.component';
+import { AuthenticationService } from '@app/core';
 
 @Component({
   selector: 'app-shell',
@@ -26,15 +27,18 @@ export class ShellComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private errorHandler: ErrorHandlerService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private authService: AuthenticationService
   ) {
-    this.profileService.checkIfUserIsMentor().subscribe(
-      data => {
-        this.isMentor = data.user[0].is_mentor;
-        localStorage.setItem('is_mentor', this.isMentor);
-      },
-      error => {}
-    );
+    if (this.authService.isAuthenticated()) {
+      this.profileService.checkIfUserIsMentor().subscribe(
+        data => {
+          this.isMentor = data.user[0].is_mentor;
+          localStorage.setItem('is_mentor', this.isMentor);
+        },
+        error => {}
+      );
+    }
   }
 
   ngOnInit() {

@@ -47,6 +47,8 @@ export class AppComponent implements OnInit {
     this.angulartics2GoogleAnalytics.eventTrack(environment.version, { category: 'App initialized' });
     if (this.authService.isAuthenticated()) {
       this.authService.renewTokens();
+    } else {
+      this.authService.softLogout();
     }
   }
 }

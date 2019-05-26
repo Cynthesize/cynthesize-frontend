@@ -1,0 +1,24 @@
+.header-image {
+  width: 13px;
+  height: 13px;
+  margin: 10px 25px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.padding-25 {
+  padding: 25px 25px 0 25px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.review-answers {
+  margin: 10px 0;
+}

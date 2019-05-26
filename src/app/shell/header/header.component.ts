@@ -14,14 +14,20 @@ export class HeaderComponent implements OnInit {
   sidenav: MatSidenav;
   isMentor = JSON.parse(localStorage.getItem('is_mentor'));
 
-  constructor(public authenticationService: AuthenticationService, private profileService: ProfileService) {
-    this.profileService.checkIfUserIsMentor().subscribe(
-      data => {
-        this.isMentor = data.user[0].is_mentor;
-        localStorage.setItem('is_mentor', this.isMentor);
-      },
-      error => {}
-    );
+  constructor(
+    public authenticationService: AuthenticationService,
+    private profileService: ProfileService,
+    private authService: AuthenticationService
+  ) {
+    if (this.authService.isAuthenticated()) {
+      this.profileService.checkIfUserIsMentor().subscribe(
+        data => {
+          this.isMentor = data.user[0].is_mentor;
+          localStorage.setItem('is_mentor', this.isMentor);
+        },
+        error => {}
+      );
+    }
   }
 
   ngOnInit() {}

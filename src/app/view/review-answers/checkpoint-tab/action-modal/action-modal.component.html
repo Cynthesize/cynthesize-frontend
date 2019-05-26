@@ -1,0 +1,19 @@
+<div class="review-action">
+  <h1>You are submitting review for {{ data.project_name }}</h1>
+  <mat-form-field appearance="outline">
+    <textarea matInput [(ngModel)]="reviewComment" rows="5" placeholder="ReviewAnswer"></textarea>
+  </mat-form-field>
+  <div mat-dialog-actions>
+    <button mat-raised-button cdkFocusInitial *ngIf="data.isApproved" (click)="actionOnCheckpoint()">Approve</button>
+    <button mat-raised-button cdkFocusInitial *ngIf="!data.isApproved" (click)="actionOnCheckpoint()">
+      Request Changes
+    </button>
+    <button mat-raised-button>Cancel</button>
+  </div>
+</div>
+
+<style>
+  .review-action {
+    padding: 25px;
+  }
+</style>

@@ -364,6 +364,15 @@ button mat-spinner svg {
   height: 20px !important;
 }
 
+mat-tab-header,
+.mat-tab-links {
+  background-color: white;
+  border-radius: 10px 10px 0 0;
+  border: 1px #dddddd solid;
+}
+.mat-tab-header-pagination {
+  display: flex;
+}
 .orange-btn .mat-button-wrapper {
   display: flex;
   align-items: center;

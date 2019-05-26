@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReviewService } from '@app/core/review/review.service';
 
 @Component({
   selector: 'app-review-answers',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./review-answers.component.scss']
 })
 export class ReviewAnswersComponent implements OnInit {
-  constructor() {}
+  checkpoints = ['Ideation', 'Prototyping', 'Feedback', 'Launching', 'Funding'];
+  constructor(private reviewService: ReviewService) {}
 
   ngOnInit() {}
 }

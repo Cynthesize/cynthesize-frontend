@@ -50,6 +50,13 @@ export class AuthenticationService {
   }
 
   public logout(): void {
+    this.softLogout();
+    this.auth0.logout({
+      returnTo: window.location.origin
+    });
+  }
+
+  public softLogout(): void {
     localStorage.removeItem('access_token');
     localStorage.removeItem('user_id');
     localStorage.removeItem('userId');
@@ -64,10 +71,6 @@ export class AuthenticationService {
     this._accessToken = '';
     this._idToken = '';
     this._expiresAt = 0;
-
-    this.auth0.logout({
-      returnTo: window.location.origin
-    });
   }
 
   public isAuthenticated(): boolean {

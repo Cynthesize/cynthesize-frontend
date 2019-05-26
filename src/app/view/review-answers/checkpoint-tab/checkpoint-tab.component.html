@@ -1,0 +1,25 @@
+<mat-card class="review-answers" *ngFor="let reviewAnswer of answers">
+  <div class="padding-25">
+    <div class="card-header">
+      <div class="header-image">
+        <img mat-card-image src="{{ reviewAnswer.project.icon }}" alt="{{ reviewAnswer.project.project_name }}" />
+      </div>
+      <mat-card-title>{{ displayableName(reviewAnswer.project.project_name) }}</mat-card-title>
+    </div>
+    <mat-card-content>
+      <div>
+        <div *ngFor="let question of questionsObject | keyvalue">
+          <b>{{ question.value }}</b> : {{ reviewAnswer[question.key] }}
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button class="orange-btn" (click)="openMentorActionModal(true, reviewAnswer)">
+        Approve with Comments
+      </button>
+      <button mat-button class="orange-btn" (click)="openMentorActionModal(false, reviewAnswer)">
+        Suggest improvements
+      </button>
+    </mat-card-actions>
+  </div>
+</mat-card>

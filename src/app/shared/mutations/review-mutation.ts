@@ -100,6 +100,14 @@ const MUTATION_SEND_PROJECT_TO_FUNDING_STAGE = gql`
   }
 `;
 
+const MUTATION_ACTION_ON_CHECKPOINT = gql`
+  mutation mutation_approve_project_for_checkpoint($objects: [review_comments_insert_input!]!) {
+    insert_review_comments(objects: $objects) {
+      affected_rows
+    }
+  }
+`;
+
 export {
   MUTATION_SEND_PROJECT_FOR_IDEATION_STAGE,
   MUTATION_SEND_PROJECT_FOR_FUNDING_STAGE,
@@ -111,5 +119,6 @@ export {
   MUTATION_SEND_PROJECT_TO_CONSUMER_FEEDBACK_STAGE,
   MUTATION_SEND_PROJECT_TO_FUNDING_STAGE,
   MUTATION_SEND_PROJECT_TO_PROTOTYPE_DEV_STAGE,
-  MUTATION_SEND_PROJECT_TO_LAUNCHING_STAGE
+  MUTATION_SEND_PROJECT_TO_LAUNCHING_STAGE,
+  MUTATION_ACTION_ON_CHECKPOINT
 };
