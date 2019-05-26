@@ -1,3 +1,5 @@
+// tslint:disable:max-line-length
+
 const IDEATION_STAGE_QUESTIONS = {
   issue_to_be_solved: 'What issue are you solving? Is there no solution for this issue already in place?',
   reinventing_the_wheel: 'Are you reinventing the wheel? Or the solution is not presented elsewhere?',
@@ -13,7 +15,17 @@ const MARKETING_STAGE_QUESTIONS = {
   three_prime_audience: 'Name any three of your prime sectors of people you will be focusing.'
 };
 
-const PRODUCT_DEVELOPMENT_STAGE_QUESTIONS = {};
+const PRODUCT_DEVELOPMENT_STAGE_QUESTIONS = {
+  minimal_solution: 'Does your MVP minimally solve the problem you are trying to solve?',
+  initial_users: 'Who are the initial users(early adapters) for the product?',
+  compatible_users:
+    'Is your prototype built according to the users you are initially aiming? Will it be easier for users to adapt the MVP/solution?',
+  analytics:
+    'What are you using for analytics or any medium to get user feedback about the product? Are you recording for any particular feature (recommended)?',
+  mobile_friendly: 'If your product is accesible via mobile devices, is it completely compatible?',
+  testing: 'Is your product tested minimally for the prototype launch?'
+};
+
 const LAUNCHING_AND_TESTING_STAGE_QUESTIONS = {};
 const CONSUMER_FEEDBACK_AND_ITERATION_STAGE_QUESTIONS = {};
 const FUNDING_STAGE_QUESTIONS = {};
@@ -100,6 +112,7 @@ const TAGS = [
     tag_id: 20
   }
 ];
+// tslint:enable:max-line-length
 
 const PROJECTS_INFO = {
   Ideation: {},

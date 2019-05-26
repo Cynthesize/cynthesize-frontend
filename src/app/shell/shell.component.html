@@ -18,6 +18,9 @@
           <a mat-list-item routerLink="/view/issues" *ngIf="isMentor === true">
             <span>See Open Issues</span>
           </a>
+          <button class="header__link" mat-button routerLink="/view/review-answers/Ideation" *ngIf="isMentor === true">
+            <span>Stage answer reviews</span>
+          </button>
           <a mat-list-item routerLink="/view/feed/projects" routerLinkActive="active-content" (click)="sidenav.close()">
             <span>Projects</span>
           </a>
