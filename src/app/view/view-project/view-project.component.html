@@ -10,7 +10,7 @@
           [routerLink]="['/view/project', project.id + '-' + project.project_name]"
           [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="issue-link-active"
-          class="open-sans cursor checkpoint"
+          class="cursor checkpoint"
         >
           Home
         </div>
@@ -54,7 +54,7 @@
             Started {{ project.created_on | timeDiff }} by
             <a [routerLink]="['/user', project.user.username]">{{ project.user.username }}</a>
           </div>
-          <div class="project-abstract open-sans">{{ project.abstract }}</div>
+          <div class="project-abstract">{{ project.abstract }}</div>
         </div>
       </div>
     </div>

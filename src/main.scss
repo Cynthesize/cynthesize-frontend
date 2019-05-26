@@ -19,16 +19,17 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include covalent-markdown-theme($theme);
 @include angular-material-theme($app-theme);
 $custom-typography: mat-typography-config(
-  $font-family: "'Open Sans', sans-serif"
+  $font-family: "'Nunito', sans-serif"
 );
 @include mat-core($custom-typography);
 
-@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800|Open+Sans:300,400,600,700,800,900");
+@import url("https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900");
 @import "theme/theme";
 
 * {
   margin: 0;
   padding: 0;
+  font-family: "Nunito", sans-serif;
 }
 
 *,
@@ -43,7 +44,6 @@ html {
 
 body {
   box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
   font-weight: 400;
   background: #f7f8fb;
   color: white;
@@ -56,11 +56,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Open Sans", sans-serif;
 }
 
 p {
-  font-family: "Open Sans", sans-serif;
   text-align: justify;
   opacity: 0.8;
   line-height: 1.8;
@@ -251,10 +249,6 @@ form mat-horizontal-stepper .mat-horizontal-stepper-header-container {
 .mat-card {
   box-shadow: 0 0 !important;
   border: 1px #dddddd solid;
-}
-
-.open-sans {
-  font-family: "Open Sans", sans-serif;
 }
 
 @media (max-width: 1050px) {

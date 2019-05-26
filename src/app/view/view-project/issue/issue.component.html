@@ -1,17 +1,12 @@
 <div *ngIf="isLoading" class="loader"><mat-spinner></mat-spinner></div>
-<div *ngIf="unresolvedIssues + resolvedIssues" class="open-sans issue-tab">
+<div *ngIf="unresolvedIssues + resolvedIssues" class="issue-tab">
   <div class="issue-list">
     <mat-tab-group>
-      <div class="category-issue" *ngFor="let checkpoint of (issues | keyvalue)">
+      <div class="category-issue" *ngFor="let checkpoint of issues | keyvalue">
         <mat-tab label="{{ checkpoint.key }}">
           <mat-accordion>
             <section *ngFor="let issue of checkpoint.value">
-              <mat-expansion-panel
-                [expanded]="false"
-                hideToggle
-                *ngIf="issue.is_resolved"
-                class="issue-expansion open-sans"
-              >
+              <mat-expansion-panel [expanded]="false" hideToggle *ngIf="issue.is_resolved" class="issue-expansion">
                 <mat-expansion-panel-header>
                   <mat-panel-title> Issue # {{ issue.id }} </mat-panel-title>
                   Resolved<mat-icon>done</mat-icon>
@@ -28,12 +23,7 @@
 
           <mat-accordion>
             <section *ngFor="let issue of checkpoint.value">
-              <mat-expansion-panel
-                [expanded]="true"
-                hideToggle
-                *ngIf="!issue.is_resolved"
-                class="issue-expansion open-sans"
-              >
+              <mat-expansion-panel [expanded]="true" hideToggle *ngIf="!issue.is_resolved" class="issue-expansion">
                 <mat-expansion-panel-header>
                   <mat-panel-title> Issue # {{ issue.id }} </mat-panel-title>
                   Not Resolved<mat-icon>clear</mat-icon>
@@ -79,7 +69,7 @@
   <div class="flex-center">
     <img class="no-issue" src="../../../../assets/not_found.svg" />
   </div>
-  <div class="font-1 center-divs open-sans">
+  <div class="font-1 center-divs">
     You haven't opened any issues till now. Click on "Add Issue" button and ask mentors.
   </div>
 </div>

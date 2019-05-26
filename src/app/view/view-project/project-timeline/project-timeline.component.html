@@ -27,7 +27,7 @@
       </button>
     </div>
   </form>
-  <div class="timeline-event open-sans" *ngFor="let event of timeline | keyvalue">
+  <div class="timeline-event" *ngFor="let event of timeline | keyvalue">
     <p class="event-name">{{ event.value }}</p>
     {{ event.key | date }}
   </div>

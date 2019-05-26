@@ -29,7 +29,7 @@
     </div>
     <form [formGroup]="reviewForm" (ngSubmit)="submitReviewForm()">
       <mat-horizontal-stepper [linear]="true" #stepper>
-        <mat-step *ngFor="let control of (questionsObject | keyvalue); let i = index" label="Ques {{ i + 1 }}">
+        <mat-step *ngFor="let control of questionsObject | keyvalue; let i = index" label="Ques {{ i + 1 }}">
           Question {{ i + 1 }} of {{ totalQuestions }}
           <div>{{ control.value }}</div>
           <mat-form-field appearance="outline">
@@ -56,5 +56,5 @@
 
 <div class="waiting" *ngIf="data.context === 'waiting'">
   <img src="../../../../assets/images/waiting.svg" />
-  <div class="open-sans font-1">Good luck for your submission... Mentors are reviewing your answers.</div>
+  <div class="font-1">Good luck for your submission... Mentors are reviewing your answers.</div>
 </div>

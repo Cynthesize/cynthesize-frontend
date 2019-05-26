@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { take, map } from 'rxjs/operators';
-import { QUERY_IDEATION_CHECKPOINT_ANSWERS } from '@app/shared/queries/review-queries';
+import {
+  QUERY_IDEATION_CHECKPOINT_ANSWERS,
+  QUERY_PRODUCT_DEVELOPMENT_CHECKPOINT_ANSWERS,
+  QUERY_FEEDBACK_CHECKPOINT_ANSWERS,
+  QUERY_LAUNCHING_CHECKPOINT_ANSWERS,
+  QUERY_FUNDING_CHECKPOINT_ANSWERS
+} from '@app/shared/queries/review-queries';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { MUTATION_ACTION_ON_CHECKPOINT } from '@app/shared/mutations/review-mutation';
 
@@ -19,6 +25,18 @@ export class ReviewService {
     switch (checkpointName) {
       case 'Ideation':
         checkpoint = QUERY_IDEATION_CHECKPOINT_ANSWERS;
+        break;
+      case 'Prototyping':
+        checkpoint = QUERY_PRODUCT_DEVELOPMENT_CHECKPOINT_ANSWERS;
+        break;
+      case 'Feedback':
+        checkpoint = QUERY_FEEDBACK_CHECKPOINT_ANSWERS;
+        break;
+      case 'Launching':
+        checkpoint = QUERY_LAUNCHING_CHECKPOINT_ANSWERS;
+        break;
+      case 'Funding':
+        checkpoint = QUERY_FUNDING_CHECKPOINT_ANSWERS;
         break;
       default:
         break;
