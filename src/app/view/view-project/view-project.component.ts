@@ -19,6 +19,7 @@ export class ViewProjectComponent implements OnInit {
   projectName = '';
   isMobile = false;
   issueActive = false;
+  isSameUser: boolean;
 
   constructor(
     private projectService: ProjectService,
@@ -37,6 +38,8 @@ export class ViewProjectComponent implements OnInit {
           this.projectName = this.projectService.displayableName(this.project['project_name']);
           this.title.setTitle('Cynthesize | ' + this.projectName);
           this.editingDescription = true;
+          console.log(this.project);
+          this.isSameUser = data.user.username === localStorage.getItem('username');
         },
         (error: any) => {
           this.router.navigate(['unauthorized']);

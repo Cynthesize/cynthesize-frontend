@@ -78,6 +78,7 @@ export class AuthenticationService {
     if (new Date().getTime() < expiresAt) {
       return true;
     } else {
+      this.softLogout();
       return false;
     }
   }

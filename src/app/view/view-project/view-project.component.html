@@ -77,7 +77,9 @@
       >
         Opened Issues
       </button>
-      <button mat-raised-button class="issue-button" (click)="openAddIssueDialog()">Add issue</button>
+      <button mat-raised-button class="issue-button" *ngIf="isSameUser" (click)="openAddIssueDialog()">
+        Add issue
+      </button>
     </div>
   </div>
   <div class="ext-container">
