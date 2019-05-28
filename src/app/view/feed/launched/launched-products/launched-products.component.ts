@@ -19,7 +19,7 @@ export class LaunchedProductsComponent implements OnInit {
   isLoading = true;
   additionalInfo: string;
   applying = false;
-  constructor(private projectService: ProjectService, private errorHandler: ErrorHandlerService, private title: Title) {
+  constructor(public projectService: ProjectService, private errorHandler: ErrorHandlerService, private title: Title) {
     this.errorHandler.ideaWindowScrolled.subscribe(message => {
       if (this.length >= this.projectList.length && message === 'fetchLaunchedProjects') {
         this.isLoading = true;
@@ -47,15 +47,6 @@ export class LaunchedProductsComponent implements OnInit {
     this.activeContext = context;
     this.projectList = [];
     this.currentCount = 0;
-  }
-
-  displayableName(str: string) {
-    str = str.replace(/-/g, ' ');
-    const splitStr = str.toLowerCase().split(' ');
-    for (let i = 0; i < splitStr.length; i++) {
-      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-    }
-    return splitStr.join(' ');
   }
 
   applyForCollab(role: string, projectId: number) {

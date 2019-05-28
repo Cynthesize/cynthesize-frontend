@@ -1,0 +1,16 @@
+<div class="padding-25">
+  <h1>Reviews for your {{ data.projectName }}'s submission:</h1>
+  <div class="review-comment" [ngClass]="{ approved: true }" *ngFor="let review of reviewAnswer">
+    <div style="display:flex;">
+      <div>
+        <img width="40px" [src]="review.mentor_datum.user.profile_pic" />
+      </div>
+      <div class="flex-center flex-column">
+        <a class="font-1" [routerLink]="['/user', review.mentor_datum.user.username]">{{
+          review.mentor_datum.user.username
+        }}</a>
+        <p>{{ review.review_comments }}</p>
+      </div>
+    </div>
+  </div>
+</div>

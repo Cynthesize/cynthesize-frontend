@@ -4,13 +4,15 @@
       <div class="left-container">
         <div class="home-content flex-center project-decription">
           <h1>Description</h1>
-          <button mat-raised-button *ngIf="!editingDescription && canEdit" (click)="editingDescription = true">
-            Edit
-          </button>
-          <button mat-raised-button *ngIf="editingDescription" (click)="updateDescription(project.id, $event)">
-            Save
-          </button>
-          <button mat-raised-button *ngIf="editingDescription" (click)="editingDescription = false">Cancel</button>
+          <div>
+            <button mat-raised-button *ngIf="!editingDescription && canEdit" (click)="editingDescription = true">
+              Edit
+            </button>
+            <button mat-raised-button *ngIf="editingDescription" (click)="updateDescription(project.id, $event)">
+              Save
+            </button>
+            <button mat-raised-button *ngIf="editingDescription" (click)="editingDescription = false">Cancel</button>
+          </div>
         </div>
         <form [formGroup]="descriptionDataForm" (ngSubmit)="updateDescription(project.id, $event)">
           <div class="description-fields">
@@ -79,7 +81,12 @@
         <div class="home-content project-progress">
           <div class="project-home-heads">
             <h1>Progress</h1>
-            <button mat-raised-button *ngIf="canEdit" (click)="openReviewModel()">Submit for review</button>
+            <div>
+              <button mat-raised-button *ngIf="canEdit" (click)="openReviewModel()">Submit for review</button>
+              <button mat-raised-button *ngIf="canEdit && isWaiting" (click)="seeReviewResponses()">
+                See review responses
+              </button>
+            </div>
           </div>
           <app-project-progress [currentStage]="this.project.current_stage"></app-project-progress>
         </div>

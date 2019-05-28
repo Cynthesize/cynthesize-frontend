@@ -34,7 +34,7 @@ export class ViewProjectComponent implements OnInit {
           if (!this.project) {
             this.router.navigate(['/not-found']);
           }
-          this.projectName = this.displayableName(this.project['project_name']);
+          this.projectName = this.projectService.displayableName(this.project['project_name']);
           this.title.setTitle('Cynthesize | ' + this.projectName);
           this.editingDescription = true;
         },
@@ -66,15 +66,6 @@ export class ViewProjectComponent implements OnInit {
       dates[index]['style']['backgroundColor'] = '#' + (index * 6 + 4000);
     }
   }*/
-
-  displayableName(str: string) {
-    str = str.replace(/-/g, ' ');
-    const splitStr = str.toLowerCase().split(' ');
-    for (let i = 0; i < splitStr.length; i++) {
-      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-    }
-    return splitStr.join(' ');
-  }
 
   openAddIssueDialog(): void {
     this.dialog.open(AddIssueComponent, {

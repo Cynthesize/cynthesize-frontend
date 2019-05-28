@@ -5,7 +5,7 @@
         <div class="header-image">
           <img mat-card-image src="{{ reviewAnswer.project.icon }}" alt="{{ reviewAnswer.project.project_name }}" />
         </div>
-        <mat-card-title>{{ displayableName(reviewAnswer.project.project_name) }}</mat-card-title>
+        <mat-card-title>{{ projectService.displayableName(reviewAnswer.project.project_name) }}</mat-card-title>
       </div>
       <mat-card-content>
         <div>

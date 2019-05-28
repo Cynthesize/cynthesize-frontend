@@ -6,7 +6,8 @@ import {
   QUERY_PRODUCT_DEVELOPMENT_CHECKPOINT_ANSWERS,
   QUERY_FEEDBACK_CHECKPOINT_ANSWERS,
   QUERY_LAUNCHING_CHECKPOINT_ANSWERS,
-  QUERY_FUNDING_CHECKPOINT_ANSWERS
+  QUERY_FUNDING_CHECKPOINT_ANSWERS,
+  QUERY_MENTOR_FEEDBACK_ANSWERS
 } from '@app/shared/queries/review-queries';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { MUTATION_ACTION_ON_CHECKPOINT } from '@app/shared/mutations/review-mutation';
@@ -59,11 +60,18 @@ export class ReviewService {
   /**
    * actionOnCheckpointByMentor
    */
-  public actionOnCheckpointByMentor(reviewComment: string, stageId: number, stageType: string, is_approved: boolean) {
+  public actionOnCheckpointByMentor(
+    reviewComment: string,
+    stageId: number,
+    stageType: string,
+    is_approved: boolean,
+    projectId: number
+  ) {
     const mutationObject = {
       is_approved: is_approved,
       mentor_id: this.authService.user_id,
-      review_comments: reviewComment
+      review_comments: reviewComment,
+      project_id: projectId
     };
     switch (stageType) {
       case 'Ideation':
@@ -89,6 +97,25 @@ export class ReviewService {
         mutation: MUTATION_ACTION_ON_CHECKPOINT,
         variables: {
           objects: mutationObject
+        }
+      })
+      .pipe(take(1))
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  /**
+   * fetchReviewAnswersByMentors
+   */
+  public fetchReviewAnswersByMentors(projectId: number) {
+    return this.apollo
+      .query<any>({
+        query: QUERY_MENTOR_FEEDBACK_ANSWERS,
+        variables: {
+          projectId: projectId
         }
       })
       .pipe(take(1))

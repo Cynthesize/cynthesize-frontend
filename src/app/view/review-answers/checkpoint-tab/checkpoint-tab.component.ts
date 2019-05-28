@@ -10,6 +10,7 @@ import {
 } from '@app/shared/constants';
 import { MatDialog } from '@angular/material';
 import { ActionModalComponent } from './action-modal/action-modal.component';
+import { ProjectService } from '@app/core/project/project.service';
 
 @Component({
   selector: 'app-checkpoint-tab',
@@ -20,7 +21,12 @@ export class CheckpointTabComponent implements OnInit {
   answers: any;
   questionsObject: any;
   currentActiveStage = '';
-  constructor(private router: Router, private reviewService: ReviewService, public dialog: MatDialog) {
+  constructor(
+    private router: Router,
+    private reviewService: ReviewService,
+    public dialog: MatDialog,
+    public projectService: ProjectService
+  ) {
     this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
         this.currentActiveStage = val.url.split('/')[3];
@@ -56,22 +62,14 @@ export class CheckpointTabComponent implements OnInit {
 
   ngOnInit() {}
 
-  displayableName(str: string) {
-    str = str.replace(/-/g, ' ');
-    const splitStr = str.toLowerCase().split(' ');
-    for (let i = 0; i < splitStr.length; i++) {
-      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-    }
-    return splitStr.join(' ');
-  }
-
-  openMentorActionModal(isApproved: boolean, reviewRef: any) {
+  openMentorActionModal(isApproved: boolean, reviewRef: any, projectId: number) {
     this.dialog.open(ActionModalComponent, {
       data: {
-        project_name: this.displayableName(reviewRef.project.project_name),
+        project_name: this.projectService.displayableName(reviewRef.project.project_name),
         isApproved: isApproved,
         stageId: reviewRef.id,
-        stageType: this.currentActiveStage
+        stageType: this.currentActiveStage,
+        projectId: reviewRef.project.id
       }
     });
   }

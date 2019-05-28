@@ -14,6 +14,7 @@ import { ProjectHomeComponent } from './project-home/project-home.component';
 import { ProjectTimelineComponent } from './project-timeline/project-timeline.component';
 import { ChartsModule } from 'ng2-charts';
 import { ProjectProgressComponent } from './project-progress/project-progress.component';
+import { ReviewResponsesComponent } from './project-home/review-responses/review-responses.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ProjectProgressComponent } from './project-progress/project-progress.co
     ReviewComponent,
     ProjectHomeComponent,
     ProjectTimelineComponent,
-    ProjectProgressComponent
+    ProjectProgressComponent,
+    ReviewResponsesComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,12 @@ import { ProjectProgressComponent } from './project-progress/project-progress.co
     CovalentTextEditorModule,
     FormsModule
   ],
-  entryComponents: [AddIssueComponent, ReviewComponent, ProjectHomeComponent, ProjectTimelineComponent]
+  entryComponents: [
+    AddIssueComponent,
+    ReviewComponent,
+    ProjectHomeComponent,
+    ProjectTimelineComponent,
+    ReviewResponsesComponent
+  ]
 })
 export class ViewProjectModule {}

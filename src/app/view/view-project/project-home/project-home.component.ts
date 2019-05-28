@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ProjectService } from '@app/core/project/project.service';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
+import { ReviewResponsesComponent } from './review-responses/review-responses.component';
 
 @Component({
   selector: 'app-project-home',
@@ -20,6 +21,7 @@ export class ProjectHomeComponent implements OnInit {
   editingDescription = false;
   canEdit = false;
   currentStage = '';
+  isWaiting: boolean;
 
   constructor(
     private dialog: MatDialog,
@@ -31,15 +33,7 @@ export class ProjectHomeComponent implements OnInit {
   ngOnInit() {
     this.canEdit = localStorage.getItem('username') === this.project.user.username;
     this.initDescriptionForm();
-    console.log(this.project);
-  }
-  displayableName(str: string) {
-    str = str.replace(/-/g, ' ');
-    const splitStr = str.toLowerCase().split(' ');
-    for (let i = 0; i < splitStr.length; i++) {
-      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-    }
-    return splitStr.join(' ');
+    this.isWaiting = this._getCurrentStageStatusWaiting();
   }
 
   openReviewModel() {
@@ -47,8 +41,19 @@ export class ProjectHomeComponent implements OnInit {
       width: 'auto',
       panelClass: 'review-modal-card',
       data: {
-        context: this._getCurrentStageStatusWaiting() ? 'waiting' : this.project.current_stage,
+        context: this.isWaiting ? 'waiting' : this.project.current_stage,
         projectId: this.project.id
+      }
+    });
+  }
+
+  seeReviewResponses() {
+    this.dialog.open(ReviewResponsesComponent, {
+      width: 'auto',
+      panelClass: 'review-modal-card',
+      data: {
+        projectId: this.project.id,
+        projectName: this.project.project_name
       }
     });
   }

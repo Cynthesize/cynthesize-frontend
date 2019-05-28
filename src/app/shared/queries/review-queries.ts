@@ -10,6 +10,7 @@ const QUERY_IDEATION_CHECKPOINT_ANSWERS = gql`
       exclusive_effort
       key_features
       project {
+        id
         project_name
         user {
           ...UserProfilePicFragment
@@ -35,6 +36,7 @@ const QUERY_PRODUCT_DEVELOPMENT_CHECKPOINT_ANSWERS = gql`
       analytics
       testing
       project {
+        id
         project_name
         user {
           ...UserProfilePicFragment
@@ -54,6 +56,7 @@ const QUERY_FEEDBACK_CHECKPOINT_ANSWERS = gql`
     stage_consumer_feedback(where: { is_passed: { _eq: false } }) {
       id
       project {
+        id
         project_name
         user {
           ...UserProfilePicFragment
@@ -73,6 +76,7 @@ const QUERY_LAUNCHING_CHECKPOINT_ANSWERS = gql`
     stage_launching(where: { is_passed: { _eq: false } }) {
       id
       project {
+        id
         project_name
         user {
           ...UserProfilePicFragment
@@ -92,6 +96,7 @@ const QUERY_FUNDING_CHECKPOINT_ANSWERS = gql`
     stage_funding(where: { is_passed: { _eq: false } }) {
       id
       project {
+        id
         project_name
         user {
           ...UserProfilePicFragment
@@ -106,10 +111,31 @@ const QUERY_FUNDING_CHECKPOINT_ANSWERS = gql`
   ${USER_PROFILE_PIC_FRAGMENT}
 `;
 
+const QUERY_MENTOR_FEEDBACK_ANSWERS = gql`
+  query query_mentor_feedback_answers($projectId: Int!) {
+    review_comments(where: { project_id: { _eq: $projectId } }) {
+      mentor_datum {
+        user {
+          ...UserProfilePicFragment
+        }
+      }
+      review_comments
+      ideation_stage_id
+      launching_stage_id
+      funding_stage_id
+      product_development_id
+      consumer_feedback_stage_id
+      is_approved
+    }
+  }
+  ${USER_PROFILE_PIC_FRAGMENT}
+`;
+
 export {
   QUERY_IDEATION_CHECKPOINT_ANSWERS,
   QUERY_PRODUCT_DEVELOPMENT_CHECKPOINT_ANSWERS,
   QUERY_LAUNCHING_CHECKPOINT_ANSWERS,
   QUERY_FUNDING_CHECKPOINT_ANSWERS,
-  QUERY_FEEDBACK_CHECKPOINT_ANSWERS
+  QUERY_FEEDBACK_CHECKPOINT_ANSWERS,
+  QUERY_MENTOR_FEEDBACK_ANSWERS
 };

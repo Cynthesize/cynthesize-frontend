@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ProjectService } from '@app/core/project/project.service';
 
 @Component({
   selector: 'app-issue-card',
@@ -8,17 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class IssueCardComponent implements OnInit {
   @Input() issue: any;
 
-  constructor() {}
+  constructor(public projectService: ProjectService) {}
 
   ngOnInit() {}
-
-  displayableName(str: string) {
-    str = str.replace(/-/g, ' ');
-    str = str.replace(/_/g, ' ');
-    const splitStr = str.toLowerCase().split(' ');
-    for (let i = 0; i < splitStr.length; i++) {
-      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-    }
-    return splitStr.join(' ');
-  }
 }

@@ -3,7 +3,7 @@
     <div class="img-box"><img [src]="project.icon" width="125px" /></div>
     <div class="project-basic-info">
       <div>
-        <div class="project-name">{{ displayableName(project.project_name) }}</div>
+        <div class="project-name">{{ projectService.displayableName(project.project_name) }}</div>
         <app-user-name
           [username]="project.user.username"
           [time]="project.created_on"

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ReviewService } from '@app/core/review/review.service';
 import { ErrorHandlerService } from '@app/core/error-handler.service';
@@ -23,7 +23,13 @@ export class ActionModalComponent implements OnInit {
   ngOnInit() {}
   actionOnCheckpoint() {
     this.reviewService
-      .actionOnCheckpointByMentor(this.reviewComment, this.data.stageId, this.data.stageType, this.data.isApproved)
+      .actionOnCheckpointByMentor(
+        this.reviewComment,
+        this.data.stageId,
+        this.data.stageType,
+        this.data.isApproved,
+        this.data.projectId
+      )
       .subscribe(
         (data: any) => {
           this.dialogRef.close();

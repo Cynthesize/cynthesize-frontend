@@ -35,7 +35,7 @@
           /></a>
           <a class="card-details" [routerLink]="['/view/feed/projects', project.project_name]">
             <div class="card-project-name">
-              {{ displayableName(project.project_name) }}
+              {{ projectService.displayableName(project.project_name) }}
               <span *ngFor="let tag of project.tagsLinkssByprojectId" class="tags">
                 {{ tag.tagsBytagId.tag_name }}
               </span>

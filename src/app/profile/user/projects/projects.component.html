@@ -8,7 +8,7 @@
       <div><img class="project-icon" [src]="project.icon" /></div>
       <div class="card-details">
         <a class="card-project-name pointer" [routerLink]="['/view/project', project.id + '-' + project.project_name]">
-          {{ displayableName(project.project_name) }}
+          {{ projectService.displayableName(project.project_name) }}
           <span *ngFor="let tag of project.tagsLinkssByprojectId" class="tags">
             {{ tag.tagsBytagId.tag_name }}
           </span>

@@ -14,7 +14,7 @@ export class FeedProjectComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<FeedProjectComponent>,
     @Inject(MAT_DIALOG_DATA) public data: number,
-    private projectService: ProjectService,
+    public projectService: ProjectService,
     private errorHandler: ErrorHandlerService,
     private bottomSheet: MatBottomSheet
   ) {}
@@ -41,13 +41,5 @@ export class FeedProjectComponent implements OnInit {
         this.errorHandler.subj_notification.next(error);
       }
     );
-  }
-  displayableName(str: string) {
-    str = str.replace(/-/g, ' ');
-    const splitStr = str.toLowerCase().split(' ');
-    for (let i = 0; i < splitStr.length; i++) {
-      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-    }
-    return splitStr.join(' ');
   }
 }

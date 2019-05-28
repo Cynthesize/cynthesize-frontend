@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '@app/core/profile/profile.service';
+import { ProjectService } from '@app/core/project/project.service';
 
 @Component({
   selector: 'app-projects',
@@ -13,7 +14,11 @@ export class ProjectsComponent implements OnInit {
   isLoading = true;
   nullText: string = null;
 
-  constructor(private route: ActivatedRoute, private profileService: ProfileService) {
+  constructor(
+    private route: ActivatedRoute,
+    private profileService: ProfileService,
+    public projectService: ProjectService
+  ) {
     this.route.params.subscribe(params => {
       this.profileService.getUserProjects(params.username).subscribe(data => {
         this.launchedProjects = data.data.user[0].projects;
@@ -25,14 +30,5 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
-  displayableName(str: string) {
-    str = str.replace(/-/g, ' ');
-    str = str.replace(/_/g, ' ');
-    const splitStr = str.toLowerCase().split(' ');
-    for (let i = 0; i < splitStr.length; i++) {
-      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-    }
-    return splitStr.join(' ');
-  }
   ngOnInit() {}
 }

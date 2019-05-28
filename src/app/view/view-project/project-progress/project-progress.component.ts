@@ -25,6 +25,5 @@ export class ProjectProgressComponent implements OnInit {
         this.completedStages[stage] = true;
       }
     }
-    console.log(this.completedStages);
   }
 }

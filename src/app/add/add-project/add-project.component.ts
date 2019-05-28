@@ -170,14 +170,14 @@ export class AddProjectComponent implements OnInit {
       const tagsToBeAdded: Array<object> = [];
       this.tags.forEach((tags: object) => {
         if (!tags['tag_id']) {
-          tagsToBeAdded.push({ tag_name: this.displayableName(tags['tag_name']) });
+          tagsToBeAdded.push({ tag_name: this.projectService.displayableName(tags['tag_name']) });
         }
       });
       this.tagsService.addNewTagsToDb(tagsToBeAdded).subscribe((data: any) => {
         this.tags.forEach((tag: object) => {
           if (!tag['tag_id']) {
             data.data.insert_tags.returning.forEach((returnedTag: any) => {
-              if (this.displayableName(tag['tag_name']) === returnedTag['tag_name']) {
+              if (this.projectService.displayableName(tag['tag_name']) === returnedTag['tag_name']) {
                 tag['tag_id'] = returnedTag['tag_id'];
               }
             });
@@ -194,15 +194,6 @@ export class AddProjectComponent implements OnInit {
       startWith(null),
       map((tag: any | null) => (tag ? this._filter(tag) : this.allTags.slice()))
     );
-  }
-
-  displayableName(str: string) {
-    str = str.replace(/ /g, ' ');
-    const splitStr = str.toLowerCase().split(' ');
-    for (let i = 0; i < splitStr.length; i++) {
-      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-    }
-    return splitStr.join(' ');
   }
 
   private _filter(value: any): any[] {

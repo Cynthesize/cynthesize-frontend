@@ -1,8 +1,10 @@
 <div class="issue">
   <div class="issue-heading">
     <h1 class="issue-project-checkpoint">
-      {{ displayableName(issue.projectsByprojectId.project_name) }}
-      <span class="issue-checkpoint"> | {{ displayableName(issue.projectsByprojectId.current_stage) }}</span>
+      {{ projectService.displayableName(issue.projectsByprojectId.project_name) }}
+      <span class="issue-checkpoint">
+        | {{ projectService.displayableName(issue.projectsByprojectId.current_stage) }}</span
+      >
     </h1>
     <a
       class="issue-checkpoint"
