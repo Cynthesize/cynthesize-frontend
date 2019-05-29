@@ -7,6 +7,7 @@
   </div>
   <div><i>Add dates for the project's acheivements and the date by when you'll submit your project for review.</i></div>
   <br />
+  <div class="error-message">{{ errorMessage }}</div>
   <form [formGroup]="timelineDataForm" *ngIf="addingTimelineEvent">
     <div class="add-event">
       <mat-form-field appearance="outline">
