@@ -302,6 +302,8 @@ export class ProjectService {
 
   public displayableName(str: string) {
     str = str.replace(/ /g, ' ');
+    str = str.replace(/-/g, ' ');
+    str = str.replace(/_/g, ' ');
     const splitStr = str.toLowerCase().split(' ');
     for (let i = 0; i < splitStr.length; i++) {
       splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);

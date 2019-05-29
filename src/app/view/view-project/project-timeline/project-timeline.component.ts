@@ -23,9 +23,7 @@ export class ProjectTimelineComponent implements OnInit {
     private errorHandler: ErrorHandlerService
   ) {}
 
-  ngOnInit() {
-    console.log(this.timeline);
-  }
+  ngOnInit() {}
 
   initAddTimelineEvent() {
     this.timelineDataForm = this.formBuilder.group({
@@ -41,7 +39,6 @@ export class ProjectTimelineComponent implements OnInit {
     } else {
       this.errorMessage = '';
       this.timeline[Date.parse(this.timelineDataForm.get('date').value)] = this.timelineDataForm.get('eventName').value;
-      console.log(this.timeline);
       this.projectService.updateProjectEvents({ timeline: this.timeline }, this.projectId).subscribe(
         (data: any) => {
           this.timelineDataForm.get('eventName').setValue('');

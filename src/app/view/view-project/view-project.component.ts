@@ -38,7 +38,6 @@ export class ViewProjectComponent implements OnInit {
           this.projectName = this.projectService.displayableName(this.project['project_name']);
           this.title.setTitle('Cynthesize | ' + this.projectName);
           this.editingDescription = true;
-          console.log(this.project);
           this.isSameUser = data.user.username === localStorage.getItem('username');
         },
         (error: any) => {
