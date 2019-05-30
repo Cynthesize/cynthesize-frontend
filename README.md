@@ -5,7 +5,7 @@
 
 ![](https://files.gitter.im/WickedBrat/wq4g/banner.jpg)
 
-->Visit [https://cynthesize.co](https://cynthesize.co)<-
+<p align="center"> Visit <a href="https://cynthesize.co">Cynthesize.co</a> </p>
 
 ### Introduction
 
