@@ -12,4 +12,4 @@ export const REALTIME_GRAPHQL_URL = 'wss://cynthesize-hasura.herokuapp.com/v1alp
 export const authClientId = 'tEbTH2wRl3dHtWZ0m4nqoWPsN1GIu9dQ';
 export const authDomain = 'cynthesize.auth0.com';
 export const auth0Audience = 'https://cynthesize.auth0.com/userinfo';
-export const callbackUrl = 'https://cynthesize.co';
+export const callbackUrl = 'https://cynthesize-develop.netlify.app/';
